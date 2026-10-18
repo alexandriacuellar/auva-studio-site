@@ -4,7 +4,7 @@
 export const site = {
   name: 'Auva Studio',
   tagline: 'Helping businesses and teams make technology work for them.',
-  email: '[hello@auvastudio.com]',
+  email: 'hello@auvastudio.com',
   url: 'https://auvastudio.com',
   location: 'Mid-Hudson Valley, NY',
   // Used in search data so local searches can find the studio.
