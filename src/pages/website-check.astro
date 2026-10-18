@@ -166,6 +166,7 @@ const choices = [
     try {
       const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
       if (!res.success) throw new Error(res.message);
+      window.auvaConvert?.('form');
       status.textContent = "Thanks! I'll look at your results and reply within 24–48 hours.";
       btn.hidden = true;
     } catch {

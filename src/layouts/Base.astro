@@ -74,6 +74,31 @@ const schema = {
       // Turn on scroll reveals only when motion is welcome and the browser can observe scrolling.
       if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-on');
     </script>
+    <script is:inline define:vars={{ ads: site.googleAds }}>
+      // Google Ads tag, only for visits that came from an ad. Pages call auvaConvert('form' | 'booking').
+      window.auvaConvert = () => {};
+      if (ads.id) {
+        const fromAd = ['gclid', 'gbraid', 'wbraid'].some((k) => new URLSearchParams(location.search).has(k));
+        let since = 0;
+        try {
+          if (fromAd) localStorage.setItem('auvaAds', String(Date.now()));
+          since = Number(localStorage.getItem('auvaAds')) || 0;
+        } catch {}
+        if (fromAd || Date.now() - since < 90 * 864e5) {
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = `https://www.googletagmanager.com/gtag/js?id=${ads.id}`;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { dataLayer.push(arguments); };
+          gtag('js', new Date());
+          gtag('config', ads.id);
+          const labels = { form: ads.formLabel, booking: ads.bookingLabel };
+          window.auvaConvert = (kind) => labels[kind] && gtag('event', 'conversion', { send_to: `${ads.id}/${labels[kind]}` });
+          addEventListener('click', (e) => { if (e.target.closest?.('a[href^="https://calendly.com"]')) auvaConvert('booking'); });
+        }
+      }
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

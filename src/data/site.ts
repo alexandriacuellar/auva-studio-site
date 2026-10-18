@@ -12,6 +12,9 @@ export const site = {
   // Get a free access key at web3forms.com (sent to the email that should receive messages).
   web3formsKey: 'ba9485ce-3d10-468e-943f-00ffc9224cd4',
   booking: 'https://calendly.com/alexandria-cuellar-ny/30min',
+  // Google Ads conversion tracking. Loads only for visitors who arrive from an ad
+  // (and on their later visits within 90 days). Leave id empty to turn it off.
+  googleAds: { id: 'AW-TEST123', formLabel: 'FORMLBL', bookingLabel: '' },
   social: [
     { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/auvastudiony/' },
     { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/auvastudiony' },
