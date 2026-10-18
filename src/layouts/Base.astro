@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, nav } from '../data/site';
+import Icon from '../components/Icon.astro';
 
 interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[] }
 const { title, seoTitle, schema: pageSchema = [], description = 'Auva Studio is a digital technology and solutions studio helping small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and build websites they own.' } = Astro.props;
@@ -27,6 +28,7 @@ const schema = {
       areaServed: site.areaServed,
       address: { '@type': 'PostalAddress', addressRegion: 'NY', addressCountry: 'US' },
       founder: { '@id': `${site.url}/#founder` },
+      sameAs: site.social.map((s) => s.href),
       knowsAbout: ['Technology consulting', 'Business analysis', 'Technical project management', 'AI adoption', 'XR and immersive experiences', 'Game production', 'Website design and development', 'Astro'],
     },
     {
@@ -103,6 +105,9 @@ const schema = {
           <img src="/auva-logo-stacked-light.png" alt="Auva Studio" width="509" height="438" />
           <p>{site.tagline}</p>
           <p class="small">Founded by Alexandria Cuellar, digital technology and solutions consultant.</p>
+          <ul class="social">
+            {site.social.map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={`Auva Studio on ${s.name}`}><Icon name={s.icon} size={22} /></a></li>)}
+          </ul>
         </div>
         <div>
           <h2>Services</h2>
