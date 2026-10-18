@@ -16,6 +16,8 @@ export const site = {
     { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/auvastudiony/' },
     { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/auvastudiony' },
     { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/company/auva-studio/' },
+    // Listed in search data only; add to the footer once there are posts.
+    { name: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@auvastudiony', footer: false },
   ],
 };
 

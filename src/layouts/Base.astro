@@ -106,7 +106,7 @@ const schema = {
           <p>{site.tagline}</p>
           <p class="small">Founded by Alexandria Cuellar, digital technology and solutions consultant.</p>
           <ul class="social">
-            {site.social.map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={`Auva Studio on ${s.name}`}><Icon name={s.icon} size={22} /></a></li>)}
+            {site.social.filter((s) => s.footer !== false).map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={`Auva Studio on ${s.name}`}><Icon name={s.icon} size={22} /></a></li>)}
           </ul>
         </div>
         <div>
