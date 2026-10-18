@@ -19,6 +19,7 @@ export const site = {
     // Listed in search data only; add to the footer once there are posts.
     { name: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@auvastudiony', footer: false },
     { name: 'Threads', icon: 'threads', href: 'https://www.threads.com/@auvastudiony', footer: false },
+    { name: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@auvastudiony', footer: false },
   ],
 };
 
