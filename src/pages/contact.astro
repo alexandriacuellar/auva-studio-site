@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import { site } from '../data/site';
+
+const faqs = [
+  { q: 'What happens on the free 30-minute call?', a: "We talk about what you're working on, what's getting in the way, and what a good outcome looks like. You leave with a suggested next step, with no obligation." },
+  { q: 'Who do you work with?', a: 'Small businesses, nonprofits, startups, community organizations, and growing teams, plus creative, XR, and game studios.' },
+  { q: 'Do you work remotely?', a: 'Yes. Most work happens remotely, with clients anywhere in the US. In-person work is available from New York City and Westchester up to Albany, with travel costs for trips outside the Mid-Hudson Valley.' },
+  { q: 'What does it cost to get started?', a: 'The first call is free. Paid work starts at $199 for a Website Diagnostic, $650 for a Technology Assessment or AI Readiness Plan, and $1,500 for a website. Nothing begins until you approve a written scope and price.' },
+];
+---
+<Base title="Contact" description="Start a website project, get consulting or project support, or explore AI and emerging tech with Auva Studio.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Get in touch</p>
+      <h1 class="mag-head">Let's talk about <em>what you're working on.</em></h1>
+      <p class="lede">Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed.</p>
+      <nav class="bd-sublinks" aria-label="Ways to get in touch">
+        <a href={site.booking} target="_blank" rel="noopener">Book a call</a>
+        <a href="#start">Email me</a>
+      </nav>
+    </div>
+  </section>
+
+  <InquiryForm kind="general" alt />
+
+  <section id="explore">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Explore services</p>
+        <h2 class="mag-head">Want <em>more detail first?</em></h2>
+      </div>
+      <div class="grid grid-3 routes">
+        <a class="card card-row" href="/websites/">
+          <div class="icon"><Icon name="globe" /></div>
+          <div>
+            <h3>I need a website</h3>
+            <p class="muted small">A new site, improvements to your current one, a Diagnostic, or ongoing updates.</p>
+            <span class="more">Explore website services <Icon name="arrow" size={16} /></span>
+          </div>
+        </a>
+        <a class="card card-row" href="/consulting/">
+          <div class="icon"><Icon name="compass" /></div>
+          <div>
+            <h3>I need consulting or project support</h3>
+            <p class="muted small">Technology planning, business analysis, or project management.</p>
+            <span class="more">Explore consulting <Icon name="arrow" size={16} /></span>
+          </div>
+        </a>
+        <a class="card card-row" href="/ai/">
+          <div class="icon"><Icon name="bolt" /></div>
+          <div>
+            <h3>I want to explore AI or emerging tech</h3>
+            <p class="muted small">AI readiness, team workshops, feasibility reviews, prototypes, or XR and game production support.</p>
+            <span class="more">Explore AI services <Icon name="arrow" size={16} /></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Faq alt faqs={faqs} lede="You don't need a detailed plan before contacting Auva Studio. Start with what you're trying to improve, resolve, or build." />
+
+  <section class="nr-sec">
+    <div class="wrap">
+      <div class="not-ready">
+        <p class="eyebrow">Not ready to commit?</p>
+        <h2 class="mag-head">See what your website <em>needs first.</em></h2>
+        <p class="lede">A $199 Website Diagnostic checks how your site works on phones, how easily people find you on Google, and how fast it loads, then tells you what to fix first. It's credited toward your new website with me.</p>
+        <div class="hero-actions">
+          <a class="btn" href="/websites/?topic=diagnostic#start">Request a Diagnostic</a>
+          <a class="btn btn-ghost" href="/website-check/">Take the free website check</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-ready { max-width: 820px; margin: 0 auto; text-align: center; background: var(--white); border: 2px solid transparent; border-radius: 28px; padding: 56px 48px; background-image: linear-gradient(var(--white), var(--white)), linear-gradient(135deg, var(--bright), #8b7cff); background-origin: border-box; background-clip: padding-box, border-box; box-shadow: var(--shadow-strong); }
+  .not-ready .lede { margin: 0 auto 28px; max-width: 600px; }
+  .not-ready .hero-actions { justify-content: center; }
+  .not-ready h2.mag-head { font-size: clamp(2rem, 4vw, 3rem); }
+  @media (max-width: 960px) { .not-ready { padding: 40px 24px; } }
+</style>

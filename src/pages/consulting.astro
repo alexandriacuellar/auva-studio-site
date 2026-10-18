@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Faq from '../components/Faq.astro';
+
+const faqs = [
+  { q: 'Do you offer one-time and ongoing support?', a: 'Yes. Engagements range from a single consultation or troubleshooting session to ongoing consulting or fractional project leadership.' },
+  { q: 'Do you work in person?', a: "Most work happens remotely. When an on-site visit would help, we'll plan it together. On-site time is billed at the $65 hourly consulting rate. I work in person from New York City and Westchester up to Albany. Outside the Mid-Hudson Valley, travel time is billed at half rate and expenses such as mileage and lodging at cost, all agreed in writing before booking." },
+  { q: "What's included in the Technology Assessment?", a: "Three one-hour sessions, research, and a written, prioritized roadmap, about 10 hours of work." },
+  { q: 'What does a Business Analysis & Process Review include?', a: 'A scoped review, such as one workflow mapped or one set of requirements documented, about 15 hours of work. Larger requests are quoted separately.' },
+  { q: 'How is pricing determined?', a: 'Pricing depends on the service, project scope, expected time, and whether travel is needed. Consulting and project support are $65 an hour. Website and technical work is $125 an hour. Fixed packages start at $650 for an Assessment, and website packages start at $1,500. For larger work, costs and expectations are agreed before work begins.' },
+  { q: 'What is fractional project leadership?', a: 'A project leader who works inside your team part time, from $650 a month for 10 hours, with a 3-month minimum. 20 hours is $1,200 and 40 hours is $2,200 a month.' },
+  { q: 'Can you work with our current vendors or IT provider?', a: 'Yes. I often work alongside existing teams and vendors, and can help you evaluate their proposals.' },
+];
+import { consulting, whyAuva, site, testimonials, serviceSchema } from '../data/site';
+
+const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/consulting/');
+
+const audiences = [
+  { icon: 'globe', title: 'Small businesses', who: 'Shops, restaurants, inns, practices, and local services.', text: 'Too many tools and not enough time. Pick the right ones, set them up, and get your team using them.' },
+  { icon: 'key', title: 'Startups', who: 'Early teams building a first product or setting up their systems.', text: 'Turn an idea into a plan, with clear requirements, the right vendors, and a project manager without a full-time hire.' },
+  { icon: 'book', title: 'Nonprofits & culture', who: 'Museums, arts councils, land trusts, and community groups.', text: 'Make a tight budget go further. Choose tools, plan upgrades, and keep grant-funded projects on track.' },
+  { icon: 'star', title: 'Creative, game & XR studios', who: 'Independent studios, anywhere.', text: 'A producer to run schedules, documents, and teams, so your creative leads can focus on the work.' },
+  { icon: 'chart', title: 'Growing teams', who: 'Companies adding people, locations, or services.', text: 'Fix the workflows that break as you grow, and keep big projects moving.' },
+];
+
+// Every consulting price in one place.
+const glance = [
+  { name: 'Consulting or project help, as needed', price: '$65/hr' },
+  { name: 'Technology Assessment', note: '3 sessions, research, and a written roadmap', price: '$650' },
+  { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
+  { name: 'Project management, monthly', note: '3-month minimum', price: '10 hrs $650 · 20 hrs $1,200 · 40 hrs $2,200' },
+  { name: 'AI & Emerging Technology', note: 'See the AI page for details', price: 'From $500' },
+];
+---
+<Base title="Consulting & Project Support" seoTitle="Technology Consulting & Project Management | Auva Studio" schema={schema} description="Technology planning, business analysis, project management, and AI consulting for small businesses, startups, and growing teams.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill" style="view-transition-name: svc-consulting">Consulting & Project Support</p>
+      <h1 class="mag-head">Technology decisions, <em>made with confidence.</em></h1>
+      <p class="lede">Practical guidance and hands-on support built around your goals. Start with an assessment, solve a specific challenge, or bring in experienced leadership for a larger initiative.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+      </div>
+      <nav class="bd-sublinks" aria-label="Consulting services">
+        {consulting.map((c) => <a href={c.id === 'ai' ? '/ai/' : `#${c.id}`}>{c.title}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who I work with</p>
+        <h2 class="mag-head">Help that fits <em>your kind of organization.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="small muted">{a.who}</p>
+            <p>{a.text}</p>
+            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me what you're working on, and I'll suggest where to start.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What I offer</p>
+        <h2 class="mag-head">Four ways <em>I help.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {consulting.map((c) => (
+          <div class="card card-row" id={c.id}>
+            <div class="icon"><Icon name={c.icon} size={36} /></div>
+            <div>
+              <h3>{c.title}</h3>
+              <p class="muted">{c.text}</p>
+              <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
+              {c.id === 'ai'
+                ? <a class="more" href="/ai/" style="margin-top: 12px">See AI & Emerging Technology <Icon name="arrow" size={16} /></a>
+                : <a class="more" href={`/consulting/?topic=${c.id}#start`} style="margin-top: 12px">Discuss this service <Icon name="arrow" size={16} /></a>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="engagements">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Engagements</p>
+        <h2 class="mag-head">Sized to <em>what you need.</em></h2>
+        <p class="lede">Every engagement starts with a free 30-minute conversation about your business, goals, and challenges. From there, I scope and quote the work before anything begins.</p>
+      </div>
+      <div class="values">
+        <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Consulting sessions</h3><p class="muted">Focused, paid time to talk through a decision, a vendor, or a plan, at $65 an hour, as a single session or ongoing.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="book" /></div><div><h3>Project-based</h3><p class="muted">A defined scope, deliverables, and timeline, with one point of contact.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Fractional project leadership</h3><p class="muted">A part-time project leader inside your team, from $650 a month, with a 3-month minimum.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="bolt" /></div><div><h3>Exploration / prototype</h3><p class="muted">Test an idea, tool, or emerging technology on a small scale before you commit. <a href="/ai/#sprint">See Prototype Sprints</a></p></div></div>
+        <p class="small muted">Every engagement ends with clear documentation and training, so your team can carry on without me.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Pricing</p>
+        <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
+      </div>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="small muted" style="margin-top: 16px">Travel outside the Mid-Hudson Valley is billed at half rate plus expenses, agreed before booking.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Why Auva Studio</p>
+        <h2 class="mag-head">Practical guidance <em>backed by technical and delivery experience.</em></h2>
+        <p class="lede">Auva Studio is led by Alexandria Cuellar, whose background spans software development, technical project management, digital products, gaming, and interactive experiences. That mix makes it possible to look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
+          <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>
+        </div>
+      </div>
+      <div class="values">
+        {whyAuva.map((w) => (
+          <div class="card"><h3>{w.title}</h3><p class="muted">{w.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What clients say</p>
+        <h2 class="mag-head">Organized, dependable, and <em>easy to work with.</em></h2>
+        <p class="lede">From game and XR studios where I managed production.</p>
+      </div>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="card quote">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
+</Base>

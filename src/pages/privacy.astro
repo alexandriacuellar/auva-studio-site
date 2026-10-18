@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+// Fill in the brackets before launch: the date, and the host once the site is deployed.
+const updated = '[Month Day, Year]';
+const host = '[hosting provider]';
+---
+<Base title="Privacy Policy" description="How the Auva Studio website collects and uses information.">
+  <section class="hero">
+    <div class="wrap prose">
+      <p class="eyebrow">Privacy</p>
+      <h1>Privacy Policy</h1>
+      <p class="muted">Last updated: {updated}</p>
+
+      <p class="lede">Auva Studio respects your privacy. This policy explains what information this website collects and how it's used.</p>
+
+      <h2>What we collect</h2>
+      <p>When you use one of our inquiry forms, we collect what you enter: your name, email, business or organization, phone number if you add one, the service you're interested in, your website, and your message. If you book a call, Calendly collects your name, email, and chosen time. Answers to the free website check stay in your browser unless you choose to send them; if you do, we receive your name, email, website, answers, and score. We don't ask for payment details on this site.</p>
+
+      <h2>How we use it</h2>
+      <p>Only to reply to your inquiry, schedule a conversation, and prepare a proposal if you ask for one. We don't sell or rent your information, and we don't add you to a mailing list without your permission.</p>
+
+      <h2>Who helps us</h2>
+      <p>Form messages are delivered to us by Web3Forms, a form-processing service, and call bookings are handled by Calendly. The site is hosted by {host}, which may keep standard server logs such as IP addresses and browser type for security.</p>
+
+      <h2>Cookies and analytics</h2>
+      <p>This site doesn't use advertising or tracking cookies. We count visits with a privacy-friendly analytics tool that doesn't use cookies or identify you personally.</p>
+
+      <h2>How long we keep it</h2>
+      <p>We keep inquiry emails as long as needed to respond and for normal business records. Ask us anytime to delete your information.</p>
+
+      <h2>Your choices</h2>
+      <p>To see, correct, or delete the information you've sent us, email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, we'll update the date above.</p>
+
+      <h2>Contact</h2>
+      <p>{site.name}, {site.location} · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </section>
+</Base>

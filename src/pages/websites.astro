@@ -1,0 +1,297 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Packages from '../components/Packages.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Faq from '../components/Faq.astro';
+import PaybackCalc from '../components/PaybackCalc.astro';
+import { comparison, discovery, addons, brandEssentials, terms, process, care, packages, serviceSchema } from '../data/site';
+
+const faqs = [
+  { q: 'How much does a small business website cost?', a: 'Packages are one-time project fees: Essential Presence is $1,500, Expanded Presence is $2,950, and Complete Presence starts at $5,500. After launch, you pay about $20 a year for your domain, and hosting is free or low cost.' },
+  { id: 'faq-founding', q: 'What is the founding client offer?', a: "My first 10 website clients get 10% off Essential, Expanded, or Complete Presence, in exchange for a short review and permission to feature their site. It doesn't combine with other discounts; if more than one applies, you get the bigger one. The offer ends after 10 projects." },
+  { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
+  { q: 'Why does each service need its own page?', a: "A page about one service can answer exactly what people search for, like 'dog grooming in Kingston'. That helps Google and AI tools match you to the right searches. Expanded Presence has room for a page for each service you offer." },
+  { id: 'faq-diagnostic', q: 'What does the Website Diagnostic check?', a: "I check how your site works on phones, how fast it loads, how easily people find you on Google, your Google Business Profile and reviews, whether visitors can quickly tell what you do, and how easy it is to call, book, or buy. You get a short, plain-English report with what to fix first, in order, within 5 business days. The report is yours to use with any developer." },
+  { q: 'Can you check a site someone else built?', a: "Yes. The Diagnostic works for any website, whoever built it or whatever it's built on." },
+  { q: 'Can I update the site myself?', a: 'Yes. A Content Editing Dashboard (from $1,750, included in Complete Presence) lets you change text, photos, news, and events with no code. The dashboard covers your page text, photos, and the content collections we set up for you, like news or events. The starting price includes 2 collections; more can be added, quoted first. New features or new kinds of pages are $125 an hour, quoted first. Or send changes to me, from $50 per update.' },
+  { q: 'What counts as one update?', a: 'A small change that takes about 30 minutes, like new text, a photo, your hours, or fixing a form or checkout link. Buy 5 for $200 and use them within 12 months.' },
+  { q: 'How fast are updates done?', a: 'Most within 2 business days. Quick questions by email are always free.' },
+  { q: 'Do I need my copy and photos ready?', a: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs." },
+  { q: 'Why Astro instead of WordPress or Wix?', a: "Astro sites load faster, have no plugins to keep updated, and hosting is free or low cost. WordPress needs regular plugin and security updates, and Wix and Squarespace charge a monthly subscription. Those platforms still make sense for some businesses, and I'll tell you if yours is one." },
+  { q: 'Already have a website?', a: "Most small businesses are on WordPress, Wix, Squarespace, Shopify, or Webflow. If you're on one of these, I can likely move you to Astro and keep your content, branding, and the pages Google already knows." },
+  { q: 'Can you redo my current website?', a: "Yes. Start with a $199 Website Diagnostic. I'll tell you honestly whether to fix what you have or rebuild, and if you choose a new website, the fee is credited toward it." },
+  { q: 'How long does a website take?', a: 'Essential Presence takes 2–3 weeks, Expanded Presence 3–5 weeks, and Complete Presence 6+ weeks. The timeline starts once your Statement of Work is signed and the deposit is paid.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Website Diagnostic', description: 'A check of how an existing site works on phones, how easily people find it on Google, how fast it loads, and what to fix first.', price: '$199' },
+  ...packages.map((p) => ({ name: `${p.name} website package`, description: p.blurb, price: p.price })),
+  ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
+  ...care.map((c) => ({ name: `Website Care: ${c.name}`, description: c.text, price: c.price })),
+  { name: 'Brand Essentials', description: 'Logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.', price: '$1,000' },
+], '/websites/');
+
+const essentials = [
+  { icon: 'globe', title: 'A clear first impression', text: 'A welcoming home page that says who you are and who you help.' },
+  { icon: 'star', title: 'Your services, explained', text: 'What you offer, how it works, and what it costs to get started.' },
+  { icon: 'check', title: 'Reasons to trust you', text: 'Your story, experience, testimonials, and credentials.' },
+  { icon: 'mail', title: 'An obvious next step', text: 'Inquiry forms, contact details, and the areas you serve.' },
+];
+
+const audiences = [
+  { id: 'hospitality', icon: 'star', title: 'Hospitality & Tourism', who: 'Inns, B&Bs, restaurants, wineries, breweries, and farms.', text: 'Menus, rooms, hours, and events that are easy to find on a phone, with links to your booking or reservation system.' },
+  { id: 'makers', icon: 'layers', title: 'Shops & Makers', who: 'Boutiques, galleries, craft studios, and artists.', text: 'Show your work and sell online, with checkout links or a store you manage yourself.' },
+  { id: 'services', icon: 'wrench', title: 'Local Services', who: 'Trades, wellness practitioners, salons, and real estate agents.', text: 'Your services, reviews, and service area, with an easy way to call, book, or request a quote.' },
+  { id: 'nonprofits', icon: 'book', title: 'Nonprofits & Culture', who: 'Arts councils, museums, land trusts, animal rescues, and community groups.', text: 'Tell your story, share programs and events, and accept donations.' },
+  { id: 'startups', icon: 'key', title: 'Startups', who: 'Early teams launching a product or service.', text: 'A credible first site that explains what you do and collects sign-ups or inquiries.' },
+  { id: 'studios', icon: 'bolt', title: 'Game & XR Studios', who: 'Independent game, VR, and interactive studios, anywhere.', text: 'A fast studio site for your games and experiences: trailers, a press kit, your team, and links to Steam, Meta Quest, or app stores.' },
+];
+---
+<Base title="Website Services" seoTitle="Small Business Websites from $1,500 | Auva Studio" schema={schema} description="Fast, mobile-friendly websites for small businesses, startups, and nonprofits. One-time packages from $1,500, with free or low-cost hosting.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill" style="view-transition-name: svc-websites">Website Services</p>
+      <h1 class="mag-head" style="max-width: 22ch">A website that helps customers <em>find you, trust you, and reach out.</em></h1>
+      <p class="lede">A website is often the first technology decision a business makes, and the one it lives with longest. I bring the same practical consulting approach to every site: focused, mobile-friendly, low-cost to run, and fully yours.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#packages">See packages</a>
+      </div>
+      <nav class="bd-sublinks" aria-label="Who I build websites for">
+        {audiences.map((a) => <a href={`#${a.id}`}>{a.title}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who I build for</p>
+        <h2 class="mag-head">A site that fits <em>your kind of business.</em></h2>
+        <p class="lede">I'm based in the Mid-Hudson Valley and build for local businesses and organizations, and for game and XR studios anywhere.</p>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card" id={a.id}>
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="small muted">{a.who}</p>
+            <p>{a.text}</p>
+            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+        <div class="card who-other who-wide">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me about your business or project, and I'll recommend the package that fits.</p>
+          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <p class="eyebrow" style="color: var(--tint)">Already have a website?</p>
+          <h2>Website Diagnostic</h2>
+          <p>I check how your site works on phones, how easily people find you on Google, how fast it loads, and what to fix first.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$199</p>
+          <p>Credited toward your new website with me.</p>
+          <a class="btn" href="/websites/?topic=diagnostic#start">Request a Diagnostic</a>
+          <p class="small" style="margin-top: 14px"><a href="#faq-diagnostic" style="color: inherit; font-weight: 700">See what I check</a></p>
+          <p class="small" style="margin-top: 6px">Not sure yet? <a href="/website-check/" style="color: inherit; font-weight: 700">Take the free 2-minute website check</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Every site includes</p>
+        <h2 class="mag-head">Everything <em>your visitors are looking for.</em></h2>
+      </div>
+      <div class="grid grid-4">
+        {essentials.map((e) => (
+          <div class="card">
+            <div class="icon"><Icon name={e.icon} size={32} /></div>
+            <h3>{e.title}</h3>
+            <p class="muted">{e.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Packages</p>
+        <h2 class="mag-head">Choose <em>the right package.</em></h2>
+        <p class="lede">Start with what you need today and grow later. Each package builds on the one before it.</p>
+      </div>
+      <Packages />
+      <PaybackCalc />
+    </div>
+  </section>
+
+  <section class="alt" id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why I build differently</p>
+        <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
+        <p class="lede">I build every site with Astro. It keeps your site fast and my prices fair.</p>
+      </div>
+      <div class="grid grid-3">
+        {comparison.benefits.map((b) => (
+          <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+        ))}
+      </div>
+      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Source: <a href="https://astro.build/" target="_blank" rel="noopener">astro.build</a>, from Chrome UX Report data.</p>
+      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Built to be found</p>
+        <h2 class="mag-head">Help customers find you, <em>today and tomorrow.</em></h2>
+        <p class="lede">I follow modern best practices so your website is easy for people, search engines, and AI tools to discover and understand.</p>
+      </div>
+      <div class="grid grid-2">
+        {discovery.map((d) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={d.icon} size={36} /></div>
+            <div><h3>{d.title}</h3><p class="muted">{d.text}</p></div>
+          </div>
+        ))}
+      </div>
+      <p class="fine">No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Add-ons</p>
+        <h2 class="mag-head">Add capabilities <em>when you need them.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {addons.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+            <p><b style="color: var(--primary)">{a.price}</b></p>
+          </div>
+        ))}
+      </div>
+
+      <div class="band" style="margin-top: 48px" id="brand">
+        <div>
+          <p class="eyebrow" style="color: var(--tint)">Optional add-on</p>
+          <h2>Brand Essentials</h2>
+          <p>A recognizable, consistent visual identity that makes a strong first impression, ready for your website and beyond.</p>
+          <ul class="ticks" style="color: var(--white)">
+            {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$1,000</p>
+          <p>Flat rate. Add it to any website package.</p>
+          <a class="btn" href="/websites/?topic=brand#start">Ask about Brand Essentials</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">After launch</p>
+        <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
+        <p class="lede">Choose who makes the changes. Most small sites only change a few times a year, so there is no monthly plan required.</p>
+      </div>
+      <div class="grid grid-2 care-paths">
+        <div class="card">
+          <div class="icon"><Icon name="wrench" size={36} /></div>
+          <h3>I update it for you</h3>
+          <p class="muted">Send me what to change and I take care of it. A small update is a quick change like text, photos, or hours, about 30 minutes of work.</p>
+          <div class="care-options">
+            {care.map((c) => (
+              <div class:list={['care-option', { featured: c.featured }]}>
+                <div class="care-head"><h4>{c.name}</h4><span class="care-price">{c.price}</span></div>
+                <p class="muted small">{c.text}</p>
+              </div>
+            ))}
+          </div>
+          <p class="small muted">No monthly plan required.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="gear" size={36} /></div>
+          <h3>You update it yourself</h3>
+          <p class="muted">Add a Content Editing Dashboard and change your text, photos, news, and events whenever you like, with no code and no waiting.</p>
+          <div class="care-options">
+            <div class="care-option featured">
+              <div class="care-head"><h4>Content Editing Dashboard</h4><span class="care-price">From $1,750</span></div>
+              <p class="muted small">Best if you update every week or post news, events, or a blog.</p>
+              <ul class="ticks small">
+                <li><Icon name="tick" size={16} />One-time setup, no monthly fee for most sites</li>
+                <li><Icon name="tick" size={16} />Up to 2 collections you add to over time, like news posts or events. More collections, quoted first.</li>
+                <li><Icon name="tick" size={16} />Training and an editor guide</li>
+                <li><Icon name="tick" size={16} />30 days of support after setup</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small muted">Included in Complete Presence. For frequent updates, it can cost less over time than paying per update.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How a website project runs</p>
+        <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
+        <p class="lede">I guide you through each step, so the process stays simple and collaborative.</p>
+      </div>
+      <ol class="steps steps-4">
+        {process.map((s, i) => (
+          <li>
+            <span class="when">{s.when}</span>
+            <span class="num">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <p class="you"><b>You:</b> {s.you}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="fine">Timeline shown for Expanded Presence. Complete Presence takes 6+ weeks.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What's included</p>
+        <h2 class="mag-head">Clear expectations <em>on both sides.</em></h2>
+        <p class="lede">Simple terms keep your project on time and on budget. Your Statement of Work spells out every detail.</p>
+      </div>
+      <div class="grid grid-3">
+        {terms.map((t) => (
+          <div class="card"><h3>{t.title}</h3><p class="muted">{t.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" />
+</Base>
+

@@ -1,0 +1,166 @@
+---
+// Inquiry section that closes the Websites, Consulting, and AI pages, and opens the Contact page (kind="general").
+// The site is static, so the form posts to Web3Forms, which emails each message.
+// The access key lives in src/data/site.ts; it is meant to be public.
+// Links can preselect a choice with ?topic= or ?package=, followed by #start.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean }
+const { kind, alt = false, hero = false } = Astro.props;
+const isWebsite = kind === 'website';
+const isAi = kind === 'ai';
+const isGeneral = kind === 'general';
+const Heading = hero ? 'h1' : 'h2';
+const intro = isGeneral && !hero
+  ? { eyebrow: 'Send a message', title: 'Tell me <em>about your project.</em>', lede: "Share a few details and I'll follow up personally with questions or a suggested next step." }
+  : isGeneral
+  ? { eyebrow: 'Contact', title: "Let's talk about <em>what you're working on.</em>", lede: "Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed." }
+  : isAi
+  ? { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' }
+  : { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' };
+const subject = isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isAi ? 'New AI & emerging tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com';
+const formAction = 'https://api.web3forms.com/submit';
+---
+<section id="start" class:list={{ alt, hero }}>
+  <div class="wrap about-grid">
+    <div>
+      {isWebsite ? (
+        <>
+          <p class="eyebrow">Start your website</p>
+          <h2 class="mag-head">Tell me about <em>your website.</em></h2>
+          <p class="lede">Share a few details and I'll follow up personally with questions or a recommended package.</p>
+        </>
+      ) : (
+        <>
+          <p class="eyebrow">{intro.eyebrow}</p>
+          <Heading class="mag-head" set:html={intro.title} />
+          <p class="lede">{intro.lede}</p>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+          {isGeneral ? (
+            hero ? <p class="muted small" style="margin-top: 12px">I read every message personally. You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">I read every message personally.</p>
+          ) : (
+            <p class="muted small" style="margin-top: 12px">Or send a message with the form.</p>
+          )}
+        </>
+      )}
+      <div class="values" style="margin-top: 28px">
+        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>What happens next</h3><p class="muted">{isGeneral ? 'Any work is scoped and priced in writing before it begins.' : <>I read every message personally and reply within 24–48 hours. {isWebsite ? "You'll get a written Statement of Work with scope, price, and schedule before anything begins." : 'Any work is scoped and priced in writing before it begins.'}</>}</p></div></div>
+        {isWebsite && (
+          <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Prefer to talk?</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a> instead.</p></div></div>
+        )}
+      </div>
+    </div>
+    <div class="card">
+      <form action={formAction} method="POST" class="inquiry">
+        <input type="hidden" name="access_key" value={site.web3formsKey} />
+        <input type="hidden" name="subject" value={subject} />
+        <input type="hidden" name="from_name" value="Auva Studio website" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="form-row">
+          <label>Name<input name="name" autocomplete="name" required /></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+        </div>
+        <div class="form-row">
+          <label>Business or organization<input name="business" autocomplete="organization" /></label>
+          <label><span>Phone <span class="opt">(optional)</span></span><input type="tel" name="phone" autocomplete="tel" /></label>
+        </div>
+        {isGeneral ? (
+          <>
+            <label>What's this about?
+              <select name="topic">
+                <option value="website">Website</option>
+                <option value="consulting">Consulting or project support</option>
+                <option value="ai">AI or emerging tech</option>
+                <option value="unsure" selected>Not sure yet</option>
+              </select>
+            </label>
+            <label><span>What are you working on? <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+          </>
+        ) : isWebsite ? (
+          <>
+            <div class="form-row">
+              <label>What do you need?
+                <select name="topic">
+                  <option value="website">A new website</option>
+                  <option value="improve">Improve my current site</option>
+                  <option value="diagnostic">Website Diagnostic ($199)</option>
+                  <option value="care">Website Care or support</option>
+                  <option value="brand">Brand Essentials</option>
+                </select>
+              </label>
+              <label><span>Current website <span class="opt">(optional)</span></span><input type="url" name="website" placeholder="https://" /></label>
+            </div>
+            <input type="hidden" name="package" value="" />
+            <label><span>Tell me about your business <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+          </>
+        ) : (
+          <>
+              {isAi ? (
+                <label>Interested in
+                  <select name="topic">
+                    <option value="unsure">Not sure yet</option>
+                    <option value="workshop">Team AI Workshop</option>
+                    <option value="readiness">AI Readiness Plan</option>
+                    <option value="ai-sprint">AI Prototype Sprint</option>
+                    <option value="review">Concept & Feasibility Review</option>
+                    <option value="xr-sprint">XR Prototype Sprint</option>
+                    <option value="advisory">Production Support</option>
+                  </select>
+                </label>
+              ) : (
+                <label>Area
+                  <select name="topic">
+                    <option value="unsure">Not sure yet</option>
+                    <option value="advisory">Technology Planning</option>
+                    <option value="analysis">Business Analysis & Process Review</option>
+                    <option value="delivery">Project Management</option>
+                    <option value="ai">AI & Emerging Technology</option>
+                  </select>
+                </label>
+              )}
+            <label><span>{isAi ? 'What are you exploring?' : "What's going on?"} <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+          </>
+        )}
+        <button class="btn" type="submit">Send message</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Preselect choices from links such as ?topic=diagnostic or ?package=Expanded%20Presence.
+  const params = new URLSearchParams(location.search);
+  for (const name of ['topic', 'package']) {
+    const value = params.get(name);
+    const select = document.querySelector<HTMLSelectElement>(`form.inquiry select[name="${name}"]`);
+    if (value && select && [...select.options].some((o) => (o.value || o.text) === value)) select.value = value;
+  }
+  // Package buttons pass their choice along in a hidden field.
+  const pkg = params.get('package');
+  const pkgInput = document.querySelector<HTMLInputElement>('form.inquiry input[name="package"]');
+  if (pkg && pkgInput) pkgInput.value = pkg;
+
+  // Send without leaving the page; without JavaScript the form still posts normally.
+  for (const form of document.querySelectorAll<HTMLFormElement>('form.inquiry')) {
+    const status = form.querySelector<HTMLElement>('.form-status');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      button.disabled = true;
+      if (status) status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        form.reset();
+        if (status) status.textContent = "Thanks! Your message is on its way. You'll hear back within 24–48 hours.";
+      } catch {
+        if (status) status.textContent = 'Something went wrong. Please email me instead.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>

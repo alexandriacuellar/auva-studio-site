@@ -1,0 +1,18 @@
+---
+import { site } from '../data/site';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Bring me a problem, <em>project, or idea.</em>',
+  text = "From a straightforward website to an AI or emerging technology idea, or a complex technology project, I'll suggest the right next step.",
+} = Astro.props;
+---
+<section class="cta">
+  <div class="wrap">
+    <h2 class="mag-head" set:html={title} />
+    <p>{text}</p>
+    <div class="cta-actions">
+      <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+      <a class="btn btn-outline-light" href="/contact/">Send a message</a>
+    </div>
+  </div>
+</section>

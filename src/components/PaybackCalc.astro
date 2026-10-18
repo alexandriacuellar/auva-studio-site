@@ -1,0 +1,66 @@
+---
+import { packages } from '../data/site';
+
+// "When does a website pay for itself?" Runs in the browser; nothing is sent anywhere.
+const options = packages.map((p) => ({ name: p.name, cost: Number(p.price.replace(/[^0-9]/g, '')), featured: p.featured }));
+---
+<div class="card payback" id="payback">
+  <div class="payback-head">
+    <h3>When does a website <em>pay for itself?</em></h3>
+    <p class="muted">A quick estimate to help you think it through.</p>
+  </div>
+  <form class="payback-form" onsubmit="return false">
+    <label>Package
+      <select name="cost">
+        {options.map((o) => <option value={o.cost} selected={o.featured}>{o.name.split(' ')[0]} (${o.cost.toLocaleString('en-US')}{o.name.startsWith('Complete') ? '+' : ''})</option>)}
+      </select>
+    </label>
+    <label>What one new customer is worth to you
+      <span class="money"><span>$</span><input name="worth" type="number" min="1" step="1" value="300" inputmode="numeric" /></span>
+    </label>
+    <label>New customers a month from your website
+      <input name="perMonth" type="number" min="0" step="1" value="2" inputmode="numeric" />
+    </label>
+  </form>
+  <p class="payback-result" aria-live="polite"></p>
+</div>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('.payback')) {
+    const form = box.querySelector('form')!;
+    const out = box.querySelector('.payback-result')!;
+    const update = () => {
+      const cost = Number(form.cost.value);
+      const value = Number(form.worth.value);
+      const perMonth = Number(form.perMonth.value);
+      if (!(value > 0)) { out.textContent = 'Enter what one new customer is worth to see your estimate.'; return; }
+      const needed = Math.ceil(cost / value);
+      let text = `<b>${needed} new ${needed === 1 ? 'customer covers' : 'customers cover'}</b> the cost.`;
+      if (perMonth > 0) {
+        const months = Math.ceil(needed / perMonth);
+        text += ` At ${perMonth} a month, your site pays for itself in about <b>${months} ${months === 1 ? 'month' : 'months'}</b>.`;
+      }
+      out.innerHTML = text;
+    };
+    form.addEventListener('input', update);
+    update();
+  }
+</script>
+
+<style>
+  .payback { margin-top: 32px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px 40px; align-items: start; }
+  .payback-head h3 { font-family: var(--font-head); font-weight: 300; font-size: 1.6rem; line-height: 1.2; margin-bottom: 8px; }
+  .payback-head h3 em { font-weight: 800; color: var(--primary); }
+  .payback-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .payback-form label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; align-content: end; }
+  .payback-form input, .payback-form select { width: 100%; }
+  .money { position: relative; display: block; }
+  .money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+  .money input { padding-left: 28px; }
+  .payback-result { grid-column: 2; margin: 4px 0 0; padding: 16px 20px; background: var(--tint); border-radius: 14px; font-size: 1.1rem; color: var(--ink); }
+  @media (max-width: 960px) {
+    .payback { grid-template-columns: 1fr; }
+    .payback-form { grid-template-columns: 1fr; }
+    .payback-result { grid-column: 1; }
+  }
+</style>

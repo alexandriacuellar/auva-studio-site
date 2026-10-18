@@ -1,0 +1,154 @@
+---
+import '../styles/global.css';
+import { site, nav } from '../data/site';
+
+interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[] }
+const { title, seoTitle, schema: pageSchema = [], description = 'Auva Studio is a digital technology and solutions studio helping small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and build websites they own.' } = Astro.props;
+// seoTitle is the full browser-tab and search-result title when a page wants more than "Title | Auva Studio".
+const fullTitle = seoTitle ?? (title ? `${title} | ${site.name}` : `Technology Consulting, AI & Emerging Tech & Websites | ${site.name}`);
+const path = Astro.url.pathname;
+const year = new Date().getFullYear();
+
+const orgDescription = 'Auva Studio is a digital technology and solutions studio helping small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, explore AI and emerging technology, and build websites they own.';
+const pageUrl = new URL(path, site.url).href;
+// One graph per page: the business, its founder, the site, and this page, plus anything the page adds (services, FAQs).
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#org`,
+      name: site.name,
+      url: `${site.url}/`,
+      description: orgDescription,
+      slogan: site.tagline,
+      logo: `${site.url}/auva-logo-tight.png`,
+      image: `${site.url}/og-image.png`,
+      areaServed: site.areaServed,
+      address: { '@type': 'PostalAddress', addressRegion: 'NY', addressCountry: 'US' },
+      founder: { '@id': `${site.url}/#founder` },
+      knowsAbout: ['Technology consulting', 'Business analysis', 'Technical project management', 'AI adoption', 'XR and immersive experiences', 'Game production', 'Website design and development', 'Astro'],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#founder`,
+      name: 'Alexandria Cuellar',
+      jobTitle: 'Founder, digital technology and solutions consultant',
+      worksFor: { '@id': `${site.url}/#org` },
+      image: `${site.url}/alexandria-cuellar.jpg`,
+    },
+    { '@type': 'WebSite', '@id': `${site.url}/#website`, name: site.name, url: `${site.url}/`, publisher: { '@id': `${site.url}/#org` } },
+    { '@type': 'WebPage', '@id': `${pageUrl}#page`, url: pageUrl, name: fullTitle, description, isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#org` } },
+    ...pageSchema,
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(path, site.url)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={`${site.url}/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Auva Studio: make technology work for your business" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,600;1,700;1,800&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script is:inline>
+      // Turn on scroll reveals only when motion is welcome and the browser can observe scrolling.
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-on');
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <p class="promo-bar"><b>Founding client offer:</b> 10% off website packages for my first 10 clients, in exchange for a short review. <a href="/websites/#faq-founding">Ask about it</a></p>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="/" class="brand" aria-label="Auva Studio home">
+          <img src="/auva-logo-tight.png" alt="Auva Studio" width="693" height="208" />
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+        <nav aria-label="Main" id="main-nav">
+          <ul>
+            {nav.map((item) => (
+              <li><a href={item.href} aria-current={path.startsWith(item.href) && item.href !== '/#about' ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+            <li><a href="/contact/" class="btn btn-small">Get in touch</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <img src="/auva-logo-stacked-light.png" alt="Auva Studio" width="509" height="438" />
+          <p>{site.tagline}</p>
+          <p class="small">Founded by Alexandria Cuellar, digital technology and solutions consultant.</p>
+        </div>
+        <div>
+          <h2>Services</h2>
+          <ul>
+            <li><a href="/websites/">Website Services</a></li>
+            <li><a href="/consulting/">Consulting & Project Support</a></li>
+            <li><a href="/ai/">AI & Emerging Technology</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Get started</h2>
+          <ul>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href={site.booking} target="_blank" rel="noopener">Book a call</a></li>
+            <li><a href="/website-check/">Free website check</a></li>
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap footer-legal">
+        <p>© {year} {site.name}. All rights reserved. · Mid-Hudson Valley, NY · Remote and in person · <a href="/privacy/">Privacy Policy</a></p>
+      </div>
+    </footer>
+      <script>
+      // Phone menu toggle.
+      const header = document.querySelector('.site-header');
+      const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+      toggle?.addEventListener('click', () => {
+        const open = header!.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? 'Close' : 'Menu';
+      });
+    </script>
+  <script is:inline>
+    // Fade sections and cards in as they scroll into view; cards in the same row arrive one after another.
+    if (document.documentElement.classList.contains('reveal-on')) {
+      const sel = 'main section:not(.hero) :is(.section-head, .card, .steps li, .band, .quote, .table-wrap)';
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      }, { rootMargin: '0px 0px -8% 0px' });
+      for (const el of document.querySelectorAll(sel)) {
+        const sibs = [...el.parentElement.children].filter((c) => c.matches(sel));
+        el.style.setProperty('--d', Math.min(sibs.indexOf(el), 5) * 90 + 'ms');
+        io.observe(el);
+      }
+    }
+  </script>
+</body>
+</html>

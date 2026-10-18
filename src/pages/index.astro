@@ -1,0 +1,205 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { categories, journey, site, testimonials } from '../data/site';
+const featured = testimonials.find((t) => t.name === 'Matthew Udy');
+import hero from '../assets/cover-hero-workspace.png';
+import headshot from '../assets/alexandria-cuellar.jpg';
+import siteMockup from '../assets/website-mockup-happy-tails.png';
+
+const situations = [
+  { title: 'Your website needs attention', text: "It's outdated, slow, hard to update, or not bringing in inquiries.", href: '/websites/', icon: 'globe' },
+  { title: "You're facing a technology decision", text: 'Too many tools, platforms, or vendors, and no clear way to choose.', href: '/consulting/#advisory', icon: 'compass' },
+  { title: 'A project needs structure', text: 'Priorities, timelines, or vendors need someone to pull them together.', href: '/consulting/#delivery', icon: 'check' },
+  { title: 'You see a practical AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai/', icon: 'bolt' },
+  { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai/', icon: 'layers' },
+];
+---
+<Base>
+  <section class="hero bd-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Consulting · AI & Emerging Tech · Websites</p>
+      <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
+      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams. I help you choose the right tools, plan and deliver projects, and build what you need, including your website.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#services">How I help</a>
+      </div>
+      <figure class="bd-stage">
+        <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
+        <figcaption class="bd-chip">
+          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
+          <span><b>Hi, I'm Alexandria.</b> You'll work with me directly, from the first call to handover.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Where to start</p>
+        <h2 class="mag-head">What are you <em>working on?</em></h2>
+        <p class="lede">You don't need to know which service you need. Start with the situation that sounds most like yours.</p>
+        <p class="muted">Not sure which fits? Real problems often span more than one. <a href="/contact/">Tell me what's happening</a> and I'll suggest a practical next step.</p>
+      </div>
+      <div class="values">
+        {situations.map((x) => (
+          <a class="card card-row" href={x.href}>
+            <div class="icon"><Icon name={x.icon} /></div>
+            <div><h3>{x.title}</h3><p class="muted">{x.text}</p></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What I do</p>
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
+      </div>
+      <div class="grid grid-3">
+        {categories.map((c) => (
+          <a class="card category bd-card" href={c.href}>
+            <div class="bd-media">
+              {c.href === '/consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
+            <div class="float f1"><span class="k">Technology plan</span><b>3 options compared</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
+            <div class="float f2"><span class="k">This week</span><ul><li><Icon name="tick" size={14} />Requirements signed off</li><li><Icon name="tick" size={14} />Vendor call booked</li></ul></div>
+          </div>)}
+              {c.href === '/ai/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
+            <div class="float f1 chat"><span class="k">Team AI Workshop</span><p class="q">Can AI draft our weekly client update?</p><p class="a">Yes, with a check step before it goes out.</p></div>
+            <div class="float f2"><span class="k">Prototype Sprint</span><span class="bar"><i style="width:66%"></i></span></div>
+          </div>)}
+              {c.href === '/websites/' && <Image src={siteMockup} alt="A sample nonprofit website shown on a laptop and a phone on a sunny desk" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
+            </div>
+            <div class="bd-body">
+              <span class="bd-tag">{c.href === '/websites/' ? 'Websites' : c.href === '/ai/' ? 'AI & Emerging Tech' : 'Consulting'}</span>
+              <h3 style={`view-transition-name: svc-${c.href.replaceAll('/', '')}`}>{c.title}</h3>
+              <p class="muted">{c.text}</p>
+              <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
+              <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">About Auva Studio</p>
+        <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
+        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals, not a product to sell.</p>
+        <p>I've spent more than 20 years helping organizations use technology to solve problems. For nearly two decades I built websites and digital products for newspaper companies, and since 2023 I've managed 14+ VR experiences and mobile games. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
+        <div class="founder">
+          <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
+          <p><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span></p>
+        </div>
+        <figure class="quote quote-inline">
+          <blockquote>“{featured.quote}”</blockquote>
+          <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+        </figure>
+      </div>
+      <div class="values">
+        <div class="card card-row"><div class="icon"><Icon name="search" /></div><div><h3>Start with the problem</h3><p class="muted">Technology should make something clearer, easier, or more reliable.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="compass" /></div><div><h3>Fit your business</h3><p class="muted">Your goals, budget, and systems shape every recommendation.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="layers" /></div><div><h3>Keep it simple</h3><p class="muted">The simplest solution that does the job well.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Leave you confident</h3><p class="muted">Clear explanations and systems you can maintain.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How I work</p>
+        <h2 class="mag-head">Simple to start, <em>clear at every step.</em></h2>
+        <p class="lede">Whatever you need, it starts the same way.</p>
+      </div>
+      <ol class="steps steps-3">
+        {journey.map((s, i) => (
+          <li>
+            <span class="num">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p style="margin-top: 28px"><a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a></p>
+    </div>
+  </section>
+  <Cta />
+</Base>
+
+<style>
+  /* Boosh-style draft: centered hero over a big photo stage, then photo-and-text rows that alternate sides. */
+  .bd-hero { position: relative; overflow: hidden; isolation: isolate; padding: 80px 0 96px; }
+  .bd-hero::before, .bd-hero::after { content: ''; position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; z-index: -1; }
+  .bd-hero::before { width: 520px; height: 520px; left: -160px; top: -120px; background: var(--tint); }
+  .bd-hero::after { width: 460px; height: 460px; right: -140px; top: 120px; background: #e6e0ff; }
+  .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
+  .bd-hero-inner .hero-actions { justify-content: center; }
+  .bd-pill { display: inline-block; font-family: var(--font-head); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; margin-bottom: 24px; box-shadow: var(--shadow); }
+  .bd-hero h1 { max-width: 15ch; }
+
+  .bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
+  .bd-stage > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; object-position: center 72%; border-radius: 28px; box-shadow: var(--shadow-strong); }
+  .bd-chip { position: absolute; left: 28px; bottom: -28px; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
+  .bd-chip img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+
+  /* Service cards with an image on top, as on Boosh's "Three ways we help you grow". */
+  .bd-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .bd-media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+  .bd-media img { width: 100%; height: 100%; object-fit: cover; }
+  .bd-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
+  .bd-body .more { margin-top: auto; }
+  .bd-tag { align-self: flex-start; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
+
+  /* Illustrated panels: floating interface cards on a soft gradient, standing in for photos still to be taken. */
+  .bd-art { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .bd-art-plan { background: radial-gradient(circle at 30% 20%, #ffffff 0%, var(--tint) 45%, #b9d0ff 100%); }
+  .bd-art-ai { background: radial-gradient(circle at 70% 25%, #ffffff 0%, #e6e0ff 45%, #b9c4ff 100%); }
+  .float { position: absolute; background: var(--white); border-radius: 16px; padding: 16px 18px; box-shadow: 0 18px 40px rgba(18, 35, 94, 0.16); font-size: 0.9rem; line-height: 1.4; display: flex; flex-direction: column; gap: 8px; }
+  .float .k { font-family: var(--font-head); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); }
+  .float b { font-family: var(--font-head); font-size: 1.05rem; }
+  .float ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .float li { display: flex; gap: 8px; align-items: center; }
+  .float li svg { color: var(--success); flex: none; }
+  .float li.todo { color: var(--muted); padding-left: 22px; }
+  .bar { display: block; height: 8px; border-radius: 99px; background: var(--surface); }
+  .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--primary), var(--bright)); }
+  .f1 { left: 8%; top: 9%; width: 52%; }
+  .f2 { right: 7%; top: 40%; width: 46%; }
+  .f3 { left: 14%; bottom: 8%; width: 44%; }
+  .tl { display: flex; justify-content: space-between; position: relative; padding: 6px 0; }
+  .tl::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--border); }
+  .tl i { position: relative; width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 3px solid var(--primary); }
+  .tl i.on { background: var(--primary); }
+  .chat .q { margin: 0; align-self: flex-end; background: var(--primary); color: var(--white); padding: 8px 12px; border-radius: 12px 12px 2px 12px; }
+  .chat .a { margin: 0; background: var(--surface); padding: 8px 12px; border-radius: 12px 12px 12px 2px; }
+  .bd-art-ai .f1 { width: 62%; }
+  .bd-art-ai .f2 { top: 52%; }
+  .bd-art-ai .f3 { bottom: 7%; }
+  .badge { flex-direction: row; align-items: center; gap: 10px; }
+  .badge svg { color: var(--primary); flex: none; }
+  .badge b { font-size: 1.6rem; margin-left: auto; }
+
+  .float { font-size: 0.8rem; padding: 12px 14px; gap: 6px; }
+  .float b { font-size: 0.95rem; }
+  .bd-art .f1 { left: 7%; top: 9%; width: 66%; }
+  .bd-art .f2 { right: 6%; top: auto; bottom: 9%; width: 58%; }
+  @media (max-width: 960px) {
+    .bd-stage > img { aspect-ratio: 4 / 3; }
+    .bd-chip { position: relative; left: auto; bottom: auto; margin: -40px 16px 0; max-width: none; }
+  }
+  @media (max-width: 640px) {
+    .bd-hero { padding: 56px 0 64px; }
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { packages } from '../data/site';
+---
+<div class="grid grid-3 packages">
+  {packages.map((p) => (
+    <article id={p.name.split(' ')[0].toLowerCase()} class:list={['card', 'package', { featured: p.featured }]}>
+      <span class="tag">{p.eyebrow}</span>
+      <h3>{p.name}</h3>
+      <p class="muted">{p.blurb}</p>
+      <p class="price">{p.price}</p>
+      <ul class="ticks">
+        {p.features.map((f, i) => (
+          <li><Icon name="tick" size={18} />{i === 0 && f.startsWith('Everything') ? <b>{f}</b> : f}</li>
+        ))}
+      </ul>
+      {p.extra && <p class="extra"><Icon name="gear" size={18} />{p.extra}</p>}
+      <p class="time"><Icon name="clock" size={18} />{p.timeline}</p>
+      <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`/websites/?package=${encodeURIComponent(p.name)}#start`}>Ask about {p.name.split(' ')[0]}</a>
+    </article>
+  ))}
+</div>
+<p class="upgrade"><b>Room to grow.</b> Start with any package and upgrade as your business grows. New pages or features can be added any time, quoted first. Bigger sites are quoted too.</p>
+<p class="fine">This site is built the same way I build yours.</p>
+<p class="fine">All prices are one-time project fees. Bought a $199 Website Diagnostic? It's credited toward your new website.</p>
