@@ -1,0 +1,3 @@
+# Sample sites are fictional businesses: keep them out of search results.
+/samples/*
+  X-Robots-Tag: noindex, nofollow
