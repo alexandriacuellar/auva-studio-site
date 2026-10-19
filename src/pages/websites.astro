@@ -14,6 +14,7 @@ const faqs = [
   { q: 'Why does each service need its own page?', a: "A page about one service can answer exactly what people search for, like 'dog grooming in Kingston'. That helps Google and AI tools match you to the right searches. Expanded Presence has room for a page for each service you offer." },
   { id: 'faq-diagnostic', q: 'What does the Website Diagnostic check?', a: "I check how your site works on phones, how fast it loads, how easily people find you on Google, your Google Business Profile and reviews, whether visitors can quickly tell what you do, and how easy it is to call, book, or buy. You get a short, plain-English report with what to fix first, in order, within 5 business days. The report is yours to use with any developer." },
   { q: 'Can you check a site someone else built?', a: "Yes. The Diagnostic works for any website, whoever built it or whatever it's built on." },
+  { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
   { q: 'Can I update the site myself?', a: 'Yes. A Content Editing Dashboard (from $1,750, included in Complete Presence) lets you change your page text, photos, and the collections I set up for you, like news or events, with no code. The starting price includes 2 collections; more can be added, quoted first. New features or new kinds of pages are $125 an hour, quoted first. Or send changes to me, $50 per update.' },
   { q: 'What counts as one update?', a: 'A small change that takes about 30 minutes, like new text, a photo, your hours, or fixing a form or checkout link. Buy 5 for $200 and use them within 12 months.' },
   { q: 'How fast are updates done?', a: 'Most within 2 business days. Quick questions by email are always free.' },
@@ -146,7 +147,7 @@ const audiences = [
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
         <p class="lede">I build every site with Astro. It keeps your site fast and my prices fair.</p>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-2">
         {comparison.benefits.map((b) => (
           <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
@@ -159,7 +160,7 @@ const audiences = [
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Built to be found</p>
+        <p class="eyebrow">Easy to discover</p>
         <h2 class="mag-head">Help customers find you, <em>today and tomorrow.</em></h2>
         <p class="lede">I follow modern best practices so your website is easy for people, search engines, and AI tools to discover and understand.</p>
       </div>
@@ -181,7 +182,7 @@ const audiences = [
         <p class="eyebrow">Add-ons</p>
         <h2 class="mag-head">Add capabilities <em>when you need them.</em></h2>
       </div>
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         {addons.map((a) => (
           <div class="card">
             <div class="icon"><Icon name={a.icon} size={32} /></div>

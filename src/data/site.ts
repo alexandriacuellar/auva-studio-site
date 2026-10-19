@@ -136,8 +136,9 @@ export const packages = [
 export const comparison = {
   benefits: [
     { icon: 'bolt', title: 'Loads almost instantly', text: "Your pages open in a blink on any phone, so visitors don't give up and leave. I'll show you your current site's Google speed score, and your new one at launch." },
+    { icon: 'search', title: 'Built to be found, from day one', text: 'Speed, clear page structure, and the details Google and AI search tools look for are part of every build, not an extra you pay for after launch.' },
     { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Hosts like Cloudflare and Netlify serve pages like these for free, or for a few dollars a month on a busier site. Your domain is about $20 a year.' },
-    { icon: 'key', title: 'Yours to keep', text: 'You own the code and the content, and you can move hosts anytime.' },
+    { icon: 'key', title: 'Yours to keep', text: "Your code, content, domain, and hosting account are all in your name. No lock-in, and no platform you can't leave." },
   ],
 };
 
@@ -150,7 +151,8 @@ export const discovery = [
 
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
-  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect other tools you already use.', price: 'Quoted based on the tools you use' },
+  { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
+  { icon: 'clock', title: 'Donations, forums, and integrations', text: 'Accept donations, host a forum, or connect other tools you already use.', price: 'Quoted based on the tools you use' },
 ];
 
 export const brandEssentials = [
