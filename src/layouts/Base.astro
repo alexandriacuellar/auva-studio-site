@@ -94,7 +94,7 @@ const schema = {
           gtag('js', new Date());
           gtag('config', ads.id);
           const labels = { form: ads.formLabel, booking: ads.bookingLabel };
-          window.auvaConvert = (kind) => labels[kind] && gtag('event', 'conversion', { send_to: `${ads.id}/${labels[kind]}` });
+          window.auvaConvert = (kind) => labels[kind] && gtag('event', 'conversion', { send_to: `${ads.id}/${labels[kind]}`, value: 1.0, currency: 'USD' });
           addEventListener('click', (e) => { if (e.target.closest?.('a[href^="https://calendly.com"]')) auvaConvert('booking'); });
         }
       }
