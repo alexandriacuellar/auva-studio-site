@@ -109,7 +109,7 @@ export const packages = [
     blurb: 'Room for every service you offer, so customers and Google can find each one.',
     features: [
       'Everything in Essential',
-      'Up to 10 pages, with a page for each service so each one can show up on Google',
+      'Up to 10 pages',
       'Up to 3 page designs',
       'Visitor stats that show which pages bring in calls and messages',
       '3 revision rounds',
