@@ -125,7 +125,7 @@ const situations = [
       <ol class="steps steps-3">
         {journey.map((s, i) => (
           <li>
-            <span class="num">{i + 1}</span>
+            <span class="num" aria-hidden="true">{i + 1}</span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </li>

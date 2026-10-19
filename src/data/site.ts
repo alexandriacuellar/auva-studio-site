@@ -72,7 +72,7 @@ export const whyAuva = [
   { title: 'Technical depth', text: 'Recommendations reflect how systems actually work, connect, and get maintained.' },
   { title: 'Business-minded guidance', text: 'Your goals, budget, team, and customers come before any new platform.' },
   { title: 'Strategy through delivery', text: 'One partner from assessment and planning through implementation.' },
-  { title: 'Broad platform experience', text: 'Websites, APIs, digital products, project management, games, XR, and interactive experiences.' },
+  { title: 'Broad experience', text: 'Websites, APIs, digital products, project management, games, XR, and interactive experiences.' },
 ];
 
 // How every engagement runs, from a small website to a complex project.
@@ -151,7 +151,7 @@ export const discovery = [
 
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
-  { icon: 'clock', title: 'Buy buttons, booking, and integrations', text: 'Add a checkout button, scheduling, or other tools you already use.', price: 'Quoted by platform' },
+  { icon: 'clock', title: 'Buy buttons, booking, and integrations', text: 'Add a checkout button, scheduling, or other tools you already use.', price: 'Priced by the tool you use' },
 ];
 
 export const brandEssentials = [
@@ -182,7 +182,7 @@ export const terms = [
 
 // Website Care (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 per update, or 5 for $200', text: 'Text, photos, hours, contact details, and fixes to things like forms or checkout links.' },
+  { name: 'Updates and fixes', price: '$50 per update, or 5 for $200 (use within 12 months)', text: 'Text, photos, hours, contact details, and fixes to things like forms or checkout links.' },
   { name: 'Room to grow', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
 ];
 
