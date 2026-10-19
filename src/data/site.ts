@@ -108,7 +108,7 @@ export const packages = [
     blurb: 'Room for every service you offer, so customers and Google can find each one.',
     features: [
       'Everything in Essential',
-      'A page for each service you offer (up to 10), so each one can show up on Google',
+      'Up to 10 pages, with a page for each service so each one can show up on Google',
       'Up to 3 page designs',
       'Visitor stats that show which pages bring in calls and messages',
       '3 revision rounds',
@@ -150,7 +150,7 @@ export const discovery = [
 
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
-  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect booking and other tools you already use.', price: 'Quoted based on the tools you use' },
+  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect other tools you already use.', price: 'Quoted based on the tools you use' },
 ];
 
 export const brandEssentials = [
@@ -197,7 +197,7 @@ export const testimonials = [
 export const aiOffers = [
   { id: 'workshop', group: 'ai', icon: 'chat', title: 'Team AI Workshop', price: 'From $500', text: 'A 2-hour hands-on session for up to 10 people. Your team practices AI tools on real work and leaves with a one-page guide.' },
   { id: 'readiness', group: 'ai', icon: 'compass', title: 'AI Readiness Plan', price: '$650', text: 'Where AI can save your team time in the work you already do, which tools fit, and how to use them safely. Three one-hour sessions and a written plan.' },
-  { id: 'ai-sprint', group: 'ai', icon: 'bolt', title: 'AI Prototype Sprint', price: 'From $2,500', text: 'A small, working test of an AI tool for your business, like a chatbot that answers customer questions or a workflow that drafts routine emails. Then a walkthrough of what we learned. 2–3 weeks.' },
+  { id: 'ai-sprint', group: 'ai', icon: 'bolt', title: 'AI Prototype Sprint', price: 'From $2,500', text: 'A small, working test of an AI tool for your business, like a chatbot that answers customer questions or a workflow that drafts routine emails. Then a walkthrough of what we learned, all in 2–3 weeks.' },
   { id: 'review', group: 'xr', icon: 'search', title: 'Concept & Feasibility Review', price: '$650', text: "Have an XR, game, or interactive idea? Find out if it's doable, which technology fits, a rough budget, and the team it would take." },
   { id: 'xr-sprint', group: 'xr', icon: 'layers', title: 'XR Prototype Sprint', price: 'From $7,500', text: 'A small, working test of your XR or interactive idea, built with a developer partner, then a walkthrough of what we learned. 4–6 weeks.' },
   { id: 'production', group: 'xr', icon: 'star', title: 'Production Support', price: '$65/hr · Monthly from $650', text: 'Producer and project management help for XR, game, and immersive teams: plans, schedules, documents, and keeping everyone aligned.' },
