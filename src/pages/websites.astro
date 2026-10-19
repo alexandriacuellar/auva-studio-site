@@ -28,7 +28,7 @@ const schema = serviceSchema([
   { name: 'Website Diagnostic', description: 'A check of how an existing site works on phones, how easily people find it on Google, how fast it loads, and what to fix first.', price: '$199' },
   ...packages.map((p) => ({ name: `${p.name} website package`, description: p.blurb, price: p.price })),
   ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
-  ...care.map((c) => ({ name: `Website Care: ${c.name}`, description: c.text, price: c.price })),
+  ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
   { name: 'Brand Essentials', description: 'Logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.', price: '$1,000' },
 ], '/websites/');
 
@@ -213,8 +213,8 @@ const audiences = [
   <section id="care">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">After launch</p>
-        <h2 class="mag-head">Website Care: how your site <em>stays up to date.</em></h2>
+        <p class="eyebrow">Help After Launch</p>
+        <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
         <p class="lede">Choose who makes the changes. Most small sites only change a few times a year, so there's no monthly plan.</p>
       </div>
       <div class="grid grid-2 care-paths">

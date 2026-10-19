@@ -210,7 +210,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--p
 .category .ticks { margin-top: 8px; }
 .steps .num { margin-top: 0; }
 
-/* Website Care paths */
+/* Help After Launch paths */
 .care-paths { align-items: start; }
 .care-options { display: grid; gap: 12px; margin: 18px 0; }
 .care-option { border: 2px solid var(--border); border-radius: 14px; padding: 16px 18px; background: var(--paper); }

@@ -39,7 +39,7 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website Diagnostic', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Website Care and on-demand support'],
+    items: ['Website Diagnostic', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
     href: '/websites/',
     cta: 'Explore website services',
   },
@@ -180,7 +180,7 @@ export const terms = [
   { title: 'Launch and support', text: 'A walkthrough, a how-to guide, and 30 days of fixes after launch.' },
 ];
 
-// Website Care (no monthly plan). A small update is about 30 minutes of work.
+// Help After Launch (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
   { name: 'Updates and fixes', price: '$50 per update, or 5 for $200 (use within 12 months)', text: 'Text, photos, hours, contact details, and fixes to things like forms or checkout links.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
