@@ -15,7 +15,7 @@ const faqs = [
 ];
 import { consulting, whyAuva, site, testimonials, serviceSchema } from '../data/site';
 
-const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/consulting/');
+const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/technology-consulting/');
 
 const audiences = [
   { icon: 'globe', title: 'Small businesses', who: 'Shops, restaurants, inns, practices, and local services.', text: 'Too many tools and not enough time. Pick the right ones, set them up, and get your team using them.' },
@@ -44,7 +44,7 @@ const glance = [
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
       </div>
       <nav class="bd-sublinks" aria-label="Consulting services">
-        {consulting.map((c) => <a href={c.id === 'ai' ? '/ai/' : `#${c.id}`}>{c.title}</a>)}
+        {consulting.map((c) => <a href={c.id === 'ai' ? '/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
       </nav>
     </div>
   </section>
@@ -90,8 +90,8 @@ const glance = [
               <p class="muted">{c.text}</p>
               <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
               {c.id === 'ai'
-                ? <a class="more" href="/ai/" style="margin-top: 12px">See AI & Emerging Technology <Icon name="arrow" size={16} /></a>
-                : <a class="more" href={`/consulting/?topic=${c.id}#start`} style="margin-top: 12px">Discuss this service <Icon name="arrow" size={16} /></a>}
+                ? <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Technology <Icon name="arrow" size={16} /></a>
+                : <a class="more" href={`/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Discuss this service <Icon name="arrow" size={16} /></a>}
             </div>
           </div>
         ))}
@@ -110,7 +110,7 @@ const glance = [
         <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Consulting sessions</h3><p class="muted">Focused, paid time to talk through a decision, a vendor, or a plan, at $65 an hour, as a single session or ongoing.</p></div></div>
         <div class="card card-row"><div class="icon"><Icon name="book" /></div><div><h3>Project-based</h3><p class="muted">A defined scope, deliverables, and timeline, with one point of contact.</p></div></div>
         <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Fractional project leadership</h3><p class="muted">A part-time project leader inside your team, from $650 a month, with a 3-month minimum.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="bolt" /></div><div><h3>Exploration / prototype</h3><p class="muted">Test an idea, tool, or emerging technology on a small scale before you commit. <a href="/ai/#sprint">See Prototype Sprints</a></p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="bolt" /></div><div><h3>Exploration / prototype</h3><p class="muted">Test an idea, tool, or emerging technology on a small scale before you commit. <a href="/ai-emerging-tech/#sprint">See Prototype Sprints</a></p></div></div>
         <p class="small muted">Every engagement ends with clear documentation and training, so your team can carry on without me.</p>
       </div>
     </div>

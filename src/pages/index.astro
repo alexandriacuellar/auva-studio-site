@@ -11,10 +11,10 @@ import siteMockup from '../assets/website-mockup-happy-tails.png';
 
 const situations = [
   { title: 'Your website needs attention', text: "It's outdated, slow, hard to update, or not bringing in inquiries.", href: '/websites/', icon: 'globe' },
-  { title: "You're facing a technology decision", text: 'Too many tools, platforms, or vendors, and no clear way to choose.', href: '/consulting/#advisory', icon: 'compass' },
-  { title: 'A project needs structure', text: 'Priorities, timelines, or vendors need someone to pull them together.', href: '/consulting/#delivery', icon: 'check' },
-  { title: 'You see a practical AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai/', icon: 'bolt' },
-  { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai/', icon: 'layers' },
+  { title: "You're facing a technology decision", text: 'Too many tools, platforms, or vendors, and no clear way to choose.', href: '/technology-consulting/#advisory', icon: 'compass' },
+  { title: 'A project needs structure', text: 'Priorities, timelines, or vendors need someone to pull them together.', href: '/technology-consulting/#delivery', icon: 'check' },
+  { title: 'You see a practical AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/', icon: 'bolt' },
+  { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/', icon: 'layers' },
 ];
 ---
 <Base>
@@ -67,18 +67,18 @@ const situations = [
         {categories.map((c) => (
           <a class="card category bd-card" href={c.href}>
             <div class="bd-media">
-              {c.href === '/consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
+              {c.href === '/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
             <div class="float f1"><span class="k">Technology plan</span><b>3 options compared</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
             <div class="float f2"><span class="k">This week</span><ul><li><Icon name="tick" size={14} />Requirements signed off</li><li><Icon name="tick" size={14} />Vendor call booked</li></ul></div>
           </div>)}
-              {c.href === '/ai/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
+              {c.href === '/ai-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
             <div class="float f1 chat"><span class="k">Team AI Workshop</span><p class="q">Can AI draft our weekly client update?</p><p class="a">Yes, with a check step before it goes out.</p></div>
             <div class="float f2"><span class="k">Prototype Sprint</span><span class="bar"><i style="width:66%"></i></span></div>
           </div>)}
               {c.href === '/websites/' && <Image src={siteMockup} alt="A sample nonprofit website shown on a laptop and a phone on a sunny desk" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
             </div>
             <div class="bd-body">
-              <span class="bd-tag">{c.href === '/websites/' ? 'Websites' : c.href === '/ai/' ? 'AI & Emerging Tech' : 'Consulting'}</span>
+              <span class="bd-tag">{c.href === '/websites/' ? 'Websites' : c.href === '/ai-emerging-tech/' ? 'AI & Emerging Tech' : 'Consulting'}</span>
               <h3 style={`view-transition-name: svc-${c.href.replaceAll('/', '')}`}>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>

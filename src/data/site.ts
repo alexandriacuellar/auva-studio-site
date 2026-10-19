@@ -28,8 +28,8 @@ export const site = {
 
 export const nav = [
   { href: '/websites/', label: 'Websites' },
-  { href: '/consulting/', label: 'Consulting' },
-  { href: '/ai/', label: 'AI & Emerging Tech' },
+  { href: '/technology-consulting/', label: 'Consulting' },
+  { href: '/ai-emerging-tech/', label: 'AI & Emerging Tech' },
   { href: '/#about', label: 'About' },
 ];
 
@@ -48,7 +48,7 @@ export const categories = [
     title: 'Consulting & Project Support',
     text: 'Choose the right tools, fix how work gets done, and keep projects on track.',
     items: ['Technology planning', 'Workflow and process reviews', 'Project management', 'Part-time project leadership'],
-    href: '/consulting/',
+    href: '/technology-consulting/',
     cta: 'Explore consulting',
   },
   {
@@ -56,7 +56,7 @@ export const categories = [
     title: 'AI & Emerging Technology',
     text: 'Explore AI, XR, and interactive ideas with small, low-risk steps.',
     items: ['AI Readiness Plan', 'Team AI Workshop', 'Feasibility reviews and prototypes', 'Production support'],
-    href: '/ai/',
+    href: '/ai-emerging-tech/',
     cta: 'Explore AI & emerging tech',
   },
 ];

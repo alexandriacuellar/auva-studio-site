@@ -13,7 +13,7 @@ const faqs = [
   { q: 'Do you build full XR or game productions?', a: 'I plan and manage them. Production Support gives XR, game, and immersive teams producer support, and XR prototypes are built with a developer partner.' },
 ];
 
-const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/ai/');
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/ai-emerging-tech/');
 
 const audiences = [
   { icon: 'bulb', title: 'Small businesses and nonprofits', text: "You're curious about AI but not sure where it helps, which tools to trust, or how to get your team using them." },
@@ -100,7 +100,7 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
                 <div class="icon"><Icon name={o.icon} size={32} /></div>
                 <h3>{o.title}</h3>
                 <p class="muted">{o.text}</p>
-                <a class="more" href={`/ai/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+                <a class="more" href={`/ai-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
               </div>
             ))}
           </div>

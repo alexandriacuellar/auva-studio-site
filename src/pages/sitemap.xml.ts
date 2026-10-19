@@ -1,11 +1,10 @@
 // Lists every public page for search engines. Add new pages here.
 import { site } from '../data/site';
 
-const pages = ['/', '/consulting/', '/ai/', '/websites/', '/contact/', '/privacy/'];
+const pages = ['/', '/websites/', '/website-check/', '/technology-consulting/', '/ai-emerging-tech/', '/contact/', '/privacy/'];
 
 export function GET() {
-  const lastmod = new Date().toISOString().slice(0, 10);
-  const urls = pages.map((p) => `  <url><loc>${site.url}${p}</loc><lastmod>${lastmod}</lastmod></url>`).join('\n');
+  const urls = pages.map((p) => `  <url><loc>${site.url}${p}</loc></url>`).join('\n');
   return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, {
     headers: { 'Content-Type': 'application/xml' },
   });
