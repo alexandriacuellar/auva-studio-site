@@ -175,7 +175,7 @@ export const terms = [
   { title: 'Clear payment', text: '50% deposit to start, balance due at launch.' },
   { title: 'You own it', text: 'Once paid in full, your website, content, domain, and accounts are yours.' },
   { title: 'Low ongoing costs', text: 'Your domain (about $20 a year) stays in your name. Hosting is free or low cost.' },
-  { title: 'No passwords needed', text: 'You keep full control of your accounts. I never need your logins.' },
+  { title: 'You stay in control', text: 'You keep ownership of every account. If I ever need access, you add me as a user and can remove me anytime.' },
   { title: 'Feedback and sign-off', text: 'You approve the page plan, design, and final site before anything goes live. A revision round is one set of changes, sent together.' },
   { title: 'Launch and support', text: 'A walkthrough, a how-to guide, and 30 days of fixes after launch.' },
 ];
