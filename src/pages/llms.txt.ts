@@ -10,7 +10,7 @@ export function GET() {
     'Every engagement starts with a free 30-minute call, and all work is scoped and priced in writing before it begins.',
     '',
     '## Pages',
-    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates from $50 each with no monthly plan`,
+    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each with no monthly plan`,
     `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership`,
     `- [AI & Emerging Technology](${site.url}/ai-emerging-tech/): AI readiness, team workshops, concept and feasibility reviews, prototypes, XR and game production support`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
