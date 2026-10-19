@@ -120,12 +120,11 @@ export const packages = [
     eyebrow: 'Go further',
     name: 'Complete Presence',
     price: '$5,500+',
-    blurb: 'For growing businesses that want to update their site and sell online themselves.',
+    blurb: 'For growing businesses that want to update their site themselves.',
     features: [
       'Everything in Expanded',
       'A Content Editing Dashboard to update text, photos, news, or events yourself',
       'Up to 6 page designs',
-      'An online store you manage yourself',
       'Booking, email sign-up, or other tools built into your pages',
       'A search checkup 30 days after launch',
       '4 revision rounds',
@@ -151,7 +150,7 @@ export const discovery = [
 
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
-  { icon: 'clock', title: 'Buy buttons, booking, and integrations', text: 'Add a checkout button, scheduling, or other tools you already use.', price: 'Priced by the tool you use' },
+  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect booking and other tools you already use.', price: 'Quoted for your project' },
 ];
 
 export const brandEssentials = [
