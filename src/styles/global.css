@@ -218,7 +218,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--p
 .care-option.featured { border-color: var(--primary); }
 .care-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .care-head h4 { font-family: var(--font-head); font-size: 1.05rem; margin: 0; }
-.care-price { font-weight: 700; color: var(--primary); white-space: nowrap; }
+.care-price { font-weight: 700; color: var(--primary); }
 .care-option p { margin: 4px 0 8px; }
 .ticks.small { gap: 4px; margin: 0; }
 
