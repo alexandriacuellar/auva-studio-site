@@ -183,7 +183,7 @@ export const terms = [
 // Website Care (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
   { name: 'Updates and fixes', price: '$50 per update, or 5 for $200 (use within 12 months)', text: 'Text, photos, hours, contact details, and fixes to things like forms or checkout links.' },
-  { name: 'Room to grow', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
+  { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
 ];
 
 
