@@ -53,7 +53,7 @@ export const categories = [
     icon: 'bulb',
     title: 'Consulting & Project Support',
     text: 'Choose the right tools, fix how work gets done, and keep projects on track.',
-    items: ['Technology planning', 'Workflow and process reviews', 'Project management', 'Part-time project leadership'],
+    items: ['Technology planning', 'Workflow and process reviews', 'Project management', 'Fractional project leadership'],
     href: '/technology-consulting/',
     cta: 'Explore consulting',
   },
