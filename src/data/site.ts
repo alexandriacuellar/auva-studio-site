@@ -136,7 +136,7 @@ export const packages = [
 
 export const comparison = {
   benefits: [
-    { icon: 'bolt', title: 'Loads almost instantly', text: "Ready-made pages appear right away on any phone. I'll show you your current site's Google speed score, and your new one at launch." },
+    { icon: 'bolt', title: 'Loads almost instantly', text: "Your pages open in a blink on any phone, so visitors don't give up and leave. I'll show you your current site's Google speed score, and your new one at launch." },
     { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Hosts like Cloudflare and Netlify serve pages like these for free, or for a few dollars a month on a busier site. Your domain is about $20 a year.' },
     { icon: 'key', title: 'Yours to keep', text: 'You own the code and the content, and you can move hosts anytime.' },
   ],
