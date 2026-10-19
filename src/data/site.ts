@@ -8,7 +8,13 @@ export const site = {
   url: 'https://auvastudio.com',
   location: 'Mid-Hudson Valley, NY',
   // Used in search data so local searches can find the studio.
-  areaServed: ['Ulster County, NY', 'Dutchess County, NY', 'Orange County, NY', 'Mid-Hudson Valley, NY', 'Westchester County, NY', 'New York, NY', 'Albany, NY', 'United States'],
+  areaServed: ['Hudson Valley, NY', 'Westchester County, NY', 'Rockland County, NY', 'Dutchess County, NY', 'Orange County, NY', 'Putnam County, NY', 'Sullivan County, NY', 'Ulster County, NY', 'Albany County, NY', 'Columbia County, NY', 'Greene County, NY', 'Rensselaer County, NY', 'New York, NY', 'United States'],
+  // Footer service area, grouped by region.
+  regions: [
+    ['Lower Hudson Valley', 'Westchester, Rockland'],
+    ['Mid-Hudson Valley', 'Dutchess, Orange, Putnam, Sullivan, Ulster'],
+    ['Upper Hudson Valley', 'Albany, Columbia, Greene, Rensselaer'],
+  ],
   // Get a free access key at web3forms.com (sent to the email that should receive messages).
   web3formsKey: 'ba9485ce-3d10-468e-943f-00ffc9224cd4',
   booking: 'https://calendly.com/alexandria-cuellar-ny/30min',
@@ -139,6 +145,7 @@ export const comparison = {
     { icon: 'bolt', title: 'Loads almost instantly', text: "Your pages open in a blink on any phone, so visitors don't give up and leave. I'll show you your current site's Google speed score, and your new one at launch." },
     { icon: 'search', title: 'Built to be found, from day one', text: 'Speed, clear page structure, and the details Google and AI search tools look for are part of every build, not an extra you pay for after launch.' },
     { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Hosts like Cloudflare and Netlify serve pages like these for free, or for a few dollars a month on a busier site. Your domain is about $20 a year.' },
+    { icon: 'check', title: 'Easy for everyone to use', text: 'Every site gets an accessibility test before launch, so it works for people using screen readers, keyboards, or larger text.' },
     { icon: 'key', title: 'Yours to keep', text: "Your code, content, domain, and hosting account are all in your name. No lock-in, and no platform you can't leave." },
   ],
 };

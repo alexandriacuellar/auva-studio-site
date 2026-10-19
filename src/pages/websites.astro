@@ -23,8 +23,8 @@ const faqs = [
   { q: 'What about Core Web Vitals?', a: "Core Web Vitals are Google's measures of how fast a page loads, responds, and stays steady while loading. Astro sites send very little code to the browser, so they usually score well. I'll share your Google PageSpeed scores at launch." },
   { q: 'What is a CMS, and do I need one?', a: "A CMS (content management system) lets you edit your site yourself. Mine is the Content Editing Dashboard, included in Complete Presence or added from $1,750. If you'd rather send changes to me, you don't need one." },
   { q: 'Why Astro instead of WordPress or Wix?', a: "Astro sites load faster, have no plugins to keep updated, and hosting is free or low cost. WordPress needs regular plugin and security updates, and Wix and Squarespace charge a monthly subscription. Those platforms still make sense for some businesses, and I'll tell you if yours is one." },
-  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most small businesses are on WordPress, Wix, Squarespace, or Webflow. If you're on one of these, I can likely move you to Astro and keep your content, branding, and the pages Google already knows. Moving the pages in your package is included. Large blogs or catalogs are quoted separately." },
-  { q: 'Can you redo my current website?', a: "Yes. Start with a $199 Website Diagnostic. I'll tell you honestly whether to fix what you have or rebuild, and if you choose a new website, the fee is credited toward it." },
+  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most small businesses are on WordPress, Wix, Squarespace, or Webflow. If you're on one of these, I can likely move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included. Large blogs or catalogs are quoted separately." },
+  { q: 'Can you redo my current website?', a: "Yes. Start with a $199 Website Diagnostic. I'll tell you honestly whether to fix what you have or rebuild, and if you choose a new website, the fee is credited toward it. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned." },
   { q: 'How long does a website take?', a: 'Essential Presence takes 2–3 weeks, Expanded Presence 3–5 weeks, and Complete Presence 6+ weeks. The timeline starts once your Statement of Work is signed and the deposit is paid.' },
 ];
 
@@ -150,7 +150,7 @@ const audiences = [
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
         <p class="lede">I build every site with Astro. It keeps your site fast and my prices fair.</p>
       </div>
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         {comparison.benefits.map((b) => (
           <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
