@@ -150,7 +150,7 @@ export const discovery = [
 
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
-  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect booking and other tools you already use.', price: 'Quoted for your project' },
+  { icon: 'clock', title: 'Online store, donations, and integrations', text: 'Sell online, accept donations, host a forum, or connect booking and other tools you already use.', price: 'Quoted based on the tools you use' },
 ];
 
 export const brandEssentials = [
