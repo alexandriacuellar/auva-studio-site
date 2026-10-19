@@ -25,7 +25,7 @@ export function GET() {
     '',
     '## Consulting & Project Support',
     ...consulting.filter((c) => c.id !== 'ai').map((c) => `- ${c.title}: ${c.text} ${c.price}`),
-    '- Monthly project management and Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
+    '- Fractional project leadership and monthly Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
     '',
     '## AI & Emerging Technology',
     ...aiOffers.map((o) => `- ${o.title} (${o.price}): ${o.text}`),
