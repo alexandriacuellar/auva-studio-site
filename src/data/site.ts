@@ -90,9 +90,10 @@ export const packages = [
     blurb: 'A professional web presence that helps customers find, trust, and contact you.',
     features: [
       'A planning call and content plan',
+      "I polish your copy and fill in what's missing",
       'One scrolling page or up to 3 pages',
-      'Mobile-friendly design',
-      'A contact form so customers can reach you',
+      'Custom design, no templates, made for phones first',
+      'A contact form and a map to find you',
       'Set up for Google and AI search: page titles, business details, and a sitemap',
       'Simple visitor stats',
       'Google Business Profile set up and linked to your site',
