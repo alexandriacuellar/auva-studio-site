@@ -140,7 +140,6 @@ export const packages = [
       'Up to 20 pages',
       'A Content Editing Dashboard to update text, photos, news, or events yourself',
       'Up to 6 page designs',
-      'Booking, email sign-up, or other tools built into your pages',
       'A search checkup 30 days after launch',
       '4 revision rounds',
     ],
@@ -161,7 +160,7 @@ export const comparison = {
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
-  { icon: 'clock', title: 'Donations, forums, and integrations', text: 'Accept donations, host a forum, or connect other tools you already use.', price: 'Quoted based on the tools you use' },
+  { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
 ];
 
 export const brandEssentials = [
