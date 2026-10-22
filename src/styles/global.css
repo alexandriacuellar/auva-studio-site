@@ -464,3 +464,14 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
   .steps.steps-4 li > h3 + p { margin-top: 8px; }
   .steps.steps-4 .step-terms li { display: flex; grid-template-columns: none; padding: 0; align-items: flex-start; }
 }
+
+/* Package cards: features grouped under small labels. */
+.package .pk-includes { margin: 8px 0 0; }
+.package .pk-group { margin-top: 10px; }
+.package .pk-label { margin: 0 0 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.package .pk-group .ticks { margin: 0; }
+.compare-wrap .group-row th { background: var(--surface); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-top: 10px; padding-bottom: 10px; text-align: left; position: static; }
+.custom-band { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 20px 28px; border: 2px dashed var(--border); border-radius: var(--radius); background: var(--white); }
+.custom-band p { margin: 0; }
+.custom-band .btn { flex: none; margin: 0; }
+@media (max-width: 640px) { .custom-band { flex-direction: column; align-items: flex-start; padding: 18px; } }

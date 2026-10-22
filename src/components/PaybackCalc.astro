@@ -12,7 +12,7 @@ const options = packages.map((p) => ({ name: p.name, cost: Number(p.price.replac
   <form class="payback-form" onsubmit="return false">
     <label>Package
       <select name="cost">
-        {options.map((o) => <option value={o.cost} selected={o.featured}>{o.name.split(' ')[0]} (${o.cost.toLocaleString('en-US')}{o.name.startsWith('Complete') ? '+' : ''})</option>)}
+        {options.map((o) => <option value={o.cost} selected={o.featured}>{o.name.split(' ')[0]} (${o.cost.toLocaleString('en-US')})</option>)}
       </select>
     </label>
     <label>What one new customer is worth to you

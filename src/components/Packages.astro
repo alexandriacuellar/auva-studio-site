@@ -5,22 +5,27 @@ import { packages, samples } from '../data/site';
 const [ess, exp, com] = packages;
 const Y = true, N = false;
 // Feature comparison for "Compare all features". Keep in step with the package cards above.
-const rows: [string, (string | boolean)[]][] = [
+type Cell = string | boolean;
+const rows: ([string, Cell[]] | string)[] = [
   ['Price', [ess.price, exp.price, com.price]],
-  ['Pages', ['1 scrolling page or up to 3', 'Up to 10', 'Up to 20, more quoted']],
-  ['Page designs', ['1', 'Up to 3', 'Up to 6']],
+  ['Timeline, once I have your content', [ess.timeline, exp.timeline, com.timeline]],
+  'Planning and content',
   ['Planning call and content plan', [Y, Y, Y]],
   ['Copy polished, gaps filled in', [Y, Y, Y]],
+  'Design and build',
+  ['Pages', ['Up to 5', 'Up to 10', 'Up to 20']],
+  ['Page designs', ['2', 'Up to 3', 'Up to 6']],
   ['Made for phones first', [Y, Y, Y]],
   ['Contact form and map', [Y, Y, Y]],
+  ['Revision rounds', ['2', '3', '4']],
+  'Found online',
   ['Set up for Google and AI search', [Y, Y, Y]],
   ['Google Business Profile guidance', [Y, Y, Y]],
   ['Visitor stats', ['Simple', 'Which pages bring calls', 'Which pages bring calls']],
-  ['Content Editing Dashboard', [N, 'Add from $1,750', 'Included']],
   ['30-day search checkup', [N, N, Y]],
+  'Extras',
+  ['Content Editing Dashboard', ['Add from $1,750', 'Add from $1,750', 'Included']],
   ['Online store or donations', ['Quoted', 'Quoted', 'Quoted']],
-  ['Revision rounds', ['2', '3', '4']],
-  ['Timeline, once I have your content', [ess.timeline, exp.timeline, com.timeline]],
 ];
 ---
 <div class="grid grid-3 packages">
@@ -31,17 +36,25 @@ const rows: [string, (string | boolean)[]][] = [
       <h3>{p.name}</h3>
       <p class="muted">{p.blurb}</p>
       <p class="price">{p.price}</p>
-      <ul class="ticks">
-        {p.features.map((f, i) => (
-          <li><Icon name="tick" size={18} />{i === 0 && f.startsWith('Everything') ? <b>{f}</b> : f}</li>
-        ))}
-      </ul>
+      {p.includes && <p class="pk-includes"><b>{p.includes}</b></p>}
+      {p.groups.map((g) => (
+        <div class="pk-group">
+          <p class="pk-label">{g.label}</p>
+          <ul class="ticks">
+            {g.items.map((f) => <li><Icon name="tick" size={18} />{f}</li>)}
+          </ul>
+        </div>
+      ))}
       {p.extra && <p class="extra"><Icon name="gear" size={18} />{p.extra}</p>}
       <p class="time"><Icon name="clock" size={18} />{p.timeline} once I have your content</p>
       {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>See a sample {p.name.split(' ')[0]} site <span aria-hidden="true">→</span></a>; })()}
       <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`/websites/?package=${encodeURIComponent(p.name)}#start`}>Start with {p.name.split(' ')[0]}</a>
     </article>
   ))}
+</div>
+<div class="custom-band">
+  <p><b>Need something bigger?</b> Custom websites for more than 20 pages, a large catalog or online store, or custom features. Quoted for your project.</p>
+  <a class="btn btn-ghost" href="/websites/?topic=website&package=Custom%20website#start">Talk about a custom site</a>
 </div>
 <details class="compare-all">
   <summary>Compare all features</summary>
@@ -51,10 +64,12 @@ const rows: [string, (string | boolean)[]][] = [
         <tr><th scope="col"><span class="sr-only">Feature</span></th>{packages.map((p) => <th scope="col" class:list={{ us: p.featured }}>{p.name.split(' ')[0]}</th>)}</tr>
       </thead>
       <tbody>
-        {rows.map(([label, cells]) => (
+        {rows.map((r) => typeof r === 'string' ? (
+          <tr class="group-row"><th scope="colgroup" colspan="4">{r}</th></tr>
+        ) : (
           <tr>
-            <th scope="row">{label}</th>
-            {cells.map((c, i) => (
+            <th scope="row">{r[0]}</th>
+            {r[1].map((c, i) => (
               <td class:list={{ us: packages[i].featured }}>
                 {c === true ? <><Icon name="tick" size={18} /><span class="sr-only">Included</span></> : c === false ? <><span aria-hidden="true" class="none">–</span><span class="sr-only">Not included</span></> : c}
               </td>
