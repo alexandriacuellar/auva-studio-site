@@ -177,7 +177,7 @@ export const process = [
   { title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user.'] },
   { title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.', terms: ['You approve the page plan and design.', 'A revision round is one set of changes, sent together.'] },
   { title: 'Build', text: 'I design the site and set up its foundation.', you: 'Answer quick questions.', terms: ['You approve the final site before anything goes live.'] },
-  { title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes.'] },
+  { title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes and small tweaks.'] },
 ];
 
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
