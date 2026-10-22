@@ -109,7 +109,7 @@ export const packages = [
       'A contact form and a map to find you',
       'Set up for Google and AI search: page titles, business details, and a sitemap',
       'Simple visitor stats',
-      'Google Business Profile set up and linked to your site',
+      'Google Business Profile guidance, where applicable',
       '2 revision rounds',
     ],
     timeline: '2–3 weeks',
