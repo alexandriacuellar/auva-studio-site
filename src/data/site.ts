@@ -157,13 +157,6 @@ export const comparison = {
   ],
 };
 
-export const discovery = [
-  { icon: 'search', title: 'Easy to find on Google', text: 'Clear page titles, organized content, and the setup search engines need to list your site.' },
-  { icon: 'data', title: 'Your details, straight to search', text: 'Your hours, services, and location are labeled so Google can show them right in the results.' },
-  { icon: 'bolt', title: 'Ready for AI search', text: "Structured so tools like ChatGPT and Google's AI answers can read your site and describe your business accurately." },
-  { icon: 'pulse', title: 'Fast, with simple insights', text: 'Quick on any phone, with simple analytics that show how visitors find you.' },
-];
-
 export const addons = [
   { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },

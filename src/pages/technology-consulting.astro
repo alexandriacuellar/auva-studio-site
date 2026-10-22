@@ -99,41 +99,6 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt" id="engagements">
-    <div class="wrap about-grid">
-      <div>
-        <p class="eyebrow">Engagements</p>
-        <h2 class="mag-head">Sized to <em>what you need.</em></h2>
-        <p class="lede">Every engagement starts with a free 30-minute conversation about your business, goals, and challenges. From there, I scope and quote the work before anything begins.</p>
-      </div>
-      <div class="values">
-        <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Consulting sessions</h3><p class="muted">Focused, paid time to talk through a decision, a vendor, or a plan, at $65 an hour, as a single session or ongoing.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="book" /></div><div><h3>Project-based</h3><p class="muted">A defined scope, deliverables, and timeline, with one point of contact.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Fractional project leadership</h3><p class="muted">A part-time project leader inside your team, from $650 a month, with a 3-month minimum.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="bolt" /></div><div><h3>Exploration / prototype</h3><p class="muted">Test an idea, tool, or emerging technology on a small scale before you commit. <a href="/ai-emerging-tech/#sprint">See Prototype Sprints</a></p></div></div>
-        <p class="small muted">Every engagement ends with clear documentation and training, so your team can carry on without me.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Pricing</p>
-        <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
-      </div>
-      <dl class="card glance">
-        {glance.map((g) => (
-          <div class="glance-row">
-            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
-            <dd>{g.price}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="small muted" style="margin-top: 16px">Travel time outside the Mid-Hudson Valley is billed at half my hourly rate, plus expenses, agreed before booking.</p>
-    </div>
-  </section>
-
   <section class="alt">
     <div class="wrap about-grid">
       <div>
@@ -168,6 +133,41 @@ const glance = [
           </figure>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="alt" id="engagements">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Engagements</p>
+        <h2 class="mag-head">Sized to <em>what you need.</em></h2>
+        <p class="lede">Every engagement starts with a free 30-minute conversation about your business, goals, and challenges. From there, I scope and quote the work before anything begins.</p>
+      </div>
+      <div class="values">
+        <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Consulting sessions</h3><p class="muted">Focused, paid time to talk through a decision, a vendor, or a plan, at $65 an hour, as a single session or ongoing.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="book" /></div><div><h3>Project-based</h3><p class="muted">A defined scope, deliverables, and timeline, with one point of contact.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Fractional project leadership</h3><p class="muted">A part-time project leader inside your team, from $650 a month, with a 3-month minimum.</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="bolt" /></div><div><h3>Exploration / prototype</h3><p class="muted">Test an idea, tool, or emerging technology on a small scale before you commit. <a href="/ai-emerging-tech/#sprint">See Prototype Sprints</a></p></div></div>
+        <p class="small muted">Every engagement ends with clear documentation and training, so your team can carry on without me.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Pricing</p>
+        <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
+      </div>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="small muted" style="margin-top: 16px">Travel time outside the Mid-Hudson Valley is billed at half my hourly rate, plus expenses, agreed before booking.</p>
     </div>
   </section>
 

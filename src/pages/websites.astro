@@ -5,7 +5,7 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, discovery, addons, brandEssentials, terms, process, care, packages, samples, serviceSchema } from '../data/site';
+import { comparison, addons, brandEssentials, terms, process, care, packages, samples, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
@@ -15,22 +15,14 @@ const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopSh
 const faqs = [
   { q: 'How much does a small business website cost?', a: 'Packages are one-time project fees: Essential Presence is $1,500, Expanded Presence is $2,950, and Complete Presence starts at $5,500. After launch, you pay about $20 a year for your domain, and hosting is free or low cost.' },
   { id: 'faq-founding', q: 'What is the founding client offer?', a: "My first 10 website clients get 10% off Essential, Expanded, or Complete Presence, in exchange for a short review and permission to feature their site. It doesn't combine with the nonprofit discount; if both apply, you get the bigger one. The offer ends after 10 projects." },
-  { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
-  { q: 'Why does each service need its own page?', a: "A page about one service can answer exactly what people search for, like 'dog grooming in Kingston'. That helps Google and AI tools match you to the right searches. Expanded Presence has room for a page for each service you offer." },
-  { id: 'faq-diagnostic', q: 'What does the Website Diagnostic check?', a: "I check how your site works on phones, how fast it loads, how easily people find you on Google, your Google Business Profile and reviews, whether visitors can quickly tell what you do, and how easy it is to call, book, or buy. You get a short, plain-English report with what to fix first, in order, within 5 business days. The report is yours to use with any developer." },
-  { q: 'Can you check a site someone else built?', a: "Yes. The Diagnostic works for any website, whoever built it or whatever it's built on." },
-  { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
-  { q: 'Can I update the site myself?', a: 'Yes. A Content Editing Dashboard (from $1,750, included in Complete Presence) lets you change your page text, photos, and the collections I set up for you, like news or events, with no code. The starting price includes 2 collections; more can be added, quoted first. New features or new kinds of pages are $125 an hour, quoted first. Or send changes to me, $50 per update.' },
-  { q: 'What counts as one update?', a: 'A small change that takes about 30 minutes, like new text, a photo, your hours, or fixing a form or checkout link. Buy 5 for $200 and use them within 12 months.' },
-  { q: 'How fast are updates done?', a: 'Most within 2 business days. Quick questions by email are always free.' },
-  { q: 'Do I need my copy and photos ready?', a: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs." },
-  { q: 'Do you do SEO, AEO, and GEO?', a: "Yes, in every package. SEO (search engine optimization) helps you show up on Google. AEO and GEO (answer and generative engine optimization) help AI tools like ChatGPT and Google's AI Overviews find and mention your business. I set up clear page titles, structured data (schema), a sitemap, and fast pages from the start." },
-  { q: 'What about Core Web Vitals?', a: "Core Web Vitals are Google's measures of how fast a page loads, responds, and stays steady while loading. Astro sites send very little code to the browser, so they usually score well. I'll share your Google PageSpeed scores at launch." },
-  { q: 'What is a CMS, and do I need one?', a: "A CMS (content management system) lets you edit your site yourself. Mine is the Content Editing Dashboard, included in Complete Presence or added from $1,750. If you'd rather send changes to me, you don't need one." },
-  { q: 'Why Astro instead of WordPress or Wix?', a: "Astro sites load faster, have no plugins to keep updated, and hosting is free or low cost. WordPress needs regular plugin and security updates, and Wix and Squarespace charge a monthly subscription. Those platforms still make sense for some businesses, and I'll tell you if yours is one." },
-  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most small businesses are on WordPress, Wix, Squarespace, or Webflow. If you're on one of these, I can likely move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included. Large blogs or catalogs are quoted separately." },
-  { q: 'Can you redo my current website?', a: "Yes. Start with a $199 Website Diagnostic. I'll tell you honestly whether to fix what you have or rebuild, and if you choose a new website, the fee is credited toward it." },
   { q: 'How long does a website take?', a: 'Essential Presence takes 2–3 weeks, Expanded Presence 3–5 weeks, and Complete Presence 6+ weeks. The timeline starts once your Statement of Work is signed and the deposit is paid.' },
+  { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
+  { q: 'Do I need my copy and photos ready?', a: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs." },
+  { q: 'Can I update the site myself?', a: "Yes. A Content Editing Dashboard, also called a CMS (from $1,750, included in Complete Presence), lets you change your page text, photos, and collections like news or events, with no code. The starting price includes 2 collections; more are quoted first. Or send changes to me: $50 per update (a small change, about 30 minutes of work), or 5 for $200 used within 12 months. Most updates are done within 2 business days." },
+  { q: 'Do you do SEO, AEO, and GEO?', a: "Yes, in every package. SEO (search engine optimization) helps you show up on Google. AEO and GEO (answer and generative engine optimization) help AI tools like ChatGPT and Google's AI Overviews find and mention your business. I set up clear page titles, structured data (schema), a sitemap, and fast pages from the start. Astro sites usually score well on Core Web Vitals, Google's measures of speed and stability, and I share your PageSpeed scores at launch." },
+  { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
+  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I can move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included; large blogs or catalogs are quoted separately. Not sure whether to fix or rebuild? Start with a Website Diagnostic." },
+  { id: 'faq-diagnostic', q: 'What does the Website Diagnostic check?', a: "I check how your site works on phones, how fast it loads, how easily people find you on Google, your Google Business Profile and reviews, whether visitors can quickly tell what you do, and how easy it is to call, book, or buy. It works for any site, whoever built it. You get a short, plain-English report with what to fix first, in order, within 5 business days. The report is yours to use with any developer, and the $199 is credited toward a new website with me." },
 ];
 
 const schema = serviceSchema([
@@ -66,9 +58,6 @@ const audiences = [
       <div class="hero-actions">
         <a class="btn" href="#packages">See packages</a>
       </div>
-      <nav class="bd-sublinks" aria-label="Who I build websites for">
-        {audiences.map((a) => <a href={`#${a.id}`}>{a.title}</a>)}
-      </nav>
     </div>
   </section>
 
@@ -99,26 +88,7 @@ const audiences = [
     </div>
   </section>
 
-  <section id="diagnostic">
-    <div class="wrap">
-      <div class="band">
-        <div>
-          <p class="eyebrow" style="color: var(--tint)">Already have a website?</p>
-          <h2>Website Diagnostic</h2>
-          <p>I check how your site works on phones, how easily people find you on Google, how fast it loads, and what to fix first.</p>
-        </div>
-        <div>
-          <p class="price" style="font-size: 4rem">$199</p>
-          <p>Credited toward your new website with me.</p>
-          <a class="btn" href="/websites/?topic=diagnostic#start">Request a Diagnostic</a>
-          <p class="small" style="margin-top: 14px"><a href="#faq-diagnostic" style="color: inherit; font-weight: 700">See what I check</a></p>
-          <p class="small" style="margin-top: 6px">Not sure yet? <a href="/website-check/" style="color: inherit; font-weight: 700">Take the free 2-minute website check</a>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Every site includes</p>
@@ -133,6 +103,24 @@ const audiences = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="alt" id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why I build differently</p>
+        <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
+        <p class="lede">I build every site with Astro. It keeps your site fast and my prices fair.</p>
+      </div>
+      <div class="grid grid-3">
+        {comparison.benefits.map((b) => (
+          <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+        ))}
+      </div>
+      <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
+      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Source: <a href="https://astro.build/" target="_blank" rel="noopener">astro.build</a>, from Chrome UX Report data.</p>
+      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
     </div>
   </section>
 
@@ -169,42 +157,6 @@ const audiences = [
           );
         })}
       </div>
-    </div>
-  </section>
-
-  <section id="compare">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Why I build differently</p>
-        <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
-        <p class="lede">I build every site with Astro. It keeps your site fast and my prices fair.</p>
-      </div>
-      <div class="grid grid-3">
-        {comparison.benefits.map((b) => (
-          <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
-        ))}
-      </div>
-      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Source: <a href="https://astro.build/" target="_blank" rel="noopener">astro.build</a>, from Chrome UX Report data.</p>
-      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Easy to discover</p>
-        <h2 class="mag-head">Help customers find you, <em>today and tomorrow.</em></h2>
-        <p class="lede">I follow modern best practices so your website is easy for people, search engines, and AI tools to discover and understand.</p>
-      </div>
-      <div class="grid grid-2">
-        {discovery.map((d) => (
-          <div class="card card-row">
-            <div class="icon"><Icon name={d.icon} size={36} /></div>
-            <div><h3>{d.title}</h3><p class="muted">{d.text}</p></div>
-          </div>
-        ))}
-      </div>
-      <p class="fine">No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
     </div>
   </section>
 
@@ -319,6 +271,25 @@ const audiences = [
         {terms.map((t) => (
           <div class="card"><h3>{t.title}</h3><p class="muted">{t.text}</p></div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <p class="eyebrow" style="color: var(--tint)">Already have a website?</p>
+          <h2>Website Diagnostic</h2>
+          <p>I check how your site works on phones, how easily people find you on Google, how fast it loads, and what to fix first.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$199</p>
+          <p>Credited toward your new website with me.</p>
+          <a class="btn" href="/websites/?topic=diagnostic#start">Request a Diagnostic</a>
+          <p class="small" style="margin-top: 14px"><a href="#faq-diagnostic" style="color: inherit; font-weight: 700">See what I check</a></p>
+          <p class="small" style="margin-top: 6px">Not sure yet? <a href="/website-check/" style="color: inherit; font-weight: 700">Take the free 2-minute website check</a>.</p>
+        </div>
       </div>
     </div>
   </section>
