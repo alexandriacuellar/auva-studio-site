@@ -5,11 +5,13 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, addons, brandEssentials, process, care, packages, samples, serviceSchema } from '../data/site';
+import { comparison, addons, brandEssentials, process, care, packages, samples, site, testimonials, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
 import rondoutShot from '../assets/samples/rondout-mercantile.jpg';
+import headshot from '../assets/alexandria-cuellar.jpg';
+const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
@@ -57,6 +59,7 @@ const audiences = [
       <p class="lede">A website is often the first technology decision a business makes, and the one it lives with longest. I bring the same practical consulting approach to every site, so each one is focused, mobile-friendly, low-cost to run, and fully yours.</p>
       <div class="hero-actions">
         <a class="btn" href="#packages">See packages</a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>
@@ -133,6 +136,16 @@ const audiences = [
         <p class="lede">Each package builds on the one before it, so you only pay for what you need today.</p>
       </div>
       <Packages />
+      <div class="proof">
+        <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
+        <div>
+          <p class="proof-line">I spent nearly 20 years building websites and digital products for newspaper companies. Your site gets the same care, from the first call to launch.</p>
+          <figure class="quote quote-inline">
+            <blockquote>“{featured.quote}”</blockquote>
+            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+          </figure>
+        </div>
+      </div>
       <PaybackCalc />
     </div>
   </section>
@@ -287,3 +300,13 @@ const audiences = [
   <InquiryForm kind="website" />
 </Base>
 
+
+<style>
+  /* Experience line and a client quote under the package cards. */
+  .proof { display: flex; gap: 20px; align-items: flex-start; max-width: 760px; margin: 40px auto 0; }
+  .proof img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex: none; }
+  .proof > div { min-width: 0; }
+  .proof-line { margin: 0; font-size: 1.1rem; font-weight: 600; }
+  .proof .quote-inline { margin-top: 20px; }
+  @media (max-width: 640px) { .proof { flex-direction: column; gap: 14px; } }
+</style>

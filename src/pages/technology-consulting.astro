@@ -31,7 +31,7 @@ const glance = [
   { name: 'Technology Assessment', note: '3 sessions, research, and a written roadmap', price: '$650' },
   { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
   { name: 'Fractional project leadership, monthly', note: '3-month minimum', price: '10 hrs $650 · 20 hrs $1,200 · 40 hrs $2,200' },
-  { name: 'AI & Emerging Technology', note: 'See the AI & Emerging Tech page for details', price: 'From $500' },
+  { name: 'AI & Emerging Tech', note: 'See the AI & Emerging Tech page for details', price: 'From $500' },
 ];
 ---
 <Base title="Consulting & Project Support" seoTitle="Technology Consulting & Project Management | Auva Studio" schema={schema} description="Technology planning, business analysis, project management, and AI and emerging tech consulting for small businesses, startups, nonprofits, and growing teams.">
@@ -90,7 +90,7 @@ const glance = [
               <p class="muted">{c.text}</p>
               <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
               {c.id === 'ai'
-                ? <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Technology <Icon name="arrow" size={16} /></a>
+                ? <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Tech <Icon name="arrow" size={16} /></a>
                 : <a class="more" href={`/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Discuss this service <Icon name="arrow" size={16} /></a>}
             </div>
           </div>

@@ -59,7 +59,7 @@ export const categories = [
   },
   {
     icon: 'bolt',
-    title: 'AI & Emerging Technology',
+    title: 'AI & Emerging Tech',
     text: 'Explore AI, XR, and interactive ideas with small, low-risk steps.',
     items: ['AI Readiness Plan', 'Team AI Workshop', 'Feasibility reviews and prototypes', 'Production support'],
     href: '/ai-emerging-tech/',
@@ -71,7 +71,7 @@ export const consulting = [
   { id: 'planning', price: 'Technology Assessment $650 · Sessions $65/hr', icon: 'compass', title: 'Technology Planning', text: 'The big picture. I look at all the tools you use, find the gaps, and give you a plan for what to fix, replace, or add first.', items: ['Technology assessments and audits', 'Roadmaps and priorities', 'Platform and tool recommendations'] },
   { id: 'analysis', price: 'From $1,000', icon: 'chart', title: 'Business Analysis & Process Review', text: "One process, in depth. I map how a task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.", items: ['Workflow and process mapping', 'Requirements and specifications', 'Solution options compared'] },
   { id: 'delivery', price: '$65/hr · Monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
-  { id: 'ai', price: 'From $500', icon: 'bolt', title: 'AI & Emerging Technology', text: 'Find practical ways to use AI, XR, and interactive technology, and test ideas before you invest.', items: ['Getting your team started with AI tools', 'Planning XR and immersive experiences', 'Checking whether an interactive or game idea is doable', 'Production support for XR and game teams'] },
+  { id: 'ai', price: 'From $500', icon: 'bolt', title: 'AI & Emerging Tech', text: 'Find practical ways to use AI, XR, and interactive technology, and test ideas before you invest.', items: ['Getting your team started with AI tools', 'Planning XR and immersive experiences', 'Checking whether an interactive or game idea is doable', 'Production support for XR and game teams'] },
 ];
 
 export const whyAuva = [
@@ -194,7 +194,7 @@ export const testimonials = [
   { quote: 'She was always super organized, dependable, and really good at keeping everything moving in the right direction.', name: 'Matthew Udy', role: 'CEO, Flip Key Studios' },
 ];
 
-// AI & Emerging Technology offers (AI page, search data, llms.txt).
+// AI & Emerging Tech offers (AI page, search data, llms.txt).
 // Grouped by buyer: AI for everyday teams, XR and interactive for studios and cultural organizations.
 export const aiOffers = [
   { id: 'workshop', group: 'ai', icon: 'chat', title: 'Team AI Workshop', price: 'From $500', text: 'A 2-hour hands-on session for up to 10 people. Your team practices AI tools on real work and leaves with a one-page guide.' },
