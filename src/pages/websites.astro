@@ -5,7 +5,7 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, addons, brandEssentials, terms, process, care, packages, samples, serviceSchema } from '../data/site';
+import { comparison, addons, brandEssentials, process, care, packages, samples, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
@@ -74,7 +74,8 @@ const audiences = [
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
             <p class="small muted">{a.who}</p>
-            <p>{a.text}</p>
+            <p class="who-text">{a.text}</p>
+            {a.id === 'nonprofits' && <p class="small who-phone">Ask about my nonprofit discount.</p>}
             <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
           </div>
         ))}
@@ -182,9 +183,12 @@ const audiences = [
           <p class="eyebrow" style="color: var(--tint)">Optional add-on</p>
           <h2>Brand Essentials</h2>
           <p>A recognizable, consistent visual identity that makes a strong first impression, ready for your website and beyond.</p>
-          <ul class="ticks" style="color: var(--white)">
-            {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
-          </ul>
+          <details class="brand-list">
+            <summary>See what's included</summary>
+            <ul class="ticks" style="color: var(--white)">
+              {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
+            </ul>
+          </details>
         </div>
         <div>
           <p class="price" style="font-size: 4rem">$1,000</p>
@@ -243,7 +247,7 @@ const audiences = [
       <div class="section-head">
         <p class="eyebrow">How a website project runs</p>
         <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
-        <p class="lede">I guide you through each step, so the process stays simple and collaborative.</p>
+        <p class="lede">I guide you through each step, so the process stays simple and collaborative. Your Statement of Work spells out every detail.</p>
       </div>
       <ol class="steps steps-4">
         {process.map((s, i) => (
@@ -253,25 +257,11 @@ const audiences = [
             <h3>{s.title}</h3>
             <p>{s.text}</p>
             <p class="you"><b>You:</b> {s.you}</p>
+            <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
           </li>
         ))}
       </ol>
       <p class="fine">Timeline shown for Expanded Presence. Complete Presence takes 6+ weeks.</p>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">What's included</p>
-        <h2 class="mag-head">Clear expectations <em>on both sides.</em></h2>
-        <p class="lede">Simple terms keep your project on time and on budget. Your Statement of Work spells out every detail.</p>
-      </div>
-      <div class="grid grid-3">
-        {terms.map((t) => (
-          <div class="card"><h3>{t.title}</h3><p class="muted">{t.text}</p></div>
-        ))}
-      </div>
     </div>
   </section>
 

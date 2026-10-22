@@ -174,19 +174,10 @@ export const brandEssentials = [
 ];
 
 export const process = [
-  { when: 'Week 1', title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.' },
-  { when: 'Week 2', title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.' },
-  { when: 'Weeks 3–4', title: 'Build', text: 'I design the site and set up its foundation.', you: 'Answer quick questions.' },
-  { when: 'Week 5', title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.' },
-];
-
-export const terms = [
-  { title: 'Clear payment', text: '50% deposit to start, balance due at launch.' },
-  { title: 'You own it', text: 'Once paid in full, your website, content, domain, and accounts are yours.' },
-  { title: 'Low ongoing costs', text: 'Your domain (about $20 a year) stays in your name. Hosting is free or low cost.' },
-  { title: 'You stay in control', text: 'You keep ownership of every account. If I ever need access, you add me as a user and can remove me anytime.' },
-  { title: 'Feedback and sign-off', text: 'You approve the page plan, design, and final site before anything goes live. A revision round is one set of changes, sent together.' },
-  { title: 'Launch and support', text: 'A walkthrough, a how-to guide, and 30 days of fixes after launch.' },
+  { when: 'Week 1', title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user.'] },
+  { when: 'Week 2', title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.', terms: ['You approve the page plan and design.', 'A revision round is one set of changes, sent together.'] },
+  { when: 'Weeks 3–4', title: 'Build', text: 'I design the site and set up its foundation.', you: 'Answer quick questions.', terms: ['You approve the final site before anything goes live.'] },
+  { when: 'Week 5', title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes.'] },
 ];
 
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
