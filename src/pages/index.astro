@@ -13,8 +13,8 @@ const situations = [
   { title: 'Your website needs attention', text: "It's outdated, slow, hard to update, or not bringing in inquiries.", href: '/websites/', icon: 'globe' },
   { title: "You're facing a technology decision", text: 'Too many tools, platforms, or vendors, and no clear way to choose.', href: '/technology-consulting/#planning', icon: 'compass' },
   { title: 'A project needs structure', text: 'Priorities, timelines, or vendors need someone to pull them together.', href: '/technology-consulting/#delivery', icon: 'check' },
-  { title: 'You see a practical AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/', icon: 'bolt' },
-  { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/', icon: 'layers' },
+  { title: 'You see an AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/#ai-team', icon: 'bolt' },
+  { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/#xr', icon: 'layers' },
 ];
 ---
 <Base>
@@ -22,7 +22,7 @@ const situations = [
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Websites · Consulting · AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams. I build your website, help you choose the right tools, and plan and deliver projects, including AI & Emerging Tech.</p>
+      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams. I build websites, help you choose the right tools, run your technology projects, and help you explore AI & Emerging Tech.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
@@ -44,7 +44,7 @@ const situations = [
         <p class="eyebrow">Where to start</p>
         <h2 class="mag-head">What are you <em>working on?</em></h2>
         <p class="lede">You don't need to know which service you need. Start with the situation that sounds most like yours.</p>
-        <p class="muted">Not sure which fits? Real problems often span more than one. <a href="/contact/">Tell me what's happening</a> and I'll suggest a practical next step.</p>
+        <p class="muted">Not sure which fits? Real problems often span more than one. <a href="/contact/">Tell me what's happening</a> and I'll suggest a next step.</p>
       </div>
       <div class="values">
         {situations.map((x) => (

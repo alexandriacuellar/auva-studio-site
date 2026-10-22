@@ -115,7 +115,7 @@ export const packages = [
     timeline: '2–3 weeks',
   },
   {
-    eyebrow: 'Recommended',
+    eyebrow: 'Grow',
     name: 'Expanded Presence',
     price: '$2,950',
     featured: true,
