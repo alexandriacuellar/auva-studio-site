@@ -105,7 +105,7 @@ export const packages = [
       'A planning call and content plan',
       "I polish your copy and fill in what's missing",
       'One scrolling page or up to 3 pages',
-      'Custom design, no templates, made for phones first',
+      'Custom design made for your business, built for phones first',
       'A contact form and a map to find you',
       'Set up for Google and AI search: page titles, business details, and a sitemap',
       'Simple visitor stats',
