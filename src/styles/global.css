@@ -373,3 +373,9 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .sample-go { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--primary); }
 .sample:hover .sample-go { text-decoration: underline; }
 .package .sample-link { font-weight: 600; color: var(--primary); }
+
+/* Home About: the note on the studio's name */
+.name-note { margin-top: 10px; padding: 4px 4px 0; }
+.name-note h3 { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; margin: 0 0 6px; color: var(--primary); }
+.name-note p { margin: 0; font-size: 0.97rem; }
+.name-note .name-line { margin-top: 8px; font-style: italic; color: var(--primary); }
