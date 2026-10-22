@@ -225,13 +225,16 @@ const closure = {"date":"","note":"Closed today for a snow day. We open again to
         const write = (l) => { try { localStorage.setItem(KEY, JSON.stringify(l)); } catch (e) {} };
         let list = read();
         const tray = document.querySelector('.hold-tray');
-        const onVisit = location.pathname.replace(/\/+$/, '').endsWith('/visit');
-        let hidden = false;
+        // The tray only shows on pages with Hold buttons, and once closed it stays closed until something new is held.
+        const HIDE = 'rondout-hold-hidden';
+        const onHoldPage = !!document.querySelector('[data-hold]');
+        let hidden = (() => { try { return localStorage.getItem(HIDE) === '1'; } catch (e) { return false; } })();
+        const setHidden = (v) => { hidden = v; try { v ? localStorage.setItem(HIDE, '1') : localStorage.removeItem(HIDE); } catch (e) {} };
         const sendBase = tray ? tray.querySelector('.hold-send').getAttribute('href').split('?')[0] : '';
         const render = (bump) => {
           document.querySelectorAll('[data-hold]').forEach((b) => b.setAttribute('aria-pressed', String(list.some((x) => x.id === b.dataset.hold))));
           if (!tray) return;
-          tray.hidden = !list.length || onVisit || hidden;
+          tray.hidden = !list.length || !onHoldPage || hidden;
           if (!list.length) return;
           tray.querySelector('.hold-count').textContent = list.length === 1 ? '1 item to hold:' : list.length + ' items to hold:';
           tray.querySelector('.hold-names').textContent = list.map((x) => x.title).join(', ') + '. ';
@@ -244,9 +247,9 @@ const closure = {"date":"","note":"Closed today for a snow day. We open again to
             e.preventDefault();
             const id = b.dataset.hold;
             list = list.some((x) => x.id === id) ? list.filter((x) => x.id !== id) : [...list, { id, title: b.dataset.title }];
-            write(list); hidden = false; render(true);
+            write(list); setHidden(false); render(true);
           }
-          if (e.target.closest('.hold-hide')) { hidden = true; render(); }
+          if (e.target.closest('.hold-hide')) { setHidden(true); render(); }
         });
         // On the Visit page: write the held items into the message, and clear the list once it is sent.
         const form = document.getElementById('contact-form');
