@@ -169,8 +169,8 @@ export const brandEssentials = [
   ['Custom favicon', 'A simple brand mark for your browser tab.'],
   ['Brand color palette', 'Five coordinated colors for a consistent style.'],
   ['Brand typography', 'Heading and body fonts that fit your business.'],
-  ['Brand reference sheet', 'One page showing your logo, colors, and type.'],
-  ['Digital brand assets', 'Final logo files in SVG and PNG.'],
+  ['Brand reference sheet', 'One page showing your logo, colors (web and print codes), and type.'],
+  ['Web and print logo files', 'Final logo files in SVG, PNG, and print-ready PDF.'],
 ];
 
 export const process = [
