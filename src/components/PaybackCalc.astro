@@ -40,10 +40,16 @@ const options = packages.map((p) => ({ name: p.name, cost: Number(p.price.replac
         const months = Math.ceil(needed / perMonth);
         text += ` At ${perMonth} a month, your site pays for itself in about <b>${months} ${months === 1 ? 'month' : 'months'}</b>.`;
       }
+      if (out.innerHTML === text) return;
       out.innerHTML = text;
+      // Restart the glow so each new result gets a gentle highlight.
+      out.classList.remove('changed');
+      void out.offsetWidth;
+      out.classList.add('changed');
     };
     form.addEventListener('input', update);
     update();
+    out.classList.remove('changed');
   }
 </script>
 

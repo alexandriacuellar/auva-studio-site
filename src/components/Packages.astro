@@ -1,6 +1,28 @@
 ---
 import Icon from './Icon.astro';
 import { packages, samples } from '../data/site';
+
+const [ess, exp, com] = packages;
+const Y = true, N = false;
+// Feature comparison for "Compare all features". Keep in step with the package cards above.
+const rows: [string, (string | boolean)[]][] = [
+  ['Price', [ess.price, exp.price, com.price]],
+  ['Pages', ['1 scrolling page or up to 3', 'Up to 10', 'Sized to your site']],
+  ['Page designs', ['Custom', 'Up to 3', 'Up to 6']],
+  ['Planning call and content plan', [Y, Y, Y]],
+  ['Copy polished, gaps filled in', [Y, Y, Y]],
+  ['Made for phones first', [Y, Y, Y]],
+  ['Contact form and map', [Y, Y, Y]],
+  ['Set up for Google and AI search', [Y, Y, Y]],
+  ['Google Business Profile guidance', [Y, Y, Y]],
+  ['Visitor stats', ['Simple', 'Which pages bring calls', 'Which pages bring calls']],
+  ['Content Editing Dashboard', [N, 'Add from $1,750', 'Included']],
+  ['Booking, sign-up, or other built-in tools', [N, N, Y]],
+  ['30-day search checkup', [N, N, Y]],
+  ['Online store or donations', ['Quoted', 'Quoted', 'Quoted']],
+  ['Revision rounds', ['2', '3', '4']],
+  ['Timeline', [ess.timeline, exp.timeline, com.timeline]],
+];
 ---
 <div class="grid grid-3 packages">
   {packages.map((p) => (
@@ -21,5 +43,26 @@ import { packages, samples } from '../data/site';
     </article>
   ))}
 </div>
-<p class="upgrade"><b>Start small, grow later.</b> Upgrade any time and pay only the difference. <b>Fixed prices, no surprises:</b> every package, add-on, and quote is agreed before work starts.</p>
-<p class="fine">All prices are one-time project fees. Bought a $199 Website Diagnostic? It's credited toward your new website. This site is built the same way I build yours.</p>
+<details class="compare-all">
+  <summary>Compare all features</summary>
+  <div class="compare-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col"><span class="sr-only">Feature</span></th>{packages.map((p) => <th scope="col" class:list={{ us: p.featured }}>{p.name.split(' ')[0]}</th>)}</tr>
+      </thead>
+      <tbody>
+        {rows.map(([label, cells]) => (
+          <tr>
+            <th scope="row">{label}</th>
+            {cells.map((c, i) => (
+              <td class:list={{ us: packages[i].featured }}>
+                {c === true ? <><Icon name="tick" size={18} /><span class="sr-only">Included</span></> : c === false ? <><span aria-hidden="true" class="none">–</span><span class="sr-only">Not included</span></> : c}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</details>
+<p class="upgrade"><b>Start small, grow later.</b> Upgrade any time and pay only the difference. <b>Fixed prices, no surprises.</b> All prices are one-time project fees, and a $199 Website Diagnostic is credited toward your new website.</p>
