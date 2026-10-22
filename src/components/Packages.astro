@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { packages } from '../data/site';
+import { packages, samples } from '../data/site';
 ---
 <div class="grid grid-3 packages">
   {packages.map((p) => (
@@ -16,6 +16,7 @@ import { packages } from '../data/site';
       </ul>
       {p.extra && <p class="extra"><Icon name="gear" size={18} />{p.extra}</p>}
       <p class="time"><Icon name="clock" size={18} />{p.timeline}</p>
+      {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>See a sample {p.name.split(' ')[0]} site <span aria-hidden="true">→</span></a>; })()}
       <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`/websites/?package=${encodeURIComponent(p.name)}#start`}>Ask about {p.name.split(' ')[0]}</a>
     </article>
   ))}

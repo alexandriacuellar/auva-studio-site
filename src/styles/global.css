@@ -362,3 +362,14 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .promo-bar { margin: 0; padding: 9px 24px; background: var(--ink); color: var(--white); text-align: center; font-size: .92rem; line-height: 1.45; }
 .promo-bar b { color: var(--white); }
 .promo-bar a { color: var(--white); font-weight: 700; margin-left: 6px; text-underline-offset: 3px; }
+
+/* Sample sites (Websites page) */
+.samples .sample { display: flex; flex-direction: column; gap: 6px; padding: 0 0 26px; overflow: hidden; }
+.samples .sample > :not(.sample-shot) { margin-left: 26px; margin-right: 26px; }
+.sample-shot { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-bottom: 2px solid var(--border); margin-bottom: 14px; transition: transform 0.4s ease; }
+.sample:hover .sample-shot { transform: scale(1.02); }
+.samples .tag { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.samples h3 { margin: 4px 0 2px; }
+.sample-go { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--primary); }
+.sample:hover .sample-go { text-decoration: underline; }
+.package .sample-link { font-weight: 600; color: var(--primary); }

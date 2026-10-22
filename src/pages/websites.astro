@@ -5,7 +5,12 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, discovery, addons, brandEssentials, terms, process, care, packages, serviceSchema } from '../data/site';
+import { comparison, discovery, addons, brandEssentials, terms, process, care, packages, samples, serviceSchema } from '../data/site';
+import { Image } from 'astro:assets';
+import skytopShot from '../assets/samples/skytop-floor-co.jpg';
+import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
+import rondoutShot from '../assets/samples/rondout-mercantile.jpg';
+const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
   { q: 'How much does a small business website cost?', a: 'Packages are one-time project fees: Essential Presence is $1,500, Expanded Presence is $2,950, and Complete Presence starts at $5,500. After launch, you pay about $20 a year for your domain, and hosting is free or low cost.' },
@@ -143,7 +148,31 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt" id="compare">
+  <section class="alt" id="samples">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Sample sites</p>
+        <h2 class="mag-head">See what <em>each package looks like.</em></h2>
+        <p class="lede">One sample site for each package. The businesses are made up, but every page, form, and feature works the way it would on your site.</p>
+      </div>
+      <div class="grid grid-3 samples">
+        {samples.map((sm) => {
+          const pk = packages.find((x) => x.name === sm.package);
+          return (
+            <a class="card sample" href={`/samples/${sm.slug}/`}>
+              <Image class="sample-shot" src={sampleShots[sm.slug]} alt={`The home page of ${sm.name}, a sample ${sm.package} site`} widths={[480, 720, 960]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 380px" />
+              <span class="tag">{sm.package} · {pk?.price}</span>
+              <h3>{sm.name}</h3>
+              <p class="muted">{sm.text}</p>
+              <span class="sample-go">Visit the sample site <span aria-hidden="true">→</span></span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section id="compare">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Why I build differently</p>
@@ -160,7 +189,7 @@ const audiences = [
     </div>
   </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Easy to discover</p>
@@ -179,7 +208,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Add-ons</p>
@@ -214,7 +243,7 @@ const audiences = [
     </div>
   </section>
 
-  <section id="care">
+  <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Help After Launch</p>
@@ -257,7 +286,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">How a website project runs</p>
@@ -279,7 +308,7 @@ const audiences = [
     </div>
   </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">What's included</p>

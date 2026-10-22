@@ -88,6 +88,13 @@ export const journey = [
   { title: 'Get it done, and keep it', text: 'I do the work with you, then hand over documentation and training so your team can carry on.' },
 ];
 
+// Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
+export const samples = [
+  { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.' },
+  { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.' },
+  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a Content Editing Dashboard, workshops, fitting booking, and a hold list for new arrivals.' },
+];
+
 export const packages = [
   {
     eyebrow: 'Get online',
