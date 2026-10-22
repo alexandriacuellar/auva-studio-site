@@ -20,7 +20,7 @@ const rows: [string, (string | boolean)[]][] = [
   ['30-day search checkup', [N, N, Y]],
   ['Online store or donations', ['Quoted', 'Quoted', 'Quoted']],
   ['Revision rounds', ['2', '3', '4']],
-  ['Timeline', [ess.timeline, exp.timeline, com.timeline]],
+  ['Timeline, once I have your content', [ess.timeline, exp.timeline, com.timeline]],
 ];
 ---
 <div class="grid grid-3 packages">
@@ -37,7 +37,7 @@ const rows: [string, (string | boolean)[]][] = [
         ))}
       </ul>
       {p.extra && <p class="extra"><Icon name="gear" size={18} />{p.extra}</p>}
-      <p class="time"><Icon name="clock" size={18} />{p.timeline}</p>
+      <p class="time"><Icon name="clock" size={18} />{p.timeline} once I have your content</p>
       {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>See a sample {p.name.split(' ')[0]} site <span aria-hidden="true">→</span></a>; })()}
       <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`/websites/?package=${encodeURIComponent(p.name)}#start`}>Start with {p.name.split(' ')[0]}</a>
     </article>
