@@ -458,9 +458,9 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .steps .step-terms li { background: none; border: 0; border-radius: 0; padding: 0; flex-direction: row; opacity: 1; transform: none; }
 @media (max-width: 640px) {
   .steps.steps-4 li { padding: 20px 18px; display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; }
-  .steps.steps-4 li > :not(.num) { grid-column: 1 / -1; }
+  .steps.steps-4 li > :not(.num, h3) { grid-column: 1 / -1; }
   .steps.steps-4 li > .num { grid-row: 1; width: 34px; height: 34px; margin: 0; }
-  .steps.steps-4 li > .when { grid-row: 1; grid-column: 2; }
-  .steps.steps-4 li > h3 { margin: 8px 0 4px; }
+  .steps.steps-4 li > h3 { grid-row: 1; grid-column: 2; margin: 0 !important; }
+  .steps.steps-4 li > h3 + p { margin-top: 8px; }
   .steps.steps-4 .step-terms li { display: flex; grid-template-columns: none; padding: 0; align-items: flex-start; }
 }

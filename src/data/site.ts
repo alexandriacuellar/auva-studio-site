@@ -137,6 +137,7 @@ export const packages = [
     blurb: 'For growing businesses that want to update their site themselves.',
     features: [
       'Everything in Expanded',
+      'Up to 20 pages',
       'A Content Editing Dashboard to update text, photos, news, or events yourself',
       'Up to 6 page designs',
       'Booking, email sign-up, or other tools built into your pages',
@@ -174,10 +175,10 @@ export const brandEssentials = [
 ];
 
 export const process = [
-  { when: 'Week 1', title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user.'] },
-  { when: 'Week 2', title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.', terms: ['You approve the page plan and design.', 'A revision round is one set of changes, sent together.'] },
-  { when: 'Weeks 3–4', title: 'Build', text: 'I design the site and set up its foundation.', you: 'Answer quick questions.', terms: ['You approve the final site before anything goes live.'] },
-  { when: 'Week 5', title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes.'] },
+  { title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user.'] },
+  { title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.', terms: ['You approve the page plan and design.', 'A revision round is one set of changes, sent together.'] },
+  { title: 'Build', text: 'I design the site and set up its foundation.', you: 'Answer quick questions.', terms: ['You approve the final site before anything goes live.'] },
+  { title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes.'] },
 ];
 
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
