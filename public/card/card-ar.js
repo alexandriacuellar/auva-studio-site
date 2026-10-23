@@ -94,7 +94,8 @@ export async function startCardAR(container, { found, lost }) {
   me.position.y = H / 2; me.userData.href = CALENDLY; me.userData.base = me.scale.clone();
   const lift = new THREE.Group(); lift.add(me); stand.add(lift);
 
-  const star = starSprite(); star.position.y = H + 0.08; lift.add(star);
+  // The star sits beside her, opposite the waving hand, to balance it
+  const star = starSprite(); star.position.set(W / 2 + 0.12, H * 0.86, 0); lift.add(star);
   // The call button hovers over the line between her title and the 3D QR, clear of her name
   const book = bookSprite(); book.position.set(0, -0.5, 0.06); anchor.group.add(book);
 
