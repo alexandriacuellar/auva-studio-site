@@ -1,3 +1,10 @@
 # Sample sites are fictional businesses: keep them out of search results.
 /samples/*
   X-Robots-Tag: noindex, nofollow
+
+# Business card AR page: keep it out of search results.
+/card/*
+  X-Robots-Tag: noindex, nofollow
+
+/card/alexandria-cuellar.vcf
+  Content-Type: text/vcard; charset=utf-8

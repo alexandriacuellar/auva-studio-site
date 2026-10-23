@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Alexandria Cuellar | Auva Studio</title>
+<meta name="description" content="Point your phone at the back of my business card and watch Virgo light up.">
+<meta name="theme-color" content="#0f1d52">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:ital,wght@0,300;0,600;1,600&display=swap" rel="stylesheet">
+<style>
+  :root { --night: #0f1d52; --deep: #0a1440; --ink: #12235e; --muted: #b8c6ea; --tint: #dce8ff; --primary: #1f5fe0; --star: #f39a3b; --white: #fff;
+          --head: 'Montserrat', Arial, sans-serif; --body: 'DM Sans', Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--night); color: var(--white); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  body { overflow: hidden; }
+  #ar { position: fixed; inset: 0; }
+  #ar video { object-fit: cover; }
+
+  /* Start screen */
+  .intro { position: fixed; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; overflow-y: auto;
+           padding: max(28px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left)); background: var(--night); }
+  .intro[hidden] { display: none; }
+  .intro .logo { width: 132px; height: auto; }
+  .intro .sky { width: 100%; max-width: 420px; align-self: center; }
+  .intro h1 { font-family: var(--head); font-weight: 300; font-size: 1.75rem; line-height: 1.2; margin: 0 0 10px; text-wrap: balance; }
+  .intro h1 b { font-weight: 600; }
+  .intro p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; max-width: 34ch; }
+  .actions { display: grid; gap: 10px; max-width: 420px; width: 100%; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 12px 20px; border-radius: 999px; border: 0; font: 600 1rem var(--body); text-decoration: none; cursor: pointer; }
+  .btn-star { background: var(--star); color: var(--deep); }
+  .btn-light { background: var(--white); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(220, 232, 255, 0.35); }
+  .btn:focus-visible { outline: 3px solid var(--tint); outline-offset: 3px; }
+  .note { font-size: 0.85rem; color: var(--muted); text-align: center; }
+  .error { color: var(--star); font-size: 0.95rem; }
+
+  /* While the camera runs */
+  .hint { position: fixed; z-index: 3; left: 50%; transform: translateX(-50%); top: max(20px, env(safe-area-inset-top)); width: max-content; max-width: calc(100% - 32px);
+          background: rgba(10, 20, 64, 0.78); color: var(--white); padding: 10px 16px; border-radius: 999px; font-size: 0.95rem; text-align: center; transition: opacity 0.4s; }
+  .hint.gone { opacity: 0; pointer-events: none; }
+  .frame { position: fixed; z-index: 2; left: 50%; top: 46%; width: min(78vw, 360px); aspect-ratio: 3.5 / 2; transform: translate(-50%, -50%); border: 2px dashed rgba(220, 232, 255, 0.55); border-radius: 14px; transition: opacity 0.4s; pointer-events: none; }
+  .frame.gone { opacity: 0; }
+  .panel { position: fixed; z-index: 3; left: 0; right: 0; bottom: 0; padding: 18px max(16px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+           background: linear-gradient(to top, rgba(10, 20, 64, 0.94) 60%, rgba(10, 20, 64, 0)); display: grid; justify-items: center; gap: 10px;
+           transform: translateY(110%); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .panel.show { transform: none; }
+  .panel .who { text-align: center; margin-bottom: 2px; }
+  .panel .who b { display: block; font-family: var(--head); font-weight: 600; font-size: 1.1rem; }
+  .panel .who span { color: var(--muted); font-size: 0.9rem; }
+  .panel .actions { grid-template-columns: 1fr 1fr; }
+  .panel .actions .btn-star { grid-column: 1 / -1; }
+  .close { position: fixed; z-index: 4; top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(10, 20, 64, 0.78); color: var(--white); font-size: 1.4rem; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .panel, .hint, .frame { transition: none; } }
+</style>
+</head>
+<body>
+<div id="ar"></div>
+
+<section class="intro" id="intro">
+  <img class="logo" src="/auva-logo-stacked-light.png" alt="Auva Studio">
+  <svg class="sky" viewBox="0 0 1040 532" aria-hidden="true">
+    <g stroke="#9fb6ff" stroke-opacity=".32" stroke-width="2.2">
+      <line x1="911" y1="69.6" x2="1020" y2="118.6"/><line x1="1020" y1="118.6" x2="996.1" y2="224.7"/><line x1="996.1" y1="224.7" x2="833.7" y2="278.8"/><line x1="833.7" y1="278.8" x2="712.6" y2="296.1"/>
+      <line x1="635" y1="188.2" x2="597.3" y2="20"/><line x1="635" y1="188.2" x2="417.8" y2="277.2"/><line x1="417.8" y1="277.2" x2="471.5" y2="512.2"/><line x1="417.8" y1="277.2" x2="267.9" y2="229.6"/>
+      <line x1="267.9" y1="229.6" x2="20" y2="221.8"/><line x1="471.5" y1="512.2" x2="189.8" y2="397.4"/><line x1="189.8" y1="397.4" x2="39.7" y2="389.8"/>
+    </g>
+    <polyline fill="none" stroke="#dce8ff" stroke-width="3" points="471.5,512.2 555.2,387.1 712.6,296.1 635,188.2"/>
+    <g fill="#fff"><circle cx="911" cy="69.6" r="6.5"/><circle cx="1020" cy="118.6" r="6.5"/><circle cx="996.1" cy="224.7" r="6.5"/><circle cx="833.7" cy="278.8" r="6.5"/><circle cx="712.6" cy="296.1" r="6.5"/><circle cx="597.3" cy="20" r="6.5"/><circle cx="555.2" cy="387.1" r="6.5"/><circle cx="471.5" cy="512.2" r="9"/><circle cx="417.8" cy="277.2" r="6.5"/><circle cx="267.9" cy="229.6" r="6.5"/><circle cx="189.8" cy="397.4" r="6.5"/><circle cx="39.7" cy="389.8" r="6.5"/><circle cx="20" cy="221.8" r="6.5"/></g>
+    <polygon fill="#f39a3b" points="635,154.2 641.8,181.4 669,188.2 641.8,195 635,222.2 628.2,195 601,188.2 628.2,181.4"/>
+  </svg>
+  <div>
+    <h1>Point your phone at the <b>back of my card</b></h1>
+    <p>Turn the card over to the side with the stars. Hold it flat in good light, and watch Virgo come to life.</p>
+    <p class="error" id="error" hidden></p>
+  </div>
+  <div class="actions">
+    <button class="btn btn-star" id="start" type="button">Start the camera</button>
+    <a class="btn btn-ghost" href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Save my contact</a>
+    <p class="note">Your camera stays on your phone. Nothing is recorded or uploaded.</p>
+  </div>
+</section>
+
+<div class="hint gone" id="hint">Find the stars on the back of the card</div>
+<div class="frame gone" id="frame"></div>
+<button class="close" id="close" type="button" aria-label="Stop the camera" hidden>&times;</button>
+<section class="panel" id="panel" aria-live="polite">
+  <div class="who"><b>Alexandria Cuellar</b><span>Websites, Consulting, and AI &amp; Emerging Tech</span></div>
+  <div class="actions">
+    <a class="btn btn-star" href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    <a class="btn btn-light" href="/card/alexandria-cuellar.vcf">Save my contact</a>
+    <a class="btn btn-ghost" href="/">See my work</a>
+  </div>
+</section>
+
+<script type="importmap">
+{ "imports": { "three": "/card/vendor/three.module.min.js", "three/addons/": "/card/vendor/addons/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { MindARThree } from '/card/vendor/mindar-image-three.prod.js';
+
+// Star positions on the card, in target units: card width = 1, origin at the card's center, y up.
+const STARS = {"omi":[0.4042,0.2226],"nu":[0.4695,0.1932],"beta":[0.4551,0.1297],"eta":[0.3579,0.0973],"gam":[0.2853,0.0869],"del":[0.2389,0.1516],"eps":[0.2163,0.2523],"the":[0.1911,0.0324],"alp":[0.141,-0.0425],"zet":[0.1088,0.0983],"tau":[0.019,0.1268],"iot":[-0.0278,0.0263],"mu":[-0.1177,0.0308],"109":[-0.1295,0.1314]};
+const FAINT = [['omi','nu'],['nu','beta'],['beta','eta'],['eta','gam'],['del','eps'],['del','zet'],['zet','alp'],['zet','tau'],['tau','109'],['alp','iot'],['iot','mu']];
+const PATH = ['alp','the','gam','del'];
+// How far each star lifts off the card, so Virgo reads as 3D when the phone moves.
+const LIFT = {omi:0.09,nu:0.05,beta:0.07,eta:0.04,gam:0.06,del:0.12,eps:0.08,the:0.05,alp:0.1,zet:0.06,tau:0.04,iot:0.07,mu:0.05,'109':0.08};
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const $ = (id) => document.getElementById(id);
+let mindar = null, running = false, found = false, t0 = 0;
+
+function glowTexture(color) {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  r.addColorStop(0, color); r.addColorStop(0.18, color); r.addColorStop(0.4, color.replace('1)', '0.35)')); r.addColorStop(1, color.replace('1)', '0)'));
+  g.fillStyle = r; g.fillRect(0, 0, 128, 128);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function labelTexture(text, sub) {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#f39a3b'; g.font = 'italic 600 92px Montserrat, Arial, sans-serif'; g.textBaseline = 'top'; g.fillText(text, 8, 20);
+  g.fillStyle = '#dce8ff'; g.font = '500 58px "DM Sans", Arial, sans-serif'; g.fillText(sub, 10, 140);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function starShape(r) {
+  const s = new THREE.Shape(), q = r * 0.2;
+  s.moveTo(0, r); s.lineTo(q, q); s.lineTo(r, 0); s.lineTo(q, -q); s.lineTo(0, -r); s.lineTo(-q, -q); s.lineTo(-r, 0); s.lineTo(-q, q); s.closePath();
+  return new THREE.ShapeGeometry(s);
+}
+
+function buildScene(group) {
+  const white = glowTexture('rgba(255,255,255,1)'), amber = glowTexture('rgba(243,154,59,1)');
+  const pos = {};
+  const stars = {};
+  for (const [k, [x, y]] of Object.entries(STARS)) {
+    pos[k] = new THREE.Vector3(x, y, LIFT[k]);
+    if (k === 'del') continue;
+    const m = new THREE.Sprite(new THREE.SpriteMaterial({ map: white, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 }));
+    const size = k === 'alp' ? 0.05 : 0.035;
+    m.scale.set(size, size, 1); m.position.set(x, y, 0); group.add(m);
+    stars[k] = { m, delay: 0.1 + Math.random() * 0.6 };
+  }
+  // Faint lines between neighbouring stars
+  const faint = new THREE.LineBasicMaterial({ color: 0x9fb6ff, transparent: true, opacity: 0 });
+  const fg = new THREE.BufferGeometry().setFromPoints(FAINT.flatMap(([a, b]) => [pos[a], pos[b]]));
+  group.add(new THREE.LineSegments(fg, faint));
+  // The bright path, drawn star by star toward Delta Virginis
+  const pts = []; const N = 90;
+  for (let i = 0; i < PATH.length - 1; i++) for (let j = 0; j < N; j++) pts.push(pos[PATH[i]].clone().lerp(pos[PATH[i + 1]], j / N));
+  pts.push(pos.del.clone());
+  const pg = new THREE.BufferGeometry().setFromPoints(pts); pg.setDrawRange(0, 0);
+  const path = new THREE.Line(pg, new THREE.LineBasicMaterial({ color: 0xdce8ff, transparent: true }));
+  group.add(path);
+  // Delta Virginis: the amber star Auva is named for
+  const del = new THREE.Group(); del.position.copy(pos.del); del.scale.setScalar(0.001); group.add(del);
+  del.add(new THREE.Mesh(starShape(0.045), new THREE.MeshBasicMaterial({ color: 0xf39a3b, transparent: true, side: THREE.DoubleSide })));
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: amber, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.55 }));
+  halo.scale.set(0.16, 0.16, 1); del.add(halo);
+  const label = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.07), new THREE.MeshBasicMaterial({ map: labelTexture('Delta Virginis', '198 light-years away'), transparent: true, opacity: 0, depthWrite: false }));
+  label.position.set(pos.del.x + 0.175, pos.del.y + 0.005, pos.del.z); group.add(label);
+  // A few slow sparkles drifting up from the card
+  const dustN = 60, dg = new THREE.BufferGeometry(), dp = new Float32Array(dustN * 3), seeds = [];
+  for (let i = 0; i < dustN; i++) { seeds.push([Math.random() - 0.5, (Math.random() - 0.5) * 0.57, Math.random()]); }
+  dg.setAttribute('position', new THREE.BufferAttribute(dp, 3));
+  const dust = new THREE.Points(dg, new THREE.PointsMaterial({ map: white, size: 0.012, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
+  group.add(dust);
+
+  return function animate(t) {
+    const ease = (v) => 1 - Math.pow(1 - Math.min(Math.max(v, 0), 1), 3);
+    for (const [k, s] of Object.entries(stars)) {
+      const e = reduced ? 1 : ease((t - s.delay) / 0.9);
+      s.m.material.opacity = e * (PATH.includes(k) ? 1 : 0.8);
+      s.m.position.z = pos[k].z * e;
+      const tw = 1 + 0.12 * Math.sin(t * 2.4 + s.delay * 20);
+      const base = k === 'alp' ? 0.05 : 0.035; s.m.scale.set(base * tw, base * tw, 1);
+    }
+    faint.opacity = 0.45 * (reduced ? 1 : ease((t - 0.8) / 0.8));
+    const drawn = reduced ? 1 : ease((t - 1.3) / 1.6);
+    pg.setDrawRange(0, Math.floor(drawn * pts.length));
+    const pop = reduced ? 1 : ease((t - 2.8) / 0.6);
+    const pulse = 1 + 0.08 * Math.sin(t * 3);
+    del.scale.setScalar(Math.max(0.001, pop * (t > 3.4 ? pulse : 1)));
+    if (!reduced) del.rotation.z = Math.sin(t * 0.8) * 0.25;
+    label.material.opacity = reduced ? 1 : ease((t - 3.3) / 0.6);
+    dust.material.opacity = 0.7 * (reduced ? 0 : ease((t - 0.5) / 1));
+    for (let i = 0; i < dustN; i++) {
+      const [x, y, s] = seeds[i], z = ((t * 0.03 + s) % 1) * 0.16;
+      dp[i * 3] = x; dp[i * 3 + 1] = y + Math.sin(t + s * 10) * 0.004; dp[i * 3 + 2] = z;
+    }
+    dg.attributes.position.needsUpdate = true;
+    return t > 3.6;
+  };
+}
+
+async function start() {
+  $('start').disabled = true; $('start').textContent = 'Starting the camera…'; $('error').hidden = true;
+  try {
+    mindar = new MindARThree({ container: $('ar'), imageTargetSrc: '/card/card.mind', uiLoading: 'no', uiScanning: 'no', uiError: 'no', filterMinCF: 0.0001, filterBeta: 0.001 });
+    const { renderer, scene, camera } = mindar;
+    const anchor = mindar.addAnchor(0);
+    const animate = buildScene(anchor.group);
+    anchor.onTargetFound = () => {
+      if (!found) t0 = performance.now();
+      found = true; $('hint').classList.add('gone'); $('frame').classList.add('gone');
+      if (navigator.vibrate) navigator.vibrate(20);
+    };
+    anchor.onTargetLost = () => { $('hint').textContent = 'Point at the stars again'; $('hint').classList.remove('gone'); };
+    await mindar.start();
+    running = true;
+    $('intro').hidden = true; $('close').hidden = false; $('hint').classList.remove('gone'); $('frame').classList.remove('gone');
+    renderer.setAnimationLoop(() => {
+      if (found && animate((performance.now() - t0) / 1000)) $('panel').classList.add('show');
+      renderer.render(scene, camera);
+    });
+  } catch (err) {
+    console.error(err);
+    stop();
+    $('error').textContent = 'The camera did not start. Check that this browser is allowed to use the camera, then try again. You can still book a call or save my contact below.';
+    $('error').hidden = false;
+  }
+  $('start').disabled = false; $('start').textContent = 'Start the camera';
+}
+
+function stop() {
+  if (mindar) { try { mindar.renderer.setAnimationLoop(null); if (running) mindar.stop(); } catch (e) {} }
+  $('ar').innerHTML = ''; mindar = null; running = false; found = false;
+  $('intro').hidden = false; $('close').hidden = true; $('panel').classList.remove('show');
+  $('hint').classList.add('gone'); $('frame').classList.add('gone'); $('hint').textContent = 'Find the stars on the back of the card';
+}
+
+$('start').addEventListener('click', start);
+$('close').addEventListener('click', stop);
+</script>
+</body>
+</html>
