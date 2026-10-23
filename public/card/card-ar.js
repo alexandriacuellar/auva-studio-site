@@ -28,12 +28,12 @@ async function iconSprite(link) {
   g.fillStyle = '#fff'; g.beginPath(); g.arc(128, 120, 96, 0, Math.PI * 2); g.fill();
   g.shadowColor = 'transparent'; g.lineWidth = 6; g.strokeStyle = PERI; g.stroke();
   g.drawImage(await svgImage(link.icon, NAVY), 80, 72, 96, 96);
-  g.font = font(600, 36); g.textAlign = 'center'; g.textBaseline = 'middle';
-  const tw = g.measureText(link.label).width + 36;
-  g.fillStyle = 'rgba(10,20,64,0.85)'; g.beginPath(); g.roundRect(128 - tw / 2, 252, tw, 56, 28); g.fill();
-  g.fillStyle = '#fff'; g.fillText(link.label, 128, 281);
+  g.font = font(700, 50); g.textAlign = 'center'; g.textBaseline = 'middle';
+  const tw = Math.min(252, g.measureText(link.label).width + 34);
+  g.fillStyle = 'rgba(10,20,64,0.9)'; g.beginPath(); g.roundRect(128 - tw / 2, 238, tw, 76, 38); g.fill();
+  g.fillStyle = '#fff'; g.fillText(link.label, 128, 278, 236);
   const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture(c), transparent: true, depthWrite: false }));
-  s.scale.set(0.17, 0.2125, 1); s.userData.href = link.href; s.userData.base = s.scale.clone();
+  s.scale.set(0.19, 0.2375, 1); s.userData.href = link.href; s.userData.base = s.scale.clone();
   return s;
 }
 
@@ -60,6 +60,7 @@ function starSprite() {
 
 export async function startCardAR(container, { found, lost }) {
   await document.fonts.ready;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mindar = new MindARThree({
     container, imageTargetSrc: '/card/card.mind', maxTrack: 1,
     uiLoading: 'no', uiScanning: 'no', uiError: 'no',
@@ -72,16 +73,15 @@ export async function startCardAR(container, { found, lost }) {
   // Anchor space: the card front is 1 unit wide, 1.75 tall, centred on the origin, +z towards the camera.
   const anchor = mindar.addAnchor(0);
 
-  // She steps out of the printed photo: a soft navy wash over it, ringed in periwinkle
-  const ring = new THREE.Mesh(new THREE.RingGeometry(0.3, 0.325, 64), new THREE.MeshBasicMaterial({ color: PERI, transparent: true, opacity: 0.9 }));
-  const pool = new THREE.Mesh(new THREE.CircleGeometry(0.3, 64), new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0.4 }));
-  ring.position.z = pool.position.z = 0.002;
+  // She steps out of the printed photo, ringed in periwinkle
+  const ring = new THREE.Mesh(new THREE.RingGeometry(0.3, 0.325, 64), new THREE.MeshBasicMaterial({ color: PERI, transparent: true, opacity: 0.85 }));
+  ring.position.z = 0.002;
   const sc = document.createElement('canvas'); sc.width = sc.height = 128; const sg = sc.getContext('2d');
   const grad = sg.createRadialGradient(64, 64, 0, 64, 64, 64); grad.addColorStop(0, 'rgba(0,0,0,0.55)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
   sg.fillStyle = grad; sg.fillRect(0, 0, 128, 128);
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.16), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
   shadow.position.set(0, 0.02, 0.004);
-  const floor = new THREE.Group(); floor.position.set(-0.13, 0.27, 0); floor.add(pool, ring, shadow); anchor.group.add(floor);
+  const floor = new THREE.Group(); floor.position.set(-0.13, 0.27, 0); floor.add(ring, shadow); anchor.group.add(floor);
 
   // Everything that stands up off the card. Rotating x past 90deg turns local +y into "up off the card",
   // leaning a little towards someone holding the card, so she isn't seen edge-on from above.
@@ -98,9 +98,10 @@ export async function startCardAR(container, { found, lost }) {
   // The call button hovers over the line between her title and the 3D QR, clear of her name
   const book = bookSprite(); book.position.set(0, -0.5, 0.06); anchor.group.add(book);
 
-  const orbit = new THREE.Group(); orbit.position.y = H * 0.55; stand.add(orbit);
+  // The icons circle the middle of the card, tight enough that none drift off a phone screen
+  const orbit = new THREE.Group(); orbit.position.set(-floor.position.x, H * 0.55, 0); stand.add(orbit);
   const icons = await Promise.all(LINKS.map(iconSprite));
-  icons.forEach((s, i) => { const a = (i / icons.length) * Math.PI * 2; s.position.set(Math.sin(a) * 0.52, Math.cos(a * 2) * 0.05, Math.cos(a) * 0.52); orbit.add(s); });
+  icons.forEach((s, i) => { const a = (i / icons.length) * Math.PI * 2; s.position.set(Math.sin(a) * 0.4, Math.cos(a * 2) * 0.05, Math.cos(a) * 0.4); orbit.add(s); });
 
   const tappable = [...icons, book, me];
 
@@ -129,16 +130,16 @@ export async function startCardAR(container, { found, lost }) {
   const clock = new THREE.Clock();
   await mindar.start();
   renderer.setAnimationLoop(() => {
-    const t = clock.getElapsedTime();
-    const k = Math.min(1, (performance.now() - shownAt) / 700);
+    // With reduce motion on, everything appears in place and holds still
+    const t = still ? 0 : clock.getElapsedTime();
+    const k = still ? 1 : Math.min(1, (performance.now() - shownAt) / 700);
     stand.scale.setScalar(Math.max(0.001, easeOutBack(k)));
-    const kb = Math.min(1, Math.max(0, (performance.now() - shownAt - 350) / 500));
+    const kb = still ? 1 : Math.min(1, Math.max(0, (performance.now() - shownAt - 350) / 500));
     orbit.rotation.y = t * 0.45;
     icons.forEach((s, i) => { s.position.y = Math.sin(t * 1.6 + i) * 0.03; });
     lift.rotation.z = Math.sin(t * 1.1) * 0.025;
     star.material.rotation = Math.sin(t * 0.8) * 0.15;
     star.scale.setScalar(0.1 + Math.sin(t * 2.4) * 0.012);
-    ring.material.opacity = 0.65 + Math.sin(t * 2) * 0.25;
     for (const s of tappable) s.scale.copy(s.userData.base);
     book.scale.multiplyScalar(Math.max(0.001, easeOutBack(kb)));
     if (pressed && performance.now() - pressed.at < 250) pressed.obj.scale.multiplyScalar(1.15);

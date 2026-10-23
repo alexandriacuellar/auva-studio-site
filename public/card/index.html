@@ -41,6 +41,17 @@
   .star-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(220, 232, 255, 0.18); font-size: 0.92rem; }
   .star-note::before, .star-icon::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  /* The one bold element: her avatar standing on an outline of the card, as the camera will show it */
+  .hero { position: relative; height: 322px; display: grid; place-items: end center; margin-top: -6px; }
+  .hero .card-outline { position: absolute; bottom: 4px; left: 50%; width: 150px; height: 64px; transform: translateX(-50%);
+                        border: 1.5px solid rgba(159, 182, 255, 0.55); border-radius: 10px; background: rgba(159, 182, 255, 0.06);
+                        clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+  .hero .ring { position: absolute; bottom: 26px; left: 50%; width: 92px; height: 22px; transform: translateX(-50%); border: 2px solid var(--peri); border-radius: 50%; }
+  .hero img { position: relative; height: 268px; width: auto; margin-bottom: 34px; }
+  .hero .star { position: absolute; top: 0; left: calc(50% + 4px); width: 18px; height: 18px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .sr-only:focus-within { position: fixed; z-index: 4; left: 14px; top: 70px; width: auto; height: auto; margin: 0; clip: auto; overflow: visible; white-space: normal; padding: 12px 16px; border-radius: 14px; background: var(--deep); }
+  .sr-only a { color: var(--white); display: block; padding: 4px 0; }
   .divider { height: 1px; background: rgba(220, 232, 255, 0.18); }
 
   /* Card AR: full screen camera view, the card comes alive under it */
@@ -61,16 +72,22 @@
 <main>
   <img class="logo" src="/auva-logo-stacked-light.png" alt="Auva Studio">
 
+  <div class="hero" aria-hidden="true">
+    <span class="card-outline"></span><span class="ring"></span>
+    <img src="/card/avatar.webp" alt="" width="373" height="1024">
+    <span class="star"></span>
+  </div>
+
   <div>
     <h1>Hi, I'm <b>Alexandria</b></h1>
-    <p>Point your camera at the front of my card and I'll pop right out of it, with every way to reach me floating around. Tap any icon to open it.</p>
+    <p>Point your camera at the front of my card and I'll step right out of it.</p>
   </div>
   <button class="btn btn-star" id="start-card" type="button">Point your camera at my card</button>
 
   <div class="actions">
     <a class="btn btn-light" href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
     <div class="row">
-      <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Save my contact</a>
+      <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Save contact</a>
       <a class="btn btn-ghost" href="/">See my work</a>
     </div>
   </div>
@@ -78,14 +95,14 @@
   <div class="divider"></div>
 
   <div>
-    <h2>No card handy? Put the star <b>on your desk</b></h2>
+    <h2>No card handy? Put the star on your desk</h2>
     <p>Tap the button, point your phone at a table, and the Auva star lands right there. Walk around it, or pinch to make it bigger.</p>
   </div>
 
   <model-viewer id="star" src="/card/auva-star.glb" ios-src="/card/auva-star.usdz" alt="A 3D Auva Studio piece: the blue Auva A on a navy base, with the Virgo constellation floating above it and the amber star Delta Virginis at its peak"
     ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"
-    camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" interaction-prompt="none"
-    camera-orbit="20deg 76deg 0.9m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 95deg auto" field-of-view="30deg"
+    camera-controls interaction-prompt="none"
+    camera-orbit="0deg 78deg 0.9m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 95deg auto" field-of-view="30deg"
     shadow-intensity="1" shadow-softness="0.9" exposure="1.15" tone-mapping="neutral" environment-image="neutral" loading="lazy">
     <button class="btn btn-star ar-btn" slot="ar-button" type="button">Put it on your desk</button>
   </model-viewer>
@@ -100,6 +117,14 @@
   <div class="ar-frame" aria-hidden="true"></div>
   <div class="ar-top"><button class="btn ar-close" id="ar-close" type="button">Done</button></div>
   <div class="ar-hint" id="ar-hint" aria-live="polite"><p>Starting the camera...</p></div>
+  <nav class="sr-only" aria-label="Links floating around me">
+    <a href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    <a href="https://auvastudio.com/">Website</a>
+    <a href="https://auvastudio.com/contact/">Contact</a>
+    <a href="https://www.instagram.com/auvastudiony/">Instagram</a>
+    <a href="https://www.facebook.com/auvastudiony">Facebook</a>
+    <a href="https://www.linkedin.com/company/auva-studio/">LinkedIn</a>
+  </nav>
 </div>
 
 <script type="module">
@@ -111,8 +136,10 @@
   const say = (big, small = '') => { hint.innerHTML = `<p>${big}</p>` + (small ? `<p class="small">${small}</p>` : ''); };
   let session = null;
 
-  document.getElementById('start-card').addEventListener('click', async () => {
+  const startBtn = document.getElementById('start-card'), closeBtn = document.getElementById('ar-close');
+  startBtn.addEventListener('click', async () => {
     arEl.hidden = false; arEl.classList.remove('found'); document.body.style.overflow = 'hidden';
+    closeBtn.focus();
     say('Starting the camera...');
     try {
       const { startCardAR } = await import('/card/card-ar.js');
@@ -127,10 +154,13 @@
     }
   });
 
-  document.getElementById('ar-close').addEventListener('click', () => {
+  const closeAR = () => {
     session?.stop(); session = null; stage.innerHTML = '';
     arEl.hidden = true; document.body.style.overflow = '';
-  });
+    startBtn.focus();
+  };
+  closeBtn.addEventListener('click', closeAR);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !arEl.hidden) closeAR(); });
 </script>
 </body>
 </html>
