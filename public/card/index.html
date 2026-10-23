@@ -5,26 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Alexandria Cuellar | Auva Studio</title>
-<meta name="description" content="Put the Auva star on your desk in 3D, then book a free call or save my contact.">
+<meta name="description" content="Point your camera at my business card to see me pop out of it, or put the Auva star on your desk in 3D.">
 <meta name="theme-color" content="#0f1d52">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "/card/vendor/three.module.min.js", "three/addons/": "/card/vendor/three-addons/" } }</script>
 <script type="module" src="/card/vendor/model-viewer.min.js"></script>
 <style>
-  :root { --night: #0f1d52; --deep: #0a1440; --ink: #12235e; --muted: #b8c6ea; --tint: #dce8ff; --star: #f39a3b; --white: #fff;
+  :root { --night: #0f1d52; --deep: #0a1440; --ink: #12235e; --muted: #b8c6ea; --tint: #dce8ff; --peri: #9fb6ff; --star: #f39a3b; --white: #fff;
           --head: 'Montserrat', Arial, sans-serif; --body: 'DM Sans', Arial, sans-serif; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--night); color: var(--white); font-family: var(--body); -webkit-font-smoothing: antialiased; }
   main { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; gap: 22px;
          padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
   .logo { width: 116px; height: auto; }
-  model-viewer { width: 100%; height: min(58vh, 440px); background: radial-gradient(closest-side, #1b2d6e, var(--night)); border-radius: 24px; --poster-color: transparent; }
+  model-viewer { width: 100%; height: min(46vh, 380px); background: radial-gradient(closest-side, #1b2d6e, var(--night)); border-radius: 24px; --poster-color: transparent; }
   model-viewer::part(default-progress-bar) { background: var(--star); }
   h1 { font-family: var(--head); font-weight: 300; font-size: 1.7rem; line-height: 1.2; margin: 0 0 8px; text-wrap: balance; }
   h1 b { font-weight: 600; }
+  h2 { font-family: var(--head); font-weight: 300; font-size: 1.25rem; line-height: 1.25; margin: 0 0 6px; }
+  h2 b { font-weight: 600; }
   p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
   .actions { display: grid; gap: 10px; }
   .btn { display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 20px; border-radius: 999px; border: 0; font: 600 1rem var(--body); text-decoration: none; cursor: pointer; }
@@ -35,40 +38,129 @@
   .ar-btn { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); white-space: nowrap; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
   .no-ar { margin-top: -10px; text-align: center; font-size: 0.9rem; color: var(--tint); }
   .note { font-size: 0.85rem; text-align: center; }
+  .star-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(220, 232, 255, 0.18); font-size: 0.92rem; }
+  .star-note::before, .star-icon::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  /* The one bold element: her avatar standing on an outline of the card, as the camera will show it */
+  .hero { position: relative; height: 322px; display: grid; place-items: end center; margin-top: -6px; }
+  .hero .card-outline { position: absolute; bottom: 4px; left: 50%; width: 150px; height: 64px; transform: translateX(-50%);
+                        border: 1.5px solid rgba(159, 182, 255, 0.55); border-radius: 10px; background: rgba(159, 182, 255, 0.06);
+                        clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+  .hero .ring { position: absolute; bottom: 26px; left: 50%; width: 92px; height: 22px; transform: translateX(-50%); border: 2px solid var(--peri); border-radius: 50%; }
+  .hero img { position: relative; height: 268px; width: auto; margin-bottom: 34px; }
+  .hero .star { position: absolute; top: 44px; left: calc(50% + 72px); width: 20px; height: 20px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .sr-only:focus-within { position: fixed; z-index: 4; left: 14px; top: 70px; width: auto; height: auto; margin: 0; clip: auto; overflow: visible; white-space: normal; padding: 12px 16px; border-radius: 14px; background: var(--deep); }
+  .sr-only a { color: var(--white); display: block; padding: 4px 0; }
+  .divider { height: 1px; background: rgba(220, 232, 255, 0.18); }
+
+  /* Card AR: full screen camera view, the card comes alive under it */
+  .ar { position: fixed; inset: 0; z-index: 10; background: #000; }
+  .ar[hidden] { display: none; }
+  .ar-stage { position: absolute; inset: 0; overflow: hidden; }
+  .ar-top { position: absolute; z-index: 3; top: max(14px, env(safe-area-inset-top)); left: 14px; right: 14px; display: flex; justify-content: flex-end; }
+  .ar-close { min-height: 44px; padding: 10px 18px; background: rgba(10, 20, 64, 0.72); color: var(--white); border: 1px solid rgba(220, 232, 255, 0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .ar-hint { position: absolute; z-index: 3; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(340px, calc(100% - 32px));
+             padding: 14px 18px; border-radius: 18px; text-align: center; background: rgba(10, 20, 64, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .ar-hint p { color: var(--white); font-size: 0.98rem; }
+  .ar-hint .small { color: var(--tint); font-size: 0.85rem; margin-top: 2px; }
+  .ar-frame { position: absolute; z-index: 2; left: 50%; top: 46%; width: min(46vw, 210px); aspect-ratio: 2 / 3.5; transform: translate(-50%, -50%); border-radius: 14px; border: 2px dashed rgba(220, 232, 255, 0.7); pointer-events: none; transition: opacity 0.3s; }
+  .ar.found .ar-frame { opacity: 0; }
 </style>
 </head>
 <body>
 <main>
   <img class="logo" src="/auva-logo-stacked-light.png" alt="Auva Studio">
 
-  <model-viewer id="star" src="/card/auva-star.glb" ios-src="/card/auva-star.usdz" alt="A 3D Auva Studio piece: the blue Auva A on a navy base, with the Virgo constellation floating above it and the amber star Delta Virginis at its peak"
-    ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"
-    camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" interaction-prompt="none"
-    camera-orbit="20deg 76deg 0.9m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 95deg auto" field-of-view="30deg"
-    shadow-intensity="1" shadow-softness="0.9" exposure="1.15" tone-mapping="neutral" environment-image="neutral">
-    <button class="btn btn-star ar-btn" slot="ar-button" type="button">Put it on your desk</button>
-  </model-viewer>
-  <p class="no-ar" id="no-ar" hidden>Open this page on your phone to place it on your desk.</p>
+  <div class="hero" aria-hidden="true">
+    <span class="card-outline"></span><span class="ring"></span>
+    <img src="/card/avatar.webp" alt="" width="373" height="1024">
+    <span class="star"></span>
+  </div>
 
   <div>
-    <h1>A little star for <b>your desk</b></h1>
-    <p>Tap the button, point your phone at a table, and the Auva star lands right there. Walk around it, or pinch to make it bigger. Auva is named for Delta Virginis, the amber star at the top.</p>
+    <h1>Hi, I'm <b>Alexandria</b></h1>
+    <p>Point your camera at the front of my card and I'll step right out of it.</p>
   </div>
+  <button class="btn btn-star" id="start-card" type="button">Point your camera at my card</button>
 
   <div class="actions">
     <a class="btn btn-light" href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
     <div class="row">
-      <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Save my contact</a>
+      <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Save contact</a>
       <a class="btn btn-ghost" href="/">See my work</a>
     </div>
-    <p class="note">Works in Safari on iPhone and Chrome on Android. No app needed.</p>
   </div>
+
+  <div class="divider"></div>
+
+  <div>
+    <h2>No card handy? Put the star on your desk</h2>
+    <p>Tap the button, point your phone at a table, and the Auva star lands right there. Walk around it, or pinch to make it bigger.</p>
+  </div>
+
+  <model-viewer id="star" src="/card/auva-star.glb" ios-src="/card/auva-star.usdz" alt="A 3D Auva Studio piece: the blue Auva A on a navy base, with the Virgo constellation floating above it and the amber star Delta Virginis at its peak"
+    ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"
+    camera-controls interaction-prompt="none"
+    camera-orbit="0deg 78deg 0.9m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 95deg auto" field-of-view="30deg"
+    shadow-intensity="1" shadow-softness="0.9" exposure="1.15" tone-mapping="neutral" environment-image="neutral" loading="lazy">
+    <button class="btn btn-star ar-btn" slot="ar-button" type="button">Put it on your desk</button>
+  </model-viewer>
+  <p class="no-ar" id="no-ar" hidden>Open this page on your phone to place it on your desk.</p>
+
+  <p class="star-note">The amber star at the top is Auva, or Delta Virginis (officially Minelauva), a cool red giant star in the constellation Virgo.</p>
+  <p class="note">Works in Safari on iPhone and Chrome on Android. No app needed.</p>
 </main>
+
+<div class="ar" id="ar" hidden role="dialog" aria-modal="true" aria-label="My card in your camera">
+  <div class="ar-stage" id="ar-stage"></div>
+  <div class="ar-frame" aria-hidden="true"></div>
+  <div class="ar-top"><button class="btn ar-close" id="ar-close" type="button">Done</button></div>
+  <div class="ar-hint" id="ar-hint" aria-live="polite"><p>Starting the camera...</p></div>
+  <nav class="sr-only" aria-label="Links floating around me">
+    <a href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    <a href="https://auvastudio.com/">Website</a>
+    <a href="https://auvastudio.com/contact/">Contact</a>
+    <a href="https://www.instagram.com/auvastudiony/">Instagram</a>
+    <a href="https://www.facebook.com/auvastudiony">Facebook</a>
+    <a href="https://www.linkedin.com/company/auva-studio/">LinkedIn</a>
+  </nav>
+</div>
+
 <script type="module">
   const mv = document.getElementById('star');
   // model-viewer hides the AR button on its own when AR isn't available; say why instead of leaving a gap.
   mv.addEventListener('load', () => { if (!mv.canActivateAR) document.getElementById('no-ar').hidden = false; });
+
+  const arEl = document.getElementById('ar'), stage = document.getElementById('ar-stage'), hint = document.getElementById('ar-hint');
+  const say = (big, small = '') => { hint.innerHTML = `<p>${big}</p>` + (small ? `<p class="small">${small}</p>` : ''); };
+  let session = null;
+
+  const startBtn = document.getElementById('start-card'), closeBtn = document.getElementById('ar-close');
+  startBtn.addEventListener('click', async () => {
+    arEl.hidden = false; arEl.classList.remove('found'); document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    say('Starting the camera...');
+    try {
+      const { startCardAR } = await import('/card/card-ar.js');
+      session = await startCardAR(stage, {
+        found: () => { arEl.classList.add('found'); say('Tap an icon to open it', 'Tap me to book a free call'); },
+        lost: () => { arEl.classList.remove('found'); say('Point at the front of my card', 'Hold it flat, with my photo in view'); },
+      });
+      say('Point at the front of my card', 'Hold it flat, with my photo in view');
+    } catch (e) {
+      console.error(e);
+      say('The camera didn\'t start', 'Allow camera access for this page and try again.');
+    }
+  });
+
+  const closeAR = () => {
+    session?.stop(); session = null; stage.innerHTML = '';
+    arEl.hidden = true; document.body.style.overflow = '';
+    startBtn.focus();
+  };
+  closeBtn.addEventListener('click', closeAR);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !arEl.hidden) closeAR(); });
 </script>
 </body>
 </html>
