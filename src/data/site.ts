@@ -103,7 +103,7 @@ export const packages = [
     blurb: 'A professional web presence that helps customers find, trust, and contact you.',
     groups: [
       { label: 'Planning and content', items: ['A planning call and content plan', "I polish your copy and fill in what's missing"] },
-      { label: 'Design and build', items: ['Up to 5 pages, or one scrolling page', '2 page designs: one for your home page, one for the rest', 'Custom design made for your business, built for phones first', 'A contact form and a map to find you', '2 revision rounds'] },
+      { label: 'Design and build', items: ["One scrolling page or up to 5 pages, whichever suits your business. I'll help you choose.", '2 page designs: one for your home page, one for the rest', 'Custom design made for your business, built for phones first', 'A contact form and a map to find you', '2 revision rounds'] },
       { label: 'Found online', items: ['Set up for Google and AI search: page titles, business details, and a sitemap', 'Google Business Profile guidance, where applicable', 'Simple visitor stats'] },
     ],
     timeline: '2–3 weeks',
