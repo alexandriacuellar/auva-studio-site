@@ -35,6 +35,8 @@
   .ar-btn { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); white-space: nowrap; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
   .no-ar { margin-top: -10px; text-align: center; font-size: 0.9rem; color: var(--tint); }
   .note { font-size: 0.85rem; text-align: center; }
+  .star-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(220, 232, 255, 0.18); font-size: 0.92rem; }
+  .star-note::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 </style>
 </head>
@@ -53,7 +55,8 @@
 
   <div>
     <h1>A little star for <b>your desk</b></h1>
-    <p>Tap the button, point your phone at a table, and the Auva star lands right there. Walk around it, or pinch to make it bigger. Auva is named for Delta Virginis, the amber star at the top.</p>
+    <p>Tap the button, point your phone at a table, and the Auva star lands right there. Walk around it, or pinch to make it bigger.</p>
+    <p class="star-note">The amber star at the top is Auva, or Delta Virginis (officially Minelauva), a cool red giant star in the constellation Virgo.</p>
   </div>
 
   <div class="actions">
