@@ -117,7 +117,7 @@
     try {
       const { startCardAR } = await import('/card/card-ar.js');
       session = await startCardAR(stage, {
-        found: () => { arEl.classList.add('found'); say('Tap an icon to open it', 'Tap my photo to book a free call'); },
+        found: () => { arEl.classList.add('found'); say('Tap an icon to open it', 'Tap me to book a free call'); },
         lost: () => { arEl.classList.remove('found'); say('Point at the front of my card', 'Hold it flat, with my photo in view'); },
       });
       say('Point at the front of my card', 'Hold it flat, with my photo in view');

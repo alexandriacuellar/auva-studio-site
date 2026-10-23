@@ -72,18 +72,24 @@ export async function startCardAR(container, { found, lost }) {
   // Anchor space: the card front is 1 unit wide, 1.75 tall, centred on the origin, +z towards the camera.
   const anchor = mindar.addAnchor(0);
 
-  // She steps out of the printed photo: a dark pool over it, ringed in periwinkle
+  // She steps out of the printed photo: a soft navy wash over it, ringed in periwinkle
   const ring = new THREE.Mesh(new THREE.RingGeometry(0.3, 0.325, 64), new THREE.MeshBasicMaterial({ color: PERI, transparent: true, opacity: 0.9 }));
-  const pool = new THREE.Mesh(new THREE.CircleGeometry(0.3, 64), new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0.88 }));
+  const pool = new THREE.Mesh(new THREE.CircleGeometry(0.3, 64), new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0.4 }));
   ring.position.z = pool.position.z = 0.002;
-  const floor = new THREE.Group(); floor.position.set(-0.13, 0.27, 0); floor.add(pool, ring); anchor.group.add(floor);
+  const sc = document.createElement('canvas'); sc.width = sc.height = 128; const sg = sc.getContext('2d');
+  const grad = sg.createRadialGradient(64, 64, 0, 64, 64, 64); grad.addColorStop(0, 'rgba(0,0,0,0.55)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
+  sg.fillStyle = grad; sg.fillRect(0, 0, 128, 128);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.16), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
+  shadow.position.set(0, 0.02, 0.004);
+  const floor = new THREE.Group(); floor.position.set(-0.13, 0.27, 0); floor.add(pool, ring, shadow); anchor.group.add(floor);
 
   // Everything that stands up off the card. Rotating x past 90deg turns local +y into "up off the card",
   // leaning a little towards someone holding the card, so she isn't seen edge-on from above.
   const stand = new THREE.Group(); stand.position.copy(floor.position); stand.rotation.x = Math.PI * 0.38; anchor.group.add(stand);
 
-  const meTex = await new THREE.TextureLoader().loadAsync('/card/me.webp'); meTex.colorSpace = THREE.SRGBColorSpace;
-  const W = 0.62, H = W * meTex.image.height / meTex.image.width;
+  // Her avatar, full length, feet on the card
+  const meTex = await new THREE.TextureLoader().loadAsync('/card/avatar.webp'); meTex.colorSpace = THREE.SRGBColorSpace;
+  const H = 1.1, W = H * meTex.image.width / meTex.image.height;
   const me = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshBasicMaterial({ map: meTex, transparent: true, alphaTest: 0.02, side: THREE.DoubleSide }));
   me.position.y = H / 2; me.userData.href = CALENDLY; me.userData.base = me.scale.clone();
   const lift = new THREE.Group(); lift.add(me); stand.add(lift);
@@ -112,7 +118,8 @@ export async function startCardAR(container, { found, lost }) {
     const r = container.getBoundingClientRect();
     ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
     ray.setFromCamera(ndc, camera);
-    const hit = ray.intersectObjects(tappable, false)[0];
+    // Icons win over her figure, so an icon passing in front of or behind her still opens
+    const hit = ray.intersectObjects([...icons, book], false)[0] || ray.intersectObject(me, false)[0];
     if (!hit) return;
     const { href } = hit.object.userData; pressed = { obj: hit.object, at: performance.now() };
     if (href.startsWith('mailto:')) window.location.href = href; else window.open(href, '_blank', 'noopener');
@@ -128,7 +135,7 @@ export async function startCardAR(container, { found, lost }) {
     const kb = Math.min(1, Math.max(0, (performance.now() - shownAt - 350) / 500));
     orbit.rotation.y = t * 0.45;
     icons.forEach((s, i) => { s.position.y = Math.sin(t * 1.6 + i) * 0.03; });
-    lift.position.y = Math.sin(t * 1.2) * 0.012;
+    lift.rotation.z = Math.sin(t * 1.1) * 0.025;
     star.material.rotation = Math.sin(t * 0.8) * 0.15;
     star.scale.setScalar(0.1 + Math.sin(t * 2.4) * 0.012);
     ring.material.opacity = 0.65 + Math.sin(t * 2) * 0.25;
