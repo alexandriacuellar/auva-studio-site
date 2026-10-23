@@ -8,3 +8,9 @@
 
 /card/alexandria-cuellar.vcf
   Content-Type: text/vcard; charset=utf-8
+
+/card/auva-star.usdz
+  Content-Type: model/vnd.usdz+zip
+
+/card/auva-star.glb
+  Content-Type: model/gltf-binary
