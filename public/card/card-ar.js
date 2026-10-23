@@ -6,7 +6,7 @@ import { MindARThree } from '/card/vendor/mindar/mindar-image-three.prod.js';
 const CALENDLY = 'https://calendly.com/alexandria-cuellar-ny/30min';
 const LINKS = [
   { label: 'Website', href: 'https://auvastudio.com/', icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/>' },
-  { label: 'Email', href: 'mailto:hello@auvastudio.com', icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
+  { label: 'Contact', href: 'https://auvastudio.com/contact/', icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
   { label: 'Instagram', href: 'https://www.instagram.com/auvastudiony/', icon: '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>' },
   { label: 'Facebook', href: 'https://www.facebook.com/auvastudiony', icon: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/auva-studio/', icon: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>' },
@@ -122,7 +122,7 @@ export async function startCardAR(container, { found, lost }) {
     const hit = ray.intersectObjects([...icons, book], false)[0] || ray.intersectObject(me, false)[0];
     if (!hit) return;
     const { href } = hit.object.userData; pressed = { obj: hit.object, at: performance.now() };
-    if (href.startsWith('mailto:')) window.location.href = href; else window.open(href, '_blank', 'noopener');
+    window.open(href, '_blank', 'noopener');
   };
   container.addEventListener('click', onTap);
 
