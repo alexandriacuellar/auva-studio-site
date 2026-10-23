@@ -68,9 +68,9 @@ export const categories = [
 ];
 
 export const consulting = [
-  { id: 'planning', price: 'Technology Assessment $650 · Sessions $65/hr', icon: 'compass', title: 'Technology Planning', text: 'The big picture. I look at all the tools you use, find the gaps, and give you a plan for what to fix, replace, or add first.', items: ['Technology assessments and audits', 'Roadmaps and priorities', 'Platform and tool recommendations'] },
+  { id: 'planning', price: 'Technology Assessment $650, sessions $65/hr', icon: 'compass', title: 'Technology Planning', text: 'The big picture. I look at all the tools you use, find the gaps, and give you a plan for what to fix, replace, or add first.', items: ['Technology assessments and audits', 'Roadmaps and priorities', 'Platform and tool recommendations'] },
   { id: 'analysis', price: 'From $1,000', icon: 'chart', title: 'Business Analysis & Process Review', text: "One process, in depth. I map how a task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.", items: ['Workflow and process mapping', 'Requirements and specifications', 'Solution options compared'] },
-  { id: 'delivery', price: '$65/hr · Monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
+  { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
   { id: 'ai', price: 'From $500', icon: 'bolt', title: 'AI & Emerging Tech', text: 'Find practical ways to use AI, XR, and interactive technology, and test ideas before you invest.', items: ['Getting your team started with AI tools', 'Planning XR and immersive experiences', 'Checking whether an interactive or game idea is doable', 'Production support for XR and game teams'] },
 ];
 
@@ -191,7 +191,7 @@ export const aiOffers = [
   { id: 'ai-sprint', group: 'ai', icon: 'bolt', title: 'AI Prototype Sprint', price: 'From $2,500', text: 'A small, working test of an AI tool for your business, like a chatbot that answers customer questions or a workflow that drafts routine emails. Then a walkthrough of what we learned, all in 2–3 weeks.' },
   { id: 'review', group: 'xr', icon: 'search', title: 'Concept & Feasibility Review', price: '$650', text: "Have an XR, game, or interactive idea? Find out if it's doable, which technology fits, a rough budget, and the team it would take. About 2 weeks." },
   { id: 'xr-sprint', group: 'xr', icon: 'layers', title: 'XR Prototype Sprint', price: 'From $7,500', text: 'A small, working test of your XR or interactive idea, built with a developer partner, then a walkthrough of what we learned. 4–6 weeks.' },
-  { id: 'production', group: 'xr', icon: 'star', title: 'Production Support', price: '$65/hr · Monthly from $650', text: 'Producer and project management help for XR, game, and immersive teams: plans, schedules, documents, and keeping everyone aligned.' },
+  { id: 'production', group: 'xr', icon: 'star', title: 'Production Support', price: '$65/hr, or monthly from $650', text: 'Producer and project management help for XR, game, and immersive teams: plans, schedules, documents, and keeping everyone aligned.' },
 ];
 
 // Search data for a list of services on one page. Prices stay as written; "From" or "+" becomes a minimum price.

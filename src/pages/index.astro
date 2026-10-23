@@ -5,7 +5,6 @@ import Icon from '../components/Icon.astro';
 import Cta from '../components/Cta.astro';
 import { categories, journey, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
-import hero from '../assets/cover-hero-workspace.png';
 import headshot from '../assets/alexandria-cuellar.jpg';
 import siteMockup from '../assets/website-mockup-happy-tails.png';
 
@@ -16,24 +15,57 @@ const situations = [
   { title: 'You see an AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/#ai-team', icon: 'bolt' },
   { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/#xr', icon: 'layers' },
 ];
+
+// The hero star chart: the three services as points of a small constellation around Delta Virginis, the star Auva is named after.
+// Positions are percentages of the chart: x/y on wide screens, mx/my on phones (the chart is taller there).
+const pts = {
+  web: { x: 14, y: 64, mx: 22, my: 30 },
+  con: { x: 42, y: 30, mx: 72, my: 16 },
+  star: { x: 60, y: 58, mx: 50, my: 54 },
+  ai: { x: 84, y: 32, mx: 72, my: 80 },
+  m1: { x: 27, y: 84, mx: 12, my: 62 },
+  m2: { x: 93, y: 64, mx: 92, my: 50 },
+  m3: { x: 74, y: 84, mx: 28, my: 88 },
+};
+type Pt = keyof typeof pts;
+const links: [Pt, Pt][] = [['web', 'con'], ['con', 'star'], ['star', 'ai'], ['web', 'm1'], ['m1', 'star'], ['ai', 'm2'], ['star', 'm3']];
+const nodes: { id: Pt; label: string; href: string }[] = [
+  { id: 'web', label: 'Websites', href: '/websites/' },
+  { id: 'con', label: 'Consulting', href: '/technology-consulting/' },
+  { id: 'ai', label: 'AI & Emerging Tech', href: '/ai-emerging-tech/' },
+];
+const minor: Pt[] = ['m1', 'm2', 'm3'];
+const at = (k: Pt) => `--x:${pts[k].x}%;--y:${pts[k].y}%;--mx:${pts[k].mx}%;--my:${pts[k].my}%`;
+const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', 'Found on Google and AI search'];
 ---
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
-      <p class="bd-pill">Websites · Consulting · AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
       <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams. I build websites, help you choose the right tools, run your technology projects, and help you explore AI & Emerging Tech.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
-      <p class="hero-strip">Fixed prices · Fast, accessible sites · You own everything · Found on Google and AI search</p>
-      <figure class="bd-stage">
-        <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-        <figcaption class="bd-chip">
+      <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+      <figure class="sky-wrap">
+        <div class="sky" role="group" aria-label="The three services as a small constellation around Delta Virginis">
+          {(['wide', 'tall'] as const).map((v) => (
+            <svg class={`sky-lines sky-${v}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              {links.map(([a, b]) => v === 'wide'
+                ? <line x1={pts[a].x} y1={pts[a].y} x2={pts[b].x} y2={pts[b].y} vector-effect="non-scaling-stroke" />
+                : <line x1={pts[a].mx} y1={pts[a].my} x2={pts[b].mx} y2={pts[b].my} vector-effect="non-scaling-stroke" />)}
+            </svg>
+          ))}
+          {minor.map((k) => <span class="sky-dot" style={at(k)} aria-hidden="true"></span>)}
+          <span class="sky-star" style={at('star')}><span class="sky-glyph" aria-hidden="true"></span><span class="sky-label">Delta Virginis</span></span>
+          {nodes.map((n) => <a class="sky-node" href={n.href} style={at(n.id)}><span class="sky-pt" aria-hidden="true"></span><span class="sky-label">{n.label}</span></a>)}
+        </div>
+        <figcaption class="sky-note"><b>What's in a name?</b> Auva takes its name from Delta Virginis, a red giant star in the constellation Virgo, about 198 light-years from Earth. A little inspiration from the stars, a little curiosity about what's possible.</figcaption>
+        <p class="bd-chip">
           <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
           <span><b>Hi, I'm Alexandria.</b> You'll work with me directly, from the first call to handover.</span>
-        </figcaption>
+        </p>
       </figure>
     </div>
   </section>
@@ -41,26 +73,24 @@ const situations = [
   <section class="alt">
     <div class="wrap about-grid">
       <div>
-        <p class="eyebrow">Where to start</p>
         <h2 class="mag-head">What are you <em>working on?</em></h2>
         <p class="lede">You don't need to know which service you need. Start with the situation that sounds most like yours.</p>
         <p class="muted">Not sure which fits? Real problems often span more than one. <a href="/contact/">Tell me what's happening</a> and I'll suggest a next step.</p>
       </div>
-      <div class="values">
+      <ul class="route-list">
         {situations.map((x) => (
-          <a class="card card-row" href={x.href}>
-            <div class="icon"><Icon name={x.icon} /></div>
-            <div><h3>{x.title}</h3><p class="muted">{x.text}</p></div>
-          </a>
+          <li><a href={x.href}>
+            <span class="icon"><Icon name={x.icon} /></span>
+            <span><b>{x.title}</b><span class="muted">{x.text}</span></span>
+          </a></li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">What I do</p>
         <h2 class="mag-head">Three ways <em>I help.</em></h2>
         <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
       </div>
@@ -94,7 +124,6 @@ const situations = [
   <section class="alt" id="about">
     <div class="wrap about-grid">
       <div>
-        <p class="eyebrow">About Auva Studio</p>
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
         <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals, not a product to sell.</p>
         <p>I've spent more than 20 years helping organizations use technology to solve problems. For nearly two decades I built websites and digital products for newspaper companies, and since 2023 I've managed 14+ VR experiences and mobile games for indie game studios. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
@@ -107,24 +136,18 @@ const situations = [
           <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
         </figure>
       </div>
-      <div class="values">
-        <div class="card card-row"><div class="icon"><Icon name="search" /></div><div><h3>Start with the problem</h3><p class="muted">Technology should make something clearer, easier, or more reliable.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="compass" /></div><div><h3>Fit your business</h3><p class="muted">Your goals, budget, and systems shape every recommendation.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="layers" /></div><div><h3>Keep it simple</h3><p class="muted">The simplest solution that does the job well.</p></div></div>
-        <div class="card card-row"><div class="icon"><Icon name="key" /></div><div><h3>Leave you confident</h3><p class="muted">Clear explanations and systems you can maintain.</p></div></div>
-        <div class="name-note">
-          <h3><Icon name="star" size={18} />What's in a name?</h3>
-          <p class="muted">Auva takes its name from Delta Virginis, a red giant star in the constellation Virgo, about 198 light-years from Earth.</p>
-          <p class="name-line">A little inspiration from the stars, a little curiosity about what's possible.</p>
-        </div>
-      </div>
+      <ul class="principles">
+        <li><h3>Start with the problem</h3><p class="muted">Technology should make something clearer, easier, or more reliable.</p></li>
+        <li><h3>Fit your business</h3><p class="muted">Your goals, budget, and systems shape every recommendation.</p></li>
+        <li><h3>Keep it simple</h3><p class="muted">The simplest solution that does the job well.</p></li>
+        <li><h3>Leave you confident</h3><p class="muted">Clear explanations and systems you can maintain.</p></li>
+      </ul>
     </div>
   </section>
 
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How I work</p>
         <h2 class="mag-head">Simple to start, <em>clear at every step.</em></h2>
         <p class="lede">Whatever you need, it starts the same way.</p>
       </div>
@@ -144,22 +167,73 @@ const situations = [
 </Base>
 
 <style>
-  /* Boosh-style draft: centered hero over a big photo stage, then photo-and-text rows that alternate sides. */
-  .bd-hero { position: relative; overflow: hidden; isolation: isolate; padding: 80px 0 96px; }
-  .bd-hero::before, .bd-hero::after { content: ''; position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; z-index: -1; }
-  .bd-hero::before { width: 520px; height: 520px; left: -160px; top: -120px; background: var(--tint); }
-  .bd-hero::after { width: 460px; height: 460px; right: -140px; top: 120px; background: #e6e0ff; }
+  /* Home hero: headline and buttons over a star chart of the three services. */
+  .bd-hero { padding: 80px 0 96px; }
   .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
   .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
   .bd-hero-inner .hero-actions { justify-content: center; }
-  .hero-strip { margin: 20px 0 0; font-size: 0.95rem; color: var(--muted, #4B5878); }
-  .bd-pill { display: inline-block; font-family: var(--font-head); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; margin-bottom: 24px; box-shadow: var(--shadow); }
+  .hero-strip { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; font-size: 0.95rem; color: var(--muted); }
+  .hero-strip li { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-strip svg { color: var(--success); flex: none; }
+  @media (max-width: 640px) { .hero-strip { display: grid; grid-template-columns: auto auto; justify-content: center; text-align: left; font-size: 0.88rem; gap: 6px 16px; } }
   .bd-hero h1 { max-width: 15ch; }
 
-  .bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
-  .bd-stage > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; object-position: center 72%; border-radius: 28px; box-shadow: var(--shadow-strong); }
-  .bd-chip { position: absolute; left: 28px; bottom: -28px; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
+  /* The star chart. Points sit at --x/--y (wide) or --mx/--my (phones); lines are drawn in the SVG underneath. */
+  .sky-wrap { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; text-align: left; }
+  .sky { position: relative; aspect-ratio: 2 / 1; border-radius: 28px; overflow: hidden; background-color: var(--night);
+    background-image: radial-gradient(circle at 8% 22%, rgb(255 255 255 / 0.5) 0 1px, transparent 2px), radial-gradient(circle at 22% 12%, rgb(255 255 255 / 0.35) 0 1px, transparent 2px),
+      radial-gradient(circle at 33% 52%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px), radial-gradient(circle at 51% 16%, rgb(255 255 255 / 0.45) 0 1px, transparent 2px),
+      radial-gradient(circle at 66% 30%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px), radial-gradient(circle at 79% 60%, rgb(255 255 255 / 0.4) 0 1px, transparent 2px),
+      radial-gradient(circle at 88% 14%, rgb(255 255 255 / 0.35) 0 1px, transparent 2px), radial-gradient(circle at 46% 90%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px),
+      radial-gradient(circle at 96% 86%, rgb(255 255 255 / 0.4) 0 1px, transparent 2px), radial-gradient(circle at 4% 70%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px); }
+  .sky-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sky-lines line { stroke: rgb(196 210 240 / 0.45); stroke-width: 1.5; stroke-linecap: round; }
+  .sky-tall { display: none; }
+  .sky-dot, .sky-star, .sky-node { position: absolute; left: var(--x); top: var(--y); }
+  .sky-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #c4d2f0; }
+  .sky-node { display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -7px); color: var(--white); text-decoration: none; }
+  .sky-pt { width: 14px; height: 14px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 5px rgb(255 255 255 / 0.14); transition: box-shadow 0.2s, transform 0.2s; }
+  .sky-label { margin-top: 10px; padding: 0 6px; border-radius: 6px; background: var(--night); white-space: nowrap; font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; }
+  .sky-node:hover .sky-pt, .sky-node:focus-visible .sky-pt { transform: scale(1.25); box-shadow: 0 0 0 8px rgb(255 255 255 / 0.2); }
+  .sky-node:hover .sky-label, .sky-node:focus-visible .sky-label { text-decoration: underline; text-underline-offset: 4px; }
+  .sky-star { display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -22px); }
+  .sky-glyph { width: 44px; height: 44px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 10px rgb(243 154 59 / 0.9)); }
+  .sky-star .sky-label { margin-top: 6px; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; color: #f6c48f; }
+  .sky-note { position: absolute; top: 26px; left: 30px; max-width: 330px; margin: 0; font-size: 0.88rem; line-height: 1.5; color: #c4d2f0; }
+  .sky-note b { display: block; color: var(--white); font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+  .bd-chip { position: absolute; right: 28px; bottom: -28px; margin: 0; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
   .bd-chip img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+  /* The one moment of motion: the lines draw in from left to right, then the star lights up. */
+  @media (prefers-reduced-motion: no-preference) {
+    .sky-lines { animation: sky-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both; }
+    .sky-glyph { animation: sky-light 0.9s ease-out 1.5s both; }
+    @keyframes sky-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @keyframes sky-light { from { opacity: 0; transform: scale(0.4) rotate(-45deg); } to { opacity: 1; transform: none; } }
+  }
+  @media (max-width: 760px) {
+    .sky { aspect-ratio: 4 / 5; }
+    .sky-wide { display: none; }
+    .sky-tall { display: block; }
+    .sky-dot, .sky-star, .sky-node { left: var(--mx); top: var(--my); }
+    .sky-label { font-size: 0.95rem; }
+    .sky-note { position: static; max-width: none; margin-top: 16px; color: var(--muted); }
+    .sky-note b { color: var(--ink); }
+    .bd-chip { position: relative; right: auto; bottom: auto; margin: 16px 0 0; max-width: none; }
+  }
+
+  /* Where to start: plain rows that link to the right service */
+  .route-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+  .route-list a { display: flex; gap: 18px; align-items: flex-start; padding: 20px 4px; border-bottom: 1px solid var(--border); color: inherit; text-decoration: none; }
+  .route-list .icon { color: var(--primary); flex: none; margin-top: 2px; }
+  .route-list b { display: block; font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 2px; }
+  .route-list .muted { display: block; }
+  .route-list a:hover b { color: var(--primary); }
+
+  /* About: four principles as a plain list */
+  .principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .principles li { padding-left: 18px; border-left: 3px solid var(--border); }
+  .principles h3 { margin: 0 0 2px; font-size: 1.15rem; }
+  .principles p { margin: 0; }
 
   /* Service cards with an image on top, as on Boosh's "Three ways we help you grow". */
   .bd-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
@@ -167,14 +241,14 @@ const situations = [
   .bd-media img { width: 100%; height: 100%; object-fit: cover; }
   .bd-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
   .bd-body .more { margin-top: auto; }
-  .bd-tag { align-self: flex-start; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
+  .bd-tag { align-self: flex-start; font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
 
   /* Illustrated panels: floating interface cards on a soft gradient, standing in for photos still to be taken. */
   .bd-art { position: relative; width: 100%; height: 100%; overflow: hidden; }
-  .bd-art-plan { background: radial-gradient(circle at 30% 20%, #ffffff 0%, var(--tint) 45%, #b9d0ff 100%); }
-  .bd-art-ai { background: radial-gradient(circle at 70% 25%, #ffffff 0%, #e6e0ff 45%, #b9c4ff 100%); }
+  .bd-art-plan { background: var(--tint); }
+  .bd-art-ai { background: #e6e0ff; }
   .float { position: absolute; background: var(--white); border-radius: 16px; padding: 16px 18px; box-shadow: 0 18px 40px rgba(18, 35, 94, 0.16); font-size: 0.9rem; line-height: 1.4; display: flex; flex-direction: column; gap: 8px; }
-  .float .k { font-family: var(--font-head); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); }
+  .float .k { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; color: var(--primary); }
   .float b { font-family: var(--font-head); font-size: 1.05rem; }
   .float ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .float li { display: flex; gap: 8px; align-items: center; }
@@ -202,10 +276,6 @@ const situations = [
   .float b { font-size: 0.95rem; }
   .bd-art .f1 { left: 7%; top: 9%; width: 66%; }
   .bd-art .f2 { right: 6%; top: auto; bottom: 9%; width: 58%; }
-  @media (max-width: 960px) {
-    .bd-stage > img { aspect-ratio: 4 / 3; }
-    .bd-chip { position: relative; left: auto; bottom: auto; margin: -40px 16px 0; max-width: none; }
-  }
   @media (max-width: 640px) {
     .bd-hero { padding: 56px 0 64px; }
   }
