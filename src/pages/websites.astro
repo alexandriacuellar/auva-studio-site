@@ -68,7 +68,6 @@ const audiences = [
   <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Who I build for</p>
         <h2 class="mag-head">A site that fits <em>your kind of business.</em></h2>
         <p class="lede">I'm based in the Mid-Hudson Valley and build for businesses and organizations across the Hudson Valley, New York City, and anywhere in the US.</p>
       </div>
@@ -80,14 +79,14 @@ const audiences = [
             <p class="small muted">{a.who}</p>
             <p class="who-text">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Ask about my nonprofit discount.</p>}
-            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
+            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site</a>
           </div>
         ))}
         <div class="card who-other who-wide">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>Something else?</h3>
           <p>Tell me about your business or project, and I'll recommend the package that fits.</p>
-          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
+          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site</a>
         </div>
       </div>
     </div>
@@ -96,13 +95,12 @@ const audiences = [
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Every site includes</p>
         <h2 class="mag-head">Everything <em>your visitors are looking for.</em></h2>
       </div>
-      <div class="grid grid-4">
+      <div class="grid grid-4 plain-grid">
         {essentials.map((e) => (
-          <div class="card">
-            <div class="icon"><Icon name={e.icon} size={32} /></div>
+          <div>
+            <div class="icon"><Icon name={e.icon} size={28} /></div>
             <h3>{e.title}</h3>
             <p class="muted">{e.text}</p>
           </div>
@@ -114,13 +112,12 @@ const audiences = [
   <section class="alt" id="compare">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Why I build differently</p>
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
         <p class="lede">I build every site with Astro, a modern tool for fast, lightweight websites. It keeps your site fast and my prices fair.</p>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3 plain-grid">
         {comparison.benefits.map((b) => (
-          <div class="card"><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
       </div>
       <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
@@ -132,7 +129,6 @@ const audiences = [
   <section id="packages">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Packages</p>
         <h2 class="mag-head">Choose <em>the right package.</em></h2>
         <p class="lede">Each package builds on the one before it, so you only pay for what you need today.</p>
       </div>
@@ -154,7 +150,6 @@ const audiences = [
   <section class="alt" id="samples">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Sample sites</p>
         <h2 class="mag-head">See what <em>each package looks like.</em></h2>
         <p class="lede">One sample site for each package. The businesses are made up, but every page and feature works the way it would on your site, and the forms show what your visitors would see.</p>
       </div>
@@ -164,7 +159,7 @@ const audiences = [
           return (
             <a class="card sample" href={`/samples/${sm.slug}/`}>
               <Image class="sample-shot" src={sampleShots[sm.slug]} alt={`The home page of ${sm.name}, a sample ${sm.package} site`} widths={[480, 720, 960]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 380px" />
-              <span class="tag">{sm.package} · {pk?.price}</span>
+              <span class="tag">{sm.package}, {pk?.price}</span>
               <h3>{sm.name}</h3>
               <p class="muted">{sm.text}</p>
               <span class="sample-go">Visit the sample site <span aria-hidden="true">→</span></span>
@@ -178,7 +173,6 @@ const audiences = [
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Add-ons</p>
         <h2 class="mag-head">Add more <em>when you need it.</em></h2>
       </div>
       <div class="grid grid-3">
@@ -216,7 +210,6 @@ const audiences = [
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Help After Launch</p>
         <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
         <p class="lede">Choose who makes the changes. Your site has no plugins that need constant upkeep, so there's no monthly plan to pay for. Ask for updates when you need them. Sites with a Content Editing Dashboard or connected tools may need occasional upkeep, which I quote first.</p>
       </div>
@@ -259,7 +252,6 @@ const audiences = [
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How a website project runs</p>
         <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
         <p class="lede">You work directly with me from start to finish, with a short progress update every week. Your website agreement spells out every detail.</p>
       </div>

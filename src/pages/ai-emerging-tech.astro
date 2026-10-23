@@ -38,7 +38,7 @@ const glance = [
   { name: 'AI Prototype Sprint', note: 'An AI chatbot or workflow, 2–3 weeks', price: 'From $2,500' },
   { name: 'Concept & Feasibility Review', note: 'Is it doable, a rough budget, and the team it takes, about 2 weeks', price: '$650' },
   { name: 'XR Prototype Sprint', note: '4–6 weeks, with a developer partner', price: 'From $7,500' },
-  { name: 'Production Support, monthly', note: '3-month minimum', price: '10 hrs $650 · 20 hrs $1,200 · 40 hrs $2,200' },
+  { name: 'Production Support, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
   { name: 'Production Support, as needed', price: '$65/hr' },
 ];
 
@@ -68,7 +68,6 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
   <section class="alt">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Who it's for</p>
         <h2 class="mag-head">Built for teams <em>exploring what's next.</em></h2>
       </div>
       <div class="grid grid-3">
@@ -86,7 +85,6 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
   <section id="offers">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Ways to work together</p>
         <h2 class="mag-head">Start small, <em>learn fast.</em></h2>
         <p class="lede">Each offer has a clear scope and price, so you can explore without a big commitment.</p>
       </div>
@@ -100,7 +98,7 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
                 <div class="icon"><Icon name={o.icon} size={32} /></div>
                 <h3>{o.title}</h3>
                 <p class="muted">{o.text}</p>
-                <a class="more" href={`/ai-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+                <a class="more" href={`/ai-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this</a>
               </div>
             ))}
           </div>
@@ -121,26 +119,24 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
   <section class="alt" id="sprint">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How a Prototype Sprint works</p>
         <h2 class="mag-head">Test the idea <em>before you invest in it.</em></h2>
         <p class="lede">Prototypes are proofs of concept. They answer one question, use placeholder visuals, and aren't ready for public release.</p>
       </div>
-      <div class="grid grid-4">
+      <ol class="steps steps-4">
         {sprint.map((s, i) => (
-          <div class="card">
-            <p class="eyebrow">Step {i + 1}</p>
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
             <h3>{s.title}</h3>
-            <p class="muted">{s.text}</p>
-          </div>
+            <p>{s.text}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 
   <section>
     <div class="wrap about-grid">
       <div>
-        <p class="eyebrow">Experience</p>
         <h2 class="mag-head">Production experience <em>across games, XR, and interactive work.</em></h2>
         <p class="lede">I've led projects for indie game studios, XR and interactive teams, and creative organizations, managing Agile workflows, design documentation, schedules, and teams of highly creative people. That production background keeps experiments focused and grounded in what can actually ship.</p>
         <div class="stats">

@@ -30,7 +30,7 @@ const glance = [
   { name: 'Consulting or project help, as needed', price: '$65/hr' },
   { name: 'Technology Assessment', note: '3 sessions, research, and a written roadmap', price: '$650' },
   { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
-  { name: 'Fractional project leadership, monthly', note: '3-month minimum', price: '10 hrs $650 · 20 hrs $1,200 · 40 hrs $2,200' },
+  { name: 'Fractional project leadership, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
   { name: 'AI & Emerging Tech', note: 'See the AI & Emerging Tech page for details', price: 'From $500' },
 ];
 ---
@@ -52,7 +52,6 @@ const glance = [
   <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Who I work with</p>
         <h2 class="mag-head">Help that fits <em>your kind of organization.</em></h2>
       </div>
       <div class="grid grid-3 who">
@@ -62,14 +61,14 @@ const glance = [
             <h3>{a.title}</h3>
             <p class="small muted">{a.who}</p>
             <p>{a.text}</p>
-            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
           </div>
         ))}
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>Something else?</h3>
           <p>Tell me what you're working on, and I'll suggest where to start.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
         </div>
       </div>
     </div>
@@ -78,7 +77,6 @@ const glance = [
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">What I offer</p>
         <h2 class="mag-head">Three ways I help, <em>plus AI &amp; Emerging Tech.</em></h2>
       </div>
       <div class="grid grid-2">
@@ -91,7 +89,7 @@ const glance = [
               <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
               {c.id === 'ai'
                 ? <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Tech <Icon name="arrow" size={16} /></a>
-                : <a class="more" href={`/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>}
+                : <a class="more" href={`/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Ask about this</a>}
             </div>
           </div>
         ))}
@@ -102,7 +100,6 @@ const glance = [
   <section class="alt">
     <div class="wrap about-grid">
       <div>
-        <p class="eyebrow">Why Auva Studio</p>
         <h2 class="mag-head">Practical guidance <em>backed by technical and delivery experience.</em></h2>
         <p class="lede">My background spans software development, technical project management, digital products, gaming, and interactive experiences. That mix lets me look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
         <div class="stats">
@@ -121,7 +118,6 @@ const glance = [
   <section>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">What clients say</p>
         <h2 class="mag-head">Organized, dependable, and <em>easy to work with.</em></h2>
         <p class="lede">From teams I've managed projects for.</p>
       </div>
@@ -139,7 +135,6 @@ const glance = [
   <section class="alt" id="engagements">
     <div class="wrap about-grid">
       <div>
-        <p class="eyebrow">Engagements</p>
         <h2 class="mag-head">Sized to <em>what you need.</em></h2>
         <p class="lede">Every engagement starts with a free 30-minute conversation about your business, goals, and challenges. From there, I scope and quote the work before anything begins.</p>
       </div>
@@ -156,7 +151,6 @@ const glance = [
   <section id="pricing">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Pricing</p>
         <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
       </div>
       <dl class="card glance">

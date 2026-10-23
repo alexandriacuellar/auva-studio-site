@@ -27,13 +27,11 @@ const formAction = 'https://api.web3forms.com/submit';
     <div>
       {isWebsite ? (
         <>
-          <p class="eyebrow">Start your website</p>
           <h2 class="mag-head">Tell me about <em>your website.</em></h2>
           <p class="lede">Share a few details and I'll follow up personally with questions or a recommended package.</p>
         </>
       ) : (
         <>
-          <p class="eyebrow">{intro.eyebrow}</p>
           <Heading class="mag-head" set:html={intro.title} />
           <p class="lede">{intro.lede}</p>
           <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
