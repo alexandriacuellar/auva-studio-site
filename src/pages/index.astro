@@ -5,6 +5,7 @@ import Icon from '../components/Icon.astro';
 import Cta from '../components/Cta.astro';
 import { categories, journey, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
+import hero from '../assets/cover-hero-workspace.png';
 import headshot from '../assets/alexandria-cuellar.jpg';
 import siteMockup from '../assets/website-mockup-happy-tails.png';
 
@@ -15,32 +16,12 @@ const situations = [
   { title: 'You see an AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/#ai-team', icon: 'bolt' },
   { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/#xr', icon: 'layers' },
 ];
-
-// The hero star chart: the three services as points of a small constellation around Delta Virginis, the star Auva is named after.
-// Positions are percentages of the chart: x/y on wide screens, mx/my on phones (the chart is taller there).
-const pts = {
-  web: { x: 14, y: 64, mx: 22, my: 30 },
-  con: { x: 42, y: 30, mx: 72, my: 16 },
-  star: { x: 60, y: 58, mx: 50, my: 54 },
-  ai: { x: 84, y: 32, mx: 72, my: 80 },
-  m1: { x: 27, y: 84, mx: 12, my: 62 },
-  m2: { x: 93, y: 64, mx: 92, my: 50 },
-  m3: { x: 74, y: 84, mx: 28, my: 88 },
-};
-type Pt = keyof typeof pts;
-const links: [Pt, Pt][] = [['web', 'con'], ['con', 'star'], ['star', 'ai'], ['web', 'm1'], ['m1', 'star'], ['ai', 'm2'], ['star', 'm3']];
-const nodes: { id: Pt; label: string; href: string }[] = [
-  { id: 'web', label: 'Websites', href: '/websites/' },
-  { id: 'con', label: 'Consulting', href: '/technology-consulting/' },
-  { id: 'ai', label: 'AI & Emerging Tech', href: '/ai-emerging-tech/' },
-];
-const minor: Pt[] = ['m1', 'm2', 'm3'];
-const at = (k: Pt) => `--x:${pts[k].x}%;--y:${pts[k].y}%;--mx:${pts[k].mx}%;--my:${pts[k].my}%`;
 const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', 'Found on Google and AI search'];
 ---
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Websites, Consulting, and AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
       <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams. I build websites, help you choose the right tools, run your technology projects, and help you explore AI & Emerging Tech.</p>
       <div class="hero-actions">
@@ -48,24 +29,12 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-      <figure class="sky-wrap">
-        <div class="sky" role="group" aria-label="The three services as a small constellation around Delta Virginis">
-          {(['wide', 'tall'] as const).map((v) => (
-            <svg class={`sky-lines sky-${v}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              {links.map(([a, b]) => v === 'wide'
-                ? <line x1={pts[a].x} y1={pts[a].y} x2={pts[b].x} y2={pts[b].y} vector-effect="non-scaling-stroke" />
-                : <line x1={pts[a].mx} y1={pts[a].my} x2={pts[b].mx} y2={pts[b].my} vector-effect="non-scaling-stroke" />)}
-            </svg>
-          ))}
-          {minor.map((k) => <span class="sky-dot" style={at(k)} aria-hidden="true"></span>)}
-          <span class="sky-star" style={at('star')}><span class="sky-glyph" aria-hidden="true"></span><span class="sky-label">Delta Virginis</span></span>
-          {nodes.map((n) => <a class="sky-node" href={n.href} style={at(n.id)}><span class="sky-pt" aria-hidden="true"></span><span class="sky-label">{n.label}</span></a>)}
-        </div>
-        <figcaption class="sky-note"><b>What's in a name?</b> Auva takes its name from Delta Virginis, a red giant star in the constellation Virgo, about 198 light-years from Earth. A little inspiration from the stars, a little curiosity about what's possible.</figcaption>
-        <p class="bd-chip">
+      <figure class="bd-stage">
+        <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
+        <figcaption class="bd-chip">
           <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
           <span><b>Hi, I'm Alexandria.</b> You'll work with me directly, from the first call to handover.</span>
-        </p>
+        </figcaption>
       </figure>
     </div>
   </section>
@@ -160,14 +129,21 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
           </li>
         ))}
       </ol>
-      <p style="margin-top: 28px"><a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a></p>
+      <div class="work-foot">
+        <p><a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a></p>
+        <div class="name-note">
+          <h3><span class="name-star" aria-hidden="true"></span>What's in a name?</h3>
+          <p class="muted">Auva takes its name from Delta Virginis, a red giant star in the constellation Virgo, about 198 light-years from Earth. It's the amber star at the end of every set of steps on this site.</p>
+          <p class="name-line">A little inspiration from the stars, a little curiosity about what's possible.</p>
+        </div>
+      </div>
     </div>
   </section>
   <Cta />
 </Base>
 
 <style>
-  /* Home hero: headline and buttons over a star chart of the three services. */
+  /* Home hero: centered headline and buttons over a big photo stage. */
   .bd-hero { padding: 80px 0 96px; }
   .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
   .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
@@ -178,48 +154,20 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
   @media (max-width: 640px) { .hero-strip { display: grid; grid-template-columns: auto auto; justify-content: center; text-align: left; font-size: 0.88rem; gap: 6px 16px; } }
   .bd-hero h1 { max-width: 15ch; }
 
-  /* The star chart. Points sit at --x/--y (wide) or --mx/--my (phones); lines are drawn in the SVG underneath. */
-  .sky-wrap { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; text-align: left; }
-  .sky { position: relative; aspect-ratio: 2 / 1; border-radius: 28px; overflow: hidden; background-color: var(--night);
-    background-image: radial-gradient(circle at 8% 22%, rgb(255 255 255 / 0.5) 0 1px, transparent 2px), radial-gradient(circle at 22% 12%, rgb(255 255 255 / 0.35) 0 1px, transparent 2px),
-      radial-gradient(circle at 33% 52%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px), radial-gradient(circle at 51% 16%, rgb(255 255 255 / 0.45) 0 1px, transparent 2px),
-      radial-gradient(circle at 66% 30%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px), radial-gradient(circle at 79% 60%, rgb(255 255 255 / 0.4) 0 1px, transparent 2px),
-      radial-gradient(circle at 88% 14%, rgb(255 255 255 / 0.35) 0 1px, transparent 2px), radial-gradient(circle at 46% 90%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px),
-      radial-gradient(circle at 96% 86%, rgb(255 255 255 / 0.4) 0 1px, transparent 2px), radial-gradient(circle at 4% 70%, rgb(255 255 255 / 0.3) 0 1px, transparent 2px); }
-  .sky-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .sky-lines line { stroke: rgb(196 210 240 / 0.45); stroke-width: 1.5; stroke-linecap: round; }
-  .sky-tall { display: none; }
-  .sky-dot, .sky-star, .sky-node { position: absolute; left: var(--x); top: var(--y); }
-  .sky-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #c4d2f0; }
-  .sky-node { display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -7px); color: var(--white); text-decoration: none; }
-  .sky-pt { width: 14px; height: 14px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 5px rgb(255 255 255 / 0.14); transition: box-shadow 0.2s, transform 0.2s; }
-  .sky-label { margin-top: 10px; padding: 0 6px; border-radius: 6px; background: var(--night); white-space: nowrap; font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; }
-  .sky-node:hover .sky-pt, .sky-node:focus-visible .sky-pt { transform: scale(1.25); box-shadow: 0 0 0 8px rgb(255 255 255 / 0.2); }
-  .sky-node:hover .sky-label, .sky-node:focus-visible .sky-label { text-decoration: underline; text-underline-offset: 4px; }
-  .sky-star { display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -22px); }
-  .sky-glyph { width: 44px; height: 44px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 10px rgb(243 154 59 / 0.9)); }
-  .sky-star .sky-label { margin-top: 6px; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; color: #f6c48f; }
-  .sky-note { position: absolute; top: 26px; left: 30px; max-width: 330px; margin: 0; font-size: 0.88rem; line-height: 1.5; color: #c4d2f0; }
-  .sky-note b { display: block; color: var(--white); font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
-  .bd-chip { position: absolute; right: 28px; bottom: -28px; margin: 0; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
+  .bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
+  .bd-stage > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; object-position: center 72%; border-radius: 28px; box-shadow: var(--shadow-strong); }
+  .bd-chip { position: absolute; left: 28px; bottom: -28px; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
   .bd-chip img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
-  /* The one moment of motion: the lines draw in from left to right, then the star lights up. */
-  @media (prefers-reduced-motion: no-preference) {
-    .sky-lines { animation: sky-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both; }
-    .sky-glyph { animation: sky-light 0.9s ease-out 1.5s both; }
-    @keyframes sky-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-    @keyframes sky-light { from { opacity: 0; transform: scale(0.4) rotate(-45deg); } to { opacity: 1; transform: none; } }
+  @media (max-width: 960px) {
+    .bd-stage > img { aspect-ratio: 4 / 3; }
+    .bd-chip { position: relative; left: auto; bottom: auto; margin: -40px 16px 0; max-width: none; }
   }
-  @media (max-width: 760px) {
-    .sky { aspect-ratio: 4 / 5; }
-    .sky-wide { display: none; }
-    .sky-tall { display: block; }
-    .sky-dot, .sky-star, .sky-node { left: var(--mx); top: var(--my); }
-    .sky-label { font-size: 0.95rem; }
-    .sky-note { position: static; max-width: none; margin-top: 16px; color: var(--muted); }
-    .sky-note b { color: var(--ink); }
-    .bd-chip { position: relative; right: auto; bottom: auto; margin: 16px 0 0; max-width: none; }
-  }
+
+  /* How I work: the book button, and the note on the studio's name beside it */
+  .work-foot { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 28px 48px; }
+  .work-foot > p { margin: 0; }
+  .work-foot .name-note { max-width: 520px; margin: 0; padding: 0; }
+  .name-star { width: 18px; height: 18px; flex: none; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
 
   /* Where to start: plain rows that link to the right service */
   .route-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
