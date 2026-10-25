@@ -17,6 +17,8 @@ export function GET() {
     '',
     '## Website Services',
     '- Website Diagnostic ($199, credited toward a new website): a review of an existing site for usability, mobile, search, and performance.',
+    '- Google Business Profile Setup ($500, one-time): create or claim the profile, add business details, categories, services, hours, and photos, and help with verification. $150 credited toward a website within 6 months.',
+    '- Google Business Profile Optimization ($500, one-time): review an existing profile and improve its categories, description, services, attributes, photos, and website links. $150 credited toward a website within 6 months.',
     ...packages.map((p) => `- ${p.name} (${p.price}): ${p.blurb}`),
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     '- Brand Essentials ($1,000): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.',
