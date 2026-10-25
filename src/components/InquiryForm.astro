@@ -35,7 +35,7 @@ const replyLine = 'I read every message personally and reply within 24–48 hour
 const websiteIntro = ({
   website: { title: 'Tell me about <em>your website.</em>', lede: "Share a few details and I'll follow up personally with questions or a recommended package.", next: `${replyLine} You'll get a short written agreement with your package, price, and schedule before anything begins.` },
   diagnostic: { title: 'Tell me about <em>your current site.</em>', lede: "Share your website address and anything that's bothering you about it.", next: `${replyLine} I confirm the details and send a payment link. Your report arrives within 5 business days of payment.` },
-  gbp: { title: 'Tell me about <em>your profile.</em>', lede: "Share your business name and whether you already have a profile. I'll tell you which option fits.", next: `${replyLine} I confirm which option fits and the price before any work begins.` },
+  gbp: { title: 'Tell me about <em>your profile.</em>', lede: "Share your business name and whether you already have a profile. I'll tell you which option fits.", next: `${replyLine} I confirm which option fits, then send a payment link. Work starts once it's paid.` },
   care: { title: 'What would you like <em>changed?</em>', lede: 'Tell me what to update, or ask how updates work.', next: `${replyLine} If a request will take longer than about 30 minutes, I tell you the price first.` },
   brand: { title: 'Tell me about <em>your brand.</em>', lede: "Share a bit about your business and the look you're after. I'll follow up with questions.", next: `${replyLine} I confirm the details and price before any work begins.` },
 } as Record<string, { title: string; lede: string; next: string }>)[topic] ?? null;
