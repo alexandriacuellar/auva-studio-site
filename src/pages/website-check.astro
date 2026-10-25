@@ -180,6 +180,8 @@ const choices = [
 
 <style>
   .check-wrap { max-width: 820px; }
+  /* The grid rule on .results would otherwise override the hidden attribute. */
+  [hidden] { display: none !important; }
   .check-list { list-style: none; counter-reset: q; margin: 0; padding: 0; display: grid; gap: 8px; }
   .check-list li { counter-increment: q; padding: 18px 0; border-bottom: 1px solid var(--border); }
   .check-list li:last-child { border-bottom: 0; }
