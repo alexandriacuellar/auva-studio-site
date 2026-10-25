@@ -5,7 +5,7 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, addons, process, care, packages, samples, site, testimonials, serviceSchema } from '../data/site';
+import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
@@ -21,7 +21,7 @@ const faqs = [
   { q: 'How long does a website take?', a: 'Essential Presence takes 2–3 weeks, Expanded Presence 3–5 weeks, and Complete Presence 6+ weeks. The timeline starts once you sign your website agreement, pay the deposit, and send me your content, like your text, photos, and logo. The sooner I have everything, the sooner your site goes live.' },
   { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
   { q: 'Do I need my copy and photos ready?', a: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs." },
-  { q: 'Can I update the site myself?', a: "Yes. A Content Editing Dashboard, also called a CMS (from $1,750, included in Complete Presence), lets you change your page text, photos, and collections like news or events, with no code. The starting price includes 2 collections; more are quoted first. Or send changes to me: $50 per update (up to about 30 minutes of edits, sent together in one request), or 5 for $200 used within 12 months. Most updates are done within 2 business days." },
+  { q: 'Can I update the site myself?', a: "Yes. A Content Editing Dashboard, also called a CMS (from $1,750, included in Complete Presence), lets you change your page text, photos, and collections like news or events, with no code. The starting price includes 2 collections; more are quoted first. Or send changes to me: $50 per update (up to about 30 minutes of edits, sent together in one request), or a pack of 5 updates for $200, used within 12 months. Most updates are done within 2 business days." },
   { q: 'Do you do SEO, AEO, and GEO?', a: "Yes, in every package. SEO (search engine optimization) helps you show up on Google. AEO and GEO (answer and generative engine optimization) help AI tools like ChatGPT and Google's AI Overviews find and mention your business. I set up clear page titles, structured data (schema), a sitemap, and fast pages from the start. Astro sites usually score well on Core Web Vitals, Google's measures of speed and stability, and I share your PageSpeed scores at launch." },
   { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
   { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I can move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included; large blogs or catalogs are quoted separately. Not sure whether to fix or rebuild? Start with a Website Diagnostic." },
@@ -209,7 +209,7 @@ const audiences = [
           <div class="icon"><Icon name="wrench" size={36} /></div>
           <h3>I update it for you</h3>
           <p class="muted">Send me what to change and I take care of it.</p>
-          <p><b style="color: var(--primary)">{care[0].price}</b></p>
+          <p><b style="color: var(--primary)">$50 per update, or a pack of 5 for $200</b></p>
         </div>
         <div class="card">
           <div class="icon"><Icon name="gear" size={36} /></div>

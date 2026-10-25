@@ -6,9 +6,9 @@ import Faq from '../../components/Faq.astro';
 import { brandEssentials, serviceSchema } from '../../data/site';
 
 const steps = [
-  { title: 'Get to know you', text: 'We talk about your business, your customers, and the styles you like and don’t.' },
-  { title: 'Two concepts', text: 'I design two logo directions for you to compare.' },
-  { title: 'Refine your pick', text: 'Two revision rounds on the one you choose, plus colors and fonts to match.' },
+  { title: 'Get to know you', text: 'I learn about your business, your customers, and the styles you like and don’t, then brief the designer.' },
+  { title: 'Two concepts', text: 'The designer creates two logo directions for you to compare.' },
+  { title: 'Refine your pick', text: 'Two revision rounds on the one you choose, plus colors and fonts to match. I pass along your feedback and keep it on schedule.' },
   { title: 'Get your files', text: 'Your logo files, favicon, and a one-page brand reference sheet, ready for web and print.' },
 ];
 
@@ -41,7 +41,7 @@ const schema = serviceSchema([
       <div class="grid grid-2">
         <div>
           <h2 class="mag-head">What's included.</h2>
-          <p class="lede">Everything you need to look the same on your website, your sign, and your business cards.</p>
+          <p class="lede">Everything you need to look the same on your website, your sign, and your business cards. I work with a professional designer I trust and manage the project for you, so your brand and website come together.</p>
         </div>
         <ul class="ticks">
           {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
