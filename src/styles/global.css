@@ -152,6 +152,11 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 .band .price { color: var(--white); }
 .band .btn { background: var(--white); color: var(--primary); border-color: var(--white); }
 .band .btn:hover { background: var(--tint); }
+/* A band's buttons: the form, its own page, and a free check when there is one. */
+.band-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.band .btn-ghost { background: transparent; color: var(--white); border-color: rgb(255 255 255 / 0.6); }
+.band .btn-ghost:hover { background: rgb(255 255 255 / 0.12); color: var(--white); }
+.band .band-check { flex-basis: 100%; justify-content: center; }
 
 /* CTA */
 .cta { background: var(--ink); color: var(--white); text-align: center; }
