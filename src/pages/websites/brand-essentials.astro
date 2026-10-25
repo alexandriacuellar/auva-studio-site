@@ -3,7 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
-import { brandEssentials, serviceSchema } from '../../data/site';
+import PayBar from '../../components/PayBar.astro';
+import { brandEssentials, serviceSchema, site } from '../../data/site';
 
 const steps = [
   { title: 'Get to know you', text: 'I learn about your business, your customers, and the styles you like and don’t, then brief the designer.' },
@@ -29,11 +30,12 @@ const schema = serviceSchema([
     <div class="wrap bd-hero-inner">
       <a class="bd-pill" href="/websites/">Website Services</a>
       <h1 class="mag-head">A look that's <em>clearly yours.</em></h1>
-      <p class="lede">A recognizable, consistent visual identity that makes a strong first impression, ready for your website and beyond.</p>
+      <p class="lede">A logo, colors, and fonts made for your business by a professional designer, so you look polished and consistent everywhere: your website, your sign, and your cards.</p>
       <div class="hero-actions">
-        <a class="btn" href="#start">Ask about Brand Essentials</a>
-        <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
+        <a class="btn" href="#start">Start my brand, $1,000</a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Not sure? Book a free call <Icon name="arrow" size={18} /></a>
       </div>
+      <p class="hero-note">Flat rate. Logo, colors, fonts, and files you own. On its own, or with any website package.</p>
     </div>
   </section>
 
@@ -78,7 +80,7 @@ const schema = serviceSchema([
         <div>
           <p class="price" style="font-size: 4rem">$1,000</p>
           <p>Flat rate. On its own, or with any website package.</p>
-          <a class="btn" href="#start">Ask about Brand Essentials</a>
+          <a class="btn" href="#start">Start my brand</a>
         </div>
       </div>
     </div>
@@ -86,4 +88,5 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="website" topic="brand" />
+  <PayBar label="Start my brand, $1,000" />
 </Base>

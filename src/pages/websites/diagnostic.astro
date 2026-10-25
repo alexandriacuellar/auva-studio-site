@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
+import PayBar from '../../components/PayBar.astro';
 import { serviceSchema } from '../../data/site';
 
 const checks = [
@@ -45,11 +46,12 @@ const schema = serviceSchema([
     <div class="wrap bd-hero-inner">
       <a class="bd-pill" href="/websites/">Website Services</a>
       <h1 class="mag-head">Find out what's holding <em>your website back.</em></h1>
-      <p class="lede">Already have a website? I check how it works on phones, how fast it loads, how easily people find you on Google, and what to fix first. It works for any site, whoever built it.</p>
+      <p class="lede">Stop guessing. I review your site the way your customers see it and send a plain-English report with what to fix first. Works for any site, whoever built it.</p>
       <div class="hero-actions">
-        <a class="btn" href="#start">Request a Diagnostic</a>
-        <a class="btn btn-ghost" href="/website-check/">Take the free website check <Icon name="arrow" size={18} /></a>
+        <a class="btn" href="#start">Get my Diagnostic, $199</a>
+        <a class="btn btn-ghost" href="/website-check/">Not sure? Try the free check <Icon name="arrow" size={18} /></a>
       </div>
+      <p class="hero-note">Pay by secure link once I confirm. Report within 5 business days. Credited toward a new website with me.</p>
     </div>
   </section>
 
@@ -105,13 +107,13 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="band">
         <div>
-          <h2>Website Diagnostic</h2>
-          <p>A short report with what to fix first, in order. It's yours to use with any developer.</p>
+          <h2>Know exactly what to fix.</h2>
+          <p>Your fixes in order, with who can make each one and about how long it takes. Yours to use with any developer, or on your own.</p>
         </div>
         <div>
           <p class="price" style="font-size: 4rem">$199</p>
           <p>Credited toward your new website with me.</p>
-          <a class="btn" href="#start">Request a Diagnostic</a>
+          <a class="btn" href="#start">Get my Diagnostic</a>
         </div>
       </div>
     </div>
@@ -119,4 +121,5 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="website" topic="diagnostic" />
+  <PayBar label="Get my Diagnostic, $199" />
 </Base>

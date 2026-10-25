@@ -1,0 +1,25 @@
+---
+// A service band with two clear routes: try the free check first, or go straight to the paid service.
+import Icon from './Icon.astro';
+
+interface Door { label: string; title: string; text: string; href: string; cta: string }
+interface Props { id?: string; eyebrow: string; title: string; text: string; free: Door; paid: Door; style?: string }
+const { id, eyebrow, title, text, free, paid, style } = Astro.props;
+---
+<div class="band path-band" id={id} style={style}>
+  <div>
+    <p class="eyebrow" style="color: var(--tint)">{eyebrow}</p>
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+  <div class="doors">
+    {[free, paid].map((d, i) => (
+      <a class:list={['door', { 'door-free': i === 0 }]} href={d.href}>
+        <span class="door-label">{d.label}</span>
+        <span class="door-title">{d.title}</span>
+        <span class="door-text">{d.text}</span>
+        <span class="door-cta">{d.cta} <Icon name="arrow" size={18} /></span>
+      </a>
+    ))}
+  </div>
+</div>

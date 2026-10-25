@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import PathBand from '../components/PathBand.astro';
 import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -245,36 +246,22 @@ const audiences = [
 
   <section id="diagnostic">
     <div class="wrap">
-      <div class="band">
-        <div>
-          <p class="eyebrow" style="color: var(--tint)">Already have a website?</p>
-          <h2>Website Diagnostic</h2>
-          <p>I check how your site works on phones, how easily people find you on Google, how fast it loads, and what to fix first.</p>
-        </div>
-        <div>
-          <p class="price" style="font-size: 4rem">$199</p>
-          <p>Credited toward your new website with me.</p>
-          <div class="band-actions">
-            <a class="btn" href="/website-check/">Check your website free in 2 minutes</a>
-            <a class="btn btn-ghost" href="/websites/diagnostic/">See what the Diagnostic covers</a>
-          </div>
-        </div>
-      </div>
-      <div class="band" id="google-business-profile" style="margin-top: 24px">
-        <div>
-          <p class="eyebrow" style="color: var(--tint)">Want to show up on Google Maps?</p>
-          <h2>Google Business Profile</h2>
-          <p>Your profile is often the first thing people see when they search for you. I set up a new one or improve the one you have, so your hours, services, photos, and website link are right.</p>
-        </div>
-        <div>
-          <p class="price" style="font-size: 4rem">$500</p>
-          <p>Setup or optimization, one time. $150 credited toward a website with me within 6 months.</p>
-          <div class="band-actions">
-            <a class="btn" href="/google-profile-check/">Check your Google profile free in 2 minutes</a>
-            <a class="btn btn-ghost" href="/websites/google-business-profile/">See what setup and optimization include</a>
-          </div>
-        </div>
-      </div>
+      <PathBand
+        eyebrow="Already have a website?"
+        title="Find out what's costing you customers."
+        text="Phones, speed, Google search, and first impressions: what's working, what isn't, and what to fix first."
+        free={{ label: 'Not sure yet?', title: 'Free website check', text: '10 quick questions. Your score and top fixes right away, no email needed.', href: '/website-check/', cta: 'Start the free check' }}
+        paid={{ label: 'Want the full picture?', title: 'Website Diagnostic, $199', text: 'A plain-English report with your fixes in order, within 5 business days. Credited toward a new site.', href: '/websites/diagnostic/', cta: 'Get the Diagnostic' }}
+      />
+      <PathBand
+        id="google-business-profile"
+        style="margin-top: 24px"
+        eyebrow="Have local customers?"
+        title="Get found on Google Maps."
+        text="It's often the first thing people see when they search for you. Wrong hours or a thin profile send them to someone else."
+        free={{ label: 'Not sure yet?', title: 'Free Google profile check', text: 'Your score and top fixes right away, or simple setup steps if you have no profile yet.', href: '/google-profile-check/', cta: 'Start the free check' }}
+        paid={{ label: 'Rather have me do it?', title: 'Setup or optimization, $500', text: 'One time, with a guide for keeping it current. $150 credited toward a website.', href: '/websites/google-business-profile/', cta: 'Get it done for you' }}
+      />
     </div>
   </section>
 

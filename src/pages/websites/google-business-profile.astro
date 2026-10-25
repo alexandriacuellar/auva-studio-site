@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
+import PayBar from '../../components/PayBar.astro';
 import { serviceSchema } from '../../data/site';
 
 const offers = [
@@ -39,12 +40,13 @@ const schema = serviceSchema([
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <a class="bd-pill" href="/websites/">Website Services</a>
-      <h1 class="mag-head">Show up right <em>on Google Maps.</em></h1>
-      <p class="lede">Your Google Business Profile is often the first thing people see when they search for you. I set up a new one or improve the one you have, so your hours, services, photos, and website link are right.</p>
+      <h1 class="mag-head">Get found <em>on Google Maps.</em></h1>
+      <p class="lede">Your Google Business Profile is often the first thing people see when they search for you. I set up a new one or fix the one you have, so the right customers find you and call.</p>
       <div class="hero-actions">
-        <a class="btn" href="#start">Ask about your profile</a>
-        <a class="btn btn-ghost" href="/google-profile-check/">Take the free Google profile check <Icon name="arrow" size={18} /></a>
+        <a class="btn" href="#start">Get started, $500</a>
+        <a class="btn btn-ghost" href="/google-profile-check/">Not sure? Try the free check <Icon name="arrow" size={18} /></a>
       </div>
+      <p class="hero-note">One time, no monthly plan. Pay by secure link once I confirm which option fits. Your profile stays in your name.</p>
     </div>
   </section>
 
@@ -62,7 +64,7 @@ const schema = serviceSchema([
             <p class="price">{o.price}</p>
             <p class="muted">{o.who}</p>
             <ul class="ticks">{o.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-            <a class="btn" href="#start">Start with {o.name.toLowerCase()}</a>
+            <a class="btn" href="#start">Get {o.name.toLowerCase()}, {o.price}</a>
           </div>
         ))}
       </div>
@@ -112,4 +114,5 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="website" topic="gbp" />
+  <PayBar label="Get started, $500" />
 </Base>

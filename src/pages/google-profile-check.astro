@@ -38,6 +38,7 @@ const choices = [
       <p class="bd-pill">Free Google profile check</p>
       <h1 class="mag-head">Is your Google profile <em>working for you?</em></h1>
       <p class="lede">Answer a few quick questions about your Google Business Profile. It takes about 2 minutes, and you'll see your score and what to fix first right away.</p>
+      <p class="hero-note">Free. No email needed. Includes a free PDF guide you can keep.</p>
     </div>
   </section>
 
@@ -102,9 +103,19 @@ const choices = [
           <a class="btn btn-ghost" id="guide-link" href="/downloads/google-business-profile-guide.pdf" download>Download the free guide (PDF)</a>
         </div>
 
+        <div class="card offer-card no-print">
+          <p class="eyebrow">Rather have me do it?</p>
+          <h3 id="offer-title">Google Business Profile Optimization</h3>
+          <p class="price">$500</p>
+          <p class="muted" id="offer-text">I fix everything this check flagged, and more: categories, description, services, photos, and links. One time, no monthly plan, and you get a guide for keeping it current. $150 credited toward a website with me.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/websites/google-business-profile/" id="offer-link">Get it done for you</a>
+          </div>
+        </div>
+
         <div class="card no-print">
-          <h3>Rather have me do it?</h3>
-          <p class="muted">Send me your answers and I'll reply personally with what I'd do. Google Business Profile setup or optimization is $500, one time, and you keep ownership. This is optional.</p>
+          <h3>Send me your answers</h3>
+          <p class="muted">I'll reply personally with what I'd do first. Free and optional.</p>
           <form action="https://api.web3forms.com/submit" method="POST" class="inquiry" id="send">
             <input type="hidden" name="access_key" value={site.web3formsKey} />
             <input type="hidden" name="subject" value="New Google profile check from auvastudio.com" />
@@ -120,6 +131,7 @@ const choices = [
               <label>Business or organization<input name="business" autocomplete="organization" required /></label>
               <label><span>Town <span class="opt">(optional)</span></span><input name="town" autocomplete="address-level2" /></label>
             </div>
+            <label class="opt-in"><input type="checkbox" name="wants_service" value="Yes, send a payment link for the $500 profile service" /><span id="opt-in-text">I'd like you to optimize my profile for $500. Send me a payment link.</span></label>
             <button class="btn" type="submit">Send my answers</button>
             <p class="form-status" role="status" aria-live="polite"></p>
           </form>
@@ -149,8 +161,8 @@ const choices = [
 
   const bands = [
     { min: 16, title: 'Your profile is in <em>good shape.</em>', text: "Keep up the monthly routine below. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
-    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
-    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
+    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
   ];
   const setupResult = {
     no: { title: "Let's get you <em>on the map.</em>", text: 'A profile is free and often the first thing people see. Follow the steps below, or have me set it up: Google Business Profile Setup is $500, one time.' },
@@ -214,10 +226,16 @@ const choices = [
       document.getElementById('score-line').hidden = true;
       document.getElementById('band-title').innerHTML = r.title;
       document.getElementById('band-text').textContent = r.text;
-      setActions([['Have me set it up', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]]);
+      setActions([['Have me set it up, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]]);
       send.score.value = 'No profile yet';
       send.answers.value = `Has a profile: ${path === 'no' ? 'No' : 'Not sure'}`;
     }
+    const isSetup = path !== 'yes';
+    document.getElementById('offer-title').textContent = isSetup ? 'Google Business Profile Setup' : 'Google Business Profile Optimization';
+    document.getElementById('offer-text').textContent = isSetup
+      ? "Skip the setup steps. I create or claim your profile, add your details, services, hours, and photos, and help you through Google's verification. One time, no monthly plan, and you get a guide for keeping it current. $150 credited toward a website with me."
+      : 'I fix everything this check flagged, and more: categories, description, services, photos, and links. One time, no monthly plan, and you get a guide for keeping it current. $150 credited toward a website with me.';
+    document.getElementById('opt-in-text').textContent = `I'd like you to ${isSetup ? 'set up' : 'optimize'} my profile for $500. Send me a payment link.`;
     document.getElementById('setup-card').hidden = path === 'yes';
     // The setup card has its own download button, so show one link per path.
     document.getElementById('guide-link').hidden = path !== 'yes';
@@ -243,7 +261,7 @@ const choices = [
       const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
       if (!res.success) throw new Error(res.message);
       window.auvaConvert?.('form');
-      status.textContent = "Thanks! I'll look at your answers and reply within 24–48 hours.";
+      status.textContent = send.wants_service.checked ? "Thanks! I'll confirm the details and send your payment link within 24–48 hours." : "Thanks! I'll look at your answers and reply within 24–48 hours.";
       btn.hidden = true;
     } catch {
       status.textContent = 'Something went wrong. Please email me instead.';
