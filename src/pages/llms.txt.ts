@@ -23,6 +23,7 @@ export function GET() {
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     '- Brand Essentials ($1,000): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.',
     `- Free website check (${site.url}/website-check/): 10 quick questions with an instant score and what to fix first.`,
+    `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- Help After Launch, ${c.name} (${c.price}): ${c.text}`),
     '',
     '## Consulting & Project Support',

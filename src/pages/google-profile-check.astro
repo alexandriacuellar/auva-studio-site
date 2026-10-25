@@ -1,0 +1,289 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+// Free Google Business Profile check. Scoring runs in the browser; answers are sent only if the visitor chooses to.
+// The first question decides the path: no profile yet shows setup steps, an existing profile gets the 10 scored questions.
+const questions = [
+  { q: 'Have you verified your profile, and can you sign in to edit it?', tip: "If someone else set it up, ask them to add you as an owner, or request access from Google. You can't fix what you can't edit." },
+  { q: 'Is your business name exactly as it appears on your sign, with no towns or services added?', tip: 'Extra words in the name can get a profile suspended. Use your real name only.' },
+  { q: 'Does your main category match what most customers hire you for?', tip: 'Your main category matters most. Pick the closest one from Google\'s list, then add a few more for your other main services.' },
+  { q: 'Are your hours, phone number, and website link correct, including holiday hours?', tip: 'Wrong hours send people to a locked door. Add special hours before each holiday.' },
+  { q: 'Have you listed your services or products?', tip: 'List each one with a short line, and a price if you share prices. It helps Google match you to the right searches.' },
+  { q: 'Does your description say what you do, who you help, and where?', tip: 'Use plain words, up to about 750 characters. Skip links and phone numbers in the description.' },
+  { q: 'Have you added at least 5 real photos in the last few months?', tip: 'Show your work, your team, and your space. Phone photos in good light are fine; skip stock photos.' },
+  { q: 'Do you have recent reviews, and do you reply to them?', tip: 'Ask happy customers in person and send your review link. Reply to every review in a sentence or two, good or bad.' },
+  { q: 'Do your name, address, and phone match your website, Facebook, and other listings?', tip: 'When your details match everywhere, Google trusts them. Fix any old address or number you find.' },
+  { q: 'Do you check your profile at least once a month?', tip: 'Anyone can suggest edits to your profile, and Google sometimes applies them. A monthly look catches wrong changes and new questions.' },
+];
+const setupSteps = [
+  'Search your business name on Google Maps. If a listing already exists, choose "Own this business?" to claim it instead of making a new one.',
+  'Go to google.com/business and sign in with a Google account you\'ll keep, ideally your business email.',
+  'Enter your business name exactly as it appears on your sign, and pick the category that best fits what you do.',
+  'Add your address if customers visit you. If you go to them, hide your address and list the towns you serve.',
+  'Add your phone number and website, then verify your business. Google may ask for a short video, a call or text, an email, or a postcard.',
+  'Once verified, add your hours, services, a short description, and at least 5 real photos.',
+];
+const monthly = ['Reply to new reviews', 'Add 2 or 3 new photos', 'Check your hours, phone, and website link', 'Add holiday hours ahead of time', 'Approve or reject suggested edits', 'Answer new questions'];
+const choices = [
+  { label: 'Yes', value: 2 },
+  { label: 'Not sure', value: 1 },
+  { label: 'No', value: 0 },
+];
+---
+<Base title="Free Google Profile Check" description="Answer a few quick questions about your Google Business Profile and see what to fix first, or how to set one up.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Free Google profile check</p>
+      <h1 class="mag-head">Can people find you <em>on Google Maps?</em></h1>
+      <p class="lede">Your Google Business Profile is often the first thing people see before they call. Answer a few quick questions and you'll get steps for your situation right away.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap check-wrap">
+      <form class="card check" id="check" novalidate>
+        <fieldset class="gate">
+          <legend>Does your business already have a Google Business Profile?</legend>
+          <div class="choices">
+            <label><input type="radio" name="has" value="yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="has" value="unsure" /><span>Not sure</span></label>
+            <label><input type="radio" name="has" value="no" /><span>No</span></label>
+          </div>
+        </fieldset>
+        <ol class="check-list" id="profile-questions" hidden>
+          {questions.map((item, i) => (
+            <li>
+              <fieldset>
+                <legend>{item.q}</legend>
+                <div class="choices">
+                  {choices.map((c) => (
+                    <label><input type="radio" name={`q${i}`} value={c.value} /><span>{c.label}</span></label>
+                  ))}
+                </div>
+              </fieldset>
+            </li>
+          ))}
+        </ol>
+        <div class="check-foot">
+          <p class="muted small" id="progress" aria-live="polite">Start with the first question.</p>
+          <button class="btn" type="submit">See my next steps</button>
+        </div>
+      </form>
+
+      <div class="results" id="results" hidden tabindex="-1">
+        <div class="card score-card">
+          <p class="eyebrow" id="result-eyebrow">Your score</p>
+          <p class="score" id="score-line"><span id="score">0</span><span class="out">/20</span></p>
+          <h2 class="mag-head" id="band-title"></h2>
+          <p class="lede" id="band-text"></p>
+          <div class="hero-actions" id="band-actions"></div>
+        </div>
+
+        <div class="card" id="setup-card" hidden>
+          <h3>How to set up your profile</h3>
+          <ol class="steps-list">{setupSteps.map((s) => <li>{s}</li>)}</ol>
+          <p class="muted small">Setup takes about 30 minutes once you have your details and photos ready. Verification can take a few days.</p>
+        </div>
+
+        <div class="card" id="tips-card" hidden>
+          <h3>What to fix first</h3>
+          <ul class="tips" id="tips"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Your 15-minute monthly routine</h3>
+          <p class="muted">Once a month is enough for most small businesses. Search your business name on Google while signed in to edit your profile from the results.</p>
+          <ul class="ticks">{monthly.map((m) => <li><Icon name="tick" size={18} />{m}</li>)}</ul>
+          <p class="small"><button type="button" class="link-btn" id="print">Print or save these steps as a PDF</button></p>
+        </div>
+
+        <div class="card no-print">
+          <h3>Rather have me do it?</h3>
+          <p class="muted">Send me your answers and I'll reply personally with what I'd do. Google Business Profile setup or optimization is $500, one time, and you keep ownership. This is optional.</p>
+          <form action="https://api.web3forms.com/submit" method="POST" class="inquiry" id="send">
+            <input type="hidden" name="access_key" value={site.web3formsKey} />
+            <input type="hidden" name="subject" value="New Google profile check from auvastudio.com" />
+            <input type="hidden" name="from_name" value="Auva Studio website" />
+            <input type="hidden" name="score" />
+            <input type="hidden" name="answers" />
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="form-row">
+              <label>Name<input name="name" autocomplete="name" required /></label>
+              <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+            </div>
+            <div class="form-row">
+              <label>Business or organization<input name="business" autocomplete="organization" required /></label>
+              <label><span>Town <span class="opt">(optional)</span></span><input name="town" autocomplete="address-level2" /></label>
+            </div>
+            <button class="btn" type="submit">Send my answers</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <p class="small muted no-print"><a href="#check" id="retake">Change my answers</a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ questions, booking: site.booking }}>
+  const form = document.getElementById('check');
+  const progress = document.getElementById('progress');
+  const results = document.getElementById('results');
+  const list = document.getElementById('profile-questions');
+  const total = questions.length;
+  const has = () => form.querySelector('input[name="has"]:checked')?.value;
+  const answered = () => questions.filter((_, i) => form.querySelector(`input[name="q${i}"]:checked`)).length;
+  const update = () => {
+    list.hidden = has() !== 'yes';
+    if (!has()) progress.textContent = 'Start with the first question.';
+    else if (has() === 'yes') progress.textContent = `${answered()} of ${total} answered`;
+    else progress.textContent = "That's all I need. See your next steps.";
+  };
+  form.addEventListener('change', update);
+
+  const bands = [
+    { min: 16, title: 'Your profile is in <em>good shape.</em>', text: "Keep up the monthly routine below. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]] },
+    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]] },
+  ];
+  const setupResult = {
+    no: { title: "Let's get you <em>on the map.</em>", text: 'A profile is free and often the first thing people see. Follow the steps below, or have me set it up: Google Business Profile Setup is $500, one time.' },
+    unsure: { title: 'First, find out if <em>you have one.</em>', text: "Search your business name on Google Maps. Google sometimes makes a listing on its own, and you can claim it. If nothing shows up, follow the steps below, or have me set it up for $500." },
+  };
+  const labels = { 2: 'Yes', 1: 'Not sure', 0: 'No' };
+
+  const setActions = (items) => {
+    const actions = document.getElementById('band-actions');
+    actions.innerHTML = '';
+    items.forEach(([label, href, external], i) => {
+      const a = document.createElement('a');
+      a.className = i === 0 ? 'btn' : 'btn btn-ghost';
+      a.href = href;
+      a.textContent = label;
+      if (external) { a.target = '_blank'; a.rel = 'noopener'; }
+      actions.append(a);
+    });
+  };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const path = has();
+    if (!path) {
+      progress.textContent = 'Please answer the first question.';
+      form.querySelector('input[name="has"]').focus();
+      return;
+    }
+    const send = document.getElementById('send');
+    const tips = document.getElementById('tips');
+    tips.innerHTML = '';
+    if (path === 'yes') {
+      const missing = questions.findIndex((_, i) => !form.querySelector(`input[name="q${i}"]:checked`));
+      if (missing !== -1) {
+        progress.textContent = `Please answer question ${missing + 1} to see your next steps.`;
+        form.querySelector(`input[name="q${missing}"]`).focus();
+        return;
+      }
+      const values = questions.map((_, i) => Number(form.querySelector(`input[name="q${i}"]:checked`).value));
+      const score = values.reduce((a, b) => a + b, 0);
+      const band = bands.find((b) => score >= b.min);
+      document.getElementById('result-eyebrow').textContent = 'Your score';
+      document.getElementById('score-line').hidden = false;
+      document.getElementById('score').textContent = score;
+      document.getElementById('band-title').innerHTML = band.title;
+      document.getElementById('band-text').textContent = band.text;
+      setActions(band.actions);
+      values.forEach((v, i) => {
+        if (v === 2) return;
+        const li = document.createElement('li');
+        li.innerHTML = '<b></b><span></span>';
+        li.querySelector('b').textContent = questions[i].q;
+        li.querySelector('span').textContent = questions[i].tip;
+        tips.append(li);
+      });
+      send.score.value = `${score}/20`;
+      send.answers.value = 'Has a profile: Yes\n' + questions.map((q, i) => `${i + 1}. ${q.q} ${labels[values[i]]}`).join('\n');
+    } else {
+      const r = setupResult[path];
+      document.getElementById('result-eyebrow').textContent = 'Your next steps';
+      document.getElementById('score-line').hidden = true;
+      document.getElementById('band-title').innerHTML = r.title;
+      document.getElementById('band-text').textContent = r.text;
+      setActions([['Have me set it up', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]]);
+      send.score.value = 'No profile yet';
+      send.answers.value = `Has a profile: ${path === 'no' ? 'No' : 'Not sure'}`;
+    }
+    document.getElementById('setup-card').hidden = path === 'yes';
+    document.getElementById('tips-card').hidden = !tips.children.length;
+    results.hidden = false;
+    // Show the result cards at once instead of waiting for the scroll fade-in.
+    results.querySelectorAll('.card').forEach((c) => c.classList.add('is-in'));
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    results.focus({ preventScroll: true });
+  });
+
+  document.getElementById('retake').addEventListener('click', () => { results.hidden = true; });
+  document.getElementById('print').addEventListener('click', () => window.print());
+
+  const send = document.getElementById('send');
+  const status = send.querySelector('.form-status');
+  send.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!send.reportValidity()) return;
+    const btn = send.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
+      if (!res.success) throw new Error(res.message);
+      window.auvaConvert?.('form');
+      status.textContent = "Thanks! I'll look at your answers and reply within 24–48 hours.";
+      btn.hidden = true;
+    } catch {
+      status.textContent = 'Something went wrong. Please email me instead.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .check-wrap { max-width: 820px; }
+  .gate { padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+  .check-list { list-style: none; counter-reset: q; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .check-list li { counter-increment: q; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .check-list li:last-child { border-bottom: 0; }
+  fieldset { border: 0; margin: 0; padding: 0; }
+  legend { font-weight: 600; color: var(--ink); font-size: 1.08rem; margin-bottom: 12px; padding: 0; }
+  .check-list legend::before { content: counter(q) '. '; color: var(--primary); font-weight: 700; }
+  .choices { display: flex; gap: 10px; flex-wrap: wrap; }
+  .choices label { position: relative; cursor: pointer; }
+  .choices input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .choices span { display: inline-block; padding: 9px 20px; border: 2px solid var(--border); border-radius: 999px; font-weight: 600; background: var(--white); transition: background .15s, border-color .15s; }
+  .choices input:checked + span { background: var(--primary); border-color: var(--primary); color: var(--white); }
+  .choices input:focus-visible + span { outline: 3px solid var(--bright); outline-offset: 2px; }
+  .check-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--border); }
+  .check-foot p { margin: 0; }
+  .results { display: grid; gap: 24px; margin-top: 32px; outline: none; }
+  .score-card { text-align: center; }
+  .score-card .lede { margin: 0 auto 24px; }
+  .score-card .hero-actions { justify-content: center; }
+  .score { font-family: var(--font-head); font-size: 4.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 0 0 12px; }
+  .score .out { font-size: 1.6rem; color: var(--muted); font-weight: 600; }
+  .score-card h2.mag-head { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .tips { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .tips :global(li) { display: grid; gap: 4px; padding-left: 16px; border-left: 3px solid var(--bright); }
+  .tips :global(span) { color: var(--muted); }
+  .steps-list { margin: 0 0 12px; padding-left: 22px; display: grid; gap: 10px; }
+  .link-btn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: var(--primary); text-decoration: underline; cursor: pointer; }
+  .inquiry { margin-top: 16px; }
+  @media (max-width: 640px) { .check-foot .btn { width: 100%; justify-content: center; } }
+  /* Printing keeps the steps and tips, not the page chrome or the form. */
+  @media print {
+    :global(.site-header), :global(.site-footer), :global(.promo-bar), .hero, #check, .no-print, .score-card .hero-actions, .link-btn { display: none !important; }
+    section.alt { padding: 0; background: none; }
+    .results .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+  }
+</style>
