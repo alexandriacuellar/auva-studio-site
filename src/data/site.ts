@@ -45,7 +45,7 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website Diagnostic', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
+    items: ['Website Diagnostic and Google Business Profile setup', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
     href: '/websites/',
     cta: 'Explore website services',
   },
