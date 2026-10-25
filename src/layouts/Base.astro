@@ -3,8 +3,9 @@ import '../styles/global.css';
 import { site, nav } from '../data/site';
 import Icon from '../components/Icon.astro';
 
-interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[] }
-const { title, seoTitle, schema: pageSchema = [], description = 'Auva Studio builds fast websites you own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and explore AI and emerging tech.' } = Astro.props;
+// noindex keeps sample pages (made-up businesses) out of search results.
+interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[]; noindex?: boolean }
+const { title, seoTitle, noindex = false, schema: pageSchema = [], description = 'Auva Studio builds fast websites you own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and explore AI and emerging tech.' } = Astro.props;
 // seoTitle is the full browser-tab and search-result title when a page wants more than "Title | Auva Studio".
 const fullTitle = seoTitle ?? (title ? `${title} | ${site.name}` : `Websites, Technology Consulting, AI & Emerging Tech | ${site.name}`);
 const path = Astro.url.pathname;
@@ -52,6 +53,7 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={new URL(path, site.url)} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
