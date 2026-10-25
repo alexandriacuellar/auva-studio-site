@@ -115,11 +115,14 @@ const choices = [
   form.addEventListener('change', () => { progress.textContent = `${answered()} of ${total} answered`; });
 
   const bands = [
-    { min: 16, title: 'Your site is in <em>good shape.</em>', text: "A few small fixes could help. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
-    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: "A $199 Website Diagnostic shows exactly what to fix first, and it's credited toward your new website with me.", actions: [['Get the Diagnostic, $199', '/websites/diagnostic/'], ['Book a free 30-minute call', booking, true]] },
+    { min: 16, title: 'Your site is in <em>good shape.</em>', text: "A few small fixes could help. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free call about my results', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: "A $199 Website Diagnostic shows exactly what to fix first, and it's credited toward your new website with me.", actions: [['Get the Diagnostic, $199', '/websites/diagnostic/'], ['Book a free call about my results', booking, true]] },
     { min: 0, title: 'Your site may be <em>costing you customers.</em>', text: 'Start with a $199 Website Diagnostic, or see website packages from $1,500.', actions: [['Get the Diagnostic, $199', '/websites/diagnostic/'], ['See website packages', '/websites/#packages']] },
   ];
   const labels = { 2: 'Yes', 1: 'Not sure', 0: 'No' };
+  // Calls booked from the results carry the score, so the booking says what the call is for.
+  // a1 fills the first question on the Calendly booking form; the utm tags show in the booking details.
+  const callUrl = (note) => `${booking}?a1=${encodeURIComponent(note)}&utm_source=auvastudio&utm_campaign=website-check`;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -140,7 +143,7 @@ const choices = [
     band.actions.forEach(([label, href, external], i) => {
       const a = document.createElement('a');
       a.className = i === 0 ? 'btn' : 'btn btn-ghost';
-      a.href = href;
+      a.href = href === booking ? callUrl(`Free website check: I scored ${score}/20 and want to talk through my results.`) : href;
       a.textContent = label;
       if (external) { a.target = '_blank'; a.rel = 'noopener'; }
       actions.append(a);

@@ -160,15 +160,19 @@ const choices = [
   form.addEventListener('change', update);
 
   const bands = [
-    { min: 16, title: 'Your profile is in <em>good shape.</em>', text: "Keep up the monthly routine below. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
-    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
-    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]] },
+    { min: 16, title: 'Your profile is in <em>good shape.</em>', text: "Keep up the monthly routine below. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free call about my results', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free call about my results', booking, true]] },
+    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it, $500', '/websites/google-business-profile/'], ['Book a free call about my results', booking, true]] },
   ];
   const setupResult = {
     no: { title: "Let's get you <em>on the map.</em>", text: 'A profile is free and often the first thing people see. Follow the steps below, or have me set it up: Google Business Profile Setup is $500, one time.' },
     unsure: { title: 'First, find out if <em>you have one.</em>', text: "Search your business name on Google Maps. Google sometimes makes a listing on its own, and you can claim it. If nothing shows up, follow the steps below, or have me set it up for $500." },
   };
   const labels = { 2: 'Yes', 1: 'Not sure', 0: 'No' };
+  // Calls booked from the results carry the answers, so the booking says what the call is for.
+  // a1 fills the first question on the Calendly booking form; the utm tags show in the booking details.
+  let callNote = '';
+  const callUrl = () => `${booking}?a1=${encodeURIComponent(callNote)}&utm_source=auvastudio&utm_campaign=google-profile-check`;
 
   const setActions = (items) => {
     const actions = document.getElementById('band-actions');
@@ -176,7 +180,7 @@ const choices = [
     items.forEach(([label, href, external], i) => {
       const a = document.createElement('a');
       a.className = i === 0 ? 'btn' : 'btn btn-ghost';
-      a.href = href;
+      a.href = href === booking ? callUrl() : href;
       a.textContent = label;
       if (external) { a.target = '_blank'; a.rel = 'noopener'; }
       actions.append(a);
@@ -204,6 +208,7 @@ const choices = [
       const values = questions.map((_, i) => Number(form.querySelector(`input[name="q${i}"]:checked`).value));
       const score = values.reduce((a, b) => a + b, 0);
       const band = bands.find((b) => score >= b.min);
+      callNote = `Free Google profile check: I scored ${score}/20 and want to talk through my results.`;
       document.getElementById('result-eyebrow').textContent = 'Your score';
       document.getElementById('score-line').hidden = false;
       document.getElementById('score').textContent = score;
@@ -222,11 +227,12 @@ const choices = [
       send.answers.value = '1. Has a profile: Yes\n' + questions.map((q, i) => `${i + 2}. ${q.q} ${labels[values[i]]}`).join('\n');
     } else {
       const r = setupResult[path];
+      callNote = `Free Google profile check: ${path === 'no' ? "I don't have a profile yet" : "I'm not sure if I have a profile"} and want help getting set up.`;
       document.getElementById('result-eyebrow').textContent = 'Your next steps';
       document.getElementById('score-line').hidden = true;
       document.getElementById('band-title').innerHTML = r.title;
       document.getElementById('band-text').textContent = r.text;
-      setActions([['Have me set it up, $500', '/websites/google-business-profile/'], ['Book a free 30-minute call', booking, true]]);
+      setActions([['Have me set it up, $500', '/websites/google-business-profile/'], ['Book a free call about my results', booking, true]]);
       send.score.value = 'No profile yet';
       send.answers.value = `Has a profile: ${path === 'no' ? 'No' : 'Not sure'}`;
     }
