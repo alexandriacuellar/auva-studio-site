@@ -34,7 +34,7 @@ const schema = serviceSchema([
   { name: 'Google Business Profile Optimization', description: 'Review an existing Google Business Profile and improve its categories, description, services, attributes, photos, and website links.', price: '$500' },
 ], '/websites/google-business-profile/');
 ---
-<Base title="Google Business Profile Setup and Optimization" seoTitle="Google Business Profile Setup and Optimization, $500 | Auva Studio" schema={schema} description="Google Business Profile setup or optimization for small businesses in the Hudson Valley and beyond. One time, $500, with a guide for keeping it up to date yourself.">
+<Base title="Google Business Profile Setup and Optimization" seoTitle="Google Business Profile Setup, $500 | Auva Studio" schema={schema} description="Google Business Profile setup or optimization for small businesses in the Hudson Valley and beyond. One time, $500, with a guide for keeping it up to date yourself.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <a class="bd-pill" href="/websites/">Website Services</a>
@@ -51,7 +51,7 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Two ways I can help.</h2>
-        <p class="lede">Both are one-time, with no monthly plan.</p>
+        <p class="lede">For Hudson Valley businesses and anyone with local customers. Both are one-time, with no monthly plan.</p>
       </div>
       <div class="grid grid-2">
         {offers.map((o) => (
@@ -93,15 +93,15 @@ const schema = serviceSchema([
           <h2 class="mag-head">What's not included.</h2>
           <p class="lede">These are setup and improvement services, not ongoing marketing. I'm happy to point you in the right direction on any of these.</p>
         </div>
-        <ul class="ticks">{notIncluded.map((n) => <li><Icon name="tick" size={18} />{n}</li>)}</ul>
+        <ul class="ticks not-included">{notIncluded.map((n) => <li><span class="dash" aria-hidden="true">–</span>{n}</li>)}</ul>
       </div>
       <div class="band" style="margin-top: 48px">
         <div>
-          <h2>Planning a website too?</h2>
+          <h2>Save $150 on a website.</h2>
           <p>If you start a website with me at the same time or within 6 months, $150 of your profile service is credited toward it.</p>
         </div>
         <div>
-          <p class="price" style="font-size: 4rem">$150</p>
+          <p class="price" style="font-size: 4rem">$150 off</p>
           <p>Credited toward any website package.</p>
           <a class="btn" href="/websites/#packages">See website packages</a>
         </div>

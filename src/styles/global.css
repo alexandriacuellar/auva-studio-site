@@ -157,6 +157,11 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 .band .btn-ghost { background: transparent; color: var(--white); border-color: rgb(255 255 255 / 0.6); }
 .band .btn-ghost:hover { background: rgb(255 255 255 / 0.12); color: var(--white); }
 .band .band-check { flex-basis: 100%; justify-content: center; }
+/* Lists of what a service leaves out: a dash, not a green tick. */
+.not-included .dash { width: 18px; flex-shrink: 0; color: var(--muted); font-weight: 700; text-align: center; }
+/* A small line under the hero buttons for visitors on a different path. */
+.hero-aside { margin: 20px 0 0; font-size: 0.98rem; color: var(--muted); }
+.hero-aside a { font-weight: 700; }
 
 /* CTA */
 .cta { background: var(--ink); color: var(--white); text-align: center; }
