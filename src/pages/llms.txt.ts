@@ -13,6 +13,7 @@ export function GET() {
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each with no monthly plan`,
     `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership`,
     `- [AI & Emerging Tech](${site.url}/ai-emerging-tech/): AI readiness, team workshops, concept and feasibility reviews, prototypes, XR and game production support`,
+    `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
     '',
     '## Website Services',

@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Faq from '../components/Faq.astro';
+import { site, serviceSchema } from '../data/site';
+
+// For agencies and designers, not business owners. Partner rates are quoted privately, so no prices on this page.
+const services = [
+  { icon: 'layers', title: 'White-label website development', text: 'Websites you deliver to your clients under your own brand.' },
+  { icon: 'globe', title: 'Design to development', text: 'Your approved Figma designs, built as responsive, production-ready websites.' },
+  { icon: 'gear', title: 'Technical implementation', text: 'APIs, integrations, analytics, and custom functionality.' },
+  { icon: 'cloud', title: 'Migrations and modernization', text: 'Move client sites from legacy platforms to fast, modern architectures.' },
+  { icon: 'wrench', title: 'Technical project support', text: 'Development planning, implementation guidance, troubleshooting, and delivery support.' },
+];
+
+const ways = [
+  { icon: 'lock', title: 'White-label', text: 'You deliver the work under your brand. Your client works with you, and my name stays off it.' },
+  { icon: 'key', title: 'Subcontracting', text: 'I join the project as an identified technical specialist working with your team.' },
+  { icon: 'chat', title: 'Collaborative delivery', text: 'We deliver the project together, each handling our own part: you lead creative and strategy, I lead the build.' },
+];
+
+const audiences = [
+  { icon: 'chart', title: 'Marketing agencies', text: 'You sell the campaign and the website. I build the site so your team can stay on strategy and content.' },
+  { icon: 'star', title: 'Creative studios', text: 'Your design stays exactly as approved, built to load fast and work on every screen.' },
+  { icon: 'compass', title: 'Independent designers', text: 'Take on bigger projects with a developer you can count on, without hiring one.' },
+];
+
+const faqs = [
+  { q: 'Will you contact or work directly with our clients?', a: "Only if you want me to. Your client relationships stay yours, and I won't approach your clients for work, during the project or after it." },
+  { q: 'Do you sign NDAs?', a: "Yes. I'm happy to sign your NDA or partner agreement before we share any project details." },
+  { q: 'Who owns the finished website?', a: 'Your client does. Code, hosting, and accounts are set up in their name or yours, never mine, and I hand everything over at the end of the project.' },
+  { q: 'What do you build with?', a: 'I build most sites with Astro, which keeps them fast, secure, and low-cost to host. When a project calls for a different platform, we decide that together during scoping.' },
+  { q: 'How does pricing work?', a: 'Partners get preferred rates, quoted for each project based on its scope, my responsibilities, and how much work we expect to do together. Every project is scoped and priced in writing before it begins.' },
+  { q: 'Can you help with AI & Emerging Tech projects too?', a: "Yes. If a client asks for something like an AI workflow or an XR prototype, I can support it the same way. See the AI & Emerging Tech page for what that work looks like." },
+];
+
+const schema = serviceSchema(services.map((s) => ({ name: s.title, description: s.text, price: '' })), '/development-partnerships/');
+---
+<Base title="Development Partnerships" seoTitle="Development Partnerships for Agencies & Designers | Auva Studio" schema={schema} description="White-label and partner website development for marketing agencies, creative studios, and independent designers: design to development, integrations, migrations, and technical project support.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Development Partnerships for Agencies</p>
+      <h1 class="mag-head">Your creative vision. <em>My technical expertise.</em></h1>
+      <p class="lede">I partner with marketing agencies, creative studios, and independent designers to provide reliable website development and technical implementation.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+        <a class="btn btn-ghost" href="#start">Tell me about a project</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">A technical partner <em>for teams that already have clients.</em></h2>
+      </div>
+      <div class="grid grid-2 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <a class="more" href="#start" style="margin-top: 12px">Talk it through</a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me about your team and your clients, and I'll suggest how we could work together.</p>
+          <a class="more" href="#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What I can <em>take off your plate.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {services.map((s) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={s.icon} size={36} /></div>
+            <div>
+              <h3>{s.title}</h3>
+              <p class="muted">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="ways">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Three ways <em>to work together.</em></h2>
+        <p class="lede">Every project is different, so you choose how I show up. Pick one for each project, or mix them as your clients need.</p>
+      </div>
+      <div class="values">
+        {ways.map((w) => (
+          <div class="card card-row"><div class="icon"><Icon name={w.icon} /></div><div><h3>{w.title}</h3><p class="muted">{w.text}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">I've been the developer <em>behind small agencies.</em></h2>
+        <p class="lede">Before Auva Studio, I worked as the developer behind small agencies. I know how to fit into your process, meet your deadlines, and make your team look good to its clients.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
+        </div>
+      </div>
+      <div class="values">
+        <div class="card"><h3>Your clients stay yours</h3><p class="muted">I never approach your clients for work, and I sign your NDA if you have one.</p></div>
+        <div class="card"><h3>Built the way you designed it</h3><p class="muted">Your approved designs, built carefully, with questions raised early rather than guessed at.</p></div>
+        <div class="card"><h3>Clear scope and price</h3><p class="muted">Every project is scoped and quoted in writing before it begins, at preferred partner rates.</p></div>
+        <div class="card"><h3>A clean handoff</h3><p class="muted">Your client owns the finished site, with documentation your team can use after launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="partner" />
+</Base>
