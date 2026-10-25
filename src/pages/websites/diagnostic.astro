@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import PayBar from '../../components/PayBar.astro';
+import { serviceSchema } from '../../data/site';
+
+const checks = [
+  { icon: 'globe', title: 'Phones', text: 'How your site looks and works on the phone in your customer’s hand.' },
+  { icon: 'bolt', title: 'Speed', text: 'How fast your pages load, with your Google speed scores.' },
+  { icon: 'search', title: 'Google search', text: 'How easily people find you on Google and in AI search tools.' },
+  { icon: 'star', title: 'Google profile and reviews', text: 'Whether your Google Business Profile and reviews help or hurt.' },
+  { icon: 'bulb', title: 'First impression', text: 'Whether visitors can tell what you do within a few seconds.' },
+  { icon: 'mail', title: 'Next steps', text: 'How easy it is to call, book, buy, or send a message.' },
+];
+
+const report = [
+  'A rating for each of the six checks: good, needs work, or fix first',
+  'What to fix first, in order, with why each fix matters',
+  'Who can make each fix, you or a developer, and about how long it takes',
+  'My honest take on whether to fix your current site or start over',
+];
+
+const steps = [
+  { title: 'Send your site', text: 'Fill in the form below with your website address and anything that is bothering you about it. I confirm the details and send a payment link.' },
+  { title: 'I review it', text: 'I go through your site on a phone and a computer, and run it through Google’s own tools.' },
+  { title: 'Get your report', text: 'A short, plain-English report with what to fix first, in order, within 5 business days.' },
+];
+
+const faqs = [
+  { q: 'When do I pay?', a: 'Up front. After you send the form, I confirm the details and send you a payment link. Your report arrives within 5 business days of payment.' },
+  { q: 'Does it matter who built my site?', a: 'No. The Diagnostic works for any site: WordPress, Wix, Squarespace, Shopify, or one a friend built. I review what your visitors see, not just the code.' },
+  { q: 'Do I have to hire you to make the fixes?', a: 'No. The report is yours to use with any developer, or to fix yourself. Many fixes are things you can do on your own.' },
+  { q: 'What if I decide on a new website?', a: 'The $199 is credited toward a new website with me, so the Diagnostic costs you nothing extra if you go ahead.' },
+  { q: 'Should I fix my site or start over?', a: "That's one of the questions the report answers. If a few fixes will do the job, I'll say so. If starting over would cost less in the long run, I'll explain why." },
+  { q: "What if I'm not ready to spend $199?", a: 'Take the free 2-minute website check first. It gives you a quick score and a few things to look at on your own.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Website Diagnostic', description: 'A check of how an existing site works on phones, how easily people find it on Google, how fast it loads, and what to fix first.', price: '$199' },
+], '/websites/diagnostic/');
+---
+<Base title="Website Diagnostic" seoTitle="Website Diagnostic, $199: Find What to Fix First | Auva Studio" schema={schema} description="A $199 review of your current website: phones, speed, Google search, and what to fix first, in a plain-English report within 5 business days.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/websites/">Website Services</a>
+      <h1 class="mag-head">Find out what's holding <em>your website back.</em></h1>
+      <p class="lede">Stop guessing. I review your site the way your customers see it and send a plain-English report with what to fix first. Works for any site, whoever built it.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Get my Diagnostic, $199</a>
+        <a class="btn btn-ghost" href="/website-check/">Not sure? Try the free check <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">Pay by secure link once I confirm. Report within 5 business days. Credited toward a new website with me.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What I check.</h2>
+      </div>
+      <div class="grid grid-3 plain-grid">
+        {checks.map((c) => (
+          <div>
+            <div class="icon"><Icon name={c.icon} size={28} /></div>
+            <h3>{c.title}</h3>
+            <p class="muted">{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mag-head">What's in your report.</h2>
+          <p class="lede">Short and plain, so you can act on it the same day.</p>
+        </div>
+        <ul class="ticks">
+          {report.map((r) => <li><Icon name="tick" size={18} />{r}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it works.</h2>
+      </div>
+      <ol class="steps steps-3">
+        {steps.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Know exactly what to fix.</h2>
+          <p>Your fixes in order, with who can make each one and about how long it takes. Yours to use with any developer, or on your own.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$199</p>
+          <p>Credited toward your new website with me.</p>
+          <a class="btn" href="#start">Get my Diagnostic</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="diagnostic" />
+  <PayBar label="Get my Diagnostic, $199" />
+</Base>

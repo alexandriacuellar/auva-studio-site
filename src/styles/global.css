@@ -152,6 +152,15 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 .band .price { color: var(--white); }
 .band .btn { background: var(--white); color: var(--primary); border-color: var(--white); }
 .band .btn:hover { background: var(--tint); }
+/* A band's buttons: its own page, and a free check when there is one. */
+.band-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.band .btn-ghost { background: transparent; color: var(--white); border-color: rgb(255 255 255 / 0.6); }
+.band .btn-ghost:hover { background: rgb(255 255 255 / 0.12); color: var(--white); }
+/* Lists of what a service leaves out: a dash, not a green tick. */
+.not-included .dash { width: 18px; flex-shrink: 0; color: var(--muted); font-weight: 700; text-align: center; }
+/* A small line under the hero buttons for visitors on a different path. */
+.hero-aside { margin: 20px 0 0; font-size: 0.98rem; color: var(--muted); }
+.hero-aside a { font-weight: 700; }
 
 /* CTA */
 .cta { background: var(--ink); color: var(--white); text-align: center; }
@@ -181,6 +190,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--p
 .site-footer h2 { font-size: 1rem; color: var(--white); }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .site-footer a { color: #c4d2f0; text-decoration: none; }
+.site-footer .footer-sub { padding-left: 14px; font-size: 0.92rem; }
 .site-footer a:hover { color: var(--white); }
 .footer-legal { border-top: 1px solid #22336e; margin-top: 40px; padding-top: 20px; font-size: 0.9rem; }
 .footer-legal p { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }
@@ -507,3 +517,39 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .plain-grid h3 { font-size: 1.15rem; margin-bottom: 6px; }
 .plain-grid p { margin: 0; }
 @media (max-width: 640px) { .plain-grid { gap: 24px; } }
+
+/* Path band: a free route and a paid route, side by side, each one whole card a link. */
+.path-band { grid-template-columns: 1fr 1.25fr; }
+.doors { display: grid; gap: 14px; }
+.door { display: grid; gap: 4px; padding: 20px 22px; border-radius: 18px; border: 2px solid rgb(255 255 255 / 0.28); color: var(--white); text-decoration: none; transition: border-color .15s, transform .15s, background .15s; }
+.door:hover { border-color: var(--white); transform: translateY(-2px); }
+.door-free { background: var(--white); border-color: var(--white); color: var(--ink); }
+.door-free:hover { background: var(--tint); border-color: var(--tint); }
+.door-label { font-size: .85rem; font-weight: 700; color: #9fb6e8; }
+.door-free .door-label { color: var(--primary); }
+.door-title { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; }
+.door-text { font-size: .95rem; color: #c4d2f0; }
+.door-free .door-text { color: var(--muted); }
+.door-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 700; }
+.door-free .door-cta { color: var(--primary); }
+.door:hover .door-cta svg { transform: translateX(3px); }
+.door-cta svg { transition: transform .15s; }
+@media (max-width: 860px) { .path-band { grid-template-columns: 1fr; } }
+
+/* Under a hero's buttons: how paying works, in one line. */
+.hero-note { margin: 16px auto 0; font-size: .95rem; color: var(--muted); }
+
+/* Phones: a buy button that stays in reach until the form is on screen. */
+.pay-bar { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 6; display: none; }
+.pay-bar .btn { width: 100%; justify-content: center; box-shadow: 0 10px 30px rgb(15 29 82 / 0.3); }
+@media (max-width: 760px) { .pay-bar { display: block; transition: transform .25s, opacity .25s; } .pay-bar.is-away { transform: translateY(140%); opacity: 0; pointer-events: none; } }
+
+/* Numbered next steps in a form's side column. */
+.next-steps { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; color: var(--muted); }
+.next-steps b { color: var(--ink); }
+
+/* The paid offer at the end of a free check. */
+.offer-card { border-color: var(--primary); background: linear-gradient(180deg, var(--tint), var(--white) 70%); }
+.offer-card .price { margin: 4px 0 8px; }
+.opt-in { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; margin: 4px 0 12px; cursor: pointer; }
+.opt-in input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--primary); }

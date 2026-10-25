@@ -6,8 +6,9 @@
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean }
-const { kind, alt = false, hero = false } = Astro.props;
+// topic preselects the website choice on a service's own page, such as topic="gbp".
+interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean; topic?: string }
+const { kind, alt = false, hero = false, topic = 'website' } = Astro.props;
 const isWebsite = kind === 'website';
 const isAi = kind === 'ai';
 const isGeneral = kind === 'general';
@@ -20,6 +21,25 @@ const intro = isGeneral && !hero
   ? { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' }
   : { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' };
 const subject = isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isAi ? 'New AI & emerging tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com';
+const websiteTopics = [
+  ['website', 'A new website'],
+  ['improve', 'Improve my current site'],
+  ['store', 'An online store'],
+  ['diagnostic', 'Website Diagnostic ($199)'],
+  ['gbp', 'Google Business Profile ($500)'],
+  ['care', 'Help after launch (updates and fixes)'],
+  ['brand', 'Brand Essentials'],
+];
+// Each website service page gets its own heading, lede, and next step.
+const replyLine = 'I read every message personally and reply within 24–48 hours.';
+// Paid services list their buying steps in order, so the route to pay is plain.
+const websiteIntro = ({
+  website: { title: 'Tell me about <em>your website.</em>', lede: "Share a few details and I'll follow up personally with questions or a recommended package.", next: `${replyLine} You'll get a short written agreement with your package, price, and schedule before anything begins.` },
+  diagnostic: { title: 'Get your <em>Website Diagnostic.</em>', lede: "Send your website address and anything that's bothering you about it.", button: 'Request my Diagnostic', steps: ['<b>Send this form.</b> I reply within 24–48 hours to confirm.', '<b>Pay $199</b> by secure payment link.', '<b>Get your report</b> within 5 business days.'] },
+  gbp: { title: 'Get your profile <em>set up right.</em>', lede: "Send your business name and whether you already have a profile. I'll confirm which option fits.", button: 'Request my profile service', steps: ['<b>Send this form.</b> I reply within 24–48 hours with the option that fits.', '<b>Pay $500</b> by secure payment link.', '<b>I do the work</b> and send your profile guide.'] },
+  care: { title: 'What would you like <em>changed?</em>', lede: 'Tell me what to update, or ask how updates work.', next: `${replyLine} If a request will take longer than about 30 minutes, I tell you the price first.` },
+  brand: { title: 'Start your <em>Brand Essentials.</em>', lede: "Share a bit about your business and the look you're after.", button: 'Request Brand Essentials', steps: ['<b>Send this form.</b> I reply within 24–48 hours with a few questions.', '<b>Confirm the details and price</b> in writing before any work begins.', '<b>Choose your favorite</b> of two logo concepts.'] },
+} as Record<string, { title: string; lede: string; next?: string; button?: string; steps?: string[] }>)[topic] ?? null;
 const formAction = 'https://api.web3forms.com/submit';
 ---
 <section id="start" class:list={{ alt, hero }}>
@@ -27,8 +47,8 @@ const formAction = 'https://api.web3forms.com/submit';
     <div>
       {isWebsite ? (
         <>
-          <h2 class="mag-head">Tell me about <em>your website.</em></h2>
-          <p class="lede">Share a few details and I'll follow up personally with questions or a recommended package.</p>
+          <h2 class="mag-head" set:html={(websiteIntro ?? { title: 'Tell me about <em>your website.</em>' }).title} />
+          <p class="lede">{websiteIntro?.lede}</p>
         </>
       ) : (
         <>
@@ -43,7 +63,11 @@ const formAction = 'https://api.web3forms.com/submit';
         </>
       )}
       <div class="values" style="margin-top: 28px">
-        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>What happens next</h3><p class="muted">{isGeneral ? 'Any work is scoped and priced in writing before it begins.' : <>I read every message personally and reply within 24–48 hours. {isWebsite ? "You'll get a short written agreement with your package, price, and schedule before anything begins." : 'Any work is scoped and priced in writing before it begins.'}</>}</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>What happens next</h3>{websiteIntro?.steps ? (
+          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
+        ) : (
+          <p class="muted">{isGeneral ? 'Any work is scoped and priced in writing before it begins.' : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} Any work is scoped and priced in writing before it begins.`}</p>
+        )}</div></div>
         {isWebsite && (
           <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Prefer to talk?</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a> instead.</p></div></div>
         )}
@@ -80,13 +104,7 @@ const formAction = 'https://api.web3forms.com/submit';
             <div class="form-row">
               <label>What do you need?
                 <select name="topic">
-                  <option value="website">A new website</option>
-                  <option value="improve">Improve my current site</option>
-                  <option value="store">An online store</option>
-                  <option value="diagnostic">Website Diagnostic ($199)</option>
-                  <option value="gbp">Google Business Profile ($500)</option>
-                  <option value="care">Help after launch (updates and fixes)</option>
-                  <option value="brand">Brand Essentials</option>
+                  {websiteTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                 </select>
               </label>
               <label><span>Current website <span class="opt">(optional)</span></span><input type="url" name="website" placeholder="https://" /></label>
@@ -122,7 +140,7 @@ const formAction = 'https://api.web3forms.com/submit';
             <label><span>{isAi ? 'What are you exploring?' : "What's going on?"} <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         )}
-        <button class="btn" type="submit">Send message</button>
+        <button class="btn" type="submit">{(isWebsite && websiteIntro?.button) || 'Send message'}</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>

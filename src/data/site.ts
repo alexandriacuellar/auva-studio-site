@@ -172,7 +172,7 @@ export const process = [
 
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 each, or 5 for $200', text: 'Up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A 5-pack is used within 12 months.' },
+  { name: 'Updates and fixes', price: '$50 each, or a pack of 5 for $200', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A pack of 5 is used within 12 months.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
 ];
 

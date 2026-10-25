@@ -1,7 +1,7 @@
 // Lists every public page for search engines. Add new pages here.
 import { site } from '../data/site';
 
-const pages = ['/', '/websites/', '/website-check/', '/google-profile-check/', '/technology-consulting/', '/ai-emerging-tech/', '/contact/', '/privacy/'];
+const pages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/website-check/', '/google-profile-check/', '/technology-consulting/', '/ai-emerging-tech/', '/contact/', '/privacy/'];
 
 export function GET() {
   const urls = pages.map((p) => `  <url><loc>${site.url}${p}</loc></url>`).join('\n');

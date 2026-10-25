@@ -77,6 +77,28 @@ const schema = {
       // Turn on scroll reveals only when motion is welcome and the browser can observe scrolling.
       if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-on');
     </script>
+    <script is:inline define:vars={{ pageName: title ?? 'home' }}>
+      // Every booking link tells Calendly which page it came from, and the service picked in the form when there is one.
+      // a1 fills the first question on the booking form; the utm tags show in the booking details.
+      // Links that already carry a note (like the free check results) keep their own.
+      (() => {
+        const tag = (a) => {
+          const url = new URL(a.href);
+          if (a.dataset.note !== undefined || !url.searchParams.has('a1')) {
+            const choice = a.closest('#start')?.querySelector('select[name="topic"]');
+            const about = choice && choice.value !== 'unsure' ? `, about: ${choice.selectedOptions[0].text}` : '';
+            a.dataset.note = '';
+            url.searchParams.set('a1', `Booked from the ${pageName} page on auvastudio.com${about}.`);
+          }
+          url.searchParams.set('utm_source', 'auvastudio');
+          url.searchParams.set('utm_campaign', location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home');
+          a.href = url.toString();
+        };
+        addEventListener('DOMContentLoaded', () => document.querySelectorAll('a[href^="https://calendly.com"]').forEach(tag));
+        // Tag again on click, for links added later and for a service picked in the form since the page loaded.
+        addEventListener('click', (e) => { const a = e.target.closest?.('a[href^="https://calendly.com"]'); if (a) tag(a); }, true);
+      })();
+    </script>
     <script is:inline define:vars={{ ads: site.googleAds }}>
       // Google Ads tag, only for visits that came from an ad. Pages call auvaConvert('form' | 'booking').
       window.auvaConvert = () => {};
@@ -141,6 +163,10 @@ const schema = {
           <h2>Services</h2>
           <ul>
             <li><a href="/websites/">Website Services</a></li>
+            <li class="footer-sub"><a href="/websites/diagnostic/">Website Diagnostic</a></li>
+            <li class="footer-sub"><a href="/websites/google-business-profile/">Google Business Profile</a></li>
+            <li class="footer-sub"><a href="/websites/help-after-launch/">Help After Launch</a></li>
+            <li class="footer-sub"><a href="/websites/brand-essentials/">Brand Essentials</a></li>
             <li><a href="/technology-consulting/">Consulting & Project Support</a></li>
             <li><a href="/ai-emerging-tech/">AI & Emerging Tech</a></li>
           </ul>
