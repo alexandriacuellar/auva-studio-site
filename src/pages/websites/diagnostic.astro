@@ -14,6 +14,13 @@ const checks = [
   { icon: 'mail', title: 'Next steps', text: 'How easy it is to call, book, buy, or send a message.' },
 ];
 
+const report = [
+  'A rating for each of the six checks: good, needs work, or fix first',
+  'What to fix first, in order, with why each fix matters',
+  'Who can make each fix, you or a developer, and about how long it takes',
+  'My honest take on whether to fix your current site or start over',
+];
+
 const steps = [
   { title: 'Send your site', text: 'Fill in the form below with your website address and anything that is bothering you about it.' },
   { title: 'I review it', text: 'I go through your site on a phone and a computer, and run it through Google’s own tools.' },
@@ -64,12 +71,14 @@ const schema = serviceSchema([
 
   <section>
     <div class="wrap">
-      <div class="card sample-cta">
+      <div class="grid grid-2">
         <div>
-          <h2 class="mag-head" style="margin: 0 0 8px">See a sample report.</h2>
-          <p class="muted" style="margin: 0">A full report for a made-up pottery studio: what I found, what to fix first, and whether to rebuild.</p>
+          <h2 class="mag-head">What's in your report.</h2>
+          <p class="lede">Short and plain, so you can act on it the same day.</p>
         </div>
-        <a class="btn" href="/websites/diagnostic/sample-report/">See the sample report</a>
+        <ul class="ticks">
+          {report.map((r) => <li><Icon name="tick" size={18} />{r}</li>)}
+        </ul>
       </div>
     </div>
   </section>
@@ -110,7 +119,3 @@ const schema = serviceSchema([
   <Faq faqs={faqs} alt />
   <InquiryForm kind="website" topic="diagnostic" />
 </Base>
-
-<style>
-  .sample-cta { display: flex; gap: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-</style>
