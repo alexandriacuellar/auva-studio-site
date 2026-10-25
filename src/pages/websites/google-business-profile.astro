@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { serviceSchema } from '../../data/site';
+
+const offers = [
+  { icon: 'star', name: 'Setup', price: '$500', who: "For a business with no profile yet, or one you can't sign in to.", items: ['Create or claim your profile', 'Your business name, address or service area, phone, and website link', 'Categories, services, and hours', 'Your photos added', "Help through Google's verification"] },
+  { icon: 'wrench', name: 'Optimization', price: '$500', who: 'For a profile you already have that could be working harder.', items: ['A review of your whole profile', 'Better categories and description', 'Services, attributes, and hours checked', 'Photos and website links improved', 'Fixes for anything that breaks Google’s rules'] },
+];
+
+const guide = [
+  { icon: 'book', title: 'What I set up', text: 'A record of your categories, services, and details, so you know what is there and why.' },
+  { icon: 'clock', title: 'A 15-minute monthly checklist', text: 'Reviews, photos, hours, and suggested edits, all in one short routine.' },
+  { icon: 'chat', title: 'Replying to reviews', text: 'Simple tips and sample replies for good and bad reviews.' },
+  { icon: 'shield', title: 'Staying safe', text: 'How to spot scam calls and wrong edits, and who has access to your profile.' },
+];
+
+const notIncluded = ['Month-to-month profile management', 'Replying to reviews for you', 'Running Google Ads', 'Regular posts on your profile', 'Directory and listing campaigns', 'Promises about rankings or leads'];
+
+const faqs = [
+  { q: 'What is a Google Business Profile?', a: "It's the free listing people see on Google Maps and in Google search when they look for your business or for what you do nearby. It shows your hours, phone number, reviews, photos, and a link to your website." },
+  { q: 'Which one do I need, setup or optimization?', a: "If you don't have a profile yet, or you can't sign in to the one that exists, you need setup. If you have a profile you can edit, optimization makes it work harder. Not sure? Take the free Google profile check, or ask me." },
+  { q: 'Do I need a website first?', a: 'No. A profile works on its own. A website gives Google and your customers more to go on, and if you start one with me at the same time or within 6 months, $150 is credited toward it.' },
+  { q: 'Who owns my profile?', a: 'You do. It stays under your Google account. If I need access, you add me as a manager and remove me when the work is done.' },
+  { q: 'How long does verification take?', a: "Google decides how to verify each business, by video, phone, email, or postcard, and how long it takes. I walk you through each step so nothing gets stuck on your side." },
+  { q: 'Is this part of the Essential Presence package?', a: 'Essential Presence includes Google Business Profile guidance, where applicable: I check your link and share basic tips. Setup and optimization are the full, hands-on service.' },
+  { q: 'Can you guarantee I show up first on Google Maps?', a: "No one honestly can. Google decides rankings based on things like distance, relevance, and reviews. I make sure your profile is complete, correct, and follows Google's rules, which gives you the best chance." },
+];
+
+const schema = serviceSchema([
+  { name: 'Google Business Profile Setup', description: 'Create or claim a Google Business Profile and set up business details, categories, services, hours, photos, and verification.', price: '$500' },
+  { name: 'Google Business Profile Optimization', description: 'Review an existing Google Business Profile and improve its categories, description, services, attributes, photos, and website links.', price: '$500' },
+], '/websites/google-business-profile/');
+---
+<Base title="Google Business Profile Setup and Optimization" seoTitle="Google Business Profile Setup and Optimization, $500 | Auva Studio" schema={schema} description="Google Business Profile setup or optimization for small businesses in the Hudson Valley and beyond. One time, $500, with a guide for keeping it up to date yourself.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/websites/">Website Services</a>
+      <h1 class="mag-head">Show up right <em>on Google Maps.</em></h1>
+      <p class="lede">Your Google Business Profile is often the first thing people see when they search for you. I set up a new one or improve the one you have, so your hours, services, photos, and website link are right.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Ask about your profile</a>
+        <a class="btn btn-ghost" href="/google-profile-check/">Take the free Google profile check <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Two ways I can help.</h2>
+        <p class="lede">Both are one-time, with no monthly plan.</p>
+      </div>
+      <div class="grid grid-2">
+        {offers.map((o) => (
+          <div class="card">
+            <div class="icon"><Icon name={o.icon} size={32} /></div>
+            <h3>{o.name}</h3>
+            <p class="price">{o.price}</p>
+            <p class="muted">{o.who}</p>
+            <ul class="ticks">{o.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="btn" href="#start">Start with {o.name.toLowerCase()}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">A guide for keeping it up to date.</h2>
+        <p class="lede">I don't manage your profile month to month, so you get a short guide for looking after it yourself.</p>
+      </div>
+      <div class="grid grid-4 plain-grid">
+        {guide.map((g) => (
+          <div>
+            <div class="icon"><Icon name={g.icon} size={28} /></div>
+            <h3>{g.title}</h3>
+            <p class="muted">{g.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mag-head">What's not included.</h2>
+          <p class="lede">These are setup and improvement services, not ongoing marketing. I'm happy to point you in the right direction on any of these.</p>
+        </div>
+        <ul class="ticks">{notIncluded.map((n) => <li><Icon name="tick" size={18} />{n}</li>)}</ul>
+      </div>
+      <div class="band" style="margin-top: 48px">
+        <div>
+          <h2>Planning a website too?</h2>
+          <p>If you start a website with me at the same time or within 6 months, $150 of your profile service is credited toward it.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$150</p>
+          <p>Credited toward any website package.</p>
+          <a class="btn" href="/websites/#packages">See website packages</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="gbp" />
+</Base>

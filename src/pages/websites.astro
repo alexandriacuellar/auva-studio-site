@@ -5,7 +5,7 @@ import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, addons, brandEssentials, process, care, packages, samples, site, testimonials, serviceSchema } from '../data/site';
+import { comparison, addons, process, care, packages, samples, site, testimonials, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
@@ -25,18 +25,11 @@ const faqs = [
   { q: 'Do you do SEO, AEO, and GEO?', a: "Yes, in every package. SEO (search engine optimization) helps you show up on Google. AEO and GEO (answer and generative engine optimization) help AI tools like ChatGPT and Google's AI Overviews find and mention your business. I set up clear page titles, structured data (schema), a sitemap, and fast pages from the start. Astro sites usually score well on Core Web Vitals, Google's measures of speed and stability, and I share your PageSpeed scores at launch." },
   { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
   { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I can move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included; large blogs or catalogs are quoted separately. Not sure whether to fix or rebuild? Start with a Website Diagnostic." },
-  { id: 'faq-gbp', q: 'What do you do for Google Business Profiles?', a: "Your Google Business Profile is the listing people see on Google Maps and in search. Setup ($500): I create or claim your profile, add your business details, categories, services, hours, and your photos, and help you through Google's verification. Optimization ($500): I review a profile you already have and improve its categories, description, services, attributes, photos, and website links. Both are one-time, with no monthly plan. I don't manage your profile month to month, reply to reviews, run ads, or promise rankings, but you get a short guide for keeping it up to date yourself, with a 15-minute monthly checklist. If you start a website with me at the same time or within 6 months, $150 is credited toward it." },
-  { id: 'faq-diagnostic', q: 'What does the Website Diagnostic check?', a: "I check how your site works on phones, how fast it loads, how easily people find you on Google, your Google Business Profile and reviews, whether visitors can quickly tell what you do, and how easy it is to call, book, or buy. It works for any site, whoever built it. You get a short, plain-English report with what to fix first, in order, within 5 business days. The report is yours to use with any developer, and the $199 is credited toward a new website with me." },
 ];
 
 const schema = serviceSchema([
-  { name: 'Website Diagnostic', description: 'A check of how an existing site works on phones, how easily people find it on Google, how fast it loads, and what to fix first.', price: '$199' },
-  { name: 'Google Business Profile Setup', description: 'Create or claim a Google Business Profile and set up business details, categories, services, hours, photos, and verification.', price: '$500' },
-  { name: 'Google Business Profile Optimization', description: 'Review an existing Google Business Profile and improve its categories, description, services, attributes, photos, and website links.', price: '$500' },
   ...packages.map((p) => ({ name: `${p.name} website package`, description: p.blurb, price: p.price })),
   ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
-  ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
-  { name: 'Brand Essentials', description: 'Logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.', price: '$1,000' },
 ], '/websites/');
 
 const essentials = [
@@ -194,17 +187,12 @@ const audiences = [
           <p class="eyebrow" style="color: var(--tint)">Optional add-on</p>
           <h2>Brand Essentials</h2>
           <p>A recognizable, consistent visual identity that makes a strong first impression, ready for your website and beyond.</p>
-          <details class="brand-list">
-            <summary>See what's included</summary>
-            <ul class="ticks" style="color: var(--white)">
-              {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
-            </ul>
-          </details>
+          <p class="small"><a href="/websites/brand-essentials/" style="color: inherit; font-weight: 700">See what's included</a></p>
         </div>
         <div>
           <p class="price" style="font-size: 4rem">$1,000</p>
           <p>Flat rate. Add it to any website package.</p>
-          <a class="btn" href="/websites/?topic=brand#start">Ask about Brand Essentials</a>
+          <a class="btn" href="/websites/brand-essentials/#start">Ask about Brand Essentials</a>
         </div>
       </div>
     </div>
@@ -221,34 +209,16 @@ const audiences = [
           <div class="icon"><Icon name="wrench" size={36} /></div>
           <h3>I update it for you</h3>
           <p class="muted">Send me what to change and I take care of it.</p>
-          <div class="care-options">
-            {care.map((c) => (
-              <div class:list={['care-option', { featured: c.featured }]}>
-                <div class="care-head"><h4>{c.name}</h4><span class="care-price">{c.price}</span></div>
-                <p class="muted small">{c.text}</p>
-              </div>
-            ))}
-          </div>
+          <p><b style="color: var(--primary)">{care[0].price}</b></p>
         </div>
         <div class="card">
           <div class="icon"><Icon name="gear" size={36} /></div>
           <h3>You update it yourself</h3>
-          <p class="muted">Add a Content Editing Dashboard and change your text, photos, news, and events whenever you like, with no code and no waiting.</p>
-          <div class="care-options">
-            <div class="care-option featured">
-              <div class="care-head"><h4>Content Editing Dashboard</h4><span class="care-price">From $1,750</span></div>
-              <p class="muted small">Best if you update every week or post news, events, or a blog.</p>
-              <ul class="ticks small">
-                <li><Icon name="tick" size={16} />One-time setup, no monthly fee for most sites</li>
-                <li><Icon name="tick" size={16} />Up to 2 collections you add to over time, like news posts or events. More collections, quoted first.</li>
-                <li><Icon name="tick" size={16} />Training and an editor guide</li>
-                <li><Icon name="tick" size={16} />30 days of support after setup</li>
-              </ul>
-            </div>
-          </div>
-          <p class="small muted">Included in Complete Presence. For frequent updates, it can cost less over time than paying per update.</p>
+          <p class="muted">Add a Content Editing Dashboard and change your text, photos, news, and events whenever you like.</p>
+          <p><b style="color: var(--primary)">From $1,750, included in Complete Presence</b></p>
         </div>
       </div>
+      <p class="fine"><a class="more" href="/websites/help-after-launch/">How Help After Launch works <Icon name="arrow" size={16} /></a></p>
     </div>
   </section>
 
@@ -284,8 +254,8 @@ const audiences = [
         <div>
           <p class="price" style="font-size: 4rem">$199</p>
           <p>Credited toward your new website with me.</p>
-          <a class="btn" href="/websites/?topic=diagnostic#start">Request a Diagnostic</a>
-          <p class="small" style="margin-top: 14px"><a href="#faq-diagnostic" style="color: inherit; font-weight: 700">See what I check</a></p>
+          <a class="btn" href="/websites/diagnostic/#start">Request a Diagnostic</a>
+          <p class="small" style="margin-top: 14px"><a href="/websites/diagnostic/" style="color: inherit; font-weight: 700">See what I check</a></p>
           <p class="small" style="margin-top: 6px">Not sure yet? <a href="/website-check/" style="color: inherit; font-weight: 700">Take the free 2-minute website check</a>.</p>
         </div>
       </div>
@@ -298,8 +268,8 @@ const audiences = [
         <div>
           <p class="price" style="font-size: 4rem">$500</p>
           <p>Setup or optimization, one time. $150 credited toward a website with me within 6 months.</p>
-          <a class="btn" href="/websites/?topic=gbp#start">Ask about your profile</a>
-          <p class="small" style="margin-top: 14px"><a href="#faq-gbp" style="color: inherit; font-weight: 700">See what's included</a></p>
+          <a class="btn" href="/websites/google-business-profile/#start">Ask about your profile</a>
+          <p class="small" style="margin-top: 14px"><a href="/websites/google-business-profile/" style="color: inherit; font-weight: 700">See what's included</a></p>
           <p class="small" style="margin-top: 6px">Not sure yet? <a href="/google-profile-check/" style="color: inherit; font-weight: 700">Take the free Google profile check</a>.</p>
         </div>
       </div>

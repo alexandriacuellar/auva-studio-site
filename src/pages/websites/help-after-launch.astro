@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { care, serviceSchema, site } from '../../data/site';
+
+const atLaunch = [
+  { icon: 'chat', title: 'A walkthrough', text: 'I show you around your new site and answer your questions.' },
+  { icon: 'book', title: 'A how-to guide', text: 'Plain steps for the things you might want to do on your own.' },
+  { icon: 'wrench', title: '30 days of fixes and small tweaks', text: 'Anything that needs adjusting in the first month, at no extra cost.' },
+  { icon: 'key', title: 'Everything in your name', text: 'Your domain, hosting, and accounts, so you never depend on me to get in.' },
+];
+
+const updateExamples = ['Change your hours, prices, or menu', 'Swap or add photos', 'Edit text on a page', 'Add a team member, event, or testimonial', 'Update a form or a link'];
+
+const faqs = [
+  { q: 'What counts as one update?', a: 'Up to about 30 minutes of edits, sent together in one request. Changing your hours, swapping a few photos, and fixing a typo can all be one update if you send them at the same time. If a request will take longer, I tell you first.' },
+  { q: 'How do I send an update?', a: `Email me at ${site.email} with what to change, plus any new text or photos. Most updates are done within 2 business days.` },
+  { q: 'Why is there no monthly plan?', a: "Your site has no plugins that need constant upkeep, so there's nothing to pay for every month. You pay only when you need something. Sites with a Content Editing Dashboard or connected tools may need occasional upkeep, which I quote first." },
+  { q: 'How does the 5-pack work?', a: 'Five updates for $200 instead of $250. Use them whenever you like within 12 months.' },
+  { q: 'Should I get a Content Editing Dashboard instead?', a: 'If you update every week, or post news, events, or a blog, a dashboard usually costs less over time than paying per update. If you change things a few times a year, sending updates to me is simpler.' },
+  { q: 'What does my site cost to run?', a: 'Your domain is about $20 a year. Hosting is free or low cost for most sites, and it stays in your name.' },
+];
+
+const schema = serviceSchema([
+  ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
+  { name: 'Content Editing Dashboard', description: 'Update page text, photos, and collections like news or events yourself, with no code.', price: 'From $1,750' },
+], '/websites/help-after-launch/');
+---
+<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them, with no monthly plan: $50 per update or 5 for $200, or a Content Editing Dashboard so you can make changes yourself.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/websites/">Website Services</a>
+      <h1 class="mag-head">Help when you need it, <em>no monthly plan.</em></h1>
+      <p class="lede">Your site has no plugins that need constant upkeep, so there's nothing to pay for every month. Ask for updates when you need them, or make changes yourself.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Ask for an update</a>
+        <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Included with every website.</h2>
+      </div>
+      <div class="grid grid-4 plain-grid">
+        {atLaunch.map((a) => (
+          <div>
+            <div class="icon"><Icon name={a.icon} size={28} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="care">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">After that, you choose who makes the changes.</h2>
+      </div>
+      <div class="grid grid-2 care-paths">
+        <div class="card">
+          <div class="icon"><Icon name="wrench" size={36} /></div>
+          <h3>I update it for you</h3>
+          <p class="muted">Send me what to change and I take care of it.</p>
+          <div class="care-options">
+            {care.map((c) => (
+              <div class:list={['care-option', { featured: c.featured }]}>
+                <div class="care-head"><h4>{c.name}</h4><span class="care-price">{c.price}</span></div>
+                <p class="muted small">{c.text}</p>
+              </div>
+            ))}
+          </div>
+          <p class="small"><b>Common updates:</b></p>
+          <ul class="ticks small">{updateExamples.map((u) => <li><Icon name="tick" size={16} />{u}</li>)}</ul>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="gear" size={36} /></div>
+          <h3>You update it yourself</h3>
+          <p class="muted">Add a Content Editing Dashboard and change your text, photos, news, and events whenever you like, with no code and no waiting.</p>
+          <div class="care-options">
+            <div class="care-option featured">
+              <div class="care-head"><h4>Content Editing Dashboard</h4><span class="care-price">From $1,750</span></div>
+              <p class="muted small">Best if you update every week or post news, events, or a blog.</p>
+              <ul class="ticks small">
+                <li><Icon name="tick" size={16} />One-time setup, no monthly fee for most sites</li>
+                <li><Icon name="tick" size={16} />Up to 2 collections you add to over time, like news posts or events. More collections, quoted first.</li>
+                <li><Icon name="tick" size={16} />Training and an editor guide</li>
+                <li><Icon name="tick" size={16} />30 days of support after setup</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small muted">Included in Complete Presence. For frequent updates, it can cost less over time than paying per update.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <InquiryForm kind="website" topic="care" alt />
+</Base>

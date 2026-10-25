@@ -6,8 +6,9 @@
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean }
-const { kind, alt = false, hero = false } = Astro.props;
+// topic preselects the website choice on a service's own page, such as topic="gbp".
+interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean; topic?: string }
+const { kind, alt = false, hero = false, topic = 'website' } = Astro.props;
 const isWebsite = kind === 'website';
 const isAi = kind === 'ai';
 const isGeneral = kind === 'general';
@@ -20,6 +21,15 @@ const intro = isGeneral && !hero
   ? { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' }
   : { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' };
 const subject = isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isAi ? 'New AI & emerging tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com';
+const websiteTopics = [
+  ['website', 'A new website'],
+  ['improve', 'Improve my current site'],
+  ['store', 'An online store'],
+  ['diagnostic', 'Website Diagnostic ($199)'],
+  ['gbp', 'Google Business Profile ($500)'],
+  ['care', 'Help after launch (updates and fixes)'],
+  ['brand', 'Brand Essentials'],
+];
 const formAction = 'https://api.web3forms.com/submit';
 ---
 <section id="start" class:list={{ alt, hero }}>
@@ -80,13 +90,7 @@ const formAction = 'https://api.web3forms.com/submit';
             <div class="form-row">
               <label>What do you need?
                 <select name="topic">
-                  <option value="website">A new website</option>
-                  <option value="improve">Improve my current site</option>
-                  <option value="store">An online store</option>
-                  <option value="diagnostic">Website Diagnostic ($199)</option>
-                  <option value="gbp">Google Business Profile ($500)</option>
-                  <option value="care">Help after launch (updates and fixes)</option>
-                  <option value="brand">Brand Essentials</option>
+                  {websiteTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                 </select>
               </label>
               <label><span>Current website <span class="opt">(optional)</span></span><input type="url" name="website" placeholder="https://" /></label>

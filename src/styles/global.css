@@ -101,7 +101,7 @@ section { padding: 88px 0; }
 .card-row .icon { flex-shrink: 0; margin: 0; }
 a.card { text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
 a.card:hover { border-color: var(--primary); transform: translateY(-2px); }
-.card .more { color: var(--primary); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
+.card .more, .fine .more { color: var(--primary); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
 
 /* Packages */
 .packages { align-items: start; }
@@ -181,6 +181,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--p
 .site-footer h2 { font-size: 1rem; color: var(--white); }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .site-footer a { color: #c4d2f0; text-decoration: none; }
+.site-footer .footer-sub { padding-left: 14px; font-size: 0.92rem; }
 .site-footer a:hover { color: var(--white); }
 .footer-legal { border-top: 1px solid #22336e; margin-top: 40px; padding-top: 20px; font-size: 0.9rem; }
 .footer-legal p { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }

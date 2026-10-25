@@ -149,8 +149,8 @@ const choices = [
 
   const bands = [
     { min: 16, title: 'Your profile is in <em>good shape.</em>', text: "Keep up the monthly routine below. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
-    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]] },
-    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/google-business-profile/#start'], ['Book a free 30-minute call', booking, true]] },
+    { min: 0, title: 'Your profile may be <em>costing you customers.</em>', text: 'Start with the fixes below, or have me do it: Google Business Profile Optimization is $500, one time.', actions: [['Have me optimize it', '/websites/google-business-profile/#start'], ['Book a free 30-minute call', booking, true]] },
   ];
   const setupResult = {
     no: { title: "Let's get you <em>on the map.</em>", text: 'A profile is free and often the first thing people see. Follow the steps below, or have me set it up: Google Business Profile Setup is $500, one time.' },
@@ -214,7 +214,7 @@ const choices = [
       document.getElementById('score-line').hidden = true;
       document.getElementById('band-title').innerHTML = r.title;
       document.getElementById('band-text').textContent = r.text;
-      setActions([['Have me set it up', '/websites/?topic=gbp#start'], ['Book a free 30-minute call', booking, true]]);
+      setActions([['Have me set it up', '/websites/google-business-profile/#start'], ['Book a free 30-minute call', booking, true]]);
       send.score.value = 'No profile yet';
       send.answers.value = `Has a profile: ${path === 'no' ? 'No' : 'Not sure'}`;
     }
