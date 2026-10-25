@@ -87,6 +87,7 @@ const choices = [
           <h3>How to set up your profile</h3>
           <ol class="steps-list">{setupSteps.map((s) => <li>{s}</li>)}</ol>
           <p class="muted small">Setup takes about 30 minutes once you have your details and photos ready. Verification can take a few days.</p>
+          <a class="btn btn-ghost" href="/downloads/google-business-profile-guide.pdf" download>Download the setup guide (PDF)</a>
         </div>
 
         <div class="card" id="tips-card" hidden>
@@ -98,7 +99,7 @@ const choices = [
           <h3>Your 15-minute monthly routine</h3>
           <p class="muted">Once a month is enough for most small businesses. Search your business name on Google while signed in to edit your profile from the results.</p>
           <ul class="ticks">{monthly.map((m) => <li><Icon name="tick" size={18} />{m}</li>)}</ul>
-          <p class="small"><button type="button" class="link-btn" id="print">Print or save these steps as a PDF</button></p>
+          <a class="btn btn-ghost" id="guide-link" href="/downloads/google-business-profile-guide.pdf" download>Download the free guide (PDF)</a>
         </div>
 
         <div class="card no-print">
@@ -218,6 +219,8 @@ const choices = [
       send.answers.value = `Has a profile: ${path === 'no' ? 'No' : 'Not sure'}`;
     }
     document.getElementById('setup-card').hidden = path === 'yes';
+    // The setup card has its own download button, so show one link per path.
+    document.getElementById('guide-link').hidden = path !== 'yes';
     document.getElementById('tips-card').hidden = !tips.children.length;
     results.hidden = false;
     // Show the result cards at once instead of waiting for the scroll fade-in.
@@ -227,7 +230,6 @@ const choices = [
   });
 
   document.getElementById('retake').addEventListener('click', () => { results.hidden = true; });
-  document.getElementById('print').addEventListener('click', () => window.print());
 
   const send = document.getElementById('send');
   const status = send.querySelector('.form-status');
@@ -280,12 +282,11 @@ const choices = [
   .tips :global(li) { display: grid; gap: 4px; padding-left: 16px; border-left: 3px solid var(--bright); }
   .tips :global(span) { color: var(--muted); }
   .steps-list { margin: 0 0 12px; padding-left: 22px; display: grid; gap: 10px; }
-  .link-btn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: var(--primary); text-decoration: underline; cursor: pointer; }
   .inquiry { margin-top: 16px; }
   @media (max-width: 640px) { .check-foot .btn { width: 100%; justify-content: center; } }
   /* Printing keeps the steps and tips, not the page chrome or the form. */
   @media print {
-    :global(.site-header), :global(.site-footer), :global(.promo-bar), .hero, #check, .no-print, .score-card .hero-actions, .link-btn { display: none !important; }
+    :global(.site-header), :global(.site-footer), :global(.promo-bar), .hero, #check, .no-print, .score-card .hero-actions { display: none !important; }
     section.alt { padding: 0; background: none; }
     .results .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
   }
