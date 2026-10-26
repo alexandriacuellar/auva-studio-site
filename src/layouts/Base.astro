@@ -31,7 +31,8 @@ const schema = {
       contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: site.email, url: `${site.url}/contact/`, areaServed: 'US', availableLanguage: 'English' },
       priceRange: '$$',
       founder: { '@id': `${site.url}/#founder` },
-      sameAs: site.social.map((s) => s.href),
+      sameAs: [...site.social.map((s) => s.href), site.googleProfile],
+      hasMap: site.googleProfile,
       knowsAbout: ['Website design and development', 'Astro', 'Technology consulting', 'Business analysis', 'Technical project management', 'AI adoption', 'AI & Emerging Tech', 'XR and immersive experiences', 'Game production', 'Search engine optimization', 'Google Business Profile'],
     },
     {
