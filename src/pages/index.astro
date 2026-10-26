@@ -16,7 +16,7 @@ const situations = [
   { title: 'You see an AI opportunity', text: 'You want AI that saves real time, not AI for its own sake.', href: '/ai-emerging-tech/#ai-team', icon: 'bolt' },
   { title: 'You have an emerging-tech idea', text: 'An early concept, prototype, or immersive experience you want to test.', href: '/ai-emerging-tech/#xr', icon: 'layers' },
 ];
-const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', 'Found on Google and AI search'];
+const strip = ['Published prices', 'Written quote before work starts', 'You own everything', 'Work with me directly'];
 ---
 <Base>
   <section class="hero bd-hero">
@@ -134,7 +134,7 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
         <p><a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a></p>
         <div class="name-note">
           <h3><span class="name-star" aria-hidden="true"></span>What's in a name?</h3>
-          <p class="muted">Auva takes its name from Delta Virginis, a red giant star in the constellation Virgo, about 198 light-years from Earth. It's the amber star at the end of every set of steps on this site.</p>
+          <p class="muted">The amber star at the end of every set of steps is Auva, or Delta Virginis (officially Minelauva), a cool red giant star in the constellation Virgo.</p>
           <p class="name-line">A little inspiration from the stars, a little curiosity about what's possible.</p>
         </div>
       </div>
@@ -149,10 +149,6 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
   .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
   .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
   .bd-hero-inner .hero-actions { justify-content: center; }
-  .hero-strip { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; font-size: 0.95rem; color: var(--muted); }
-  .hero-strip li { display: inline-flex; align-items: center; gap: 6px; }
-  .hero-strip svg { color: var(--success); flex: none; }
-  @media (max-width: 640px) { .hero-strip { display: grid; grid-template-columns: auto auto; justify-content: center; text-align: left; font-size: 0.88rem; gap: 6px 16px; } }
   .bd-hero h1 { max-width: 15ch; }
 
   .bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
