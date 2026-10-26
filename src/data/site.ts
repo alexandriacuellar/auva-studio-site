@@ -92,7 +92,7 @@ export const journey = [
 export const samples = [
   { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.', goodFor: 'Good for trades and home services, like contractors, cleaners, landscapers, and repair shops.' },
   { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.', goodFor: 'Good for farms, inns, wineries, and businesses with several services or experiences to show.' },
-  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a Content Editing Dashboard, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
+  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a CMS, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
 ];
 
 export const packages = [
@@ -119,7 +119,7 @@ export const packages = [
       { label: 'Design and build', items: ['Up to 10 pages', 'Up to 3 page designs', '3 revision rounds'] },
       { label: 'Found online', items: ['Visitor stats that show which pages bring in calls and messages'] },
     ],
-    extra: 'Add a Content Editing Dashboard from $1,750',
+    extra: 'Add a CMS from $1,750',
     timeline: '3–5 weeks',
   },
   {
@@ -130,7 +130,7 @@ export const packages = [
     includes: 'Everything in Expanded, plus:',
     groups: [
       { label: 'Design and build', items: ['Up to 20 pages', 'Up to 6 page designs', '4 revision rounds'] },
-      { label: 'Update it yourself', items: ['A Content Editing Dashboard to update text, photos, news, or events yourself'] },
+      { label: 'Update it yourself', items: ['A CMS to update your text, photos, news, or events yourself'] },
       { label: 'Found online', items: ['A search checkup 30 days after launch'] },
     ],
     timeline: '6+ weeks',
@@ -148,7 +148,7 @@ export const comparison = {
 };
 
 export const addons = [
-  { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
+  { icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
   { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
 ];
@@ -173,7 +173,7 @@ export const process = [
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
   { name: 'Updates and fixes', price: '$50 each, or a pack of 5 for $200', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A pack of 5 is used within 12 months.' },
-  { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
+  { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
 
 
