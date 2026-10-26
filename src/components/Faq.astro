@@ -1,5 +1,5 @@
 ---
-interface Props { faqs: { q: string; a: string; id?: string }[]; title?: string; lede?: string; alt?: boolean }
+interface Props { faqs: { q: string; a: string; html?: string; id?: string }[]; title?: string; lede?: string; alt?: boolean }
 const { faqs, title = 'Before you <em>reach out.</em>', lede, alt = false } = Astro.props;
 // FAQ data helps search engines and AI tools quote these answers directly.
 const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
@@ -14,7 +14,7 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
       {faqs.map((f) => (
         <details class="card" id={f.id}>
           <summary>{f.q}</summary>
-          <p class="muted">{f.a}</p>
+          {f.html ? <p class="muted" set:html={f.html} /> : <p class="muted">{f.a}</p>}
         </details>
       ))}
     </div>
