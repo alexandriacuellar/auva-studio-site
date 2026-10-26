@@ -63,7 +63,7 @@ export const categories = [
     text: 'Explore AI, XR, and interactive ideas with small, low-risk steps.',
     items: ['AI Readiness Plan', 'Team AI Workshop', 'Feasibility reviews and prototypes', 'Production support'],
     href: '/ai-emerging-tech/',
-    cta: 'Explore AI & emerging tech',
+    cta: 'Explore AI & Emerging Tech',
   },
 ];
 
