@@ -7,7 +7,7 @@ import PayBar from '../../components/PayBar.astro';
 import { serviceSchema } from '../../data/site';
 
 const offers = [
-  { icon: 'star', name: 'Setup', price: '$500', who: "For a business with no profile yet, or one you can't sign in to.", items: ['Create or claim your profile', 'Your business name, address or service area, phone, and website link', 'Categories, services, and hours', 'Your photos added', "Help through Google's verification"] },
+  { icon: 'star', name: 'Setup', cta: 'Get set up', price: '$500', who: "For a business with no profile yet, or one you can't sign in to.", items: ['Create or claim your profile', 'Your business name, address or service area, phone, and website link', 'Categories, services, and hours', 'Your photos added', "Help through Google's verification"] },
   { icon: 'wrench', name: 'Optimization', price: '$500', who: 'For a profile you already have that could be working harder.', items: ['A review of your whole profile', 'Better categories and description', 'Services, attributes, and hours checked', 'Photos and website links improved', 'Fixes for anything that breaks Google’s rules'] },
 ];
 
@@ -64,7 +64,7 @@ const schema = serviceSchema([
             <p class="price">{o.price}</p>
             <p class="muted">{o.who}</p>
             <ul class="ticks">{o.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-            <a class="btn" href="#start">Get {o.name.toLowerCase()}, {o.price}</a>
+            <a class="btn" href="#start">{o.cta ?? `Get ${o.name.toLowerCase()}`}, {o.price}</a>
           </div>
         ))}
       </div>
