@@ -44,6 +44,8 @@ export function GET() {
     `- Book a free 30-minute call: ${site.booking}`,
     `- Contact page: ${site.url}/contact/`,
     `- Email: ${site.email} (replies within 24–48 hours)`,
+    `- Google Business Profile: ${site.googleProfile}`,
+    ...site.social.map((x) => `- ${x.name}: ${x.href}`),
     '',
   ];
   return new Response(lines.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
