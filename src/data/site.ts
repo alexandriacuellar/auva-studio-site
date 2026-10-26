@@ -90,9 +90,9 @@ export const journey = [
 
 // Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
 export const samples = [
-  { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.' },
-  { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.' },
-  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a Content Editing Dashboard, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.' },
+  { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.', goodFor: 'Good for trades and home services, like contractors, cleaners, landscapers, and repair shops.' },
+  { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.', goodFor: 'Good for farms, inns, wineries, and businesses with several services or experiences to show.' },
+  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a Content Editing Dashboard, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
 ];
 
 export const packages = [
