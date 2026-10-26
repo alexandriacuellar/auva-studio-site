@@ -92,16 +92,6 @@ const audiences = [
         <p class="lede">Each package builds on the one before it, so you only pay for what you need today. Every package includes a clear home page, your services, reasons to trust you, and an easy next step.</p>
       </div>
       <Packages />
-      <div class="proof">
-        <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
-        <div>
-          <p class="proof-line">I spent nearly 20 years building websites and digital products for newspaper companies. Your site gets the same care, from the first call to launch.</p>
-          <figure class="quote quote-inline">
-            <blockquote>“{featured.quote}”</blockquote>
-            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-          </figure>
-        </div>
-      </div>
       <PaybackCalc />
     </div>
   </section>
@@ -130,7 +120,28 @@ const audiences = [
     </div>
   </section>
 
-  <section id="compare">
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
+        <p class="lede">You work directly with me from start to finish, with a short progress update every week. Your website agreement spells out every detail.</p>
+      </div>
+      <ol class="steps steps-4">
+        {process.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <p class="you"><b>You:</b> {s.you}</p>
+            <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+      <p class="fine">The steps are the same for every package. Smaller sites move through them faster, and larger sites take a little longer.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="compare">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
@@ -144,10 +155,20 @@ const audiences = [
       <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
       <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Based on real-world performance data from <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and the <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
       <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
+      <div class="proof proof-why">
+        <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
+        <div>
+          <p class="proof-line">I spent nearly 20 years building websites and digital products for newspaper companies. Your site gets the same care, from the first call to launch.</p>
+          <figure class="quote quote-inline">
+            <blockquote>“{featured.quote}”</blockquote>
+            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Add more <em>when you need it.</em></h2>
@@ -178,7 +199,7 @@ const audiences = [
     </div>
   </section>
 
-  <section id="care">
+  <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
@@ -199,27 +220,6 @@ const audiences = [
         </div>
       </div>
       <p style="margin-top: 28px"><a class="btn" href="/websites/help-after-launch/">See how updates work</a></p>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
-        <p class="lede">You work directly with me from start to finish, with a short progress update every week. Your website agreement spells out every detail.</p>
-      </div>
-      <ol class="steps steps-4">
-        {process.map((s, i) => (
-          <li>
-            <span class="num" aria-hidden="true">{i + 1}</span>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-            <p class="you"><b>You:</b> {s.you}</p>
-            <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-          </li>
-        ))}
-      </ol>
-      <p class="fine">The steps are the same for every package. Smaller sites move through them faster, and larger sites take a little longer.</p>
     </div>
   </section>
 
