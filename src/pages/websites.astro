@@ -34,12 +34,6 @@ const schema = serviceSchema([
   ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
 ], '/websites/');
 
-const essentials = [
-  { icon: 'globe', title: 'A clear first impression', text: 'A welcoming home page that says who you are and who you help.' },
-  { icon: 'star', title: 'Your services, explained', text: 'What you offer, how it works, and what it costs to get started.' },
-  { icon: 'check', title: 'Reasons to trust you', text: 'Your story, experience, testimonials, and credentials.' },
-  { icon: 'mail', title: 'An obvious next step', text: 'Inquiry forms, contact details, and the areas you serve.' },
-];
 
 const audiences = [
   { id: 'hospitality', icon: 'star', title: 'Hospitality & Tourism', who: 'Inns, B&Bs, restaurants, wineries, breweries, and farms.', text: 'Menus, rooms, hours, and events that are easy to find on a phone, with links to your booking or reservation system.' },
@@ -91,45 +85,11 @@ const audiences = [
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Everything <em>your visitors are looking for.</em></h2>
-      </div>
-      <div class="grid grid-4 plain-grid">
-        {essentials.map((e) => (
-          <div>
-            <div class="icon"><Icon name={e.icon} size={28} /></div>
-            <h3>{e.title}</h3>
-            <p class="muted">{e.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="alt" id="compare">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
-        <p class="lede">I build every site with Astro, a modern tool for fast, lightweight websites. It keeps your site fast and my prices fair.</p>
-      </div>
-      <div class="grid grid-3 plain-grid">
-        {comparison.benefits.map((b) => (
-          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
-        ))}
-      </div>
-      <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
-      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Based on real-world performance data from <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and the <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
-      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
-    </div>
-  </section>
-
   <section id="packages">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Choose <em>the right package.</em></h2>
-        <p class="lede">Each package builds on the one before it, so you only pay for what you need today.</p>
+        <p class="lede">Each package builds on the one before it, so you only pay for what you need today. Every package includes a clear home page, your services, reasons to trust you, and an easy next step.</p>
       </div>
       <Packages />
       <div class="proof">
@@ -170,7 +130,24 @@ const audiences = [
     </div>
   </section>
 
-  <section>
+  <section id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
+        <p class="lede">I build every site with Astro, a modern tool for fast, lightweight websites. It keeps your site fast and my prices fair.</p>
+      </div>
+      <div class="grid grid-3 plain-grid">
+        {comparison.benefits.map((b) => (
+          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+        ))}
+      </div>
+      <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
+      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Based on real-world performance data from <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and the <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
+      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
+    </div>
+  </section>
+
+  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Add more <em>when you need it.</em></h2>
@@ -201,7 +178,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt" id="care">
+  <section id="care">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
@@ -225,7 +202,7 @@ const audiences = [
     </div>
   </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">A clear process <em>from discovery to launch.</em></h2>
