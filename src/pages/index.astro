@@ -78,7 +78,7 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
               {c.href === '/websites/' && <Image src={siteMockup} alt="A sample nonprofit website shown on a laptop and a phone on a sunny desk" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
             </div>
             <div class="bd-body">
-              <span class="bd-tag">{c.href === '/websites/' ? 'Websites' : c.href === '/ai-emerging-tech/' ? 'AI & Emerging Tech' : 'Consulting'}</span>
+              <span class="bd-tag">{c.href === '/websites/' ? 'From $1,500' : c.href === '/ai-emerging-tech/' ? 'From $500' : 'From $65/hr'}</span>
               <h3 style={`view-transition-name: svc-${c.href.replaceAll('/', '')}`}>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
