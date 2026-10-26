@@ -385,6 +385,8 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .samples .tag { font-size: 0.9rem; font-weight: 700; color: var(--muted); }
 .samples h3 { margin: 4px 0 2px; }
 .samples .sample-for { font-size: 0.95rem; font-weight: 600; }
+.hero-checks { margin: 14px 0 0; font-size: 0.95rem; color: var(--muted); }
+.hero-checks a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .sample-go { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--primary); }
 .sample:hover .sample-go { text-decoration: underline; }
 .package .sample-link { font-weight: 600; color: var(--primary); }

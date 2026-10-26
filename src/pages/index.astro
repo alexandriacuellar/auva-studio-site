@@ -28,6 +28,7 @@ const strip = ['Fixed prices', 'Fast, accessible sites', 'You own everything', '
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
+      <p class="hero-checks">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
       <figure class="bd-stage">
         <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
