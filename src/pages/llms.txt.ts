@@ -7,7 +7,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, plan and deliver projects, and explore AI & Emerging Tech. Founded by Alexandria Cuellar, a digital technology and solutions consultant with 20+ years in technology, nearly 20 years building websites and digital products for newspaper companies, and 14+ VR experiences and mobile games produced for indie game studios.`,
+    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, plan and deliver projects, and explore AI & Emerging Tech. Founded by Alexandria Cuellar, a digital technology and solutions consultant, web producer, and game and XR producer with 20+ years in technology, nearly 20 years building websites and digital products for newspaper companies, and 14+ VR experiences and mobile games produced for indie game studios.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
@@ -15,7 +15,7 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each with no monthly plan`,
-    `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership`,
+    `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership, web producer and game or XR producer support`,
     `- [AI & Emerging Tech](${site.url}/ai-emerging-tech/): AI readiness, team workshops, concept and feasibility reviews, prototypes, XR and game production support`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
     '',
