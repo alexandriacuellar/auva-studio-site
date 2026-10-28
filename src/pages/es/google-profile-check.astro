@@ -19,7 +19,7 @@ const questions = [
   { q: '¿Revisa su perfil al menos una vez al mes?', tip: 'Cualquiera puede sugerir cambios a su perfil, y a veces Google los aplica. Una revisión mensual detecta cambios equivocados y preguntas nuevas.' },
 ];
 const setupSteps = [
-  'Busque el nombre de su negocio en Google Maps. Si ya existe una ficha, elija "¿Es el propietario de esta empresa?" para reclamarla en lugar de crear una nueva.',
+  'Busque el nombre de su negocio en Google Maps. Si ya existe una ficha, elija "Reclamar esta empresa" en lugar de crear una nueva.',
   'Vaya a google.com/business e inicie sesión con una cuenta de Google que vaya a conservar, de preferencia el correo de su negocio.',
   'Escriba el nombre de su negocio exactamente como aparece en su letrero, y elija la categoría que mejor describa lo que hace.',
   'Agregue su dirección si los clientes le visitan. Si usted va a ellos, oculte su dirección y ponga los pueblos y ciudades que atiende.',
@@ -33,13 +33,13 @@ const choices = [
   { label: 'No', value: 0 },
 ];
 ---
-<Base title="Revisión gratis de su perfil de Google" description="Responda unas preguntas rápidas sobre su Perfil de Empresa en Google y vea qué arreglar primero, o cómo crear uno.">
+<Base title="Revisión gratis de su perfil de Google" description="Responda unas preguntas rápidas sobre su Perfil de Negocio de Google y vea qué arreglar primero, o cómo crear uno.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Revisión gratis de su perfil de Google</p>
       <h1 class="mag-head">¿Su perfil de Google <em>trabaja para usted?</em></h1>
-      <p class="lede">Responda unas preguntas rápidas sobre su Perfil de Empresa en Google. Toma unos 2 minutos, y verá al instante su puntuación y qué arreglar primero.</p>
-      <p class="hero-note">Gratis. Sin dar su correo. Incluye una guía gratuita en PDF (en inglés) para quedarse.</p>
+      <p class="lede">Responda unas preguntas rápidas sobre su Perfil de Negocio de Google. Toma unos 2 minutos, y verá al instante su puntuación y qué arreglar primero.</p>
+      <p class="hero-note">Gratis. Sin dar su correo. Incluye una guía gratuita en PDF para quedarse.</p>
     </div>
   </section>
 
@@ -49,7 +49,7 @@ const choices = [
         <ol class="check-list">
           <li>
             <fieldset>
-              <legend>¿Su negocio ya tiene un Perfil de Empresa en Google?</legend>
+              <legend>¿Su negocio ya tiene un Perfil de Negocio de Google?</legend>
               <div class="choices">
                 <label><input type="radio" name="has" value="yes" required /><span>Sí</span></label>
                 <label><input type="radio" name="has" value="unsure" /><span>No sé</span></label>
@@ -89,7 +89,7 @@ const choices = [
           <h3>Cómo crear su perfil</h3>
           <ol class="steps-list">{setupSteps.map((s) => <li>{s}</li>)}</ol>
           <p class="muted small">La configuración toma unos 30 minutos una vez que tenga listos sus datos y fotos. La verificación puede tardar unos días.</p>
-          <a class="btn btn-ghost" href="/downloads/google-business-profile-guide.pdf" download hreflang="en">Descargar la guía de configuración (PDF, en inglés)</a>
+          <a class="btn btn-ghost" href="/downloads/google-business-profile-guide-es.pdf" download>Descargar la guía de configuración (PDF)</a>
         </div>
 
         <div class="card" id="tips-card" hidden>
@@ -101,12 +101,12 @@ const choices = [
           <h3>Su rutina mensual de 15 minutos</h3>
           <p class="muted">Una vez al mes es suficiente para la mayoría de los pequeños negocios. Busque el nombre de su negocio en Google con su sesión iniciada para editar su perfil desde los resultados.</p>
           <ul class="ticks">{monthly.map((m) => <li><Icon name="tick" size={18} />{m}</li>)}</ul>
-          <a class="btn btn-ghost" id="guide-link" href="/downloads/google-business-profile-guide.pdf" download hreflang="en">Descargar la guía gratis (PDF, en inglés)</a>
+          <a class="btn btn-ghost" id="guide-link" href="/downloads/google-business-profile-guide-es.pdf" download>Descargar la guía gratis (PDF)</a>
         </div>
 
         <div class="card offer-card no-print">
           <p class="eyebrow">¿Prefiere que lo haga yo?</p>
-          <h3 id="offer-title">Optimización del Perfil de Empresa en Google</h3>
+          <h3 id="offer-title">Optimización del Perfil de Negocio de Google</h3>
           <p class="price">$500</p>
           <p class="muted" id="offer-text">Arreglo todo lo que marcó esta revisión, y más: categorías, descripción, servicios, fotos y enlaces. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.</p>
           <div class="hero-actions">
@@ -163,11 +163,11 @@ const choices = [
 
   const bands = [
     { min: 16, title: 'Su perfil está <em>en buena forma.</em>', text: 'Siga con la rutina mensual de abajo. Reserve una llamada gratis de 30 minutos si quiere una segunda opinión.', actions: [['Reservar una llamada gratis sobre mis resultados', booking, true]] },
-    { min: 9, title: 'Unos cuantos arreglos harían <em>una diferencia real.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Empresa en Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
-    { min: 0, title: 'Su perfil podría estar <em>costándole clientes.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Empresa en Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 9, title: 'Unos cuantos arreglos harían <em>una diferencia real.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Negocio de Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 0, title: 'Su perfil podría estar <em>costándole clientes.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Negocio de Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
   ];
   const setupResult = {
-    no: { title: 'Pongamos su negocio <em>en el mapa.</em>', text: 'Un perfil es gratis y muchas veces es lo primero que ve la gente. Siga los pasos de abajo, o deje que lo configure yo: la Configuración del Perfil de Empresa en Google cuesta $500, pago único.' },
+    no: { title: 'Pongamos su negocio <em>en el mapa.</em>', text: 'Un perfil es gratis y muchas veces es lo primero que ve la gente. Siga los pasos de abajo, o deje que lo configure yo: la Configuración del Perfil de Negocio de Google cuesta $500, pago único.' },
     unsure: { title: 'Primero, averigüe si <em>ya tiene uno.</em>', text: 'Busque el nombre de su negocio en Google Maps. A veces Google crea una ficha por su cuenta, y usted puede reclamarla. Si no aparece nada, siga los pasos de abajo, o deje que lo configure yo por $500.' },
   };
   const labels = { 2: 'Sí', 1: 'No sé', 0: 'No' };
@@ -239,7 +239,7 @@ const choices = [
       send.answers.value = `Tiene perfil: ${path === 'no' ? 'No' : 'No sé'}`;
     }
     const isSetup = path !== 'yes';
-    document.getElementById('offer-title').textContent = isSetup ? 'Configuración del Perfil de Empresa en Google' : 'Optimización del Perfil de Empresa en Google';
+    document.getElementById('offer-title').textContent = isSetup ? 'Configuración del Perfil de Negocio de Google' : 'Optimización del Perfil de Negocio de Google';
     document.getElementById('offer-text').textContent = isSetup
       ? 'Sáltese los pasos de configuración. Creo o reclamo su perfil, agrego sus datos, servicios, horario y fotos, y le acompaño en la verificación de Google. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.'
       : 'Arreglo todo lo que marcó esta revisión, y más: categorías, descripción, servicios, fotos y enlaces. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.';
