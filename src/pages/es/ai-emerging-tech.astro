@@ -1,0 +1,160 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/ai-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, testimonials, aiOffers as offers, serviceSchema } from '../../data/site.es';
+
+const faqs = [
+  { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los Planes de Preparación y los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini aplicadas a su trabajo real.' },
+  { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada Plan de Preparación cubre los riesgos de privacidad y de calidad, y recomienda herramientas que se ajusten a sus reglas.' },
+  { q: '¿Cuál es la diferencia entre el Plan de Preparación para IA y la Evaluación Tecnológica?', a: 'El Plan de Preparación se enfoca solo en la IA. La Evaluación revisa todos sus sistemas y herramientas. Ambos cuestan $650, con tres sesiones de una hora y un plan por escrito.' },
+  { q: '¿Un prototipo queda listo para lanzarse?', a: 'No. Un prototipo es una prueba de concepto. Responde una sola pregunta con elementos visuales provisionales, para que usted decida si construirlo, cambiarlo o detenerse antes de invertir más.' },
+  { q: '¿Produce experiencias XR o videojuegos completos?', a: 'Los planifico y los gestiono. El Apoyo de Producción da a los equipos de XR, videojuegos y experiencias inmersivas el respaldo de una productora, y los prototipos XR se construyen con un desarrollador colaborador.' },
+];
+
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ai-emerging-tech/');
+
+const audiences = [
+  { icon: 'bulb', title: 'Pequeños negocios y organizaciones sin fines de lucro', text: 'Le da curiosidad la IA, pero no sabe dónde le ayuda, en qué herramientas confiar ni cómo lograr que su equipo las use.' },
+  { icon: 'mail', title: 'Oficinas profesionales', text: 'Contadores, despachos de abogados, bienes raíces, seguros y agencias con mucho correo, muchos documentos y preguntas repetidas. Encuentre dónde la IA puede ahorrarle tiempo a su equipo.' },
+  { icon: 'key', title: 'Startups', text: 'Equipos con una idea de producto con IA. Pruebe un chatbot o una función de IA con usuarios reales antes de construir todo.' },
+  { icon: 'star', title: 'Estudios creativos, de XR y de videojuegos', text: 'Necesita estructura de producción, revisiones de viabilidad o una productora con experiencia sin contratar a nadie de tiempo completo.' },
+  { icon: 'book', title: 'Museos, educadores y organizaciones culturales', text: 'Está planificando una experiencia inmersiva o interactiva y quiere un alcance realista antes de comprometerse.' },
+  { icon: 'globe', title: 'Recintos, marcas y turismo', text: 'Atracciones, espacios para eventos, comercios y centros de visitantes que planifican una experiencia inmersiva o interactiva. Conozca el presupuesto antes de comprometerse.' },
+];
+
+const sprint = [
+  { title: 'Definir', text: 'Acordamos la única pregunta que debe responder el prototipo y cómo se ve el éxito.' },
+  { title: 'Construir', text: 'Creo una versión pequeña y funcional, con un desarrollador colaborador cuando hace falta, usando herramientas existentes siempre que se pueda.' },
+  { title: 'Probar', text: 'Usted y algunos usuarios reales lo prueban, y yo reúno lo que funcionó y lo que no.' },
+  { title: 'Decidir', text: 'Recibe un breve informe con una recomendación: construirlo, cambiarlo o detenerse aquí, antes de invertir más.' },
+];
+
+const glance = [
+  { name: 'Taller de IA para Equipos', note: '2 horas, hasta 10 personas', price: 'Desde $500' },
+  { name: 'Plan de Preparación para IA', note: '3 sesiones y un plan por escrito', price: '$650' },
+  { name: 'Sprint de Prototipo de IA', note: 'Un chatbot o flujo de trabajo con IA, 2–3 semanas', price: 'Desde $2,500' },
+  { name: 'Revisión de Concepto y Viabilidad', note: 'Si es viable, un presupuesto aproximado y el equipo que hace falta, unas 2 semanas', price: '$650' },
+  { name: 'Sprint de Prototipo XR', note: '4–6 semanas, con un desarrollador colaborador', price: 'Desde $7,500' },
+  { name: 'Apoyo de Producción, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
+  { name: 'Apoyo de Producción, según lo necesite', price: '$65/hora' },
+];
+
+const groups = [
+  { key: 'ai', id: 'ai-team', title: 'IA para su equipo', text: 'Para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento que quieren usar la IA en el trabajo que ya hacen.' },
+  { key: 'xr', id: 'xr', title: 'XR, videojuegos e interactivos', text: 'Para estudios, museos, educadores y recintos que planean crear algo nuevo.' },
+];
+
+const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
+---
+<Base title="IA y Tecnología Emergente" seoTitle="IA y Tecnología Emergente: consultoría, talleres y prototipos | Auva Studio" schema={schema} description="IA práctica para pequeños negocios y equipos, además de revisiones de viabilidad, prototipos y apoyo de producción para proyectos de XR, videojuegos y experiencias interactivas.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill" style="view-transition-name: svc-ai">IA y Tecnología Emergente</p>
+      <h1 class="mag-head">Tecnología nueva, <em>sin experimentos costosos.</em></h1>
+      <p class="lede">La IA, la XR y las herramientas interactivas pueden abrir oportunidades reales, o convertirse en experimentos costosos. Le ayudo a encontrar dónde encaja de verdad la tecnología nueva, a probar ideas a pequeña escala y a avanzar con un plan claro.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
+      </div>
+      <nav class="bd-sublinks" aria-label="Servicios de IA y Tecnología Emergente">
+        <a href="#ai-team">IA para su equipo</a>
+        <a href="#xr">XR, videojuegos e interactivos</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Para equipos que exploran <em>lo que viene.</em></h2>
+      </div>
+      <div class="grid grid-3 who who-ai">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted ai-who-text">{a.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="offers">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Empiece en pequeño, <em>aprenda rápido.</em></h2>
+        <p class="lede">Cada servicio tiene un alcance y un precio claros, para que pueda explorar sin un gran compromiso.</p>
+      </div>
+      {groups.map((g) => (
+        <div class="offer-group" id={g.id}>
+          <h3 class="offer-group-title">{g.title}</h3>
+          <p class="muted">{g.text}</p>
+          <div class="grid grid-3">
+            {offers.filter((o) => o.group === g.key).map((o) => (
+              <div class="card offer" id={o.id}>
+                <div class="icon"><Icon name={o.icon} size={32} /></div>
+                <h3>{o.title}</h3>
+                <p class="muted">{o.text}</p>
+                <a class="more" href={`/es/ai-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+      <h3 class="glance-title">Precios de un vistazo</h3>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="alt" id="sprint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Pruebe la idea <em>antes de invertir en ella.</em></h2>
+        <p class="lede">Los prototipos son pruebas de concepto. Responden una sola pregunta, usan elementos visuales provisionales y no están listos para lanzarse al público.</p>
+      </div>
+      <ol class="steps steps-4">
+        {sprint.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Experiencia de producción <em>en videojuegos, XR y trabajo interactivo.</em></h2>
+        <p class="lede">He dirigido proyectos para estudios independientes de videojuegos, equipos de XR e interactivos, y organizaciones creativas, gestionando flujos de trabajo Agile, documentación de diseño, calendarios y equipos de personas muy creativas. Esa experiencia en producción mantiene los experimentos enfocados y con los pies en lo que de verdad se puede lanzar.</p>
+        <div class="stats">
+          <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
+        </div>
+        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> XR y videojuegos: Unity, Meta Quest. IA: ChatGPT, Claude, Gemini. Automatización: Zapier.</p>
+      </div>
+      <div class="values">
+        {quotes.map((t) => (
+          <figure class="card quote" lang="en">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" />
+</Base>

@@ -1,14 +1,98 @@
 ---
 import '../styles/global.css';
-import { site, nav } from '../data/site';
+import * as en from '../data/site';
+import * as es from '../data/site.es';
 import Icon from '../components/Icon.astro';
+import { langFromPath, switchPath, localize, translatedPages, basePath } from '../i18n';
 
 interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[] }
-const { title, seoTitle, schema: pageSchema = [], description = 'Websites you own, technology consulting, and AI & Emerging Tech for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.' } = Astro.props;
-// seoTitle is the full browser-tab and search-result title when a page wants more than "Title | Auva Studio".
-const fullTitle = seoTitle ?? (title ? `${title} | ${site.name}` : `Websites, Technology Consulting, AI & Emerging Tech | ${site.name}`);
 const path = Astro.url.pathname;
+const lang = langFromPath(path);
+const { site, nav } = lang === 'es' ? es : en;
+const l = (href: string) => localize(href, lang);
+// Header, footer, and page-wide wording in each language.
+const t = {
+  en: {
+    description: 'Websites you own, technology consulting, and AI & Emerging Tech for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
+    defaultTitle: 'Websites, Technology Consulting, AI & Emerging Tech',
+    ogImageAlt: 'Auva Studio: make technology work for your business',
+    skip: 'Skip to content',
+    promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review.',
+    promoShort: '<b>Founding offer:</b> 10% off websites.',
+    promoLink: 'Ask about it',
+    promoLinkShort: 'Ask about it',
+    home: 'Auva Studio home',
+    menu: 'Menu',
+    close: 'Close',
+    navLabel: 'Main',
+    getInTouch: 'Get in touch',
+    switchLabel: 'Español',
+    switchTitle: 'Ver este sitio en español',
+    founded: 'Founded by Alexandria Cuellar, digital technology and solutions consultant.',
+    socialLabel: (name: string) => `Auva Studio on ${name}`,
+    services: 'Services',
+    footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/technology-consulting/', 'Consulting & Project Support'], ['/ai-emerging-tech/', 'AI & Emerging Tech']],
+    getStarted: 'Get started',
+    contact: 'Contact',
+    bookCall: 'Book a call',
+    websiteCheck: 'Free website check',
+    profileCheck: 'Free Google profile check',
+    serviceArea: 'Service area',
+    counties: (c: string) => `${c} counties`,
+    nyc: 'New York City',
+    remote: 'And remote, anywhere in the US',
+    rights: 'All rights reserved.',
+    based: 'Mid-Hudson Valley, NY. Remote and in person.',
+    privacy: 'Privacy Policy',
+    bookedFrom: (page: string) => `Booked from the ${page} page on auvastudio.com`,
+    about: ', about: ',
+  },
+  es: {
+    description: 'Sitios web que son suyos, consultoría tecnológica, e IA y Tecnología Emergente para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Valle del Hudson.',
+    defaultTitle: 'Sitios web, consultoría tecnológica, IA y Tecnología Emergente',
+    ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
+    skip: 'Ir al contenido',
+    promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña.',
+    promoShort: '<b>Fundadores:</b> 10% en sitios web.',
+    promoLink: 'Pregunte por ella',
+    promoLinkShort: 'Pregunte',
+    home: 'Inicio de Auva Studio',
+    menu: 'Menú',
+    close: 'Cerrar',
+    navLabel: 'Principal',
+    getInTouch: 'Hablemos',
+    switchLabel: 'English',
+    switchTitle: 'View this site in English',
+    founded: 'Fundado por Alexandria Cuellar, consultora de tecnología y soluciones digitales.',
+    socialLabel: (name: string) => `Auva Studio en ${name}`,
+    services: 'Servicios',
+    footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/technology-consulting/', 'Consultoría y apoyo en proyectos'], ['/ai-emerging-tech/', 'IA y Tecnología Emergente']],
+    getStarted: 'Para empezar',
+    contact: 'Contacto',
+    bookCall: 'Reservar una llamada',
+    websiteCheck: 'Revisión gratis de su sitio web',
+    profileCheck: 'Revisión gratis de su perfil de Google',
+    serviceArea: 'Zona de servicio',
+    counties: (c: string) => `condados de ${c.replace(/, ([^,]+)$/, ' y $1')}`,
+    nyc: 'Ciudad de Nueva York',
+    remote: 'Y a distancia, en todo Estados Unidos',
+    rights: 'Todos los derechos reservados.',
+    based: 'Mid-Hudson Valley, Nueva York. A distancia y en persona.',
+    privacy: 'Política de privacidad',
+    bookedFrom: (page: string) => `Reservado desde la página ${page} de auvastudio.com (en español)`,
+    about: ', sobre: ',
+  },
+}[lang];
+const description = Astro.props.description ?? t.description;
+const { title, seoTitle, schema: pageSchema = [] } = Astro.props;
+// seoTitle is the full browser-tab and search-result title when a page wants more than "Title | Auva Studio".
+const fullTitle = seoTitle ?? (title ? `${title} | ${site.name}` : `${t.defaultTitle} | ${site.name}`);
 const year = new Date().getFullYear();
+// Both language versions of this page, for search engines and the language switch.
+const base = basePath(path);
+const hasSpanish = translatedPages.includes(base);
+const otherLang = lang === 'es' ? 'en' : 'es';
+const switchHref = switchPath(path, otherLang);
 
 const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and explore AI & Emerging Tech. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
@@ -28,7 +112,7 @@ const schema = {
       areaServed: site.areaServed,
       address: { '@type': 'PostalAddress', addressRegion: 'NY', addressCountry: 'US' },
       email: site.email,
-      contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: site.email, url: `${site.url}/contact/`, areaServed: 'US', availableLanguage: 'English' },
+      contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: site.email, url: `${site.url}/contact/`, areaServed: 'US', availableLanguage: ['English', 'Spanish'] },
       priceRange: '$$',
       founder: { '@id': `${site.url}/#founder` },
       sameAs: [...site.social.map((s) => s.href), site.googleProfile],
@@ -46,13 +130,13 @@ const schema = {
       image: `${site.url}/alexandria-cuellar.jpg`,
     },
     { '@type': 'WebSite', '@id': `${site.url}/#website`, name: site.name, url: `${site.url}/`, publisher: { '@id': `${site.url}/#org` } },
-    { '@type': 'WebPage', '@id': `${pageUrl}#page`, url: pageUrl, name: fullTitle, description, isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#org` } },
+    { '@type': 'WebPage', '@id': `${pageUrl}#page`, url: pageUrl, name: fullTitle, description, inLanguage: lang === 'es' ? 'es-US' : 'en-US', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#org` } },
     ...pageSchema,
   ],
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,11 +148,17 @@ const schema = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_US' : 'en_US'} />
+    {hasSpanish && <>
+      <link rel="alternate" hreflang="en" href={new URL(base, site.url)} />
+      <link rel="alternate" hreflang="es" href={new URL(`/es${base}`, site.url)} />
+      <link rel="alternate" hreflang="x-default" href={new URL(base, site.url)} />
+      <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_US'} />
+    </>}
     <meta property="og:image" content={`${site.url}/og-image.png`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Auva Studio: make technology work for your business" />
+    <meta property="og:image:alt" content={t.ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -83,7 +173,7 @@ const schema = {
       // Turn on scroll reveals only when motion is welcome and the browser can observe scrolling.
       if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-on');
     </script>
-    <script is:inline define:vars={{ pageName: title ?? 'home' }}>
+    <script is:inline define:vars={{ pageName: title ?? (lang === 'es' ? 'de inicio' : 'home'), bookedFrom: t.bookedFrom('PAGE'), aboutSep: t.about }}>
       // Every booking link tells Calendly which page it came from, and the service picked in the form when there is one.
       // a1 fills the first question on the booking form; the utm tags show in the booking details.
       // Links that already carry a note (like the free check results) keep their own.
@@ -92,9 +182,9 @@ const schema = {
           const url = new URL(a.href);
           if (a.dataset.note !== undefined || !url.searchParams.has('a1')) {
             const choice = a.closest('#start')?.querySelector('select[name="topic"]');
-            const about = choice && choice.value !== 'unsure' ? `, about: ${choice.selectedOptions[0].text}` : '';
+            const about = choice && choice.value !== 'unsure' ? `${aboutSep}${choice.selectedOptions[0].text}` : '';
             a.dataset.note = '';
-            url.searchParams.set('a1', `Booked from the ${pageName} page on auvastudio.com${about}.`);
+            url.searchParams.set('a1', `${bookedFrom.replace('PAGE', pageName)}${about}.`);
           }
           url.searchParams.set('utm_source', 'auvastudio');
           url.searchParams.set('utm_campaign', location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home');
@@ -132,20 +222,21 @@ const schema = {
     </script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
-    <p class="promo-bar"><span class="promo-long"><b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review.</span><span class="promo-short"><b>Founding offer:</b> 10% off websites.</span> <a href="/websites/#faq-founding">Ask about it</a></p>
+    <a class="skip" href="#main">{t.skip}</a>
+    <p class="promo-bar"><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></p>
     <header class="site-header">
       <div class="wrap header-inner">
-        <a href="/" class="brand" aria-label="Auva Studio home">
+        <a href={l('/')} class="brand" aria-label={t.home}>
           <img src="/auva-logo-tight.png" alt="Auva Studio" width="693" height="208" />
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
-        <nav aria-label="Main" id="main-nav">
+        <a class="lang-switch" href={switchHref} hreflang={otherLang} lang={otherLang} title={t.switchTitle}><Icon name="globe" size={18} />{t.switchLabel}</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu={t.menu} data-close={t.close}>{t.menu}</button>
+        <nav aria-label={t.navLabel} id="main-nav">
           <ul>
             {nav.map((item) => (
-              <li><a href={item.href} aria-current={path.startsWith(item.href) && item.href !== '/#about' ? 'page' : undefined}>{item.label}</a></li>
+              <li><a href={item.href} aria-current={path.startsWith(item.href) && !item.href.includes('#about') ? 'page' : undefined}>{item.label}</a></li>
             ))}
-            <li><a href="/contact/" class="btn btn-small">Get in touch</a></li>
+            <li><a href={l('/contact/')} class="btn btn-small">{t.getInTouch}</a></li>
           </ul>
         </nav>
       </div>
@@ -160,44 +251,38 @@ const schema = {
         <div class="footer-brand">
           <img src="/auva-logo-stacked-light.png" alt="Auva Studio" width="509" height="438" />
           <p>{site.tagline}</p>
-          <p class="small">Founded by Alexandria Cuellar, digital technology and solutions consultant.</p>
+          <p class="small">{t.founded}</p>
           <ul class="social">
-            {site.social.filter((s) => s.footer !== false).map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={`Auva Studio on ${s.name}`}><Icon name={s.icon} size={22} /></a></li>)}
+            {site.social.filter((s) => s.footer !== false).map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={t.socialLabel(s.name)}><Icon name={s.icon} size={22} /></a></li>)}
           </ul>
         </div>
         <div>
-          <h2>Services</h2>
+          <h2>{t.services}</h2>
           <ul>
-            <li><a href="/websites/">Website Services</a></li>
-            <li class="footer-sub"><a href="/websites/diagnostic/">Website Diagnostic</a></li>
-            <li class="footer-sub"><a href="/websites/google-business-profile/">Google Business Profile</a></li>
-            <li class="footer-sub"><a href="/websites/help-after-launch/">Help After Launch</a></li>
-            <li class="footer-sub"><a href="/websites/brand-essentials/">Brand Essentials</a></li>
-            <li><a href="/technology-consulting/">Consulting & Project Support</a></li>
-            <li><a href="/ai-emerging-tech/">AI & Emerging Tech</a></li>
+            {t.footerServices.map(([href, label, sub]) => <li class:list={{ 'footer-sub': sub }}><a href={l(href as string)}>{label}</a></li>)}
           </ul>
         </div>
         <div>
-          <h2>Get started</h2>
+          <h2>{t.getStarted}</h2>
           <ul>
-            <li><a href="/contact/">Contact</a></li>
-            <li><a href={site.booking} target="_blank" rel="noopener">Book a call</a></li>
-            <li><a href="/website-check/">Free website check</a></li>
-            <li><a href="/google-profile-check/">Free Google profile check</a></li>
+            <li><a href={l('/contact/')}>{t.contact}</a></li>
+            <li><a href={site.booking} target="_blank" rel="noopener">{t.bookCall}</a></li>
+            <li><a href={l('/website-check/')}>{t.websiteCheck}</a></li>
+            <li><a href={l('/google-profile-check/')}>{t.profileCheck}</a></li>
             <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
           </ul>
         </div>
         <div>
-          <h2>Service area</h2>
+          <h2>{t.serviceArea}</h2>
           <ul>
-            {site.regions.map(([region, counties]) => <li><b>{region}:</b> {counties} counties</li>)}
-            <li><b>New York City</b></li>
-            <li>And remote, anywhere in the US</li>
+            {site.regions.map(([region, counties]) => <li><b>{region}:</b> {t.counties(counties)}</li>)}
+            <li><b>{t.nyc}</b></li>
+            <li>{t.remote}</li>
           </ul>
         </div>
       </div>
       <div class="wrap footer-legal">
-        <p><span>© {year} {site.name}. All rights reserved.</span> <span>Mid-Hudson Valley, NY. Remote and in person.</span> <a href="/privacy/">Privacy Policy</a></p>
+        <p><span>© {year} {site.name}. {t.rights}</span> <span>{t.based}</span> <a href={l('/privacy/')}>{t.privacy}</a></p>
       </div>
     </footer>
       <script>
@@ -207,7 +292,7 @@ const schema = {
       toggle?.addEventListener('click', () => {
         const open = header!.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
-        toggle.textContent = open ? 'Close' : 'Menu';
+        toggle.textContent = open ? toggle.dataset.close! : toggle.dataset.menu!;
       });
     </script>
   <script is:inline>

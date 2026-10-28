@@ -1,0 +1,92 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import PayBar from '../../../components/PayBar.astro';
+import { brandEssentials, serviceSchema, site } from '../../../data/site.es';
+
+const steps = [
+  { title: 'Conocerle', text: 'Conozco su negocio, sus clientes y los estilos que le gustan y los que no, y luego le doy las indicaciones al diseñador.' },
+  { title: 'Dos propuestas', text: 'El diseñador crea dos direcciones de logotipo para que las compare.' },
+  { title: 'Afinar su favorita', text: 'Dos rondas de cambios sobre la que elija, más colores y fuentes que combinen. Yo le paso sus comentarios y cuido que todo vaya a tiempo.' },
+  { title: 'Reciba sus archivos', text: 'Los archivos de su logotipo, su favicon y una hoja de referencia de marca de una página, listos para web e impresión.' },
+];
+
+const faqs = [
+  { q: 'Ya tengo logotipo. ¿Necesito esto?', a: 'Probablemente no. Puedo trabajar con su logotipo y sus colores actuales en cualquier paquete de sitio web. La Identidad de Marca es para negocios que empiezan desde cero, o con un logotipo que no funciona bien en un sitio web.' },
+  { q: '¿Puedo contratar la Identidad de Marca sin un sitio web?', a: 'Sí. Funciona por sí sola, para sus letreros, tarjetas y redes sociales. Si agrega un sitio web después, su sitio se construye alrededor de ella.' },
+  { q: '¿El logotipo es mío?', a: 'Sí. Una vez pagado el proyecto por completo, su logotipo y sus archivos de marca son suyos para usarlos donde quiera, para siempre.' },
+  { q: '¿Qué es una hoja de referencia de marca?', a: 'Una página que muestra su logotipo, sus colores con sus códigos para web e impresión, y sus fuentes. Désela a una imprenta, a quien le haga un letrero o a cualquier persona que diseñe para usted, y todo se mantiene uniforme.' },
+  { q: '¿Qué tipos de archivo recibo?', a: 'Archivos SVG y PNG para la web, y archivos PDF listos para imprimir, en versiones principal, clara y de un solo color.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Identidad de Marca', description: 'Logotipo o logotipo de texto, variaciones, favicon, paleta de colores, tipografía y una hoja de referencia de marca.', price: '$1,000' },
+], '/es/websites/brand-essentials/');
+---
+<Base title="Identidad de Marca" seoTitle="Identidad de Marca: logotipo, colores y fuentes, $1,000 | Auva Studio" schema={schema} description="Un logotipo a la medida, una paleta de colores, fuentes y una hoja de referencia de marca por $1,000, listos para su sitio web y para todo lo demás. Por sí sola, o con cualquier paquete de sitio web.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/es/websites/">Servicios de sitios web</a>
+      <h1 class="mag-head">Una imagen que es <em>claramente suya.</em></h1>
+      <p class="lede">Un logotipo, colores y fuentes hechos para su negocio por un diseñador profesional, para que se vea pulido y uniforme en todas partes: su sitio web, su letrero y sus tarjetas.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Empezar mi marca, $1,000</a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">¿Aún tiene dudas? Reserve una llamada gratis <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">Precio fijo. Logotipo, colores, fuentes y archivos que son suyos. Por sí sola, o con cualquier paquete de sitio web.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mag-head">Lo que incluye.</h2>
+          <p class="lede">Todo lo que necesita para verse igual en su sitio web, su letrero y sus tarjetas de presentación. Trabajo con un diseñador profesional de mi confianza y gestiono el proyecto por usted, para que su marca y su sitio web vayan de la mano.</p>
+        </div>
+        <ul class="ticks">
+          {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo funciona.</h2>
+      </div>
+      <ol class="steps steps-4">
+        {steps.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Identidad de Marca</h2>
+          <p>Contrátela por sí sola, o júntela con un sitio web para que su marca esté lista antes de empezar el diseño y todo combine desde el primer día.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$1,000</p>
+          <p>Precio fijo. Por sí sola, o con cualquier paquete de sitio web.</p>
+          <a class="btn" href="#start">Empezar mi marca</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="brand" />
+  <PayBar label="Empezar mi marca, $1,000" />
+</Base>

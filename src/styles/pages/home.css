@@ -1,0 +1,80 @@
+/* index page styles, shared by the English and Spanish versions. */
+/* Home hero: centered headline and buttons over a big photo stage. */
+.bd-hero { padding: 80px 0 96px; }
+.bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
+.bd-hero-inner .hero-actions { justify-content: center; }
+.bd-hero h1 { max-width: 15ch; }
+
+.bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
+.bd-stage > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; object-position: center 72%; border-radius: 28px; box-shadow: var(--shadow-strong); }
+.bd-chip { position: absolute; left: 28px; bottom: -28px; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
+.bd-chip img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+@media (max-width: 960px) {
+  .bd-stage > img { aspect-ratio: 4 / 3; }
+  .bd-chip { position: relative; left: auto; bottom: auto; margin: -40px 16px 0; max-width: none; }
+}
+
+/* How I work: the book button, and the note on the studio's name beside it */
+.work-foot { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 28px 48px; }
+.work-foot > p { margin: 0; }
+.work-foot .name-note { max-width: 520px; margin: 0; padding: 0; }
+.name-star { width: 18px; height: 18px; flex: none; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+
+/* Where to start: plain rows that link to the right service */
+.route-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.route-list a { display: flex; gap: 18px; align-items: flex-start; padding: 20px 4px; border-bottom: 1px solid var(--border); color: inherit; text-decoration: none; }
+.route-list .icon { color: var(--primary); flex: none; margin-top: 2px; }
+.route-list b { display: block; font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 2px; }
+.route-list .muted { display: block; }
+.route-list a:hover b { color: var(--primary); }
+
+/* About: four principles as a plain list */
+.principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.principles li { padding-left: 18px; border-left: 3px solid var(--border); }
+.principles h3 { margin: 0 0 2px; font-size: 1.15rem; }
+.principles p { margin: 0; }
+
+/* Service cards with an image on top, as on Boosh's "Three ways we help you grow". */
+.bd-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.bd-media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+.bd-media img { width: 100%; height: 100%; object-fit: cover; }
+.bd-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
+.bd-body .more { margin-top: auto; }
+.bd-tag { align-self: flex-start; font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
+
+/* Illustrated panels: floating interface cards on a soft gradient, standing in for photos still to be taken. */
+.bd-art { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.bd-art-plan { background: var(--tint); }
+.bd-art-ai { background: #e6e0ff; }
+.float { position: absolute; background: var(--white); border-radius: 16px; padding: 16px 18px; box-shadow: 0 18px 40px rgba(18, 35, 94, 0.16); font-size: 0.9rem; line-height: 1.4; display: flex; flex-direction: column; gap: 8px; }
+.float .k { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; color: var(--primary); }
+.float b { font-family: var(--font-head); font-size: 1.05rem; }
+.float ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.float li { display: flex; gap: 8px; align-items: center; }
+.float li.todo { color: var(--muted); padding-left: 22px; }
+.bar { display: block; height: 8px; border-radius: 99px; background: var(--surface); }
+.bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--primary), var(--bright)); }
+.f1 { left: 8%; top: 9%; width: 52%; }
+.f2 { right: 7%; top: 40%; width: 46%; }
+.f3 { left: 14%; bottom: 8%; width: 44%; }
+.tl { display: flex; justify-content: space-between; position: relative; padding: 6px 0; }
+.tl::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--border); }
+.tl i { position: relative; width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 3px solid var(--primary); }
+.tl i.on { background: var(--primary); }
+.chat .q { margin: 0; align-self: flex-end; background: var(--primary); color: var(--white); padding: 8px 12px; border-radius: 12px 12px 2px 12px; }
+.chat .a { margin: 0; background: var(--surface); padding: 8px 12px; border-radius: 12px 12px 12px 2px; }
+.bd-art-ai .f1 { width: 62%; }
+.bd-art-ai .f2 { top: 52%; }
+.bd-art-ai .f3 { bottom: 7%; }
+.badge { flex-direction: row; align-items: center; gap: 10px; }
+.badge svg { color: var(--primary); flex: none; }
+.badge b { font-size: 1.6rem; margin-left: auto; }
+
+.float { font-size: 0.8rem; padding: 12px 14px; gap: 6px; }
+.float b { font-size: 0.95rem; }
+.bd-art .f1 { left: 7%; top: 9%; width: 66%; }
+.bd-art .f2 { right: 6%; top: auto; bottom: 9%; width: 58%; }
+@media (max-width: 640px) {
+  .bd-hero { padding: 56px 0 64px; }
+}

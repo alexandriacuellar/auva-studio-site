@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/pages/ai-emerging-tech.css';
 import Icon from '../components/Icon.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -158,9 +159,3 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
   <Faq faqs={faqs} alt />
   <InquiryForm kind="ai" />
 </Base>
-
-<style>
-  .offer-group + .offer-group { margin-top: 48px; }
-  .offer-group-title { font-size: 1.4rem; margin-bottom: 4px; }
-  .offer-group > .muted { margin-bottom: 20px; }
-</style>

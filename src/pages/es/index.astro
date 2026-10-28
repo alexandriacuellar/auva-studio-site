@@ -1,0 +1,145 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/home.css';
+import Icon from '../../components/Icon.astro';
+import Cta from '../../components/Cta.astro';
+import { categories, journey, site, testimonials } from '../../data/site.es';
+const featured = testimonials.find((t) => t.name === 'Matthew Udy');
+import hero from '../../assets/cover-hero-workspace.png';
+import headshot from '../../assets/alexandria-cuellar.jpg';
+import siteMockup from '../../assets/website-mockup-happy-tails.png';
+
+const situations = [
+  { title: 'Su sitio web necesita atención', text: 'Está desactualizado, es lento, cuesta actualizarlo o no le trae consultas.', href: '/es/websites/', icon: 'globe' },
+  { title: 'Tiene que tomar una decisión tecnológica', text: 'Demasiadas herramientas, plataformas o proveedores, y ninguna forma clara de elegir.', href: '/es/technology-consulting/#planning', icon: 'compass' },
+  { title: 'Un proyecto necesita estructura', text: 'Prioridades, plazos o proveedores que necesitan a alguien que los organice.', href: '/es/technology-consulting/#delivery', icon: 'check' },
+  { title: 'Ve una oportunidad con la IA', text: 'Quiere una IA que ahorre tiempo de verdad, no IA solo por usarla.', href: '/es/ai-emerging-tech/#ai-team', icon: 'bolt' },
+  { title: 'Tiene una idea de tecnología emergente', text: 'Un concepto temprano, un prototipo o una experiencia inmersiva que quiere probar.', href: '/es/ai-emerging-tech/#xr', icon: 'layers' },
+];
+const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar', 'Todo es suyo', 'Trabaja directamente conmigo'];
+---
+<Base>
+  <section class="hero bd-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Sitios web, Consultoría, e IA y Tecnología Emergente</p>
+      <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
+      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales. Creo sitios web, oriento decisiones tecnológicas y ayudo a los equipos a aprovechar la IA y la Tecnología Emergente, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
+      </div>
+      <p class="hero-checks">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
+      <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+      <figure class="bd-stage">
+        <Image src={hero} alt="Un espacio de trabajo soleado con una laptop, una taza de café y plantas" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
+        <figcaption class="bd-chip">
+          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
+          <span><b>Hola, soy Alexandria.</b> Trabajará directamente conmigo, desde la primera llamada hasta la entrega.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">¿En qué está <em>trabajando?</em></h2>
+        <p class="lede">No necesita saber qué servicio necesita. Empiece por la situación que más se parezca a la suya.</p>
+        <p class="muted">¿No sabe cuál le corresponde? Los problemas reales muchas veces abarcan más de uno. <a href="/es/contact/">Cuénteme qué está pasando</a> y le sugiero un siguiente paso.</p>
+      </div>
+      <ul class="route-list">
+        {situations.map((x) => (
+          <li><a href={x.href}>
+            <span class="icon"><Icon name={x.icon} /></span>
+            <span><b>{x.title}</b><span class="muted">{x.text}</span></span>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
+        <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
+      </div>
+      <div class="grid grid-3">
+        {categories.map((c) => (
+          <a class="card category bd-card" href={c.href}>
+            <div class="bd-media">
+              {c.href === '/es/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
+            <div class="float f1"><span class="k">Plan tecnológico</span><b>3 opciones comparadas</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
+            <div class="float f2"><span class="k">Esta semana</span><ul><li><Icon name="tick" size={14} />Requisitos aprobados</li><li><Icon name="tick" size={14} />Llamada con proveedor agendada</li></ul></div>
+          </div>)}
+              {c.href === '/es/ai-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
+            <div class="float f1 chat"><span class="k">Taller de IA para Equipos</span><p class="q">¿Puede la IA redactar nuestro informe semanal para clientes?</p><p class="a">Sí, con una revisión antes de enviarlo.</p></div>
+            <div class="float f2"><span class="k">Sprint de Prototipo</span><span class="bar"><i style="width:66%"></i></span></div>
+          </div>)}
+              {c.href === '/es/websites/' && <Image src={siteMockup} alt="Un sitio web de muestra para una organización sin fines de lucro, en una laptop y un celular sobre un escritorio soleado" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
+            </div>
+            <div class="bd-body">
+              <span class="bd-tag">{c.href === '/es/websites/' ? 'Desde $1,500' : c.href === '/es/ai-emerging-tech/' ? 'Desde $500' : 'Desde $65/hora'}</span>
+              <h3 style={`view-transition-name: svc-${c.href.replace('/es/', '').replaceAll('/', '')}`}>{c.title}</h3>
+              <p class="muted">{c.text}</p>
+              <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
+              <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Orientación tecnológica práctica, <em>pensada para las personas.</em></h2>
+        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas, no por un producto que vender.</p>
+        <p>Llevo más de 20 años ayudando a organizaciones a resolver problemas con tecnología. Durante casi dos décadas creé sitios web y productos digitales para empresas periodísticas, y desde 2023 he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
+        <div class="founder">
+          <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
+          <p><b>Alexandria Cuellar</b>, consultora de tecnología y soluciones digitales<br /><span class="muted">Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna, por el Mid-Hudson Valley.</span><br /><a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Siga a Auva Studio en LinkedIn</a></p>
+        </div>
+        <figure class="quote quote-inline" lang="en">
+          <blockquote>“{featured.quote}”</blockquote>
+          <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+        </figure>
+      </div>
+      <ul class="principles">
+        <li><h3>Empezar por el problema</h3><p class="muted">La tecnología debe hacer algo más claro, más fácil o más confiable.</p></li>
+        <li><h3>A la medida de su negocio</h3><p class="muted">Sus metas, su presupuesto y sus sistemas guían cada recomendación.</p></li>
+        <li><h3>Mantenerlo simple</h3><p class="muted">La solución más sencilla que haga bien el trabajo.</p></li>
+        <li><h3>Que usted quede con confianza</h3><p class="muted">Explicaciones claras y sistemas que usted puede mantener.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Fácil de empezar, <em>claro en cada paso.</em></h2>
+        <p class="lede">Sea lo que sea que necesite, empieza de la misma manera.</p>
+      </div>
+      <ol class="steps steps-3">
+        {journey.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="work-foot">
+        <p><a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a></p>
+        <div class="name-note">
+          <h3><span class="name-star" aria-hidden="true"></span>¿Qué hay en un nombre?</h3>
+          <p class="muted">La estrella ámbar al final de cada serie de pasos es Auva, o Delta Virginis (oficialmente Minelauva), una gigante roja fría de la constelación de Virgo.</p>
+          <p class="name-line">Un poco de inspiración de las estrellas, un poco de curiosidad por lo que es posible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Cta />
+</Base>
