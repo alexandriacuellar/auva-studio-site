@@ -26,7 +26,7 @@ export const categories = [
     icon: 'globe',
     title: 'Servicios de sitios web',
     text: 'Sitios web que ayudan a sus clientes a encontrarle, confiar en usted y comunicarse.',
-    items: ['Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Paquetes de sitios web desde $1,500', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
+    items: ['Diagnóstico Web y configuración de su Perfil de Empresa en Google', 'Paquetes de sitios web desde $1,500', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
     href: '/es/websites/',
     cta: 'Ver servicios de sitios web',
   },
@@ -85,7 +85,7 @@ export const packages = [
     groups: [
       { label: 'Planificación y contenido', items: ['Una llamada de planificación y un plan de contenido', 'Pulo sus textos y completo lo que falte'] },
       { label: 'Diseño y desarrollo', items: ['Una sola página con desplazamiento o hasta 5 páginas, lo que mejor le funcione a su negocio. Le ayudo a decidir.', '2 diseños de página: uno para su página principal y otro para las demás', 'Diseño a la medida de su negocio, pensado primero para el celular', 'Un formulario de contacto y un mapa para encontrarle', '2 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Perfil de Negocio de Google, cuando aplique', 'Estadísticas sencillas de visitas'] },
+      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Perfil de Empresa en Google, cuando aplique', 'Estadísticas sencillas de visitas'] },
     ],
     timeline: '2–3 semanas',
   },
@@ -126,9 +126,9 @@ export const comparison = {
   benefits: [
     { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren en un abrir y cerrar de ojos en cualquier celular, para que sus visitantes no se cansen de esperar y se vayan. Le muestro la puntuación de velocidad de Google de su sitio actual, y la del nuevo al lanzarlo.' },
     { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'La velocidad, una estructura clara y los datos que buscan Google y las herramientas de búsqueda con IA vienen en cada sitio, no son un extra que se paga después.' },
-    { icon: 'cloud', title: 'Hospedaje gratis o de bajo costo', text: 'Servicios como Cloudflare y Netlify hospedan sitios como estos gratis, o por unos pocos dólares al mes si el sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
+    { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Servicios como Cloudflare y Netlify alojan sitios como estos gratis, o por unos pocos dólares al mes si el sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
     { icon: 'check', title: 'Fácil de usar para todos', text: 'Cada sitio pasa una prueba de accesibilidad antes del lanzamiento, para que funcione con lectores de pantalla, con teclado o con letra más grande.' },
-    { icon: 'key', title: 'Es suyo', text: 'Su código, su contenido, su dominio y su cuenta de hospedaje están a su nombre. Sin ataduras, y sin una plataforma de la que no pueda salir.' },
+    { icon: 'key', title: 'Es suyo', text: 'Su código, su contenido, su dominio y su cuenta de hosting están a su nombre. Sin ataduras, y sin una plataforma de la que no pueda salir.' },
   ],
 };
 
