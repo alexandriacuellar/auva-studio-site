@@ -8,9 +8,9 @@ export const site = {
   tagline: 'Ayudo a negocios y equipos a que la tecnología trabaje para ellos.',
   location: 'Mid-Hudson Valley, Nueva York',
   regions: [
-    ['Bajo Valle del Hudson', 'Westchester, Rockland'],
-    ['Valle del Hudson Medio', 'Dutchess, Orange, Putnam, Sullivan, Ulster'],
-    ['Alto Valle del Hudson', 'Albany, Columbia, Greene, Rensselaer'],
+    ['Lower Hudson Valley', 'Westchester, Rockland'],
+    ['Mid-Hudson Valley', 'Dutchess, Orange, Putnam, Sullivan, Ulster'],
+    ['Upper Hudson Valley', 'Albany, Columbia, Greene, Rensselaer'],
   ],
 };
 
