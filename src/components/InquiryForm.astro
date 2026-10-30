@@ -8,11 +8,12 @@ import { site } from '../data/site';
 import { langFromPath } from '../i18n';
 
 // topic preselects the website choice on a service's own page, such as topic="gbp".
-interface Props { kind: 'website' | 'consulting' | 'ai' | 'general'; alt?: boolean; hero?: boolean; topic?: string }
+interface Props { kind: 'website' | 'consulting' | 'ai' | 'partner' | 'general'; alt?: boolean; hero?: boolean; topic?: string }
 const { kind, alt = false, hero = false, topic = 'website' } = Astro.props;
 const lang = langFromPath(Astro.url.pathname);
 const isWebsite = kind === 'website';
 const isAi = kind === 'ai';
+const isPartner = kind === 'partner';
 const isGeneral = kind === 'general';
 const Heading = hero ? 'h1' : 'h2';
 // Every word on the form, in each language. Option values stay in English so messages sort the same way.
@@ -21,6 +22,7 @@ const t = {
     intros: {
       general: { eyebrow: 'Send a message', title: 'Tell me <em>about your project.</em>', lede: "Share a few details and I'll follow up personally with questions or a suggested next step." },
       contact: { eyebrow: 'Contact', title: "Let's talk about <em>what you're working on.</em>", lede: "Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed." },
+      partner: { eyebrow: 'Partner with me', title: 'Tell me <em>about your project.</em>', lede: 'A single build, an overflow project, or an ongoing partnership are all welcome. Designs, briefs, or a rough idea are enough to start.' },
       ai: { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' },
       consulting: { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' },
     },
@@ -52,7 +54,7 @@ const t = {
     instead: 'instead.',
     name: 'Name', email: 'Email', business: 'Business or organization', phone: 'Phone', optional: '(optional)',
     about: "What's this about?",
-    generalTopics: [['website', 'Website'], ['consulting', 'Consulting or project support'], ['ai', 'AI & Emerging Tech'], ['unsure', 'Not sure yet']],
+    generalTopics: [['website', 'Website'], ['consulting', 'Consulting or project support'], ['ai', 'AI & Emerging Tech'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
     workingOn: 'What are you working on?',
     need: 'What do you need?', currentSite: 'Current website', tellBusiness: 'Tell me about your business',
     interested: 'Interested in',
@@ -60,6 +62,9 @@ const t = {
     area: 'Area',
     consultingTopics: [['unsure', 'Not sure yet'], ['planning', 'Technology Planning'], ['analysis', 'Business Analysis & Process Review'], ['delivery', 'Project Management'], ['ai', 'AI & Emerging Tech']],
     exploring: 'What are you exploring?', going: "What's going on?",
+    howWork: 'How would you like to work?',
+    partnerTopics: [['unsure', 'Not sure yet'], ['white-label', 'White-label'], ['subcontracting', 'Subcontracting'], ['collaborative', 'Collaborative delivery']],
+    projectNeeds: 'What does the project need?',
     send: 'Send message',
     sending: 'Sending…',
     thanks: "Thanks! Your message is on its way. You'll hear back within 24–48 hours.",
@@ -69,6 +74,7 @@ const t = {
     intros: {
       general: { eyebrow: 'Envíe un mensaje', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Comparta algunos detalles y le respondo personalmente con preguntas o un siguiente paso sugerido.' },
       contact: { eyebrow: 'Contacto', title: 'Hablemos de <em>lo que está haciendo.</em>', lede: 'Reserve una llamada gratis de 30 minutos, o envíe un mensaje y le respondo en 24–48 horas. No necesita un plan detallado.' },
+      partner: { eyebrow: 'Trabajemos juntos', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Un solo sitio, un proyecto extra o una colaboración continua: todo es bienvenido. Diseños, un brief o una idea general bastan para empezar.' },
       ai: { eyebrow: 'Empiece a explorar', title: 'Cuénteme <em>su idea.</em>', lede: 'Las ideas tempranas y las preguntas a medio formar son bienvenidas. No necesita una propuesta formal.' },
       consulting: { eyebrow: 'Empecemos a conversar', title: 'Cuénteme <em>en qué está trabajando.</em>', lede: 'Ideas tempranas, proyectos ya en marcha y trabajo junto a su equipo o proveedores actuales: todo es bienvenido. No necesita una propuesta formal.' },
     },
@@ -100,7 +106,7 @@ const t = {
     instead: 'en su lugar.',
     name: 'Nombre', email: 'Correo electrónico', business: 'Negocio u organización', phone: 'Teléfono', optional: '(opcional)',
     about: '¿De qué se trata?',
-    generalTopics: [['website', 'Sitio web'], ['consulting', 'Consultoría o apoyo en proyectos'], ['ai', 'IA y Tecnología Emergente'], ['unsure', 'Todavía no sé']],
+    generalTopics: [['website', 'Sitio web'], ['consulting', 'Consultoría o apoyo en proyectos'], ['ai', 'IA y Tecnología Emergente'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
     workingOn: '¿En qué está trabajando?',
     need: '¿Qué necesita?', currentSite: 'Sitio web actual', tellBusiness: 'Cuénteme sobre su negocio',
     interested: 'Me interesa',
@@ -108,15 +114,18 @@ const t = {
     area: 'Área',
     consultingTopics: [['unsure', 'Todavía no sé'], ['planning', 'Planificación Tecnológica'], ['analysis', 'Análisis de Negocio y Revisión de Procesos'], ['delivery', 'Gestión de Proyectos'], ['ai', 'IA y Tecnología Emergente']],
     exploring: '¿Qué está explorando?', going: '¿Qué está pasando?',
+    howWork: '¿Cómo le gustaría trabajar?',
+    partnerTopics: [['unsure', 'Todavía no sé'], ['white-label', 'Marca blanca'], ['subcontracting', 'Subcontratación'], ['collaborative', 'Entrega colaborativa']],
+    projectNeeds: '¿Qué necesita el proyecto?',
     send: 'Enviar mensaje',
     sending: 'Enviando…',
     thanks: '¡Gracias! Su mensaje va en camino. Le respondo en 24–48 horas.',
     failed: 'Algo salió mal. Por favor, escríbame por correo electrónico.',
   },
 }[lang];
-const intro = isGeneral && !hero ? t.intros.general : isGeneral ? t.intros.contact : isAi ? t.intros.ai : t.intros.consulting;
+const intro = isGeneral && !hero ? t.intros.general : isGeneral ? t.intros.contact : isPartner ? t.intros.partner : isAi ? t.intros.ai : t.intros.consulting;
 // Spanish messages say so in the subject line, so replies go out in Spanish.
-const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isAi ? 'New AI & Emerging Tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
+const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New AI & Emerging Tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
 const websiteTopics = t.websiteTopics;
 // Each website service page gets its own heading, lede, and next step.
 const replyLine = t.replyLine;
@@ -194,7 +203,13 @@ const formAction = 'https://api.web3forms.com/submit';
           </>
         ) : (
           <>
-              {isAi ? (
+              {isPartner ? (
+                <label>{t.howWork}
+                  <select name="topic">
+                    {t.partnerTopics.map(([value, label]) => <option value={value}>{label}</option>)}
+                  </select>
+                </label>
+              ) : isAi ? (
                 <label>{t.interested}
                   <select name="topic">
                     {t.aiTopics.map(([value, label]) => <option value={value}>{label}</option>)}
@@ -207,7 +222,7 @@ const formAction = 'https://api.web3forms.com/submit';
                   </select>
                 </label>
               )}
-            <label><span>{isAi ? t.exploring : t.going} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
+            <label><span>{isPartner ? t.projectNeeds : isAi ? t.exploring : t.going} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         )}
         <button class="btn" type="submit">{(isWebsite && websiteIntro?.button) || t.send}</button>

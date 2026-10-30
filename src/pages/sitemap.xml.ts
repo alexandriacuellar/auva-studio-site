@@ -2,7 +2,7 @@
 import { site } from '../data/site';
 import { translatedPages } from '../i18n';
 
-const pages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/technology-consulting/', '/ai-emerging-tech/', '/contact/', '/privacy/'];
+const pages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/technology-consulting/', '/ai-emerging-tech/', '/development-partnerships/', '/contact/', '/privacy/'];
 
 export function GET() {
   // Each English page and its Spanish twin point to each other, so search engines show the right language.
