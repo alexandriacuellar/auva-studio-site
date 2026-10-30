@@ -21,6 +21,8 @@ export const site = {
   // Google Ads conversion tracking. Loads only for visitors who arrive from an ad
   // (and on their later visits within 90 days). Leave id empty to turn it off.
   googleAds: { id: 'AW-18520886996', formLabel: 'G0RYCIDY8qEdENSduf9E', bookingLabel: 'Vu4oCMik8KEdENSduf9E' },
+  // Auva's own Google Business Profile (search data only).
+  googleProfile: 'https://maps.app.goo.gl/ihg5tLDqC4zx5dfP6',
   social: [
     { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/auvastudiony/' },
     { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/auvastudiony' },
@@ -45,7 +47,7 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website Diagnostic', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
+    items: ['Website Diagnostic and Google Business Profile setup', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
     href: '/websites/',
     cta: 'Explore website services',
   },
@@ -63,7 +65,7 @@ export const categories = [
     text: 'Explore AI, XR, and interactive ideas with small, low-risk steps.',
     items: ['AI Readiness Plan', 'Team AI Workshop', 'Feasibility reviews and prototypes', 'Production support'],
     href: '/ai-emerging-tech/',
-    cta: 'Explore AI & emerging tech',
+    cta: 'Explore AI & Emerging Tech',
   },
 ];
 
@@ -90,13 +92,15 @@ export const journey = [
 
 // Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
 export const samples = [
-  { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.' },
-  { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.' },
-  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a Content Editing Dashboard, workshops, fitting booking, and a hold list for new arrivals.' },
+  { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.', goodFor: 'Good for trades and home services, like contractors, cleaners, landscapers, and repair shops.' },
+  { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.', goodFor: 'Good for farms, inns, wineries, and businesses with several services or experiences to show.' },
+  { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a CMS, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
 ];
 
 export const packages = [
   {
+    id: 'essential',
+    short: 'Essential',
     eyebrow: 'Get online',
     name: 'Essential Presence',
     price: '$1,500',
@@ -109,6 +113,8 @@ export const packages = [
     timeline: '2–3 weeks',
   },
   {
+    id: 'expanded',
+    short: 'Expanded',
     eyebrow: 'Grow',
     name: 'Expanded Presence',
     price: '$2,950',
@@ -119,10 +125,12 @@ export const packages = [
       { label: 'Design and build', items: ['Up to 10 pages', 'Up to 3 page designs', '3 revision rounds'] },
       { label: 'Found online', items: ['Visitor stats that show which pages bring in calls and messages'] },
     ],
-    extra: 'Add a Content Editing Dashboard from $1,750',
+    extra: 'Add a CMS from $1,750',
     timeline: '3–5 weeks',
   },
   {
+    id: 'complete',
+    short: 'Complete',
     eyebrow: 'Go further',
     name: 'Complete Presence',
     price: '$5,500',
@@ -130,7 +138,7 @@ export const packages = [
     includes: 'Everything in Expanded, plus:',
     groups: [
       { label: 'Design and build', items: ['Up to 20 pages', 'Up to 6 page designs', '4 revision rounds'] },
-      { label: 'Update it yourself', items: ['A Content Editing Dashboard to update text, photos, news, or events yourself'] },
+      { label: 'Update it yourself', items: ['A CMS to update your text, photos, news, or events yourself'] },
       { label: 'Found online', items: ['A search checkup 30 days after launch'] },
     ],
     timeline: '6+ weeks',
@@ -148,7 +156,7 @@ export const comparison = {
 };
 
 export const addons = [
-  { icon: 'gear', title: 'Content Editing Dashboard', text: 'Update your page text, photos, news, and events yourself.', price: 'From $1,750' },
+  { icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
   { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
 ];
@@ -164,7 +172,7 @@ export const brandEssentials = [
 ];
 
 export const process = [
-  { title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user and remove me when the work is done.'] },
+  { title: 'Discovery', text: 'I learn about your business and confirm your goals and site map.', you: 'Share your goals and assets.', link: { href: '/websites/get-ready/', text: 'How to get ready' }, terms: ['50% deposit to start.', 'Every account stays in your name. If I need access, you add me as a user and remove me when the work is done.'] },
   { title: 'Content & Review', text: 'Share what you have. I polish it, draft anything missing, and walk you through the page structure.', you: 'Approve your copy and give feedback within 2 business days.', terms: ['You approve the page plan.'] },
   { title: 'Build & Preview', text: 'I build your site and share a live preview you can open on your phone, then refine it with your feedback.', you: 'Send each round of changes together, within 2 business days.', terms: ['A revision round is one set of changes, sent together.', 'You approve the final site before anything goes live.'] },
   { title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes and small tweaks.'] },
@@ -172,8 +180,8 @@ export const process = [
 
 // Help After Launch (no monthly plan). A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 each, or 5 for $200', text: 'Up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A 5-pack is used within 12 months.' },
-  { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your Content Editing Dashboard.' },
+  { name: 'Updates and fixes', price: '$50 each, or a pack of 5 for $200', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A pack of 5 is used within 12 months.' },
+  { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
 
 

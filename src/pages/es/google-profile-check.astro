@@ -1,0 +1,280 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/google-profile-check.css';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site.es';
+
+// Free Google Business Profile check. Scoring runs in the browser; answers are sent only if the visitor chooses to.
+// The first question decides the path: no profile yet shows setup steps, an existing profile gets the 10 scored questions.
+const questions = [
+  { q: '¿Verificó su perfil y puede entrar para editarlo?', tip: 'Si otra persona lo creó, pídale que le dé acceso de propietario, o solicite acceso a Google. No puede arreglar lo que no puede editar.' },
+  { q: '¿El nombre de su negocio aparece exactamente como en su letrero, sin pueblos ni servicios agregados?', tip: 'Las palabras de más en el nombre pueden hacer que suspendan el perfil. Use solo su nombre real.' },
+  { q: '¿Su categoría principal corresponde a lo que la mayoría de sus clientes le contrata?', tip: 'Su categoría principal es la que más importa. Elija la más parecida de la lista de Google y luego agregue algunas más para sus otros servicios principales.' },
+  { q: '¿Su horario, teléfono y enlace a su sitio web están correctos, incluido el horario de días festivos?', tip: 'Un horario equivocado manda a la gente a una puerta cerrada. Agregue horarios especiales antes de cada día festivo.' },
+  { q: '¿Agregó sus servicios o productos?', tip: 'Ponga cada uno con una línea breve, y un precio si comparte precios. Ayuda a que Google le muestre en las búsquedas correctas.' },
+  { q: '¿Su descripción dice qué hace, a quién ayuda y dónde?', tip: 'Use palabras sencillas, hasta unos 750 caracteres. No ponga enlaces ni números de teléfono en la descripción.' },
+  { q: '¿Agregó al menos 5 fotos reales en los últimos meses?', tip: 'Muestre su trabajo, su equipo y su espacio. Las fotos del celular con buena luz están bien; evite las fotos de stock.' },
+  { q: '¿Tiene reseñas recientes, y las responde?', tip: 'Pídales reseñas en persona a sus clientes contentos y envíeles su enlace de reseñas. Responda cada reseña en una o dos frases, buena o mala.' },
+  { q: '¿Su nombre, dirección y teléfono coinciden con su sitio web, su Facebook y otros listados?', tip: 'Cuando sus datos coinciden en todas partes, Google confía en ellos. Corrija cualquier dirección o número viejo que encuentre.' },
+  { q: '¿Revisa su perfil al menos una vez al mes?', tip: 'Cualquiera puede sugerir cambios a su perfil, y a veces Google los aplica. Una revisión mensual detecta cambios equivocados y preguntas nuevas.' },
+];
+const setupSteps = [
+  'Busque el nombre de su negocio en Google Maps. Si ya existe una ficha, elija "Reclamar esta empresa" en lugar de crear una nueva.',
+  'Vaya a google.com/business e inicie sesión con una cuenta de Google que vaya a conservar, de preferencia el correo de su negocio.',
+  'Escriba el nombre de su negocio exactamente como aparece en su letrero, y elija la categoría que mejor describa lo que hace.',
+  'Agregue su dirección si los clientes le visitan. Si usted va a ellos, oculte su dirección y ponga los pueblos y ciudades que atiende.',
+  'Agregue su teléfono y su sitio web, y luego verifique su negocio. Google puede pedirle un video corto, una llamada o un mensaje de texto, un correo electrónico o una tarjeta postal.',
+  'Una vez verificado, agregue su horario, sus servicios, una descripción breve y al menos 5 fotos reales.',
+];
+const monthly = ['Responder las reseñas nuevas', 'Agregar 2 o 3 fotos nuevas', 'Revisar su horario, teléfono y enlace a su sitio web', 'Agregar con anticipación el horario de días festivos', 'Aprobar o rechazar los cambios sugeridos', 'Responder las preguntas nuevas'];
+const choices = [
+  { label: 'Sí', value: 2 },
+  { label: 'No sé', value: 1 },
+  { label: 'No', value: 0 },
+];
+---
+<Base title="Revisión gratis de su perfil de Google" description="Responda unas preguntas rápidas sobre su Perfil de Negocio de Google y vea qué arreglar primero, o cómo crear uno.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Revisión gratis de su perfil de Google</p>
+      <h1 class="mag-head">¿Su perfil de Google <em>trabaja para usted?</em></h1>
+      <p class="lede">Responda unas preguntas rápidas sobre su Perfil de Negocio de Google. Toma unos 2 minutos, y verá al instante su puntuación y qué arreglar primero.</p>
+      <p class="hero-note">Gratis. Sin dar su correo. Incluye una guía gratuita en PDF para quedarse.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap check-wrap">
+      <form class="card check" id="check" novalidate>
+        <ol class="check-list">
+          <li>
+            <fieldset>
+              <legend>¿Su negocio ya tiene un Perfil de Negocio de Google?</legend>
+              <div class="choices">
+                <label><input type="radio" name="has" value="yes" required /><span>Sí</span></label>
+                <label><input type="radio" name="has" value="unsure" /><span>No sé</span></label>
+                <label><input type="radio" name="has" value="no" /><span>No</span></label>
+              </div>
+            </fieldset>
+          </li>
+          {questions.map((item, i) => (
+            <li class="profile-q" hidden>
+              <fieldset>
+                <legend>{item.q}</legend>
+                <div class="choices">
+                  {choices.map((c) => (
+                    <label><input type="radio" name={`q${i}`} value={c.value} /><span>{c.label}</span></label>
+                  ))}
+                </div>
+              </fieldset>
+            </li>
+          ))}
+        </ol>
+        <div class="check-foot">
+          <p class="muted small" id="progress" aria-live="polite">Empiece con la pregunta 1.</p>
+          <button class="btn" type="submit">Ver mis siguientes pasos</button>
+        </div>
+      </form>
+
+      <div class="results" id="results" hidden tabindex="-1">
+        <div class="card score-card">
+          <p class="eyebrow" id="result-eyebrow">Su puntuación</p>
+          <p class="score" id="score-line"><span id="score">0</span><span class="out">/20</span></p>
+          <h2 class="mag-head" id="band-title"></h2>
+          <p class="lede" id="band-text"></p>
+          <div class="hero-actions" id="band-actions"></div>
+        </div>
+
+        <div class="card" id="setup-card" hidden>
+          <h3>Cómo crear su perfil</h3>
+          <ol class="steps-list">{setupSteps.map((s) => <li>{s}</li>)}</ol>
+          <p class="muted small">La configuración toma unos 30 minutos una vez que tenga listos sus datos y fotos. La verificación puede tardar unos días.</p>
+          <a class="btn btn-ghost" href="/downloads/google-business-profile-guide-es.pdf" download>Descargar la guía de configuración (PDF)</a>
+        </div>
+
+        <div class="card" id="tips-card" hidden>
+          <h3>Qué arreglar primero</h3>
+          <ul class="tips" id="tips"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Su rutina mensual de 15 minutos</h3>
+          <p class="muted">Una vez al mes es suficiente para la mayoría de los pequeños negocios. Busque el nombre de su negocio en Google con su sesión iniciada para editar su perfil desde los resultados.</p>
+          <ul class="ticks">{monthly.map((m) => <li><Icon name="tick" size={18} />{m}</li>)}</ul>
+          <a class="btn btn-ghost" id="guide-link" href="/downloads/google-business-profile-guide-es.pdf" download>Descargar la guía gratis (PDF)</a>
+        </div>
+
+        <div class="card offer-card no-print">
+          <p class="eyebrow">¿Prefiere que lo haga yo?</p>
+          <h3 id="offer-title">Optimización del Perfil de Negocio de Google</h3>
+          <p class="price">$500</p>
+          <p class="muted" id="offer-text">Arreglo todo lo que marcó esta revisión, y más: categorías, descripción, servicios, fotos y enlaces. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/es/websites/google-business-profile/" id="offer-link">Que lo haga yo</a>
+          </div>
+        </div>
+
+        <div class="card no-print">
+          <h3>Envíeme sus respuestas</h3>
+          <p class="muted">Le respondo personalmente con lo que yo haría primero. Gratis y opcional.</p>
+          <form action="https://api.web3forms.com/submit" method="POST" class="inquiry" id="send">
+            <input type="hidden" name="access_key" value={site.web3formsKey} />
+            <input type="hidden" name="subject" value="New Google profile check from auvastudio.com (Spanish)" />
+            <input type="hidden" name="from_name" value="Auva Studio website" />
+            <input type="hidden" name="language" value="Spanish" />
+            <input type="hidden" name="score" />
+            <input type="hidden" name="answers" />
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="form-row">
+              <label>Nombre<input name="name" autocomplete="name" required /></label>
+              <label>Correo electrónico<input type="email" name="email" autocomplete="email" required /></label>
+            </div>
+            <div class="form-row">
+              <label>Negocio u organización<input name="business" autocomplete="organization" required /></label>
+              <label><span>Pueblo o ciudad <span class="opt">(opcional)</span></span><input name="town" autocomplete="address-level2" /></label>
+            </div>
+            <label class="opt-in"><input type="checkbox" name="wants_service" value="Yes, send a payment link for the $500 profile service (in Spanish)" /><span id="opt-in-text">Quiero que optimice mi perfil por $500. Envíeme un enlace de pago.</span></label>
+            <button class="btn" type="submit">Enviar mis respuestas</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <p class="small muted no-print"><a href="#check" id="retake">Cambiar mis respuestas</a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ questions, booking: site.booking }}>
+  const form = document.getElementById('check');
+  const progress = document.getElementById('progress');
+  const results = document.getElementById('results');
+  const profileQs = form.querySelectorAll('.profile-q');
+  const total = questions.length;
+  const has = () => form.querySelector('input[name="has"]:checked')?.value;
+  const answered = () => questions.filter((_, i) => form.querySelector(`input[name="q${i}"]:checked`)).length;
+  const update = () => {
+    profileQs.forEach((li) => { li.hidden = has() !== 'yes'; });
+    if (!has()) progress.textContent = 'Empiece con la pregunta 1.';
+    else if (has() === 'yes') progress.textContent = `${answered() + 1} de ${total + 1} respondidas`;
+    else progress.textContent = 'Es todo lo que necesito. Vea sus siguientes pasos.';
+  };
+  form.addEventListener('change', update);
+
+  const bands = [
+    { min: 16, title: 'Su perfil está <em>en buena forma.</em>', text: 'Siga con la rutina mensual de abajo. Reserve una llamada gratis de 30 minutos si quiere una segunda opinión.', actions: [['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 9, title: 'Unos cuantos arreglos harían <em>una diferencia real.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Negocio de Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 0, title: 'Su perfil podría estar <em>costándole clientes.</em>', text: 'Empiece con los arreglos de abajo, o deje que lo haga yo: la Optimización del Perfil de Negocio de Google cuesta $500, pago único.', actions: [['Que lo optimice yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+  ];
+  const setupResult = {
+    no: { title: 'Pongamos su negocio <em>en el mapa.</em>', text: 'Un perfil es gratis y muchas veces es lo primero que ve la gente. Siga los pasos de abajo, o deje que lo configure yo: la Configuración del Perfil de Negocio de Google cuesta $500, pago único.' },
+    unsure: { title: 'Primero, averigüe si <em>ya tiene uno.</em>', text: 'Busque el nombre de su negocio en Google Maps. A veces Google crea una ficha por su cuenta, y usted puede reclamarla. Si no aparece nada, siga los pasos de abajo, o deje que lo configure yo por $500.' },
+  };
+  const labels = { 2: 'Sí', 1: 'No sé', 0: 'No' };
+  // Calls booked from the results carry the answers, so the booking says what the call is for.
+  // a1 fills the first question on the Calendly booking form; the utm tags show in the booking details.
+  let callNote = '';
+  const callUrl = () => `${booking}?a1=${encodeURIComponent(callNote)}&utm_source=auvastudio&utm_campaign=es-google-profile-check`;
+
+  const setActions = (items) => {
+    const actions = document.getElementById('band-actions');
+    actions.innerHTML = '';
+    items.forEach(([label, href, external], i) => {
+      const a = document.createElement('a');
+      a.className = i === 0 ? 'btn' : 'btn btn-ghost';
+      a.href = href === booking ? callUrl() : href;
+      a.textContent = label;
+      if (external) { a.target = '_blank'; a.rel = 'noopener'; }
+      actions.append(a);
+    });
+  };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const path = has();
+    if (!path) {
+      progress.textContent = 'Por favor, responda la pregunta 1.';
+      form.querySelector('input[name="has"]').focus();
+      return;
+    }
+    const send = document.getElementById('send');
+    const tips = document.getElementById('tips');
+    tips.innerHTML = '';
+    if (path === 'yes') {
+      const missing = questions.findIndex((_, i) => !form.querySelector(`input[name="q${i}"]:checked`));
+      if (missing !== -1) {
+        progress.textContent = `Por favor, responda la pregunta ${missing + 2} para ver sus siguientes pasos.`;
+        form.querySelector(`input[name="q${missing}"]`).focus();
+        return;
+      }
+      const values = questions.map((_, i) => Number(form.querySelector(`input[name="q${i}"]:checked`).value));
+      const score = values.reduce((a, b) => a + b, 0);
+      const band = bands.find((b) => score >= b.min);
+      callNote = `Revisión gratis del perfil de Google: saqué ${score}/20 y quiero hablar de mis resultados.`;
+      document.getElementById('result-eyebrow').textContent = 'Su puntuación';
+      document.getElementById('score-line').hidden = false;
+      document.getElementById('score').textContent = score;
+      document.getElementById('band-title').innerHTML = band.title;
+      document.getElementById('band-text').textContent = band.text;
+      setActions(band.actions);
+      values.forEach((v, i) => {
+        if (v === 2) return;
+        const li = document.createElement('li');
+        li.innerHTML = '<b></b><span></span>';
+        li.querySelector('b').textContent = questions[i].q;
+        li.querySelector('span').textContent = questions[i].tip;
+        tips.append(li);
+      });
+      send.score.value = `${score}/20`;
+      send.answers.value = '1. Tiene perfil: Sí\n' + questions.map((q, i) => `${i + 2}. ${q.q} ${labels[values[i]]}`).join('\n');
+    } else {
+      const r = setupResult[path];
+      callNote = `Revisión gratis del perfil de Google: ${path === 'no' ? 'todavía no tengo perfil' : 'no sé si tengo perfil'} y quiero ayuda para configurarlo.`;
+      document.getElementById('result-eyebrow').textContent = 'Sus siguientes pasos';
+      document.getElementById('score-line').hidden = true;
+      document.getElementById('band-title').innerHTML = r.title;
+      document.getElementById('band-text').textContent = r.text;
+      setActions([['Que lo configure yo, $500', '/es/websites/google-business-profile/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]]);
+      send.score.value = 'No profile yet (Sin perfil todavía)';
+      send.answers.value = `Tiene perfil: ${path === 'no' ? 'No' : 'No sé'}`;
+    }
+    const isSetup = path !== 'yes';
+    document.getElementById('offer-title').textContent = isSetup ? 'Configuración del Perfil de Negocio de Google' : 'Optimización del Perfil de Negocio de Google';
+    document.getElementById('offer-text').textContent = isSetup
+      ? 'Sáltese los pasos de configuración. Creo o reclamo su perfil, agrego sus datos, servicios, horario y fotos, y le acompaño en la verificación de Google. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.'
+      : 'Arreglo todo lo que marcó esta revisión, y más: categorías, descripción, servicios, fotos y enlaces. Pago único, sin plan mensual, y recibe una guía para mantenerlo al día. Se abonan $150 a un sitio web conmigo.';
+    document.getElementById('opt-in-text').textContent = `Quiero que ${isSetup ? 'configure' : 'optimice'} mi perfil por $500. Envíeme un enlace de pago.`;
+    document.getElementById('setup-card').hidden = path === 'yes';
+    // The setup card has its own download button, so show one link per path.
+    document.getElementById('guide-link').hidden = path !== 'yes';
+    document.getElementById('tips-card').hidden = !tips.children.length;
+    results.hidden = false;
+    // Show the result cards at once instead of waiting for the scroll fade-in.
+    results.querySelectorAll('.card').forEach((c) => c.classList.add('is-in'));
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    results.focus({ preventScroll: true });
+  });
+
+  document.getElementById('retake').addEventListener('click', () => { results.hidden = true; });
+
+  const send = document.getElementById('send');
+  const status = send.querySelector('.form-status');
+  send.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!send.reportValidity()) return;
+    const btn = send.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.textContent = 'Enviando…';
+    try {
+      const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
+      if (!res.success) throw new Error(res.message);
+      window.auvaConvert?.('form');
+      status.textContent = send.wants_service.checked ? '¡Gracias! Confirmo los detalles y le envío su enlace de pago en 24–48 horas.' : '¡Gracias! Reviso sus respuestas y le respondo en 24–48 horas.';
+      btn.hidden = true;
+    } catch {
+      status.textContent = 'Algo salió mal. Por favor, escríbame por correo electrónico.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

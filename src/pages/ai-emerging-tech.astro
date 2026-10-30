@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/pages/ai-emerging-tech.css';
 import Icon from '../components/Icon.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -17,7 +18,7 @@ const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.
 
 const audiences = [
   { icon: 'bulb', title: 'Small businesses and nonprofits', text: "You're curious about AI but not sure where it helps, which tools to trust, or how to get your team using them." },
-  { icon: 'mail', title: 'Professional offices', text: 'Accountants, law offices, real estate, insurance, and agencies with lots of email, documents, and repeat questions. Find where AI saves hours each week, safely.' },
+  { icon: 'mail', title: 'Professional offices', text: 'Accountants, law offices, real estate, insurance, and agencies with lots of email, documents, and repeat questions. Find where AI can save your team time.' },
   { icon: 'key', title: 'Startups', text: 'Teams with an AI product idea. Test a chatbot or AI feature with real users before you build the full thing.' },
   { icon: 'star', title: 'Creative, XR, and game studios', text: 'You need production structure, feasibility checks, or an experienced producer without a full-time hire.' },
   { icon: 'book', title: 'Museums, educators, and cultural organizations', text: "You're planning an immersive or interactive experience and want a realistic scope before you commit." },
@@ -31,7 +32,7 @@ const sprint = [
   { title: 'Decide', text: 'You get a short report with a recommendation: build it, change it, or stop here, before you invest more.' },
 ];
 
-// Every AI and emerging tech price in one place.
+// Every AI & Emerging Tech price in one place.
 const glance = [
   { name: 'Team AI Workshop', note: '2 hours, up to 10 people', price: 'From $500' },
   { name: 'AI Readiness Plan', note: '3 sessions and a written plan', price: '$650' },
@@ -58,7 +59,7 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
       </div>
-      <nav class="bd-sublinks" aria-label="AI and emerging technology services">
+      <nav class="bd-sublinks" aria-label="AI & Emerging Tech services">
         <a href="#ai-team">AI for your team</a>
         <a href="#xr">XR, games, and interactive</a>
       </nav>
@@ -70,12 +71,12 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
       <div class="section-head">
         <h2 class="mag-head">Built for teams <em>exploring what's next.</em></h2>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3 who who-ai">
         {audiences.map((a) => (
           <div class="card">
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
-            <p class="muted">{a.text}</p>
+            <p class="muted ai-who-text">{a.text}</p>
           </div>
         ))}
       </div>
@@ -158,9 +159,3 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
   <Faq faqs={faqs} alt />
   <InquiryForm kind="ai" />
 </Base>
-
-<style>
-  .offer-group + .offer-group { margin-top: 48px; }
-  .offer-group-title { font-size: 1.4rem; margin-bottom: 4px; }
-  .offer-group > .muted { margin-bottom: 20px; }
-</style>

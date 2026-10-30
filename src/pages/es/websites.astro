@@ -1,0 +1,252 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/websites.css';
+import Icon from '../../components/Icon.astro';
+import PathBand from '../../components/PathBand.astro';
+import Packages from '../../components/Packages.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import PaybackCalc from '../../components/PaybackCalc.astro';
+import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../../data/site.es';
+import { Image } from 'astro:assets';
+import skytopShot from '../../assets/samples/skytop-floor-co.jpg';
+import eneaShot from '../../assets/samples/enea-hudson-cattle-farm.jpg';
+import rondoutShot from '../../assets/samples/rondout-mercantile.jpg';
+import headshot from '../../assets/alexandria-cuellar.jpg';
+const featured = testimonials.find((t) => t.name === 'Matthew Udy');
+const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
+
+const faqs = [
+  { q: '¿Es usted diseñadora web?', a: 'Sí. Diseño y construyo sitios web a la medida para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley, la ciudad de Nueva York y todo Estados Unidos. Además, tengo más de 20 años de experiencia en tecnología, así que planifico cada sitio como cualquier proyecto tecnológico: enfocado, rápido y totalmente suyo.' },
+  { q: '¿Cuánto cuesta un sitio web para un pequeño negocio?', a: 'Los paquetes son pagos únicos por proyecto: Presencia Esencial cuesta $1,500, Presencia Ampliada $2,950 y Presencia Completa $5,500. Los sitios más grandes o a la medida se cotizan según su proyecto. Después del lanzamiento, paga unos $20 al año por su dominio, y el hosting es gratis o de bajo costo.' },
+  { q: '¿Una página o varias? ¿Qué me conviene?', a: 'Una sola página con desplazamiento funciona bien cuando usted hace una cosa principal, quiere que sus visitantes den un solo paso sencillo (llamar, reservar o pedir un presupuesto) y la mayoría le encuentra desde el celular. Varias páginas funcionan mejor cuando ofrece servicios que la gente busca por separado, ya que cada página puede aparecer en Google por sí sola, o cuando tiene más que compartir, como un menú, una galería o su historia. Ambas opciones cuestan lo mismo en Esencial, y lo decidimos juntos durante el Descubrimiento.' },
+  { id: 'faq-founding', q: '¿Qué es la oferta para clientes fundadores?', a: 'Mis primeros 10 clientes de sitios web reciben un 10% de descuento en Presencia Esencial, Ampliada o Completa, a cambio de una breve reseña y permiso para mostrar su sitio. No se combina con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor. La oferta termina después de 10 proyectos.' },
+  { q: '¿Cuánto tarda un sitio web?', a: 'Presencia Esencial toma 2–3 semanas, Presencia Ampliada 3–5 semanas y Presencia Completa 6 semanas o más. El plazo empieza cuando firma su acuerdo de sitio web, paga el depósito y me envía su contenido, como sus textos, fotos y logotipo. Mientras antes tenga todo, antes se publica su sitio.' },
+  { q: '¿El sitio web es mío?', a: 'Sí. Una vez pagado el proyecto por completo, su sitio web, su contenido, su dominio y sus cuentas son suyos. Puede cambiarse a otro hosting o a otro desarrollador cuando quiera.' },
+  { q: '¿Necesito tener listos mis textos y fotos?', a: 'No. Notas a mano, su sitio anterior y fotos del celular son un buen comienzo. Pulo lo que tenga y redacto lo que falte. Los cambios de texto forman parte de sus rondas de cambios, así que lo dejamos bien sin costos sorpresa. ¿Quiere adelantar? Vea cómo prepararse para su sitio web nuevo.', html: 'No. Notas a mano, su sitio anterior y fotos del celular son un buen comienzo. Pulo lo que tenga y redacto lo que falte. Los cambios de texto forman parte de sus rondas de cambios, así que lo dejamos bien sin costos sorpresa. ¿Quiere adelantar? Vea <a href="/es/websites/get-ready/">cómo prepararse para su sitio web nuevo</a>.' },
+  { q: '¿Puedo actualizar el sitio por mi cuenta?', a: 'Sí. Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza por su cuenta los textos, las fotos y colecciones como noticias o eventos, sin programar. Se puede agregar a Esencial o Ampliada desde $1,750 y viene incluido en Presencia Completa. El precio inicial incluye 2 colecciones; las demás se cotizan antes. O envíeme los cambios a mí: $50 por cambio (hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud), o un paquete de 5 cambios por $200, para usar dentro de 12 meses. La mayoría de los cambios quedan listos en 2 días hábiles.' },
+  { q: '¿Y si algo falla después del lanzamiento?', a: 'Es poco común. No hay plugins que se descompongan, y un CMS tiene su propio acceso seguro. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea Ayuda después del lanzamiento. Si algo sale mal, encuentro la causa y le explico sus opciones y el costo antes de arreglar nada.', html: 'Es poco común. No hay plugins que se descompongan, y un CMS tiene su propio acceso seguro. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea <a href="/es/websites/help-after-launch/">Ayuda después del lanzamiento</a>. Si algo sale mal, encuentro la causa y le explico sus opciones y el costo antes de arreglar nada.' },
+  { q: '¿Hace SEO, AEO y GEO?', a: 'Sí, en todos los paquetes. El SEO (optimización para motores de búsqueda) le ayuda a aparecer en Google. El AEO y el GEO (optimización para motores de respuesta y generativos) ayudan a que herramientas de IA como ChatGPT y las Vistas creadas con IA de Google encuentren y mencionen su negocio. Desde el principio preparo títulos de página claros, datos estructurados (schema), un mapa del sitio y páginas rápidas. Los sitios hechos con Astro suelen salir bien en las Core Web Vitals, las medidas de velocidad y estabilidad de Google, y le comparto sus puntuaciones de PageSpeed al lanzar.' },
+  { q: '¿Puede crear una tienda en línea?', a: 'Sí. Puedo agregar unos cuantos botones de compra a un sitio pequeño o crear una tienda en línea completa. Cada tienda es diferente, así que cuénteme qué vende y más o menos cuántos productos tiene, y le doy un presupuesto.' },
+  { q: 'Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?', a: 'Lo más probable es que sí. Puedo pasarlo a Astro y conservar su contenido y su imagen. Mantengo las páginas que Google ya conoce y redirijo cada dirección antigua a su nueva página, para que no pierda las visitas que ya se ganó. La mudanza de las páginas de su paquete está incluida; los blogs o catálogos grandes se cotizan aparte. ¿No sabe si arreglar o rehacer? Empiece con un Diagnóstico Web.' },
+];
+
+const schema = serviceSchema([
+  ...packages.map((p) => ({ name: `Paquete de sitio web ${p.name}`, description: p.blurb, price: p.price })),
+  ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
+], '/es/websites/');
+
+const audiences = [
+  { id: 'hospitality', icon: 'star', title: 'Hospitalidad y turismo', who: 'Posadas, B&B, restaurantes, viñedos, cervecerías y granjas.', text: 'Menús, habitaciones, horarios y eventos fáciles de encontrar en el celular, con enlaces a su sistema de reservas.' },
+  { id: 'makers', icon: 'layers', title: 'Tiendas y artesanos', who: 'Boutiques, galerías, talleres artesanales y artistas.', text: 'Muestre su trabajo y lleve a sus clientes a donde pueden comprar. Se puede agregar una tienda en línea, con presupuesto según las herramientas que use.' },
+  { id: 'services', icon: 'wrench', title: 'Servicios locales', who: 'Oficios, profesionales del bienestar, salones de belleza y agentes de bienes raíces.', text: 'Sus servicios, reseñas y zona de servicio, con una forma fácil de llamar, reservar o pedir un presupuesto.' },
+  { id: 'nonprofits', icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', who: 'Consejos de arte, museos, fideicomisos de tierras, rescates de animales y grupos comunitarios.', text: 'Cuente su historia, comparta sus programas y eventos, y facilite que la gente le apoye. Se pueden agregar donaciones, con presupuesto según su proyecto. ¿Es una organización sin fines de lucro registrada? Pregunte por mi descuento.' },
+  { id: 'startups', icon: 'key', title: 'Startups', who: 'Equipos nuevos que lanzan un producto o servicio.', text: 'Un primer sitio creíble que explica lo que hace y recibe registros o consultas.' },
+  { id: 'studios', icon: 'bolt', title: 'Estudios de videojuegos y XR', who: 'Estudios independientes de videojuegos, realidad virtual y experiencias interactivas, en cualquier lugar.', text: 'Un sitio rápido para sus juegos y experiencias: tráileres, un kit de prensa, su equipo y enlaces a Steam, Meta Quest o las tiendas de apps.' },
+];
+---
+<Base title="Sitios web" seoTitle="Sitios web para pequeños negocios en el Hudson Valley, desde $1,500 | Auva Studio" schema={schema} description="Sitios web rápidos y fáciles de usar en el celular para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. Paquetes de pago único desde $1,500, con hosting gratis o de bajo costo.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill" style="view-transition-name: svc-websites">Servicios de sitios web</p>
+      <h1 class="mag-head" style="max-width: 22ch">Un sitio web que ayuda a sus clientes a <em>encontrarle, confiar en usted y contactarle.</em></h1>
+      <p class="lede">Un sitio web suele ser la primera decisión tecnológica de un negocio, y la que lo acompaña por más tiempo. Planifico cada sitio como planificaría cualquier proyecto tecnológico, para que sea enfocado, fácil de usar en el celular, barato de mantener y totalmente suyo.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#packages">Ver paquetes</a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-aside">¿Ya tiene sitio web? Haga la <a href="/es/website-check/">revisión gratis de 2 minutos</a>, o vea el <a href="/es/websites/diagnostic/">Diagnóstico Web de $199</a>.</p>
+      <ul class="hero-strip">{['Precios fijos', 'Sitios rápidos y accesibles', 'Todo es suyo', 'Visible en Google y en las búsquedas con IA'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Un sitio a la medida <em>de su tipo de negocio.</em></h2>
+        <p class="lede">Estoy en el Mid-Hudson Valley y creo sitios para negocios y organizaciones en todo el Hudson Valley, la ciudad de Nueva York y cualquier parte de Estados Unidos.</p>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card" id={a.id}>
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="small muted">{a.who}</p>
+            <p class="who-text">{a.text}</p>
+            {a.id === 'nonprofits' && <p class="small who-phone">Pregunte por mi descuento para organizaciones sin fines de lucro.</p>}
+            <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio</a>
+          </div>
+        ))}
+        <div class="card who-other who-wide">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Otra cosa?</h3>
+          <p>Cuénteme sobre su negocio o proyecto, y le recomiendo el paquete que le conviene.</p>
+          <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Elija <em>el paquete adecuado.</em></h2>
+        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy. Todos incluyen una página principal clara, sus servicios, razones para confiar en usted y un siguiente paso fácil.</p>
+      </div>
+      <Packages />
+      <PaybackCalc />
+    </div>
+  </section>
+
+  <section class="alt" id="samples">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Vea cómo <em>se ve cada paquete.</em></h2>
+        <p class="lede">Un sitio de muestra para cada paquete. Los negocios son inventados, pero cada página y función trabaja tal como lo haría en su sitio, y los formularios muestran lo que verían sus visitantes. Los sitios de muestra están en inglés.</p>
+      </div>
+      <div class="grid grid-3 samples">
+        {samples.map((sm) => {
+          const pk = packages.find((x) => x.name === sm.package);
+          return (
+            <a class="card sample" href={`/samples/${sm.slug}/`} hreflang="en">
+              <Image class="sample-shot" src={sampleShots[sm.slug]} alt={`La página principal de ${sm.name}, un sitio de muestra del paquete ${sm.package}`} widths={[480, 720, 960]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 380px" />
+              <span class="tag">{sm.package}, {pk?.price}</span>
+              <h3>{sm.name}</h3>
+              <p class="muted">{sm.text}</p>
+              <p class="sample-for">{sm.goodFor}</p>
+              <span class="sample-go">Visitar el sitio de muestra <span aria-hidden="true">→</span></span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Un proceso claro, <em>del descubrimiento al lanzamiento.</em></h2>
+        <p class="lede">Trabaja directamente conmigo de principio a fin, con un breve informe de avance cada semana. Su acuerdo de sitio web detalla cada punto.</p>
+      </div>
+      <ol class="steps steps-4">
+        {process.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <p class="you"><b>Usted:</b> {s.you}</p>
+            {s.link && <p class="you"><a href={s.link.href}>{s.link.text} <Icon name="arrow" size={14} /></a></p>}
+            <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+      <p class="fine">Los pasos son los mismos para todos los paquetes. Los sitios pequeños los recorren más rápido, y los más grandes toman un poco más.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Rápido, económico <em>y suyo.</em></h2>
+        <p class="lede">Construyo cada sitio con Astro, una herramienta moderna para sitios web rápidos y ligeros. Así su sitio se mantiene rápido y mis precios, justos.</p>
+      </div>
+      <div class="grid grid-3 plain-grid">
+        {comparison.benefits.map((b) => (
+          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+        ))}
+      </div>
+      <p class="fine"><b>Hecho para que le encuentren</b> significa títulos de página claros, su horario, servicios y ubicación marcados para Google, y una estructura que herramientas de IA como ChatGPT pueden leer. Nadie puede garantizar posiciones ni menciones en la IA, pero estos pasos le dan a su sitio la mejor oportunidad.</p>
+      <p class="fine">El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress. Según datos de rendimiento real de <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> y del <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">Ver todos los datos</a>.</p>
+      <p class="fit-note"><b>Cuando Astro no es lo indicado.</b> Si su negocio ya funciona bien con WordPress u otra plataforma, quizá no valga la pena cambiar. Se lo diré con honestidad en nuestra primera llamada.</p>
+      <div class="proof proof-why">
+        <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
+        <div>
+          <p class="proof-line">Pasé casi 20 años creando sitios web y productos digitales para empresas periodísticas. Su sitio recibe el mismo cuidado, desde la primera llamada hasta el lanzamiento.</p>
+          <figure class="quote quote-inline" lang="en">
+            <blockquote>“{featured.quote}”</blockquote>
+            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Agregue más <em>cuando lo necesite.</em></h2>
+      </div>
+      <div class="grid grid-3">
+        {addons.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+            <p><b style="color: var(--primary)">{a.price}</b></p>
+          </div>
+        ))}
+      </div>
+
+      <div class="band" style="margin-top: 48px" id="brand">
+        <div>
+          <p class="eyebrow" style="color: var(--tint)">Servicio adicional opcional</p>
+          <h2>Identidad de Marca</h2>
+          <p>Una identidad visual reconocible y uniforme que causa una gran primera impresión, lista para su sitio web y para todo lo demás.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$1,000</p>
+          <p>Precio fijo. Por sí sola, o con cualquier paquete de sitio web.</p>
+          <a class="btn" href="/es/websites/brand-essentials/">Vea lo que incluye</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="care">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo se mantiene <em>al día su sitio.</em></h2>
+        <p class="lede">Usted elige quién hace los cambios. Su sitio no tiene plugins que necesiten mantenimiento constante, así que no hay un plan mensual que pagar. Pida cambios cuando los necesite. Los sitios con un CMS o herramientas conectadas pueden necesitar mantenimiento de vez en cuando, que cotizo antes.</p>
+      </div>
+      <div class="grid grid-2 care-paths">
+        <div class="card">
+          <div class="icon"><Icon name="wrench" size={36} /></div>
+          <h3>Yo lo actualizo por usted</h3>
+          <p class="muted">Dígame qué cambiar y yo me encargo.</p>
+          <p><b style="color: var(--primary)">$50 por cambio, o un paquete de 5 por $200</b></p>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="gear" size={36} /></div>
+          <h3>Usted lo actualiza</h3>
+          <p class="muted">Agregue un CMS a Esencial o Ampliada y cambie sus textos, fotos, noticias y eventos cuando quiera.</p>
+          <p><b style="color: var(--primary)">Adicional desde $1,750 · Incluido en Presencia Completa</b></p>
+        </div>
+      </div>
+      <p style="margin-top: 28px"><a class="btn" href="/es/websites/help-after-launch/">Vea cómo funcionan los cambios</a></p>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <div class="wrap">
+      <PathBand
+        eyebrow="¿Ya tiene sitio web?"
+        title="Descubra qué le está costando clientes."
+        text="Celular, velocidad, búsqueda en Google y primera impresión: qué funciona, qué no y qué arreglar primero."
+        free={{ label: '¿Aún tiene dudas?', title: 'Revisión gratis de su sitio', text: '10 preguntas rápidas. Su puntuación y lo más importante que arreglar al instante, sin dar su correo.', href: '/es/website-check/', cta: 'Empezar la revisión gratis' }}
+        paid={{ label: '¿Quiere el panorama completo?', title: 'Diagnóstico Web, $199', text: 'Un informe en lenguaje sencillo con sus arreglos en orden, en 5 días hábiles. Se abona a un sitio nuevo.', href: '/es/websites/diagnostic/', cta: 'Pedir el Diagnóstico' }}
+      />
+      <PathBand
+        id="google-business-profile"
+        style="margin-top: 24px"
+        eyebrow="¿Tiene clientes locales?"
+        title="Aparezca en Google Maps."
+        text="Muchas veces es lo primero que ve la gente cuando le busca. Un horario equivocado o un perfil incompleto los manda con otro."
+        free={{ label: '¿Aún tiene dudas?', title: 'Revisión gratis de su perfil de Google', text: 'Su puntuación y lo más importante que arreglar al instante, o pasos sencillos si todavía no tiene perfil.', href: '/es/google-profile-check/', cta: 'Empezar la revisión gratis' }}
+        paid={{ label: '¿Prefiere que lo haga yo?', title: 'Configuración u optimización, $500', text: 'Pago único, con una guía para mantenerlo al día. Se abonan $150 a un sitio web.', href: '/es/websites/google-business-profile/', cta: 'Que lo haga yo' }}
+      />
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" />
+</Base>

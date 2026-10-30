@@ -1,0 +1,19 @@
+---
+// Phones only: keeps the main buy button in reach, and steps aside while the hero buttons or the form are on screen.
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<div class="pay-bar is-away" id="pay-bar"><a class="btn" href="#start">{label}</a></div>
+
+<script>
+  const bar = document.getElementById('pay-bar');
+  const targets = [document.querySelector('.hero .hero-actions'), document.getElementById('start')].filter(Boolean) as Element[];
+  if (bar && targets.length) {
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) e.isIntersecting ? visible.add(e.target) : visible.delete(e.target);
+      bar.classList.toggle('is-away', visible.size > 0);
+    });
+    targets.forEach((t) => io.observe(t));
+  }
+</script>

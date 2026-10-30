@@ -1,24 +1,32 @@
 ---
-import { packages } from '../data/site';
+import * as en from '../data/site';
+import * as es from '../data/site.es';
+import { langFromPath } from '../i18n';
 
 // "When does a website pay for itself?" Runs in the browser; nothing is sent anywhere.
-const options = packages.map((p) => ({ name: p.name, cost: Number(p.price.replace(/[^0-9]/g, '')), featured: p.featured }));
+const lang = langFromPath(Astro.url.pathname);
+const { packages } = lang === 'es' ? es : en;
+const options = packages.map((p) => ({ name: p.short, cost: Number(p.price.replace(/[^0-9]/g, '')), featured: p.featured }));
+const t = {
+  en: { lede: 'A quick estimate to help you think it through.', pkg: 'Package', worth: 'What one new customer is worth to you', perMonth: 'New customers a month from your website' },
+  es: { lede: 'Un cálculo rápido para ayudarle a pensarlo.', pkg: 'Paquete', worth: 'Lo que vale para usted un cliente nuevo', perMonth: 'Clientes nuevos al mes gracias a su sitio web' },
+}[lang];
 ---
-<div class="card payback" id="payback">
+<div class="card payback" id="payback" data-lang={lang}>
   <div class="payback-head">
-    <h3>When does a website <em>pay for itself?</em></h3>
-    <p class="muted">A quick estimate to help you think it through.</p>
+    <h3>{lang === 'es' ? <>¿Cuándo se paga solo <em>un sitio web?</em></> : <>When does a website <em>pay for itself?</em></>}</h3>
+    <p class="muted">{t.lede}</p>
   </div>
   <form class="payback-form" onsubmit="return false">
-    <label>Package
+    <label>{t.pkg}
       <select name="cost">
-        {options.map((o) => <option value={o.cost} selected={o.featured}>{o.name.split(' ')[0]} (${o.cost.toLocaleString('en-US')})</option>)}
+        {options.map((o) => <option value={o.cost} selected={o.featured}>{o.name} (${o.cost.toLocaleString('en-US')})</option>)}
       </select>
     </label>
-    <label>What one new customer is worth to you
+    <label>{t.worth}
       <span class="money"><span>$</span><input name="worth" type="number" min="1" step="1" value="300" inputmode="numeric" /></span>
     </label>
-    <label>New customers a month from your website
+    <label>{t.perMonth}
       <input name="perMonth" type="number" min="0" step="1" value="2" inputmode="numeric" />
     </label>
   </form>
@@ -29,16 +37,21 @@ const options = packages.map((p) => ({ name: p.name, cost: Number(p.price.replac
   for (const box of document.querySelectorAll<HTMLElement>('.payback')) {
     const form = box.querySelector('form')!;
     const out = box.querySelector('.payback-result')!;
+    const es = box.dataset.lang === 'es';
     const update = () => {
       const cost = Number(form.cost.value);
       const value = Number(form.worth.value);
       const perMonth = Number(form.perMonth.value);
-      if (!(value > 0)) { out.textContent = 'Enter what one new customer is worth to see your estimate.'; return; }
+      if (!(value > 0)) { out.textContent = es ? 'Escriba lo que vale un cliente nuevo para ver su cálculo.' : 'Enter what one new customer is worth to see your estimate.'; return; }
       const needed = Math.ceil(cost / value);
-      let text = `<b>${needed} new ${needed === 1 ? 'customer covers' : 'customers cover'}</b> the cost.`;
+      let text = es
+        ? `<b>${needed} ${needed === 1 ? 'cliente nuevo cubre' : 'clientes nuevos cubren'}</b> el costo.`
+        : `<b>${needed} new ${needed === 1 ? 'customer covers' : 'customers cover'}</b> the cost.`;
       if (perMonth > 0) {
         const months = Math.ceil(needed / perMonth);
-        text += ` At ${perMonth} a month, your site pays for itself in about <b>${months} ${months === 1 ? 'month' : 'months'}</b>.`;
+        text += es
+          ? ` Con ${perMonth} al mes, su sitio se paga solo en unos <b>${months} ${months === 1 ? 'mes' : 'meses'}</b>.`
+          : ` At ${perMonth} a month, your site pays for itself in about <b>${months} ${months === 1 ? 'month' : 'months'}</b>.`;
       }
       if (out.innerHTML === text) return;
       out.innerHTML = text;

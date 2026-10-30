@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import PayBar from '../../components/PayBar.astro';
+import { brandEssentials, serviceSchema, site } from '../../data/site';
+
+const steps = [
+  { title: 'Get to know you', text: 'I learn about your business, your customers, and the styles you like and don’t, then brief the designer.' },
+  { title: 'Two concepts', text: 'The designer creates two logo directions for you to compare.' },
+  { title: 'Refine your pick', text: 'Two revision rounds on the one you choose, plus colors and fonts to match. I pass along your feedback and keep it on schedule.' },
+  { title: 'Get your files', text: 'Your logo files, favicon, and a one-page brand reference sheet, ready for web and print.' },
+];
+
+const faqs = [
+  { q: 'I already have a logo. Do I need this?', a: "Probably not. I can work with your existing logo and colors in any website package. Brand Essentials is for businesses starting fresh, or with a logo that doesn't work well on a website." },
+  { q: 'Can I get Brand Essentials without a website?', a: 'Yes. It works on its own, for your signs, cards, and social media. If you add a website later, your site is built around it.' },
+  { q: 'Do I own my logo?', a: 'Yes. Once your project is paid in full, your logo and brand files are yours to use anywhere, for good.' },
+  { q: 'What is a brand reference sheet?', a: 'One page that shows your logo, your colors with their web and print codes, and your fonts. Hand it to a printer, a sign maker, or anyone designing for you, and everything stays consistent.' },
+  { q: 'What file types do I get?', a: 'SVG and PNG files for the web, and print-ready PDF files, in primary, light, and one-color versions.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Brand Essentials', description: 'Logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet.', price: '$1,000' },
+], '/websites/brand-essentials/');
+---
+<Base title="Brand Essentials" seoTitle="Brand Essentials: Logo, Colors, and Fonts, $1,000 | Auva Studio" schema={schema} description="A custom logo, color palette, fonts, and brand reference sheet for $1,000, ready for your website and beyond. On its own, or with any website package.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/websites/">Website Services</a>
+      <h1 class="mag-head">A look that's <em>clearly yours.</em></h1>
+      <p class="lede">A logo, colors, and fonts made for your business by a professional designer, so you look polished and consistent everywhere: your website, your sign, and your cards.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Start my brand, $1,000</a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Not sure? Book a free call <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">Flat rate. Logo, colors, fonts, and files you own. On its own, or with any website package.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mag-head">What's included.</h2>
+          <p class="lede">Everything you need to look the same on your website, your sign, and your business cards. I work with a professional designer I trust and manage the project for you, so your brand and website come together.</p>
+        </div>
+        <ul class="ticks">
+          {brandEssentials.map(([t, d]) => <li><Icon name="tick" size={18} /><span><b>{t}.</b> {d}</span></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it works.</h2>
+      </div>
+      <ol class="steps steps-4">
+        {steps.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Brand Essentials</h2>
+          <p>Get it on its own, or pair it with a website so your brand is ready before the design starts and everything matches from day one.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$1,000</p>
+          <p>Flat rate. On its own, or with any website package.</p>
+          <a class="btn" href="#start">Start my brand</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="brand" />
+  <PayBar label="Start my brand, $1,000" />
+</Base>

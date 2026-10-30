@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import { site } from '../../data/site';
+
+// Public prep checklist for people planning a new website. Signed clients get the longer kickoff checklist.
+const groups = [
+  { icon: 'key', title: 'Your business basics', lede: 'The facts that show up across your whole site.', items: [
+    'Your business name, exactly as it should appear',
+    'What you do, in one sentence, the way you would tell a new neighbor',
+    'Your services or products, with a short description of each',
+    'Who you serve, and the towns or areas you cover',
+    'Phone, email, address, and business hours',
+    'Your logo, the best version you have. No logo yet? Ask me about Brand Essentials.',
+  ] },
+  { icon: 'star', title: 'Your photos', lede: 'Real photos build more trust than stock photos, and phone photos work well.', items: [
+    'You and your team: a friendly headshot and one of you at work',
+    'Your place: storefront, studio, office, or where you work',
+    '5 to 10 examples of your best work or products',
+    'One wide, bright photo for the top of your home page',
+    'Customer photos only with their written permission',
+  ], tip: 'Shoot in daylight, hold your phone sideways, and send the original files, not screenshots.' },
+  { icon: 'chat', title: 'Your words', lede: 'Write like you talk. Notes and voice memos are fine. I polish them into finished pages.', items: [
+    'Home: what you do, who it’s for, and what visitors should do next',
+    'About: why you started and what makes you different',
+    'Each service: what it is, who it’s for, and the price if you share it',
+    '5 to 8 questions customers often ask you, with your answers',
+    '3 to 5 customer reviews you have permission to use',
+  ], tip: 'Stuck? Record a two-minute voice memo answering “What do you do, and who do you do it for?”' },
+  { icon: 'lock', title: 'Your domain and accounts', lede: 'Everything stays in your name, from the start.', items: [
+    'Your domain (like yourbusiness.com), registered in your name. No domain yet? I can help you pick one.',
+    'A working login to your domain account, tested now so it doesn’t hold up launch',
+    'Your current website and email, if you have them, so nothing breaks when the new site goes live',
+    'Any booking, newsletter, payment, or donation tools you use or want',
+  ], tip: 'Never send passwords by email or text. When access is needed, you add me as a user from your own account.' },
+  { icon: 'bulb', title: 'Your style and goals', lede: 'No design terms needed. Your honest reactions help most.', items: [
+    '3 websites you like, from any industry, and what you like about each',
+    '1 or 2 websites you don’t like, and why',
+    '3 words for how your site should feel, like warm, calm, and trustworthy',
+    'The one thing visitors should do: call, book, visit, buy, donate, or get in touch',
+  ] },
+];
+
+const faqs = [
+  { q: 'Do I need everything on this list before we talk?', a: "No. Bring whatever you have to a free call. Rough notes and phone photos are a fine start, and I polish your words and draft anything missing for your approval." },
+  { q: 'Why does getting ready matter?', a: 'Your timeline starts once I have your content. Most websites that run late are waiting on photos and words, not design, so the more you gather early, the sooner your site goes live.' },
+  { q: 'What happens after I hire you?', a: 'You get a full kickoff checklist and a shared folder in your own Google Drive, Dropbox, or OneDrive for your files. Then we move through Discovery, Content & Review, Build & Preview, and Launch.' },
+];
+---
+<Base title="Get Ready for Your New Website" seoTitle="Website Prep Checklist: Get Ready for Your New Website | Auva Studio" description="A free checklist of the photos, words, and accounts to gather before your new website is built, so it goes live sooner.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/websites/">Website Services</a>
+      <h1 class="mag-head">Get ready for <em>your new website.</em></h1>
+      <p class="lede">Planning a website? This free checklist shows what to gather first: your basics, photos, words, and accounts. The more you have ready, the sooner your site goes live.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="/websites/#packages">See packages</a>
+      </div>
+      <p class="hero-note">You don't need everything before we talk. Bring what you have.</p>
+    </div>
+  </section>
+
+  {groups.map((g, i) => (
+    <section class:list={{ alt: i % 2 === 1 }}>
+      <div class="wrap">
+        <div class="grid grid-2">
+          <div>
+            <div class="icon"><Icon name={g.icon} size={28} /></div>
+            <h2 class="mag-head">{g.title}</h2>
+            <p class="lede">{g.lede}</p>
+          </div>
+          <div>
+            <ul class="ticks">
+              {g.items.map((t) => <li><Icon name="tick" size={18} />{t}</li>)}
+            </ul>
+            {g.tip && <p class="fine"><b>Tip:</b> {g.tip}</p>}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Have some of it? That's enough to start.</h2>
+          <p>On a free 30-minute call, we look at what you have and which package fits. I polish your words and draft anything missing.</p>
+        </div>
+        <div>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+</Base>

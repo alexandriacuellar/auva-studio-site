@@ -1,12 +1,37 @@
 ---
 import Icon from './Icon.astro';
-import { packages, samples } from '../data/site';
+import * as en from '../data/site';
+import * as es from '../data/site.es';
+import { langFromPath } from '../i18n';
 
+const lang = langFromPath(Astro.url.pathname);
+const { packages, samples } = lang === 'es' ? es : en;
+const base = lang === 'es' ? '/es/websites/' : '/websites/';
 const [ess, exp, com] = packages;
 const Y = true, N = false;
 // Feature comparison for "Compare all features". Keep in step with the package cards above.
 type Cell = string | boolean;
-const rows: ([string, Cell[]] | string)[] = [
+const rows: ([string, Cell[]] | string)[] = lang === 'es' ? [
+  ['Precio', [ess.price, exp.price, com.price]],
+  ['Plazo, una vez que tenga su contenido', [ess.timeline, exp.timeline, com.timeline]],
+  'Planificación y contenido',
+  ['Llamada de planificación y plan de contenido', [Y, Y, Y]],
+  ['Textos pulidos y completados', [Y, Y, Y]],
+  'Diseño y desarrollo',
+  ['Páginas', ['Hasta 5', 'Hasta 10', 'Hasta 20']],
+  ['Diseños de página', ['2', 'Hasta 3', 'Hasta 6']],
+  ['Pensado primero para el celular', [Y, Y, Y]],
+  ['Formulario de contacto y mapa', [Y, Y, Y]],
+  ['Rondas de cambios', ['2', '3', '4']],
+  'Visibilidad en internet',
+  ['Preparado para Google y las búsquedas con IA', [Y, Y, Y]],
+  ['Orientación sobre su Perfil de Negocio de Google', [Y, Y, Y]],
+  ['Estadísticas de visitas', ['Sencillas', 'Qué páginas traen llamadas', 'Qué páginas traen llamadas']],
+  ['Revisión de búsqueda a los 30 días', [N, N, Y]],
+  'Extras',
+  ['CMS (actualícelo usted)', ['Agregar desde $1,750', 'Agregar desde $1,750', 'Incluido']],
+  ['Tienda en línea o donaciones', ['Con presupuesto', 'Con presupuesto', 'Con presupuesto']],
+] : [
   ['Price', [ess.price, exp.price, com.price]],
   ['Timeline, once I have your content', [ess.timeline, exp.timeline, com.timeline]],
   'Planning and content',
@@ -24,14 +49,18 @@ const rows: ([string, Cell[]] | string)[] = [
   ['Visitor stats', ['Simple', 'Which pages bring calls', 'Which pages bring calls']],
   ['30-day search checkup', [N, N, Y]],
   'Extras',
-  ['Content Editing Dashboard', ['Add from $1,750', 'Add from $1,750', 'Included']],
+  ['CMS (update it yourself)', ['Add from $1,750', 'Add from $1,750', 'Included']],
   ['Online store or donations', ['Quoted', 'Quoted', 'Quoted']],
 ];
+const t = {
+  en: { recommended: 'Recommended', once: 'once I have your content', sample: (n: string) => `See a sample ${n} site`, start: (n: string) => `Start with ${n}`, bigger: "<b>Need something different?</b> More than 20 pages, an online store, donations, member logins, or custom features. Let's talk about what you need and find the right fit. It might be a custom package, quoted for your project.", custom: 'Talk about a custom site', customPkg: 'Custom website', compare: 'Compare all features', feature: 'Feature', included: 'Included', notIncluded: 'Not included', upgrade: '<b>Start small, grow later.</b> Upgrade any time and pay only the difference. <b>Fixed prices, no surprises.</b> All prices are one-time project fees, and a $199 Website Diagnostic is credited toward your new website.' },
+  es: { recommended: 'Recomendado', once: 'una vez que tenga su contenido', sample: (n: string) => `Ver un sitio de muestra del paquete ${n}`, start: (n: string) => `Empezar con ${n}`, bigger: '<b>¿Necesita algo diferente?</b> Más de 20 páginas, una tienda en línea, donaciones, acceso para miembros o funciones especiales. Hablemos de lo que necesita y encontremos la mejor opción para usted. Puede ser un paquete a la medida, con presupuesto según su proyecto.', custom: 'Hablemos de un sitio a la medida', customPkg: 'Sitio a la medida', compare: 'Comparar todas las funciones', feature: 'Función', included: 'Incluido', notIncluded: 'No incluido', upgrade: '<b>Empiece en pequeño y crezca después.</b> Cambie a un paquete mayor cuando quiera y pague solo la diferencia. <b>Precios fijos, sin sorpresas.</b> Todos los precios son pagos únicos por proyecto, y el Diagnóstico Web de $199 se abona a su sitio nuevo.' },
+}[lang];
 ---
 <div class="grid grid-3 packages">
   {packages.map((p) => (
-    <article id={p.name.split(' ')[0].toLowerCase()} class:list={['card', 'package', { featured: p.featured }]}>
-      {p.featured && <span class="rec">Recommended</span>}
+    <article id={p.id} class:list={['card', 'package', { featured: p.featured }]}>
+      {p.featured && <span class="rec">{t.recommended}</span>}
       <span class="tag">{p.eyebrow}</span>
       <h3>{p.name}</h3>
       <p class="muted">{p.blurb}</p>
@@ -46,22 +75,22 @@ const rows: ([string, Cell[]] | string)[] = [
         </div>
       ))}
       {p.extra && <p class="extra"><Icon name="gear" size={18} />{p.extra}</p>}
-      <p class="time"><Icon name="clock" size={18} />{p.timeline} once I have your content</p>
-      {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>See a sample {p.name.split(' ')[0]} site <span aria-hidden="true">→</span></a>; })()}
-      <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`/websites/?package=${encodeURIComponent(p.name)}#start`}>Start with {p.name.split(' ')[0]}</a>
+      <p class="time"><Icon name="clock" size={18} />{p.timeline} {t.once}</p>
+      {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>{t.sample(p.short)} <span aria-hidden="true">→</span></a>; })()}
+      <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`${base}?package=${encodeURIComponent(p.name)}#start`}>{t.start(p.short)}</a>
     </article>
   ))}
 </div>
 <div class="custom-band">
-  <p><b>Need something bigger?</b> Custom websites for more than 20 pages, a large catalog or online store, or custom features. Quoted for your project.</p>
-  <a class="btn btn-ghost" href="/websites/?topic=website&package=Custom%20website#start">Talk about a custom site</a>
+  <p set:html={t.bigger} />
+  <a class="btn btn-ghost" href={`${base}?topic=website&package=${encodeURIComponent(t.customPkg)}#start`}>{t.custom}</a>
 </div>
 <details class="compare-all">
-  <summary>Compare all features</summary>
+  <summary>{t.compare}</summary>
   <div class="compare-wrap">
     <table>
       <thead>
-        <tr><th scope="col"><span class="sr-only">Feature</span></th>{packages.map((p) => <th scope="col" class:list={{ us: p.featured }}>{p.name.split(' ')[0]}</th>)}</tr>
+        <tr><th scope="col"><span class="sr-only">{t.feature}</span></th>{packages.map((p) => <th scope="col" class:list={{ us: p.featured }}>{p.short}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r) => typeof r === 'string' ? (
@@ -71,7 +100,7 @@ const rows: ([string, Cell[]] | string)[] = [
             <th scope="row">{r[0]}</th>
             {r[1].map((c, i) => (
               <td class:list={{ us: packages[i].featured }}>
-                {c === true ? <><Icon name="tick" size={18} /><span class="sr-only">Included</span></> : c === false ? <><span aria-hidden="true" class="none">–</span><span class="sr-only">Not included</span></> : c}
+                {c === true ? <><Icon name="tick" size={18} /><span class="sr-only">{t.included}</span></> : c === false ? <><span aria-hidden="true" class="none">–</span><span class="sr-only">{t.notIncluded}</span></> : c}
               </td>
             ))}
           </tr>
@@ -80,4 +109,4 @@ const rows: ([string, Cell[]] | string)[] = [
     </table>
   </div>
 </details>
-<p class="upgrade"><b>Start small, grow later.</b> Upgrade any time and pay only the difference. <b>Fixed prices, no surprises.</b> All prices are one-time project fees, and a $199 Website Diagnostic is credited toward your new website.</p>
+<p class="upgrade" set:html={t.upgrade} />

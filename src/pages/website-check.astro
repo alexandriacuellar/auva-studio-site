@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/pages/website-check.css';
 import { site } from '../data/site';
 
 // Free self-check quiz. Scoring runs in the browser; answers are sent only if the visitor chooses to.
@@ -27,6 +28,7 @@ const choices = [
       <p class="bd-pill">Free website check</p>
       <h1 class="mag-head">Is your website <em>working for you?</em></h1>
       <p class="lede">Answer 10 quick questions about your website. It takes about 2 minutes, and you'll see your score and what to fix first right away.</p>
+      <p class="hero-note">Free. No email needed. Includes a free PDF guide you can keep. Your answers stay on your screen unless you choose to send them.</p>
     </div>
   </section>
 
@@ -69,8 +71,24 @@ const choices = [
         </div>
 
         <div class="card">
-          <h3>Want a second opinion?</h3>
-          <p class="muted">Send me your results and I'll take a look and reply personally. This is optional.</p>
+          <h3>Check it yourself, step by step</h3>
+          <p class="muted">A free 2-page guide with simple ways to test each of these questions on your own site, and what to fix first.</p>
+          <a class="btn btn-ghost" href="/downloads/website-check-guide.pdf" download>Download the free guide (PDF)</a>
+        </div>
+
+        <div class="card offer-card">
+          <p class="eyebrow">Ready for the full picture?</p>
+          <h3>Website Diagnostic</h3>
+          <p class="price">$199</p>
+          <p class="muted">This check shows where to look. The Diagnostic shows exactly what to fix: I review your site on a phone and a computer, run it through Google's own tools, and send a plain-English report with your fixes in order within 5 business days. Credited toward a new website with me.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/websites/diagnostic/">Get the Diagnostic</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Send me your results</h3>
+          <p class="muted">I'll take a look and reply personally with what I'd do first. Free and optional.</p>
           <form action="https://api.web3forms.com/submit" method="POST" class="inquiry" id="send">
             <input type="hidden" name="access_key" value={site.web3formsKey} />
             <input type="hidden" name="subject" value="New website check from auvastudio.com" />
@@ -83,6 +101,7 @@ const choices = [
               <label>Email<input type="email" name="email" autocomplete="email" required /></label>
             </div>
             <label><span>Website <span class="opt">(optional)</span></span><input name="website" placeholder="yourbusiness.com" autocomplete="url" /></label>
+            <label class="opt-in"><input type="checkbox" name="wants_diagnostic" value="Yes, send a payment link for the $199 Website Diagnostic" /><span>I'd like the $199 Website Diagnostic. Send me a payment link.</span></label>
             <button class="btn" type="submit">Send my results</button>
             <p class="form-status" role="status" aria-live="polite"></p>
           </form>
@@ -103,11 +122,14 @@ const choices = [
   form.addEventListener('change', () => { progress.textContent = `${answered()} of ${total} answered`; });
 
   const bands = [
-    { min: 16, title: 'Your site is in <em>good shape.</em>', text: "A few small fixes could help. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free 30-minute call', booking, true]] },
-    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: "A $199 Website Diagnostic shows exactly what to fix first, and it's credited toward your new website with me.", actions: [['Request a Diagnostic', '/websites/?topic=diagnostic#start'], ['Book a free 30-minute call', booking, true]] },
-    { min: 0, title: 'Your site may be <em>costing you customers.</em>', text: 'Start with a $199 Website Diagnostic, or see website packages from $1,500.', actions: [['Request a Diagnostic', '/websites/?topic=diagnostic#start'], ['See website packages', '/websites/#packages']] },
+    { min: 16, title: 'Your site is in <em>good shape.</em>', text: "A few small fixes could help. Book a free 30-minute call if you'd like a second opinion.", actions: [['Book a free call about my results', booking, true]] },
+    { min: 9, title: 'A few fixes would make <em>a real difference.</em>', text: "A $199 Website Diagnostic shows exactly what to fix first, and it's credited toward your new website with me.", actions: [['Get the Diagnostic, $199', '/websites/diagnostic/'], ['Book a free call about my results', booking, true]] },
+    { min: 0, title: 'Your site may be <em>costing you customers.</em>', text: 'Start with a $199 Website Diagnostic, or see website packages from $1,500.', actions: [['Get the Diagnostic, $199', '/websites/diagnostic/'], ['See website packages', '/websites/#packages']] },
   ];
   const labels = { 2: 'Yes', 1: 'Not sure', 0: 'No' };
+  // Calls booked from the results carry the score, so the booking says what the call is for.
+  // a1 fills the first question on the Calendly booking form; the utm tags show in the booking details.
+  const callUrl = (note) => `${booking}?a1=${encodeURIComponent(note)}&utm_source=auvastudio&utm_campaign=website-check`;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -128,7 +150,7 @@ const choices = [
     band.actions.forEach(([label, href, external], i) => {
       const a = document.createElement('a');
       a.className = i === 0 ? 'btn' : 'btn btn-ghost';
-      a.href = href;
+      a.href = href === booking ? callUrl(`Free website check: I scored ${score}/20 and want to talk through my results.`) : href;
       a.textContent = label;
       if (external) { a.target = '_blank'; a.rel = 'noopener'; }
       actions.append(a);
@@ -168,7 +190,7 @@ const choices = [
       const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
       if (!res.success) throw new Error(res.message);
       window.auvaConvert?.('form');
-      status.textContent = "Thanks! I'll look at your results and reply within 24–48 hours.";
+      status.textContent = send.wants_diagnostic.checked ? "Thanks! I'll confirm your details and send your payment link within 24–48 hours." : "Thanks! I'll look at your results and reply within 24–48 hours.";
       btn.hidden = true;
     } catch {
       status.textContent = 'Something went wrong. Please email me instead.';
@@ -177,33 +199,3 @@ const choices = [
     }
   });
 </script>
-
-<style>
-  .check-wrap { max-width: 820px; }
-  .check-list { list-style: none; counter-reset: q; margin: 0; padding: 0; display: grid; gap: 8px; }
-  .check-list li { counter-increment: q; padding: 18px 0; border-bottom: 1px solid var(--border); }
-  .check-list li:last-child { border-bottom: 0; }
-  fieldset { border: 0; margin: 0; padding: 0; }
-  legend { font-weight: 600; color: var(--ink); font-size: 1.08rem; margin-bottom: 12px; padding: 0; }
-  legend::before { content: counter(q) '. '; color: var(--primary); font-weight: 700; }
-  .choices { display: flex; gap: 10px; flex-wrap: wrap; }
-  .choices label { position: relative; cursor: pointer; }
-  .choices input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-  .choices span { display: inline-block; padding: 9px 20px; border: 2px solid var(--border); border-radius: 999px; font-weight: 600; background: var(--white); transition: background .15s, border-color .15s; }
-  .choices input:checked + span { background: var(--primary); border-color: var(--primary); color: var(--white); }
-  .choices input:focus-visible + span { outline: 3px solid var(--bright); outline-offset: 2px; }
-  .check-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--border); }
-  .check-foot p { margin: 0; }
-  .results { display: grid; gap: 24px; margin-top: 32px; outline: none; }
-  .score-card { text-align: center; }
-  .score-card .lede { margin: 0 auto 24px; }
-  .score-card .hero-actions { justify-content: center; }
-  .score { font-family: var(--font-head); font-size: 4.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 0 0 12px; }
-  .score .out { font-size: 1.6rem; color: var(--muted); font-weight: 600; }
-  .score-card h2.mag-head { font-size: clamp(1.8rem, 4vw, 2.6rem); }
-  .tips { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
-  .tips :global(li) { display: grid; gap: 4px; padding-left: 16px; border-left: 3px solid var(--bright); }
-  .tips :global(span) { color: var(--muted); }
-  .inquiry { margin-top: 16px; }
-  @media (max-width: 640px) { .check-foot .btn { width: 100%; justify-content: center; } }
-</style>

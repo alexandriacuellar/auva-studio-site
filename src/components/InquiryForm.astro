@@ -5,50 +5,162 @@
 // Links can preselect a choice with ?topic= or ?package=, followed by #start.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
+import { langFromPath } from '../i18n';
 
-interface Props { kind: 'website' | 'consulting' | 'ai' | 'partner' | 'general'; alt?: boolean; hero?: boolean }
-const { kind, alt = false, hero = false } = Astro.props;
+// topic preselects the website choice on a service's own page, such as topic="gbp".
+interface Props { kind: 'website' | 'consulting' | 'ai' | 'partner' | 'general'; alt?: boolean; hero?: boolean; topic?: string }
+const { kind, alt = false, hero = false, topic = 'website' } = Astro.props;
+const lang = langFromPath(Astro.url.pathname);
 const isWebsite = kind === 'website';
 const isAi = kind === 'ai';
 const isPartner = kind === 'partner';
 const isGeneral = kind === 'general';
 const Heading = hero ? 'h1' : 'h2';
-const intro = isGeneral && !hero
-  ? { eyebrow: 'Send a message', title: 'Tell me <em>about your project.</em>', lede: "Share a few details and I'll follow up personally with questions or a suggested next step." }
-  : isGeneral
-  ? { eyebrow: 'Contact', title: "Let's talk about <em>what you're working on.</em>", lede: "Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed." }
-  : isPartner
-  ? { eyebrow: 'Partner with me', title: 'Tell me <em>about your project.</em>', lede: 'A single build, an overflow project, or an ongoing partnership are all welcome. Designs, briefs, or a rough idea are enough to start.' }
-  : isAi
-  ? { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' }
-  : { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' };
-const subject = isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New AI & emerging tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com';
+// Every word on the form, in each language. Option values stay in English so messages sort the same way.
+const t = {
+  en: {
+    intros: {
+      general: { eyebrow: 'Send a message', title: 'Tell me <em>about your project.</em>', lede: "Share a few details and I'll follow up personally with questions or a suggested next step." },
+      contact: { eyebrow: 'Contact', title: "Let's talk about <em>what you're working on.</em>", lede: "Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed." },
+      partner: { eyebrow: 'Partner with me', title: 'Tell me <em>about your project.</em>', lede: 'A single build, an overflow project, or an ongoing partnership are all welcome. Designs, briefs, or a rough idea are enough to start.' },
+      ai: { eyebrow: 'Start exploring', title: 'Tell me <em>about your idea.</em>', lede: 'Early ideas and half-formed questions are welcome. No formal brief needed.' },
+      consulting: { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' },
+    },
+    websiteTopics: [
+      ['website', 'A new website (from $1,500)'],
+      ['improve', 'Improve my current site'],
+      ['store', 'An online store'],
+      ['diagnostic', 'Website Diagnostic ($199)'],
+      ['gbp', 'Google Business Profile ($500)'],
+      ['care', 'Help after launch (updates and fixes)'],
+      ['brand', 'Brand Essentials ($1,000)'],
+    ],
+    replyLine: 'I read every message personally and reply within 24–48 hours.',
+    websiteIntro: (replyLine: string) => ({
+      website: { title: 'Tell me about <em>your website.</em>', lede: "Share a few details and I'll follow up personally with questions or a recommended package.", next: `${replyLine} You'll get a short written agreement with your package, price, and schedule before anything begins.` },
+      diagnostic: { title: 'Get your <em>Website Diagnostic.</em>', lede: "Send your website address and anything that's bothering you about it.", button: 'Request my Diagnostic', steps: ['<b>Send this form.</b> I reply within 24–48 hours to confirm.', '<b>Pay $199</b> by secure payment link.', '<b>Get your report</b> within 5 business days.'] },
+      gbp: { title: 'Get your profile <em>set up right.</em>', lede: "Send your business name and whether you already have a profile. I'll confirm which option fits.", button: 'Request my profile service', steps: ['<b>Send this form.</b> I reply within 24–48 hours with the option that fits.', '<b>Pay $500</b> by secure payment link.', '<b>I do the work</b> and send your profile guide.'] },
+      care: { title: 'What would you like <em>changed?</em>', lede: 'Tell me what to update, or ask how updates work.', next: `${replyLine} If a request will take longer than about 30 minutes, I tell you the price first.` },
+      brand: { title: 'Start your <em>Brand Essentials.</em>', lede: "Share a bit about your business and the look you're after.", button: 'Request Brand Essentials', steps: ['<b>Send this form.</b> I reply within 24–48 hours with a few questions.', '<b>Confirm the details and price</b> in writing before any work begins.', '<b>Choose your favorite</b> of two logo concepts.'] },
+    }),
+    websiteTitle: 'Tell me about <em>your website.</em>',
+    book: 'Book a free 30-minute call',
+    readPersonally: 'I read every message personally.',
+    alsoEmail: 'I read every message personally. You can also email',
+    orForm: 'Or send a message with the form.',
+    whatNext: 'What happens next',
+    scoped: 'Any work is scoped and priced in writing before it begins.',
+    preferTalk: 'Prefer to talk?',
+    instead: 'instead.',
+    name: 'Name', email: 'Email', business: 'Business or organization', phone: 'Phone', optional: '(optional)',
+    about: "What's this about?",
+    generalTopics: [['website', 'Website'], ['consulting', 'Consulting or project support'], ['ai', 'AI & Emerging Tech'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
+    workingOn: 'What are you working on?',
+    need: 'What do you need?', currentSite: 'Current website', tellBusiness: 'Tell me about your business',
+    interested: 'Interested in',
+    aiTopics: [['unsure', 'Not sure yet'], ['workshop', 'Team AI Workshop'], ['readiness', 'AI Readiness Plan'], ['ai-sprint', 'AI Prototype Sprint'], ['review', 'Concept & Feasibility Review'], ['xr-sprint', 'XR Prototype Sprint'], ['production', 'Production Support']],
+    area: 'Area',
+    consultingTopics: [['unsure', 'Not sure yet'], ['planning', 'Technology Planning'], ['analysis', 'Business Analysis & Process Review'], ['delivery', 'Project Management'], ['ai', 'AI & Emerging Tech']],
+    exploring: 'What are you exploring?', going: "What's going on?",
+    howWork: 'How would you like to work?',
+    partnerTopics: [['unsure', 'Not sure yet'], ['white-label', 'White-label'], ['subcontracting', 'Subcontracting'], ['collaborative', 'Collaborative delivery']],
+    projectNeeds: 'What does the project need?',
+    send: 'Send message',
+    sending: 'Sending…',
+    thanks: "Thanks! Your message is on its way. You'll hear back within 24–48 hours.",
+    failed: 'Something went wrong. Please email me instead.',
+  },
+  es: {
+    intros: {
+      general: { eyebrow: 'Envíe un mensaje', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Comparta algunos detalles y le respondo personalmente con preguntas o un siguiente paso sugerido.' },
+      contact: { eyebrow: 'Contacto', title: 'Hablemos de <em>lo que está haciendo.</em>', lede: 'Reserve una llamada gratis de 30 minutos, o envíe un mensaje y le respondo en 24–48 horas. No necesita un plan detallado.' },
+      partner: { eyebrow: 'Trabajemos juntos', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Un solo sitio, un proyecto extra o una colaboración continua: todo es bienvenido. Diseños, un brief o una idea general bastan para empezar.' },
+      ai: { eyebrow: 'Empiece a explorar', title: 'Cuénteme <em>su idea.</em>', lede: 'Las ideas tempranas y las preguntas a medio formar son bienvenidas. No necesita una propuesta formal.' },
+      consulting: { eyebrow: 'Empecemos a conversar', title: 'Cuénteme <em>en qué está trabajando.</em>', lede: 'Ideas tempranas, proyectos ya en marcha y trabajo junto a su equipo o proveedores actuales: todo es bienvenido. No necesita una propuesta formal.' },
+    },
+    websiteTopics: [
+      ['website', 'Un sitio web nuevo (desde $1,500)'],
+      ['improve', 'Mejorar mi sitio actual'],
+      ['store', 'Una tienda en línea'],
+      ['diagnostic', 'Diagnóstico Web ($199)'],
+      ['gbp', 'Perfil de Negocio de Google ($500)'],
+      ['care', 'Ayuda después del lanzamiento (cambios y arreglos)'],
+      ['brand', 'Identidad de Marca ($1,000)'],
+    ],
+    replyLine: 'Leo cada mensaje personalmente y respondo en 24–48 horas.',
+    websiteIntro: (replyLine: string) => ({
+      website: { title: 'Cuénteme <em>sobre su sitio web.</em>', lede: 'Comparta algunos detalles y le respondo personalmente con preguntas o un paquete recomendado.', next: `${replyLine} Antes de empezar, recibirá un breve acuerdo por escrito con su paquete, precio y calendario.` },
+      diagnostic: { title: 'Pida su <em>Diagnóstico Web.</em>', lede: 'Envíe la dirección de su sitio web y cualquier cosa que le preocupe de él.', button: 'Pedir mi Diagnóstico', steps: ['<b>Envíe este formulario.</b> Le respondo en 24–48 horas para confirmar.', '<b>Pague $199</b> con un enlace de pago seguro.', '<b>Reciba su informe</b> en un plazo de 5 días hábiles.'] },
+      gbp: { title: 'Deje su perfil <em>bien configurado.</em>', lede: 'Envíe el nombre de su negocio y dígame si ya tiene un perfil. Le confirmo qué opción le conviene.', button: 'Pedir el servicio para mi perfil', steps: ['<b>Envíe este formulario.</b> Le respondo en 24–48 horas con la opción que le conviene.', '<b>Pague $500</b> con un enlace de pago seguro.', '<b>Hago el trabajo</b> y le envío la guía de su perfil.'] },
+      care: { title: '¿Qué le gustaría <em>cambiar?</em>', lede: 'Dígame qué actualizar, o pregunte cómo funcionan los cambios.', next: `${replyLine} Si una solicitud va a tomar más de unos 30 minutos, primero le digo el precio.` },
+      brand: { title: 'Empiece su <em>Identidad de Marca.</em>', lede: 'Cuénteme un poco sobre su negocio y el estilo que busca.', button: 'Pedir mi Identidad de Marca', steps: ['<b>Envíe este formulario.</b> Le respondo en 24–48 horas con algunas preguntas.', '<b>Confirme los detalles y el precio</b> por escrito antes de empezar.', '<b>Elija su favorita</b> entre dos propuestas de logotipo.'] },
+    }),
+    websiteTitle: 'Cuénteme <em>sobre su sitio web.</em>',
+    book: 'Reserve una llamada gratis de 30 minutos',
+    readPersonally: 'Leo cada mensaje personalmente.',
+    alsoEmail: 'Leo cada mensaje personalmente. También puede escribir a',
+    orForm: 'O envíe un mensaje con el formulario.',
+    whatNext: 'Qué sigue',
+    scoped: 'Todo trabajo se define y se cotiza por escrito antes de empezar.',
+    preferTalk: '¿Prefiere hablar?',
+    instead: 'en su lugar.',
+    name: 'Nombre', email: 'Correo electrónico', business: 'Negocio u organización', phone: 'Teléfono', optional: '(opcional)',
+    about: '¿De qué se trata?',
+    generalTopics: [['website', 'Sitio web'], ['consulting', 'Consultoría o apoyo en proyectos'], ['ai', 'IA y Tecnología Emergente'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
+    workingOn: '¿En qué está trabajando?',
+    need: '¿Qué necesita?', currentSite: 'Sitio web actual', tellBusiness: 'Cuénteme sobre su negocio',
+    interested: 'Me interesa',
+    aiTopics: [['unsure', 'Todavía no sé'], ['workshop', 'Taller de IA para Equipos'], ['readiness', 'Plan de Preparación para IA'], ['ai-sprint', 'Sprint de Prototipo de IA'], ['review', 'Revisión de Concepto y Viabilidad'], ['xr-sprint', 'Sprint de Prototipo XR'], ['production', 'Apoyo de Producción']],
+    area: 'Área',
+    consultingTopics: [['unsure', 'Todavía no sé'], ['planning', 'Planificación Tecnológica'], ['analysis', 'Análisis de Negocio y Revisión de Procesos'], ['delivery', 'Gestión de Proyectos'], ['ai', 'IA y Tecnología Emergente']],
+    exploring: '¿Qué está explorando?', going: '¿Qué está pasando?',
+    howWork: '¿Cómo le gustaría trabajar?',
+    partnerTopics: [['unsure', 'Todavía no sé'], ['white-label', 'Marca blanca'], ['subcontracting', 'Subcontratación'], ['collaborative', 'Entrega colaborativa']],
+    projectNeeds: '¿Qué necesita el proyecto?',
+    send: 'Enviar mensaje',
+    sending: 'Enviando…',
+    thanks: '¡Gracias! Su mensaje va en camino. Le respondo en 24–48 horas.',
+    failed: 'Algo salió mal. Por favor, escríbame por correo electrónico.',
+  },
+}[lang];
+const intro = isGeneral && !hero ? t.intros.general : isGeneral ? t.intros.contact : isPartner ? t.intros.partner : isAi ? t.intros.ai : t.intros.consulting;
+// Spanish messages say so in the subject line, so replies go out in Spanish.
+const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New AI & Emerging Tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
+const websiteTopics = t.websiteTopics;
+// Each website service page gets its own heading, lede, and next step.
+const replyLine = t.replyLine;
+// Paid services list their buying steps in order, so the route to pay is plain.
+const websiteIntro = (t.websiteIntro(replyLine) as Record<string, { title: string; lede: string; next?: string; button?: string; steps?: string[] }>)[topic] ?? null;
 const formAction = 'https://api.web3forms.com/submit';
 ---
-<section id="start" class:list={{ alt, hero }}>
+<section id="start" class:list={{ alt, hero }} data-sending={t.sending} data-thanks={t.thanks} data-failed={t.failed}>
   <div class="wrap about-grid">
     <div>
       {isWebsite ? (
         <>
-          <h2 class="mag-head">Tell me about <em>your website.</em></h2>
-          <p class="lede">Share a few details and I'll follow up personally with questions or a recommended package.</p>
+          <h2 class="mag-head" set:html={(websiteIntro ?? { title: t.websiteTitle }).title} />
+          <p class="lede">{websiteIntro?.lede}</p>
         </>
       ) : (
         <>
           <Heading class="mag-head" set:html={intro.title} />
           <p class="lede">{intro.lede}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">{t.book} <Icon name="arrow" size={18} /></a>
           {isGeneral ? (
-            hero ? <p class="muted small" style="margin-top: 12px">I read every message personally. You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">I read every message personally.</p>
+            hero ? <p class="muted small" style="margin-top: 12px">{t.alsoEmail} <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">{t.readPersonally}</p>
           ) : (
-            <p class="muted small" style="margin-top: 12px">Or send a message with the form.</p>
+            <p class="muted small" style="margin-top: 12px">{t.orForm}</p>
           )}
         </>
       )}
       <div class="values" style="margin-top: 28px">
-        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>What happens next</h3><p class="muted">{isGeneral ? 'Any work is scoped and priced in writing before it begins.' : <>I read every message personally and reply within 24–48 hours. {isWebsite ? "You'll get a short written agreement with your package, price, and schedule before anything begins." : 'Any work is scoped and priced in writing before it begins.'}</>}</p></div></div>
+        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>{t.whatNext}</h3>{websiteIntro?.steps ? (
+          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
+        ) : (
+          <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
+        )}</div></div>
         {isWebsite && (
-          <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>Prefer to talk?</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a> instead.</p></div></div>
+          <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>{t.preferTalk}</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">{t.book}</a> {t.instead}</p></div></div>
         )}
       </div>
     </div>
@@ -57,84 +169,63 @@ const formAction = 'https://api.web3forms.com/submit';
         <input type="hidden" name="access_key" value={site.web3formsKey} />
         <input type="hidden" name="subject" value={subject} />
         <input type="hidden" name="from_name" value="Auva Studio website" />
+        {lang === 'es' && <input type="hidden" name="language" value="Spanish" />}
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="form-row">
-          <label>Name<input name="name" autocomplete="name" required /></label>
-          <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+          <label>{t.name}<input name="name" autocomplete="name" required /></label>
+          <label>{t.email}<input type="email" name="email" autocomplete="email" required /></label>
         </div>
         <div class="form-row">
-          <label>Business or organization<input name="business" autocomplete="organization" /></label>
-          <label><span>Phone <span class="opt">(optional)</span></span><input type="tel" name="phone" autocomplete="tel" /></label>
+          <label>{t.business}<input name="business" autocomplete="organization" /></label>
+          <label><span>{t.phone} <span class="opt">{t.optional}</span></span><input type="tel" name="phone" autocomplete="tel" /></label>
         </div>
         {isGeneral ? (
           <>
-            <label>What's this about?
+            <label>{t.about}
               <select name="topic">
-                <option value="website">Website</option>
-                <option value="consulting">Consulting or project support</option>
-                <option value="ai">AI & Emerging Tech</option>
-                <option value="partner">Development partnership (agencies and designers)</option>
-                <option value="unsure" selected>Not sure yet</option>
+                {t.generalTopics.map(([value, label]) => <option value={value} selected={value === 'unsure'}>{label}</option>)}
               </select>
             </label>
-            <label><span>What are you working on? <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+            <label><span>{t.workingOn} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         ) : isWebsite ? (
           <>
             <div class="form-row">
-              <label>What do you need?
+              <label>{t.need}
                 <select name="topic">
-                  <option value="website">A new website</option>
-                  <option value="improve">Improve my current site</option>
-                  <option value="store">An online store</option>
-                  <option value="diagnostic">Website Diagnostic ($199)</option>
-                  <option value="care">Help after launch (updates and fixes)</option>
-                  <option value="brand">Brand Essentials</option>
+                  {websiteTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                 </select>
               </label>
-              <label><span>Current website <span class="opt">(optional)</span></span><input type="url" name="website" placeholder="https://" /></label>
+              <label><span>{t.currentSite} <span class="opt">{t.optional}</span></span><input type="url" name="website" placeholder="https://" /></label>
             </div>
             <input type="hidden" name="package" value="" />
-            <label><span>Tell me about your business <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+            <label><span>{t.tellBusiness} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         ) : (
           <>
               {isPartner ? (
-                <label>How would you like to work?
+                <label>{t.howWork}
                   <select name="topic">
-                    <option value="unsure">Not sure yet</option>
-                    <option value="white-label">White-label</option>
-                    <option value="subcontracting">Subcontracting</option>
-                    <option value="collaborative">Collaborative delivery</option>
+                    {t.partnerTopics.map(([value, label]) => <option value={value}>{label}</option>)}
                   </select>
                 </label>
               ) : isAi ? (
-                <label>Interested in
+                <label>{t.interested}
                   <select name="topic">
-                    <option value="unsure">Not sure yet</option>
-                    <option value="workshop">Team AI Workshop</option>
-                    <option value="readiness">AI Readiness Plan</option>
-                    <option value="ai-sprint">AI Prototype Sprint</option>
-                    <option value="review">Concept & Feasibility Review</option>
-                    <option value="xr-sprint">XR Prototype Sprint</option>
-                    <option value="production">Production Support</option>
+                    {t.aiTopics.map(([value, label]) => <option value={value}>{label}</option>)}
                   </select>
                 </label>
               ) : (
-                <label>Area
+                <label>{t.area}
                   <select name="topic">
-                    <option value="unsure">Not sure yet</option>
-                    <option value="planning">Technology Planning</option>
-                    <option value="analysis">Business Analysis & Process Review</option>
-                    <option value="delivery">Project Management</option>
-                    <option value="ai">AI & Emerging Tech</option>
+                    {t.consultingTopics.map(([value, label]) => <option value={value}>{label}</option>)}
                   </select>
                 </label>
               )}
-            <label><span>{isPartner ? 'What does the project need?' : isAi ? 'What are you exploring?' : "What's going on?"} <span class="opt">(optional)</span></span><textarea name="message" rows="5"></textarea></label>
+            <label><span>{isPartner ? t.projectNeeds : isAi ? t.exploring : t.going} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         )}
-        <button class="btn" type="submit">Send message</button>
+        <button class="btn" type="submit">{(isWebsite && websiteIntro?.button) || t.send}</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -157,20 +248,21 @@ const formAction = 'https://api.web3forms.com/submit';
   // Send without leaving the page; without JavaScript the form still posts normally.
   for (const form of document.querySelectorAll<HTMLFormElement>('form.inquiry')) {
     const status = form.querySelector<HTMLElement>('.form-status');
+    const words = form.closest<HTMLElement>('#start')!.dataset;
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       button.disabled = true;
-      if (status) status.textContent = 'Sending…';
+      if (status) status.textContent = words.sending!;
       try {
         const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
         const data = await res.json();
         if (!data.success) throw new Error(data.message);
         form.reset();
         (window as any).auvaConvert?.('form');
-        if (status) status.textContent = "Thanks! Your message is on its way. You'll hear back within 24–48 hours.";
+        if (status) status.textContent = words.thanks!;
       } catch {
-        if (status) status.textContent = 'Something went wrong. Please email me instead.';
+        if (status) status.textContent = words.failed!;
       } finally {
         button.disabled = false;
       }
