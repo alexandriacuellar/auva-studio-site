@@ -1,0 +1,156 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+
+const faqs = [
+  { q: '¿Ofrece apoyo puntual y continuo?', a: 'Sí. Los trabajos van desde una sola consulta o sesión para resolver un problema hasta consultoría continua o liderazgo de proyectos a tiempo parcial.' },
+  { q: '¿Trabaja en persona?', a: 'La mayor parte del trabajo es a distancia. Cuando una visita en persona ayuda, la planificamos juntos. El tiempo en sus instalaciones se cobra a la tarifa de consultoría de $65 por hora. Trabajo en persona desde la ciudad de Nueva York y Westchester hasta Albany. Fuera del Mid-Hudson Valley, el tiempo de viaje se cobra a la mitad de mi tarifa por hora y los gastos, como millaje y hospedaje, al costo, todo acordado por escrito antes de reservar.' },
+  { q: '¿Qué incluye la Evaluación Tecnológica?', a: 'Tres sesiones de una hora, investigación y una hoja de ruta por escrito con prioridades, unas 10 horas de trabajo.' },
+  { q: '¿Qué incluye un Análisis de Negocio y Revisión de Procesos?', a: 'Una revisión con alcance definido, como el mapeo de un flujo de trabajo o la documentación de un conjunto de requisitos, unas 15 horas de trabajo. Los encargos más grandes se cotizan aparte.' },
+  { q: '¿Cómo se definen los precios?', a: 'El precio depende del servicio, el alcance del proyecto, el tiempo previsto y si hace falta viajar. Mis tarifas aparecen en Precios de un vistazo. Para trabajos más grandes, los costos y las expectativas se acuerdan antes de empezar.' },
+  { q: '¿Qué es el liderazgo de proyectos a tiempo parcial?', a: 'Una líder de proyecto que trabaja con su equipo a tiempo parcial, desde $650 al mes por 10 horas, con un mínimo de 3 meses. 20 horas cuestan $1,200 y 40 horas $2,200 al mes.' },
+  { q: '¿Puede trabajar con nuestros proveedores actuales o nuestro soporte de TI?', a: 'Sí. Muchas veces trabajo junto a equipos y proveedores existentes, y puedo ayudarle a evaluar sus propuestas.' },
+];
+import { consulting, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
+
+const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/es/technology-consulting/');
+
+const audiences = [
+  { icon: 'globe', title: 'Pequeños negocios', who: 'Tiendas, restaurantes, posadas, consultorios y servicios locales.', text: 'Demasiadas herramientas y poco tiempo. Elija las adecuadas, configúrelas y logre que su equipo las use.' },
+  { icon: 'key', title: 'Startups', who: 'Equipos nuevos que crean su primer producto o montan sus sistemas.', text: 'Convierta una idea en un plan, con requisitos claros, los proveedores adecuados y una gestora de proyectos sin contratar a nadie de tiempo completo.' },
+  { icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', who: 'Museos, consejos de arte, fideicomisos de tierras y grupos comunitarios.', text: 'Haga rendir un presupuesto ajustado. Elija herramientas, planifique mejoras y mantenga en marcha los proyectos financiados con subvenciones.' },
+  { icon: 'star', title: 'Estudios creativos, de videojuegos y XR', who: 'Estudios independientes, en cualquier lugar.', text: 'Una productora que maneje calendarios, documentos y equipos, para que sus líderes creativos se concentren en el trabajo.' },
+  { icon: 'chart', title: 'Equipos en crecimiento', who: 'Empresas que suman personas, sedes o servicios.', text: 'Arregle los flujos de trabajo que se rompen al crecer y mantenga en marcha los proyectos grandes.' },
+];
+
+const glance = [
+  { name: 'Consultoría o ayuda con proyectos, según la necesite', price: '$65/hora' },
+  { name: 'Evaluación Tecnológica', note: '3 sesiones, investigación y una hoja de ruta por escrito', price: '$650' },
+  { name: 'Análisis de Negocio y Revisión de Procesos', note: 'Un proceso, unas 15 horas', price: 'Desde $1,000' },
+  { name: 'Liderazgo de proyectos a tiempo parcial, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
+  { name: 'IA y Tecnología Emergente', note: 'Vea la página de IA y Tecnología Emergente para más detalles', price: 'Desde $500' },
+];
+---
+<Base title="Consultoría y apoyo en proyectos" seoTitle="Consultoría tecnológica y gestión de proyectos | Auva Studio" schema={schema} description="Planificación tecnológica, análisis de negocio, gestión de proyectos y consultoría en IA y Tecnología Emergente para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill" style="view-transition-name: svc-technology-consulting">Consultoría y apoyo en proyectos</p>
+      <h1 class="mag-head">Decisiones tecnológicas, <em>tomadas con confianza.</em></h1>
+      <p class="lede">Orientación clara y apoyo práctico pensados en sus metas. Empiece con una evaluación, resuelva un reto concreto o sume liderazgo con experiencia para un proyecto más grande.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
+      </div>
+      <nav class="bd-sublinks" aria-label="Servicios de consultoría">
+        {consulting.map((c) => <a href={c.id === 'ai' ? '/es/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Ayuda a la medida <em>de su tipo de organización.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="small muted">{a.who}</p>
+            <p class="who-text">{a.text}</p>
+            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Otra cosa?</h3>
+          <p>Cuénteme en qué está trabajando, y le sugiero por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Tres formas de ayudarle, <em>más IA y Tecnología Emergente.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {consulting.map((c) => (
+          <div class="card card-row" id={c.id}>
+            <div class="icon"><Icon name={c.icon} size={36} /></div>
+            <div>
+              <h3>{c.title}</h3>
+              <p class="muted">{c.text}</p>
+              <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
+              {c.id === 'ai'
+                ? <a class="more" href="/es/ai-emerging-tech/" style="margin-top: 12px">Ver IA y Tecnología Emergente <Icon name="arrow" size={16} /></a>
+                : <a class="more" href={`/es/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Pregunte por esto</a>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Precios <em>de un vistazo.</em></h2>
+        <p class="lede">Todo trabajo empieza con una llamada gratis de 30 minutos. Luego defino el alcance y le doy un presupuesto por escrito antes de empezar, ya sea una sola sesión, un proyecto definido o liderazgo de proyectos a tiempo parcial.</p>
+      </div>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="small muted" style="margin-top: 16px">¿Quiere probar una idea antes de comprometerse? <a href="/es/ai-emerging-tech/#sprint">Vea los Sprints de Prototipo</a>. Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Orientación práctica <em>respaldada por experiencia técnica y de ejecución.</em></h2>
+        <p class="lede">Mi experiencia abarca desarrollo de software, gestión de proyectos técnicos, productos digitales, videojuegos y experiencias interactivas. Esa combinación me permite ver más allá de la superficie de un proyecto, entender cómo funciona la tecnología y armar un plan realista para el equipo que lo va a mantener.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
+          <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
+          <div class="stat-wide"><span class="stat">Casi 20</span><span class="muted">años creando sitios web y productos digitales para empresas periodísticas</span></div>
+        </div>
+      </div>
+      <div class="values">
+        {whyAuva.map((w) => (
+          <div class="card"><h3>{w.title}</h3><p class="muted">{w.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Organizada, confiable y <em>fácil de tratar.</em></h2>
+        <p class="lede">Lo que dicen los equipos con los que he gestionado proyectos (en sus propias palabras, en inglés).</p>
+      </div>
+      <div class="grid grid-3">
+        {testimonials.map((t) => (
+          <figure class="card quote" lang="en">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <Faq faqs={faqs} />
+  <InquiryForm kind="consulting" alt />
+</Base>

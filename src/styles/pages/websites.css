@@ -1,0 +1,8 @@
+/* websites page styles, shared by the English and Spanish versions. */
+/* Experience line and a client quote under the package cards. */
+.proof { display: flex; gap: 20px; align-items: flex-start; max-width: 760px; margin: 40px auto 0; }
+.proof img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex: none; }
+.proof > div { min-width: 0; }
+.proof-line { margin: 0; font-size: 1.1rem; font-weight: 600; }
+.proof .quote-inline { margin-top: 20px; }
+@media (max-width: 640px) { .proof { flex-direction: column; gap: 14px; } }

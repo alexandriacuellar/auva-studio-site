@@ -18,6 +18,7 @@ export function GET() {
     `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership, web producer and game or XR producer support`,
     `- [AI & Emerging Tech](${site.url}/ai-emerging-tech/): AI readiness, team workshops, concept and feasibility reviews, prototypes, XR and game production support`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
+    `- [Sitio en español](${site.url}/es/): the whole site, except the sample sites, is also available in Spanish under /es/; Alexandria works with clients in English or Spanish`,
     '',
     '## Website Services',
     `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website): a review of an existing site for usability, mobile, search, and performance.`,

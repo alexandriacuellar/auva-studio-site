@@ -1,0 +1,30 @@
+/* website-check page styles, shared by the English and Spanish versions. */
+.check-wrap { max-width: 820px; }
+/* The grid rule on .results would otherwise override the hidden attribute. */
+[hidden] { display: none !important; }
+.check-list { list-style: none; counter-reset: q; margin: 0; padding: 0; display: grid; gap: 8px; }
+.check-list li { counter-increment: q; padding: 18px 0; border-bottom: 1px solid var(--border); }
+.check-list li:last-child { border-bottom: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+legend { font-weight: 600; color: var(--ink); font-size: 1.08rem; margin-bottom: 12px; padding: 0; }
+legend::before { content: counter(q) '. '; color: var(--primary); font-weight: 700; }
+.choices { display: flex; gap: 10px; flex-wrap: wrap; }
+.choices label { position: relative; cursor: pointer; }
+.choices input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.choices span { display: inline-block; padding: 9px 20px; border: 2px solid var(--border); border-radius: 999px; font-weight: 600; background: var(--white); transition: background .15s, border-color .15s; }
+.choices input:checked + span { background: var(--primary); border-color: var(--primary); color: var(--white); }
+.choices input:focus-visible + span { outline: 3px solid var(--bright); outline-offset: 2px; }
+.check-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--border); }
+.check-foot p { margin: 0; }
+.results { display: grid; gap: 24px; margin-top: 32px; outline: none; }
+.score-card { text-align: center; }
+.score-card .lede { margin: 0 auto 24px; }
+.score-card .hero-actions { justify-content: center; }
+.score { font-family: var(--font-head); font-size: 4.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 0 0 12px; }
+.score .out { font-size: 1.6rem; color: var(--muted); font-weight: 600; }
+.score-card h2.mag-head { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.tips { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.tips li { display: grid; gap: 4px; padding-left: 16px; border-left: 3px solid var(--bright); }
+.tips span { color: var(--muted); }
+.inquiry { margin-top: 16px; }
+@media (max-width: 640px) { .check-foot .btn { width: 100%; justify-content: center; } }
