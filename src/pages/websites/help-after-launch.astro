@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
-import { care, serviceSchema, site } from '../../data/site';
+import { care, monthly, serviceSchema, site } from '../../data/site';
 
 const atLaunch = [
   { icon: 'chat', title: 'A walkthrough', text: 'I show you around your new site and answer your questions.' },
@@ -17,29 +17,31 @@ const updateExamples = ['Change your hours, prices, or menu', 'Swap or add photo
 const faqs = [
   { q: 'What counts as one update?', a: 'Up to about 30 minutes of edits, sent together in one request. Changing your hours, swapping a few photos, and fixing a typo can all be one update if you send them at the same time. If a request will take longer, I tell you first.' },
   { q: 'How do I send an update?', a: `Email me at ${site.email} with what to change, plus any new text or photos. Most updates are done within 2 business days.` },
-  { q: 'Why is there no monthly plan?', a: "Your site has no plugins that need constant upkeep, so there's nothing to pay for every month. You pay only when you need something. Sites with a CMS or connected tools may need occasional upkeep, which I quote first." },
-  { q: 'How does the pack of 5 work?', a: 'You pay $200 up front for 5 updates, instead of $50 each ($250). Use them whenever you like within 12 months.' },
+  { q: 'Do I need a monthly plan?', a: "No. Most sites I build have no plugins to maintain, so you can pay only when you need something. If your site runs on a platform with its own monthly fee, I'll tell you up front. Sites with a CMS or connected tools may need occasional upkeep, which I quote first." },
+  { q: 'How does the monthly plan work?', a: "We start with a free call about your goals and what's coming up. Then you get a set number of hours each month, from 5 hours for $650, with a 3-month minimum and 30 days' notice to stop after that. Unused hours carry over one month. Monthly clients get same-day help with urgent problems, like a form that stops sending." },
+  { q: 'Do you handle marketing or write content?', a: "No. If you have a marketing or SEO person, I work with them: they set the direction and the message, and I build the pages and make sure they work. I suggest topics people are searching for and polish what you send, but I don't write ads, social posts, or blog posts." },
   { q: 'Should I get a CMS instead?', a: 'If you update every week, or post news, events, or a blog, a CMS usually costs less over time than paying per update. If you change things a few times a year, sending updates to me is simpler.' },
   { q: "Can you update a site you didn't build?", a: 'Help After Launch is for sites I build. If you have a site from someone else, start with a Website Diagnostic, or ask me about a small one-time change.' },
-  { q: 'What does my site cost to run?', a: 'Your domain is about $20 a year. Hosting is free or low cost for most sites, and it stays in your name.' },
+  { q: 'What does my site cost to run?', a: "Your domain is about $20 a year. Hosting is free or low cost for most sites I build, and it stays in your name. If your site needs a platform with a monthly fee, I'll tell you before we start." },
 ];
 
 const schema = serviceSchema([
   ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
+  { name: `Help After Launch: ${monthly.name}`, description: monthly.text, price: monthly.price },
   { name: 'CMS (content management system)', description: 'A simple dashboard to update page text, photos, and collections like news or events yourself, with no code.', price: 'From $1,750' },
 ], '/websites/help-after-launch/');
 ---
-<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them, with no monthly plan: $50 per update or a pack of 5 for $200, or a CMS so you can make changes yourself.">
+<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $50 per update, a CMS so you can make changes yourself, or a monthly web producer from $650 for 5 hours.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <a class="bd-pill" href="/websites/">Website Services</a>
-      <h1 class="mag-head">Help when you need it, <em>no monthly plan.</em></h1>
-      <p class="lede">Your site has no plugins that need constant upkeep, so there's nothing to pay for every month. Ask for updates when you need them, or make changes yourself.</p>
+      <h1 class="mag-head">Help when you need it, <em>or every month.</em></h1>
+      <p class="lede">Most sites I build have no plugins to maintain, so there's no monthly fee required. Ask for updates when you need them, make changes yourself, or have me as your web producer every month.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
         <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
       </div>
-      <p class="hero-note">Updates are $50 each, or a pack of 5 for $200. You pay only when you need one.</p>
+      <p class="hero-note">Updates are $50 each, and you pay only when you need one. Monthly help starts at $650 for 5 hours.</p>
     </div>
   </section>
 
@@ -98,6 +100,25 @@ const schema = serviceSchema([
             </div>
           </div>
           <p class="small muted">Add it to Essential or Expanded, or get it included in Complete Presence. For frequent updates, it can cost less over time than paying per update.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="monthly">
+    <div class="wrap">
+      <div class="grid grid-2 monthly-band">
+        <div>
+          <p class="eyebrow">Prefer a monthly plan?</p>
+          <h2 class="mag-head">Your own web producer, <em>without hiring one.</em></h2>
+          <p class="lede">I've done this inside teams for years. Your marketer or SEO person sets the direction, and I make it happen on your site.</p>
+        </div>
+        <div class="card">
+          <p><b>Each month, your site:</b></p>
+          <ul class="ticks">{monthly.outcomes.map((o) => <li><Icon name="tick" size={18} />{o}</li>)}</ul>
+          <p><b style="color: var(--primary)">{monthly.price}</b></p>
+          <p class="muted small">{monthly.terms}</p>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener">Let's talk about what you need</a>
         </div>
       </div>
     </div>
