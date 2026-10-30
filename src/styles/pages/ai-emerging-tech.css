@@ -1,0 +1,4 @@
+/* ai-emerging-tech page styles, shared by the English and Spanish versions. */
+.offer-group + .offer-group { margin-top: 48px; }
+.offer-group-title { font-size: 1.4rem; margin-bottom: 4px; }
+.offer-group > .muted { margin-bottom: 20px; }

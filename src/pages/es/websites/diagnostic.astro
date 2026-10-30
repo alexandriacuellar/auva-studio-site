@@ -1,0 +1,125 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import PayBar from '../../../components/PayBar.astro';
+import { serviceSchema } from '../../../data/site.es';
+
+const checks = [
+  { icon: 'globe', title: 'Celular', text: 'Cómo se ve y funciona su sitio en el celular que su cliente tiene en la mano.' },
+  { icon: 'bolt', title: 'Velocidad', text: 'Qué tan rápido cargan sus páginas, con sus puntuaciones de velocidad de Google.' },
+  { icon: 'search', title: 'Búsqueda en Google', text: 'Qué tan fácil le encuentra la gente en Google y en las herramientas de búsqueda con IA.' },
+  { icon: 'star', title: 'Perfil de Google y reseñas', text: 'Si su Perfil de Negocio de Google y sus reseñas le ayudan o le perjudican.' },
+  { icon: 'bulb', title: 'Primera impresión', text: 'Si sus visitantes entienden lo que usted hace en unos segundos.' },
+  { icon: 'mail', title: 'Siguientes pasos', text: 'Qué tan fácil es llamar, reservar, comprar o enviar un mensaje.' },
+];
+
+const report = [
+  'Una calificación para cada una de las seis revisiones: bien, necesita trabajo o arreglar primero',
+  'Qué arreglar primero, en orden, y por qué importa cada arreglo',
+  'Quién puede hacer cada arreglo, usted o un desarrollador, y cuánto tiempo toma más o menos',
+  'Mi opinión honesta sobre si conviene arreglar su sitio actual o empezar de nuevo',
+];
+
+const steps = [
+  { title: 'Envíe su sitio', text: 'Llene el formulario de abajo con la dirección de su sitio web y cualquier cosa que le preocupe de él. Confirmo los detalles y le envío un enlace de pago.' },
+  { title: 'Lo reviso', text: 'Recorro su sitio en un celular y en una computadora, y lo paso por las propias herramientas de Google.' },
+  { title: 'Reciba su informe', text: 'Un informe breve y en lenguaje sencillo con lo que debe arreglar primero, en orden, en un plazo de 5 días hábiles.' },
+];
+
+const faqs = [
+  { q: '¿Cuándo pago?', a: 'Por adelantado. Después de que envíe el formulario, confirmo los detalles y le envío un enlace de pago. Su informe llega en un plazo de 5 días hábiles después del pago.' },
+  { q: '¿Importa quién hizo mi sitio?', a: 'No. El Diagnóstico funciona para cualquier sitio: WordPress, Wix, Squarespace o uno que hizo un amigo. Reviso lo que ven sus visitantes, no solo el código.' },
+  { q: '¿Tengo que contratarle para hacer los arreglos?', a: 'No. El informe es suyo para usarlo con cualquier desarrollador, o para hacer los arreglos usted. Muchos arreglos los puede hacer por su cuenta.' },
+  { q: '¿Y si decido hacer un sitio web nuevo?', a: 'Los $199 se abonan a un sitio web nuevo conmigo, así que el Diagnóstico no le cuesta nada extra si sigue adelante.' },
+  { q: '¿Arreglo mi sitio o empiezo de nuevo?', a: 'Esa es una de las preguntas que responde el informe. Si unos cuantos arreglos bastan, se lo digo. Si empezar de nuevo le saldría más barato a largo plazo, le explico por qué.' },
+  { q: '¿Y si todavía no quiero gastar $199?', a: 'Haga primero la revisión gratis de 2 minutos. Le da una puntuación rápida y algunas cosas que puede revisar por su cuenta.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Diagnóstico Web', description: 'Una revisión de cómo funciona un sitio existente en el celular, qué tan fácil se encuentra en Google, qué tan rápido carga y qué arreglar primero.', price: '$199' },
+], '/es/websites/diagnostic/');
+---
+<Base title="Diagnóstico Web" seoTitle="Diagnóstico Web, $199: sepa qué arreglar primero | Auva Studio" schema={schema} description="Una revisión de $199 de su sitio web actual: celular, velocidad, búsqueda en Google y qué arreglar primero, en un informe en lenguaje sencillo en 5 días hábiles.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/es/websites/">Servicios de sitios web</a>
+      <h1 class="mag-head">Descubra qué está frenando <em>a su sitio web.</em></h1>
+      <p class="lede">Deje de adivinar. Reviso su sitio como lo ven sus clientes y le envío un informe en lenguaje sencillo con lo que debe arreglar primero. Funciona para cualquier sitio, sin importar quién lo hizo.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Pedir mi Diagnóstico, $199</a>
+        <a class="btn btn-ghost" href="/es/website-check/">¿Aún tiene dudas? Haga la revisión gratis <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">Pague con un enlace seguro una vez que yo confirme. Informe en 5 días hábiles. Se abona a un sitio web nuevo conmigo.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Lo que reviso.</h2>
+      </div>
+      <div class="grid grid-3 plain-grid">
+        {checks.map((c) => (
+          <div>
+            <div class="icon"><Icon name={c.icon} size={28} /></div>
+            <h3>{c.title}</h3>
+            <p class="muted">{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mag-head">Lo que trae su informe.</h2>
+          <p class="lede">Breve y sencillo, para que pueda actuar el mismo día.</p>
+        </div>
+        <ul class="ticks">
+          {report.map((r) => <li><Icon name="tick" size={18} />{r}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo funciona.</h2>
+      </div>
+      <ol class="steps steps-3">
+        {steps.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Sepa exactamente qué arreglar.</h2>
+          <p>Sus arreglos en orden, con quién puede hacer cada uno y cuánto tiempo toma más o menos. Para usarlo con cualquier desarrollador, o por su cuenta.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$199</p>
+          <p>Se abona a su sitio web nuevo conmigo.</p>
+          <a class="btn" href="#start">Pedir mi Diagnóstico</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="diagnostic" />
+  <PayBar label="Pedir mi Diagnóstico, $199" />
+</Base>

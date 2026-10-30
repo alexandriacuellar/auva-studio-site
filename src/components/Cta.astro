@@ -1,18 +1,21 @@
 ---
 import { site } from '../data/site';
+import { langFromPath, localize } from '../i18n';
 interface Props { title?: string; text?: string }
-const {
-  title = 'Bring me a problem, <em>project, or idea.</em>',
-  text = "From a straightforward website to a complex technology project or an AI & Emerging Tech idea, I'll suggest the right next step.",
-} = Astro.props;
+const lang = langFromPath(Astro.url.pathname);
+const t = {
+  en: { title: 'Bring me a problem, <em>project, or idea.</em>', text: "From a straightforward website to a complex technology project or an AI & Emerging Tech idea, I'll suggest the right next step.", book: 'Book a free 30-minute call', message: 'Send a message' },
+  es: { title: 'Tráigame un problema, <em>un proyecto o una idea.</em>', text: 'Desde un sitio web sencillo hasta un proyecto tecnológico complejo o una idea de IA y Tecnología Emergente, le sugiero el siguiente paso adecuado.', book: 'Reserve una llamada gratis de 30 minutos', message: 'Envíe un mensaje' },
+}[lang];
+const { title = t.title, text = t.text } = Astro.props;
 ---
 <section class="cta">
   <div class="wrap">
     <h2 class="mag-head" set:html={title} />
     <p>{text}</p>
     <div class="cta-actions">
-      <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
-      <a class="btn btn-outline-light" href="/contact/">Send a message</a>
+      <a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book}</a>
+      <a class="btn btn-outline-light" href={localize('/contact/', lang)}>{t.message}</a>
     </div>
   </div>
 </section>

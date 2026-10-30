@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site.es';
+
+const updated = '26 de octubre de 2026';
+const host = 'Cloudflare Pages';
+---
+<Base title="Política de privacidad" description="Cómo el sitio web de Auva Studio recopila y usa la información.">
+  <section class="hero">
+    <div class="wrap prose">
+      <h1>Política de privacidad</h1>
+      <p class="muted">Última actualización: {updated}</p>
+
+      <p class="lede">Auva Studio respeta su privacidad. Esta política explica qué información recopila este sitio web y cómo se usa.</p>
+      <p class="small muted">Esta traducción se ofrece para su comodidad. Si hay alguna diferencia, rige la <a href="/privacy/" hreflang="en">versión en inglés</a>.</p>
+
+      <h2>Qué recopilo</h2>
+      <p>Cuando usa uno de mis formularios de consulta, recopilo lo que usted escribe: su nombre, correo electrónico, negocio u organización, su teléfono si lo agrega, el servicio que le interesa, su sitio web y su mensaje. Si reserva una llamada, Calendly recopila su nombre, correo electrónico y el horario que elija. Las respuestas a la revisión gratis de su sitio web se quedan en su navegador, a menos que decida enviármelas; si lo hace, recibo su nombre, correo electrónico, sitio web, respuestas y puntuación. Las respuestas a la revisión gratis de su perfil de Google también se quedan en su navegador, a menos que decida enviármelas. Si lo hace, recibo su nombre, correo electrónico, negocio, pueblo o ciudad, respuestas y puntuación. La página de la tarjeta de presentación puede usar su cámara para mostrar la tarjeta en realidad aumentada. La imagen de la cámara se queda en su teléfono y nunca se graba ni se me envía. No pido datos de pago en este sitio.</p>
+
+      <h2>Cómo la uso</h2>
+      <p>Solo para responder a su consulta, agendar una conversación y preparar una propuesta si me la pide. No vendo ni alquilo su información, y no le agrego a ninguna lista de correo sin su permiso.</p>
+
+      <h2>Quién me ayuda</h2>
+      <p>Los mensajes de los formularios me los entrega Web3Forms, un servicio de procesamiento de formularios, y las reservas de llamadas las gestiona Calendly. El sitio está alojado en {host}, que puede guardar registros estándar del servidor, como direcciones IP y tipo de navegador, por seguridad.</p>
+
+      <h2>Cookies y estadísticas</h2>
+      <p>Cuento las visitas con Cloudflare Web Analytics, que no usa cookies ni le identifica personalmente.</p>
+      <p>Si llega haciendo clic en uno de mis anuncios de Google, el sitio también carga la etiqueta de anuncios de Google. Esta usa cookies para que Google pueda decirme si un anuncio llevó a un mensaje o a una llamada reservada, y Google trata esos datos según su propia <a href="https://policies.google.com/privacy?hl=es" target="_blank" rel="noopener">política de privacidad</a>. Quienes no llegan desde un anuncio no reciben esta etiqueta. Puede dejar de recibir anuncios personalizados cuando quiera en la <a href="https://adssettings.google.com/?hl=es" target="_blank" rel="noopener">configuración de anuncios de Google</a>.</p>
+
+      <h2>Cuánto tiempo la guardo</h2>
+      <p>Guardo los correos de consulta el tiempo necesario para responder y para los registros normales del negocio. Pídame en cualquier momento que borre su información.</p>
+
+      <h2>Sus opciones</h2>
+      <p>Para ver, corregir o borrar la información que me ha enviado, escriba a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Cambios</h2>
+      <p>Si esta política cambia, actualizaré la fecha de arriba.</p>
+
+      <h2>Contacto</h2>
+      <p>{site.name}, {site.location}<br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </section>
+</Base>

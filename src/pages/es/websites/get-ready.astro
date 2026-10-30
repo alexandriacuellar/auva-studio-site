@@ -1,0 +1,100 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import Faq from '../../../components/Faq.astro';
+import { site } from '../../../data/site';
+
+// Checklist público para quien planea un sitio web nuevo. Los clientes con acuerdo firmado reciben el checklist de inicio completo.
+const groups = [
+  { icon: 'key', title: 'Los datos de su negocio', lede: 'La información que aparece en todo su sitio.', items: [
+    'El nombre de su negocio, tal como debe aparecer',
+    'Qué hace, en una oración, como se lo explicaría a un vecino nuevo',
+    'Sus servicios o productos, con una breve descripción de cada uno',
+    'A quién atiende y los pueblos o zonas que cubre',
+    'Teléfono, correo, dirección y horario',
+    'Su logo, la mejor versión que tenga. ¿Aún no tiene logo? Pregúnteme por Identidad de Marca.',
+  ] },
+  { icon: 'star', title: 'Sus fotos', lede: 'Las fotos reales generan más confianza que las fotos de stock, y las del celular funcionan bien.', items: [
+    'Usted y su equipo: un retrato amable y una foto trabajando',
+    'Su lugar: local, estudio, oficina o donde trabaja',
+    'De 5 a 10 ejemplos de sus mejores trabajos o productos',
+    'Una foto amplia y con buena luz para el inicio de su página principal',
+    'Fotos de clientes solo con su permiso por escrito',
+  ], tip: 'Tome las fotos con luz de día, ponga el celular de lado y envíe los archivos originales, no capturas de pantalla.' },
+  { icon: 'chat', title: 'Sus textos', lede: 'Escriba como habla. Notas y mensajes de voz están bien. Yo los convierto en páginas terminadas.', items: [
+    'Página principal: qué hace, para quién y qué deben hacer sus visitantes',
+    'Sobre usted: por qué empezó y qué lo hace diferente',
+    'Cada servicio: qué es, para quién es y el precio si lo comparte',
+    'De 5 a 8 preguntas que sus clientes suelen hacerle, con sus respuestas',
+    'De 3 a 5 opiniones de clientes que tenga permiso para usar',
+  ], tip: '¿No sabe por dónde empezar? Grabe una nota de voz de dos minutos respondiendo “¿Qué hace y para quién?”' },
+  { icon: 'lock', title: 'Su dominio y sus cuentas', lede: 'Todo queda a su nombre desde el principio.', items: [
+    'Su dominio (como sunegocio.com), registrado a su nombre. ¿Aún no tiene uno? Puedo ayudarle a elegirlo.',
+    'Acceso a la cuenta de su dominio, probado ahora para que no retrase el lanzamiento',
+    'Su sitio web y email actuales, si los tiene, para que nada falle cuando se publique el sitio nuevo',
+    'Las herramientas de reservas, newsletter, pagos o donaciones que usa o quiere usar',
+  ], tip: 'Nunca envíe contraseñas por correo ni por mensaje. Cuando necesite acceso, usted me agrega como usuaria desde su propia cuenta.' },
+  { icon: 'bulb', title: 'Su estilo y sus metas', lede: 'No necesita términos de diseño. Lo que más ayuda es su opinión sincera.', items: [
+    '3 sitios web que le gusten, de cualquier industria, y qué le gusta de cada uno',
+    '1 o 2 sitios web que no le gusten, y por qué',
+    '3 palabras sobre cómo debe sentirse su sitio, como cálido, tranquilo y confiable',
+    'Lo que más quiere que hagan sus visitantes: llamar, reservar, visitarle, comprar, donar o escribirle',
+  ] },
+];
+
+const faqs = [
+  { q: '¿Necesito todo lo de esta lista antes de hablar?', a: 'No. Traiga lo que tenga a una llamada gratis. Notas sencillas y fotos del celular son un buen comienzo, y yo pulo sus textos y redacto lo que falte para que usted lo apruebe.' },
+  { q: '¿Por qué importa prepararse?', a: 'El plazo empieza cuando tenga su contenido. La mayoría de los sitios que se retrasan están esperando fotos y textos, no diseño, así que mientras antes reúna todo, antes se publica su sitio.' },
+  { q: '¿Qué pasa cuando me contrata?', a: 'Recibe un checklist de inicio completo y una carpeta compartida en su propio Google Drive, Dropbox u OneDrive para sus archivos. Luego pasamos por Descubrimiento, Contenido y revisión, Desarrollo y vista previa, y Lanzamiento.' },
+];
+---
+<Base title="Prepárese para su sitio web nuevo" seoTitle="Checklist para preparar su sitio web nuevo | Auva Studio" description="Un checklist gratis con las fotos, los textos y las cuentas que conviene reunir antes de construir su sitio web nuevo, para publicarlo antes.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <a class="bd-pill" href="/es/websites/">Servicios de sitios web</a>
+      <h1 class="mag-head">Prepárese para <em>su sitio web nuevo.</em></h1>
+      <p class="lede">¿Está planeando un sitio web? Este checklist gratis le muestra qué reunir primero: los datos de su negocio, fotos, textos y cuentas. Mientras más tenga listo, antes se publica su sitio.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="/es/websites/#packages">Ver paquetes</a>
+      </div>
+      <p class="hero-note">No necesita tener todo antes de hablar. Traiga lo que tenga.</p>
+    </div>
+  </section>
+
+  {groups.map((g, i) => (
+    <section class:list={{ alt: i % 2 === 1 }}>
+      <div class="wrap">
+        <div class="grid grid-2">
+          <div>
+            <div class="icon"><Icon name={g.icon} size={28} /></div>
+            <h2 class="mag-head">{g.title}</h2>
+            <p class="lede">{g.lede}</p>
+          </div>
+          <div>
+            <ul class="ticks">
+              {g.items.map((t) => <li><Icon name="tick" size={18} />{t}</li>)}
+            </ul>
+            {g.tip && <p class="fine"><b>Consejo:</b> {g.tip}</p>}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>¿Tiene una parte? Es suficiente para empezar.</h2>
+          <p>En una llamada gratis de 30 minutos revisamos lo que tiene y qué paquete le conviene. Yo pulo sus textos y redacto lo que falte.</p>
+        </div>
+        <div>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener">Reservar una llamada gratis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+</Base>

@@ -99,6 +99,8 @@ export const samples = [
 
 export const packages = [
   {
+    id: 'essential',
+    short: 'Essential',
     eyebrow: 'Get online',
     name: 'Essential Presence',
     price: '$1,500',
@@ -111,6 +113,8 @@ export const packages = [
     timeline: '2–3 weeks',
   },
   {
+    id: 'expanded',
+    short: 'Expanded',
     eyebrow: 'Grow',
     name: 'Expanded Presence',
     price: '$2,950',
@@ -125,6 +129,8 @@ export const packages = [
     timeline: '3–5 weeks',
   },
   {
+    id: 'complete',
+    short: 'Complete',
     eyebrow: 'Go further',
     name: 'Complete Presence',
     price: '$5,500',

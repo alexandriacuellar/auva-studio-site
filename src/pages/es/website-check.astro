@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/website-check.css';
+import { site } from '../../data/site.es';
+
+// Free self-check quiz. Scoring runs in the browser; answers are sent only if the visitor chooses to.
+const questions = [
+  { q: '¿Su sitio se ve bien y es fácil de usar en el celular?', tip: 'La mayoría de las visitas llegan desde un celular. Revise que el texto se lea bien y que los botones sean fáciles de tocar.' },
+  { q: '¿Carga rápido, incluso en el celular?', tip: 'Las páginas lentas pierden visitas. Las fotos muy pesadas y el exceso de plugins suelen ser la causa.' },
+  { q: '¿Una persona que lo visita por primera vez entiende en unos segundos qué hace usted y a quién atiende?', tip: 'Dígalo claramente en la primera línea que ve la gente, antes que nada.' },
+  { q: '¿Cada página deja claro el siguiente paso, como llamar, reservar, comprar o donar?', tip: 'Dé a cada página un botón principal que diga exactamente qué hacer.' },
+  { q: '¿Es fácil encontrar su teléfono, correo, horario y ubicación?', tip: 'Póngalos en el pie de página y en una página de contacto, no solo en una foto o un PDF.' },
+  { q: 'Cuando busca el nombre de su negocio en Google, ¿su sitio aparece primero?', tip: 'Revise los títulos y las descripciones de sus páginas, y asegúrese de que Google pueda encontrar su sitio.' },
+  { q: '¿Su Perfil de Negocio de Google está reclamado y al día?', tip: 'Es gratis y muchas veces es lo primero que ve la gente. Agregue su horario, fotos y el enlace a su sitio web.' },
+  { q: '¿Su sitio muestra reseñas, testimonios o ejemplos de su trabajo?', tip: 'Unas cuantas citas reales o fotos de su trabajo ayudan a que la gente confíe en usted.' },
+  { q: '¿Todo en su sitio está al día, sin eventos, precios o personal de antes?', tip: 'Los datos viejos hacen que la gente se pregunte si todavía está abierto.' },
+  { q: '¿Sabe cuántas personas visitan su sitio y le contactan a través de él?', tip: 'Las estadísticas gratuitas de visitas muestran qué funciona y qué arreglar.' },
+];
+const choices = [
+  { label: 'Sí', value: 2 },
+  { label: 'No sé', value: 1 },
+  { label: 'No', value: 0 },
+];
+---
+<Base title="Revisión gratis de su sitio web" description="Responda 10 preguntas rápidas sobre su sitio web y vea su puntuación y qué arreglar primero.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Revisión gratis de su sitio web</p>
+      <h1 class="mag-head">¿Su sitio web <em>trabaja para usted?</em></h1>
+      <p class="lede">Responda 10 preguntas rápidas sobre su sitio web. Toma unos 2 minutos, y verá al instante su puntuación y qué arreglar primero.</p>
+      <p class="hero-note">Gratis. Sin dar su correo. Incluye una guía gratuita en PDF para quedarse. Sus respuestas se quedan en su pantalla, a menos que decida enviármelas.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap check-wrap">
+      <form class="card check" id="check" novalidate>
+        <ol class="check-list">
+          {questions.map((item, i) => (
+            <li>
+              <fieldset>
+                <legend>{item.q}</legend>
+                <div class="choices">
+                  {choices.map((c) => (
+                    <label><input type="radio" name={`q${i}`} value={c.value} required /><span>{c.label}</span></label>
+                  ))}
+                </div>
+              </fieldset>
+            </li>
+          ))}
+        </ol>
+        <div class="check-foot">
+          <p class="muted small" id="progress" aria-live="polite">0 de {questions.length} respondidas</p>
+          <button class="btn" type="submit">Ver mi puntuación</button>
+        </div>
+      </form>
+
+      <div class="results" id="results" hidden tabindex="-1">
+        <div class="card score-card">
+          <p class="eyebrow">Su puntuación</p>
+          <p class="score"><span id="score">0</span><span class="out">/20</span></p>
+          <p class="small muted">Sí = 2 puntos, No sé = 1, No = 0.</p>
+          <h2 class="mag-head" id="band-title"></h2>
+          <p class="lede" id="band-text"></p>
+          <div class="hero-actions" id="band-actions"></div>
+        </div>
+
+        <div class="card" id="tips-card">
+          <h3>Qué arreglar primero</h3>
+          <ul class="tips" id="tips"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Revíselo usted mismo, paso a paso</h3>
+          <p class="muted">Una guía gratuita de 2 páginas con formas sencillas de comprobar cada una de estas preguntas en su sitio, y qué arreglar primero.</p>
+          <a class="btn btn-ghost" href="/downloads/website-check-guide-es.pdf" download>Descargar la guía gratis (PDF)</a>
+        </div>
+
+        <div class="card offer-card">
+          <p class="eyebrow">¿Quiere ver el panorama completo?</p>
+          <h3>Diagnóstico Web</h3>
+          <p class="price">$199</p>
+          <p class="muted">Esta revisión le muestra dónde mirar. El Diagnóstico le muestra exactamente qué arreglar: reviso su sitio en un celular y en una computadora, lo paso por las propias herramientas de Google y le envío un informe en lenguaje sencillo con sus arreglos en orden, en 5 días hábiles. Se abona a un sitio web nuevo conmigo.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/es/websites/diagnostic/">Pedir el Diagnóstico</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Envíeme sus resultados</h3>
+          <p class="muted">Los reviso y le respondo personalmente con lo que yo haría primero. Gratis y opcional.</p>
+          <form action="https://api.web3forms.com/submit" method="POST" class="inquiry" id="send">
+            <input type="hidden" name="access_key" value={site.web3formsKey} />
+            <input type="hidden" name="subject" value="New website check from auvastudio.com (Spanish)" />
+            <input type="hidden" name="from_name" value="Auva Studio website" />
+            <input type="hidden" name="language" value="Spanish" />
+            <input type="hidden" name="score" />
+            <input type="hidden" name="answers" />
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="form-row">
+              <label>Nombre<input name="name" autocomplete="name" required /></label>
+              <label>Correo electrónico<input type="email" name="email" autocomplete="email" required /></label>
+            </div>
+            <label><span>Sitio web <span class="opt">(opcional)</span></span><input name="website" placeholder="sunegocio.com" autocomplete="url" /></label>
+            <label class="opt-in"><input type="checkbox" name="wants_diagnostic" value="Yes, send a payment link for the $199 Website Diagnostic (in Spanish)" /><span>Quiero el Diagnóstico Web de $199. Envíeme un enlace de pago.</span></label>
+            <button class="btn" type="submit">Enviar mis resultados</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <p class="small muted"><a href="#check" id="retake">Cambiar mis respuestas</a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ questions, booking: site.booking }}>
+  const form = document.getElementById('check');
+  const progress = document.getElementById('progress');
+  const results = document.getElementById('results');
+  const total = questions.length;
+  const answered = () => questions.filter((_, i) => form.querySelector(`input[name="q${i}"]:checked`)).length;
+  form.addEventListener('change', () => { progress.textContent = `${answered()} de ${total} respondidas`; });
+
+  const bands = [
+    { min: 16, title: 'Su sitio está <em>en buena forma.</em>', text: 'Unos pequeños arreglos podrían ayudar. Reserve una llamada gratis de 30 minutos si quiere una segunda opinión.', actions: [['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 9, title: 'Unos cuantos arreglos harían <em>una diferencia real.</em>', text: 'Un Diagnóstico Web de $199 le muestra exactamente qué arreglar primero, y se abona a su sitio web nuevo conmigo.', actions: [['Pedir el Diagnóstico, $199', '/es/websites/diagnostic/'], ['Reservar una llamada gratis sobre mis resultados', booking, true]] },
+    { min: 0, title: 'Su sitio podría estar <em>costándole clientes.</em>', text: 'Empiece con un Diagnóstico Web de $199, o vea los paquetes de sitios web desde $1,500.', actions: [['Pedir el Diagnóstico, $199', '/es/websites/diagnostic/'], ['Ver paquetes de sitios web', '/es/websites/#packages']] },
+  ];
+  const labels = { 2: 'Sí', 1: 'No sé', 0: 'No' };
+  // Calls booked from the results carry the score, so the booking says what the call is for.
+  // a1 fills the first question on the Calendly booking form; the utm tags show in the booking details.
+  const callUrl = (note) => `${booking}?a1=${encodeURIComponent(note)}&utm_source=auvastudio&utm_campaign=es-website-check`;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const missing = questions.findIndex((_, i) => !form.querySelector(`input[name="q${i}"]:checked`));
+    if (missing !== -1) {
+      progress.textContent = `Por favor, responda la pregunta ${missing + 1} para ver su puntuación.`;
+      form.querySelector(`input[name="q${missing}"]`).focus();
+      return;
+    }
+    const values = questions.map((_, i) => Number(form.querySelector(`input[name="q${i}"]:checked`).value));
+    const score = values.reduce((a, b) => a + b, 0);
+    const band = bands.find((b) => score >= b.min);
+    document.getElementById('score').textContent = score;
+    document.getElementById('band-title').innerHTML = band.title;
+    document.getElementById('band-text').textContent = band.text;
+    const actions = document.getElementById('band-actions');
+    actions.innerHTML = '';
+    band.actions.forEach(([label, href, external], i) => {
+      const a = document.createElement('a');
+      a.className = i === 0 ? 'btn' : 'btn btn-ghost';
+      a.href = href === booking ? callUrl(`Revisión gratis del sitio web: saqué ${score}/20 y quiero hablar de mis resultados.`) : href;
+      a.textContent = label;
+      if (external) { a.target = '_blank'; a.rel = 'noopener'; }
+      actions.append(a);
+    });
+    const tips = document.getElementById('tips');
+    tips.innerHTML = '';
+    values.forEach((v, i) => {
+      if (v === 2) return;
+      const li = document.createElement('li');
+      li.innerHTML = '<b></b><span></span>';
+      li.querySelector('b').textContent = questions[i].q;
+      li.querySelector('span').textContent = questions[i].tip;
+      tips.append(li);
+    });
+    document.getElementById('tips-card').hidden = !tips.children.length;
+    const send = document.getElementById('send');
+    send.score.value = `${score}/20`;
+    send.answers.value = questions.map((q, i) => `${i + 1}. ${q.q} ${labels[values[i]]}`).join('\n');
+    results.hidden = false;
+    // Show the result cards at once instead of waiting for the scroll fade-in.
+    results.querySelectorAll('.card').forEach((c) => c.classList.add('is-in'));
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    results.focus({ preventScroll: true });
+  });
+
+  document.getElementById('retake').addEventListener('click', () => { results.hidden = true; });
+
+  const send = document.getElementById('send');
+  const status = send.querySelector('.form-status');
+  send.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!send.reportValidity()) return;
+    const btn = send.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.textContent = 'Enviando…';
+    try {
+      const res = await (await fetch(send.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(send) })).json();
+      if (!res.success) throw new Error(res.message);
+      window.auvaConvert?.('form');
+      status.textContent = send.wants_diagnostic.checked ? '¡Gracias! Confirmo sus datos y le envío su enlace de pago en 24–48 horas.' : '¡Gracias! Reviso sus resultados y le respondo en 24–48 horas.';
+      btn.hidden = true;
+    } catch {
+      status.textContent = 'Algo salió mal. Por favor, escríbame por correo electrónico.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
