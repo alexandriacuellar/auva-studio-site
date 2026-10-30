@@ -17,6 +17,7 @@ const t = {
     defaultTitle: 'Websites, Technology Consulting, AI & Emerging Tech',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
+    promoLabel: 'Founding offer',
     promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review.',
     promoShort: '<b>Founding offer:</b> 10% off websites.',
     promoLink: 'Ask about it',
@@ -52,6 +53,7 @@ const t = {
     defaultTitle: 'Sitios web, consultoría tecnológica, IA y Tecnología Emergente',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
+    promoLabel: 'Oferta para fundadores',
     promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña.',
     promoShort: '<b>Fundadores:</b> 10% en sitios web.',
     promoLink: 'Pregunte por ella',
@@ -223,7 +225,7 @@ const schema = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
-    <p class="promo-bar"><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></p>
+    <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>
     <header class="site-header">
       <div class="wrap header-inner">
         <a href={l('/')} class="brand" aria-label={t.home}>
