@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site } from '../../data/site';
+import { serviceSchema } from '../../data/site.es';
+
+// Para agencias y diseñadores, no para dueños de negocios. Las tarifas para socios se cotizan en privado, así que esta página no muestra precios.
+const services = [
+  { icon: 'layers', title: 'Desarrollo web de marca blanca', text: 'Sitios web que usted entrega a sus clientes con su propia marca.' },
+  { icon: 'globe', title: 'Del diseño al desarrollo', text: 'Sus diseños aprobados, de Figma o cualquier herramienta de diseño, convertidos en sitios web adaptables y listos para publicar.' },
+  { icon: 'gear', title: 'Implementación técnica', text: 'APIs, integraciones, analítica y funciones a la medida.' },
+  { icon: 'cloud', title: 'Migraciones y modernización', text: 'Paso los sitios de sus clientes de plataformas antiguas a arquitecturas modernas y rápidas.' },
+  { icon: 'wrench', title: 'Apoyo técnico en proyectos', text: 'Planificación del desarrollo, guía para la implementación, solución de problemas y apoyo en la entrega.' },
+];
+
+const ways = [
+  { icon: 'lock', title: 'Marca blanca', text: 'Usted entrega el trabajo con su marca. Su cliente trabaja con usted, y mi nombre no aparece.' },
+  { icon: 'key', title: 'Subcontratación', text: 'Me sumo al proyecto como especialista técnica identificada, trabajando con su equipo.' },
+  { icon: 'chat', title: 'Entrega colaborativa', text: 'Entregamos el proyecto juntos y cada uno se encarga de su parte: usted dirige la creatividad y la estrategia, y yo dirijo el desarrollo.' },
+];
+
+const audiences = [
+  { icon: 'chart', title: 'Agencias de marketing', text: 'Usted vende la campaña y el sitio web. Yo construyo el sitio para que su equipo se enfoque en la estrategia y el contenido.' },
+  { icon: 'star', title: 'Estudios creativos', text: 'Su diseño queda tal como se aprobó, hecho para cargar rápido y funcionar en cualquier pantalla.' },
+  { icon: 'compass', title: 'Diseñadores independientes', text: 'Acepte proyectos más grandes con una desarrolladora de confianza, sin tener que contratar a nadie.' },
+];
+
+const faqs = [
+  { q: '¿Va a contactar o trabajar directamente con nuestros clientes?', a: 'Solo si usted quiere. Sus clientes siguen siendo suyos, y no les ofreceré mis servicios, ni durante el proyecto ni después.' },
+  { q: '¿Firma acuerdos de confidencialidad (NDA)?', a: 'Sí. Con gusto firmo su NDA o su acuerdo de colaboración antes de compartir cualquier detalle del proyecto.' },
+  { q: '¿Quién es dueño del sitio terminado?', a: 'Su cliente. El código, el hosting y las cuentas quedan a nombre de su cliente o del suyo, nunca del mío, y le entrego todo al final del proyecto.' },
+  { q: '¿Con qué construye los sitios?', a: 'Construyo la mayoría de los sitios con Astro, que los mantiene rápidos, seguros y con hosting de bajo costo. Cuando un proyecto necesita otra plataforma, lo decidimos juntos al definir el alcance.' },
+  { q: '¿Cómo funcionan los precios?', a: 'Los socios reciben tarifas preferenciales, cotizadas para cada proyecto según su alcance, mis responsabilidades y cuánto trabajo esperamos hacer juntos. Cada proyecto se define y se cotiza por escrito antes de empezar.' },
+  { q: '¿También puede ayudar con proyectos de IA y Tecnología Emergente?', a: 'Sí. Si un cliente pide algo como un flujo de trabajo con IA o un prototipo de XR, puedo apoyarlo de la misma forma. Vea la página de IA y Tecnología Emergente para conocer ese trabajo.' },
+];
+
+const schema = serviceSchema(services.map((s) => ({ name: s.title, description: s.text, price: '' })), '/es/development-partnerships/');
+---
+<Base title="Colaboraciones para agencias" seoTitle="Colaboraciones de desarrollo web para agencias y diseñadores | Auva Studio" schema={schema} description="Desarrollo web de marca blanca y en colaboración para agencias de marketing, estudios creativos y diseñadores independientes: del diseño al desarrollo, integraciones, migraciones y apoyo técnico en proyectos.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="bd-pill">Colaboraciones para agencias</p>
+      <h1 class="mag-head">Su visión creativa. <em>Mi experiencia técnica.</em></h1>
+      <p class="lede">Colaboro con agencias de marketing, estudios creativos y diseñadores independientes para ofrecer desarrollo web e implementación técnica confiables.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
+        <a class="btn btn-ghost" href="#start">Cuénteme sobre un proyecto</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Una socia técnica <em>para equipos que ya tienen clientes.</em></h2>
+      </div>
+      <div class="grid grid-2 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Algo diferente?</h3>
+          <p>Cuénteme sobre su equipo y sus clientes, y le sugeriré cómo podríamos trabajar juntos.</p>
+          <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Lo que puedo <em>quitarle de encima.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {services.map((s) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={s.icon} size={36} /></div>
+            <div>
+              <h3>{s.title}</h3>
+              <p class="muted">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="ways">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Tres formas <em>de trabajar juntos.</em></h2>
+        <p class="lede">Cada proyecto es diferente, así que usted elige cómo participo. Elija una para cada proyecto, o combínelas según lo que necesiten sus clientes.</p>
+      </div>
+      <div class="values">
+        {ways.map((w) => (
+          <div class="card card-row"><div class="icon"><Icon name={w.icon} /></div><div><h3>{w.title}</h3><p class="muted">{w.text}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">He sido la desarrolladora <em>detrás de agencias pequeñas.</em></h2>
+        <p class="lede">Antes de Auva Studio, trabajé como desarrolladora detrás de agencias pequeñas. Sé cómo adaptarme a su proceso, cumplir sus plazos y hacer que su equipo quede bien con sus clientes.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
+        </div>
+      </div>
+      <div class="values">
+        <div class="card"><h3>Sus clientes siguen siendo suyos</h3><p class="muted">Nunca les ofrezco mis servicios a sus clientes, y firmo su NDA si tiene uno.</p></div>
+        <div class="card"><h3>Hecho tal como lo diseñó</h3><p class="muted">Sus diseños aprobados, construidos con cuidado, con las dudas resueltas a tiempo en vez de adivinar.</p></div>
+        <div class="card"><h3>Alcance y precio claros</h3><p class="muted">Cada proyecto se define y se cotiza por escrito antes de empezar, con tarifas preferenciales para socios.</p></div>
+        <div class="card"><h3>Una entrega ordenada</h3><p class="muted">Su cliente es dueño del sitio terminado, con documentación que su equipo puede usar después del lanzamiento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="partner" />
+</Base>
