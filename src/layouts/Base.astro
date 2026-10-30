@@ -38,6 +38,7 @@ const t = {
     bookCall: 'Book a call',
     websiteCheck: 'Free website check',
     profileCheck: 'Free Google profile check',
+    prepChecklist: 'Website prep checklist',
     serviceArea: 'Service area',
     counties: (c: string) => `${c} counties`,
     nyc: 'New York City',
@@ -74,6 +75,7 @@ const t = {
     bookCall: 'Reservar una llamada',
     websiteCheck: 'Revisión gratis de su sitio web',
     profileCheck: 'Revisión gratis de su perfil de Google',
+    prepChecklist: 'Checklist para preparar su sitio web',
     serviceArea: 'Zona de servicio',
     counties: (c: string) => `condados de ${c.replace(/, ([^,]+)$/, ' y $1')}`,
     nyc: 'Ciudad de Nueva York',
@@ -271,6 +273,7 @@ const schema = {
             <li><a href={site.booking} target="_blank" rel="noopener">{t.bookCall}</a></li>
             <li><a href={l('/website-check/')}>{t.websiteCheck}</a></li>
             <li><a href={l('/google-profile-check/')}>{t.profileCheck}</a></li>
+            <li><a href={l('/websites/get-ready/')}>{t.prepChecklist}</a></li>
             <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
           </ul>
         </div>

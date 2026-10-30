@@ -149,7 +149,7 @@ export const brandEssentials = [
 ];
 
 export const process = [
-  { title: 'Descubrimiento', text: 'Conozco su negocio y confirmamos sus metas y el mapa del sitio.', you: 'Comparta sus metas y materiales.', terms: ['Depósito del 50% para empezar.', 'Todas las cuentas quedan a su nombre. Si necesito acceso, usted me agrega como usuaria y me quita cuando termine el trabajo.'] },
+  { title: 'Descubrimiento', text: 'Conozco su negocio y confirmamos sus metas y el mapa del sitio.', you: 'Comparta sus metas y materiales.', link: { href: '/es/websites/get-ready/', text: 'Cómo prepararse' }, terms: ['Depósito del 50% para empezar.', 'Todas las cuentas quedan a su nombre. Si necesito acceso, usted me agrega como usuaria y me quita cuando termine el trabajo.'] },
   { title: 'Contenido y revisión', text: 'Compártame lo que tenga. Lo pulo, redacto lo que falte y le explico la estructura de las páginas.', you: 'Apruebe sus textos y envíe sus comentarios en un plazo de 2 días hábiles.', terms: ['Usted aprueba el plan de páginas.'] },
   { title: 'Desarrollo y vista previa', text: 'Construyo su sitio y le comparto una vista previa en vivo que puede abrir en su celular; luego lo ajusto con sus comentarios.', you: 'Envíe cada ronda de cambios junta, en un plazo de 2 días hábiles.', terms: ['Una ronda de cambios es un solo grupo de cambios, enviados juntos.', 'Usted aprueba el sitio final antes de que se publique.'] },
   { title: 'Lanzamiento', text: 'Hago las pruebas, conecto sus herramientas, le capacito y publico su sitio.', you: 'Apruebe la publicación de su sitio.', terms: ['El saldo se paga al lanzar. Después, todo es suyo.', 'Un recorrido por el sitio, una guía práctica y 30 días de arreglos y pequeños ajustes.'] },
