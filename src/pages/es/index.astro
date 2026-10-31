@@ -24,19 +24,14 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Sitios web, Consultoría, e IA y Tecnología Emergente</p>
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales. Creo sitios web, oriento decisiones tecnológicas y ayudo a los equipos a aprovechar la IA y la Tecnología Emergente, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
+      <p class="lede">Un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
       </div>
-      <p class="hero-checks">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
       <figure class="bd-stage">
         <Image src={hero} alt="Un espacio de trabajo soleado con una laptop, una taza de café y plantas" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-        <figcaption class="bd-chip">
-          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
-          <span><b>Hola, soy Alexandria.</b> Trabajará directamente conmigo, desde la primera llamada hasta la entrega.</span>
-        </figcaption>
       </figure>
     </div>
   </section>
@@ -89,30 +84,26 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
           </a>
         ))}
       </div>
+      <p class="hero-checks" style="text-align: center; margin-top: 28px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
   <section class="alt" id="about">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap home-about">
+      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
+      <div class="home-about-text">
         <h2 class="mag-head">Orientación tecnológica práctica, <em>pensada para las personas.</em></h2>
-        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas, no por un producto que vender.</p>
-        <p>Llevo más de 20 años ayudando a organizaciones a resolver problemas con tecnología. Durante casi dos décadas creé sitios web y productos digitales para empresas periodísticas, y desde 2023 he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
-        <div class="founder">
-          <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
-          <p><b>Alexandria Cuellar</b>, consultora de tecnología y soluciones digitales<br /><span class="muted">Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna, por el Mid-Hudson Valley.</span><br /><a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Siga a Auva Studio en LinkedIn</a></p>
+        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/technology-consulting/">consultoría tecnológica</a> e <a href="/es/ai-emerging-tech/">IA y Tecnología Emergente</a>.</p>
+        <p class="home-about-name"><b>Alexandria Cuellar</b>, consultora de tecnología y soluciones digitales<br /><span class="muted">Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna, por el Mid-Hudson Valley.</span></p>
+        <figure class="quote home-about-quote" lang="en">
+        <blockquote>“{featured.quote}”</blockquote>
+        <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+      </figure>
+        <div class="home-about-actions">
+          <a class="btn btn-ghost" href="/es/about/">Más sobre mí <Icon name="arrow" size={18} /></a>
+          <a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Siga a Auva Studio en LinkedIn</a>
         </div>
-        <figure class="quote quote-inline" lang="en">
-          <blockquote>“{featured.quote}”</blockquote>
-          <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-        </figure>
       </div>
-      <ul class="principles">
-        <li><h3>Empezar por el problema</h3><p class="muted">La tecnología debe hacer algo más claro, más fácil o más confiable.</p></li>
-        <li><h3>A la medida de su negocio</h3><p class="muted">Sus metas, su presupuesto y sus sistemas guían cada recomendación.</p></li>
-        <li><h3>Mantenerlo simple</h3><p class="muted">La solución más sencilla que haga bien el trabajo.</p></li>
-        <li><h3>Que usted quede con confianza</h3><p class="muted">Explicaciones claras y sistemas que usted puede mantener.</p></li>
-      </ul>
     </div>
   </section>
 

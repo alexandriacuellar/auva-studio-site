@@ -18,7 +18,7 @@ export const nav = [
   { href: '/es/websites/', label: 'Sitios web' },
   { href: '/es/technology-consulting/', label: 'Consultoría' },
   { href: '/es/ai-emerging-tech/', label: 'IA y Tecnología Emergente' },
-  { href: '/es/#about', label: 'Sobre mí' },
+  { href: '/es/about/', label: 'Sobre mí' },
 ];
 
 export const categories = [

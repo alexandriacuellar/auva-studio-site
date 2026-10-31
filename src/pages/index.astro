@@ -24,19 +24,14 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Websites, Consulting, and AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio. I build websites, guide technology decisions, and help teams put AI & Emerging Tech to work, for small businesses, startups, nonprofits, and growing teams.</p>
+      <p class="lede">A digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
-      <p class="hero-checks">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
       <figure class="bd-stage">
         <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-        <figcaption class="bd-chip">
-          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
-          <span><b>Hi, I'm Alexandria.</b> You'll work with me directly, from the first call to handover.</span>
-        </figcaption>
       </figure>
     </div>
   </section>
@@ -89,30 +84,26 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
           </a>
         ))}
       </div>
+      <p class="hero-checks" style="text-align: center; margin-top: 28px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 
   <section class="alt" id="about">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap home-about">
+      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
+      <div class="home-about-text">
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
-        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals, not a product to sell.</p>
-        <p>I've spent more than 20 years helping organizations use technology to solve problems. For nearly two decades I built websites and digital products for newspaper companies, and since 2023 I've managed 14+ VR experiences and mobile games for indie game studios. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
-        <div class="founder">
-          <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
-          <p><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span><br /><a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Follow Auva Studio on LinkedIn</a></p>
+        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals. I help with <a href="/websites/">websites</a>, <a href="/technology-consulting/">technology consulting</a>, and <a href="/ai-emerging-tech/">AI &amp; Emerging Tech</a>.</p>
+        <p class="home-about-name"><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span></p>
+        <figure class="quote home-about-quote">
+        <blockquote>“{featured.quote}”</blockquote>
+        <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
+      </figure>
+        <div class="home-about-actions">
+          <a class="btn btn-ghost" href="/about/">More about me <Icon name="arrow" size={18} /></a>
+          <a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Follow Auva Studio on LinkedIn</a>
         </div>
-        <figure class="quote quote-inline">
-          <blockquote>“{featured.quote}”</blockquote>
-          <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-        </figure>
       </div>
-      <ul class="principles">
-        <li><h3>Start with the problem</h3><p class="muted">Technology should make something clearer, easier, or more reliable.</p></li>
-        <li><h3>Fit your business</h3><p class="muted">Your goals, budget, and systems shape every recommendation.</p></li>
-        <li><h3>Keep it simple</h3><p class="muted">The simplest solution that does the job well.</p></li>
-        <li><h3>Leave you confident</h3><p class="muted">Clear explanations and systems you can maintain.</p></li>
-      </ul>
     </div>
   </section>
 

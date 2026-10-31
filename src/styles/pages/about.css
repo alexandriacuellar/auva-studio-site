@@ -1,0 +1,17 @@
+/* About page styles, shared by the English and Spanish versions. */
+.about-hero { padding: 72px 0 80px; }
+.about-hero .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 56px; align-items: center; }
+.about-photo { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-strong); border: 6px solid var(--white); }
+.about-hero h1 { margin-top: 10px; }
+.about-hero .lede { max-width: 58ch; }
+.about-role { margin: 0 0 24px; font-weight: 600; color: var(--muted); }
+.about-story p { max-width: 64ch; }
+.about-quotes { align-items: stretch; }
+.about-home p { max-width: 62ch; }
+@media (max-width: 860px) {
+  .about-hero { padding: 48px 0 56px; }
+  .about-hero .wrap { grid-template-columns: 1fr; gap: 28px; justify-items: center; text-align: center; }
+  .about-hero .lede { margin-left: auto; margin-right: auto; }
+  .about-hero .hero-actions { justify-content: center; }
+  .about-photo { width: 200px; height: 200px; }
+}

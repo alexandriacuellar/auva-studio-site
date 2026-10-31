@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../assets/alexandria-cuellar.jpg';
 import '../styles/pages/ai-emerging-tech.css';
 import Icon from '../components/Icon.astro';
 import InquiryForm from '../components/InquiryForm.astro';
@@ -55,7 +57,7 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
     <div class="wrap bd-hero-inner">
       <p class="bd-pill" style="view-transition-name: svc-ai">AI & Emerging Tech</p>
       <h1 class="mag-head">New technology, <em>without the expensive experiments.</em></h1>
-      <p class="lede">AI, XR, and interactive tools can open real opportunities, or become expensive experiments. I help you find where new technology actually fits, test ideas on a small scale, and move forward with a clear plan.</p>
+      <p class="lede">I help you find where AI, XR, and interactive tools actually fit, test ideas on a small scale, and move forward with a clear plan.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
       </div>
@@ -64,6 +66,10 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
         <a href="#xr">XR, games, and interactive</a>
       </nav>
     </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria.</b> I use AI tools in my own work and have managed 14+ VR experiences and mobile games. I'd love to show your team what they can do for you. <a href="/about/">More about me</a></span></div>
   </section>
 
   <section class="alt">
@@ -141,9 +147,10 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
         <h2 class="mag-head">Production experience <em>across games, XR, and interactive work.</em></h2>
         <p class="lede">I've led projects for indie game studios, XR and interactive teams, and creative organizations, managing Agile workflows, design documentation, schedules, and teams of highly creative people. That production background keeps experiments focused and grounded in what can actually ship.</p>
         <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
           <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>
         </div>
-        <p class="small muted" style="margin-top: 20px"><b>Tools I work with.</b> XR and games: Unity, Meta Quest. AI: ChatGPT, Claude, Gemini. Automation: Zapier.</p>
+        <p class="small muted" style="margin-top: 20px"><b>Tools I work with.</b> XR and games: Unity, Meta Quest. AI: ChatGPT, Claude, Gemini. Automation: Zapier. I use these AI tools in my own work, and I'm eager to show your team how they can help.</p>
       </div>
       <div class="values">
         {quotes.map((t) => (

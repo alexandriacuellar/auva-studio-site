@@ -38,7 +38,7 @@ export const nav = [
   { href: '/websites/', label: 'Websites' },
   { href: '/technology-consulting/', label: 'Consulting' },
   { href: '/ai-emerging-tech/', label: 'AI & Emerging Tech' },
-  { href: '/#about', label: 'About' },
+  { href: '/about/', label: 'About' },
 ];
 
 // Three service categories, so visitors are not faced with a long list.
