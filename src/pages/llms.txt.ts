@@ -1,5 +1,5 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, aiOffers, addons, care } from '../data/site';
+import { site, consulting, packages, aiOffers, addons, care, monthly } from '../data/site';
 
 const items = (p: (typeof packages)[number]) => p.groups.flatMap((g) => g.items).map((i) => i.replace(/ I'll help you choose\.$/, '').replace(/\.$/, '')).join('; ');
 
@@ -14,7 +14,7 @@ export function GET() {
     'Every engagement starts with a free 30-minute call, and all work is scoped and priced in writing before it begins. Clients keep ownership of their website, content, domain, and accounts.',
     '',
     '## Pages',
-    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each with no monthly plan`,
+    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each or a monthly web producer from $650`,
     `- [Consulting & Project Support](${site.url}/technology-consulting/): technology planning, business analysis and process review, project management, fractional project leadership, web producer and game or XR producer support`,
     `- [AI & Emerging Tech](${site.url}/ai-emerging-tech/): AI readiness, team workshops, concept and feasibility reviews, prototypes, XR and game production support`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
@@ -26,7 +26,7 @@ export function GET() {
     `- [Google Business Profile Setup](${site.url}/websites/google-business-profile/) ($500, one-time): create or claim the profile, add business details, categories, services, hours, and photos, and help with verification. $150 credited toward a website within 6 months.`,
     `- [Google Business Profile Optimization](${site.url}/websites/google-business-profile/) ($500, one-time): review an existing profile and improve its categories, description, services, attributes, photos, and website links. $150 credited toward a website within 6 months.`,
     ...packages.map((p) => `- ${p.name} (${p.price}, one-time; ${p.timeline} once content is ready): ${p.blurb} ${p.includes ?? 'Includes:'} ${items(p)}.${p.extra ? ` ${p.extra}.` : ''}`),
-    '- Website terms: 50% deposit to start, balance at launch; 30 days of fixes and small tweaks after launch; upgrade to a bigger package any time and pay only the difference. Websites are built with Astro, with free or low-cost hosting and no plugins to maintain.',
+    '- Website terms: 50% deposit to start, balance at launch; 30 days of fixes and small tweaks after launch; upgrade to a bigger package any time and pay only the difference. Websites are built with Astro, with free or low-cost hosting and no plugins to maintain; sites on other platforms are quoted with any platform fees up front.',
     '- Founding client offer: 10% off any website package for the first 10 clients, in exchange for a short review. Registered nonprofits can ask about a nonprofit discount (the two do not combine).',
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     `- [Brand Essentials](${site.url}/websites/brand-essentials/) ($1,000, on its own or with any website): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet, designed with a professional designer partner.`,
@@ -34,7 +34,8 @@ export function GET() {
     `- Free website prep checklist (${site.url}/websites/get-ready/): the business basics, photos, words, and accounts to gather before a new website is built.`,
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
-    '- Help After Launch is pay as you go, with no monthly plan, for websites Auva Studio built.',
+    `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly block of web producer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. 3-month minimum, then 30 days' notice; same-day help with urgent problems. Marketing, ads, and content writing are not included.`,
+    '- Help After Launch pay-as-you-go updates are for websites Auva Studio built. The monthly plan can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
     '## Consulting & Project Support',
     ...consulting.filter((c) => c.id !== 'ai').map((c) => `- ${c.title}: ${c.text} ${c.price}`),

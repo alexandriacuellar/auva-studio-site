@@ -178,11 +178,19 @@ export const process = [
   { title: 'Launch', text: 'I test, connect your tools, train you, and publish your site.', you: 'Approve your site to go live.', terms: ['Balance due at launch. Then everything is yours.', 'A walkthrough, a how-to guide, and 30 days of fixes and small tweaks.'] },
 ];
 
-// Help After Launch (no monthly plan). A small update is about 30 minutes of work.
+// Help After Launch: pay as you go, or one monthly plan sized on a call. A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 each, or a pack of 5 for $200', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. A pack of 5 is used within 12 months.' },
+  { name: 'Updates and fixes', price: '$50 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
+
+// The only monthly offer: a block of web producer hours. Sold on outcomes; hours set the price.
+export const monthly = {
+  name: 'Monthly web producer',
+  price: 'From $650 a month for 5 hours',
+  text: 'Your own web producer, without hiring one. Your marketer or SEO person sets the direction, and I make it happen on your site.',
+  outcomes: ['Stays fast, secure, and working', 'Gets new pages for your campaigns, events, and products', 'Keeps up with what people are searching for', 'Comes with a short report on what changed, what it did, and what\'s next'],
+};
 
 
 export const testimonials = [
