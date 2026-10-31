@@ -35,7 +35,7 @@ export function GET() {
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
     `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly block of web producer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. 3-month minimum, then 30 days' notice; same-day help with urgent problems. Marketing, ads, and content writing are not included.`,
-    '- Help After Launch is for websites Auva Studio built: pay as you go, or one monthly plan sized on a free call.',
+    '- Help After Launch pay-as-you-go updates are for websites Auva Studio built. The monthly plan can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
     '## Consulting & Project Support',
     ...consulting.filter((c) => c.id !== 'ai').map((c) => `- ${c.title}: ${c.text} ${c.price}`),
