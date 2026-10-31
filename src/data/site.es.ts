@@ -165,7 +165,6 @@ export const monthly = {
   price: 'Desde $650 al mes por 5 horas',
   text: 'Su propia productora web, sin tener que contratar a nadie. Su persona de marketing o de SEO marca el rumbo, y yo lo hago realidad en su sitio.',
   outcomes: ['Se mantiene rápido, seguro y funcionando', 'Recibe páginas nuevas para sus campañas, eventos y productos', 'Se mantiene al día con lo que la gente busca', 'Viene con un informe breve: qué cambió, qué logró y qué sigue'],
-  terms: 'Mínimo de 3 meses; después, aviso de 30 días para terminar. Ayuda el mismo día con problemas urgentes.',
 };
 
 // Client quotes stay in their own words, in English.

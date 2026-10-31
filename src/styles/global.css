@@ -239,7 +239,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 
 /* Help After Launch paths */
 .care-paths { align-items: start; }
-.monthly-band { align-items: center; }
+.price-unit { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--muted); }
 .care-options { display: grid; gap: 12px; margin: 18px 0; }
 .care-option { border: 2px solid var(--border); border-radius: 14px; padding: 16px 18px; background: var(--paper); }
 .care-option.featured { border-color: var(--primary); }

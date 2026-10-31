@@ -12,7 +12,12 @@ const atLaunch = [
   { icon: 'key', title: 'Todo a su nombre', text: 'Su dominio, su hosting y sus cuentas, para que nunca dependa de mí para entrar.' },
 ];
 
-const updateExamples = ['Cambiar su horario, precios o menú', 'Cambiar o agregar fotos', 'Editar el texto de una página', 'Agregar a un miembro del equipo, un evento o un testimonio', 'Actualizar un formulario o un enlace'];
+// Tres formas de recibir ayuda después del lanzamiento, como las tarjetas de paquetes.
+const paths = [
+  { tag: 'De vez en cuando', name: 'Pague por cambio', price: '$50', unit: 'por cambio', blurb: 'Envíeme lo que quiere cambiar y yo me encargo.', items: ['Hasta unos 30 minutos de ediciones por cambio, enviadas juntas en una sola solicitud', 'Listo en 2 días hábiles', 'Páginas y funciones nuevas a $125/hora, con presupuesto previo', 'Sin compromiso. Pague solo cuando necesite algo.'], cta: 'Enviar un cambio', href: '#start' },
+  { tag: 'Hágalo usted', name: 'Actualícelo usted', price: 'Desde $1,750', unit: 'pago único', blurb: 'Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza sus textos, fotos, noticias y eventos. No necesita programar.', items: ['Haga cambios cuando quiera, sin esperar', 'Hasta 2 colecciones, como noticias o eventos. Más colecciones, con presupuesto previo.', 'Capacitación y una guía para editar', '30 días de apoyo después de la configuración', 'Incluido en Presencia Completa'], cta: 'Preguntar por un CMS', href: '#start' },
+  { tag: 'Cada mes', name: 'Productora web mensual', price: 'Desde $650', unit: 'al mes por 5 horas', blurb: monthly.text, items: [...monthly.outcomes, 'Ayuda el mismo día con problemas urgentes', 'Mínimo de 3 meses; después, aviso de 30 días para terminar'], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
+];
 
 const faqs = [
   { q: '¿Qué cuenta como un cambio?', a: 'Hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Cambiar su horario, sustituir algunas fotos y corregir un error de escritura pueden ser un solo cambio si los envía al mismo tiempo. Si una solicitud va a tomar más, se lo digo antes.' },
@@ -65,62 +70,22 @@ const schema = serviceSchema([
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Después, usted elige quién hace los cambios.</h2>
+        <h2 class="mag-head">Después del lanzamiento, <em>tres formas de recibir ayuda.</em></h2>
+        <p class="lede">La mayoría de los sitios que construyo no tienen plugins que mantener, así que no se requiere ninguna tarifa mensual. Elija lo que mejor se adapte a la frecuencia con que cambia su sitio.</p>
       </div>
-      <div class="grid grid-2 care-paths">
-        <div class="card">
-          <div class="icon"><Icon name="wrench" size={36} /></div>
-          <h3>Yo lo actualizo por usted</h3>
-          <p class="muted">Dígame qué cambiar y yo me encargo.</p>
-          <div class="care-options">
-            {care.map((c) => (
-              <div class:list={['care-option', { featured: c.featured }]}>
-                <div class="care-head"><h4>{c.name}</h4><span class="care-price">{c.price}</span></div>
-                <p class="muted small">{c.text}</p>
-              </div>
-            ))}
-          </div>
-          <p class="small"><b>Cambios comunes:</b></p>
-          <ul class="ticks small">{updateExamples.map((u) => <li><Icon name="tick" size={16} />{u}</li>)}</ul>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="gear" size={36} /></div>
-          <h3>Usted lo actualiza</h3>
-          <p class="muted">Agregue un CMS, un panel sencillo donde cambia sus textos, fotos, noticias y eventos cuando quiera, sin programar y sin esperar.</p>
-          <div class="care-options">
-            <div class="care-option featured">
-              <div class="care-head"><h4>CMS (sistema de gestión de contenidos)</h4><span class="care-price">Desde $1,750</span></div>
-              <p class="muted small">Lo mejor si actualiza cada semana o publica noticias, eventos o un blog.</p>
-              <ul class="ticks small">
-                <li><Icon name="tick" size={16} />Configuración de una sola vez, sin cuota mensual para la mayoría de los sitios</li>
-                <li><Icon name="tick" size={16} />Hasta 2 colecciones que va llenando con el tiempo, como noticias o eventos. Más colecciones, con presupuesto previo.</li>
-                <li><Icon name="tick" size={16} />Capacitación y una guía de edición</li>
-                <li><Icon name="tick" size={16} />30 días de apoyo después de la configuración</li>
-              </ul>
-            </div>
-          </div>
-          <p class="small muted">Agréguelo a Esencial o Ampliada, o téngalo incluido en Presencia Completa. Si hace cambios con frecuencia, puede costarle menos con el tiempo que pagar por cada cambio.</p>
-        </div>
+      <div class="grid grid-3 packages">
+        {paths.map((p) => (
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
+            <span class="tag">{p.tag}</span>
+            <h3>{p.name}</h3>
+            <p class="muted">{p.blurb}</p>
+            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
+          </article>
+        ))}
       </div>
-    </div>
-  </section>
-
-  <section id="monthly">
-    <div class="wrap">
-      <div class="grid grid-2 monthly-band">
-        <div>
-          <p class="eyebrow">¿Prefiere un plan mensual?</p>
-          <h2 class="mag-head">Su propia productora web, <em>sin contratar a nadie.</em></h2>
-          <p class="lede">Llevo años haciendo esto dentro de equipos. Su persona de marketing o de SEO marca el rumbo, y yo lo hago realidad en su sitio.</p>
-        </div>
-        <div class="card">
-          <p><b>Cada mes, su sitio:</b></p>
-          <ul class="ticks">{monthly.outcomes.map((o) => <li><Icon name="tick" size={18} />{o}</li>)}</ul>
-          <p><b style="color: var(--primary)">{monthly.price}</b></p>
-          <p class="muted small">{monthly.terms}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener">Hablemos de lo que necesita</a>
-        </div>
-      </div>
+      <p class="fine">Las horas mensuales son un solo saldo flexible para cualquier cosa de la lista, y las horas que no use pasan al mes siguiente. Las tarifas de terceros, como plataformas o aplicaciones, se pagan aparte. No puedo prometer resultados como posiciones en Google o ventas, pero le mostraré lo que está funcionando.</p>
     </div>
   </section>
 

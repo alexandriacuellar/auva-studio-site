@@ -12,7 +12,12 @@ const atLaunch = [
   { icon: 'key', title: 'Everything in your name', text: 'Your domain, hosting, and accounts, so you never depend on me to get in.' },
 ];
 
-const updateExamples = ['Change your hours, prices, or menu', 'Swap or add photos', 'Edit text on a page', 'Add a team member, event, or testimonial', 'Update a form or a link'];
+// Three ways to get help after launch, shown like the website package cards.
+const paths = [
+  { tag: 'Now and then', name: 'Pay as you go', price: '$50', unit: 'per update', blurb: 'Send me what to change and I take care of it.', items: ['Up to about 30 minutes of edits per update, sent together in one request', 'Done within 2 business days', 'New pages and features at $125/hr, quoted first', 'No commitment. Pay only when you need something.'], cta: 'Send an update', href: '#start' },
+  { tag: 'Do it yourself', name: 'Update it yourself', price: 'From $1,750', unit: 'one time', blurb: 'A CMS (content management system) is a simple dashboard where you update your text, photos, news, and events yourself. No code needed.', items: ['Make changes whenever you like, with no waiting', 'Up to 2 collections, like news posts or events. More collections, quoted first.', 'Training and an editor guide', '30 days of support after setup', 'Included in Complete Presence'], cta: 'Ask about a CMS', href: '#start' },
+  { tag: 'Every month', name: 'Monthly web producer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
+];
 
 const faqs = [
   { q: 'What counts as one update?', a: 'Up to about 30 minutes of edits, sent together in one request. Changing your hours, swapping a few photos, and fixing a typo can all be one update if you send them at the same time. If a request will take longer, I tell you first.' },
@@ -65,62 +70,22 @@ const schema = serviceSchema([
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">After that, you choose who makes the changes.</h2>
+        <h2 class="mag-head">After launch, <em>three ways to get help.</em></h2>
+        <p class="lede">Most sites I build have no plugins to maintain, so there's no monthly fee required. Choose what fits how often your site changes.</p>
       </div>
-      <div class="grid grid-2 care-paths">
-        <div class="card">
-          <div class="icon"><Icon name="wrench" size={36} /></div>
-          <h3>I update it for you</h3>
-          <p class="muted">Send me what to change and I take care of it.</p>
-          <div class="care-options">
-            {care.map((c) => (
-              <div class:list={['care-option', { featured: c.featured }]}>
-                <div class="care-head"><h4>{c.name}</h4><span class="care-price">{c.price}</span></div>
-                <p class="muted small">{c.text}</p>
-              </div>
-            ))}
-          </div>
-          <p class="small"><b>Common updates:</b></p>
-          <ul class="ticks small">{updateExamples.map((u) => <li><Icon name="tick" size={16} />{u}</li>)}</ul>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="gear" size={36} /></div>
-          <h3>You update it yourself</h3>
-          <p class="muted">Add a CMS, a simple dashboard where you change your text, photos, news, and events whenever you like, with no code and no waiting.</p>
-          <div class="care-options">
-            <div class="care-option featured">
-              <div class="care-head"><h4>CMS (content management system)</h4><span class="care-price">From $1,750</span></div>
-              <p class="muted small">Best if you update every week or post news, events, or a blog.</p>
-              <ul class="ticks small">
-                <li><Icon name="tick" size={16} />One-time setup, no monthly fee for most sites</li>
-                <li><Icon name="tick" size={16} />Up to 2 collections you add to over time, like news posts or events. More collections, quoted first.</li>
-                <li><Icon name="tick" size={16} />Training and an editor guide</li>
-                <li><Icon name="tick" size={16} />30 days of support after setup</li>
-              </ul>
-            </div>
-          </div>
-          <p class="small muted">Add it to Essential or Expanded, or get it included in Complete Presence. For frequent updates, it can cost less over time than paying per update.</p>
-        </div>
+      <div class="grid grid-3 packages">
+        {paths.map((p) => (
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
+            <span class="tag">{p.tag}</span>
+            <h3>{p.name}</h3>
+            <p class="muted">{p.blurb}</p>
+            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
+          </article>
+        ))}
       </div>
-    </div>
-  </section>
-
-  <section id="monthly">
-    <div class="wrap">
-      <div class="grid grid-2 monthly-band">
-        <div>
-          <p class="eyebrow">Prefer a monthly plan?</p>
-          <h2 class="mag-head">Your own web producer, <em>without hiring one.</em></h2>
-          <p class="lede">I've done this inside teams for years. Your marketer or SEO person sets the direction, and I make it happen on your site.</p>
-        </div>
-        <div class="card">
-          <p><b>Each month, your site:</b></p>
-          <ul class="ticks">{monthly.outcomes.map((o) => <li><Icon name="tick" size={18} />{o}</li>)}</ul>
-          <p><b style="color: var(--primary)">{monthly.price}</b></p>
-          <p class="muted small">{monthly.terms}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener">Let's talk about what you need</a>
-        </div>
-      </div>
+      <p class="fine">Monthly hours are one flexible allowance across anything on the list, and unused hours carry over one month. Third-party fees, like platforms or apps, are separate. I can't promise results like rankings or sales, but I'll show you what's working.</p>
     </div>
   </section>
 
