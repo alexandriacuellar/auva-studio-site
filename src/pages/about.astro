@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import '../styles/pages/home.css';
+import '../styles/pages/about.css';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { site, testimonials } from '../data/site';
+import headshot from '../assets/alexandria-cuellar.jpg';
+---
+<Base title="About" seoTitle="About Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, founder of Auva Studio: 20+ years helping organizations solve problems with technology, based in the Mid-Hudson Valley.">
+  <section class="hero about-hero">
+    <div class="wrap">
+      <Image class="about-photo" src={headshot} alt="Alexandria Cuellar" width={300} height={300} densities={[1, 2]} loading="eager" />
+      <div>
+        <p class="bd-pill">About</p>
+        <h1 class="mag-head" set:html={`Hi, I'm Alexandria. <em>Let's make technology work for you.</em>`} />
+        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals, not a product to sell.</p>
+        <p class="about-role">Digital technology and solutions consultant, based in the Mid-Hudson Valley</p>
+        <div class="hero-actions">
+          <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={18} /> Follow Auva Studio on LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt about-story">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head" set:html={`20+ years of making <em>technology work for people.</em>`} />
+        <p>I've spent more than 20 years helping organizations use technology to solve problems. For nearly two decades I built websites and digital products for newspaper companies, and since 2023 I've managed 14+ VR experiences and mobile games for indie game studios. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
+      </div>
+      <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
+          <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>
+          <div class="stat-wide"><span class="stat">Nearly 20</span><span class="muted">years building websites and digital products for newspaper companies</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head" set:html={`How <em>I work.</em>`} />
+        <p class="lede">You work with me directly, from the first call to handover.</p>
+      </div>
+      <ul class="principles">
+        <li><h3>Start with the problem</h3><p class="muted">Technology should make something clearer, easier, or more reliable.</p></li>
+        <li><h3>Fit your business</h3><p class="muted">Your goals, budget, and systems shape every recommendation.</p></li>
+        <li><h3>Keep it simple</h3><p class="muted">The simplest solution that does the job well.</p></li>
+        <li><h3>Leave you confident</h3><p class="muted">Clear explanations and systems you can maintain.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={`What people say <em>about working with me.</em>`} />
+      </div>
+      <div class="grid grid-3 about-quotes">
+        {testimonials.map((t) => (
+          <figure class="card quote">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-home">
+      <h2 class="mag-head" set:html={`Rooted in <em>the Hudson Valley.</em>`} />
+      <p class="lede">I'm based in the Mid-Hudson Valley and work with businesses and organizations across the Hudson Valley, New York City, and anywhere in the US. When I'm not working, you'll find me on long walks with my dog, Midna.</p>
+    </div>
+  </section>
+  <Cta />
+</Base>
