@@ -1,0 +1,101 @@
+---
+// Shows the real sample sites inside a phone frame, with one tab per sample, so visitors
+// can scroll and tap them the way their own customers would. Only the chosen sample loads.
+import { samples, packages } from '../data/site';
+import Icon from './Icon.astro';
+
+interface Props { lang?: 'en' | 'es' }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+
+const t = es
+  ? {
+      title: 'Pruébelos como <em>lo harán sus clientes.</em>',
+      text: 'La mayoría de sus visitantes conocerán su negocio en un teléfono, por eso cada sitio que hago empieza ahí. Elija una muestra, y desplácese y toque dentro del teléfono.',
+      tabs: 'Sitios de muestra',
+      hint: 'Desplácese dentro de la pantalla',
+      open: ['Abrir', 'en pantalla completa'],
+      frame: (n: string) => `${n}, sitio de muestra en un teléfono`,
+    }
+  : {
+      title: 'Try them the way <em>your customers will.</em>',
+      text: 'Most visitors will meet your business on a phone, so every site I build starts there. Pick a sample, then scroll and tap inside the phone.',
+      tabs: 'Sample sites',
+      hint: 'Scroll inside the screen',
+      open: ['Open', 'full screen'],
+      frame: (n: string) => `${n}, sample site on a phone`,
+    };
+
+const items = samples.map((sm) => {
+  const pk = packages.find((x) => x.name === sm.package);
+  return { ...sm, short: pk?.short ?? sm.package, price: pk?.price ?? '', href: `/samples/${sm.slug}/` };
+});
+const first = items[0];
+---
+<div class="pv" data-pv>
+  <div class="pv-copy">
+    <h3 class="mag-head pv-title" set:html={t.title} />
+    <p class="muted">{t.text}</p>
+    <div class="pv-tabs" role="tablist" aria-label={t.tabs}>
+      {items.map((it, i) => (
+        <button type="button" role="tab" class="pv-tab" id={`pv-tab-${it.slug}`} aria-controls="pv-screen" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-src={it.href} data-name={it.name} data-title={t.frame(it.name)}>
+          <span class="pv-tab-name">{it.name}</span>
+          <span class="pv-tab-meta">{it.short}, {it.price}</span>
+        </button>
+      ))}
+    </div>
+    <a class="pv-open" href={first.href} hreflang={es ? 'en' : undefined} target="_blank" rel="noopener" data-pv-open><span>{t.open[0]} <span data-pv-name>{first.name}</span> {t.open[1]}</span> <Icon name="arrow" size={16} /></a>
+  </div>
+  <figure class="pv-phone-wrap">
+    <div class="pv-phone">
+      <span class="pv-speaker" aria-hidden="true"></span>
+      <div class="pv-screen" id="pv-screen" role="tabpanel" aria-labelledby={`pv-tab-${first.slug}`}>
+        <iframe src={first.href} title={t.frame(first.name)} loading="lazy" width="390" height="844"></iframe>
+      </div>
+    </div>
+    <figcaption class="pv-hint small muted">{t.hint}</figcaption>
+  </figure>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-pv]').forEach((root) => {
+    const screen = root.querySelector<HTMLElement>('.pv-screen')!;
+    const frame = screen.querySelector('iframe')!;
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.pv-tab'));
+    const open = root.querySelector<HTMLAnchorElement>('[data-pv-open]')!;
+    const openName = root.querySelector<HTMLElement>('[data-pv-name]')!;
+
+    // The sample renders at a real phone width (390px) and is scaled to fit the frame.
+    const fit = () => screen.style.setProperty('--pv-scale', String(screen.clientWidth / 390));
+    fit();
+    new ResizeObserver(fit).observe(screen);
+
+    const select = (tab: HTMLButtonElement, focus = false) => {
+      tabs.forEach((x) => {
+        const on = x === tab;
+        x.setAttribute('aria-selected', String(on));
+        x.tabIndex = on ? 0 : -1;
+      });
+      if (focus) tab.focus();
+      screen.setAttribute('aria-labelledby', tab.id);
+      if (frame.getAttribute('src') !== tab.dataset.src) {
+        screen.classList.add('is-loading');
+        frame.src = tab.dataset.src!;
+        frame.title = tab.dataset.title!;
+      }
+      open.href = tab.dataset.src!;
+      openName.textContent = tab.dataset.name!;
+    };
+    frame.addEventListener('load', () => screen.classList.remove('is-loading'));
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        select(tabs[(i + step + tabs.length) % tabs.length], true);
+      });
+    });
+  });
+</script>
