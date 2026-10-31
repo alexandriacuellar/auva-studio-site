@@ -65,6 +65,17 @@ const t = {
     howWork: 'How would you like to work?',
     partnerTopics: [['unsure', 'Not sure yet'], ['white-label', 'White-label'], ['subcontracting', 'Subcontracting'], ['collaborative', 'Collaborative delivery']],
     projectNeeds: 'What does the project need?',
+    styleLegend: 'Which style feels most like your business?',
+    styleHint: "Not sure? Skip it. We'll choose together on our first call.",
+    example: 'Example:',
+    styles: [
+      ['clean', 'Clean and simple', 'Lots of space, nothing extra.', ''],
+      ['organized', 'Organized and practical', 'Clear sections, easy to scan.', 'Skytop Floor Co.'],
+      ['warm', 'Warm and personal', 'Friendly photos and soft colors.', 'Rondout Mercantile'],
+      ['editorial', 'Editorial and calm', 'A magazine feel, quiet and refined.', 'Enea Hudson Cattle Farm'],
+      ['bold', 'One bold signature', 'One standout color, font, or image.', ''],
+      ['motion', 'Full of motion', 'Animation and interaction that wow.', ''],
+    ],
     send: 'Send message',
     sending: 'Sending…',
     thanks: "Thanks! Your message is on its way. You'll hear back within 24–48 hours.",
@@ -117,6 +128,17 @@ const t = {
     howWork: '¿Cómo le gustaría trabajar?',
     partnerTopics: [['unsure', 'Todavía no sé'], ['white-label', 'Marca blanca'], ['subcontracting', 'Subcontratación'], ['collaborative', 'Entrega colaborativa']],
     projectNeeds: '¿Qué necesita el proyecto?',
+    styleLegend: '¿Qué estilo va más con su negocio?',
+    styleHint: '¿No está seguro? Sáltelo. Lo elegimos juntos en nuestra primera llamada.',
+    example: 'Ejemplo:',
+    styles: [
+      ['clean', 'Limpio y sencillo', 'Mucho espacio, nada de más.', ''],
+      ['organized', 'Organizado y práctico', 'Secciones claras, fácil de recorrer.', 'Skytop Floor Co.'],
+      ['warm', 'Cálido y cercano', 'Fotos amables y colores suaves.', 'Rondout Mercantile'],
+      ['editorial', 'Editorial y sereno', 'Estilo revista, tranquilo y refinado.', 'Enea Hudson Cattle Farm'],
+      ['bold', 'Un sello llamativo', 'Un color, letra o imagen que destaca.', ''],
+      ['motion', 'Lleno de movimiento', 'Animación e interacción que sorprenden.', ''],
+    ],
     send: 'Enviar mensaje',
     sending: 'Enviando…',
     thanks: '¡Gracias! Su mensaje va en camino. Le respondo en 24–48 horas.',
@@ -132,6 +154,9 @@ const replyLine = t.replyLine;
 // Paid services list their buying steps in order, so the route to pay is plain.
 const websiteIntro = (t.websiteIntro(replyLine) as Record<string, { title: string; lede: string; next?: string; button?: string; steps?: string[] }>)[topic] ?? null;
 const formAction = 'https://api.web3forms.com/submit';
+// The style step shows for new or improved sites only. Values are sent in English.
+const styleTopics = ['website', 'improve', 'store'];
+const styleValues: Record<string, string> = { clean: 'Clean and simple', organized: 'Organized and practical', warm: 'Warm and personal', editorial: 'Editorial and calm', bold: 'One bold signature', motion: 'Full of motion' };
 ---
 <section id="start" class:list={{ alt, hero }} data-sending={t.sending} data-thanks={t.thanks} data-failed={t.failed}>
   <div class="wrap about-grid">
@@ -199,6 +224,21 @@ const formAction = 'https://api.web3forms.com/submit';
               <label><span>{t.currentSite} <span class="opt">{t.optional}</span></span><input type="url" name="website" placeholder="https://" /></label>
             </div>
             <input type="hidden" name="package" value="" />
+            <fieldset class="style-pick" hidden={!styleTopics.includes(topic)} data-style-topics={styleTopics.join(' ')}>
+              <legend>{t.styleLegend} <span class="opt">{t.optional}</span></legend>
+              <p class="style-hint">{t.styleHint}</p>
+              <div class="style-grid">
+                {t.styles.map(([id, name, desc, ex]) => (
+                  <label class="style-tile">
+                    <input type="radio" name="style" value={styleValues[id]} />
+                    <span class:list={['style-mock', `mock-${id}`]} aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                    <span class="style-name">{name}</span>
+                    <span class="style-desc">{desc}</span>
+                    {ex && <span class="style-ex">{t.example} {ex}</span>}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
             <label><span>{t.tellBusiness} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         ) : (
@@ -244,6 +284,27 @@ const formAction = 'https://api.web3forms.com/submit';
   const pkg = params.get('package');
   const pkgInput = document.querySelector<HTMLInputElement>('form.inquiry input[name="package"]');
   if (pkg && pkgInput) pkgInput.value = pkg;
+
+  // The style step follows the service choice, and a second tap on a chosen style clears it.
+  for (const pick of document.querySelectorAll<HTMLFieldSetElement>('fieldset.style-pick')) {
+    const form = pick.closest('form')!;
+    const select = form.querySelector<HTMLSelectElement>('select[name="topic"]');
+    const topics = (pick.dataset.styleTopics ?? '').split(' ');
+    const sync = () => {
+      const show = !select || topics.includes(select.value);
+      pick.hidden = !show;
+      if (!show) pick.querySelectorAll<HTMLInputElement>('input').forEach((r) => (r.checked = false));
+    };
+    select?.addEventListener('change', sync);
+    sync();
+    let last: HTMLInputElement | null = null;
+    pick.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach((r) => {
+      r.addEventListener('click', () => {
+        if (last === r) { r.checked = false; last = null; } else last = r;
+      });
+    });
+    form.addEventListener('reset', () => (last = null));
+  }
 
   // Send without leaving the page; without JavaScript the form still posts normally.
   for (const form of document.querySelectorAll<HTMLFormElement>('form.inquiry')) {
