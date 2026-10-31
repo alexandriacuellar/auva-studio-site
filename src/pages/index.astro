@@ -93,20 +93,21 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
   </section>
 
   <section class="alt" id="about">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap home-about">
+      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
+      <div class="home-about-text">
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
         <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals, not a product to sell.</p>
-        <div class="founder">
-          <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
-          <p><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span><br /><a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Follow Auva Studio on LinkedIn</a></p>
-        </div>
-        <p><a class="btn btn-ghost" href="/about/">More about me <Icon name="arrow" size={18} /></a></p>
-      </div>
-      <figure class="card quote">
+        <p class="home-about-name"><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span></p>
+        <figure class="quote home-about-quote">
         <blockquote>“{featured.quote}”</blockquote>
         <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
       </figure>
+        <div class="home-about-actions">
+          <a class="btn btn-ghost" href="/about/">More about me <Icon name="arrow" size={18} /></a>
+          <a class="founder-link" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Follow Auva Studio on LinkedIn</a>
+        </div>
+      </div>
     </div>
   </section>
 

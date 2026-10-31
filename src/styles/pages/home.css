@@ -81,3 +81,18 @@
   .bd-hero .bd-pill { font-size: 0.875rem; padding: 6px 16px; border-radius: 16px; max-width: 16rem; text-wrap: balance; }
   .bd-hero-inner .lede { text-align: left; }
 }
+
+/* Home About teaser: a big photo beside the intro, quote, and links. The full story is on /about/. */
+.home-about { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 64px; align-items: center; }
+.home-about-photo { width: 260px; height: 260px; border-radius: 50%; object-fit: cover; border: 6px solid var(--white); box-shadow: var(--shadow-strong); }
+.home-about-text { max-width: 680px; }
+.home-about-text .lede { margin-bottom: 14px; }
+.home-about-name { margin: 0 0 22px; }
+.home-about-quote { margin: 0 0 24px; padding: 4px 0 4px 20px; border-left: 3px solid var(--primary); gap: 10px; }
+.home-about-quote blockquote { font-size: 1.1rem; }
+.home-about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.home-about-actions .btn { margin: 0; }
+@media (max-width: 860px) {
+  .home-about { grid-template-columns: 1fr; gap: 28px; justify-items: center; }
+  .home-about-photo { width: 180px; height: 180px; }
+}
