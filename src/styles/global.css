@@ -620,3 +620,11 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
   .pv-screen { border-radius: 22px; }
 }
 .pv-open svg { vertical-align: -3px; margin-left: 4px; }
+
+/* Websites hero: a small hello from Alexandria with her photo. */
+.hello-band { padding: 36px 0; background: var(--night); color: var(--white); }
+.hello { display: flex; align-items: center; justify-content: center; gap: 28px; font-size: 1.25rem; line-height: 1.5; }
+.hello span { max-width: 52ch; }
+.hello b { color: var(--white); }
+.hello img { width: 120px; height: 120px; border-radius: 50%; flex: none; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.85); }
+@media (max-width: 640px) { .hello-band { padding: 28px 0; } .hello { gap: 16px; font-size: 1.02rem; justify-content: flex-start; } .hello img { width: 84px; height: 84px; } }
