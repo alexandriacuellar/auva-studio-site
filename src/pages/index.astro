@@ -24,19 +24,14 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Websites, Consulting, and AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio. I build websites, guide technology decisions, and help teams put AI & Emerging Tech to work, for small businesses, startups, nonprofits, and growing teams.</p>
+      <p class="lede">A digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
-      <p class="hero-checks">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
       <figure class="bd-stage">
         <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-        <figcaption class="bd-chip">
-          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
-          <span><b>Hi, I'm Alexandria.</b> You'll work with me directly, from the first call to handover.</span>
-        </figcaption>
       </figure>
     </div>
   </section>
@@ -89,6 +84,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
           </a>
         ))}
       </div>
+      <p class="hero-checks" style="text-align: center; margin-top: 28px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 
