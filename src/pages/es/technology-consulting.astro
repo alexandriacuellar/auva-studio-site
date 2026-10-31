@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../../assets/alexandria-cuellar.jpg';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
@@ -46,6 +48,10 @@ const glance = [
         {consulting.map((c) => <a href={c.id === 'ai' ? '/es/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
       </nav>
     </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Llevo más de 20 años en software y tecnología digital, desde sitios web de periódicos hasta realidad virtual y videojuegos, y trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a></span></div>
   </section>
 
   <section class="alt" id="who">
@@ -118,7 +124,7 @@ const glance = [
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Orientación práctica <em>respaldada por experiencia técnica y de ejecución.</em></h2>
-        <p class="lede">Mi experiencia abarca desarrollo de software, gestión de proyectos técnicos, productos digitales, videojuegos y experiencias interactivas. Esa combinación me permite ver más allá de la superficie de un proyecto, entender cómo funciona la tecnología y armar un plan realista para el equipo que lo va a mantener.</p>
+        <p class="lede">Empecé como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de otros sitios de periódicos locales, y luego pasé a la gestión de proyectos técnicos de productos digitales, videojuegos y experiencias interactivas. Mi experiencia abarca desarrollo de software, gestión de proyectos técnicos, productos digitales, videojuegos y experiencias interactivas. Esa combinación me permite ver más allá de la superficie de un proyecto, entender cómo funciona la tecnología y armar un plan realista para el equipo que lo va a mantener.</p>
         <div class="stats">
           <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
           <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>

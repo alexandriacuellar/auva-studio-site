@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../assets/alexandria-cuellar.jpg';
 import Icon from '../components/Icon.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -47,6 +49,10 @@ const glance = [
         {consulting.map((c) => <a href={c.id === 'ai' ? '/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
       </nav>
     </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria.</b> I've spent 20+ years in software and digital technology, from newspaper websites to VR and games, and you'll work with me directly. <a href="/about/">More about me</a></span></div>
   </section>
 
   <section class="alt" id="who">
@@ -127,7 +133,7 @@ const glance = [
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Practical guidance <em>backed by technical and delivery experience.</em></h2>
-        <p class="lede">My background spans software development, technical project management, digital products, gaming, and interactive experiences. That mix lets me look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
+        <p class="lede">I started as one of many developers behind the Times Herald-Record and other local newspaper websites, then moved into technical project management for digital products, games, and interactive experiences. My background spans software development, technical project management, digital products, gaming, and interactive experiences. That mix lets me look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
         <div class="stats">
           <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
           <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>

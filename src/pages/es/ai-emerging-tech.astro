@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../../assets/alexandria-cuellar.jpg';
 import '../../styles/pages/ai-emerging-tech.css';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
@@ -63,6 +65,10 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
         <a href="#xr">XR, videojuegos e interactivos</a>
       </nav>
     </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Uso herramientas de IA en mi propio trabajo y he dirigido más de 14 experiencias de realidad virtual y juegos para celular. Me encantará mostrarle a su equipo lo que pueden hacer por ustedes. <a href="/es/about/">Más sobre mí</a></span></div>
   </section>
 
   <section class="alt">
@@ -140,9 +146,10 @@ const quotes = testimonials.filter((t) => t.name !== 'Aaron Sorrels');
         <h2 class="mag-head">Experiencia de producción <em>en videojuegos, XR y trabajo interactivo.</em></h2>
         <p class="lede">He dirigido proyectos para estudios independientes de videojuegos, equipos de XR e interactivos, y organizaciones creativas, gestionando flujos de trabajo Agile, documentación de diseño, calendarios y equipos de personas muy creativas. Esa experiencia en producción mantiene los experimentos enfocados y con los pies en lo que de verdad se puede lanzar.</p>
         <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
           <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
         </div>
-        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> XR y videojuegos: Unity, Meta Quest. IA: ChatGPT, Claude, Gemini. Automatización: Zapier.</p>
+        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> XR y videojuegos: Unity, Meta Quest. IA: ChatGPT, Claude, Gemini. Automatización: Zapier. Uso estas herramientas de IA en mi propio trabajo, y me encantará mostrarle a su equipo cómo pueden ayudarle.</p>
       </div>
       <div class="values">
         {quotes.map((t) => (
