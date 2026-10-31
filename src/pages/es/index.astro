@@ -24,19 +24,14 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     <div class="wrap bd-hero-inner">
       <p class="bd-pill">Sitios web, Consultoría, e IA y Tecnología Emergente</p>
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales. Creo sitios web, oriento decisiones tecnológicas y ayudo a los equipos a aprovechar la IA y la Tecnología Emergente, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
+      <p class="lede">Un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
       </div>
-      <p class="hero-checks">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
       <figure class="bd-stage">
         <Image src={hero} alt="Un espacio de trabajo soleado con una laptop, una taza de café y plantas" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-        <figcaption class="bd-chip">
-          <Image src={headshot} alt="" width={56} height={56} densities={[1, 2]} />
-          <span><b>Hola, soy Alexandria.</b> Trabajará directamente conmigo, desde la primera llamada hasta la entrega.</span>
-        </figcaption>
       </figure>
     </div>
   </section>
@@ -89,6 +84,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
           </a>
         ))}
       </div>
+      <p class="hero-checks" style="text-align: center; margin-top: 28px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
