@@ -5,6 +5,7 @@ import Icon from '../components/Icon.astro';
 import PathBand from '../components/PathBand.astro';
 import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
+import PhoneViewer from '../components/PhoneViewer.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
 import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../data/site';
@@ -105,6 +106,7 @@ const audiences = [
         <h2 class="mag-head">See what <em>each package looks like.</em></h2>
         <p class="lede">One sample site for each package. The businesses are made up, but every page and feature works the way it would on your site, and the forms show what your visitors would see.</p>
       </div>
+      <PhoneViewer />
       <div class="grid grid-3 samples">
         {samples.map((sm) => {
           const pk = packages.find((x) => x.name === sm.package);

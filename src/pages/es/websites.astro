@@ -5,6 +5,7 @@ import Icon from '../../components/Icon.astro';
 import PathBand from '../../components/PathBand.astro';
 import Packages from '../../components/Packages.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
+import PhoneViewer from '../../components/PhoneViewer.astro';
 import Faq from '../../components/Faq.astro';
 import PaybackCalc from '../../components/PaybackCalc.astro';
 import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../../data/site.es';
@@ -104,6 +105,7 @@ const audiences = [
         <h2 class="mag-head">Vea cómo <em>se ve cada paquete.</em></h2>
         <p class="lede">Un sitio de muestra para cada paquete. Los negocios son inventados, pero cada página y función trabaja tal como lo haría en su sitio, y los formularios muestran lo que verían sus visitantes. Los sitios de muestra están en inglés.</p>
       </div>
+      <PhoneViewer lang="es" />
       <div class="grid grid-3 samples">
         {samples.map((sm) => {
           const pk = packages.find((x) => x.name === sm.package);
