@@ -14,9 +14,10 @@ const situations = [
   { title: 'You need a website', text: "You don't have one yet, or you're starting something new.", href: '/websites/', icon: 'globe' },
   { title: 'Your website needs attention', text: "It's outdated, slow, hard to update, or not bringing in inquiries.", href: '/websites/diagnostic/', icon: 'search' },
   { title: "Customers can't find you on Google Maps", text: 'Your Google profile is missing, thin, or has the wrong details.', href: '/websites/google-business-profile/', icon: 'star' },
-  { title: "Your tools or processes aren't working", text: "Too many tools, too many workarounds, or you're not sure where AI fits.", href: '/technology-consulting/', icon: 'compass' },
-  { title: 'A project needs a leader', text: 'A technology project needs someone to keep scope, schedule, vendors, and people on track.', href: '/technology-consulting/', icon: 'check' },
-  { title: "You're making a game, XR, or AR project", text: 'Get a producer to keep it on track, or test an immersive idea with a small prototype first.', href: '/production-emerging-tech/', icon: 'bolt' },
+  { title: "Your tools aren't working for you", text: "Too many apps, too many workarounds, or you're not sure where AI fits.", href: '/technology-consulting/#planning', icon: 'compass' },
+  { title: 'Your team does the same tasks by hand', text: 'Follow-ups, data entry, and reports that could run on their own.', href: '/technology-consulting/#automation', icon: 'gear' },
+  { title: 'A project needs a leader', text: 'A technology project needs someone to keep scope, schedule, vendors, and people on track.', href: '/technology-consulting/#delivery', icon: 'check' },
+  { title: "You're making a game, XR, or AR project", text: 'Get a producer to keep it on track, or start small with an AR project that opens on a phone.', href: '/production-emerging-tech/', icon: 'bolt' },
 ];
 const strip = ['Published prices', 'Written quote before work starts', 'You own everything', 'Work with me directly'];
 ---
@@ -24,7 +25,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams: websites, technology and AI consulting, and production for games, XR, and emerging tech.</p>
+      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams: websites; tech, automation, and AI; and production for games, XR, and AR.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
@@ -65,8 +66,8 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
           <a class="card category bd-card" href={c.href}>
             <div class="bd-media">
               {c.href === '/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
-            <div class="float f1"><span class="k">Technology plan</span><b>3 options compared</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
-            <div class="float f2"><span class="k">This week</span><ul><li><Icon name="tick" size={14} />Requirements signed off</li><li><Icon name="tick" size={14} />Vendor call booked</li></ul></div>
+            <div class="float f1"><span class="k">Tech Review</span><b>Top 5 fixes, in order</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
+            <div class="float f2"><span class="k">Now automated</span><ul><li><Icon name="tick" size={14} />New client follow-up</li><li><Icon name="tick" size={14} />Monthly report</li></ul></div>
           </div>)}
               {c.href === '/production-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
             <div class="float f1 chat"><span class="k">Sprint 4 of 6</span><p class="q">Can we ship the Quest demo by the 20th?</p><p class="a">Yes, if art locks Friday. Playtest booked.</p></div>
@@ -75,7 +76,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
               {c.href === '/websites/' && <Image src={siteMockup} alt="A sample nonprofit website shown on a laptop and a phone on a sunny desk" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
             </div>
             <div class="bd-body">
-              <span class="bd-tag">{c.href === '/websites/' ? 'From $1,500' : 'From $65/hr'}</span>
+              <span class="bd-tag">{c.href === '/websites/' ? 'From $1,500' : c.href === '/technology-consulting/' ? 'From $250' : 'From $65/hr'}</span>
               <h3>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
@@ -93,7 +94,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
-        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals. I help with <a href="/websites/">websites</a>, <a href="/technology-consulting/">technology and AI consulting</a>, and <a href="/production-emerging-tech/">production for games, XR, and emerging tech</a>.</p>
+        <p class="lede">I founded Auva Studio to help small businesses, startups, nonprofits, and growing teams make confident technology decisions, starting with your goals. I help with <a href="/websites/">websites</a>, <a href="/technology-consulting/">tech, automation, and AI</a>, and <a href="/production-emerging-tech/">production for games, XR, and AR</a>.</p>
         <p class="home-about-name"><b>Alexandria Cuellar</b>, digital technology and solutions consultant<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span></p>
         <figure class="quote home-about-quote">
         <blockquote>“{featured.quote}”</blockquote>
