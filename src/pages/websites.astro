@@ -8,28 +8,23 @@ import InquiryForm from '../components/InquiryForm.astro';
 import PhoneViewer from '../components/PhoneViewer.astro';
 import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
-import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../data/site';
+import { comparison, addons, process, packages, samples, site, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
 import rondoutShot from '../assets/samples/rondout-mercantile.jpg';
 import headshot from '../assets/alexandria-cuellar.jpg';
-const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
-  { q: 'Are you a web designer?', a: "Yes. I design and build custom websites for small businesses, startups, nonprofits, and growing teams across the Hudson Valley, New York City, and anywhere in the US. I also bring more than 20 years of technology experience, so each site is planned like any technology project: focused, fast, and fully yours." },
-  { q: 'How much does a small business website cost?', a: 'Packages are one-time project fees: Essential Presence is $1,500, Expanded Presence is $2,950, and Complete Presence is $5,500. Larger or custom websites are quoted for your project. After launch, you pay about $20 a year for your domain, and hosting is free or low cost for most sites.' },
-  { q: 'One page or several: which is right for me?', a: 'One scrolling page works well when you do one main thing, want visitors to take one simple step (call, book, or ask for an estimate), and most people find you on their phones. Several pages work better when you offer services people search for separately, since each page can show up on Google on its own, or when you have more to share, like a menu, a gallery, or your story. Both options cost the same in Essential, and we choose together during Discovery.' },
-  { id: 'faq-founding', q: 'What is the founding client offer?', a: "My first 10 website clients get 10% off Essential, Expanded, or Complete Presence, in exchange for a short review and permission to feature their site. It doesn't combine with the nonprofit discount; if both apply, you get the bigger one. The offer ends after 10 projects." },
-  { q: 'How long does a website take?', a: 'Essential Presence takes 2–3 weeks, Expanded Presence 3–5 weeks, and Complete Presence 6+ weeks. The timeline starts once you sign your website agreement, pay the deposit, and send me your content, like your text, photos, and logo. The sooner I have everything, the sooner your site goes live.' },
+  { id: "faq-founding", q: "What is the founding client offer?", a: "My first 10 website clients get 10% off any package, in exchange for a short review and permission to feature their site. It doesn't combine with the nonprofit discount; if both apply, you get the bigger one." },
+  { q: "How long does a website take?", a: "Essential takes 2–3 weeks, Expanded 3–5 weeks, and Complete 6+ weeks, once I have your content. The sooner you send your text and photos, the sooner your site goes live." },
   { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
-  { q: 'Do I need my copy and photos ready?', a: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs. Want a head start? See how to get ready for your new website.", html: "No. Rough notes, your old site, and phone photos are a fine start. I polish what you have and draft what's missing. Copy changes are part of your revision rounds, so we get it right without surprise costs. Want a head start? See <a href=\"/websites/get-ready/\">how to get ready for your new website</a>." },
-  { q: 'Can I update the site myself?', a: "Yes. A CMS (content management system) is a simple dashboard where you update your page text, photos, and collections like news or events yourself, with no code. It can be added to Essential or Expanded from $1,750 and is included in Complete Presence. The starting price includes 2 collections; more are quoted first. Or send changes to me: $50 per update (up to about 30 minutes of edits, sent together in one request). Most updates are done within 2 business days." },
-  { q: 'What if something breaks after launch?', a: "It's rare. Most sites I build have no plugins to break, and a CMS has its own secure login. Fixes are free for 30 days after launch, then see Help After Launch. If something goes wrong, I'll find the cause and explain your options and cost before fixing anything.", html: "It's rare. Most sites I build have no plugins to break, and a CMS has its own secure login. Fixes are free for 30 days after launch, then see <a href=\"/websites/help-after-launch/\">Help After Launch</a>. If something goes wrong, I'll find the cause and explain your options and cost before fixing anything." },
-  { q: 'Do you do SEO, AEO, and GEO?', a: "Yes, in every package. SEO (search engine optimization) helps you show up on Google. AEO and GEO (answer and generative engine optimization) help AI tools like ChatGPT and Google's AI Overviews find and mention your business. I set up clear page titles, structured data (schema), a sitemap, and fast pages from the start. Astro sites usually score well on Core Web Vitals, Google's measures of speed and stability, and I share your PageSpeed scores at launch." },
-  { q: 'Can you build an online store?', a: "Yes. I can add a few buy buttons to a small site or build a full online store. Every store is different, so tell me what you sell and about how many products you have, and I'll quote it for you." },
-  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I can move you to Astro and keep your content and branding. I keep the pages Google already knows and point each old address to its new page, so you don't lose visitors you've already earned. Moving the pages in your package is included; large blogs or catalogs are quoted separately. Not sure whether to fix or rebuild? Start with a Website Diagnostic." },
+  { q: "Do I need my copy and photos ready?", a: "No. Rough notes, your old site, and phone photos are a fine start, and I polish what you have and draft what's missing. Want a head start? See how to get ready for your new website.", html: "No. Rough notes, your old site, and phone photos are a fine start, and I polish what you have and draft what's missing. Want a head start? See <a href=\"/websites/get-ready/\">how to get ready for your new website</a>." },
+  { q: "Can I update the site myself?", a: "Yes, with a CMS (content management system), a simple dashboard where you change your text, photos, news, and events with no code. It's included in Complete and can be added to Essential or Expanded from $1,750, or you can send changes to me for $50 each." },
+  { q: "What if something breaks after launch?", a: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see Help After Launch, and I always explain the cause and the cost before fixing anything.", html: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see <a href=\"/websites/help-after-launch/\">Help After Launch</a>, and I always explain the cause and the cost before fixing anything." },
+  { q: "Will people find me on Google?", a: "Every package is built to be found, with clear page titles, search data, a sitemap, and fast pages that Google and AI tools like ChatGPT can read. No one can honestly promise a ranking, but your site starts with everything search engines look for." },
+  { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I keep your content and the page addresses Google already knows, so you don't lose visitors, and moving the pages in your package is included. If your site already works well where it is, switching may not be worth it, and I'll tell you honestly." },
 ];
 
 const schema = serviceSchema([
@@ -39,19 +34,19 @@ const schema = serviceSchema([
 
 
 const audiences = [
-  { id: 'hospitality', icon: 'star', title: 'Hospitality & Tourism', who: 'Inns, B&Bs, restaurants, wineries, breweries, and farms.', text: 'Menus, rooms, hours, and events that are easy to find on a phone, with links to your booking or reservation system.' },
-  { id: 'makers', icon: 'layers', title: 'Shops & Makers', who: 'Boutiques, galleries, craft studios, and artists.', text: 'Show your work and point customers to where they can buy. An online store can be added, quoted based on the tools you use.' },
-  { id: 'services', icon: 'wrench', title: 'Local Services', who: 'Trades, wellness practitioners, salons, and real estate agents.', text: 'Your services, reviews, and service area, with an easy way to call, book, or request a quote.' },
-  { id: 'nonprofits', icon: 'book', title: 'Nonprofits & Culture', who: 'Arts councils, museums, land trusts, animal rescues, and community groups.', text: 'Tell your story, share programs and events, and make it easy to support you. Donations can be added, quoted for your project. Registered nonprofit? Ask about my nonprofit discount.' },
-  { id: 'startups', icon: 'key', title: 'Startups', who: 'Early teams launching a product or service.', text: 'A credible first site that explains what you do and collects sign-ups or inquiries.' },
-  { id: 'studios', icon: 'bolt', title: 'Game & XR Studios', who: 'Independent game, VR, and interactive studios, anywhere.', text: 'A fast studio site for your games and experiences: trailers, a press kit, your team, and links to Steam, Meta Quest, or app stores.' },
+  { id: 'hospitality', icon: 'star', title: 'Hospitality & Tourism', text: 'Inns, restaurants, wineries, and farms, with menus, rooms, and events easy to find on a phone.' },
+  { id: 'makers', icon: 'layers', title: 'Shops & Makers', text: 'Boutiques, galleries, and artists, showing your work and where to buy it.' },
+  { id: 'services', icon: 'wrench', title: 'Local Services', text: 'Trades, wellness, salons, and real estate, with an easy way to call, book, or get a quote.' },
+  { id: 'nonprofits', icon: 'book', title: 'Nonprofits & Culture', text: 'Museums, arts groups, rescues, and community groups, sharing your story, events, and ways to give.' },
+  { id: 'startups', icon: 'key', title: 'Startups', text: 'Early teams that need a credible first site that collects sign-ups or inquiries.' },
+  { id: 'studios', icon: 'bolt', title: 'Game & XR Studios', text: 'Indie game and XR studios, with trailers, a press kit, and store links.' },
 ];
 ---
 <Base title="Website Services" seoTitle="Small Business Websites in the Hudson Valley, from $1,500 | Auva Studio" schema={schema} description="Fast, mobile-friendly websites for small businesses, startups, nonprofits, and growing teams. One-time packages from $1,500, with free or low-cost hosting.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head" style="max-width: 22ch">A website that helps customers <em>find you, trust you, and reach out.</em></h1>
-      <p class="lede">Planned like any technology project: focused, easy to use on a phone, low-cost to run, and fully yours.</p>
+      <p class="lede">Easy to use on a phone, quick to load, low-cost to run, and fully yours.</p>
       <div class="hero-actions">
         <a class="btn" href="#packages">See packages</a>
         <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
@@ -61,7 +56,7 @@ const audiences = [
   </section>
 
   <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria.</b> I've built websites for nearly 20 years, and you'll work with me directly from the first call to launch.</span></div>
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria,</b> founder of Auva Studio. I spent nearly 20 years as one of many developers behind local newspaper websites, including the Times Herald-Record. Now I build fast, custom sites for small businesses, and you'll work with me directly from the first call to launch. <a href="/about/">More about me</a><ul class="hello-facts"><li><b>Nearly 20</b> years building websites</li><li><b>20+</b> years in software</li></ul></span></div>
   </section>
 
   <section class="alt" id="who">
@@ -75,8 +70,7 @@ const audiences = [
           <div class="card" id={a.id}>
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
-            <p class="small muted">{a.who}</p>
-            <p class="who-text">{a.text}</p>
+            <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Ask about my nonprofit discount.</p>}
             <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site</a>
           </div>
@@ -95,7 +89,7 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Choose <em>the right package.</em></h2>
-        <p class="lede">Each package builds on the one before it, so you only pay for what you need today. Every package includes a clear home page, your services, reasons to trust you, and an easy next step.</p>
+        <p class="lede">Each package builds on the one before it, so you only pay for what you need today.</p>
       </div>
       <Packages />
       <PaybackCalc />
@@ -160,17 +154,11 @@ const audiences = [
           <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
       </div>
-      <p class="fine"><b>Built to be found</b> means clear page titles, your hours, services, and location labeled for Google, and a structure AI tools like ChatGPT can read. No one can guarantee rankings or AI mentions, but these steps give your site the best chance.</p>
-      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites. Based on real-world performance data from <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and the <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
-      <p class="fit-note"><b>When Astro isn't the right fit.</b> If your business already runs well on WordPress or another platform, switching may not be worth it. I'll tell you honestly on our first call.</p>
+      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites (<a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>). <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
       <div class="proof proof-why">
         <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
         <div>
           <p class="proof-line">I spent nearly 20 years building websites and web apps for newspapers. Your site gets the same care, from the first call to launch.</p>
-          <figure class="quote quote-inline">
-            <blockquote>“{featured.quote}”</blockquote>
-            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-          </figure>
         </div>
       </div>
     </div>
@@ -193,6 +181,15 @@ const audiences = [
         ))}
       </div>
 
+      <div class="card card-row" id="care" style="margin-top: 24px">
+        <div class="icon"><Icon name="wrench" size={32} /></div>
+        <div>
+          <h3>Would you rather I make the changes?</h3>
+          <p class="muted">Send me updates when you need them for <b style="color: var(--primary)">$50 each</b>, with no monthly fee, or have me as your web producer from $650 for 5 hours a month.</p>
+          <a class="more" href="/websites/help-after-launch/" style="margin-top: 8px">See how updates work</a>
+        </div>
+      </div>
+
       <div class="band" style="margin-top: 48px" id="brand">
         <div>
           <p class="eyebrow" style="color: var(--tint)">Optional add-on</p>
@@ -205,35 +202,11 @@ const audiences = [
           <a class="btn" href="/websites/brand-essentials/">See what you get</a>
         </div>
       </div>
+      <p class="muted" style="margin-top: 32px"><b>Once your site is live,</b> I can also help you <a href="/technology-consulting/#automation">automate the busywork</a>, <a href="/technology-consulting/#ai">put AI to work for your team</a>, or <a href="/production-emerging-tech/#ideas">try AR for your business</a>.</p>
     </div>
   </section>
 
-  <section class="alt" id="care">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">How your site <em>stays up to date.</em></h2>
-        <p class="lede">Choose who makes the changes. Most sites I build have no plugins to maintain, so there's no monthly fee required. Ask for updates when you need them, or have me as your web producer every month, from $650 for 5 hours.</p>
-      </div>
-      <div class="grid grid-2 care-paths">
-        <div class="card">
-          <div class="icon"><Icon name="wrench" size={36} /></div>
-          <h3>I update it for you</h3>
-          <p class="muted">Send me what to change and I take care of it.</p>
-          <p><b style="color: var(--primary)">$50 per update</b></p>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="gear" size={36} /></div>
-          <h3>You update it yourself</h3>
-          <p class="muted">Add a CMS to Essential or Expanded and change your text, photos, news, and events whenever you like.</p>
-          <p><b style="color: var(--primary)">Add-on from $1,750 · Included in Complete Presence</b></p>
-        </div>
-      </div>
-      <p style="margin-top: 28px"><a class="btn" href="/websites/help-after-launch/">See how updates work</a></p>
-      <p class="muted" style="margin-top: 24px"><b>Once your site is live,</b> I can also help you <a href="/technology-consulting/#ai">put AI to work for your team</a> or <a href="/production-emerging-tech/#ideas">try AR for your business</a>.</p>
-    </div>
-  </section>
-
-  <section id="diagnostic">
+  <section class="alt" id="diagnostic">
     <div class="wrap">
       <PathBand
         eyebrow="Already have a website?"
@@ -254,6 +227,6 @@ const audiences = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="website" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="website" alt />
 </Base>

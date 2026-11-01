@@ -14,8 +14,8 @@ const l = (href: string) => localize(href, lang);
 // Header, footer, and page-wide wording in each language.
 const t = {
   en: {
-    description: 'Websites you own, technology and AI consulting, and production for games, XR, and emerging tech, for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
-    defaultTitle: 'Websites, Technology & AI Consulting, Production & Emerging Tech',
+    description: 'Websites you own; help with tech tools, automation, and AI; and production for games, XR, and AR, for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
+    defaultTitle: 'Websites, Tech Help & Game Production in the Hudson Valley',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
     promoLabel: 'Founding offer',
@@ -30,7 +30,7 @@ const t = {
     getInTouch: 'Get in touch',
     switchLabel: 'Español',
     switchTitle: 'Ver este sitio en español',
-    founded: 'Founded by Alexandria Cuellar, digital technology and solutions consultant.',
+    founded: 'Founded by Alexandria Cuellar.',
     socialLabel: (name: string) => `Auva Studio on ${name}`,
     services: 'Services',
     ftWebsites: 'Websites',
@@ -55,8 +55,8 @@ const t = {
     about: ', about: ',
   },
   es: {
-    description: 'Sitios web que son suyos, consultoría tecnológica y de IA, y producción para videojuegos, XR y tecnología emergente, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
-    defaultTitle: 'Sitios web, consultoría tecnológica y de IA, Producción y Tecnología Emergente',
+    description: 'Sitios web que son suyos; ayuda con herramientas tecnológicas, automatización e IA; y producción para videojuegos, XR y AR, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
+    defaultTitle: 'Sitios web, tecnología y producción de videojuegos en el Hudson Valley',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
     promoLabel: 'Oferta para fundadores',
@@ -71,7 +71,7 @@ const t = {
     getInTouch: 'Hablemos',
     switchLabel: 'English',
     switchTitle: 'View this site in English',
-    founded: 'Fundado por Alexandria Cuellar, consultora de tecnología y soluciones digitales.',
+    founded: 'Fundado por Alexandria Cuellar.',
     socialLabel: (name: string) => `Auva Studio en ${name}`,
     services: 'Servicios',
     ftWebsites: 'Sitios web',
@@ -106,6 +106,8 @@ const base = basePath(path);
 const hasSpanish = translatedPages.includes(base);
 const otherLang = lang === 'es' ? 'en' : 'es';
 const switchHref = switchPath(path, otherLang);
+// The founding offer is for websites, so the bar shows only where website buyers land.
+const showPromo = base === '/' || base.startsWith('/websites/') || base === '/website-check/';
 
 const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
@@ -136,8 +138,8 @@ const schema = {
       '@type': 'Person',
       '@id': `${site.url}/#founder`,
       name: 'Alexandria Cuellar',
-      jobTitle: 'Founder, digital technology and solutions consultant',
-      description: 'Digital technology and solutions consultant, web producer, and game and XR producer.',
+      jobTitle: 'Founder, Auva Studio',
+      description: 'Founder of Auva Studio. Builds websites, sets up tools and automation, and produces games and XR. Web producer, and game and XR producer.',
       knowsAbout: ['Web production', 'Website project management', 'Game production', 'XR production', 'Agile project management', 'Technology consulting'],
       worksFor: { '@id': `${site.url}/#org` },
       image: `${site.url}/alexandria-cuellar.jpg`,
@@ -236,7 +238,7 @@ const schema = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
-    <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>
+    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
     <header class="site-header">
       <div class="wrap header-inner">
         <a href={l('/')} class="brand" aria-label={t.home}>
@@ -246,7 +248,15 @@ const schema = {
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu={t.menu} data-close={t.close}>{t.menu}</button>
         <nav aria-label={t.navLabel} id="main-nav">
           <ul>
-            {nav.map((item) => (
+            {nav.map((item: { href: string; label: string; menuLabel?: string; children?: { href: string; label: string }[] }, i) => item.children ? (
+              <li class="has-sub">
+                <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+                <button class="sub-toggle" type="button" aria-expanded="false" aria-controls={`sub-${i}`} aria-label={item.menuLabel}><Icon name="chevron" size={16} /></button>
+                <ul class="sub-menu" id={`sub-${i}`}>
+                  {item.children.map((c) => <li><a href={c.href} aria-current={path === c.href ? 'page' : undefined}>{c.label}</a></li>)}
+                </ul>
+              </li>
+            ) : (
               <li><a href={item.href} aria-current={path.startsWith(item.href) && !item.href.includes('#about') ? 'page' : undefined}>{item.label}</a></li>
             ))}
             <li><a href={l('/contact/')} class="btn btn-small">{t.getInTouch}</a></li>
@@ -322,6 +332,20 @@ const schema = {
         const open = header!.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
         toggle.textContent = open ? toggle.dataset.close! : toggle.dataset.menu!;
+      });
+      // Websites dropdown: opens on click or tap; closes on Escape or a click elsewhere.
+      const subs = [...document.querySelectorAll<HTMLButtonElement>('.sub-toggle')];
+      const closeSubs = (except?: HTMLButtonElement) => subs.forEach((b) => { if (b !== except) b.setAttribute('aria-expanded', 'false'); });
+      subs.forEach((b) => b.addEventListener('click', () => {
+        const open = b.getAttribute('aria-expanded') !== 'true';
+        closeSubs(b);
+        b.setAttribute('aria-expanded', String(open));
+      }));
+      document.addEventListener('click', (e) => { if (!(e.target as Element).closest('.has-sub')) closeSubs(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const openBtn = subs.find((b) => b.getAttribute('aria-expanded') === 'true');
+        if (openBtn) { closeSubs(); openBtn.focus(); }
       });
     </script>
   <script is:inline>

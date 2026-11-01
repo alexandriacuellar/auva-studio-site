@@ -8,20 +8,14 @@ import { site } from '../data/site';
 
 const faqs = [
   { q: 'What happens on the free 30-minute call?', a: "We talk about what you're working on, what's getting in the way, and what a good outcome looks like. You leave with a suggested next step, with no obligation." },
-  { q: 'Who do you work with?', a: 'Small businesses, startups, nonprofits, and growing teams, plus creative, XR, and game studios.' },
-  { q: 'Do you work remotely?', a: 'Yes. Most work happens remotely, with clients anywhere in the US. In-person work is available from New York City and Westchester up to Albany, with travel costs for trips outside the Mid-Hudson Valley.' },
-  { q: 'What does it cost to get started?', a: 'The first call is free. Consulting sessions are $65 an hour. Fixed-price work includes a $199 Website Diagnostic, $500 Google Business Profile setup, a $250 Tech Review, automation setup from $500, a $750 Team AI Workshop, and websites from $1,500. Nothing begins until you approve a written scope and price.' },
+  { q: "What does it cost to get started?", a: "The first call is free. Fixed prices start at $199 for a Website Diagnostic and $250 for a Tech Review, and nothing begins until you approve a written scope and price." },
 ];
 ---
-<Base title="Contact" description="Start a website project, get consulting, AI, or project support, or bring a game, XR, or AR project to Auva Studio.">
+<Base title="Contact" seoTitle="Contact Alexandria Cuellar | Auva Studio" description="Book a free 30-minute call or send a message about a website, tech, automation, or AI help, or a game, XR, or AR project. I reply within 24–48 hours.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Let's talk about <em>what you're working on.</em></h1>
       <p class="lede">Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed.</p>
-      <nav class="bd-sublinks" aria-label="Ways to get in touch">
-        <a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
-        <a href="#start">Send a message</a>
-      </nav>
     </div>
   </section>
 
@@ -63,16 +57,4 @@ const faqs = [
 
   <Faq alt faqs={faqs} lede="You don't need a detailed plan before reaching out. Start with what you're trying to improve, resolve, or build." />
 
-  <section class="nr-sec">
-    <div class="wrap">
-      <div class="not-ready">
-        <h2 class="mag-head">See what your website <em>needs first.</em></h2>
-        <p class="lede">A $199 Website Diagnostic checks how your site works on phones, how easily people find you on Google, and how fast it loads, then tells you what to fix first. It's credited toward your new website with me.</p>
-        <div class="hero-actions">
-          <a class="btn" href="/websites/diagnostic/">See what I check</a>
-          <a class="btn btn-ghost" href="/website-check/">Take the free website check</a>
-        </div>
-      </div>
-    </div>
-  </section>
 </Base>

@@ -1,7 +1,8 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, aiOffers, addons, care, monthly } from '../data/site';
+import { site, consulting, packages, packageBasics, aiOffers, addons, care, monthly } from '../data/site';
+import { moreAnswers } from '../data/moreAnswers';
 
-const items = (p: (typeof packages)[number]) => p.groups.flatMap((g) => g.items).map((i) => i.replace(/ I'll help you choose\.$/, '').replace(/\.$/, '')).join('; ');
+const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
 
 export function GET() {
   const lines = [
@@ -15,7 +16,7 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each or a monthly web producer from $650`,
-    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), project management and fractional project leadership`,
+    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), monthly project management`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
@@ -25,7 +26,8 @@ export function GET() {
     `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website): a review of an existing site for usability, mobile, search, and performance.`,
     `- [Google Business Profile Setup](${site.url}/websites/google-business-profile/) ($500, one-time): create or claim the profile, add business details, categories, services, hours, and photos, and help with verification. $150 credited toward a website within 6 months.`,
     `- [Google Business Profile Optimization](${site.url}/websites/google-business-profile/) ($500, one-time): review an existing profile and improve its categories, description, services, attributes, photos, and website links. $150 credited toward a website within 6 months.`,
-    ...packages.map((p) => `- ${p.name} (${p.price}, one-time; ${p.timeline} once content is ready): ${p.blurb} ${p.includes ?? 'Includes:'} ${items(p)}.${p.extra ? ` ${p.extra}.` : ''}`),
+    `- Every website package includes: ${packageBasics.join('; ')}.`,
+    ...packages.map((p) => `- ${p.name} (${p.price}, one-time; ${p.timeline} once content is ready): ${p.blurb} ${items(p)}.`),
     '- Website terms: 50% deposit to start, balance at launch; 30 days of fixes and small tweaks after launch; upgrade to a bigger package any time and pay only the difference. Websites are built with Astro, with free or low-cost hosting and no plugins to maintain; sites on other platforms are quoted with any platform fees up front.',
     '- Founding client offer: 10% off any website package for the first 10 clients, in exchange for a short review. Registered nonprofits can ask about a nonprofit discount (the two do not combine).',
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
@@ -40,11 +42,14 @@ export function GET() {
     '## Tech, Automation & AI',
     ...consulting.map((c) => `- ${c.title}: ${c.text} ${c.price}`),
     ...aiOffers.filter((o) => o.group === 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
-    '- Fractional project leadership and monthly Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
+    '- Monthly project management and monthly Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
     '',
     '## Production & Emerging Tech',
     ...aiOffers.filter((o) => o.group !== 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
     `- Live AR example: ${site.url}/card/ (Alexandria's AR business card). Bigger productions go to a trusted studio partner, with Alexandria as producer.`,
+    '',
+    '## More answers',
+    ...moreAnswers.map((m) => `- ${m.q} ${m.a} (${m.page}: ${site.url}${m.path})`),
     '',
     '## Contact',
     `- Book a free 30-minute call: ${site.booking}`,

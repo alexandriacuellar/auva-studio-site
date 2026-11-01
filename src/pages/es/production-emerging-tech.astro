@@ -14,9 +14,7 @@ const prototypes = ['review', 'ar-starter'].map((id) => offers.find((o) => o.id 
 
 const faqs = [
   { q: '¿Produce experiencias XR o videojuegos completos?', a: 'Los planifico y los gestiono como su productora. Los proyectos de AR se construyen con un desarrollador colaborador cuando hace falta, y las producciones más grandes pasan a un estudio colaborador de confianza, conmigo como su productora si así lo desea.' },
-  { q: '¿Con qué dispositivos trabaja?', a: 'Sigo de cerca la línea de Meta: los visores Meta Quest, los lentes Ray-Ban Meta y Meta Ray-Ban Display, los nuevos Meta VR Glasses cuando salgan a la venta y los mundos de Meta Horizon. También creo AR que se abre en el navegador del teléfono, sin descargar ninguna app. Le recomiendo el que mejor se ajusta a su público y su presupuesto.' },
   { q: '¿Puede unirse a un proyecto que ya está en marcha?', a: 'Sí. El Apoyo de Producción muchas veces empieza a mitad del proyecto: reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },
-  { q: '¿También trabaja con pequeños negocios?', a: 'Sí. Si le da curiosidad usar AR en su negocio, empiece en pequeño con un Proyecto AR Inicial, como una tarjeta de presentación o un volante que cobra vida. Para un sitio web, herramientas o un proyecto de IA, vea Tecnología, Automatización e IA.' },
 ];
 
 const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/production-emerging-tech/');
@@ -25,9 +23,6 @@ const ideas = [
   { icon: 'star', title: 'Una tarjeta de presentación con AR', text: 'Apunte el teléfono a la tarjeta y aparece su dueña, con botones para reservar, llamar o seguirla.', live: true },
   { icon: 'book', title: 'Una exhibición que cobra vida', text: 'Etiquetas de museo o letreros históricos que muestran una escena, una voz o un objeto 3D a través del teléfono.' },
   { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad, un recorrido o una conversación difícil en Meta Quest antes de hacerlo de verdad.' },
-  { icon: 'chat', title: 'Una guía manos libres en lentes de Meta', text: 'Ayuda paso a paso o un paseo guiado en lentes Ray-Ban Meta o Meta Ray-Ban Display, con las manos libres.' },
-  { icon: 'globe', title: 'Un mundo en Meta Horizon', text: 'Un espacio para su recinto, su marca o su evento que la gente puede visitar en VR o desde el teléfono.' },
-  { icon: 'layers', title: 'Un videojuego o una demo de VR', text: 'Una parte pequeña y jugable que ayuda a un estudio a presentar, probar o conseguir fondos para una idea más grande.' },
 ];
 
 const audiences = [
@@ -37,12 +32,6 @@ const audiences = [
   { icon: 'bulb', title: 'Pequeños negocios y startups', text: '¿Le da curiosidad usar AR en su negocio? Empiece en pequeño, con una tarjeta, un volante o un producto que cobra vida en el teléfono.' },
 ];
 
-const glance = [
-  { name: 'Apoyo de Producción, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
-  { name: 'Apoyo de Producción, según lo necesite', price: '$65/hora' },
-  { name: 'Revisión del Plan de Producción', note: 'Alcance, hitos, riesgos y un plan, unas 2 semanas', price: '$650' },
-  { name: 'Proyecto AR Inicial', note: 'Una tarjeta, un volante o un producto en AR, se abre en el navegador del teléfono, 2–4 semanas', price: 'Desde $1,500' },
-];
 ---
 <Base title="Producción y Tecnología Emergente" seoTitle="Productora de videojuegos y XR, proyectos de AR | Auva Studio" schema={schema} description="Una productora para proyectos de videojuegos, XR e interactivos, además de revisiones del plan de producción y proyectos pequeños de AR para estudios, museos, recintos y pequeños negocios.">
   <section class="hero bd-hero bd-inner-hero">
@@ -53,15 +42,38 @@ const glance = [
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#production">Vea el Apoyo de Producción</a>
       </div>
-      <ul class="hero-strip">{['Más de 14 experiencias de VR y juegos para celular', 'Planes, calendarios y documentos', 'Primer paso a precio fijo', 'Trabaje directamente conmigo'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+      <ul class="hero-strip">{['Productora para estudios independientes de videojuegos', 'Planes, calendarios y documentos', 'Primer paso a precio fijo', 'Trabaje directamente conmigo'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
   <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Desde 2023 he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos, y usted trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a></span></div>
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria,</b> fundadora de Auva Studio y productora para estudios independientes de videojuegos y equipos de XR. Trabajará directamente conmigo desde la primera idea hasta el lanzamiento. <a href="/es/about/">Más sobre mí</a><ul class="hello-facts"><li><b>14+</b> experiencias de realidad virtual y juegos</li><li><b>Meta Horizon</b> Start y Creator Program</li><li><b>20+</b> años en software</li></ul></span></div>
   </section>
 
-  <section class="alt" id="production">
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Algo diferente?</h3>
+          <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="production">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Apoyo de <em>Producción.</em></h2>
@@ -72,7 +84,7 @@ const glance = [
           <li><Icon name="tick" size={18} />Documentos de diseño y seguimiento de tareas al día</li>
           <li><Icon name="tick" size={18} />Pruebas de juego, comentarios y revisiones de hitos</li>
           <li><Icon name="tick" size={18} />Coordinación del equipo, proveedores y colaboradores</li>
-          <li><Icon name="tick" size={18} />Por hora, o un bloque mensual de horas</li>
+          <li><Icon name="tick" size={18} />Por hora, o mensual: 10 horas $650, 20 horas $1,200 o 40 horas $2,200, con un mínimo de 3 meses</li>
         </ul>
         <a class="btn" href="/es/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Pregunte por el Apoyo de Producción</a>
         <p class="small muted" style="margin-top: 16px">¿Tiene un proyecto de sitio web, software o herramientas para un pequeño negocio? Vea la <a href="/es/technology-consulting/#delivery">gestión de proyectos en Tecnología, Automatización e IA</a>.</p>
@@ -83,26 +95,6 @@ const glance = [
             <blockquote>“{t.quote}”</blockquote>
             <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
           </figure>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="ideas">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
-        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar la suya.</p>
-      </div>
-      <div class="grid grid-3">
-        {ideas.map((i) => (
-          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
-            <div class="icon"><Icon name={i.icon} size={32} /></div>
-            {i.live ? <span class="idea-tag">Demo en vivo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
-            <h3>{i.title}</h3>
-            <p class="muted">{i.text}</p>
-            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Pruébela con mi tarjeta <Icon name="arrow" size={16} /></a>}
-          </div>
         ))}
       </div>
     </div>
@@ -132,64 +124,46 @@ const glance = [
           <p class="muted">Las producciones completas pasan a un estudio colaborador de confianza, y yo puedo seguir como su productora. Usted tiene a una persona que conoce el proyecto desde la primera idea.</p>
         </div>
       </div>
+      <p class="muted" style="margin-top: 24px"><b>¿Necesita un sitio web para su estudio o su juego?</b> Vea los <a href="/es/websites/#packages">paquetes web desde $1,500</a>. Para herramientas, automatización o IA para su equipo, vea <a href="/es/technology-consulting/">Tecnología, Automatización e IA</a>.</p>
     </div>
   </section>
 
-  <section id="who">
+  <section id="ideas">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+        <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
+        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las otras son ideas para inspirar la suya.</p>
       </div>
-      <div class="grid grid-3 who">
-        {audiences.map((a) => (
-          <div class="card">
-            <div class="icon"><Icon name={a.icon} size={32} /></div>
-            <h3>{a.title}</h3>
-            <p class="muted">{a.text}</p>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Demo en vivo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Pruébela con mi tarjeta <Icon name="arrow" size={16} /></a>}
           </div>
         ))}
-        <div class="card who-other">
-          <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>¿Algo diferente?</h3>
-          <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
-        </div>
       </div>
+      <p class="muted" style="margin-top: 24px"><b>Más ideas:</b> una guía manos libres en lentes Ray-Ban Meta o Meta Ray-Ban Display, un mundo en Meta Horizon para su recinto o evento, o una pequeña demo jugable para presentar un videojuego más grande.</p>
     </div>
   </section>
 
-  <section class="alt" id="pricing">
+  <section class="alt" id="how">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Precios <em>de un vistazo.</em></h2>
-        <p class="lede">Cada proyecto empieza con una llamada gratis de 30 minutos, y usted recibe un alcance y un precio por escrito antes de empezar cualquier trabajo.</p>
+        <h2 class="mag-head">Cómo <em>funciona.</em></h2>
+        <p class="lede">Fácil de empezar, sin sorpresas en el camino.</p>
       </div>
-      <dl class="card glance">
-        {glance.map((g) => (
-          <div class="glance-row">
-            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
-            <dd>{g.price}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="small muted" style="margin-top: 16px">¿Busca talleres de IA o una Revisión Tecnológica para su negocio? Vea <a href="/es/technology-consulting/#ai">Tecnología, Automatización e IA</a>.</p>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Llamada gratis</h3><p>Cuénteme sobre su proyecto de videojuego, XR o AR y en qué punto está hoy.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Alcance y precio por escrito</h3><p>Una propuesta breve con lo que haré, cuánto tiempo toma y el precio. Los proyectos nuevos suelen empezar con una Revisión del Plan de Producción.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Producción</h3><p>Sprints, calendarios, pruebas de juego y revisiones de hitos, con actualizaciones durante el proceso. Los proyectos de AR se crean con un socio desarrollador cuando hace falta.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Lanzamiento y entrega</h3><p>Su equipo se queda con el plan, los documentos y los archivos, para que pueda seguir sin mí.</p></li>
+      </ol>
     </div>
   </section>
 
-  <section>
-    <div class="wrap narrow-wrap">
-      <div>
-        <h2 class="mag-head">Experiencia de producción <em>en videojuegos, XR y trabajo interactivo.</em></h2>
-        <p class="lede">Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. He dirigido proyectos para estudios independientes de videojuegos, equipos de XR e interactivos, y organizaciones creativas, gestionando flujos de trabajo Agile, documentación de diseño, calendarios y equipos de personas muy creativas. Esa experiencia en producción mantiene los experimentos enfocados y con los pies en lo que de verdad se puede lanzar.</p>
-        <div class="stats">
-          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
-          <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
-        </div>
-        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> XR y videojuegos: Unity, Meta Quest, lentes de Meta, Meta Horizon y AR en el navegador. IA: ChatGPT, Claude, Gemini y Meta AI. Automatización: Zapier.</p>
-      </div>
-    </div>
-  </section>
-
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" alt />
 </Base>

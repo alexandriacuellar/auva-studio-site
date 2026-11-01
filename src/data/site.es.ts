@@ -15,7 +15,16 @@ export const site = {
 };
 
 export const nav = [
-  { href: '/es/websites/', label: 'Sitios web' },
+  {
+    href: '/es/websites/', label: 'Sitios web', menuLabel: 'Páginas de sitios web',
+    children: [
+      { href: '/es/websites/', label: 'Paquetes de sitios web' },
+      { href: '/es/websites/diagnostic/', label: 'Diagnóstico Web' },
+      { href: '/es/websites/google-business-profile/', label: 'Perfil de Negocio de Google' },
+      { href: '/es/websites/help-after-launch/', label: 'Ayuda después del lanzamiento' },
+      { href: '/es/websites/brand-essentials/', label: 'Identidad de Marca' },
+    ],
+  },
   { href: '/es/technology-consulting/', label: 'Tecnología e IA' },
   { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
   { href: '/es/about/', label: 'Sobre mí' },
@@ -26,7 +35,7 @@ export const categories = [
     icon: 'globe',
     title: 'Servicios de sitios web',
     text: 'Sitios web que ayudan a sus clientes a encontrarle, confiar en usted y comunicarse.',
-    items: ['Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Paquetes de sitios web desde $1,500', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
+    items: ['Paquetes de sitios web desde $1,500', 'Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
     href: '/es/websites/',
     cta: 'Ver servicios de sitios web',
   },
@@ -52,26 +61,25 @@ export const consulting = [
   { id: 'planning', price: '$250, se acredita a una configuración en 90 días', icon: 'search', title: 'Revisión Tecnológica', text: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios, costos aproximados y dónde ayudaría la automatización o la IA.', items: ['Revisión de herramientas y suscripciones', 'Revisión de flujos de trabajo', 'Informe por escrito con prioridades'] },
   { id: 'automation', price: 'Desde $500', icon: 'gear', title: 'Configuración de automatización', text: 'Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos y reportes mensuales. Un flujo de trabajo, configurado en sus propias cuentas, con una guía breve.', items: ['Automatización de flujos de trabajo', 'Conexión de las aplicaciones que ya usa', 'Guía para su equipo'] },
   { id: 'workspace', price: 'Desde $1,500', icon: 'layers', title: 'Configuración de espacio de proyectos', text: 'Configuro la herramienta donde su equipo planifica el trabajo, como Asana, ClickUp, Jira, monday.com, Notion o Trello, con tableros, plantillas y responsables claros, y luego capacito a su equipo.', items: ['Configuración del espacio y las plantillas', 'Capacitación para su equipo', '30 días de preguntas después de la configuración'] },
-  { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Liderazgo de proyectos a tiempo parcial'] },
+  { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Gestión de proyectos mensual'] },
 ];
 
-export const whyAuva = [
-  { title: 'Profundidad técnica', text: 'Recomendaciones basadas en cómo los sistemas realmente funcionan, se conectan y se mantienen.' },
-  { title: 'Visión de negocio', text: 'Sus metas, su presupuesto, su equipo y sus clientes van antes que cualquier plataforma nueva.' },
-  { title: 'De la estrategia a la entrega', text: 'Una sola persona de confianza desde la evaluación y la planificación hasta la implementación.' },
-  { title: 'Experiencia amplia', text: 'Sitios web, APIs, productos digitales, gestión de proyectos, videojuegos, XR y experiencias interactivas.' },
-];
 
-export const journey = [
-  { title: 'Hablemos', text: 'Una llamada gratis de 30 minutos sobre sus metas, lo que usa hoy y lo que le está estorbando.' },
-  { title: 'Un plan claro', text: 'Un alcance y un precio por escrito antes de empezar cualquier trabajo, sin sorpresas.' },
-  { title: 'Hecho, y suyo', text: 'Hago el trabajo con usted y luego le entrego documentación y capacitación para que su equipo pueda seguir adelante.' },
-];
 
 export const samples = [
   { package: 'Presencia Esencial', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'Un sitio de una sola página para una empresa de pisos de madera, con servicios, fotos de antes y después, y un formulario para pedir un presupuesto gratis.', goodFor: 'Ideal para oficios y servicios para el hogar, como contratistas, limpieza, jardinería y talleres de reparación.' },
   { package: 'Presencia Ampliada', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'Un sitio de 10 páginas para una granja familiar de ganado, con animales a la venta, una guía de compra y un formulario de consultas.', goodFor: 'Ideal para granjas, posadas, viñedos y negocios con varios servicios o experiencias que mostrar.' },
   { package: 'Presencia Completa', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'Un sitio más grande para una tienda en Kingston, con un CMS, talleres, citas para pruebas de ropa (como servicio adicional) y una lista para apartar productos nuevos.', goodFor: 'Ideal para tiendas, estudios y organizaciones que publican productos, eventos o noticias con frecuencia.' },
+];
+
+// Lo que incluyen todos los paquetes; se muestra una vez sobre las tarjetas.
+export const packageBasics = [
+  'Una llamada de planificación y un plan de contenido',
+  'Pulo sus textos y completo lo que falte',
+  'Diseño a la medida de su negocio, pensado primero para el celular',
+  'Un formulario de contacto y un mapa para encontrarle',
+  'Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio',
+  'Orientación sobre su Perfil de Negocio de Google, cuando aplique',
 ];
 
 export const packages = [
@@ -82,11 +90,7 @@ export const packages = [
     name: 'Presencia Esencial',
     price: '$1,500',
     blurb: 'Una presencia profesional en internet que ayuda a sus clientes a encontrarle, confiar en usted y contactarle.',
-    groups: [
-      { label: 'Planificación y contenido', items: ['Una llamada de planificación y un plan de contenido', 'Pulo sus textos y completo lo que falte'] },
-      { label: 'Diseño y desarrollo', items: ['Una sola página con desplazamiento o hasta 5 páginas, lo que mejor le funcione a su negocio. Le ayudo a decidir.', '2 diseños de página: uno para su página principal y otro para las demás', 'Diseño a la medida de su negocio, pensado primero para el celular', 'Un formulario de contacto y un mapa para encontrarle', '2 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Perfil de Negocio de Google, cuando aplique', 'Estadísticas sencillas de visitas'] },
-    ],
+    specs: [['Páginas', 'De 1 a 5'], ['Diseños de página', '2'], ['Rondas de cambios', '2'], ['Estadísticas', 'Básicas'], ['CMS', 'Desde $1,750'], ['Revisión a los 30 días', null]],
     timeline: '2–3 semanas',
   },
   {
@@ -97,12 +101,7 @@ export const packages = [
     price: '$2,950',
     featured: true,
     blurb: 'Espacio para cada servicio que ofrece, para que sus clientes y Google puedan encontrar cada uno.',
-    includes: 'Todo lo de Esencial, más:',
-    groups: [
-      { label: 'Diseño y desarrollo', items: ['Hasta 10 páginas', 'Hasta 3 diseños de página', '3 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Estadísticas que muestran qué páginas le traen llamadas y mensajes'] },
-    ],
-    extra: 'Agregue un CMS desde $1,750',
+    specs: [['Páginas', 'Hasta 10'], ['Diseños de página', 'Hasta 3'], ['Rondas de cambios', '3'], ['Estadísticas', 'Llamadas por página'], ['CMS', 'Desde $1,750'], ['Revisión a los 30 días', null]],
     timeline: '3–5 semanas',
   },
   {
@@ -112,23 +111,18 @@ export const packages = [
     name: 'Presencia Completa',
     price: '$5,500',
     blurb: 'Para negocios en crecimiento que quieren actualizar su sitio por su cuenta.',
-    includes: 'Todo lo de Ampliada, más:',
-    groups: [
-      { label: 'Diseño y desarrollo', items: ['Hasta 20 páginas', 'Hasta 6 diseños de página', '4 rondas de cambios'] },
-      { label: 'Actualícelo usted', items: ['Un CMS para actualizar sus textos, fotos, noticias o eventos por su cuenta'] },
-      { label: 'Visibilidad en internet', items: ['Una revisión de búsqueda 30 días después del lanzamiento'] },
-    ],
+    specs: [['Páginas', 'Hasta 20'], ['Diseños de página', 'Hasta 6'], ['Rondas de cambios', '4'], ['Estadísticas', 'Llamadas por página'], ['CMS', 'Incluido'], ['Revisión a los 30 días', 'Incluida']],
     timeline: '6+ semanas',
   },
 ];
 
 export const comparison = {
   benefits: [
-    { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren en un abrir y cerrar de ojos en cualquier celular, para que sus visitantes no se cansen de esperar y se vayan. Le muestro la puntuación de velocidad de Google de su sitio actual, y la del nuevo al lanzarlo.' },
-    { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'La velocidad, una estructura clara y los datos que buscan Google y las herramientas de búsqueda con IA vienen en cada sitio, no son un extra que se paga después.' },
-    { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Servicios como Cloudflare y Netlify alojan sitios como estos gratis, o por unos pocos dólares al mes si el sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
-    { icon: 'check', title: 'Fácil de usar para todos', text: 'Cada sitio pasa una prueba de accesibilidad antes del lanzamiento, para que funcione con lectores de pantalla, con teclado o con letra más grande.' },
-    { icon: 'key', title: 'Es suyo', text: 'Su código, su contenido, su dominio y su cuenta de hosting están a su nombre. Sin ataduras, y sin una plataforma de la que no pueda salir.' },
+    { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren al instante en cualquier celular, y sus visitantes se quedan. Le muestro su puntuación de velocidad de Google antes y después.' },
+    { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'Los datos que buscan Google y las herramientas de búsqueda con IA, incluidos. No son un extra que se paga después.' },
+    { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Gratis, o unos pocos dólares al mes si su sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
+    { icon: 'check', title: 'Fácil de usar para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
+    { icon: 'key', title: 'Es suyo', text: 'Código, contenido, dominio y hosting a su nombre. Sin ataduras.' },
   ],
 };
 
@@ -164,7 +158,7 @@ export const care = [
 export const monthly = {
   name: 'Productora web mensual',
   price: 'Desde $650 al mes por 5 horas',
-  text: 'Su propia productora web, sin tener que contratar a nadie. Su persona de marketing o de SEO marca el rumbo, y yo lo hago realidad en su sitio.',
+  text: 'Su propia productora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
   outcomes: ['Se mantiene rápido, seguro y funcionando', 'Recibe páginas nuevas para sus campañas, eventos y productos', 'Se mantiene al día con lo que la gente busca', 'Viene con un informe breve: qué cambió, qué logró y qué sigue'],
 };
 

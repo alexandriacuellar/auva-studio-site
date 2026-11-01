@@ -35,7 +35,16 @@ export const site = {
 };
 
 export const nav = [
-  { href: '/websites/', label: 'Websites' },
+  {
+    href: '/websites/', label: 'Websites', menuLabel: 'Website pages',
+    children: [
+      { href: '/websites/', label: 'Website packages' },
+      { href: '/websites/diagnostic/', label: 'Website Diagnostic' },
+      { href: '/websites/google-business-profile/', label: 'Google Business Profile' },
+      { href: '/websites/help-after-launch/', label: 'Help After Launch' },
+      { href: '/websites/brand-essentials/', label: 'Brand Essentials' },
+    ],
+  },
   { href: '/technology-consulting/', label: 'Tech, Automation & AI' },
   { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
   { href: '/about/', label: 'About' },
@@ -47,7 +56,7 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website Diagnostic and Google Business Profile setup', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
+    items: ['Website packages from $1,500', 'Website Diagnostic and Google Business Profile setup', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
     href: '/websites/',
     cta: 'Explore website services',
   },
@@ -73,28 +82,27 @@ export const consulting = [
   { id: 'planning', price: '$250, credited toward a setup within 90 days', icon: 'search', title: 'Tech Review', text: 'A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order, rough costs, and where automation or AI would help.', items: ['Tools and subscriptions review', 'Workflow review', 'Prioritized written report'] },
   { id: 'automation', price: 'From $500', icon: 'gear', title: 'Automation setup', text: 'I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, and monthly reports. One workflow, set up in your own accounts, with a short how-to guide.', items: ['Workflow automation', 'Connecting the apps you already use', 'How-to guide for your team'] },
   { id: 'workspace', price: 'From $1,500', icon: 'layers', title: 'Project workspace setup', text: 'I set up the tool your team plans work in, like Asana, ClickUp, Jira, monday.com, Notion, or Trello, with boards, templates, and clear ownership, then train your team to use it.', items: ['Workspace and template setup', 'Team training', '30 days of questions after setup'] },
-  { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
+  { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Monthly project management'] },
 ];
 
-export const whyAuva = [
-  { title: 'Technical depth', text: 'Recommendations reflect how systems actually work, connect, and get maintained.' },
-  { title: 'Business-minded guidance', text: 'Your goals, budget, team, and customers come before any new platform.' },
-  { title: 'Strategy through delivery', text: 'One partner from assessment and planning through implementation.' },
-  { title: 'Broad experience', text: 'Websites, APIs, digital products, project management, games, XR, and interactive experiences.' },
-];
 
 // How every engagement runs, from a small website to a complex project.
-export const journey = [
-  { title: 'Talk it through', text: "A free 30-minute call about your goals, your current setup, and what's getting in the way." },
-  { title: 'Get a clear plan', text: 'A written scope and price before any work begins, with no surprises.' },
-  { title: 'Get it done, and keep it', text: 'I do the work with you, then hand over documentation and training so your team can carry on.' },
-];
 
 // Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
 export const samples = [
   { package: 'Essential Presence', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'A one-page site for a wood flooring company, with services, before-and-after photos, and a free estimate form.', goodFor: 'Good for trades and home services, like contractors, cleaners, landscapers, and repair shops.' },
   { package: 'Expanded Presence', slug: 'enea-hudson-cattle-farm', name: 'Enea Hudson Cattle Farm', text: 'A 10-page site for a family cattle farm, with animals for sale, a buying guide, and an inquiry form.', goodFor: 'Good for farms, inns, wineries, and businesses with several services or experiences to show.' },
   { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a CMS, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
+];
+
+// Shared by every package; shown once above the package cards.
+export const packageBasics = [
+  'A planning call and content plan',
+  "I polish your copy and fill in what's missing",
+  'Custom design made for your business, built for phones first',
+  'A contact form and a map to find you',
+  'Set up for Google and AI search: page titles, business details, and a sitemap',
+  'Google Business Profile guidance, where applicable',
 ];
 
 export const packages = [
@@ -105,11 +113,7 @@ export const packages = [
     name: 'Essential Presence',
     price: '$1,500',
     blurb: 'A professional web presence that helps customers find, trust, and contact you.',
-    groups: [
-      { label: 'Planning and content', items: ['A planning call and content plan', "I polish your copy and fill in what's missing"] },
-      { label: 'Design and build', items: ["One scrolling page or up to 5 pages, whichever suits your business. I'll help you choose.", '2 page designs: one for your home page, one for the rest', 'Custom design made for your business, built for phones first', 'A contact form and a map to find you', '2 revision rounds'] },
-      { label: 'Found online', items: ['Set up for Google and AI search: page titles, business details, and a sitemap', 'Google Business Profile guidance, where applicable', 'Simple visitor stats'] },
-    ],
+    specs: [['Pages', '1 to 5'], ['Page designs', '2'], ['Revision rounds', '2'], ['Visitor stats', 'Basic'], ['CMS', 'From $1,750'], ['30-day search checkup', null]],
     timeline: '2–3 weeks',
   },
   {
@@ -120,12 +124,7 @@ export const packages = [
     price: '$2,950',
     featured: true,
     blurb: 'Room for every service you offer, so customers and Google can find each one.',
-    includes: 'Everything in Essential, plus:',
-    groups: [
-      { label: 'Design and build', items: ['Up to 10 pages', 'Up to 3 page designs', '3 revision rounds'] },
-      { label: 'Found online', items: ['Visitor stats that show which pages bring in calls and messages'] },
-    ],
-    extra: 'Add a CMS from $1,750',
+    specs: [['Pages', 'Up to 10'], ['Page designs', 'Up to 3'], ['Revision rounds', '3'], ['Visitor stats', 'Calls by page'], ['CMS', 'From $1,750'], ['30-day search checkup', null]],
     timeline: '3–5 weeks',
   },
   {
@@ -135,23 +134,18 @@ export const packages = [
     name: 'Complete Presence',
     price: '$5,500',
     blurb: 'For growing businesses that want to update their site themselves.',
-    includes: 'Everything in Expanded, plus:',
-    groups: [
-      { label: 'Design and build', items: ['Up to 20 pages', 'Up to 6 page designs', '4 revision rounds'] },
-      { label: 'Update it yourself', items: ['A CMS to update your text, photos, news, or events yourself'] },
-      { label: 'Found online', items: ['A search checkup 30 days after launch'] },
-    ],
+    specs: [['Pages', 'Up to 20'], ['Page designs', 'Up to 6'], ['Revision rounds', '4'], ['Visitor stats', 'Calls by page'], ['CMS', 'Included'], ['30-day search checkup', 'Included']],
     timeline: '6+ weeks',
   },
 ];
 
 export const comparison = {
   benefits: [
-    { icon: 'bolt', title: 'Loads almost instantly', text: "Your pages open in a blink on any phone, so visitors don't give up and leave. I'll show you your current site's Google speed score, and your new one at launch." },
-    { icon: 'search', title: 'Built to be found, from day one', text: 'Speed, clear page structure, and the details Google and AI search tools look for are part of every build, not an extra you pay for after launch.' },
-    { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Hosts like Cloudflare and Netlify serve pages like these for free, or for a few dollars a month on a busier site. Your domain is about $20 a year.' },
-    { icon: 'check', title: 'Easy for everyone to use', text: 'Every site gets an accessibility test before launch, so it works for people using screen readers, keyboards, or larger text.' },
-    { icon: 'key', title: 'Yours to keep', text: "Your code, content, domain, and hosting account are all in your name. No lock-in, and no platform you can't leave." },
+    { icon: 'bolt', title: 'Loads almost instantly', text: "Pages open in a blink on any phone, so visitors stay. I'll show you your Google speed score before and after." },
+    { icon: 'search', title: 'Built to be found, from day one', text: 'The details Google and AI search tools look for, built in. Not an extra you pay for later.' },
+    { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Free, or a few dollars a month on a busier site. Your domain is about $20 a year.' },
+    { icon: 'check', title: 'Easy for everyone to use', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
+    { icon: 'key', title: 'Yours to keep', text: 'Code, content, domain, and hosting in your name. No lock-in.' },
   ],
 };
 
@@ -189,7 +183,7 @@ export const care = [
 export const monthly = {
   name: 'Monthly web producer',
   price: 'From $650 a month for 5 hours',
-  text: 'Your own web producer, without hiring one. Your marketer or SEO person sets the direction, and I make it happen on your site.',
+  text: 'Your own web producer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
   outcomes: ['Stays fast, secure, and working', 'Gets new pages for your campaigns, events, and products', 'Keeps up with what people are searching for', 'Comes with a short report on what changed, what it did, and what\'s next'],
 };
 
