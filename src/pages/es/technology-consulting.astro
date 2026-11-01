@@ -154,19 +154,7 @@ const glance = [
           </div>
         ))}
       </div>
-      <div class="grid grid-2" style="margin-top: 32px">
-        {aiConsulting.map((o) => (
-          <div class="card card-row card-wide" id={o.id}>
-            <div class="icon"><Icon name={o.icon} size={36} /></div>
-            <div>
-              <h3>{o.title}</h3>
-              <p class="svc-meta"><b>{o.price}</b></p>
-              <p class="muted">{o.text}</p>
-              <a class="more" href={`/es/technology-consulting/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto</a>
-            </div>
-          </div>
-        ))}
-      </div>
+      <p id="workshop" style="margin-top: 28px"><a class="btn" href="/es/technology-consulting/?topic=workshop#start">Pregunte por el Taller de IA para Equipos, $750</a></p>
       <p class="small muted" style="margin-top: 20px"><b>Herramientas que uso.</b> ChatGPT, Claude, Gemini, Meta AI y Zapier. ¿Quiere un chatbot en su sitio web que responda las preguntas de sus clientes? Vea <a href="/es/websites/#addons">Chatbots de IA y aplicaciones web</a>.</p>
     </div>
   </section>
