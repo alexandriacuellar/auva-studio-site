@@ -189,7 +189,7 @@ export const care = [
 export const monthly = {
   name: 'Monthly web producer',
   price: 'From $650 a month for 5 hours',
-  text: 'Your own web producer, without hiring one. Your marketer or SEO person sets the direction, and I make it happen on your site.',
+  text: 'Your own web producer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
   outcomes: ['Stays fast, secure, and working', 'Gets new pages for your campaigns, events, and products', 'Keeps up with what people are searching for', 'Comes with a short report on what changed, what it did, and what\'s next'],
 };
 

@@ -164,7 +164,7 @@ export const care = [
 export const monthly = {
   name: 'Productora web mensual',
   price: 'Desde $650 al mes por 5 horas',
-  text: 'Su propia productora web, sin tener que contratar a nadie. Su persona de marketing o de SEO marca el rumbo, y yo lo hago realidad en su sitio.',
+  text: 'Su propia productora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
   outcomes: ['Se mantiene rápido, seguro y funcionando', 'Recibe páginas nuevas para sus campañas, eventos y productos', 'Se mantiene al día con lo que la gente busca', 'Viene con un informe breve: qué cambió, qué logró y qué sigue'],
 };
 
