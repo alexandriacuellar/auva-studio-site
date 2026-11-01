@@ -1,0 +1,260 @@
+---
+// "Ask Auva": the chat assistant. A small button opens a chat window; questions go to /api/chat (functions/api/chat.ts).
+// It is also the live demo for the "AI chatbots and web apps" website add-on.
+import Icon from './Icon.astro';
+import { langFromPath, localize } from '../i18n';
+
+const lang = langFromPath(Astro.url.pathname);
+const t = {
+  en: {
+    open: 'Ask Auva',
+    title: 'Ask Auva',
+    sub: 'AI assistant',
+    close: 'Close chat',
+    hello: "Hi! I can answer questions about Auva Studio's services, prices, and how to get started. What would you like to know?",
+    chips: ['How much is a website?', 'Which website package fits me?', 'Can you help my team use AI?', 'How do I get started?'],
+    placeholder: 'Type your question',
+    send: 'Send',
+    note: 'AI answers can be wrong; prices are confirmed in writing before any work. Chats aren\'t saved.',
+    privacy: 'Privacy',
+    restart: 'Start over',
+    thinking: 'Thinking…',
+    offline: "Sorry, I couldn't connect. Please try again, or email hello@auvastudio.com.",
+  },
+  es: {
+    open: 'Pregunte a Auva',
+    title: 'Pregunte a Auva',
+    sub: 'Asistente con IA',
+    close: 'Cerrar chat',
+    hello: '¡Hola! Puedo responder preguntas sobre los servicios y precios de Auva Studio, y cómo empezar. ¿Qué le gustaría saber?',
+    chips: ['¿Cuánto cuesta un sitio web?', '¿Qué paquete me conviene?', '¿Pueden ayudar a mi equipo con la IA?', '¿Cómo empiezo?'],
+    placeholder: 'Escriba su pregunta',
+    send: 'Enviar',
+    note: 'Las respuestas de la IA pueden tener errores; los precios se confirman por escrito antes de empezar. Las conversaciones no se guardan.',
+    privacy: 'Privacidad',
+    restart: 'Empezar de nuevo',
+    thinking: 'Pensando…',
+    offline: 'Lo siento, no pude conectarme. Inténtelo de nuevo o escriba a hello@auvastudio.com.',
+  },
+}[lang];
+---
+<div class="assistant" data-lang={lang} data-thinking={t.thinking} data-offline={t.offline}>
+  <button class="assistant-open" type="button" aria-expanded="false" aria-controls="assistant-panel">
+    <Icon name="chat" size={20} /><span>{t.open}</span>
+  </button>
+  <div class="assistant-panel" id="assistant-panel" role="dialog" aria-labelledby="assistant-title" hidden>
+    <div class="assistant-head">
+      <span class="assistant-star" aria-hidden="true"><Icon name="star" size={18} /></span>
+      <div>
+        <h2 id="assistant-title">{t.title}</h2>
+        <p>{t.sub}</p>
+      </div>
+      <button class="assistant-restart" type="button">{t.restart}</button>
+      <button class="assistant-close" type="button" aria-label={t.close}>×</button>
+    </div>
+    <div class="assistant-log" aria-live="polite">
+      <p class="assistant-msg from-bot">{t.hello}</p>
+      <div class="assistant-chips">
+        {t.chips.map((c) => <button type="button">{c}</button>)}
+      </div>
+    </div>
+    <form class="assistant-form">
+      <label class="sr-only" for="assistant-input">{t.placeholder}</label>
+      <textarea id="assistant-input" rows="1" maxlength="600" placeholder={t.placeholder} enterkeyhint="send"></textarea>
+      <button type="submit" class="btn btn-small">{t.send}</button>
+    </form>
+    <p class="assistant-note">{t.note} <a href={localize('/privacy/', lang)}>{t.privacy}</a></p>
+  </div>
+</div>
+
+<style is:global>
+  .arrow-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .assistant-open {
+    position: fixed; right: 16px; bottom: 16px; z-index: 7;
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px;
+    border: 0; border-radius: 999px; background: var(--ink); color: var(--white);
+    font: 600 16px/1 var(--font-body); cursor: pointer; box-shadow: 0 10px 30px rgb(15 29 82 / 0.3);
+    transition: transform .2s, background .2s;
+  }
+  .assistant-open:hover { background: var(--deep); transform: translateY(-2px); }
+  .assistant-open[aria-expanded="true"] { display: none; }
+  /* On phones, sit above the sticky pay bar when it shows. */
+  @media (max-width: 760px) { body:has(.pay-bar:not(.is-away)) .assistant-open { bottom: 84px; } }
+
+  .assistant-panel {
+    position: fixed; right: 16px; bottom: 16px; z-index: 20;
+    width: min(400px, calc(100vw - 32px)); height: min(620px, calc(100dvh - 32px));
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: 0 24px 60px rgb(15 29 82 / 0.25);
+  }
+  .assistant-panel[hidden] { display: none; }
+  @media (max-width: 520px) {
+    .assistant-panel { inset: 0; width: 100%; height: 100dvh; border-radius: 0; border: 0; }
+  }
+  .assistant-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: var(--night); color: var(--white); }
+  .assistant-head h2 { font-size: 1.05rem; margin: 0; }
+  .assistant-head p { margin: 0; font-size: 13px; opacity: .75; }
+  .assistant-head > div { flex: 1; min-width: 0; }
+  .assistant-star { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgb(255 255 255 / .1); color: var(--star); }
+  .assistant-star svg { fill: currentColor; }
+  .assistant-close, .assistant-restart { border: 0; background: none; color: inherit; cursor: pointer; font-family: var(--font-body); }
+  .assistant-close { font-size: 28px; line-height: 1; padding: 0 4px; }
+  .assistant-restart { font-size: 13px; opacity: .8; text-decoration: underline; }
+  .assistant-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: var(--surface); overscroll-behavior: contain; }
+  .assistant-msg { margin: 0; padding: 10px 14px; border-radius: 16px; font-size: 16px; line-height: 1.5; max-width: 88%; overflow-wrap: anywhere; }
+  .assistant-msg p, .assistant-msg ul { margin: 0 0 .5em; }
+  .assistant-msg > :last-child { margin-bottom: 0; }
+  .assistant-msg ul { padding-left: 1.2em; }
+  .from-bot { background: var(--white); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .from-you { background: var(--primary); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; white-space: pre-wrap; }
+  .assistant-msg.is-waiting { color: var(--muted); font-style: italic; }
+  .assistant-chips[hidden] { display: none; }
+  .assistant-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .assistant-chips button { border: 1px solid var(--border); background: var(--white); color: var(--primary); border-radius: 999px; padding: 7px 12px; font: 500 14px/1.3 var(--font-body); cursor: pointer; text-align: left; }
+  .assistant-chips button:hover { border-color: var(--primary); }
+  .assistant-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); align-items: flex-end; }
+  /* 16px text stops phones from zooming in on the box. */
+  .assistant-form textarea { flex: 1; resize: none; max-height: 120px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; font: 16px/1.4 var(--font-body); color: var(--ink); }
+  .assistant-form .btn { flex: none; }
+  .assistant-note { margin: 0; padding: 0 12px 10px; font-size: 12px; line-height: 1.4; color: var(--muted); }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('.assistant')!;
+  const openBtn = root.querySelector<HTMLButtonElement>('.assistant-open')!;
+  const panel = root.querySelector<HTMLElement>('.assistant-panel')!;
+  const log = root.querySelector<HTMLElement>('.assistant-log')!;
+  const chips = root.querySelector<HTMLElement>('.assistant-chips')!;
+  const form = root.querySelector<HTMLFormElement>('.assistant-form')!;
+  const input = form.querySelector('textarea')!;
+  const sendBtn = form.querySelector<HTMLButtonElement>('button')!;
+  const lang = root.dataset.lang;
+  const KEY = 'auva-assistant';
+
+  type Turn = { role: 'user' | 'assistant'; content: string };
+  let turns: Turn[] = [];
+  let busy = false;
+
+  // Keep the chat while the visitor moves between pages (this browser tab only).
+  const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify({ turns, open: !panel.hidden })); } catch {} };
+
+  // Shows the assistant's reply with simple formatting: paragraphs, bullet lists, bold, and links to this site or Calendly.
+  function render(el: HTMLElement, md: string) {
+    el.replaceChildren();
+    const inline = (parent: HTMLElement, text: string) => {
+      const re = /\[([^\]]+)\]\((https:\/\/[^)\s]+)\)|\*\*([^*]+)\*\*|(https:\/\/(?:www\.)?(?:auvastudio\.com|calendly\.com)[^\s)]*)/g;
+      let last = 0;
+      for (const m of text.matchAll(re)) {
+        parent.append(text.slice(last, m.index));
+        if (m[3]) { const b = document.createElement('strong'); b.textContent = m[3]; parent.append(b); }
+        else {
+          const href = m[2] ?? m[4];
+          const host = new URL(href).hostname;
+          if (/(^|\.)auvastudio\.com$|(^|\.)calendly\.com$/.test(host)) {
+            const a = document.createElement('a');
+            a.href = host.endsWith('auvastudio.com') ? href.replace(/^https:\/\/(www\.)?auvastudio\.com/, '') || '/' : href;
+            if (!host.endsWith('auvastudio.com')) { a.target = '_blank'; a.rel = 'noopener'; }
+            a.textContent = m[1] ?? href;
+            parent.append(a);
+          } else parent.append(m[1] ?? href);
+        }
+        last = m.index! + m[0].length;
+      }
+      parent.append(text.slice(last));
+    };
+    for (const block of md.trim().split(/\n{2,}/)) {
+      const lines = block.split('\n');
+      if (lines.every((l) => /^\s*[-*•] /.test(l))) {
+        const ul = document.createElement('ul');
+        for (const l of lines) { const li = document.createElement('li'); inline(li, l.replace(/^\s*[-*•] /, '')); ul.append(li); }
+        el.append(ul);
+      } else {
+        const p = document.createElement('p');
+        lines.forEach((l, i) => { if (i) p.append(document.createElement('br')); inline(p, l.replace(/^#+\s*/, '')); });
+        el.append(p);
+      }
+    }
+  }
+
+  function bubble(role: Turn['role'], content: string) {
+    const el = document.createElement('div');
+    el.className = `assistant-msg ${role === 'user' ? 'from-you' : 'from-bot'}`;
+    if (role === 'user') el.textContent = content; else render(el, content);
+    log.append(el);
+    log.scrollTop = log.scrollHeight;
+    return el;
+  }
+
+  function setOpen(open: boolean) {
+    panel.hidden = !open;
+    openBtn.setAttribute('aria-expanded', String(open));
+    if (open) { log.scrollTop = log.scrollHeight; if (matchMedia('(min-width: 521px)').matches) input.focus(); }
+    else openBtn.focus();
+    save();
+  }
+
+  async function ask(question: string) {
+    question = question.trim().slice(0, 600);
+    if (!question || busy) return;
+    busy = true; sendBtn.disabled = true;
+    chips.hidden = true;
+    turns.push({ role: 'user', content: question });
+    bubble('user', question);
+    input.value = ''; input.style.height = '';
+    const el = bubble('assistant', '');
+    el.classList.add('is-waiting'); el.textContent = root.dataset.thinking!;
+    let answer = '';
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: turns, lang, page: location.pathname }),
+      });
+      if (!res.ok || !res.body) throw new Error(String(res.status));
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        answer += decoder.decode(value, { stream: true });
+        el.classList.remove('is-waiting');
+        render(el, answer);
+        log.scrollTop = log.scrollHeight;
+      }
+    } catch {}
+    if (!answer.trim()) { answer = root.dataset.offline!; el.classList.remove('is-waiting'); render(el, answer); turns.pop(); }
+    else turns.push({ role: 'assistant', content: answer });
+    save();
+    busy = false; sendBtn.disabled = false;
+  }
+
+  openBtn.addEventListener('click', () => setOpen(true));
+  root.querySelector('.assistant-close')!.addEventListener('click', () => setOpen(false));
+  root.querySelector('.assistant-restart')!.addEventListener('click', () => {
+    turns = [];
+    log.querySelectorAll('.assistant-msg:not(:first-child)').forEach((m) => m.remove());
+    chips.hidden = false; save(); input.focus();
+  });
+  panel.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  chips.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest('button'); if (b) ask(b.textContent!); });
+  form.addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  input.addEventListener('input', () => { input.style.height = ''; input.style.height = `${Math.min(input.scrollHeight, 120)}px`; });
+  // Any link on the page to #ask (like the chatbot add-on's demo link) opens the chat.
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest('a[href$="#ask"]');
+    if (a) { e.preventDefault(); setOpen(true); }
+  });
+
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+    if (saved?.turns?.length) {
+      turns = saved.turns; chips.hidden = true;
+      for (const t of turns) bubble(t.role, t.content);
+      if (saved.open && matchMedia('(min-width: 521px)').matches) { panel.hidden = false; openBtn.setAttribute('aria-expanded', 'true'); }
+    }
+  } catch {}
+  if (location.hash === '#ask') setOpen(true);
+</script>

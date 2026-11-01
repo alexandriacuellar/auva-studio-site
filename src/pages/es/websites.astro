@@ -187,6 +187,7 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             <p><b style="color: var(--primary)">{a.price}</b></p>
+            {'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
           </div>
         ))}
       </div>
