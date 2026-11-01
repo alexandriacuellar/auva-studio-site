@@ -151,13 +151,13 @@ export const process = [
 ];
 
 export const care = [
-  { name: 'Cambios y arreglos', price: '$50 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles.' },
+  { name: 'Cambios y arreglos', price: '$59 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles.' },
   { name: 'Páginas y funciones nuevas', price: '$125/hora, con presupuesto previo', text: 'Páginas nuevas, funciones nuevas o más colecciones para su CMS.' },
 ];
 
 export const plans = [
   { name: 'Cambios mensuales', price: '$99 al mes', hours: '1 hora', text: '1 hora de cambios al mes, unos 2 cambios, más una revisión mensual de que sus formularios, enlaces y botones funcionan. Listo en 2 días hábiles.' },
-  { name: 'Cambios mensuales plus', price: '$199 al mes', hours: '2 horas', text: '2 horas al mes para cambios, una página nueva o ajustes en su CMS, una revisión mensual y una revisión de búsqueda cada 3 meses. Listo en 1 día hábil.' },
+  { name: 'Cambios mensuales plus', price: '$179 al mes', hours: '2 horas', text: '2 horas al mes para cambios, una página nueva o ajustes en su CMS, una revisión mensual y una revisión de búsqueda cada 3 meses. Listo en 1 día hábil.' },
 ];
 
 export const monthly = {
