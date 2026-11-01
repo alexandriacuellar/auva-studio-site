@@ -7,16 +7,14 @@ import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
 
 const faqs = [
-  { q: '¿Ofrece apoyo puntual y continuo?', a: 'Sí. Los trabajos van desde una sola consulta o sesión para resolver un problema hasta consultoría continua o liderazgo de proyectos a tiempo parcial.' },
+  { q: '¿Qué incluye la Revisión Tecnológica?', a: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios en orden, costos aproximados y dónde ayudaría la automatización o la IA. Cuesta $250, que se acreditan a cualquier configuración conmigo que empiece en 90 días.' },
+  { q: '¿Qué herramientas de proyectos configura?', a: 'Asana, ClickUp, Jira, monday.com, Notion y Trello, y otras según lo que necesite su equipo. Si todavía no tiene una, le ayudo a elegir.' },
+  { q: '¿Ofrece apoyo puntual y continuo?', a: 'Sí. El trabajo va desde una sola configuración o sesión hasta liderazgo de proyectos continuo, por hora o en bloques mensuales.' },
   { q: '¿Trabaja en persona?', a: 'La mayor parte del trabajo es a distancia. Cuando una visita en persona ayuda, la planificamos juntos. El tiempo en sus instalaciones se cobra a la tarifa de consultoría de $65 por hora. Trabajo en persona desde la ciudad de Nueva York y Westchester hasta Albany. Fuera del Mid-Hudson Valley, el tiempo de viaje se cobra a la mitad de mi tarifa por hora y los gastos, como millaje y hospedaje, al costo, todo acordado por escrito antes de reservar.' },
-  { q: '¿Qué incluye la Evaluación Tecnológica?', a: 'Tres sesiones de una hora, investigación y una hoja de ruta por escrito con prioridades, unas 10 horas de trabajo.' },
-  { q: '¿Qué incluye un Análisis de Negocio y Revisión de Procesos?', a: 'Una revisión con alcance definido, como el mapeo de un flujo de trabajo o la documentación de un conjunto de requisitos, unas 15 horas de trabajo. Los encargos más grandes se cotizan aparte.' },
-  { q: '¿Cómo se definen los precios?', a: 'El precio depende del servicio, el alcance del proyecto, el tiempo previsto y si hace falta viajar. Mis tarifas aparecen en Precios de un vistazo. Para trabajos más grandes, los costos y las expectativas se acuerdan antes de empezar.' },
   { q: '¿Qué es el liderazgo de proyectos a tiempo parcial?', a: 'Una líder de proyecto que trabaja con su equipo a tiempo parcial, desde $650 al mes por 10 horas, con un mínimo de 3 meses. 20 horas cuestan $1,200 y 40 horas $2,200 al mes.' },
   { q: '¿Puede trabajar con nuestros proveedores actuales o nuestro soporte de TI?', a: 'Sí. Muchas veces trabajo junto a equipos y proveedores existentes, y puedo ayudarle a evaluar sus propuestas.' },
-  { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los Planes de Preparación y los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini aplicadas a su trabajo real.' },
-  { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada Plan de Preparación cubre los riesgos de privacidad y de calidad, y recomienda herramientas que se ajusten a sus reglas.' },
-  { q: '¿Cuál es la diferencia entre el Plan de Preparación para IA y la Evaluación Tecnológica?', a: 'El Plan de Preparación se enfoca solo en la IA. La Evaluación revisa todos sus sistemas y herramientas. Ambos cuestan $650, con tres sesiones de una hora y un plan por escrito.' },
+  { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini en su trabajo real.' },
+  { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada taller cubre los riesgos de privacidad y calidad, y una Revisión Tecnológica le recomienda herramientas que respetan sus reglas.' },
 ];
 import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
 
@@ -35,23 +33,22 @@ const aiTasks = [
 
 
 const glance = [
-  { name: 'Evaluación Tecnológica', note: '3 sesiones, investigación y un plan por escrito. Se acredita a trabajo posterior en 90 días', price: '$650' },
-  { name: 'Análisis de Negocio y Revisión de Procesos', note: 'Un proceso, unas 15 horas. Se acredita a trabajo posterior en 90 días', price: 'Desde $1,000' },
+  { name: 'Revisión Tecnológica', note: 'Una llamada de 60 minutos y un informe por escrito. Se acredita a cualquier configuración en 90 días', price: '$250' },
   { name: 'Configuración de automatización', note: 'Un flujo de trabajo, con una guía', price: 'Desde $500' },
+  { name: 'Configuración de espacio de proyectos', note: 'Configuración y capacitación para su equipo', price: 'Desde $1,500' },
+  { name: 'Taller de IA para Equipos', note: '90 minutos, hasta 10 personas', price: '$950' },
   { name: 'Líder de proyecto, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
-  { name: 'Taller de IA para Equipos', note: '2 horas, hasta 10 personas', price: 'Desde $500' },
-  { name: 'Plan de Preparación para IA', note: '3 sesiones y un plan por escrito. Se acredita a trabajo posterior en 90 días', price: '$650' },
   { name: 'Consultoría o ayuda con proyectos, según la necesite', price: '$65/hora' },
 ];
 ---
-<Base title="Consultoría e IA" seoTitle="Consultoría tecnológica y de IA para pequeños negocios | Auva Studio" schema={schema} description="Ayuda para elegir las herramientas adecuadas, poner la IA a trabajar, mejorar procesos lentos y mantener en marcha los proyectos tecnológicos, para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
+<Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para pequeños negocios | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y liderazgo de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Menos trabajo repetitivo, mejores herramientas, <em>proyectos que se terminan.</em></h1>
       <p class="lede">¿Demasiadas aplicaciones, un proceso sostenido con parches o un proyecto que siempre se atrasa? Ayudo a pequeños negocios, organizaciones sin fines de lucro y equipos en crecimiento a elegir las herramientas adecuadas, automatizar el trabajo repetitivo, poner la IA a trabajar y mantener los proyectos en marcha.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#planning">Vea la Evaluación Tecnológica de $650</a>
+        <a class="btn btn-ghost" href="#planning">Empiece con una Revisión Tecnológica de $250</a>
       </div>
       <ul class="hero-strip">{['Precio fijo para empezar', 'Un plan en lenguaje sencillo', 'Trabajo con sus proveedores actuales', 'Trabaja directamente conmigo'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
@@ -72,7 +69,7 @@ const glance = [
         <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>Necesita un programa nuevo y no sabe cuál</b><span class="muted">Reservas, punto de venta, contabilidad, correo o lista de clientes, con demasiadas opciones para comparar.</span></span></a></li>
         <li><a href="#automation"><span class="icon"><Icon name="chart" /></span><span><b>Su equipo escribe lo mismo dos veces</b><span class="muted">La información vive en tres lugares, y se acumulan errores y trabajo extra.</span></span></a></li>
         <li><a href="#automation"><span class="icon"><Icon name="gear" /></span><span><b>Los seguimientos y reportes le consumen la semana</b><span class="muted">Correos de recordatorio, papeleo de clientes nuevos y el mismo reporte mensual, todo a mano.</span></span></a></li>
-        <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>Una tarea sencilla toma horas</b><span class="muted">Hojas de cálculo, parches y "así lo hemos hecho siempre".</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="clock" /></span><span><b>Una tarea sencilla toma horas</b><span class="muted">Hojas de cálculo, parches y "así lo hemos hecho siempre".</span></span></a></li>
         <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>Sabe que la IA podría ayudar, pero no dónde</b><span class="muted">Su equipo probó un chatbot una vez, o nadie ha tenido tiempo de averiguarlo.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>Un proyecto tecnológico siempre se atrasa</b><span class="muted">Un sistema nuevo, una mudanza o una actualización sin nadie claramente a cargo.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="shield" /></span><span><b>Necesita a alguien de su lado frente a un proveedor</b><span class="muted">Alguien que entienda la tecnología y haga las preguntas correctas.</span></span></a></li>
@@ -87,6 +84,16 @@ const glance = [
         <p class="lede">Todas empiezan con una llamada gratis, y recibe un precio por escrito antes de empezar cualquier trabajo.</p>
       </div>
       <div class="grid grid-2">
+        <div class="card card-row" id="planning">
+          <div class="icon"><Icon name="search" size={36} /></div>
+          <div>
+            <h3>Empiece con una Revisión Tecnológica</h3>
+            <p class="svc-meta"><span>Revisión Tecnológica</span> <b>$250</b></p>
+            <p class="muted">Una llamada sobre cómo funciona su negocio y luego un informe por escrito con sus arreglos prioritarios: qué herramientas conservar, eliminar o conectar, y dónde ayudarían de verdad la automatización o la IA.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Una llamada de 60 minutos y una revisión de sus herramientas</li><li><Icon name="tick" size={16} />Un informe por escrito en 5 días hábiles</li><li><Icon name="tick" size={16} />Sus arreglos prioritarios en orden, con costos aproximados</li><li><Icon name="tick" size={16} />Los $250 se acreditan a cualquier configuración en 90 días</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=planning#start" style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        </div>
         <div class="card card-row" id="automation">
           <div class="icon"><Icon name="gear" size={36} /></div>
           <div>
@@ -97,17 +104,27 @@ const glance = [
             <a class="more" href="/es/technology-consulting/?topic=automation#start" style="margin-top: 12px">Pregunte por esto</a>
           </div>
         </div>
-        <div class="card card-row">
+        <div class="card card-row" id="workspace">
+          <div class="icon"><Icon name="layers" size={36} /></div>
+          <div>
+            <h3>Organice sus proyectos</h3>
+            <p class="svc-meta"><span>Configuración de espacio de proyectos</span> <b>Desde $1,500</b></p>
+            <p class="muted">Configuro la herramienta donde su equipo planifica el trabajo, como Asana, ClickUp, Jira, monday.com, Notion o Trello, con tableros, plantillas y una vista clara de quién hace qué. Luego capacito a su equipo para usarla.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Configurado en su propia cuenta</li><li><Icon name="tick" size={16} />Plantillas para el trabajo que se repite</li><li><Icon name="tick" size={16} />Una sesión de capacitación para su equipo</li><li><Icon name="tick" size={16} />30 días de preguntas después de la configuración</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=workspace#start" style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        </div>
+        <div class="card card-row" id="ai-card">
           <div class="icon"><Icon name="bolt" size={36} /></div>
           <div>
             <h3>Ponga la IA a trabajar</h3>
-            <p class="svc-meta"><span>Taller de IA para Equipos o Plan de Preparación para IA</span> <b>Desde $500</b></p>
-            <p class="muted">Descubra dónde la IA puede ahorrarle tiempo a su equipo, elija herramientas confiables y logre que todos las usen.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Práctica con sus tareas reales, no demostraciones</li><li><Icon name="tick" size={16} />Privacidad y calidad cubiertas</li><li><Icon name="tick" size={16} />Pensado para equipos sin perfil técnico</li></ul>
-            <a class="more" href="#ai" style="margin-top: 12px">Vea IA para su equipo <Icon name="arrow" size={16} /></a>
+            <p class="svc-meta"><span>Taller de IA para Equipos</span> <b>$950</b></p>
+            <p class="muted">Una sesión práctica de 90 minutos para hasta 10 personas. Su equipo practica ChatGPT, Claude o Gemini con trabajo real y se lleva una guía de una página.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Práctica con sus tareas reales, no demostraciones</li><li><Icon name="tick" size={16} />Privacidad y calidad incluidas</li><li><Icon name="tick" size={16} />Pensado para equipos sin perfil técnico</li></ul>
+            <a class="more" href="#ai" style="margin-top: 12px">Vea la IA para su equipo <Icon name="arrow" size={16} /></a>
           </div>
         </div>
-        <div class="card card-row" id="delivery">
+        <div class="card card-row card-wide" id="delivery">
           <div class="icon"><Icon name="check" size={36} /></div>
           <div>
             <h3>Alguien que dirija el proyecto</h3>
@@ -116,26 +133,6 @@ const glance = [
             <ul class="ticks small"><li><Icon name="tick" size={16} />Un plan y un calendario que todos pueden seguir</li><li><Icon name="tick" size={16} />Su equipo y sus proveedores coordinados</li><li><Icon name="tick" size={16} />Aviso temprano de retrasos y riesgos</li><li><Icon name="tick" size={16} />Por hora, o un bloque mensual de horas</li></ul>
             <a class="more" href="/es/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Pregunte por esto</a>
             <p class="small muted" style="margin-top: 12px">¿Está creando un videojuego o un proyecto XR? Vea el <a href="/es/production-emerging-tech/#production">Apoyo de Producción</a>.</p>
-          </div>
-        </div>
-        <div class="card card-row" id="planning">
-          <div class="icon"><Icon name="compass" size={36} /></div>
-          <div>
-            <h3>Un plan para sus herramientas</h3>
-            <p class="svc-meta"><span>Evaluación Tecnológica</span> <b>$650</b></p>
-            <p class="muted">Reviso cada herramienta que paga, encuentro lo que falta o sobra, y le doy un plan por escrito de qué mantener, reemplazar o agregar primero.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Una revisión de sus herramientas y suscripciones</li><li><Icon name="tick" size={16} />Un plan por escrito en orden de prioridad</li><li><Icon name="tick" size={16} />Ayuda para elegir programas o proveedores nuevos</li><li><Icon name="tick" size={16} />El costo se acredita a trabajo posterior que empiece en 90 días</li></ul>
-            <a class="more" href="/es/technology-consulting/?topic=planning#start" style="margin-top: 12px">Pregunte por esto</a>
-          </div>
-        </div>
-        <div class="card card-row card-wide" id="analysis">
-          <div class="icon"><Icon name="chart" size={36} /></div>
-          <div>
-            <h3>Mejore un proceso que le frena</h3>
-            <p class="svc-meta"><span>Análisis de Negocio y Revisión de Procesos</span> <b>Desde $1,000</b></p>
-            <p class="muted">Describo cómo se hace hoy una tarea, encuentro qué está frenando a su equipo y dejo por escrito lo que necesita una solución antes de construir o comprar. Disponible por sí solo, sin obligación de contratarme para el siguiente paso.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Un mapa claro de cómo se hace el trabajo hoy</li><li><Icon name="tick" size={16} />Lo que necesita una solución, por escrito</li><li><Icon name="tick" size={16} />Opciones comparadas lado a lado</li><li><Icon name="tick" size={16} />El costo se acredita a trabajo posterior que empiece en 90 días</li></ul>
-            <a class="more" href="/es/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Pregunte por esto</a>
           </div>
         </div>
       </div>
@@ -159,7 +156,7 @@ const glance = [
       </div>
       <div class="grid grid-2" style="margin-top: 32px">
         {aiConsulting.map((o) => (
-          <div class="card card-row" id={o.id}>
+          <div class="card card-row card-wide" id={o.id}>
             <div class="icon"><Icon name={o.icon} size={36} /></div>
             <div>
               <h3>{o.title}</h3>
@@ -170,7 +167,7 @@ const glance = [
           </div>
         ))}
       </div>
-      <p class="small muted" style="margin-top: 20px"><b>Herramientas que uso.</b> ChatGPT, Claude, Gemini, Meta AI y Zapier. ¿Quiere probar una herramienta de IA hecha para su negocio, como un chatbot para preguntas de clientes? Vea el <a href="/es/production-emerging-tech/#ai-sprint">Sprint de Prototipo de IA</a>.</p>
+      <p class="small muted" style="margin-top: 20px"><b>Herramientas que uso.</b> ChatGPT, Claude, Gemini, Meta AI y Zapier. ¿Quiere un chatbot en su sitio web que responda las preguntas de sus clientes? Vea <a href="/es/websites/#addons">Chatbots de IA y aplicaciones web</a>.</p>
     </div>
   </section>
 
@@ -203,7 +200,7 @@ const glance = [
           </div>
         ))}
       </dl>
-      <p class="small muted" style="margin-top: 16px">¿Quiere probar una idea antes de comprometerse? <a href="/es/production-emerging-tech/#prototypes">Vea los Sprints de Prototipo</a>. Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
+      <p class="small muted" style="margin-top: 16px">Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
     </div>
   </section>
 
