@@ -37,12 +37,6 @@ const audiences = [
   { icon: 'bulb', title: 'Pequeños negocios y startups', text: '¿Le da curiosidad usar AR en su negocio? Empiece en pequeño, con una tarjeta, un volante o un producto que cobra vida en el teléfono.' },
 ];
 
-const glance = [
-  { name: 'Apoyo de Producción, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
-  { name: 'Apoyo de Producción, según lo necesite', price: '$65/hora' },
-  { name: 'Revisión del Plan de Producción', note: 'Alcance, hitos, riesgos y un plan, unas 2 semanas', price: '$650' },
-  { name: 'Proyecto AR Inicial', note: 'Una tarjeta, un volante o un producto en AR, se abre en el navegador del teléfono, 2–4 semanas', price: 'Desde $1,500' },
-];
 ---
 <Base title="Producción y Tecnología Emergente" seoTitle="Productora de videojuegos y XR, proyectos de AR | Auva Studio" schema={schema} description="Una productora para proyectos de videojuegos, XR e interactivos, además de revisiones del plan de producción y proyectos pequeños de AR para estudios, museos, recintos y pequeños negocios.">
   <section class="hero bd-hero bd-inner-hero">
@@ -72,7 +66,7 @@ const glance = [
           <li><Icon name="tick" size={18} />Documentos de diseño y seguimiento de tareas al día</li>
           <li><Icon name="tick" size={18} />Pruebas de juego, comentarios y revisiones de hitos</li>
           <li><Icon name="tick" size={18} />Coordinación del equipo, proveedores y colaboradores</li>
-          <li><Icon name="tick" size={18} />Por hora, o un bloque mensual de horas</li>
+          <li><Icon name="tick" size={18} />Por hora, o mensual: 10 horas $650, 20 horas $1,200 o 40 horas $2,200, con un mínimo de 3 meses</li>
         </ul>
         <a class="btn" href="/es/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Pregunte por el Apoyo de Producción</a>
         <p class="small muted" style="margin-top: 16px">¿Tiene un proyecto de sitio web, software o herramientas para un pequeño negocio? Vea la <a href="/es/technology-consulting/#delivery">gestión de proyectos en Tecnología, Automatización e IA</a>.</p>
@@ -158,25 +152,8 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt" id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Precios <em>de un vistazo.</em></h2>
-        <p class="lede">Cada proyecto empieza con una llamada gratis de 30 minutos, y usted recibe un alcance y un precio por escrito antes de empezar cualquier trabajo.</p>
-      </div>
-      <dl class="card glance">
-        {glance.map((g) => (
-          <div class="glance-row">
-            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
-            <dd>{g.price}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="small muted" style="margin-top: 16px">¿Busca talleres de IA o una Revisión Tecnológica para su negocio? Vea <a href="/es/technology-consulting/#ai">Tecnología, Automatización e IA</a>.</p>
-    </div>
-  </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap narrow-wrap">
       <div>
         <h2 class="mag-head">Experiencia de producción <em>en videojuegos, XR y trabajo interactivo.</em></h2>
@@ -190,6 +167,6 @@ const glance = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" alt />
 </Base>
