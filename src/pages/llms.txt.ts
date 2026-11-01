@@ -29,7 +29,7 @@ export function GET() {
     `- Every website package includes: ${packageBasics.join('; ')}.`,
     ...packages.map((p) => `- ${p.name} (${p.price}, one-time; ${p.timeline} once content is ready): ${p.blurb} ${items(p)}.`),
     '- Website terms: 50% deposit to start, balance at launch; 30 days of fixes and small tweaks after launch; upgrade to a bigger package any time and pay only the difference. Websites are built with Astro, with free or low-cost hosting and no plugins to maintain; sites on other platforms are quoted with any platform fees up front.',
-    '- Founding client offer: 10% off any website package for the first 10 clients, in exchange for a short review and permission to show the finished site as an example of Auva Studio's work. Registered nonprofits can ask about a nonprofit discount (the two do not combine).',
+    '- Founding client offer: 10% off any website package for the first 10 clients, in exchange for a short review and permission to show the finished site as an example of the work. Registered nonprofits can ask about a nonprofit discount (the two do not combine).',
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     `- [Brand Essentials](${site.url}/websites/brand-essentials/) ($1,000, on its own or with any website): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet, designed with a professional designer partner.`,
     `- Free website check (${site.url}/website-check/): 10 quick questions with an instant score and what to fix first.`,
