@@ -26,7 +26,7 @@ export const categories = [
     icon: 'globe',
     title: 'Servicios de sitios web',
     text: 'Sitios web que ayudan a sus clientes a encontrarle, confiar en usted y comunicarse.',
-    items: ['Paquetes de sitios web desde $1,500', 'Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
+    items: ['Paquetes de sitios web desde $1,500', 'Diagnóstico Web y configuración de su Google Business Profile', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
     href: '/es/websites/',
     cta: 'Ver servicios de sitios web',
   },
@@ -85,7 +85,7 @@ export const packages = [
     groups: [
       { label: 'Planificación y contenido', items: ['Una llamada de planificación y un plan de contenido', 'Pulo sus textos y completo lo que falte'] },
       { label: 'Diseño y desarrollo', items: ['Una sola página con desplazamiento o hasta 5 páginas, lo que mejor le funcione a su negocio. Le ayudo a decidir.', '2 diseños de página: uno para su página principal y otro para las demás', 'Diseño a la medida de su negocio, pensado primero para el celular', 'Un formulario de contacto y un mapa para encontrarle', '2 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Perfil de Negocio de Google, cuando aplique', 'Estadísticas sencillas de visitas'] },
+      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Google Business Profile, cuando aplique', 'Estadísticas sencillas de visitas'] },
     ],
     timeline: '2–3 semanas',
   },
