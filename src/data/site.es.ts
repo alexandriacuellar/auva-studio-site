@@ -157,7 +157,7 @@ export const care = [
 
 export const plans = [
   { name: 'Cambios mensuales', price: '$99 al mes', hours: '1 hora', text: '1 hora de cambios al mes, unos 2 cambios, más una revisión mensual de que sus formularios, enlaces y botones funcionan. Listo en 2 días hábiles.' },
-  { name: 'Cambios mensuales plus', price: '$179 al mes', hours: '2 horas', text: '2 horas al mes para cambios y ajustes en su CMS, una revisión mensual y una revisión de búsqueda cada 3 meses. Listo en 1 día hábil.' },
+  { name: 'Cambios mensuales plus', price: '$179 al mes', hours: '2 horas', text: '2 horas al mes para cambios, ajustes en su CMS o una página nueva sencilla con un diseño de página actual, una revisión mensual y una revisión de búsqueda cada 3 meses. Listo en 1 día hábil.' },
 ];
 
 export const monthly = {
