@@ -1,0 +1,39 @@
+---
+// Home page service cards: one photo, the name, one line, a short price list, and a link.
+// Modeled on the simple photo cards at greaterpurposeweb.com (alexandria, 2026-11-01).
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import websites from '../assets/home/websites.jpg';
+import tech from '../assets/home/tech.jpg';
+import production from '../assets/home/production.jpg';
+
+interface Props { categories: any[]; lang?: 'en' | 'es' }
+const { categories, lang = 'en' } = Astro.props;
+const photos: Record<string, { src: any; alt: { en: string; es: string } }> = {
+  websites: { src: websites, alt: { en: 'Two café owners smiling behind their counter', es: 'Dos dueños de una cafetería sonriendo detrás del mostrador' } },
+  tech: { src: tech, alt: { en: 'A woman planning work with sticky notes on a glass wall', es: 'Una mujer organizando el trabajo con notas adhesivas en una pared de vidrio' } },
+  production: { src: production, alt: { en: 'A woman exploring a virtual world in a VR headset', es: 'Una mujer explorando un mundo virtual con un visor de realidad virtual' } },
+};
+const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('technology') ? 'tech' : 'production';
+---
+<div class="svc-cards">
+  {categories.map((c) => {
+    const p = photos[key(c.href)];
+    return (
+      <a class="svc-card" href={c.href}>
+        <div class="svc-photo"><Image src={p.src} alt={p.alt[lang]} widths={[480, 760, 960]} sizes="(max-width: 960px) 100vw, 380px" /></div>
+        <div class="svc-body">
+          <h3>{c.title}</h3>
+          <p class="svc-line">{c.text}</p>
+          <div class="svc-list">
+          <ul class="svc-offers">
+            {c.offers.map(([name, price]: [string, string]) => <li><span>{name}</span><b>{price}</b></li>)}
+          </ul>
+          {c.note && <p class="svc-note">{c.note}</p>}
+          </div>
+          <span class="svc-more">{c.cta} <Icon name="arrow" size={16} /></span>
+        </div>
+      </a>
+    );
+  })}
+</div>
