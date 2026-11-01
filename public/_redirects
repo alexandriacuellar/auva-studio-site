@@ -1,5 +1,9 @@
 # Old page addresses, kept so links and search results still work.
-/ai /ai-emerging-tech/ 301
-/ai/ /ai-emerging-tech/ 301
+/ai /technology-consulting/#ai 301
+/ai/ /technology-consulting/#ai 301
+/ai-emerging-tech /production-emerging-tech/ 301
+/ai-emerging-tech/ /production-emerging-tech/ 301
+/es/ai-emerging-tech /es/production-emerging-tech/ 301
+/es/ai-emerging-tech/ /es/production-emerging-tech/ 301
 /consulting /technology-consulting/ 301
 /consulting/ /technology-consulting/ 301

@@ -1,0 +1,213 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../../assets/alexandria-cuellar.jpg';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, testimonials, aiOffers, serviceSchema } from '../../data/site.es';
+
+const offers = aiOffers.filter((o) => o.group !== 'consulting');
+const production = offers.find((o) => o.id === 'production')!;
+const prototypes = ['review', 'ai-sprint', 'xr-sprint'].map((id) => offers.find((o) => o.id === id)!);
+
+const faqs = [
+  { q: '¿Produce experiencias XR o videojuegos completos?', a: 'Los planifico y los gestiono como su productora. Los prototipos XR se construyen con un desarrollador colaborador, y las producciones más grandes pasan a un estudio colaborador de confianza, conmigo como su productora si así lo desea.' },
+  { q: '¿Con qué dispositivos trabaja?', a: 'Sigo de cerca la línea de Meta: los visores Meta Quest, los lentes Ray-Ban Meta y Meta Ray-Ban Display, los nuevos Meta VR Glasses cuando salgan a la venta y los mundos de Meta Horizon. También creo AR que se abre en el navegador del teléfono, sin descargar ninguna app. Una Revisión de Concepto y Viabilidad le recomienda el que mejor se ajusta a su público y su presupuesto.' },
+  { q: '¿Un prototipo queda listo para lanzarse?', a: 'No. Un prototipo es una prueba de concepto. Responde una sola pregunta con elementos visuales provisionales, para que usted decida si construirlo, cambiarlo o detenerse antes de invertir más.' },
+  { q: '¿Puede unirse a un proyecto que ya está en marcha?', a: 'Sí. El Apoyo de Producción muchas veces empieza a mitad del proyecto: reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },
+  { q: '¿También trabaja con pequeños negocios?', a: 'Sí. Si le da curiosidad usar AR o VR en su negocio, empiece con una Revisión de Concepto y Viabilidad. Para un sitio web, herramientas o un proyecto de IA, vea Consultoría e IA.' },
+];
+
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/production-emerging-tech/');
+
+const ideas = [
+  { icon: 'star', title: 'Una tarjeta de presentación con AR', text: 'Apunte el teléfono a la tarjeta y aparece su dueña, con botones para reservar, llamar o seguirla.', live: true },
+  { icon: 'book', title: 'Una exhibición que cobra vida', text: 'Etiquetas de museo o letreros históricos que muestran una escena, una voz o un objeto 3D a través del teléfono.' },
+  { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad, un recorrido o una conversación difícil en Meta Quest antes de hacerlo de verdad.' },
+  { icon: 'chat', title: 'Una guía manos libres en lentes de Meta', text: 'Ayuda paso a paso o un paseo guiado en lentes Ray-Ban Meta o Meta Ray-Ban Display, con las manos libres.' },
+  { icon: 'globe', title: 'Un mundo en Meta Horizon', text: 'Un espacio para su recinto, su marca o su evento que la gente puede visitar en VR o desde el teléfono.' },
+  { icon: 'layers', title: 'Un videojuego o una demo de VR', text: 'Una parte pequeña y jugable que ayuda a un estudio a presentar, probar o conseguir fondos para una idea más grande.' },
+];
+
+const sprint = [
+  { title: 'Definir', text: 'Acordamos la única pregunta que debe responder el prototipo y cómo se ve el éxito.' },
+  { title: 'Construir', text: 'Creo una versión pequeña y funcional, con un desarrollador colaborador cuando hace falta, usando herramientas existentes siempre que se pueda.' },
+  { title: 'Probar', text: 'Usted y algunos usuarios reales lo prueban, y yo reúno lo que funcionó y lo que no.' },
+  { title: 'Decidir', text: 'Recibe un breve informe con una recomendación: construirlo, cambiarlo o detenerse aquí, antes de invertir más.' },
+];
+
+const audiences = [
+  { icon: 'star', title: 'Estudios de videojuegos y XR', text: 'Necesita estructura de producción, un calendario en el que la gente confíe o una productora con experiencia sin contratar a nadie de tiempo completo.' },
+  { icon: 'book', title: 'Museos, educadores y organizaciones culturales', text: 'Está planificando una experiencia inmersiva o interactiva y quiere un alcance realista antes de comprometerse.' },
+  { icon: 'globe', title: 'Recintos, marcas y turismo', text: 'Atracciones, espacios para eventos, comercios y centros de visitantes que planean algo que la gente recuerde. Conozca el presupuesto primero.' },
+  { icon: 'bulb', title: 'Pequeños negocios y startups', text: '¿Le da curiosidad usar AR, VR o una herramienta de IA en su negocio? Pruebe la idea en pequeño antes de invertir en grande.' },
+];
+
+const glance = [
+  { name: 'Apoyo de Producción, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
+  { name: 'Apoyo de Producción, según lo necesite', price: '$65/hora' },
+  { name: 'Revisión de Concepto y Viabilidad', note: 'Si es viable, un presupuesto aproximado y el equipo que hace falta, unas 2 semanas', price: '$650' },
+  { name: 'Sprint de Prototipo de IA', note: 'Un chatbot o flujo de trabajo con IA, 2–3 semanas', price: 'Desde $2,500' },
+  { name: 'Sprint de Prototipo XR', note: '4–6 semanas, con un desarrollador colaborador', price: 'Desde $7,500' },
+];
+---
+<Base title="Producción y Tecnología Emergente" seoTitle="Productora de videojuegos y XR, prototipos de AR y VR | Auva Studio" schema={schema} description="Una productora para proyectos de videojuegos, XR e interactivos, además de revisiones de viabilidad y prototipos pequeños de AR, VR e IA para estudios, museos, recintos y pequeños negocios.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Una productora para su videojuego, <em>proyecto XR o interactivo.</em></h1>
+      <p class="lede">Mantengo los proyectos de videojuegos, XR e interactivos al día, desde la primera idea hasta el lanzamiento. ¿Le da curiosidad la AR o la VR, en teléfonos, Meta Quest o lentes de Meta? También ayudo a estudios, museos, recintos y pequeños negocios a probar una idea con un prototipo pequeño antes de invertir.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#production">Vea el Apoyo de Producción</a>
+      </div>
+      <ul class="hero-strip">{['Más de 14 experiencias de VR y juegos para celular', 'Planes, calendarios y documentos', 'Primer paso a precio fijo', 'Trabaje directamente conmigo'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Desde 2023 he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos, y usted trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a></span></div>
+  </section>
+
+  <section class="alt" id="production">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Apoyo de <em>Producción.</em></h2>
+        <p class="svc-meta"><span>Para equipos de videojuegos, XR y experiencias inmersivas</span> <b>{production.price}</b></p>
+        <p class="lede">{production.text} Me uno al inicio o a mitad del proyecto, unas horas por semana o como su productora integrada al equipo.</p>
+        <ul class="ticks">
+          <li><Icon name="tick" size={18} />Flujo de trabajo Agile, sprints y un calendario confiable</li>
+          <li><Icon name="tick" size={18} />Documentos de diseño y seguimiento de tareas al día</li>
+          <li><Icon name="tick" size={18} />Pruebas de juego, comentarios y revisiones de hitos</li>
+          <li><Icon name="tick" size={18} />Coordinación del equipo, proveedores y colaboradores</li>
+          <li><Icon name="tick" size={18} />Por hora, o un bloque mensual de horas</li>
+        </ul>
+        <a class="btn" href="/es/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Pregunte por el Apoyo de Producción</a>
+        <p class="small muted" style="margin-top: 16px">¿Tiene un proyecto de sitio web, software o herramientas para un pequeño negocio? Vea la <a href="/es/technology-consulting/#delivery">gestión de proyectos en Consultoría e IA</a>.</p>
+      </div>
+      <div class="values">
+        {testimonials.map((t) => (
+          <figure class="card quote">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
+        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar la suya.</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Demo en vivo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Pruébela con mi tarjeta <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="prototypes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Pruebe la idea <em>antes de invertir en ella.</em></h2>
+        <p class="lede">Empiece con una revisión y luego un prototipo pequeño. Los prototipos son pruebas de concepto: responden una sola pregunta, usan elementos visuales provisionales y no están listos para el público.</p>
+      </div>
+      <div class="grid grid-3">
+        {prototypes.map((o) => (
+          <div class="card offer" id={o.id}>
+            <div class="icon"><Icon name={o.icon} size={32} /></div>
+            <h3>{o.title}</h3>
+            <p class="svc-meta"><b>{o.price}</b></p>
+            <p class="muted">{o.text}</p>
+            <a class="more" href={`/es/production-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        ))}
+      </div>
+      <ol class="steps steps-4" id="sprint" style="margin-top: 40px">
+        {sprint.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="card card-row bigger" style="margin-top: 32px">
+        <div class="icon"><Icon name="layers" size={36} /></div>
+        <div>
+          <h3>¿Necesita algo más grande?</h3>
+          <p class="muted">Las producciones completas pasan a un estudio colaborador de confianza, y yo puedo seguir como su productora. Usted tiene a una persona que conoce el proyecto desde la primera idea.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Algo diferente?</h3>
+          <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Precios <em>de un vistazo.</em></h2>
+        <p class="lede">Cada proyecto empieza con una llamada gratis de 30 minutos, y usted recibe un alcance y un precio por escrito antes de empezar cualquier trabajo.</p>
+      </div>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="small muted" style="margin-top: 16px">¿Busca talleres de IA o un plan de preparación para su equipo? Vea <a href="/es/technology-consulting/#ai">Consultoría e IA</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap narrow-wrap">
+      <div>
+        <h2 class="mag-head">Experiencia de producción <em>en videojuegos, XR y trabajo interactivo.</em></h2>
+        <p class="lede">Soy creadora asociada de Meta Horizon Worlds, y he dirigido proyectos para estudios independientes de videojuegos, equipos de XR e interactivos, y organizaciones creativas, gestionando flujos de trabajo Agile, documentación de diseño, calendarios y equipos de personas muy creativas. Esa experiencia en producción mantiene los experimentos enfocados y con los pies en lo que de verdad se puede lanzar.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
+          <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
+        </div>
+        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> XR y videojuegos: Unity, Meta Quest, lentes de Meta, Meta Horizon y AR en el navegador. IA: ChatGPT, Claude, Gemini y Meta AI. Automatización: Zapier.</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" />
+</Base>

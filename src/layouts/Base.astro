@@ -13,8 +13,8 @@ const l = (href: string) => localize(href, lang);
 // Header, footer, and page-wide wording in each language.
 const t = {
   en: {
-    description: 'Websites you own, technology consulting, and AI & Emerging Tech for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
-    defaultTitle: 'Websites, Technology Consulting, AI & Emerging Tech',
+    description: 'Websites you own, technology and AI consulting, and production for games, XR, and emerging tech, for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
+    defaultTitle: 'Websites, Technology & AI Consulting, Production & Emerging Tech',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
     promoLabel: 'Founding offer',
@@ -36,7 +36,7 @@ const t = {
     ftMore: 'More services',
     ftTools: 'Free tools',
     ftAbout: 'About Alexandria',
-    footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/technology-consulting/', 'Consulting & Project Support'], ['/ai-emerging-tech/', 'AI & Emerging Tech'], ['/development-partnerships/', 'Development Partnerships']],
+    footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/technology-consulting/', 'Consulting & AI'], ['/production-emerging-tech/', 'Production & Emerging Tech'], ['/development-partnerships/', 'Development Partnerships']],
     getStarted: 'Get started',
     contact: 'Contact',
     bookCall: 'Book a call',
@@ -54,8 +54,8 @@ const t = {
     about: ', about: ',
   },
   es: {
-    description: 'Sitios web que son suyos, consultoría tecnológica, e IA y Tecnología Emergente para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
-    defaultTitle: 'Sitios web, consultoría tecnológica, IA y Tecnología Emergente',
+    description: 'Sitios web que son suyos, consultoría tecnológica y de IA, y producción para videojuegos, XR y tecnología emergente, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
+    defaultTitle: 'Sitios web, consultoría tecnológica y de IA, Producción y Tecnología Emergente',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
     promoLabel: 'Oferta para fundadores',
@@ -77,7 +77,7 @@ const t = {
     ftMore: 'Más servicios',
     ftTools: 'Herramientas gratis',
     ftAbout: 'Sobre Alexandria',
-    footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/technology-consulting/', 'Consultoría y apoyo en proyectos'], ['/ai-emerging-tech/', 'IA y Tecnología Emergente'], ['/development-partnerships/', 'Colaboraciones para agencias']],
+    footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/technology-consulting/', 'Consultoría e IA'], ['/production-emerging-tech/', 'Producción y Tecnología Emergente'], ['/development-partnerships/', 'Colaboraciones para agencias']],
     getStarted: 'Para empezar',
     contact: 'Contacto',
     bookCall: 'Reservar una llamada',
@@ -106,7 +106,7 @@ const hasSpanish = translatedPages.includes(base);
 const otherLang = lang === 'es' ? 'en' : 'es';
 const switchHref = switchPath(path, otherLang);
 
-const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, deliver projects, and explore AI & Emerging Tech. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
+const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
 // One graph per page: the business, its founder, the site, and this page, plus anything the page adds (services, FAQs).
 const schema = {
@@ -129,7 +129,7 @@ const schema = {
       founder: { '@id': `${site.url}/#founder` },
       sameAs: [...site.social.map((s) => s.href), site.googleProfile],
       hasMap: site.googleProfile,
-      knowsAbout: ['Website design and development', 'Astro', 'Technology consulting', 'Business analysis', 'Technical project management', 'Web production', 'Digital production', 'AI adoption', 'AI & Emerging Tech', 'XR and immersive experiences', 'Game production', 'Search engine optimization', 'Google Business Profile'],
+      knowsAbout: ['Website design and development', 'Astro', 'Technology consulting', 'Business analysis', 'Technical project management', 'Web production', 'Digital production', 'AI adoption', 'AI consulting', 'XR and immersive experiences', 'Augmented reality', 'Meta Quest', 'Meta Horizon Worlds', 'Game production', 'Search engine optimization', 'Google Business Profile'],
     },
     {
       '@type': 'Person',

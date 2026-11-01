@@ -4,8 +4,8 @@ import { langFromPath, localize } from '../i18n';
 interface Props { title?: string; text?: string }
 const lang = langFromPath(Astro.url.pathname);
 const t = {
-  en: { title: 'Bring me a problem, <em>project, or idea.</em>', text: "From a straightforward website to a complex technology project or an AI & Emerging Tech idea, I'll suggest the right next step.", book: 'Book a free 30-minute call', message: 'Send a message' },
-  es: { title: 'Tráigame un problema, <em>un proyecto o una idea.</em>', text: 'Desde un sitio web sencillo hasta un proyecto tecnológico complejo o una idea de IA y Tecnología Emergente, le sugiero el siguiente paso adecuado.', book: 'Reserve una llamada gratis de 30 minutos', message: 'Envíe un mensaje' },
+  en: { title: 'Bring me a problem, <em>project, or idea.</em>', text: "From a straightforward website to an AI question or a game or XR project, I'll suggest the right next step.", book: 'Book a free 30-minute call', message: 'Send a message' },
+  es: { title: 'Tráigame un problema, <em>un proyecto o una idea.</em>', text: 'Desde un sitio web sencillo hasta una pregunta sobre IA o un proyecto de videojuego o XR, le sugiero el siguiente paso adecuado.', book: 'Reserve una llamada gratis de 30 minutos', message: 'Envíe un mensaje' },
 }[lang];
 const { title = t.title, text = t.text } = Astro.props;
 ---

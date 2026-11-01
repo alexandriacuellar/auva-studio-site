@@ -17,7 +17,7 @@ export const site = {
 export const nav = [
   { href: '/es/websites/', label: 'Sitios web' },
   { href: '/es/technology-consulting/', label: 'Consultoría' },
-  { href: '/es/ai-emerging-tech/', label: 'IA y Tecnología Emergente' },
+  { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
   { href: '/es/about/', label: 'Sobre mí' },
 ];
 
@@ -32,19 +32,19 @@ export const categories = [
   },
   {
     icon: 'bulb',
-    title: 'Consultoría y apoyo en proyectos',
-    text: 'Elija las herramientas adecuadas, mejore la forma de trabajar y mantenga sus proyectos en marcha.',
-    items: ['Planificación tecnológica', 'Revisión de flujos de trabajo y procesos', 'Gestión de proyectos', 'Liderazgo de proyectos a tiempo parcial'],
+    title: 'Consultoría e IA',
+    text: 'Elija las herramientas adecuadas, ponga la IA a trabajar, mejore la forma de trabajar y mantenga sus proyectos en marcha.',
+    items: ['Planificación tecnológica', 'Revisión de flujos de trabajo y procesos', 'Talleres y planes de preparación para IA', 'Gestión de proyectos'],
     href: '/es/technology-consulting/',
     cta: 'Ver consultoría',
   },
   {
     icon: 'bolt',
-    title: 'IA y Tecnología Emergente',
-    text: 'Explore la IA, la realidad extendida (XR) y las ideas interactivas con pasos pequeños y de bajo riesgo.',
-    items: ['Plan de Preparación para IA', 'Taller de IA para Equipos', 'Revisiones de viabilidad y prototipos', 'Apoyo de producción'],
-    href: '/es/ai-emerging-tech/',
-    cta: 'Ver IA y Tecnología Emergente',
+    title: 'Producción y Tecnología Emergente',
+    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de prototipos pequeños para probar ideas nuevas.',
+    items: ['Apoyo de producción para equipos de videojuegos y XR', 'AR y VR para teléfonos, Meta Quest y lentes de Meta', 'Revisión de Concepto y Viabilidad', 'Prototipos de IA y XR'],
+    href: '/es/production-emerging-tech/',
+    cta: 'Ver Producción y Tecnología Emergente',
   },
 ];
 
@@ -52,7 +52,6 @@ export const consulting = [
   { id: 'planning', price: 'Evaluación Tecnológica $650, sesiones $65/hora', icon: 'compass', title: 'Planificación Tecnológica', text: 'La visión completa. Reviso todas las herramientas que usa, encuentro lo que falta y le doy un plan de qué arreglar, reemplazar o agregar primero.', items: ['Evaluaciones y auditorías tecnológicas', 'Hojas de ruta y prioridades', 'Recomendaciones de plataformas y herramientas'] },
   { id: 'analysis', price: 'Desde $1,000', icon: 'chart', title: 'Análisis de Negocio y Revisión de Procesos', text: 'Un proceso, a fondo. Describo cómo se hace una tarea hoy, encuentro qué está frenando a su equipo y detallo lo que necesita una solución antes de que usted construya o compre. Se puede contratar por sí solo, sin obligación de contratarme para el siguiente paso.', items: ['Mapeo de flujos de trabajo y procesos', 'Requisitos y especificaciones', 'Comparación de opciones de solución'] },
   { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Liderazgo de proyectos a tiempo parcial'] },
-  { id: 'ai', price: 'Desde $500', icon: 'bolt', title: 'IA y Tecnología Emergente', text: 'Encuentre formas prácticas de usar la IA, la XR y la tecnología interactiva, y pruebe sus ideas antes de invertir.', items: ['Ayudar a su equipo a empezar con herramientas de IA', 'Planificar experiencias XR e inmersivas', 'Comprobar si una idea interactiva o de videojuego es viable', 'Apoyo de producción para equipos de XR y videojuegos'] },
 ];
 
 export const whyAuva = [
@@ -171,10 +170,10 @@ export const monthly = {
 export { testimonials } from './site';
 
 export const aiOffers = [
-  { id: 'workshop', group: 'ai', icon: 'chat', title: 'Taller de IA para Equipos', price: 'Desde $500', text: 'Una sesión práctica de 2 horas para hasta 10 personas. Su equipo practica con herramientas de IA en trabajo real y se lleva una guía de una página.' },
-  { id: 'readiness', group: 'ai', icon: 'compass', title: 'Plan de Preparación para IA', price: '$650', text: 'Dónde puede la IA ahorrarle tiempo a su equipo en el trabajo que ya hace, qué herramientas le convienen y cómo usarlas de forma segura. Tres sesiones de una hora y un plan por escrito.' },
-  { id: 'ai-sprint', group: 'ai', icon: 'bolt', title: 'Sprint de Prototipo de IA', price: 'Desde $2,500', text: 'Una prueba pequeña y funcional de una herramienta de IA para su negocio, como un chatbot que responde preguntas de clientes o un flujo que redacta correos de rutina. Luego repasamos juntos lo que aprendimos, todo en 2–3 semanas.' },
-  { id: 'review', group: 'xr', icon: 'search', title: 'Revisión de Concepto y Viabilidad', price: '$650', text: '¿Tiene una idea de XR, videojuego o experiencia interactiva? Averigüe si es viable, qué tecnología le conviene, un presupuesto aproximado y el equipo que haría falta. Unas 2 semanas.' },
-  { id: 'xr-sprint', group: 'xr', icon: 'layers', title: 'Sprint de Prototipo XR', price: 'Desde $7,500', text: 'Una prueba pequeña y funcional de su idea de XR o interactiva, construida con un desarrollador colaborador, y luego un repaso de lo que aprendimos. 4–6 semanas.' },
-  { id: 'production', group: 'xr', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de XR, videojuegos y experiencias inmersivas: planes, calendarios, documentos y mantener a todos alineados.' },
+  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: 'Desde $500', text: 'Una sesión práctica de 2 horas para hasta 10 personas. Su equipo practica con herramientas de IA en trabajo real y se lleva una guía de una página.' },
+  { id: 'readiness', group: 'consulting', icon: 'compass', title: 'Plan de Preparación para IA', price: '$650', text: 'Dónde puede la IA ahorrarle tiempo a su equipo en el trabajo que ya hace, qué herramientas le convienen y cómo usarlas de forma segura. Tres sesiones de una hora y un plan por escrito.' },
+  { id: 'ai-sprint', group: 'prototype', icon: 'bolt', title: 'Sprint de Prototipo de IA', price: 'Desde $2,500', text: 'Una prueba pequeña y funcional de una herramienta de IA para su negocio, como un chatbot que responde preguntas de clientes o un flujo que redacta correos de rutina. Luego repasamos juntos lo que aprendimos, todo en 2–3 semanas.' },
+  { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión de Concepto y Viabilidad', price: '$650', text: '¿Tiene una idea de XR, videojuego o experiencia interactiva? Averigüe si es viable, qué tecnología le conviene, un presupuesto aproximado y el equipo que haría falta. Unas 2 semanas.' },
+  { id: 'xr-sprint', group: 'prototype', icon: 'layers', title: 'Sprint de Prototipo XR', price: 'Desde $7,500', text: 'Una prueba pequeña y funcional de su idea de XR o interactiva, construida con un desarrollador colaborador, y luego un repaso de lo que aprendimos. 4–6 semanas.' },
+  { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
 ];

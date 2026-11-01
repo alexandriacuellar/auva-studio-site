@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import headshot from '../assets/alexandria-cuellar.jpg';
+import '../styles/pages/production-emerging-tech.css';
+import Icon from '../components/Icon.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Faq from '../components/Faq.astro';
+import { site, testimonials, aiOffers, serviceSchema } from '../data/site';
+
+const offers = aiOffers.filter((o) => o.group !== 'consulting');
+const production = offers.find((o) => o.id === 'production')!;
+const prototypes = ['review', 'ai-sprint', 'xr-sprint'].map((id) => offers.find((o) => o.id === id)!);
+
+const faqs = [
+  { q: 'Do you build full XR or game productions?', a: "I plan and manage them as your producer. XR prototypes are built with a developer partner, and bigger builds go to a trusted studio partner, with me as your producer if you'd like." },
+  { q: 'Which devices do you work with?', a: "I follow Meta's lineup closely: Meta Quest headsets, Ray-Ban Meta and Meta Ray-Ban Display glasses, the new Meta VR Glasses when they ship, and Meta Horizon worlds. I also build AR that opens in a phone's browser, with no app needed. A Concept & Feasibility Review recommends the one that fits your audience and budget." },
+  { q: 'Will a prototype be ready to launch?', a: 'No. A prototype is a proof of concept. It answers one question with placeholder visuals, so you can decide to build, change, or stop before investing more.' },
+  { q: 'Can you join a project that is already underway?', a: 'Yes. Production Support often starts mid-project: I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
+  { q: 'Do you work with small businesses too?', a: "Yes. If you're curious about AR or VR for your business, start with a Concept & Feasibility Review. For a website, tools, or AI project, see Consulting & AI." },
+];
+
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
+
+const ideas = [
+  { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
+  { icon: 'book', title: 'An exhibit that comes alive', text: 'Museum labels or historic signs that show a scene, a voice, or a 3D object through a phone.' },
+  { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step, a tour, or a hard conversation on Meta Quest before doing it for real.' },
+  { icon: 'chat', title: 'A hands-free guide on Meta glasses', text: 'Step-by-step help or a guided walk on Ray-Ban Meta or Meta Ray-Ban Display glasses, while hands stay free.' },
+  { icon: 'globe', title: 'A Meta Horizon world', text: 'A space for your venue, brand, or event that people can visit in VR or on their phone.' },
+  { icon: 'layers', title: 'A game or VR demo', text: 'A small, playable slice that helps a studio pitch, test, or raise money for a bigger idea.' },
+];
+
+const sprint = [
+  { title: 'Define', text: 'We agree on the one question the prototype should answer and what success looks like.' },
+  { title: 'Build', text: 'I create a small, working version, with a developer partner when needed, using existing tools wherever possible.' },
+  { title: 'Test', text: "You and a few real users try it, and I gather what worked and what didn't." },
+  { title: 'Decide', text: 'You get a short report with a recommendation: build it, change it, or stop here, before you invest more.' },
+];
+
+const audiences = [
+  { icon: 'star', title: 'Game and XR studios', text: 'You need production structure, a schedule people trust, or an experienced producer without a full-time hire.' },
+  { icon: 'book', title: 'Museums, educators, and cultural organizations', text: "You're planning an immersive or interactive experience and want a realistic scope before you commit." },
+  { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, event spaces, retailers, and visitor centers planning something people will remember. Know the budget first.' },
+  { icon: 'bulb', title: 'Small businesses and startups', text: 'Curious about AR, VR, or an AI tool for your business? Test the idea small before you spend big.' },
+];
+
+const glance = [
+  { name: 'Production Support, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
+  { name: 'Production Support, as needed', price: '$65/hr' },
+  { name: 'Concept & Feasibility Review', note: 'Is it doable, a rough budget, and the team it takes, about 2 weeks', price: '$650' },
+  { name: 'AI Prototype Sprint', note: 'An AI chatbot or workflow, 2–3 weeks', price: 'From $2,500' },
+  { name: 'XR Prototype Sprint', note: '4–6 weeks, with a developer partner', price: 'From $7,500' },
+];
+---
+<Base title="Production & Emerging Tech" seoTitle="Game & XR Producer, AR/VR Prototypes | Auva Studio" schema={schema} description="A producer for game, XR, and interactive projects, plus feasibility reviews and small AR, VR, and AI prototypes for studios, museums, venues, and small businesses.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">A producer for your game, <em>XR, or interactive project.</em></h1>
+      <p class="lede">I keep game, XR, and interactive projects on schedule, from first idea to launch. Curious about AR or VR, on phones, Meta Quest, or Meta glasses? I also help studios, museums, venues, and small businesses test an idea with a small prototype before they invest.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#production">See Production Support</a>
+      </div>
+      <ul class="hero-strip">{['14+ VR experiences and mobile games', 'Plans, schedules, and documents', 'Fixed-price first step', 'Work with me directly'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="hello-band" aria-label="Alexandria Cuellar">
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria.</b> Since 2023 I've managed 14+ VR experiences and mobile games for indie game studios, and you'll work with me directly. <a href="/about/">More about me</a></span></div>
+  </section>
+
+  <section class="alt" id="production">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Production <em>Support.</em></h2>
+        <p class="svc-meta"><span>For game, XR, and immersive teams</span> <b>{production.price}</b></p>
+        <p class="lede">{production.text} Join at the start or partway through, for a few hours a week or as your embedded producer.</p>
+        <ul class="ticks">
+          <li><Icon name="tick" size={18} />Agile workflow, sprints, and a schedule people trust</li>
+          <li><Icon name="tick" size={18} />Design documents and task tracking kept up to date</li>
+          <li><Icon name="tick" size={18} />Playtests, feedback, and milestone reviews</li>
+          <li><Icon name="tick" size={18} />Team, vendor, and partner coordination</li>
+          <li><Icon name="tick" size={18} />Hourly, or a monthly block of hours</li>
+        </ul>
+        <a class="btn" href="/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Ask about Production Support</a>
+        <p class="small muted" style="margin-top: 16px">Running a website, software, or tools project for a small business? See <a href="/technology-consulting/#delivery">project management on Consulting &amp; AI</a>.</p>
+      </div>
+      <div class="values">
+        {testimonials.map((t) => (
+          <figure class="card quote">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What we could <em>build together.</em></h2>
+        <p class="lede">AR and VR for phones, Meta Quest, and Meta glasses. The first one is my own business card. The rest are ideas to spark yours.</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Live demo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="prototypes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Test the idea <em>before you invest in it.</em></h2>
+        <p class="lede">Start with a review, then a small prototype. Prototypes are proofs of concept: they answer one question, use placeholder visuals, and aren't ready for public release.</p>
+      </div>
+      <div class="grid grid-3">
+        {prototypes.map((o) => (
+          <div class="card offer" id={o.id}>
+            <div class="icon"><Icon name={o.icon} size={32} /></div>
+            <h3>{o.title}</h3>
+            <p class="svc-meta"><b>{o.price}</b></p>
+            <p class="muted">{o.text}</p>
+            <a class="more" href={`/production-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this</a>
+          </div>
+        ))}
+      </div>
+      <ol class="steps steps-4" id="sprint" style="margin-top: 40px">
+        {sprint.map((s, i) => (
+          <li>
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="card card-row bigger" style="margin-top: 32px">
+        <div class="icon"><Icon name="layers" size={36} /></div>
+        <div>
+          <h3>Need something bigger?</h3>
+          <p class="muted">Full productions go to a trusted studio partner, and I can stay on as your producer. You get one person who knows the project from the first idea.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Who I <em>work with.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me what you're working on, and I'll suggest where to start.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
+        <p class="lede">Every project starts with a free 30-minute call, and you get a written scope and price before any work begins.</p>
+      </div>
+      <dl class="card glance">
+        {glance.map((g) => (
+          <div class="glance-row">
+            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
+            <dd>{g.price}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="small muted" style="margin-top: 16px">Looking for AI workshops or a readiness plan for your team? See <a href="/technology-consulting/#ai">Consulting &amp; AI</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap narrow-wrap">
+      <div>
+        <h2 class="mag-head">Production experience <em>across games, XR, and interactive work.</em></h2>
+        <p class="lede">I'm a Meta Horizon Worlds creator partner, and I've led projects for indie game studios, XR and interactive teams, and creative organizations, managing Agile workflows, design documentation, schedules, and teams of highly creative people. That production background keeps experiments focused and grounded in what can actually ship.</p>
+        <div class="stats">
+          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
+          <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>
+        </div>
+        <p class="small muted" style="margin-top: 20px"><b>Tools I work with.</b> XR and games: Unity, Meta Quest, Meta glasses, Meta Horizon, and AR in the browser. AI: ChatGPT, Claude, Gemini, and Meta AI. Automation: Zapier.</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" />
+</Base>
