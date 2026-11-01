@@ -35,7 +35,16 @@ export const site = {
 };
 
 export const nav = [
-  { href: '/websites/', label: 'Websites' },
+  {
+    href: '/websites/', label: 'Websites', menuLabel: 'Website pages',
+    children: [
+      { href: '/websites/', label: 'Website packages' },
+      { href: '/websites/diagnostic/', label: 'Website Diagnostic' },
+      { href: '/websites/google-business-profile/', label: 'Google Business Profile' },
+      { href: '/websites/help-after-launch/', label: 'Help After Launch' },
+      { href: '/websites/brand-essentials/', label: 'Brand Essentials' },
+    ],
+  },
   { href: '/technology-consulting/', label: 'Tech, Automation & AI' },
   { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
   { href: '/about/', label: 'About' },
