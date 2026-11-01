@@ -38,6 +38,7 @@ const aiTasks = [
 const glance = [
   { name: 'Technology Assessment', note: '3 sessions, research, and a written plan', price: '$650' },
   { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
+  { name: 'Automation setup', note: 'One workflow, with a how-to guide', price: 'From $500' },
   { name: 'Project lead, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
   { name: 'Team AI Workshop', note: '2 hours, up to 10 people', price: 'From $500' },
   { name: 'AI Readiness Plan', note: '3 sessions and a written plan', price: '$650' },
@@ -47,8 +48,8 @@ const glance = [
 <Base title="Consulting & AI" seoTitle="Technology & AI Consulting for Small Businesses | Auva Studio" schema={schema} description="Help choosing the right tools, putting AI to work, fixing slow processes, and keeping tech projects on track, for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">The right tools, <em>set up and working for you.</em></h1>
-      <p class="lede">Too many apps, a process held together with workarounds, or a project that keeps slipping? I help small businesses, nonprofits, and growing teams choose the right tools, put AI to work, fix how work gets done, and keep projects on track.</p>
+      <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
+      <p class="lede">Too many apps, a process held together with workarounds, or a project that keeps slipping? I help small businesses, nonprofits, and growing teams choose the right tools, automate the busywork, put AI to work, and keep projects on track.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#planning">See the $650 Technology Assessment</a>
@@ -70,7 +71,8 @@ const glance = [
       <ul class="route-list">
         <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>You pay for apps nobody uses</b><span class="muted">Or you have so many tools that none of them talk to each other.</span></span></a></li>
         <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>You need new software and don't know which</b><span class="muted">Booking, point of sale, accounting, email, or a customer list, with too many options to compare.</span></span></a></li>
-        <li><a href="#analysis"><span class="icon"><Icon name="chart" /></span><span><b>Your team types the same thing twice</b><span class="muted">Information lives in three places, so mistakes and extra work pile up.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="chart" /></span><span><b>Your team types the same thing twice</b><span class="muted">Information lives in three places, so mistakes and extra work pile up.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="gear" /></span><span><b>Follow-ups and reports eat your week</b><span class="muted">Reminder emails, new-client paperwork, and the same monthly report, all by hand.</span></span></a></li>
         <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>A simple task takes hours</b><span class="muted">Spreadsheets, workarounds, and "that's how we've always done it."</span></span></a></li>
         <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>You know AI could help, but not where</b><span class="muted">Your team tried a chatbot once, or nobody has had time to figure it out.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>A tech project keeps slipping</b><span class="muted">A new system, a move, or an upgrade with no one clearly in charge.</span></span></a></li>
@@ -82,28 +84,28 @@ const glance = [
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Four ways <em>I help.</em></h2>
+        <h2 class="mag-head">Five ways <em>I help.</em></h2>
         <p class="lede">Every one starts with a free call, and you get a written price before any work begins.</p>
       </div>
       <div class="grid grid-2">
-        <div class="card card-row" id="planning">
-          <div class="icon"><Icon name="compass" size={36} /></div>
+        <div class="card card-row" id="automation">
+          <div class="icon"><Icon name="gear" size={36} /></div>
           <div>
-            <h3>Get a plan for your tools</h3>
-            <p class="svc-meta"><span>Technology Assessment</span> <b>$650</b></p>
-            <p class="muted">I look at every tool you pay for, find what's missing or wasted, and give you a written plan for what to keep, replace, or add first.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />A review of your tools and subscriptions</li><li><Icon name="tick" size={16} />A written plan in priority order</li><li><Icon name="tick" size={16} />Help choosing new software or vendors</li></ul>
-            <a class="more" href="/technology-consulting/?topic=planning#start" style="margin-top: 12px">Ask about this</a>
+            <h3>Automate the busywork</h3>
+            <p class="svc-meta"><span>Automation setup</span> <b>From $500</b></p>
+            <p class="muted">I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, monthly reports, or copying details from one app to another. Not every automation needs AI.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />One workflow, set up in your own accounts</li><li><Icon name="tick" size={16} />A short how-to guide for your team</li><li><Icon name="tick" size={16} />Any tool fees are billed to you directly, in your name</li><li><Icon name="tick" size={16} />Some tasks are better done by a person, and I'll tell you which</li></ul>
+            <a class="more" href="/technology-consulting/?topic=automation#start" style="margin-top: 12px">Ask about this</a>
           </div>
         </div>
-        <div class="card card-row" id="analysis">
-          <div class="icon"><Icon name="chart" size={36} /></div>
+        <div class="card card-row">
+          <div class="icon"><Icon name="bolt" size={36} /></div>
           <div>
-            <h3>Fix a process that slows you down</h3>
-            <p class="svc-meta"><span>Business Analysis & Process Review</span> <b>From $1,000</b></p>
-            <p class="muted">I map how one task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />A clear map of how the work gets done now</li><li><Icon name="tick" size={16} />What a fix needs, written down</li><li><Icon name="tick" size={16} />Options compared side by side</li></ul>
-            <a class="more" href="/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Ask about this</a>
+            <h3>Put AI to work</h3>
+            <p class="svc-meta"><span>Team AI Workshop or AI Readiness Plan</span> <b>From $500</b></p>
+            <p class="muted">Find where AI can save your team time, choose tools you can trust, and get everyone using them.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Practice on your real tasks, not demos</li><li><Icon name="tick" size={16} />Privacy and quality covered</li><li><Icon name="tick" size={16} />Made for non-technical teams</li></ul>
+            <a class="more" href="#ai" style="margin-top: 12px">See AI for your team <Icon name="arrow" size={16} /></a>
           </div>
         </div>
         <div class="card card-row" id="delivery">
@@ -117,14 +119,24 @@ const glance = [
             <p class="small muted" style="margin-top: 12px">Making a game or XR project? See <a href="/production-emerging-tech/#production">Production Support</a>.</p>
           </div>
         </div>
-        <div class="card card-row">
-          <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div class="card card-row" id="planning">
+          <div class="icon"><Icon name="compass" size={36} /></div>
           <div>
-            <h3>Put AI to work</h3>
-            <p class="svc-meta"><span>Team AI Workshop or AI Readiness Plan</span> <b>From $500</b></p>
-            <p class="muted">Find where AI can save your team time, choose tools you can trust, and get everyone using them.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Practice on your real tasks, not demos</li><li><Icon name="tick" size={16} />Privacy and quality covered</li><li><Icon name="tick" size={16} />Made for non-technical teams</li></ul>
-            <a class="more" href="#ai" style="margin-top: 12px">See AI for your team <Icon name="arrow" size={16} /></a>
+            <h3>Get a plan for your tools</h3>
+            <p class="svc-meta"><span>Technology Assessment</span> <b>$650</b></p>
+            <p class="muted">I look at every tool you pay for, find what's missing or wasted, and give you a written plan for what to keep, replace, or add first.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A review of your tools and subscriptions</li><li><Icon name="tick" size={16} />A written plan in priority order</li><li><Icon name="tick" size={16} />Help choosing new software or vendors</li></ul>
+            <a class="more" href="/technology-consulting/?topic=planning#start" style="margin-top: 12px">Ask about this</a>
+          </div>
+        </div>
+        <div class="card card-row card-wide" id="analysis">
+          <div class="icon"><Icon name="chart" size={36} /></div>
+          <div>
+            <h3>Fix a process that slows you down</h3>
+            <p class="svc-meta"><span>Business Analysis & Process Review</span> <b>From $1,000</b></p>
+            <p class="muted">I map how one task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A clear map of how the work gets done now</li><li><Icon name="tick" size={16} />What a fix needs, written down</li><li><Icon name="tick" size={16} />Options compared side by side</li></ul>
+            <a class="more" href="/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Ask about this</a>
           </div>
         </div>
       </div>

@@ -33,8 +33,8 @@ export const categories = [
   {
     icon: 'bulb',
     title: 'Consultoría e IA',
-    text: 'Elija las herramientas adecuadas, ponga la IA a trabajar, mejore la forma de trabajar y mantenga sus proyectos en marcha.',
-    items: ['Planificación tecnológica', 'Revisión de flujos de trabajo y procesos', 'Talleres y planes de preparación para IA', 'Gestión de proyectos'],
+    text: 'Elija las herramientas adecuadas, automatice el trabajo repetitivo, ponga la IA a trabajar y mantenga sus proyectos en marcha.',
+    items: ['Planificación tecnológica', 'Automatizaciones para el trabajo repetitivo', 'Revisión de flujos de trabajo y procesos', 'Talleres y planes de preparación para IA', 'Gestión de proyectos'],
     href: '/es/technology-consulting/',
     cta: 'Ver consultoría',
   },
@@ -51,6 +51,7 @@ export const categories = [
 export const consulting = [
   { id: 'planning', price: 'Evaluación Tecnológica $650, sesiones $65/hora', icon: 'compass', title: 'Planificación Tecnológica', text: 'La visión completa. Reviso todas las herramientas que usa, encuentro lo que falta y le doy un plan de qué arreglar, reemplazar o agregar primero.', items: ['Evaluaciones y auditorías tecnológicas', 'Hojas de ruta y prioridades', 'Recomendaciones de plataformas y herramientas'] },
   { id: 'analysis', price: 'Desde $1,000', icon: 'chart', title: 'Análisis de Negocio y Revisión de Procesos', text: 'Un proceso, a fondo. Describo cómo se hace una tarea hoy, encuentro qué está frenando a su equipo y detallo lo que necesita una solución antes de que usted construya o compre. Se puede contratar por sí solo, sin obligación de contratarme para el siguiente paso.', items: ['Mapeo de flujos de trabajo y procesos', 'Requisitos y especificaciones', 'Comparación de opciones de solución'] },
+  { id: 'automation', price: 'Desde $500', icon: 'gear', title: 'Configuración de automatización', text: 'Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos y reportes mensuales. Un flujo de trabajo, configurado en sus propias cuentas, con una guía breve.', items: ['Automatización de flujos de trabajo', 'Conexión de las aplicaciones que ya usa', 'Guía para su equipo'] },
   { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Liderazgo de proyectos a tiempo parcial'] },
 ];
 

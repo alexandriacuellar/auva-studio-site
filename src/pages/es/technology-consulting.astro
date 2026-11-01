@@ -37,6 +37,7 @@ const aiTasks = [
 const glance = [
   { name: 'Evaluación Tecnológica', note: '3 sesiones, investigación y un plan por escrito', price: '$650' },
   { name: 'Análisis de Negocio y Revisión de Procesos', note: 'Un proceso, unas 15 horas', price: 'Desde $1,000' },
+  { name: 'Configuración de automatización', note: 'Un flujo de trabajo, con una guía', price: 'Desde $500' },
   { name: 'Líder de proyecto, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
   { name: 'Taller de IA para Equipos', note: '2 horas, hasta 10 personas', price: 'Desde $500' },
   { name: 'Plan de Preparación para IA', note: '3 sesiones y un plan por escrito', price: '$650' },
@@ -46,8 +47,8 @@ const glance = [
 <Base title="Consultoría e IA" seoTitle="Consultoría tecnológica y de IA para pequeños negocios | Auva Studio" schema={schema} description="Ayuda para elegir las herramientas adecuadas, poner la IA a trabajar, mejorar procesos lentos y mantener en marcha los proyectos tecnológicos, para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">Las herramientas adecuadas, <em>configuradas y trabajando para usted.</em></h1>
-      <p class="lede">¿Demasiadas aplicaciones, un proceso sostenido con parches o un proyecto que siempre se atrasa? Ayudo a pequeños negocios, organizaciones sin fines de lucro y equipos en crecimiento a elegir las herramientas adecuadas, poner la IA a trabajar, mejorar cómo se hace el trabajo y mantener los proyectos en marcha.</p>
+      <h1 class="mag-head">Menos trabajo repetitivo, mejores herramientas, <em>proyectos que se terminan.</em></h1>
+      <p class="lede">¿Demasiadas aplicaciones, un proceso sostenido con parches o un proyecto que siempre se atrasa? Ayudo a pequeños negocios, organizaciones sin fines de lucro y equipos en crecimiento a elegir las herramientas adecuadas, automatizar el trabajo repetitivo, poner la IA a trabajar y mantener los proyectos en marcha.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#planning">Vea la Evaluación Tecnológica de $650</a>
@@ -69,7 +70,8 @@ const glance = [
       <ul class="route-list">
         <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>Paga aplicaciones que nadie usa</b><span class="muted">O tiene tantas herramientas que ninguna se conecta con las demás.</span></span></a></li>
         <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>Necesita un programa nuevo y no sabe cuál</b><span class="muted">Reservas, punto de venta, contabilidad, correo o lista de clientes, con demasiadas opciones para comparar.</span></span></a></li>
-        <li><a href="#analysis"><span class="icon"><Icon name="chart" /></span><span><b>Su equipo escribe lo mismo dos veces</b><span class="muted">La información vive en tres lugares, y se acumulan errores y trabajo extra.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="chart" /></span><span><b>Su equipo escribe lo mismo dos veces</b><span class="muted">La información vive en tres lugares, y se acumulan errores y trabajo extra.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="gear" /></span><span><b>Los seguimientos y reportes le consumen la semana</b><span class="muted">Correos de recordatorio, papeleo de clientes nuevos y el mismo reporte mensual, todo a mano.</span></span></a></li>
         <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>Una tarea sencilla toma horas</b><span class="muted">Hojas de cálculo, parches y "así lo hemos hecho siempre".</span></span></a></li>
         <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>Sabe que la IA podría ayudar, pero no dónde</b><span class="muted">Su equipo probó un chatbot una vez, o nadie ha tenido tiempo de averiguarlo.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>Un proyecto tecnológico siempre se atrasa</b><span class="muted">Un sistema nuevo, una mudanza o una actualización sin nadie claramente a cargo.</span></span></a></li>
@@ -81,28 +83,28 @@ const glance = [
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Cuatro formas <em>de ayudarle.</em></h2>
+        <h2 class="mag-head">Cinco formas <em>de ayudarle.</em></h2>
         <p class="lede">Todas empiezan con una llamada gratis, y recibe un precio por escrito antes de empezar cualquier trabajo.</p>
       </div>
       <div class="grid grid-2">
-        <div class="card card-row" id="planning">
-          <div class="icon"><Icon name="compass" size={36} /></div>
+        <div class="card card-row" id="automation">
+          <div class="icon"><Icon name="gear" size={36} /></div>
           <div>
-            <h3>Un plan para sus herramientas</h3>
-            <p class="svc-meta"><span>Evaluación Tecnológica</span> <b>$650</b></p>
-            <p class="muted">Reviso cada herramienta que paga, encuentro lo que falta o sobra, y le doy un plan por escrito de qué mantener, reemplazar o agregar primero.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Una revisión de sus herramientas y suscripciones</li><li><Icon name="tick" size={16} />Un plan por escrito en orden de prioridad</li><li><Icon name="tick" size={16} />Ayuda para elegir programas o proveedores nuevos</li></ul>
-            <a class="more" href="/es/technology-consulting/?topic=planning#start" style="margin-top: 12px">Pregunte por esto</a>
+            <h3>Automatice el trabajo repetitivo</h3>
+            <p class="svc-meta"><span>Configuración de automatización</span> <b>Desde $500</b></p>
+            <p class="muted">Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos, reportes mensuales o pasar datos de una aplicación a otra. No toda automatización necesita IA.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Un flujo de trabajo, configurado en sus propias cuentas</li><li><Icon name="tick" size={16} />Una guía breve para su equipo</li><li><Icon name="tick" size={16} />Cualquier costo de herramientas se le cobra directamente a usted, a su nombre</li><li><Icon name="tick" size={16} />Algunas tareas es mejor que las haga una persona, y le diré cuáles</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=automation#start" style="margin-top: 12px">Pregunte por esto</a>
           </div>
         </div>
-        <div class="card card-row" id="analysis">
-          <div class="icon"><Icon name="chart" size={36} /></div>
+        <div class="card card-row">
+          <div class="icon"><Icon name="bolt" size={36} /></div>
           <div>
-            <h3>Mejore un proceso que le frena</h3>
-            <p class="svc-meta"><span>Análisis de Negocio y Revisión de Procesos</span> <b>Desde $1,000</b></p>
-            <p class="muted">Describo cómo se hace hoy una tarea, encuentro qué está frenando a su equipo y dejo por escrito lo que necesita una solución antes de construir o comprar. Disponible por sí solo, sin obligación de contratarme para el siguiente paso.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Un mapa claro de cómo se hace el trabajo hoy</li><li><Icon name="tick" size={16} />Lo que necesita una solución, por escrito</li><li><Icon name="tick" size={16} />Opciones comparadas lado a lado</li></ul>
-            <a class="more" href="/es/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Pregunte por esto</a>
+            <h3>Ponga la IA a trabajar</h3>
+            <p class="svc-meta"><span>Taller de IA para Equipos o Plan de Preparación para IA</span> <b>Desde $500</b></p>
+            <p class="muted">Descubra dónde la IA puede ahorrarle tiempo a su equipo, elija herramientas confiables y logre que todos las usen.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Práctica con sus tareas reales, no demostraciones</li><li><Icon name="tick" size={16} />Privacidad y calidad cubiertas</li><li><Icon name="tick" size={16} />Pensado para equipos sin perfil técnico</li></ul>
+            <a class="more" href="#ai" style="margin-top: 12px">Vea IA para su equipo <Icon name="arrow" size={16} /></a>
           </div>
         </div>
         <div class="card card-row" id="delivery">
@@ -116,14 +118,24 @@ const glance = [
             <p class="small muted" style="margin-top: 12px">¿Está creando un videojuego o un proyecto XR? Vea el <a href="/es/production-emerging-tech/#production">Apoyo de Producción</a>.</p>
           </div>
         </div>
-        <div class="card card-row">
-          <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div class="card card-row" id="planning">
+          <div class="icon"><Icon name="compass" size={36} /></div>
           <div>
-            <h3>Ponga la IA a trabajar</h3>
-            <p class="svc-meta"><span>Taller de IA para Equipos o Plan de Preparación para IA</span> <b>Desde $500</b></p>
-            <p class="muted">Descubra dónde la IA puede ahorrarle tiempo a su equipo, elija herramientas confiables y logre que todos las usen.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Práctica con sus tareas reales, no demostraciones</li><li><Icon name="tick" size={16} />Privacidad y calidad cubiertas</li><li><Icon name="tick" size={16} />Pensado para equipos sin perfil técnico</li></ul>
-            <a class="more" href="#ai" style="margin-top: 12px">Vea IA para su equipo <Icon name="arrow" size={16} /></a>
+            <h3>Un plan para sus herramientas</h3>
+            <p class="svc-meta"><span>Evaluación Tecnológica</span> <b>$650</b></p>
+            <p class="muted">Reviso cada herramienta que paga, encuentro lo que falta o sobra, y le doy un plan por escrito de qué mantener, reemplazar o agregar primero.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Una revisión de sus herramientas y suscripciones</li><li><Icon name="tick" size={16} />Un plan por escrito en orden de prioridad</li><li><Icon name="tick" size={16} />Ayuda para elegir programas o proveedores nuevos</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=planning#start" style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        </div>
+        <div class="card card-row card-wide" id="analysis">
+          <div class="icon"><Icon name="chart" size={36} /></div>
+          <div>
+            <h3>Mejore un proceso que le frena</h3>
+            <p class="svc-meta"><span>Análisis de Negocio y Revisión de Procesos</span> <b>Desde $1,000</b></p>
+            <p class="muted">Describo cómo se hace hoy una tarea, encuentro qué está frenando a su equipo y dejo por escrito lo que necesita una solución antes de construir o comprar. Disponible por sí solo, sin obligación de contratarme para el siguiente paso.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Un mapa claro de cómo se hace el trabajo hoy</li><li><Icon name="tick" size={16} />Lo que necesita una solución, por escrito</li><li><Icon name="tick" size={16} />Opciones comparadas lado a lado</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Pregunte por esto</a>
           </div>
         </div>
       </div>

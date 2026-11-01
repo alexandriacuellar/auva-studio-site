@@ -54,8 +54,8 @@ export const categories = [
   {
     icon: 'bulb',
     title: 'Consulting & AI',
-    text: 'Choose the right tools, put AI to work, fix how work gets done, and keep projects on track.',
-    items: ['Technology planning', 'Workflow and process reviews', 'AI workshops and readiness plans', 'Project management'],
+    text: 'Choose the right tools, automate the busywork, put AI to work, and keep projects on track.',
+    items: ['Technology planning', 'Automations for everyday busywork', 'Workflow and process reviews', 'AI workshops and readiness plans', 'Project management'],
     href: '/technology-consulting/',
     cta: 'Explore consulting',
   },
@@ -72,6 +72,7 @@ export const categories = [
 export const consulting = [
   { id: 'planning', price: 'Technology Assessment $650, sessions $65/hr', icon: 'compass', title: 'Technology Planning', text: 'The big picture. I look at all the tools you use, find the gaps, and give you a plan for what to fix, replace, or add first.', items: ['Technology assessments and audits', 'Roadmaps and priorities', 'Platform and tool recommendations'] },
   { id: 'analysis', price: 'From $1,000', icon: 'chart', title: 'Business Analysis & Process Review', text: "One process, in depth. I map how a task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.", items: ['Workflow and process mapping', 'Requirements and specifications', 'Solution options compared'] },
+  { id: 'automation', price: 'From $500', icon: 'gear', title: 'Automation setup', text: 'I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, and monthly reports. One workflow, set up in your own accounts, with a short how-to guide.', items: ['Workflow automation', 'Connecting the apps you already use', 'How-to guide for your team'] },
   { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
 ];
 

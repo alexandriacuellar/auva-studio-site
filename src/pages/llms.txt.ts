@@ -15,7 +15,7 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each or a monthly web producer from $650`,
-    `- [Consulting & AI](${site.url}/technology-consulting/): technology planning, business analysis and process review, AI readiness plans and team AI workshops for small businesses, project management and fractional project leadership`,
+    `- [Consulting & AI](${site.url}/technology-consulting/): technology planning, automation setup (from $500, one workflow), business analysis and process review, AI readiness plans and team AI workshops for small businesses, project management and fractional project leadership`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; concept and feasibility reviews; AI and XR prototype sprints; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
