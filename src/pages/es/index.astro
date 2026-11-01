@@ -14,9 +14,10 @@ const situations = [
   { title: 'Necesita un sitio web', text: 'Todavía no tiene uno, o está empezando algo nuevo.', href: '/es/websites/', icon: 'globe' },
   { title: 'Su sitio web necesita atención', text: 'Está desactualizado, es lento, cuesta actualizarlo o no le trae consultas.', href: '/es/websites/diagnostic/', icon: 'search' },
   { title: 'Sus clientes no lo encuentran en Google Maps', text: 'Su perfil de Google falta, está incompleto o tiene datos equivocados.', href: '/es/websites/google-business-profile/', icon: 'star' },
-  { title: 'Sus herramientas o procesos no funcionan', text: 'Demasiadas herramientas, demasiados parches, o no sabe dónde encaja la IA.', href: '/es/technology-consulting/', icon: 'compass' },
-  { title: 'Un proyecto necesita quien lo dirija', text: 'Un proyecto tecnológico necesita a alguien que mantenga el alcance, el calendario, los proveedores y el equipo en orden.', href: '/es/technology-consulting/', icon: 'check' },
-  { title: 'Está creando un videojuego o un proyecto XR o AR', text: 'Consiga una productora que lo mantenga en marcha, o pruebe primero una idea inmersiva con un prototipo pequeño.', href: '/es/production-emerging-tech/', icon: 'bolt' },
+  { title: 'Sus herramientas no le están funcionando', text: 'Demasiadas aplicaciones, demasiados parches, o no sabe dónde encaja la IA.', href: '/es/technology-consulting/#planning', icon: 'compass' },
+  { title: 'Su equipo hace las mismas tareas a mano', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/#automation', icon: 'gear' },
+  { title: 'Un proyecto necesita quien lo dirija', text: 'Un proyecto tecnológico necesita a alguien que mantenga el alcance, el calendario, los proveedores y el equipo en orden.', href: '/es/technology-consulting/#delivery', icon: 'check' },
+  { title: 'Está creando un videojuego o un proyecto XR o AR', text: 'Consiga una productora que lo mantenga en marcha, o empiece con algo pequeño, como un proyecto AR que se abre en el celular.', href: '/es/production-emerging-tech/', icon: 'bolt' },
 ];
 const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar', 'Todo es suyo', 'Trabaja directamente conmigo'];
 ---
@@ -24,7 +25,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento: sitios web, consultoría tecnológica y de IA, y producción para videojuegos, XR y tecnología emergente.</p>
+      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento: sitios web; tecnología, automatización e IA; y producción para videojuegos, XR y AR.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
@@ -65,8 +66,8 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
           <a class="card category bd-card" href={c.href}>
             <div class="bd-media">
               {c.href === '/es/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
-            <div class="float f1"><span class="k">Plan tecnológico</span><b>3 opciones comparadas</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
-            <div class="float f2"><span class="k">Esta semana</span><ul><li><Icon name="tick" size={14} />Requisitos aprobados</li><li><Icon name="tick" size={14} />Llamada con proveedor agendada</li></ul></div>
+            <div class="float f1"><span class="k">Revisión Tecnológica</span><b>5 arreglos principales, en orden</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
+            <div class="float f2"><span class="k">Ya automatizado</span><ul><li><Icon name="tick" size={14} />Seguimiento a clientes nuevos</li><li><Icon name="tick" size={14} />Informe mensual</li></ul></div>
           </div>)}
               {c.href === '/es/production-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
             <div class="float f1 chat"><span class="k">Sprint 4 de 6</span><p class="q">¿Podemos entregar la demo de Quest el día 20?</p><p class="a">Sí, si el arte se cierra el viernes. Prueba de juego reservada.</p></div>
@@ -75,7 +76,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
               {c.href === '/es/websites/' && <Image src={siteMockup} alt="Un sitio web de muestra para una organización sin fines de lucro, en una laptop y un celular sobre un escritorio soleado" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
             </div>
             <div class="bd-body">
-              <span class="bd-tag">{c.href === '/es/websites/' ? 'Desde $1,500' : 'Desde $65/hora'}</span>
+              <span class="bd-tag">{c.href === '/es/websites/' ? 'Desde $1,500' : c.href === '/es/technology-consulting/' ? 'Desde $250' : 'Desde $65/hora'}</span>
               <h3>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
@@ -93,7 +94,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Orientación tecnológica práctica, <em>pensada para las personas.</em></h2>
-        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/technology-consulting/">consultoría tecnológica y de IA</a>, y <a href="/es/production-emerging-tech/">producción para videojuegos, XR y tecnología emergente</a>.</p>
+        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/technology-consulting/">tecnología, automatización e IA</a>, y <a href="/es/production-emerging-tech/">producción para videojuegos, XR y AR</a>.</p>
         <p class="home-about-name"><b>Alexandria Cuellar</b>, consultora de tecnología y soluciones digitales<br /><span class="muted">Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna, por el Mid-Hudson Valley.</span></p>
         <figure class="quote home-about-quote" lang="en">
         <blockquote>“{featured.quote}”</blockquote>

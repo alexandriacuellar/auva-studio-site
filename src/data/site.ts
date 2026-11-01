@@ -47,7 +47,7 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website Diagnostic and Google Business Profile setup', 'Website packages from $1,500', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
+    items: ['Website packages from $1,500', 'Website Diagnostic and Google Business Profile setup', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
     href: '/websites/',
     cta: 'Explore website services',
   },
@@ -79,7 +79,7 @@ export const consulting = [
 export const whyAuva = [
   { title: 'Technical depth', text: 'Recommendations reflect how systems actually work, connect, and get maintained.' },
   { title: 'Business-minded guidance', text: 'Your goals, budget, team, and customers come before any new platform.' },
-  { title: 'Strategy through delivery', text: 'One partner from assessment and planning through implementation.' },
+  { title: 'Strategy through delivery', text: 'One person from the first review through setup and training.' },
   { title: 'Broad experience', text: 'Websites, APIs, digital products, project management, games, XR, and interactive experiences.' },
 ];
 
