@@ -31,7 +31,7 @@ const key = (href: string) => href.includes('websites') ? 'websites' : href.incl
           </ul>
           {c.note && <p class="svc-note">{c.note}</p>}
           </div>
-          <span class="svc-more">{c.cta} <Icon name="arrow" size={16} /></span>
+          <span class="svc-more">{c.cta.split(' ').slice(0, -1).join(' ')} <span class="nowrap">{c.cta.split(' ').at(-1)}<Icon name="arrow" size={16} /></span></span>
         </div>
       </a>
     );
