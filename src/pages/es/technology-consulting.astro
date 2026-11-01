@@ -32,14 +32,6 @@ const aiTasks = [
 ];
 
 
-const glance = [
-  { name: 'Revisión Tecnológica', note: 'Una llamada de 60 minutos y un informe por escrito. Se acredita a cualquier configuración en 90 días', price: '$250' },
-  { name: 'Configuración de automatización', note: 'Un flujo de trabajo, con una guía', price: 'Desde $500' },
-  { name: 'Configuración de espacio de proyectos', note: 'Configuración y capacitación para su equipo', price: 'Desde $1,500' },
-  { name: 'Taller de IA para Equipos', note: '90 minutos, hasta 10 personas', price: '$750' },
-  { name: 'Gestión de proyectos, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
-  { name: 'Consultoría o ayuda con proyectos, según la necesite', price: '$65/hora' },
-];
 ---
 <Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para pequeños negocios | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y gestión de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
@@ -81,7 +73,7 @@ const glance = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Cinco formas <em>de ayudarle.</em></h2>
-        <p class="lede">Todas empiezan con una llamada gratis, y recibe un precio por escrito antes de empezar cualquier trabajo.</p>
+        <p class="lede">Todas empiezan con una llamada gratis, y recibe un precio por escrito antes de empezar cualquier trabajo. ¿Solo necesita un consejo? Las sesiones de consultoría cuestan $65/hora.</p>
       </div>
       <div class="grid grid-2">
         <div class="card card-row" id="planning">
@@ -130,7 +122,7 @@ const glance = [
             <h3>Alguien que dirija el proyecto</h3>
             <p class="svc-meta"><span>Gestión de Proyectos</span> <b>$65/hora, o mensual desde $650</b></p>
             <p class="muted">Una gerente de proyectos a tiempo parcial que planifica el trabajo, mantiene a su equipo y a sus proveedores al día y avisa a tiempo de los problemas, sin contratar a nadie de tiempo completo.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Un plan y un calendario que todos pueden seguir</li><li><Icon name="tick" size={16} />Su equipo y sus proveedores coordinados</li><li><Icon name="tick" size={16} />Aviso temprano de retrasos y riesgos</li><li><Icon name="tick" size={16} />Por hora, o un bloque mensual de horas</li></ul>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Un plan y un calendario que todos pueden seguir</li><li><Icon name="tick" size={16} />Su equipo y sus proveedores coordinados</li><li><Icon name="tick" size={16} />Aviso temprano de retrasos y riesgos</li><li><Icon name="tick" size={16} />Mensual: 10 horas $650, 20 horas $1,200 o 40 horas $2,200, con un mínimo de 3 meses</li></ul>
             <a class="more" href="/es/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Pregunte por esto</a>
             <p class="small muted" style="margin-top: 12px">¿Está creando un videojuego o un proyecto XR? Vea el <a href="/es/production-emerging-tech/#production">Apoyo de Producción</a>.</p>
           </div>
@@ -174,25 +166,8 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt" id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Precios <em>de un vistazo.</em></h2>
-        <p class="lede">Todo trabajo empieza con una llamada gratis de 30 minutos. Luego defino el alcance y le doy un presupuesto por escrito antes de empezar, ya sea una sola sesión, un proyecto definido o gestión de proyectos mensual.</p>
-      </div>
-      <dl class="card glance">
-        {glance.map((g) => (
-          <div class="glance-row">
-            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
-            <dd>{g.price}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="small muted" style="margin-top: 16px">Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
-    </div>
-  </section>
 
-  <section id="who">
+  <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
@@ -242,7 +217,7 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt">
+  <section>
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Una desarrolladora y gerente de proyectos <em>de su lado.</em></h2>
@@ -261,7 +236,7 @@ const glance = [
     </div>
   </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organizada, confiable y <em>fácil de tratar.</em></h2>
@@ -279,6 +254,6 @@ const glance = [
   </section>
 
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="consulting" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="consulting" alt />
 </Base>

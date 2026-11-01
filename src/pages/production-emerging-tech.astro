@@ -37,12 +37,6 @@ const audiences = [
   { icon: 'bulb', title: 'Small businesses and startups', text: 'Curious about AR for your business? Start small, with a business card, flyer, or product that comes to life on a phone.' },
 ];
 
-const glance = [
-  { name: 'Production Support, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
-  { name: 'Production Support, as needed', price: '$65/hr' },
-  { name: 'Production Plan Review', note: 'Scope, milestones, risks, and a plan, about 2 weeks', price: '$650' },
-  { name: 'AR Starter Project', note: "A business card, flyer, or product in AR, opens in a phone's browser, 2–4 weeks", price: 'From $1,500' },
-];
 ---
 <Base title="Production & Emerging Tech" seoTitle="Game & XR Producer, AR Projects | Auva Studio" schema={schema} description="A producer for game, XR, and interactive projects, plus production plan reviews and small AR projects for studios, museums, venues, and small businesses.">
   <section class="hero bd-hero bd-inner-hero">
@@ -72,7 +66,7 @@ const glance = [
           <li><Icon name="tick" size={18} />Design documents and task tracking kept up to date</li>
           <li><Icon name="tick" size={18} />Playtests, feedback, and milestone reviews</li>
           <li><Icon name="tick" size={18} />Team, vendor, and partner coordination</li>
-          <li><Icon name="tick" size={18} />Hourly, or a monthly block of hours</li>
+          <li><Icon name="tick" size={18} />Hourly, or monthly: 10 hrs $650, 20 hrs $1,200, or 40 hrs $2,200, with a 3-month minimum</li>
         </ul>
         <a class="btn" href="/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Ask about Production Support</a>
         <p class="small muted" style="margin-top: 16px">Running a website, software, or tools project for a small business? See <a href="/technology-consulting/#delivery">project management on Tech, Automation &amp; AI</a>.</p>
@@ -158,25 +152,8 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt" id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
-        <p class="lede">Every project starts with a free 30-minute call, and you get a written scope and price before any work begins.</p>
-      </div>
-      <dl class="card glance">
-        {glance.map((g) => (
-          <div class="glance-row">
-            <dt>{g.name}{g.note && <span class="muted small">{g.note}</span>}</dt>
-            <dd>{g.price}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="small muted" style="margin-top: 16px">Looking for AI workshops or a Tech Review for your business? See <a href="/technology-consulting/#ai">Tech, Automation &amp; AI</a>.</p>
-    </div>
-  </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap narrow-wrap">
       <div>
         <h2 class="mag-head">Production experience <em>across games, XR, and interactive work.</em></h2>
@@ -190,6 +167,6 @@ const glance = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" alt />
 </Base>
