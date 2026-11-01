@@ -7,16 +7,14 @@ import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 
 const faqs = [
-  { q: 'Do you offer one-time and ongoing support?', a: 'Yes. Engagements range from a single consultation or troubleshooting session to ongoing consulting or fractional project leadership.' },
+  { q: "What's in the Tech Review?", a: 'A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order, rough costs, and where automation or AI would help. It costs $250, credited toward any setup with me that starts within 90 days.' },
+  { q: 'Which project tools do you set up?', a: "Asana, ClickUp, Jira, monday.com, Notion, and Trello, and others as your team needs them. If you don't have one yet, I'll help you choose." },
+  { q: 'Do you offer one-time and ongoing support?', a: 'Yes. Work ranges from a single setup or session to ongoing project leadership, billed by the hour or in monthly blocks.' },
   { q: 'Do you work in person?', a: "Most work happens remotely. When an on-site visit would help, we'll plan it together. On-site time is billed at the $65 hourly consulting rate. I work in person from New York City and Westchester up to Albany. Outside the Mid-Hudson Valley, travel time is billed at half my hourly rate and expenses such as mileage and lodging at cost, all agreed in writing before booking." },
-  { q: "What's included in the Technology Assessment?", a: "Three one-hour sessions, research, and a written, prioritized roadmap, about 10 hours of work." },
-  { q: 'What does a Business Analysis & Process Review include?', a: 'A scoped review, such as one workflow mapped or one set of requirements documented, about 15 hours of work. Larger requests are quoted separately.' },
-  { q: 'How is pricing determined?', a: 'Pricing depends on the service, project scope, expected time, and whether travel is needed. My rates are listed under Pricing at a glance. For larger work, costs and expectations are agreed before work begins.' },
   { q: 'What is fractional project leadership?', a: 'A project leader who works with your team part time, from $650 a month for 10 hours, with a 3-month minimum. 20 hours is $1,200 and 40 hours is $2,200 a month.' },
   { q: 'Can you work with our current vendors or IT provider?', a: 'Yes. I often work alongside existing teams and vendors, and can help you evaluate their proposals.' },
-  { q: 'Do we need technical skills to use AI?', a: 'No. Readiness Plans and workshops are built for non-technical teams, using tools like ChatGPT, Claude, and Gemini in your real work.' },
-  { q: 'Is it safe to use AI with our business data?', a: 'It can be, with the right tools and settings. Every Readiness Plan covers privacy and quality risks and recommends tools that fit your rules.' },
-  { q: "What's the difference between the AI Readiness Plan and the Technology Assessment?", a: 'The Readiness Plan focuses only on AI. The Assessment reviews all your systems and tools. Both are $650, with three one-hour sessions and a written plan.' },
+  { q: 'Do we need technical skills to use AI?', a: 'No. Workshops are built for non-technical teams, using tools like ChatGPT, Claude, and Gemini in your real work.' },
+  { q: 'Is it safe to use AI with our business data?', a: 'It can be, with the right tools and settings. Every workshop covers privacy and quality risks, and a Tech Review recommends tools that fit your rules.' },
 ];
 import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../data/site';
 
@@ -36,22 +34,22 @@ const aiTasks = [
 
 // Every consulting price in one place.
 const glance = [
-  { name: 'Technology Assessment', note: '3 sessions, research, and a written plan', price: '$650' },
-  { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
+  { name: 'Tech Review', note: 'A 60-minute call and a written report. Credited toward any setup within 90 days', price: '$250' },
+  { name: 'Automation setup', note: 'One workflow, with a how-to guide', price: 'From $500' },
+  { name: 'Project workspace setup', note: 'Setup and team training', price: 'From $1,500' },
+  { name: 'Team AI Workshop', note: '90 minutes, up to 10 people', price: '$750' },
   { name: 'Project lead, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
-  { name: 'Team AI Workshop', note: '2 hours, up to 10 people', price: 'From $500' },
-  { name: 'AI Readiness Plan', note: '3 sessions and a written plan', price: '$650' },
   { name: 'Consulting or project help, as needed', price: '$65/hr' },
 ];
 ---
-<Base title="Consulting & AI" seoTitle="Technology & AI Consulting for Small Businesses | Auva Studio" schema={schema} description="Help choosing the right tools, putting AI to work, fixing slow processes, and keeping tech projects on track, for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
+<Base title="Tech, Automation & AI" seoTitle="Tech, Automation & AI Help for Small Businesses | Auva Studio" schema={schema} description="A $250 Tech Review, automation setup, project workspace setup, AI workshops, and project leadership for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">The right tools, <em>set up and working for you.</em></h1>
-      <p class="lede">Too many apps, a process held together with workarounds, or a project that keeps slipping? I help small businesses, nonprofits, and growing teams choose the right tools, put AI to work, fix how work gets done, and keep projects on track.</p>
+      <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
+      <p class="lede">Too many apps, a process held together with workarounds, or a project that keeps slipping? I help small businesses, nonprofits, and growing teams choose the right tools, automate the busywork, put AI to work, and keep projects on track.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#planning">See the $650 Technology Assessment</a>
+        <a class="btn btn-ghost" href="#planning">Start with a $250 Tech Review</a>
       </div>
       <ul class="hero-strip">{['Fixed price to start', 'Plain-English plan', 'Works with your current vendors', 'Work with me directly'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
@@ -70,8 +68,9 @@ const glance = [
       <ul class="route-list">
         <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>You pay for apps nobody uses</b><span class="muted">Or you have so many tools that none of them talk to each other.</span></span></a></li>
         <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>You need new software and don't know which</b><span class="muted">Booking, point of sale, accounting, email, or a customer list, with too many options to compare.</span></span></a></li>
-        <li><a href="#analysis"><span class="icon"><Icon name="chart" /></span><span><b>Your team types the same thing twice</b><span class="muted">Information lives in three places, so mistakes and extra work pile up.</span></span></a></li>
-        <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>A simple task takes hours</b><span class="muted">Spreadsheets, workarounds, and "that's how we've always done it."</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="chart" /></span><span><b>Your team types the same thing twice</b><span class="muted">Information lives in three places, so mistakes and extra work pile up.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="gear" /></span><span><b>Follow-ups and reports eat your week</b><span class="muted">Reminder emails, new-client paperwork, and the same monthly report, all by hand.</span></span></a></li>
+        <li><a href="#automation"><span class="icon"><Icon name="clock" /></span><span><b>A simple task takes hours</b><span class="muted">Spreadsheets, workarounds, and "that's how we've always done it."</span></span></a></li>
         <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>You know AI could help, but not where</b><span class="muted">Your team tried a chatbot once, or nobody has had time to figure it out.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>A tech project keeps slipping</b><span class="muted">A new system, a move, or an upgrade with no one clearly in charge.</span></span></a></li>
         <li><a href="#delivery"><span class="icon"><Icon name="shield" /></span><span><b>You need someone on your side with a vendor</b><span class="muted">Someone who understands the tech and asks the right questions.</span></span></a></li>
@@ -82,31 +81,51 @@ const glance = [
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Four ways <em>I help.</em></h2>
+        <h2 class="mag-head">Five ways <em>I help.</em></h2>
         <p class="lede">Every one starts with a free call, and you get a written price before any work begins.</p>
       </div>
       <div class="grid grid-2">
         <div class="card card-row" id="planning">
-          <div class="icon"><Icon name="compass" size={36} /></div>
+          <div class="icon"><Icon name="search" size={36} /></div>
           <div>
-            <h3>Get a plan for your tools</h3>
-            <p class="svc-meta"><span>Technology Assessment</span> <b>$650</b></p>
-            <p class="muted">I look at every tool you pay for, find what's missing or wasted, and give you a written plan for what to keep, replace, or add first.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />A review of your tools and subscriptions</li><li><Icon name="tick" size={16} />A written plan in priority order</li><li><Icon name="tick" size={16} />Help choosing new software or vendors</li></ul>
+            <h3>Start with a Tech Review</h3>
+            <p class="svc-meta"><span>Tech Review</span> <b>$250</b></p>
+            <p class="muted">One call about how your business runs, then a written report with your top fixes: which tools to keep, cut, or connect, and where automation or AI would actually help.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A 60-minute call and a look at your tools</li><li><Icon name="tick" size={16} />A written report within 5 business days</li><li><Icon name="tick" size={16} />Your top fixes in order, with rough costs</li><li><Icon name="tick" size={16} />$250 credited toward any setup within 90 days</li></ul>
             <a class="more" href="/technology-consulting/?topic=planning#start" style="margin-top: 12px">Ask about this</a>
           </div>
         </div>
-        <div class="card card-row" id="analysis">
-          <div class="icon"><Icon name="chart" size={36} /></div>
+        <div class="card card-row" id="automation">
+          <div class="icon"><Icon name="gear" size={36} /></div>
           <div>
-            <h3>Fix a process that slows you down</h3>
-            <p class="svc-meta"><span>Business Analysis & Process Review</span> <b>From $1,000</b></p>
-            <p class="muted">I map how one task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />A clear map of how the work gets done now</li><li><Icon name="tick" size={16} />What a fix needs, written down</li><li><Icon name="tick" size={16} />Options compared side by side</li></ul>
-            <a class="more" href="/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Ask about this</a>
+            <h3>Automate the busywork</h3>
+            <p class="svc-meta"><span>Automation setup</span> <b>From $500</b></p>
+            <p class="muted">I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, monthly reports, or copying details from one app to another. Not every automation needs AI.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />One workflow, set up in your own accounts</li><li><Icon name="tick" size={16} />A short how-to guide for your team</li><li><Icon name="tick" size={16} />Any tool fees are billed to you directly, in your name</li><li><Icon name="tick" size={16} />Some tasks are better done by a person, and I'll tell you which</li></ul>
+            <a class="more" href="/technology-consulting/?topic=automation#start" style="margin-top: 12px">Ask about this</a>
           </div>
         </div>
-        <div class="card card-row" id="delivery">
+        <div class="card card-row" id="workspace">
+          <div class="icon"><Icon name="layers" size={36} /></div>
+          <div>
+            <h3>Get your projects organized</h3>
+            <p class="svc-meta"><span>Project workspace setup</span> <b>From $1,500</b></p>
+            <p class="muted">I set up the tool your team plans work in, like Asana, ClickUp, Jira, monday.com, Notion, or Trello, with boards, templates, and a clear view of who's doing what. Then I train your team to use it.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Set up in your own account</li><li><Icon name="tick" size={16} />Templates for the work you repeat</li><li><Icon name="tick" size={16} />A training session for your team</li><li><Icon name="tick" size={16} />30 days of questions after setup</li></ul>
+            <a class="more" href="/technology-consulting/?topic=workspace#start" style="margin-top: 12px">Ask about this</a>
+          </div>
+        </div>
+        <div class="card card-row" id="ai-card">
+          <div class="icon"><Icon name="bolt" size={36} /></div>
+          <div>
+            <h3>Put AI to work</h3>
+            <p class="svc-meta"><span>Team AI Workshop</span> <b>$750</b></p>
+            <p class="muted">A 90-minute hands-on session for up to 10 people. Your team practices ChatGPT, Claude, or Gemini on real work and leaves with a one-page guide.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Practice on your real tasks, not demos</li><li><Icon name="tick" size={16} />Privacy and quality covered</li><li><Icon name="tick" size={16} />Made for non-technical teams</li></ul>
+            <a class="more" href="#ai" style="margin-top: 12px">See AI for your team <Icon name="arrow" size={16} /></a>
+          </div>
+        </div>
+        <div class="card card-row card-wide" id="delivery">
           <div class="icon"><Icon name="check" size={36} /></div>
           <div>
             <h3>Someone to run the project</h3>
@@ -115,16 +134,6 @@ const glance = [
             <ul class="ticks small"><li><Icon name="tick" size={16} />A plan and schedule everyone can follow</li><li><Icon name="tick" size={16} />Your team and vendors kept in step</li><li><Icon name="tick" size={16} />Early warning on delays and risks</li><li><Icon name="tick" size={16} />Hourly, or a monthly block of hours</li></ul>
             <a class="more" href="/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Ask about this</a>
             <p class="small muted" style="margin-top: 12px">Making a game or XR project? See <a href="/production-emerging-tech/#production">Production Support</a>.</p>
-          </div>
-        </div>
-        <div class="card card-row">
-          <div class="icon"><Icon name="bolt" size={36} /></div>
-          <div>
-            <h3>Put AI to work</h3>
-            <p class="svc-meta"><span>Team AI Workshop or AI Readiness Plan</span> <b>From $500</b></p>
-            <p class="muted">Find where AI can save your team time, choose tools you can trust, and get everyone using them.</p>
-            <ul class="ticks small"><li><Icon name="tick" size={16} />Practice on your real tasks, not demos</li><li><Icon name="tick" size={16} />Privacy and quality covered</li><li><Icon name="tick" size={16} />Made for non-technical teams</li></ul>
-            <a class="more" href="#ai" style="margin-top: 12px">See AI for your team <Icon name="arrow" size={16} /></a>
           </div>
         </div>
       </div>
@@ -148,7 +157,7 @@ const glance = [
       </div>
       <div class="grid grid-2" style="margin-top: 32px">
         {aiConsulting.map((o) => (
-          <div class="card card-row" id={o.id}>
+          <div class="card card-row card-wide" id={o.id}>
             <div class="icon"><Icon name={o.icon} size={36} /></div>
             <div>
               <h3>{o.title}</h3>
@@ -159,7 +168,7 @@ const glance = [
           </div>
         ))}
       </div>
-      <p class="small muted" style="margin-top: 20px"><b>Tools I use.</b> ChatGPT, Claude, Gemini, Meta AI, and Zapier. Want to test an AI tool built for your business, like a chatbot for customer questions? See the <a href="/production-emerging-tech/#ai-sprint">AI Prototype Sprint</a>.</p>
+      <p class="small muted" style="margin-top: 20px"><b>Tools I use.</b> ChatGPT, Claude, Gemini, Meta AI, and Zapier. Want a chatbot on your website that answers customer questions? See <a href="/websites/#addons">AI chatbots and web apps</a>.</p>
     </div>
   </section>
 
@@ -192,7 +201,7 @@ const glance = [
           </div>
         ))}
       </dl>
-      <p class="small muted" style="margin-top: 16px">Want to test an idea before you commit? <a href="/production-emerging-tech/#prototypes">See Prototype Sprints</a>. Every engagement ends with clear documentation and training, so your team can carry on without me. Travel time outside the Mid-Hudson Valley is billed at half my hourly rate, plus expenses, agreed before booking.</p>
+      <p class="small muted" style="margin-top: 16px">Every engagement ends with clear documentation and training, so your team can carry on without me. Travel time outside the Mid-Hudson Valley is billed at half my hourly rate, plus expenses, agreed before booking.</p>
     </div>
   </section>
 

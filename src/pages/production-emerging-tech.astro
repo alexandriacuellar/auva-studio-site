@@ -10,14 +10,13 @@ import { site, testimonials, aiOffers, serviceSchema } from '../data/site';
 
 const offers = aiOffers.filter((o) => o.group !== 'consulting');
 const production = offers.find((o) => o.id === 'production')!;
-const prototypes = ['review', 'ai-sprint', 'xr-sprint'].map((id) => offers.find((o) => o.id === id)!);
+const prototypes = ['review', 'ar-starter'].map((id) => offers.find((o) => o.id === id)!);
 
 const faqs = [
-  { q: 'Do you build full XR or game productions?', a: "I plan and manage them as your producer. XR prototypes are built with a developer partner, and bigger builds go to a trusted studio partner, with me as your producer if you'd like." },
-  { q: 'Which devices do you work with?', a: "I follow Meta's lineup closely: Meta Quest headsets, Ray-Ban Meta and Meta Ray-Ban Display glasses, the new Meta VR Glasses when they ship, and Meta Horizon worlds. I also build AR that opens in a phone's browser, with no app needed. A Concept & Feasibility Review recommends the one that fits your audience and budget." },
-  { q: 'Will a prototype be ready to launch?', a: 'No. A prototype is a proof of concept. It answers one question with placeholder visuals, so you can decide to build, change, or stop before investing more.' },
+  { q: 'Do you build full XR or game productions?', a: "I plan and manage them as your producer. AR projects are built with a developer partner when needed, and bigger builds go to a trusted studio partner, with me as your producer if you'd like." },
+  { q: 'Which devices do you work with?', a: "I follow Meta's lineup closely: Meta Quest headsets, Ray-Ban Meta and Meta Ray-Ban Display glasses, the new Meta VR Glasses when they ship, and Meta Horizon worlds. I also build AR that opens in a phone's browser, with no app needed. I'll recommend the one that fits your audience and budget." },
   { q: 'Can you join a project that is already underway?', a: 'Yes. Production Support often starts mid-project: I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
-  { q: 'Do you work with small businesses too?', a: "Yes. If you're curious about AR or VR for your business, start with a Concept & Feasibility Review. For a website, tools, or AI project, see Consulting & AI." },
+  { q: 'Do you work with small businesses too?', a: "Yes. If you're curious about AR for your business, start small with an AR Starter Project, like a business card or flyer that comes to life. For a website, tools, or AI project, see Tech, Automation & AI." },
 ];
 
 const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
@@ -31,33 +30,25 @@ const ideas = [
   { icon: 'layers', title: 'A game or VR demo', text: 'A small, playable slice that helps a studio pitch, test, or raise money for a bigger idea.' },
 ];
 
-const sprint = [
-  { title: 'Define', text: 'We agree on the one question the prototype should answer and what success looks like.' },
-  { title: 'Build', text: 'I create a small, working version, with a developer partner when needed, using existing tools wherever possible.' },
-  { title: 'Test', text: "You and a few real users try it, and I gather what worked and what didn't." },
-  { title: 'Decide', text: 'You get a short report with a recommendation: build it, change it, or stop here, before you invest more.' },
-];
-
 const audiences = [
   { icon: 'star', title: 'Game and XR studios', text: 'You need production structure, a schedule people trust, or an experienced producer without a full-time hire.' },
   { icon: 'book', title: 'Museums, educators, and cultural organizations', text: "You're planning an immersive or interactive experience and want a realistic scope before you commit." },
   { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, event spaces, retailers, and visitor centers planning something people will remember. Know the budget first.' },
-  { icon: 'bulb', title: 'Small businesses and startups', text: 'Curious about AR, VR, or an AI tool for your business? Test the idea small before you spend big.' },
+  { icon: 'bulb', title: 'Small businesses and startups', text: 'Curious about AR for your business? Start small, with a business card, flyer, or product that comes to life on a phone.' },
 ];
 
 const glance = [
   { name: 'Production Support, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
   { name: 'Production Support, as needed', price: '$65/hr' },
-  { name: 'Concept & Feasibility Review', note: 'Is it doable, a rough budget, and the team it takes, about 2 weeks', price: '$650' },
-  { name: 'AI Prototype Sprint', note: 'An AI chatbot or workflow, 2–3 weeks', price: 'From $2,500' },
-  { name: 'XR Prototype Sprint', note: '4–6 weeks, with a developer partner', price: 'From $7,500' },
+  { name: 'Production Plan Review', note: 'Scope, milestones, risks, and a plan, about 2 weeks', price: '$650' },
+  { name: 'AR Starter Project', note: "A business card, flyer, or product in AR, opens in a phone's browser, 2–4 weeks", price: 'From $1,500' },
 ];
 ---
-<Base title="Production & Emerging Tech" seoTitle="Game & XR Producer, AR/VR Prototypes | Auva Studio" schema={schema} description="A producer for game, XR, and interactive projects, plus feasibility reviews and small AR, VR, and AI prototypes for studios, museums, venues, and small businesses.">
+<Base title="Production & Emerging Tech" seoTitle="Game & XR Producer, AR Projects | Auva Studio" schema={schema} description="A producer for game, XR, and interactive projects, plus production plan reviews and small AR projects for studios, museums, venues, and small businesses.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">A producer for your game, <em>XR, or interactive project.</em></h1>
-      <p class="lede">I keep game, XR, and interactive projects on schedule, from first idea to launch. Curious about AR or VR, on phones, Meta Quest, or Meta glasses? I also help studios, museums, venues, and small businesses test an idea with a small prototype before they invest.</p>
+      <p class="lede">I keep game, XR, and interactive projects on schedule, from first idea to launch. Curious about AR or VR, on phones, Meta Quest, or Meta glasses? I also help museums, venues, and small businesses start small, with AR that opens right in a phone's browser.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#production">See Production Support</a>
@@ -84,7 +75,7 @@ const glance = [
           <li><Icon name="tick" size={18} />Hourly, or a monthly block of hours</li>
         </ul>
         <a class="btn" href="/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Ask about Production Support</a>
-        <p class="small muted" style="margin-top: 16px">Running a website, software, or tools project for a small business? See <a href="/technology-consulting/#delivery">project management on Consulting &amp; AI</a>.</p>
+        <p class="small muted" style="margin-top: 16px">Running a website, software, or tools project for a small business? See <a href="/technology-consulting/#delivery">project management on Tech, Automation &amp; AI</a>.</p>
       </div>
       <div class="values">
         {testimonials.map((t) => (
@@ -120,10 +111,10 @@ const glance = [
   <section class="alt" id="prototypes">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Test the idea <em>before you invest in it.</em></h2>
-        <p class="lede">Start with a review, then a small prototype. Prototypes are proofs of concept: they answer one question, use placeholder visuals, and aren't ready for public release.</p>
+        <h2 class="mag-head">Start small, <em>then grow.</em></h2>
+        <p class="lede">A plan review for studios, or a small AR project for businesses. Bigger builds go to a trusted studio partner.</p>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-2">
         {prototypes.map((o) => (
           <div class="card offer" id={o.id}>
             <div class="icon"><Icon name={o.icon} size={32} /></div>
@@ -134,15 +125,6 @@ const glance = [
           </div>
         ))}
       </div>
-      <ol class="steps steps-4" id="sprint" style="margin-top: 40px">
-        {sprint.map((s, i) => (
-          <li>
-            <span class="num" aria-hidden="true">{i + 1}</span>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </li>
-        ))}
-      </ol>
       <div class="card card-row bigger" style="margin-top: 32px">
         <div class="icon"><Icon name="layers" size={36} /></div>
         <div>
@@ -190,7 +172,7 @@ const glance = [
           </div>
         ))}
       </dl>
-      <p class="small muted" style="margin-top: 16px">Looking for AI workshops or a readiness plan for your team? See <a href="/technology-consulting/#ai">Consulting &amp; AI</a>.</p>
+      <p class="small muted" style="margin-top: 16px">Looking for AI workshops or a Tech Review for your business? See <a href="/technology-consulting/#ai">Tech, Automation &amp; AI</a>.</p>
     </div>
   </section>
 

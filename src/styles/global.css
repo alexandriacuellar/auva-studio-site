@@ -101,6 +101,7 @@ section { padding: 88px 0; }
 /* Cards */
 .grid { display: grid; gap: 24px; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-2 > .card-wide { grid-column: 1 / -1; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 .card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 30px; }

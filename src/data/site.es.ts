@@ -16,7 +16,7 @@ export const site = {
 
 export const nav = [
   { href: '/es/websites/', label: 'Sitios web' },
-  { href: '/es/technology-consulting/', label: 'Consultoría e IA' },
+  { href: '/es/technology-consulting/', label: 'Tecnología e IA' },
   { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
   { href: '/es/about/', label: 'Sobre mí' },
 ];
@@ -32,25 +32,26 @@ export const categories = [
   },
   {
     icon: 'bulb',
-    title: 'Consultoría e IA',
-    text: 'Elija las herramientas adecuadas, ponga la IA a trabajar, mejore la forma de trabajar y mantenga sus proyectos en marcha.',
-    items: ['Planificación tecnológica', 'Revisión de flujos de trabajo y procesos', 'Talleres y planes de preparación para IA', 'Gestión de proyectos'],
+    title: 'Tecnología, Automatización e IA',
+    text: 'Configure las herramientas adecuadas, automatice el trabajo repetitivo, ponga la IA a trabajar y mantenga sus proyectos en marcha.',
+    items: ['Revisión Tecnológica de $250', 'Configuración de automatizaciones', 'Configuración de espacios de proyectos', 'Talleres de IA para equipos', 'Gestión de proyectos'],
     href: '/es/technology-consulting/',
-    cta: 'Ver consultoría',
+    cta: 'Ver Tecnología, Automatización e IA',
   },
   {
     icon: 'bolt',
     title: 'Producción y Tecnología Emergente',
-    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de prototipos pequeños para probar ideas nuevas.',
-    items: ['Apoyo de producción para equipos de videojuegos y XR', 'AR y VR para teléfonos, Meta Quest y lentes de Meta', 'Revisión de Concepto y Viabilidad', 'Prototipos de IA y XR'],
+    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos pequeños de AR para negocios.',
+    items: ['Apoyo de producción para equipos de videojuegos y XR', 'Revisión del Plan de Producción', 'Proyectos AR iniciales', 'AR y VR para teléfonos, Meta Quest y lentes de Meta'],
     href: '/es/production-emerging-tech/',
     cta: 'Ver Producción y Tecnología Emergente',
   },
 ];
 
 export const consulting = [
-  { id: 'planning', price: 'Evaluación Tecnológica $650, sesiones $65/hora', icon: 'compass', title: 'Planificación Tecnológica', text: 'La visión completa. Reviso todas las herramientas que usa, encuentro lo que falta y le doy un plan de qué arreglar, reemplazar o agregar primero.', items: ['Evaluaciones y auditorías tecnológicas', 'Hojas de ruta y prioridades', 'Recomendaciones de plataformas y herramientas'] },
-  { id: 'analysis', price: 'Desde $1,000', icon: 'chart', title: 'Análisis de Negocio y Revisión de Procesos', text: 'Un proceso, a fondo. Describo cómo se hace una tarea hoy, encuentro qué está frenando a su equipo y detallo lo que necesita una solución antes de que usted construya o compre. Se puede contratar por sí solo, sin obligación de contratarme para el siguiente paso.', items: ['Mapeo de flujos de trabajo y procesos', 'Requisitos y especificaciones', 'Comparación de opciones de solución'] },
+  { id: 'planning', price: '$250, se acredita a una configuración en 90 días', icon: 'search', title: 'Revisión Tecnológica', text: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios, costos aproximados y dónde ayudaría la automatización o la IA.', items: ['Revisión de herramientas y suscripciones', 'Revisión de flujos de trabajo', 'Informe por escrito con prioridades'] },
+  { id: 'automation', price: 'Desde $500', icon: 'gear', title: 'Configuración de automatización', text: 'Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos y reportes mensuales. Un flujo de trabajo, configurado en sus propias cuentas, con una guía breve.', items: ['Automatización de flujos de trabajo', 'Conexión de las aplicaciones que ya usa', 'Guía para su equipo'] },
+  { id: 'workspace', price: 'Desde $1,500', icon: 'layers', title: 'Configuración de espacio de proyectos', text: 'Configuro la herramienta donde su equipo planifica el trabajo, como Asana, ClickUp, Jira, monday.com, Notion o Trello, con tableros, plantillas y responsables claros, y luego capacito a su equipo.', items: ['Configuración del espacio y las plantillas', 'Capacitación para su equipo', '30 días de preguntas después de la configuración'] },
   { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Liderazgo de proyectos a tiempo parcial'] },
 ];
 
@@ -135,6 +136,7 @@ export const addons = [
   { icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar.', price: 'Desde $1,750' },
   { icon: 'layers', title: 'Tiendas en línea y botones de compra', text: 'Desde unos cuantos botones de compra en un sitio pequeño hasta una tienda en línea completa. Cuénteme qué quiere vender y le doy un presupuesto.', price: 'Presupuesto según su proyecto' },
   { icon: 'clock', title: 'Citas, donaciones y otras herramientas', text: 'Agrego las herramientas de citas, donaciones o foros que ya usa, o le ayudo a configurar unas nuevas.', price: 'Presupuesto según las herramientas que use' },
+  { icon: 'chat', title: 'Chatbots de IA y aplicaciones web', text: 'Un asistente de chat que responde las preguntas de sus visitantes con sus propias preguntas frecuentes, servicios y precios, o una herramienta a la medida, como un portal para clientes o una app de citas.', price: 'Presupuesto según su proyecto' },
 ];
 
 export const brandEssentials = [
@@ -170,10 +172,8 @@ export const monthly = {
 export { testimonials } from './site';
 
 export const aiOffers = [
-  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: 'Desde $500', text: 'Una sesión práctica de 2 horas para hasta 10 personas. Su equipo practica con herramientas de IA en trabajo real y se lleva una guía de una página.' },
-  { id: 'readiness', group: 'consulting', icon: 'compass', title: 'Plan de Preparación para IA', price: '$650', text: 'Dónde puede la IA ahorrarle tiempo a su equipo en el trabajo que ya hace, qué herramientas le convienen y cómo usarlas de forma segura. Tres sesiones de una hora y un plan por escrito.' },
-  { id: 'ai-sprint', group: 'prototype', icon: 'bolt', title: 'Sprint de Prototipo de IA', price: 'Desde $2,500', text: 'Una prueba pequeña y funcional de una herramienta de IA para su negocio, como un chatbot que responde preguntas de clientes o un flujo que redacta correos de rutina. Luego repasamos juntos lo que aprendimos, todo en 2–3 semanas.' },
-  { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión de Concepto y Viabilidad', price: '$650', text: '¿Tiene una idea de XR, videojuego o experiencia interactiva? Averigüe si es viable, qué tecnología le conviene, un presupuesto aproximado y el equipo que haría falta. Unas 2 semanas.' },
-  { id: 'xr-sprint', group: 'prototype', icon: 'layers', title: 'Sprint de Prototipo XR', price: 'Desde $7,500', text: 'Una prueba pequeña y funcional de su idea de XR o interactiva, construida con un desarrollador colaborador, y luego un repaso de lo que aprendimos. 4–6 semanas.' },
+  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: '$750', text: 'Una sesión práctica de 90 minutos para hasta 10 personas. Su equipo practica ChatGPT, Claude o Gemini con trabajo real y se lleva una guía de una página.' },
+  { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión del Plan de Producción', price: '$650', text: 'Para proyectos de videojuegos, XR e interactivos. Reviso su alcance, sus hitos y sus riesgos, y le entrego un plan que su equipo pueda seguir, con sus herramientas de proyecto configuradas si las necesita. Unas 2 semanas.' },
+  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'Proyecto AR Inicial', price: 'Desde $1,500', text: 'Una pieza pequeña de AR que se abre en el navegador del teléfono, sin descargar ninguna app: una tarjeta de presentación, un volante, un póster o un producto que cobra vida. Construida con un desarrollador colaborador cuando hace falta. 2–4 semanas.' },
   { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
 ];
