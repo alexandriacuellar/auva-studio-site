@@ -14,7 +14,7 @@ const l = (href: string) => localize(href, lang);
 const t = {
   en: {
     description: 'Websites you own; help with tech tools, automation, and AI; and production for games, XR, and AR, for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
-    defaultTitle: 'Websites, Tech & AI Help, Game & XR Production',
+    defaultTitle: 'Websites, Tech Help & Game Production in the Hudson Valley',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
     promoLabel: 'Founding offer',
@@ -55,7 +55,7 @@ const t = {
   },
   es: {
     description: 'Sitios web que son suyos; ayuda con herramientas tecnológicas, automatización e IA; y producción para videojuegos, XR y AR, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
-    defaultTitle: 'Sitios web, tecnología e IA, producción de videojuegos y XR',
+    defaultTitle: 'Sitios web, tecnología y producción de videojuegos en el Hudson Valley',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
     promoLabel: 'Oferta para fundadores',
@@ -105,6 +105,8 @@ const base = basePath(path);
 const hasSpanish = translatedPages.includes(base);
 const otherLang = lang === 'es' ? 'en' : 'es';
 const switchHref = switchPath(path, otherLang);
+// The founding offer is for websites, so the bar shows only where website buyers land.
+const showPromo = base === '/' || base.startsWith('/websites/') || base === '/website-check/';
 
 const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
@@ -235,7 +237,7 @@ const schema = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
-    <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>
+    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
     <header class="site-header">
       <div class="wrap header-inner">
         <a href={l('/')} class="brand" aria-label={t.home}>

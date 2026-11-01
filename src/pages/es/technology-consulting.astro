@@ -29,7 +29,7 @@ const aiTasks = [
 ];
 
 ---
-<Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para pequeños negocios | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y gestión de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
+<Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para negocios del Hudson Valley | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y gestión de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Menos trabajo repetitivo, mejores herramientas, <em>proyectos que se terminan.</em></h1>
@@ -199,10 +199,10 @@ const aiTasks = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organizada, confiable y <em>fácil de tratar.</em></h2>
-        <p class="lede">Lo que dicen los equipos con los que he gestionado proyectos (en sus propias palabras, en inglés).</p>
+        <p class="lede">Lo que dice un equipo con el que he gestionado proyectos (en sus propias palabras, en inglés).</p>
       </div>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
+      <div class="tech-quote">
+        {testimonials.filter((t) => t.name === 'Aaron Sorrels').map((t) => (
           <figure class="card quote" lang="en">
             <blockquote>“{t.quote}”</blockquote>
             <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>

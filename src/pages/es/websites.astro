@@ -8,13 +8,12 @@ import InquiryForm from '../../components/InquiryForm.astro';
 import PhoneViewer from '../../components/PhoneViewer.astro';
 import Faq from '../../components/Faq.astro';
 import PaybackCalc from '../../components/PaybackCalc.astro';
-import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../../data/site.es';
+import { comparison, addons, process, packages, samples, site, serviceSchema } from '../../data/site.es';
 import { Image } from 'astro:assets';
 import skytopShot from '../../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../../assets/samples/enea-hudson-cattle-farm.jpg';
 import rondoutShot from '../../assets/samples/rondout-mercantile.jpg';
 import headshot from '../../assets/alexandria-cuellar.jpg';
-const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
@@ -89,7 +88,7 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Elija <em>el paquete adecuado.</em></h2>
-        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy. Todos incluyen una página principal clara, sus servicios, razones para confiar en usted y un siguiente paso fácil.</p>
+        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy.</p>
       </div>
       <Packages />
       <PaybackCalc />
@@ -159,10 +158,6 @@ const audiences = [
         <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
         <div>
           <p class="proof-line">Pasé casi 20 años creando sitios web y aplicaciones web para periódicos. Su sitio recibe el mismo cuidado, desde la primera llamada hasta el lanzamiento.</p>
-          <figure class="quote quote-inline" lang="en">
-            <blockquote>“{featured.quote}”</blockquote>
-            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-          </figure>
         </div>
       </div>
     </div>

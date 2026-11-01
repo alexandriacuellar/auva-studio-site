@@ -23,9 +23,6 @@ const ideas = [
   { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
   { icon: 'book', title: 'An exhibit that comes alive', text: 'Museum labels or historic signs that show a scene, a voice, or a 3D object through a phone.' },
   { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step, a tour, or a hard conversation on Meta Quest before doing it for real.' },
-  { icon: 'chat', title: 'A hands-free guide on Meta glasses', text: 'Step-by-step help or a guided walk on Ray-Ban Meta or Meta Ray-Ban Display glasses, while hands stay free.' },
-  { icon: 'globe', title: 'A Meta Horizon world', text: 'A space for your venue, brand, or event that people can visit in VR or on their phone.' },
-  { icon: 'layers', title: 'A game or VR demo', text: 'A small, playable slice that helps a studio pitch, test, or raise money for a bigger idea.' },
 ];
 
 const audiences = [
@@ -135,7 +132,7 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">What we could <em>build together.</em></h2>
-        <p class="lede">AR and VR for phones, Meta Quest, and Meta glasses. The first one is my own business card. The rest are ideas to spark yours.</p>
+        <p class="lede">AR and VR for phones, Meta Quest, and Meta glasses. The first one is my own business card. The others are ideas to spark yours.</p>
       </div>
       <div class="grid grid-3">
         {ideas.map((i) => (
@@ -148,6 +145,7 @@ const audiences = [
           </div>
         ))}
       </div>
+      <p class="muted" style="margin-top: 24px"><b>More ideas:</b> a hands-free guide on Ray-Ban Meta or Meta Ray-Ban Display glasses, a Meta Horizon world for your venue or event, or a small playable demo to pitch a bigger game.</p>
     </div>
   </section>
 

@@ -717,3 +717,4 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .ai-tasks .card { padding: 22px; gap: 14px; }
 .ai-tasks h3 { font-size: 1.02rem; margin-bottom: 4px; }
 .ai-tasks .icon { margin: 0; }
+.tech-quote { max-width: 760px; }
