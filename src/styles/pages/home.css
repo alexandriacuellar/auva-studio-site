@@ -30,17 +30,20 @@
 .principles p { margin: 0; }
 
 /* Service cards: one warm photo, the name, one line, a short price list, and a link (like greaterpurposeweb.com). */
-.svc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.svc-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; }
-.svc-card:hover { border-color: var(--primary); transform: translateY(-3px); }
-.svc-photo { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+#services { padding: 120px 0; }
+#services .section-head { margin-bottom: 64px; }
+.svc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 44px; }
+/* No box around each card: the photo and the white space do the grouping. */
+.svc-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.svc-photo { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: var(--surface); }
 .svc-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .svc-card:hover .svc-photo img { transform: scale(1.04); }
-.svc-body { display: flex; flex-direction: column; flex: 1; padding: 26px 28px 28px; }
-.svc-body h3 { margin: 0 0 8px; font-size: 1.4rem; line-height: 1.2; }
-.svc-line { margin: 0 0 20px; color: var(--muted); }
+.svc-body { display: flex; flex-direction: column; flex: 1; padding: 30px 0 0; }
+.svc-body h3 { margin: 0 0 10px; font-size: 1.45rem; line-height: 1.2; }
+.svc-card:hover h3 { color: var(--primary); }
+.svc-line { margin: 0 0 28px; color: var(--muted); }
 .svc-offers { list-style: none; margin: 0 0 14px; padding: 0; }
-.svc-offers li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--border); font-size: 0.97rem; line-height: 1.35; }
+.svc-offers li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid var(--border); font-size: 0.97rem; line-height: 1.35; }
 .svc-offers b { flex: none; font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: var(--deep); white-space: nowrap; }
 .svc-note { margin: 0 0 18px; font-size: 0.9rem; color: var(--muted); }
 .svc-more { margin-top: auto; padding-top: 6px; color: var(--primary); font-weight: 700; }
@@ -50,16 +53,17 @@
   @media (min-width: 1021px) {
     .svc-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
     .svc-body { display: contents; }
-    .svc-body > * { margin-left: 28px; margin-right: 28px; }
-    .svc-body > h3 { margin: 0 28px 8px; padding-top: 26px; }
-    .svc-body > .svc-more { margin-bottom: 28px; align-self: end; }
+    .svc-body > h3 { padding-top: 30px; }
+    .svc-body > .svc-more { align-self: end; }
   }
 }
 @media (max-width: 1020px) {
-  .svc-cards { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; gap: 24px; }
+  #services { padding: 88px 0; }
+  #services .section-head { margin-bottom: 44px; }
+  .svc-cards { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; gap: 64px; }
   .svc-photo { aspect-ratio: 16 / 9; }
 }
-@media (prefers-reduced-motion: reduce) { .svc-card, .svc-photo img { transition: none; } .svc-card:hover .svc-photo img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .svc-photo img { transition: none; } .svc-card:hover .svc-photo img { transform: none; } }
 
 @media (max-width: 640px) {
   .bd-hero { padding: 56px 0 64px; }
