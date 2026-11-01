@@ -95,6 +95,16 @@ export const samples = [
   { package: 'Complete Presence', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'A larger site for a Kingston mercantile, with a CMS, workshops, fitting booking (shown as an add-on), and a hold list for new arrivals.', goodFor: 'Good for shops, studios, and organizations that post new products, events, or news often.' },
 ];
 
+// Shared by every package; shown once above the package cards.
+export const packageBasics = [
+  'A planning call and content plan',
+  "I polish your copy and fill in what's missing",
+  'Custom design made for your business, built for phones first',
+  'A contact form and a map to find you',
+  'Set up for Google and AI search: page titles, business details, and a sitemap',
+  'Google Business Profile guidance, where applicable',
+];
+
 export const packages = [
   {
     id: 'essential',
@@ -103,11 +113,7 @@ export const packages = [
     name: 'Essential Presence',
     price: '$1,500',
     blurb: 'A professional web presence that helps customers find, trust, and contact you.',
-    groups: [
-      { label: 'Planning and content', items: ['A planning call and content plan', "I polish your copy and fill in what's missing"] },
-      { label: 'Design and build', items: ["One scrolling page or up to 5 pages, whichever suits your business. I'll help you choose.", '2 page designs: one for your home page, one for the rest', 'Custom design made for your business, built for phones first', 'A contact form and a map to find you', '2 revision rounds'] },
-      { label: 'Found online', items: ['Set up for Google and AI search: page titles, business details, and a sitemap', 'Google Business Profile guidance, where applicable', 'Simple visitor stats'] },
-    ],
+    specs: [['Pages', '1 to 5'], ['Page designs', '2'], ['Revision rounds', '2'], ['Visitor stats', 'Basic'], ['CMS', 'From $1,750'], ['30-day search checkup', null]],
     timeline: '2–3 weeks',
   },
   {
@@ -118,12 +124,7 @@ export const packages = [
     price: '$2,950',
     featured: true,
     blurb: 'Room for every service you offer, so customers and Google can find each one.',
-    includes: 'Everything in Essential, plus:',
-    groups: [
-      { label: 'Design and build', items: ['Up to 10 pages', 'Up to 3 page designs', '3 revision rounds'] },
-      { label: 'Found online', items: ['Visitor stats that show which pages bring in calls and messages'] },
-    ],
-    extra: 'Add a CMS from $1,750',
+    specs: [['Pages', 'Up to 10'], ['Page designs', 'Up to 3'], ['Revision rounds', '3'], ['Visitor stats', 'Calls by page'], ['CMS', 'From $1,750'], ['30-day search checkup', null]],
     timeline: '3–5 weeks',
   },
   {
@@ -133,12 +134,7 @@ export const packages = [
     name: 'Complete Presence',
     price: '$5,500',
     blurb: 'For growing businesses that want to update their site themselves.',
-    includes: 'Everything in Expanded, plus:',
-    groups: [
-      { label: 'Design and build', items: ['Up to 20 pages', 'Up to 6 page designs', '4 revision rounds'] },
-      { label: 'Update it yourself', items: ['A CMS to update your text, photos, news, or events yourself'] },
-      { label: 'Found online', items: ['A search checkup 30 days after launch'] },
-    ],
+    specs: [['Pages', 'Up to 20'], ['Page designs', 'Up to 6'], ['Revision rounds', '4'], ['Visitor stats', 'Calls by page'], ['CMS', 'Included'], ['30-day search checkup', 'Included']],
     timeline: '6+ weeks',
   },
 ];
