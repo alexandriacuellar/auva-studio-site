@@ -26,7 +26,7 @@ export const categories = [
     icon: 'globe',
     title: 'Servicios de sitios web',
     text: 'Sitios web que ayudan a sus clientes a encontrarle, confiar en usted y comunicarse.',
-    items: ['Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Paquetes de sitios web desde $1,500', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
+    items: ['Paquetes de sitios web desde $1,500', 'Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
     href: '/es/websites/',
     cta: 'Ver servicios de sitios web',
   },
@@ -58,7 +58,7 @@ export const consulting = [
 export const whyAuva = [
   { title: 'Profundidad técnica', text: 'Recomendaciones basadas en cómo los sistemas realmente funcionan, se conectan y se mantienen.' },
   { title: 'Visión de negocio', text: 'Sus metas, su presupuesto, su equipo y sus clientes van antes que cualquier plataforma nueva.' },
-  { title: 'De la estrategia a la entrega', text: 'Una sola persona de confianza desde la evaluación y la planificación hasta la implementación.' },
+  { title: 'De la estrategia a la entrega', text: 'Una sola persona de confianza desde la primera revisión hasta la configuración y la capacitación.' },
   { title: 'Experiencia amplia', text: 'Sitios web, APIs, productos digitales, gestión de proyectos, videojuegos, XR y experiencias interactivas.' },
 ];
 
