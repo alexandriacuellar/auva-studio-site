@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
-import { care, monthly, serviceSchema, site } from '../../data/site';
+import { care, plans, monthly, serviceSchema, site } from '../../data/site';
 
 const atLaunch = [
   { icon: 'chat', title: 'A walkthrough', text: 'I show you around your new site and answer your questions.' },
@@ -12,27 +12,29 @@ const atLaunch = [
   { icon: 'key', title: 'Everything in your name', text: 'Your domain, hosting, and accounts, so you never depend on me to get in.' },
 ];
 
-// Three ways to get help after launch, shown like the website package cards.
+// Four ways to get help after launch, shown like the website package cards.
 const paths = [
   { tag: 'Now and then', name: 'Pay as you go', price: '$50', unit: 'per update', blurb: 'Send me what to change and I take care of it.', items: ['Up to about 30 minutes of edits per update, sent together in one request', 'Done within 2 business days', 'Buy 5 updates ahead for $200 and save $50', 'New pages and features at $125/hr, quoted first', 'No commitment. Pay only when you need something.'], cta: 'Send an update', href: '#start' },
-  { tag: 'Do it yourself', name: 'Update it yourself', price: 'From $1,750', unit: 'one time', blurb: 'A CMS (content management system) is a simple dashboard where you update your text, photos, news, and events yourself. No code needed.', items: ['Make changes whenever you like, with no waiting', 'Up to 2 collections, like news posts or events. More collections, quoted first.', 'Training and an editor guide', '30 days of support after setup', 'Included in Complete Presence'], cta: 'Ask about a CMS', href: '#start' },
+  { tag: 'A little each month', name: plans[0].name, price: '$99', unit: 'a month', blurb: 'For sites with a few small changes most months.', items: ['1 hour of updates a month, about 2 updates', 'A monthly check that your forms, links, and buttons work', 'Done within 2 business days', 'Unused time carries over one month', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates', href: '#start' },
+  { tag: 'More each month', name: plans[1].name, price: '$199', unit: 'a month', blurb: 'For growing sites with new pages, services, or events.', items: ['2 hours a month for updates, a new page, or CMS changes', 'The same monthly check', 'A search review every 3 months, with what to fix', 'Done within 1 business day', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates plus', href: '#start' },
   { tag: 'Every month', name: 'Monthly web producer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
 ];
 
 const faqs = [
   { q: "What counts as one update?", a: "Up to about 30 minutes of edits, sent together in one request, like new hours, a few new photos, and a typo fix. If a request will take longer, I tell you first." },
-  { q: "Do I need a monthly plan?", a: "No. Most sites I build have no plugins or other add-on software to keep patched, so you pay only when you want a change." },
-  { q: "Can you help with a site you didn't build?", a: "Pay-as-you-go updates are for sites I build. For a site built by someone else, we start with a Website Diagnostic, and then the monthly plan or a small one-time change may fit." },
+  { q: "Do I need a monthly plan?", a: "No. Most sites I build have no plugins to keep patched, so you can pay only when you want a change. If you change things most months, a plan is simpler, and you can start, switch, or stop one any time after the first 3 months." },
+  { q: "Can you help with a site you didn't build?", a: "Pay-as-you-go updates are for sites I build. For a site built by someone else, we start with a Website Diagnostic, and then a monthly plan or a small one-time change may fit." },
   { q: "What does my site cost to run?", a: "Your domain is about $20 a year, and hosting is free or low cost for most sites I build, in your name. If your site needs a platform with a monthly fee, I'll tell you before we start." },
 ];
 
 const schema = serviceSchema([
   ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
+  ...plans.map((p) => ({ name: `Help After Launch: ${p.name}`, description: p.text, price: p.price })),
   { name: `Help After Launch: ${monthly.name}`, description: monthly.text, price: monthly.price },
   { name: 'CMS (content management system)', description: 'A simple dashboard to update page text, photos, and collections like news or events yourself, with no code.', price: 'From $1,750' },
 ], '/websites/help-after-launch/');
 ---
-<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $50 per update, a CMS so you can make changes yourself, or a monthly web producer from $650 for 5 hours.">
+<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $50 per update, monthly update plans from $99, a monthly web producer from $650, or a CMS so you can make changes yourself.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Help when you need it, <em>or every month.</em></h1>
@@ -41,7 +43,7 @@ const schema = serviceSchema([
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
         <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
       </div>
-      <p class="hero-note">Updates are $50 each, and you pay only when you need one. Monthly help starts at $650 for 5 hours.</p>
+      <p class="hero-note">Updates are $50 each, or pick a monthly plan from $99. Start any time, at launch or later.</p>
     </div>
   </section>
 
@@ -65,10 +67,10 @@ const schema = serviceSchema([
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">After launch, <em>three ways to get help.</em></h2>
-        <p class="lede">No monthly fee unless you want one. Pick what fits how often your site changes.</p>
+        <h2 class="mag-head">After launch, <em>four ways to get help.</em></h2>
+        <p class="lede">No monthly fee unless you want one. Pick what fits how often your site changes, and start or switch plans any time.</p>
       </div>
-      <div class="grid grid-3 packages">
+      <div class="grid grid-4 packages">
         {paths.map((p) => (
           <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
             <span class="tag">{p.tag}</span>
@@ -81,6 +83,16 @@ const schema = serviceSchema([
         ))}
       </div>
       <p class="fine">Monthly hours are one flexible allowance across anything on the list, and unused hours carry over one month. Third-party fees, like platforms or apps, are separate. I can't promise results like rankings or sales, but I'll show you what's working.</p>
+    </div>
+  </section>
+
+  <section id="cms">
+    <div class="wrap">
+      <div class="card" style="display:grid;gap:12px">
+        <h2 class="mag-head">Rather <em>update it yourself?</em></h2>
+        <p class="muted">A CMS (content management system) is a simple dashboard where you update your text, photos, news, and events yourself. No code needed. <b style="color: var(--primary)">From $1,750</b>, one time, with training, an editor guide, and 30 days of support. Up to 2 collections, like news posts or events. Included in Complete Presence.</p>
+        <p><a class="btn btn-ghost" href="#start">Ask about a CMS</a></p>
+      </div>
     </div>
   </section>
 

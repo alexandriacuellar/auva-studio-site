@@ -3,7 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import InquiryForm from '../../../components/InquiryForm.astro';
 import Faq from '../../../components/Faq.astro';
-import { care, monthly, serviceSchema, site } from '../../../data/site.es';
+import { care, plans, monthly, serviceSchema, site } from '../../../data/site.es';
 
 const atLaunch = [
   { icon: 'chat', title: 'Un recorrido', text: 'Le muestro su sitio nuevo y respondo sus preguntas.' },
@@ -12,27 +12,29 @@ const atLaunch = [
   { icon: 'key', title: 'Todo a su nombre', text: 'Su dominio, su hosting y sus cuentas, para que nunca dependa de mí para entrar.' },
 ];
 
-// Tres formas de recibir ayuda después del lanzamiento, como las tarjetas de paquetes.
+// Cuatro formas de recibir ayuda después del lanzamiento, como las tarjetas de paquetes.
 const paths = [
   { tag: 'De vez en cuando', name: 'Pague por cambio', price: '$50', unit: 'por cambio', blurb: 'Envíeme lo que quiere cambiar y yo me encargo.', items: ['Hasta unos 30 minutos de ediciones por cambio, enviadas juntas en una sola solicitud', 'Listo en 2 días hábiles', 'Compre 5 cambios por adelantado por $200 y ahorre $50', 'Páginas y funciones nuevas a $125/hora, con presupuesto previo', 'Sin compromiso. Pague solo cuando necesite algo.'], cta: 'Enviar un cambio', href: '#start' },
-  { tag: 'Hágalo usted', name: 'Actualícelo usted', price: 'Desde $1,750', unit: 'pago único', blurb: 'Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza sus textos, fotos, noticias y eventos. No necesita programar.', items: ['Haga cambios cuando quiera, sin esperar', 'Hasta 2 colecciones, como noticias o eventos. Más colecciones, con presupuesto previo.', 'Capacitación y una guía para editar', '30 días de apoyo después de la configuración', 'Incluido en Presencia Completa'], cta: 'Preguntar por un CMS', href: '#start' },
+  { tag: 'Un poco cada mes', name: plans[0].name, price: '$99', unit: 'al mes', blurb: 'Para sitios con algunos cambios pequeños casi todos los meses.', items: ['1 hora de cambios al mes, unos 2 cambios', 'Una revisión mensual de que sus formularios, enlaces y botones funcionan', 'Listo en 2 días hábiles', 'El tiempo que no use pasa al mes siguiente', 'Mínimo de 3 meses; después, aviso de 30 días para terminar'], cta: 'Empezar cambios mensuales', href: '#start' },
+  { tag: 'Más cada mes', name: plans[1].name, price: '$199', unit: 'al mes', blurb: 'Para sitios que crecen con páginas, servicios o eventos nuevos.', items: ['2 horas al mes para cambios, una página nueva o ajustes en su CMS', 'La misma revisión mensual', 'Una revisión de búsqueda cada 3 meses, con lo que conviene arreglar', 'Listo en 1 día hábil', 'Mínimo de 3 meses; después, aviso de 30 días para terminar'], cta: 'Empezar cambios mensuales plus', href: '#start' },
   { tag: 'Cada mes', name: 'Productora web mensual', price: 'Desde $650', unit: 'al mes por 5 horas', blurb: monthly.text, items: [...monthly.outcomes, 'Ayuda el mismo día con problemas urgentes', 'Mínimo de 3 meses; después, aviso de 30 días para terminar'], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
 ];
 
 const faqs = [
   { q: "¿Qué cuenta como un cambio?", a: "Hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud, como un horario nuevo, algunas fotos nuevas y un error de escritura. Si una solicitud va a tomar más, se lo digo antes." },
-  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins ni otro software adicional que haya que mantener al día, así que solo paga cuando quiere un cambio." },
-  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios sin plan mensual son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir el plan mensual o un cambio puntual pequeño." },
+  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si cambia cosas casi todos los meses, un plan es más sencillo, y puede empezarlo, cambiarlo o dejarlo cuando quiera después de los primeros 3 meses." },
+  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios sin plan mensual son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir un plan mensual o un cambio puntual pequeño." },
   { q: "¿Cuánto cuesta mantener mi sitio funcionando?", a: "Su dominio cuesta unos $20 al año, y el hosting es gratis o de bajo costo para la mayoría de los sitios que construyo, a su nombre. Si su sitio necesita una plataforma con cuota mensual, se lo digo antes de empezar." },
 ];
 
 const schema = serviceSchema([
   ...care.map((c) => ({ name: `Ayuda después del lanzamiento: ${c.name}`, description: c.text, price: c.price })),
+  ...plans.map((p) => ({ name: `Ayuda después del lanzamiento: ${p.name}`, description: p.text, price: p.price })),
   { name: `Ayuda después del lanzamiento: ${monthly.name}`, description: monthly.text, price: monthly.price },
   { name: 'CMS (sistema de gestión de contenidos)', description: 'Un panel sencillo para actualizar por su cuenta los textos, las fotos y colecciones como noticias o eventos, sin programar.', price: 'Desde $1,750' },
 ], '/es/websites/help-after-launch/');
 ---
-<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $50 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $50 por cambio, un CMS para hacer los cambios por su cuenta, o una productora web mensual desde $650 por 5 horas.">
+<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $50 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $50 por cambio, planes mensuales desde $99, una productora web mensual desde $650, o un CMS para hacer los cambios por su cuenta.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Ayuda cuando la necesite, <em>o cada mes.</em></h1>
@@ -41,7 +43,7 @@ const schema = serviceSchema([
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
         <a class="btn btn-ghost" href="/es/websites/#packages">Ver paquetes de sitios web <Icon name="arrow" size={18} /></a>
       </div>
-      <p class="hero-note">Los cambios cuestan $50 cada uno, y solo paga cuando necesita uno. La ayuda mensual empieza en $650 por 5 horas.</p>
+      <p class="hero-note">Los cambios cuestan $50 cada uno, o elija un plan mensual desde $99. Empiece cuando quiera, al lanzar o más adelante.</p>
     </div>
   </section>
 
@@ -65,10 +67,10 @@ const schema = serviceSchema([
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Después del lanzamiento, <em>tres formas de recibir ayuda.</em></h2>
-        <p class="lede">Sin tarifa mensual, a menos que usted la quiera. Elija lo que mejor se adapte a la frecuencia con que cambia su sitio.</p>
+        <h2 class="mag-head">Después del lanzamiento, <em>cuatro formas de recibir ayuda.</em></h2>
+        <p class="lede">Sin tarifa mensual, a menos que usted la quiera. Elija lo que mejor se adapte a la frecuencia con que cambia su sitio, y empiece o cambie de plan cuando quiera.</p>
       </div>
-      <div class="grid grid-3 packages">
+      <div class="grid grid-4 packages">
         {paths.map((p) => (
           <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
             <span class="tag">{p.tag}</span>
@@ -81,6 +83,16 @@ const schema = serviceSchema([
         ))}
       </div>
       <p class="fine">Las horas mensuales son un solo saldo flexible para cualquier cosa de la lista, y las horas que no use pasan al mes siguiente. Las tarifas de terceros, como plataformas o aplicaciones, se pagan aparte. No puedo prometer resultados como posiciones en Google o ventas, pero le mostraré lo que está funcionando.</p>
+    </div>
+  </section>
+
+  <section id="cms">
+    <div class="wrap">
+      <div class="card" style="display:grid;gap:12px">
+        <h2 class="mag-head">¿Prefiere <em>actualizarlo usted?</em></h2>
+        <p class="muted">Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza sus textos, fotos, noticias y eventos. No necesita programar. <b style="color: var(--primary)">Desde $1,750</b>, pago único, con capacitación, una guía para editar y 30 días de apoyo. Hasta 2 colecciones, como noticias o eventos. Incluido en Presencia Completa.</p>
+        <p><a class="btn btn-ghost" href="#start">Preguntar por un CMS</a></p>
+      </div>
     </div>
   </section>
 

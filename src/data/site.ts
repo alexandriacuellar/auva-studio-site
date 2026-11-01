@@ -180,6 +180,12 @@ export const care = [
 ];
 
 // The only monthly offer: a block of web producer hours. Sold on outcomes; hours set the price.
+// Monthly update plans (2026-11-01): sized by how often a client needs help. Optional, start or switch any time.
+export const plans = [
+  { name: 'Monthly updates', price: '$99 a month', hours: '1 hour', text: '1 hour of updates a month, about 2 updates, plus a monthly check that your forms, links, and buttons work. Done within 2 business days.' },
+  { name: 'Monthly updates plus', price: '$199 a month', hours: '2 hours', text: '2 hours a month for updates, a new page, or CMS changes, a monthly check, and a search review every 3 months. Done within 1 business day.' },
+];
+
 export const monthly = {
   name: 'Monthly web producer',
   price: 'From $650 a month for 5 hours',
