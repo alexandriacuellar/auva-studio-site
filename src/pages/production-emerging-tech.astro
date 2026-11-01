@@ -14,9 +14,7 @@ const prototypes = ['review', 'ar-starter'].map((id) => offers.find((o) => o.id 
 
 const faqs = [
   { q: 'Do you build full XR or game productions?', a: "I plan and manage them as your producer. AR projects are built with a developer partner when needed, and bigger builds go to a trusted studio partner, with me as your producer if you'd like." },
-  { q: 'Which devices do you work with?', a: "I follow Meta's lineup closely: Meta Quest headsets, Ray-Ban Meta and Meta Ray-Ban Display glasses, the new Meta VR Glasses when they ship, and Meta Horizon worlds. I also build AR that opens in a phone's browser, with no app needed. I'll recommend the one that fits your audience and budget." },
   { q: 'Can you join a project that is already underway?', a: 'Yes. Production Support often starts mid-project: I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
-  { q: 'Do you work with small businesses too?', a: "Yes. If you're curious about AR for your business, start small with an AR Starter Project, like a business card or flyer that comes to life. For a website, tools, or AI project, see Tech, Automation & AI." },
 ];
 
 const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');

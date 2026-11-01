@@ -14,9 +14,7 @@ const prototypes = ['review', 'ar-starter'].map((id) => offers.find((o) => o.id 
 
 const faqs = [
   { q: '¿Produce experiencias XR o videojuegos completos?', a: 'Los planifico y los gestiono como su productora. Los proyectos de AR se construyen con un desarrollador colaborador cuando hace falta, y las producciones más grandes pasan a un estudio colaborador de confianza, conmigo como su productora si así lo desea.' },
-  { q: '¿Con qué dispositivos trabaja?', a: 'Sigo de cerca la línea de Meta: los visores Meta Quest, los lentes Ray-Ban Meta y Meta Ray-Ban Display, los nuevos Meta VR Glasses cuando salgan a la venta y los mundos de Meta Horizon. También creo AR que se abre en el navegador del teléfono, sin descargar ninguna app. Le recomiendo el que mejor se ajusta a su público y su presupuesto.' },
   { q: '¿Puede unirse a un proyecto que ya está en marcha?', a: 'Sí. El Apoyo de Producción muchas veces empieza a mitad del proyecto: reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },
-  { q: '¿También trabaja con pequeños negocios?', a: 'Sí. Si le da curiosidad usar AR en su negocio, empiece en pequeño con un Proyecto AR Inicial, como una tarjeta de presentación o un volante que cobra vida. Para un sitio web, herramientas o un proyecto de IA, vea Tecnología, Automatización e IA.' },
 ];
 
 const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/production-emerging-tech/');
