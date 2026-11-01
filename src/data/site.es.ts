@@ -127,7 +127,7 @@ export const comparison = {
 };
 
 export const addons = [
-  { icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar.', price: 'Desde $1,750' },
+  { icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar, y gratis de mantener para la mayoría de los sitios.', price: 'Desde $1,750' },
   { icon: 'layers', title: 'Tiendas en línea y botones de compra', text: 'Desde unos cuantos botones de compra en un sitio pequeño hasta una tienda en línea completa. Cuénteme qué quiere vender y le doy un presupuesto.', price: 'Presupuesto según su proyecto' },
   { icon: 'clock', title: 'Citas, donaciones y otras herramientas', text: 'Agrego las herramientas de citas, donaciones o foros que ya usa, o le ayudo a configurar unas nuevas.', price: 'Presupuesto según las herramientas que use' },
   { icon: 'chat', title: 'Chatbots de IA y aplicaciones web', text: 'Un asistente de chat que responde las preguntas de sus visitantes con sus propias preguntas frecuentes, servicios y precios, o una herramienta a la medida, como un portal para clientes o una app de citas.', price: 'Presupuesto según su proyecto', demo: "Pruébelo ahora: pregunte al asistente de este sitio" },
