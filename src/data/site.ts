@@ -145,11 +145,11 @@ export const packages = [
 
 export const comparison = {
   benefits: [
-    { icon: 'bolt', title: 'Loads almost instantly', text: "Your pages open in a blink on any phone, so visitors don't give up and leave. I'll show you your current site's Google speed score, and your new one at launch." },
-    { icon: 'search', title: 'Built to be found, from day one', text: 'Speed, clear page structure, and the details Google and AI search tools look for are part of every build, not an extra you pay for after launch.' },
-    { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Hosts like Cloudflare and Netlify serve pages like these for free, or for a few dollars a month on a busier site. Your domain is about $20 a year.' },
-    { icon: 'check', title: 'Easy for everyone to use', text: 'Every site gets an accessibility test before launch, so it works for people using screen readers, keyboards, or larger text.' },
-    { icon: 'key', title: 'Yours to keep', text: "Your code, content, domain, and hosting account are all in your name. No lock-in, and no platform you can't leave." },
+    { icon: 'bolt', title: 'Loads almost instantly', text: "Pages open in a blink on any phone, so visitors stay. I'll show you your Google speed score before and after." },
+    { icon: 'search', title: 'Built to be found, from day one', text: 'The details Google and AI search tools look for, built in. Not an extra you pay for later.' },
+    { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Free, or a few dollars a month on a busier site. Your domain is about $20 a year.' },
+    { icon: 'check', title: 'Easy for everyone to use', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
+    { icon: 'key', title: 'Yours to keep', text: 'Code, content, domain, and hosting in your name. No lock-in.' },
   ],
 };
 
