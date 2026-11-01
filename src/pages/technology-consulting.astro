@@ -19,34 +19,26 @@ import { consulting, whyAuva, site, testimonials, serviceSchema } from '../data/
 
 const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/technology-consulting/');
 
-const audiences = [
-  { icon: 'globe', title: 'Small businesses', who: 'Shops, restaurants, inns, practices, and local services.', text: 'Too many tools and not enough time. Pick the right ones, set them up, and get your team using them.' },
-  { icon: 'key', title: 'Startups', who: 'Early teams building a first product or setting up their systems.', text: 'Turn an idea into a plan, with clear requirements, the right vendors, and a project manager without a full-time hire.' },
-  { icon: 'book', title: 'Nonprofits & Culture', who: 'Museums, arts councils, land trusts, and community groups.', text: 'Make a tight budget go further. Choose tools, plan upgrades, and keep grant-funded projects on track.' },
-  { icon: 'star', title: 'Creative, game & XR studios', who: 'Independent studios, anywhere.', text: 'A producer to run schedules, documents, and teams, so your creative leads can focus on the work.' },
-  { icon: 'chart', title: 'Growing teams', who: 'Companies adding people, locations, or services.', text: 'Fix the workflows that break as you grow, and keep big projects moving.' },
-];
 
 // Every consulting price in one place.
 const glance = [
-  { name: 'Consulting or project help, as needed', price: '$65/hr' },
-  { name: 'Technology Assessment', note: '3 sessions, research, and a written roadmap', price: '$650' },
+  { name: 'Technology Assessment', note: '3 sessions, research, and a written plan', price: '$650' },
   { name: 'Business Analysis & Process Review', note: 'One process, about 15 hours', price: 'From $1,000' },
-  { name: 'Fractional project leadership, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
+  { name: 'Project lead, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
+  { name: 'Consulting or project help, as needed', price: '$65/hr' },
   { name: 'AI & Emerging Tech', note: 'See the AI & Emerging Tech page for details', price: 'From $500' },
 ];
 ---
-<Base title="Consulting & Project Support" seoTitle="Technology Consulting & Project Management | Auva Studio" schema={schema} description="Technology planning, business analysis, project management, and AI & Emerging Tech consulting for small businesses, startups, nonprofits, and growing teams.">
+<Base title="Consulting & Project Support" seoTitle="Technology Consulting & Project Management | Auva Studio" schema={schema} description="Help choosing the right tools, fixing slow processes, and keeping tech projects on track, for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">Technology decisions, <em>made with confidence.</em></h1>
-      <p class="lede">Technology consulting and project support built around your goals. Start with an assessment, solve a specific challenge, or bring in experienced leadership for a bigger project.</p>
+      <h1 class="mag-head">The right tools, <em>set up and working for you.</em></h1>
+      <p class="lede">Too many apps, a process held together with workarounds, or a project that keeps slipping? I help small businesses, nonprofits, and growing teams choose the right tools, fix how work gets done, and keep projects on track.</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#planning">See the $650 Technology Assessment</a>
       </div>
-      <nav class="bd-sublinks" aria-label="Consulting services">
-        {consulting.map((c) => <a href={c.id === 'ai' ? '/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
-      </nav>
+      <ul class="hero-strip">{['Fixed price to start', 'Plain-English plan', 'Works with your current vendors', 'Work with me directly'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
@@ -54,63 +46,88 @@ const glance = [
     <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria.</b> I've spent 20+ years in software and digital technology, from newspaper websites to VR and games, and you'll work with me directly. <a href="/about/">More about me</a></span></div>
   </section>
 
-  <section class="alt" id="who">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Help that fits <em>your kind of organization.</em></h2>
+  <section class="alt" id="problems">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">Sound <em>familiar?</em></h2>
+        <p class="lede">Pick the one closest to yours. Each one shows the service that fixes it.</p>
       </div>
-      <div class="grid grid-3 who">
-        {audiences.map((a) => (
-          <div class="card">
-            <div class="icon"><Icon name={a.icon} size={32} /></div>
-            <h3>{a.title}</h3>
-            <p class="small muted">{a.who}</p>
-            <p class="who-text">{a.text}</p>
-            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
-          </div>
-        ))}
-        <div class="card who-other">
-          <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>Something else?</h3>
-          <p>Tell me what you're working on, and I'll suggest where to start.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
-        </div>
-      </div>
+      <ul class="route-list">
+        <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>You pay for apps nobody uses</b><span class="muted">Or you have so many tools that none of them talk to each other.</span></span></a></li>
+        <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>You need new software and don't know which</b><span class="muted">Booking, point of sale, accounting, email, or a customer list, with too many options to compare.</span></span></a></li>
+        <li><a href="#analysis"><span class="icon"><Icon name="chart" /></span><span><b>Your team types the same thing twice</b><span class="muted">Information lives in three places, so mistakes and extra work pile up.</span></span></a></li>
+        <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>A simple task takes hours</b><span class="muted">Spreadsheets, workarounds, and "that's how we've always done it."</span></span></a></li>
+        <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>A tech project keeps slipping</b><span class="muted">A new system, a move, or an upgrade with no one clearly in charge.</span></span></a></li>
+        <li><a href="#delivery"><span class="icon"><Icon name="shield" /></span><span><b>You need someone on your side with a vendor</b><span class="muted">Someone who understands the tech and asks the right questions.</span></span></a></li>
+      </ul>
     </div>
   </section>
 
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Three ways I help, <em>plus AI &amp; Emerging Tech.</em></h2>
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Every one starts with a free call, and you get a written price before any work begins.</p>
       </div>
       <div class="grid grid-2">
-        {consulting.map((c) => (
-          <div class="card card-row" id={c.id}>
-            <div class="icon"><Icon name={c.icon} size={36} /></div>
-            <div>
-              <h3>{c.title}</h3>
-              <p class="muted">{c.text}</p>
-              <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
-              {c.id === 'ai'
-                ? <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Tech <Icon name="arrow" size={16} /></a>
-                : <a class="more" href={`/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Ask about this</a>}
-            </div>
+        <div class="card card-row" id="planning">
+          <div class="icon"><Icon name="compass" size={36} /></div>
+          <div>
+            <h3>Get a plan for your tools</h3>
+            <p class="svc-meta"><span>Technology Assessment</span> <b>$650</b></p>
+            <p class="muted">I look at every tool you pay for, find what's missing or wasted, and give you a written plan for what to keep, replace, or add first.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A review of your tools and subscriptions</li><li><Icon name="tick" size={16} />A written plan in priority order</li><li><Icon name="tick" size={16} />Help choosing new software or vendors</li></ul>
+            <a class="more" href="/technology-consulting/?topic=planning#start" style="margin-top: 12px">Ask about this</a>
           </div>
-        ))}
-      </div>
-      <div class="card card-row" style="margin-top: 24px">
-        <div class="icon"><Icon name="layers" size={36} /></div>
-        <div>
-          <h3>Agencies and designers</h3>
-          <p class="muted">Need a reliable developer behind your team? I partner with marketing agencies, creative studios, and independent designers on white-label and shared projects.</p>
-          <a class="more" href="/development-partnerships/" style="margin-top: 12px">See Development Partnerships <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card card-row" id="analysis">
+          <div class="icon"><Icon name="chart" size={36} /></div>
+          <div>
+            <h3>Fix a process that slows you down</h3>
+            <p class="svc-meta"><span>Business Analysis & Process Review</span> <b>From $1,000</b></p>
+            <p class="muted">I map how one task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A clear map of how the work gets done now</li><li><Icon name="tick" size={16} />What a fix needs, written down</li><li><Icon name="tick" size={16} />Options compared side by side</li></ul>
+            <a class="more" href="/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Ask about this</a>
+          </div>
+        </div>
+        <div class="card card-row" id="delivery">
+          <div class="icon"><Icon name="check" size={36} /></div>
+          <div>
+            <h3>Someone to run the project</h3>
+            <p class="svc-meta"><span>Project Management</span> <b>$65/hr, or monthly from $650</b></p>
+            <p class="muted">A part-time project lead who plans the work, keeps your team and vendors on schedule, and flags problems early, without a full-time hire.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />A plan and schedule everyone can follow</li><li><Icon name="tick" size={16} />Your team and vendors kept in step</li><li><Icon name="tick" size={16} />Early warning on delays and risks</li><li><Icon name="tick" size={16} />Hourly, or a monthly block of hours</li></ul>
+            <a class="more" href="/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Ask about this</a>
+          </div>
+        </div>
+        <div class="card card-row">
+          <div class="icon"><Icon name="bolt" size={36} /></div>
+          <div>
+            <h3>Curious about AI?</h3>
+            <p class="muted">Find where AI can save your team time, choose tools you can trust, and get everyone using them.</p>
+            <a class="more" href="/ai-emerging-tech/" style="margin-top: 12px">See AI & Emerging Tech <Icon name="arrow" size={16} /></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="alt" id="pricing">
+  <section class="alt" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it <em>works.</em></h2>
+        <p class="lede">Simple to start, with no surprises along the way.</p>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me what's going on. I'll tell you honestly whether I can help and where to start.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>A short proposal with what I'll do, how long it takes, and the price, before any work begins.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>The work</h3><p>Sessions, research, and hands-on help. You work with me directly and get updates as we go.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Handover</h3><p>Clear documents and training, so your team can keep going without me.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="pricing">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
@@ -128,11 +145,61 @@ const glance = [
     </div>
   </section>
 
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Who I <em>work with.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        <div class="card">
+          <div class="icon"><Icon name="globe" size={32} /></div>
+          <h3>Small businesses</h3>
+          <p class="small muted">Shops, restaurants, inns, practices, and local services.</p>
+          <p class="who-text">Too many tools and not enough time. Pick the right ones, set them up, and get your team using them.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="book" size={32} /></div>
+          <h3>Nonprofits & Culture</h3>
+          <p class="small muted">Museums, arts councils, land trusts, and community groups.</p>
+          <p class="who-text">Make a tight budget go further. Choose tools, plan upgrades, and keep grant-funded projects on track.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="key" size={32} /></div>
+          <h3>Startups</h3>
+          <p class="small muted">Early teams building a first product or setting up their systems.</p>
+          <p class="who-text">Turn an idea into a plan, with clear requirements, the right vendors, and a project lead without a full-time hire.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="chart" size={32} /></div>
+          <h3>Growing teams</h3>
+          <p class="small muted">Companies adding people, locations, or services.</p>
+          <p class="who-text">Fix the workflows that break as you grow, and keep big projects moving.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="layers" size={32} /></div>
+          <h3>Agencies and designers</h3>
+          <p class="who-text">Need a reliable developer behind your team? I partner with marketing agencies, creative studios, and independent designers.</p>
+          <a class="more" href="/development-partnerships/" style="margin-top: 12px">See Development Partnerships <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me what you're working on, and I'll suggest where to start.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Practical guidance <em>backed by technical and delivery experience.</em></h2>
-        <p class="lede">I started as one of many developers behind the Times Herald-Record and other local newspaper websites, then moved into technical project management for digital products, games, and interactive experiences. My background spans software development, technical project management, digital products, gaming, and interactive experiences. That mix lets me look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
+        <p class="lede">I started as one of many developers behind the Times Herald-Record and other local newspaper websites, then moved into technical project management for digital products, games, and interactive experiences. That mix lets me look beyond the surface of a project, understand how the technology works, and build a plan that's realistic for the team that will maintain it.</p>
         <div class="stats">
           <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
           <div><span class="stat">14+</span><span class="muted">VR experiences and mobile games</span></div>
