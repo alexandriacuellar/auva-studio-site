@@ -15,7 +15,7 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each or a monthly web producer from $650`,
-    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($950), project management and fractional project leadership`,
+    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), project management and fractional project leadership`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
