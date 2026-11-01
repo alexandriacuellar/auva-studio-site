@@ -10,6 +10,7 @@ import Faq from '../components/Faq.astro';
 import PaybackCalc from '../components/PaybackCalc.astro';
 import { comparison, addons, process, packages, samples, site, serviceSchema } from '../data/site';
 import { Image } from 'astro:assets';
+import { assistantOn } from '../data/features';
 import skytopShot from '../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../assets/samples/enea-hudson-cattle-farm.jpg';
 import rondoutShot from '../assets/samples/rondout-mercantile.jpg';
@@ -177,7 +178,7 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             <p><b style="color: var(--primary)">{a.price}</b></p>
-            {'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
+            {assistantOn && 'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
           </div>
         ))}
       </div>

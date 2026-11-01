@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import * as en from '../data/site';
+import { assistantOn } from '../data/features';
 import * as es from '../data/site.es';
 import Icon from '../components/Icon.astro';
 import Assistant from '../components/Assistant.astro';
@@ -269,7 +270,7 @@ const schema = {
       <slot />
     </main>
 
-    <Assistant />
+    {assistantOn && <Assistant />}
 
     <footer class="site-footer">
       <div class="wrap footer-inner">
