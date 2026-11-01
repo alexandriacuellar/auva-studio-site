@@ -72,6 +72,16 @@ export const samples = [
   { package: 'Presencia Completa', slug: 'rondout-mercantile', name: 'Rondout Mercantile', text: 'Un sitio más grande para una tienda en Kingston, con un CMS, talleres, citas para pruebas de ropa (como servicio adicional) y una lista para apartar productos nuevos.', goodFor: 'Ideal para tiendas, estudios y organizaciones que publican productos, eventos o noticias con frecuencia.' },
 ];
 
+// Lo que incluyen todos los paquetes; se muestra una vez sobre las tarjetas.
+export const packageBasics = [
+  'Una llamada de planificación y un plan de contenido',
+  'Pulo sus textos y completo lo que falte',
+  'Diseño a la medida de su negocio, pensado primero para el celular',
+  'Un formulario de contacto y un mapa para encontrarle',
+  'Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio',
+  'Orientación sobre su Perfil de Negocio de Google, cuando aplique',
+];
+
 export const packages = [
   {
     id: 'essential',
@@ -80,11 +90,7 @@ export const packages = [
     name: 'Presencia Esencial',
     price: '$1,500',
     blurb: 'Una presencia profesional en internet que ayuda a sus clientes a encontrarle, confiar en usted y contactarle.',
-    groups: [
-      { label: 'Planificación y contenido', items: ['Una llamada de planificación y un plan de contenido', 'Pulo sus textos y completo lo que falte'] },
-      { label: 'Diseño y desarrollo', items: ['Una sola página con desplazamiento o hasta 5 páginas, lo que mejor le funcione a su negocio. Le ayudo a decidir.', '2 diseños de página: uno para su página principal y otro para las demás', 'Diseño a la medida de su negocio, pensado primero para el celular', 'Un formulario de contacto y un mapa para encontrarle', '2 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio', 'Orientación sobre su Perfil de Negocio de Google, cuando aplique', 'Estadísticas sencillas de visitas'] },
-    ],
+    specs: [['Páginas', 'De 1 a 5'], ['Diseños de página', '2'], ['Rondas de cambios', '2'], ['Estadísticas', 'Básicas'], ['CMS', 'Desde $1,750'], ['Revisión a los 30 días', null]],
     timeline: '2–3 semanas',
   },
   {
@@ -95,12 +101,7 @@ export const packages = [
     price: '$2,950',
     featured: true,
     blurb: 'Espacio para cada servicio que ofrece, para que sus clientes y Google puedan encontrar cada uno.',
-    includes: 'Todo lo de Esencial, más:',
-    groups: [
-      { label: 'Diseño y desarrollo', items: ['Hasta 10 páginas', 'Hasta 3 diseños de página', '3 rondas de cambios'] },
-      { label: 'Visibilidad en internet', items: ['Estadísticas que muestran qué páginas le traen llamadas y mensajes'] },
-    ],
-    extra: 'Agregue un CMS desde $1,750',
+    specs: [['Páginas', 'Hasta 10'], ['Diseños de página', 'Hasta 3'], ['Rondas de cambios', '3'], ['Estadísticas', 'Llamadas por página'], ['CMS', 'Desde $1,750'], ['Revisión a los 30 días', null]],
     timeline: '3–5 semanas',
   },
   {
@@ -110,23 +111,18 @@ export const packages = [
     name: 'Presencia Completa',
     price: '$5,500',
     blurb: 'Para negocios en crecimiento que quieren actualizar su sitio por su cuenta.',
-    includes: 'Todo lo de Ampliada, más:',
-    groups: [
-      { label: 'Diseño y desarrollo', items: ['Hasta 20 páginas', 'Hasta 6 diseños de página', '4 rondas de cambios'] },
-      { label: 'Actualícelo usted', items: ['Un CMS para actualizar sus textos, fotos, noticias o eventos por su cuenta'] },
-      { label: 'Visibilidad en internet', items: ['Una revisión de búsqueda 30 días después del lanzamiento'] },
-    ],
+    specs: [['Páginas', 'Hasta 20'], ['Diseños de página', 'Hasta 6'], ['Rondas de cambios', '4'], ['Estadísticas', 'Llamadas por página'], ['CMS', 'Incluido'], ['Revisión a los 30 días', 'Incluida']],
     timeline: '6+ semanas',
   },
 ];
 
 export const comparison = {
   benefits: [
-    { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren en un abrir y cerrar de ojos en cualquier celular, para que sus visitantes no se cansen de esperar y se vayan. Le muestro la puntuación de velocidad de Google de su sitio actual, y la del nuevo al lanzarlo.' },
-    { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'La velocidad, una estructura clara y los datos que buscan Google y las herramientas de búsqueda con IA vienen en cada sitio, no son un extra que se paga después.' },
-    { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Servicios como Cloudflare y Netlify alojan sitios como estos gratis, o por unos pocos dólares al mes si el sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
-    { icon: 'check', title: 'Fácil de usar para todos', text: 'Cada sitio pasa una prueba de accesibilidad antes del lanzamiento, para que funcione con lectores de pantalla, con teclado o con letra más grande.' },
-    { icon: 'key', title: 'Es suyo', text: 'Su código, su contenido, su dominio y su cuenta de hosting están a su nombre. Sin ataduras, y sin una plataforma de la que no pueda salir.' },
+    { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren al instante en cualquier celular, y sus visitantes se quedan. Le muestro su puntuación de velocidad de Google antes y después.' },
+    { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'Los datos que buscan Google y las herramientas de búsqueda con IA, incluidos. No son un extra que se paga después.' },
+    { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Gratis, o unos pocos dólares al mes si su sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
+    { icon: 'check', title: 'Fácil de usar para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
+    { icon: 'key', title: 'Es suyo', text: 'Código, contenido, dominio y hosting a su nombre. Sin ataduras.' },
   ],
 };
 

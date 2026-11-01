@@ -8,13 +8,12 @@ import InquiryForm from '../../components/InquiryForm.astro';
 import PhoneViewer from '../../components/PhoneViewer.astro';
 import Faq from '../../components/Faq.astro';
 import PaybackCalc from '../../components/PaybackCalc.astro';
-import { comparison, addons, process, packages, samples, site, testimonials, serviceSchema } from '../../data/site.es';
+import { comparison, addons, process, packages, samples, site, serviceSchema } from '../../data/site.es';
 import { Image } from 'astro:assets';
 import skytopShot from '../../assets/samples/skytop-floor-co.jpg';
 import eneaShot from '../../assets/samples/enea-hudson-cattle-farm.jpg';
 import rondoutShot from '../../assets/samples/rondout-mercantile.jpg';
 import headshot from '../../assets/alexandria-cuellar.jpg';
-const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
@@ -25,7 +24,7 @@ const faqs = [
   { q: "¿Puedo actualizar el sitio por mi cuenta?", a: "Sí, con un CMS (sistema de gestión de contenido), un panel sencillo donde cambia sus textos, fotos, noticias y eventos sin código. Viene incluido en Presencia Completa y se puede agregar a Esencial o Ampliada desde $1,750, o puede enviarme los cambios por $50 cada uno." },
   { q: "¿Y si algo falla después del lanzamiento?", a: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea Ayuda después del lanzamiento, y siempre le explico la causa y el costo antes de arreglar nada.", html: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea <a href=\"/es/websites/help-after-launch/\">Ayuda después del lanzamiento</a>, y siempre le explico la causa y el costo antes de arreglar nada." },
   { q: "¿Me encontrarán en Google?", a: "Cada paquete está hecho para que lo encuentren, con títulos de página claros, datos para buscadores, un mapa del sitio y páginas rápidas que Google y herramientas de IA como ChatGPT pueden leer. Nadie puede prometer honestamente una posición, pero su sitio empieza con todo lo que buscan los buscadores." },
-  { q: "Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?", a: "Lo más probable es que sí. Conservo su contenido y las direcciones de página que Google ya conoce, para que no pierda visitas, y mudar las páginas de su paquete está incluido." },
+  { q: "Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?", a: "Lo más probable es que sí. Conservo su contenido y las direcciones de página que Google ya conoce, para que no pierda visitas, y mudar las páginas de su paquete está incluido. Si su sitio ya funciona bien donde está, quizá no valga la pena cambiar, y se lo diré con honestidad." },
 ];
 
 const schema = serviceSchema([
@@ -34,12 +33,12 @@ const schema = serviceSchema([
 ], '/es/websites/');
 
 const audiences = [
-  { id: 'hospitality', icon: 'star', title: 'Hospitalidad y turismo', who: 'Posadas, B&B, restaurantes, viñedos, cervecerías y granjas.', text: 'Menús, habitaciones, horarios y eventos fáciles de encontrar en el celular, con enlaces a su sistema de reservas.' },
-  { id: 'makers', icon: 'layers', title: 'Tiendas y artesanos', who: 'Boutiques, galerías, talleres artesanales y artistas.', text: 'Muestre su trabajo y lleve a sus clientes a donde pueden comprar. Se puede agregar una tienda en línea, con presupuesto según las herramientas que use.' },
-  { id: 'services', icon: 'wrench', title: 'Servicios locales', who: 'Oficios, profesionales del bienestar, salones de belleza y agentes de bienes raíces.', text: 'Sus servicios, reseñas y zona de servicio, con una forma fácil de llamar, reservar o pedir un presupuesto.' },
-  { id: 'nonprofits', icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', who: 'Consejos de arte, museos, fideicomisos de tierras, rescates de animales y grupos comunitarios.', text: 'Cuente su historia, comparta sus programas y eventos, y facilite que la gente le apoye. Se pueden agregar donaciones, con presupuesto según su proyecto. ¿Es una organización sin fines de lucro registrada? Pregunte por mi descuento.' },
-  { id: 'startups', icon: 'key', title: 'Startups', who: 'Equipos nuevos que lanzan un producto o servicio.', text: 'Un primer sitio creíble que explica lo que hace y recibe registros o consultas.' },
-  { id: 'studios', icon: 'bolt', title: 'Estudios de videojuegos y XR', who: 'Estudios independientes de videojuegos, realidad virtual y experiencias interactivas, en cualquier lugar.', text: 'Un sitio rápido para sus juegos y experiencias: tráileres, un kit de prensa, su equipo y enlaces a Steam, Meta Quest o las tiendas de apps.' },
+  { id: 'hospitality', icon: 'star', title: 'Hospitalidad y turismo', text: 'Posadas, restaurantes, viñedos y granjas, con menús, habitaciones y eventos fáciles de encontrar en el celular.' },
+  { id: 'makers', icon: 'layers', title: 'Tiendas y artesanos', text: 'Boutiques, galerías y artistas, que muestran su trabajo y dónde comprarlo.' },
+  { id: 'services', icon: 'wrench', title: 'Servicios locales', text: 'Oficios, bienestar, salones y bienes raíces, con una forma fácil de llamar, reservar o pedir un presupuesto.' },
+  { id: 'nonprofits', icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', text: 'Museos, grupos de arte, rescates y grupos comunitarios, que comparten su historia, sus eventos y cómo apoyar.' },
+  { id: 'startups', icon: 'key', title: 'Startups', text: 'Equipos nuevos que necesitan un primer sitio creíble que reciba registros o consultas.' },
+  { id: 'studios', icon: 'bolt', title: 'Estudios de videojuegos y XR', text: 'Estudios independientes de videojuegos y XR, con tráileres, kit de prensa y enlaces a las tiendas.' },
 ];
 ---
 <Base title="Sitios web" seoTitle="Sitios web para pequeños negocios en el Hudson Valley, desde $1,500 | Auva Studio" schema={schema} description="Sitios web rápidos y fáciles de usar en el celular para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. Paquetes de pago único desde $1,500, con hosting gratis o de bajo costo.">
@@ -70,8 +69,7 @@ const audiences = [
           <div class="card" id={a.id}>
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
-            <p class="small muted">{a.who}</p>
-            <p class="who-text">{a.text}</p>
+            <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Pregunte por mi descuento para organizaciones sin fines de lucro.</p>}
             <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio</a>
           </div>
@@ -90,7 +88,7 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Elija <em>el paquete adecuado.</em></h2>
-        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy. Todos incluyen una página principal clara, sus servicios, razones para confiar en usted y un siguiente paso fácil.</p>
+        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy.</p>
       </div>
       <Packages />
       <PaybackCalc />
@@ -155,17 +153,11 @@ const audiences = [
           <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
       </div>
-      <p class="fine"><b>Hecho para que le encuentren</b> significa títulos de página claros, su horario, servicios y ubicación marcados para Google, y una estructura que herramientas de IA como ChatGPT pueden leer. Nadie puede garantizar posiciones ni menciones en la IA, pero estos pasos le dan a su sitio la mejor oportunidad.</p>
-      <p class="fine">El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress. Según datos de rendimiento real de <a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> y del <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>. <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">Ver todos los datos</a>.</p>
-      <p class="fit-note"><b>Cuando Astro no es lo indicado.</b> Si su negocio ya funciona bien con WordPress u otra plataforma, quizá no valga la pena cambiar. Se lo diré con honestidad en nuestra primera llamada.</p>
+      <p class="fine">El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (<a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> y <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>). <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">Ver todos los datos</a>.</p>
       <div class="proof proof-why">
         <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
         <div>
           <p class="proof-line">Pasé casi 20 años creando sitios web y aplicaciones web para periódicos. Su sitio recibe el mismo cuidado, desde la primera llamada hasta el lanzamiento.</p>
-          <figure class="quote quote-inline" lang="en">
-            <blockquote>“{featured.quote}”</blockquote>
-            <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
-          </figure>
         </div>
       </div>
     </div>
@@ -187,6 +179,15 @@ const audiences = [
         ))}
       </div>
 
+      <div class="card card-row" id="care" style="margin-top: 24px">
+        <div class="icon"><Icon name="wrench" size={32} /></div>
+        <div>
+          <h3>¿Prefiere que yo haga los cambios?</h3>
+          <p class="muted">Pídame cambios cuando los necesite por <b style="color: var(--primary)">$50 cada uno</b>, sin tarifa mensual, o cuente conmigo como su productora web desde $650 por 5 horas al mes.</p>
+          <a class="more" href="/es/websites/help-after-launch/" style="margin-top: 8px">Vea cómo funcionan los cambios</a>
+        </div>
+      </div>
+
       <div class="band" style="margin-top: 48px" id="brand">
         <div>
           <p class="eyebrow" style="color: var(--tint)">Servicio adicional opcional</p>
@@ -199,35 +200,11 @@ const audiences = [
           <a class="btn" href="/es/websites/brand-essentials/">Vea lo que incluye</a>
         </div>
       </div>
+      <p class="muted" style="margin-top: 32px"><b>Cuando su sitio esté en línea,</b> también puedo ayudarle a <a href="/es/technology-consulting/#automation">automatizar el trabajo repetitivo</a>, a <a href="/es/technology-consulting/#ai">poner la IA a trabajar para su equipo</a> o a <a href="/es/production-emerging-tech/#ideas">probar la AR en su negocio</a>.</p>
     </div>
   </section>
 
-  <section class="alt" id="care">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Cómo se mantiene <em>al día su sitio.</em></h2>
-        <p class="lede">Usted elige quién hace los cambios. Pídame cambios solo cuando los necesite, sin tarifa mensual, o cuente conmigo como su productora web cada mes, desde $650 por 5 horas.</p>
-      </div>
-      <div class="grid grid-2 care-paths">
-        <div class="card">
-          <div class="icon"><Icon name="wrench" size={36} /></div>
-          <h3>Yo lo actualizo por usted</h3>
-          <p class="muted">Dígame qué cambiar y yo me encargo.</p>
-          <p><b style="color: var(--primary)">$50 por cambio</b></p>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="gear" size={36} /></div>
-          <h3>Usted lo actualiza</h3>
-          <p class="muted">Agregue un CMS a Esencial o Ampliada y cambie sus textos, fotos, noticias y eventos cuando quiera.</p>
-          <p><b style="color: var(--primary)">Adicional desde $1,750 · Incluido en Presencia Completa</b></p>
-        </div>
-      </div>
-      <p style="margin-top: 28px"><a class="btn" href="/es/websites/help-after-launch/">Vea cómo funcionan los cambios</a></p>
-      <p class="muted" style="margin-top: 24px"><b>Cuando su sitio esté en línea,</b> también puedo ayudarle a <a href="/es/technology-consulting/#automation">automatizar el trabajo repetitivo</a>, a <a href="/es/technology-consulting/#ai">poner la IA a trabajar para su equipo</a> o a <a href="/es/production-emerging-tech/#ideas">probar la AR en su negocio</a>.</p>
-    </div>
-  </section>
-
-  <section id="diagnostic">
+  <section class="alt" id="diagnostic">
     <div class="wrap">
       <PathBand
         eyebrow="¿Ya tiene sitio web?"
@@ -248,6 +225,6 @@ const audiences = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="website" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="website" alt />
 </Base>

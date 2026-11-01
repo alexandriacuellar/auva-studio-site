@@ -128,11 +128,14 @@ a.card:hover { border-color: var(--primary); transform: translateY(-2px); }
 .card .more { color: var(--primary); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
 
 /* Packages */
-.packages { align-items: start; }
-.package { display: flex; flex-direction: column; gap: 6px; }
+.packages { align-items: start; row-gap: 32px; }
+/* Each card spans 8 shared rows (subgrid), so prices, specs, and buttons line up across cards. */
+.package { display: grid; grid-row: span 8; grid-template-rows: subgrid; row-gap: 6px; position: relative; align-content: start; }
+.package > * { min-width: 0; }
+@supports not (grid-template-rows: subgrid) { .package { display: flex; flex-direction: column; gap: 6px; } }
 .package.featured { border: 4px solid var(--primary); box-shadow: var(--shadow-strong); }
 .package .tag { font-size: 0.92rem; font-weight: 700; color: var(--muted); }
-.package .rec { font-size: 0.85rem; font-weight: 700; color: var(--white); background: var(--success); align-self: flex-start; padding: 3px 14px; border-radius: 999px; }
+.package .rec { position: absolute; top: -15px; left: 24px; font-size: 0.85rem; font-weight: 700; color: var(--white); background: var(--success); padding: 3px 14px; border-radius: 999px; }
 .package h3 { margin: 6px 0 4px; }
 .package.featured h3 { color: var(--primary); }
 .price { font-family: var(--font-head); font-size: 2.6rem; font-weight: 800; line-height: 1.1; margin: 8px 0 12px; }
@@ -301,7 +304,7 @@ a.more { color: var(--primary); font-weight: 700; text-decoration: none; display
 /* Service area */
 .areas { align-items: start; }
 .towns { font-weight: 600; line-height: 1.8; margin: 8px 0 0; }
-.package .btn { align-self: flex-start; margin-top: 12px; }
+.package .btn { align-self: start; justify-self: start; margin-top: 12px; }
 
 /* Long-form text pages */
 .prose { max-width: 760px; }
@@ -437,7 +440,7 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .hero-checks a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .sample-go { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--primary); }
 .sample:hover .sample-go { text-decoration: underline; }
-.package .sample-link { font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
+.package .sample-link { justify-self: start; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
 
 /* Home About: the note on the studio's name */
 .name-note { margin-top: 10px; padding: 4px 4px 0; }
@@ -451,28 +454,6 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* "Compare all features" table under the packages. */
-.compare-all { margin-top: 32px; }
-.compare-all summary { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; cursor: pointer; font-weight: 600; color: var(--primary); list-style: none; }
-.compare-all summary::-webkit-details-marker { display: none; }
-.compare-all summary::after { content: '+'; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); font-weight: 700; }
-.compare-all[open] summary::after { content: '–'; }
-.compare-wrap { margin-top: 16px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--white); overflow: clip; }
-.compare-wrap thead th { position: sticky; top: 76px; z-index: 1; }
-.compare-wrap td.us { font-weight: 600; }
-.compare-wrap table { min-width: 0; table-layout: fixed; }
-.compare-wrap th[scope=row] { font-weight: 500; width: 34%; }
-.compare-wrap td { text-align: center; vertical-align: middle; }
-.compare-wrap td svg { color: var(--success); vertical-align: middle; }
-.compare-wrap .none { color: var(--muted); }
-.compare-wrap tbody tr:last-child > * { border-bottom: 0; }
-.compare-wrap thead th:not(:first-child) { text-align: center; }
-@media (max-width: 640px) {
-  .compare-wrap th, .compare-wrap td { padding: 10px 6px; font-size: 0.875rem; line-height: 1.35; }
-  .compare-wrap th[scope=row] { width: 36%; padding-left: 12px; }
-  .compare-wrap thead th { top: 65px; }
-}
-
 /* Small delights: the Recommended package lifts once it has arrived; the payback result glows when it changes. */
 @media (prefers-reduced-motion: no-preference) {
   html.reveal-on main section:not(.hero) .package.featured {
@@ -485,7 +466,7 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 }
 
 /* Websites page: shorter on phones. */
-.who-phone { display: none; }
+.who-phone { margin-top: 6px; color: var(--primary); font-weight: 600; }
 .step-terms { list-style: none; padding: 10px 0 0; margin: 10px 0 0; border-top: 1px solid var(--border); display: grid; gap: 6px; font-size: 0.88rem; color: var(--muted); }
 .step-terms li { display: flex; gap: 6px; align-items: flex-start; }
 .step-terms svg { flex: none; margin-top: 3px; color: var(--success); }
@@ -531,10 +512,16 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 }
 
 /* Package cards: features grouped under small labels. */
-.package .pk-includes { margin: 8px 0 0; }
-.package .pk-group { margin-top: 10px; }
-.package .pk-label { margin: 0 0 4px; font-size: 0.88rem; font-weight: 700; color: var(--muted); }
-.package .pk-group .ticks { margin: 0; }
+.pk-basics { margin: 0 0 24px; padding: 20px 24px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
+.pk-basics-title { margin: 0 0 10px; font-weight: 700; color: var(--ink); }
+.pk-basics .ticks { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 28px; }
+@media (max-width: 760px) { .pk-basics .ticks { grid-template-columns: 1fr; } .pk-basics { padding: 18px; } }
+.package .pk-specs { margin: 12px 0 0; display: flex; flex-direction: column; }
+.package .pk-specs > div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-top: 1px solid var(--border); }
+.package .pk-specs > div:last-child { border-bottom: 1px solid var(--border); }
+.package .pk-specs dt { color: var(--muted); font-size: 0.92rem; }
+.package .pk-specs dd { margin: 0; font-weight: 700; color: var(--ink); text-align: right; }
+.package .pk-specs dd.none { color: var(--muted); font-weight: 400; }
 .compare-wrap .group-row th { background: var(--surface); font-size: 0.88rem; font-weight: 700; color: var(--muted); padding-top: 10px; padding-bottom: 10px; text-align: left; position: static; }
 .custom-band { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 20px 28px; border: 2px dashed var(--border); border-radius: var(--radius); background: var(--white); }
 .custom-band p { margin: 0; }
@@ -730,3 +717,4 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .ai-tasks .card { padding: 22px; gap: 14px; }
 .ai-tasks h3 { font-size: 1.02rem; margin-bottom: 4px; }
 .ai-tasks .icon { margin: 0; }
+.tech-quote { max-width: 760px; }

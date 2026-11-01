@@ -30,7 +30,7 @@ const aiTasks = [
 
 // Every consulting price in one place.
 ---
-<Base title="Tech, Automation & AI" seoTitle="Tech, Automation & AI Help for Small Businesses | Auva Studio" schema={schema} description="A $250 Tech Review, automation setup, project workspace setup, AI workshops, and project management for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
+<Base title="Tech, Automation & AI" seoTitle="Tech, Automation & AI Help for Hudson Valley Businesses | Auva Studio" schema={schema} description="A $250 Tech Review, automation setup, project workspace setup, AI workshops, and project management for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
@@ -200,10 +200,10 @@ const aiTasks = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organized, dependable, and <em>easy to work with.</em></h2>
-        <p class="lede">From teams I've managed projects for.</p>
+        <p class="lede">From a team I've managed projects for.</p>
       </div>
-      <div class="grid grid-3">
-        {testimonials.map((t) => (
+      <div class="tech-quote">
+        {testimonials.filter((t) => t.name === 'Aaron Sorrels').map((t) => (
           <figure class="card quote">
             <blockquote>“{t.quote}”</blockquote>
             <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>

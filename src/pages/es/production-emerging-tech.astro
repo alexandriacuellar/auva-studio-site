@@ -23,9 +23,6 @@ const ideas = [
   { icon: 'star', title: 'Una tarjeta de presentación con AR', text: 'Apunte el teléfono a la tarjeta y aparece su dueña, con botones para reservar, llamar o seguirla.', live: true },
   { icon: 'book', title: 'Una exhibición que cobra vida', text: 'Etiquetas de museo o letreros históricos que muestran una escena, una voz o un objeto 3D a través del teléfono.' },
   { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad, un recorrido o una conversación difícil en Meta Quest antes de hacerlo de verdad.' },
-  { icon: 'chat', title: 'Una guía manos libres en lentes de Meta', text: 'Ayuda paso a paso o un paseo guiado en lentes Ray-Ban Meta o Meta Ray-Ban Display, con las manos libres.' },
-  { icon: 'globe', title: 'Un mundo en Meta Horizon', text: 'Un espacio para su recinto, su marca o su evento que la gente puede visitar en VR o desde el teléfono.' },
-  { icon: 'layers', title: 'Un videojuego o una demo de VR', text: 'Una parte pequeña y jugable que ayuda a un estudio a presentar, probar o conseguir fondos para una idea más grande.' },
 ];
 
 const audiences = [
@@ -135,7 +132,7 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
-        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar la suya.</p>
+        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las otras son ideas para inspirar la suya.</p>
       </div>
       <div class="grid grid-3">
         {ideas.map((i) => (
@@ -148,6 +145,7 @@ const audiences = [
           </div>
         ))}
       </div>
+      <p class="muted" style="margin-top: 24px"><b>Más ideas:</b> una guía manos libres en lentes Ray-Ban Meta o Meta Ray-Ban Display, un mundo en Meta Horizon para su recinto o evento, o una pequeña demo jugable para presentar un videojuego más grande.</p>
     </div>
   </section>
 
