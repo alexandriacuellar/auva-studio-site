@@ -23,9 +23,8 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
-      <p class="bd-pill">Websites, Consulting, and AI & Emerging Tech</p>
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">A digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams.</p>
+      <p class="lede">Auva Studio is a digital technology and solutions studio for small businesses, startups, nonprofits, and growing teams: websites, consulting, and AI &amp; Emerging Tech.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
@@ -77,7 +76,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
             </div>
             <div class="bd-body">
               <span class="bd-tag">{c.href === '/websites/' ? 'From $1,500' : c.href === '/ai-emerging-tech/' ? 'From $500' : 'From $65/hr'}</span>
-              <h3 style={`view-transition-name: svc-${c.href.replaceAll('/', '')}`}>{c.title}</h3>
+              <h3>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
               <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>

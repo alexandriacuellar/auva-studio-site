@@ -364,10 +364,6 @@ a.card.card-row:hover { border-color: var(--primary); }
 .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
 .bd-hero-inner .hero-actions { justify-content: center; }
-.bd-pill { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; color: var(--primary); margin: 0 0 20px; }
-.bd-pill::before { content: ''; width: 28px; height: 2px; background: currentColor; flex: none; }
-a.bd-pill { text-decoration: none; }
-a.bd-pill:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 /* Inside-page hero: compact, with a row of sub-service links. */
 .bd-inner-hero { padding: 72px 0 64px; }
