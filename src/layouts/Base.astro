@@ -245,7 +245,15 @@ const schema = {
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu={t.menu} data-close={t.close}>{t.menu}</button>
         <nav aria-label={t.navLabel} id="main-nav">
           <ul>
-            {nav.map((item) => (
+            {nav.map((item: { href: string; label: string; menuLabel?: string; children?: { href: string; label: string }[] }, i) => item.children ? (
+              <li class="has-sub">
+                <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+                <button class="sub-toggle" type="button" aria-expanded="false" aria-controls={`sub-${i}`} aria-label={item.menuLabel}><Icon name="chevron" size={16} /></button>
+                <ul class="sub-menu" id={`sub-${i}`}>
+                  {item.children.map((c) => <li><a href={c.href} aria-current={path === c.href ? 'page' : undefined}>{c.label}</a></li>)}
+                </ul>
+              </li>
+            ) : (
               <li><a href={item.href} aria-current={path.startsWith(item.href) && !item.href.includes('#about') ? 'page' : undefined}>{item.label}</a></li>
             ))}
             <li><a href={l('/contact/')} class="btn btn-small">{t.getInTouch}</a></li>
@@ -319,6 +327,20 @@ const schema = {
         const open = header!.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
         toggle.textContent = open ? toggle.dataset.close! : toggle.dataset.menu!;
+      });
+      // Websites dropdown: opens on click or tap; closes on Escape or a click elsewhere.
+      const subs = [...document.querySelectorAll<HTMLButtonElement>('.sub-toggle')];
+      const closeSubs = (except?: HTMLButtonElement) => subs.forEach((b) => { if (b !== except) b.setAttribute('aria-expanded', 'false'); });
+      subs.forEach((b) => b.addEventListener('click', () => {
+        const open = b.getAttribute('aria-expanded') !== 'true';
+        closeSubs(b);
+        b.setAttribute('aria-expanded', String(open));
+      }));
+      document.addEventListener('click', (e) => { if (!(e.target as Element).closest('.has-sub')) closeSubs(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const openBtn = subs.find((b) => b.getAttribute('aria-expanded') === 'true');
+        if (openBtn) { closeSubs(); openBtn.focus(); }
       });
     </script>
   <script is:inline>

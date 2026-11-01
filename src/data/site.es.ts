@@ -15,7 +15,16 @@ export const site = {
 };
 
 export const nav = [
-  { href: '/es/websites/', label: 'Sitios web' },
+  {
+    href: '/es/websites/', label: 'Sitios web', menuLabel: 'Páginas de sitios web',
+    children: [
+      { href: '/es/websites/', label: 'Paquetes de sitios web' },
+      { href: '/es/websites/diagnostic/', label: 'Diagnóstico Web' },
+      { href: '/es/websites/google-business-profile/', label: 'Perfil de Negocio de Google' },
+      { href: '/es/websites/help-after-launch/', label: 'Ayuda después del lanzamiento' },
+      { href: '/es/websites/brand-essentials/', label: 'Identidad de Marca' },
+    ],
+  },
   { href: '/es/technology-consulting/', label: 'Tecnología e IA' },
   { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
   { href: '/es/about/', label: 'Sobre mí' },
