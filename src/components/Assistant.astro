@@ -3,6 +3,7 @@
 // It is also the live demo for the "AI chatbots and web apps" website add-on.
 import Icon from './Icon.astro';
 import { langFromPath, localize } from '../i18n';
+import { site } from '../data/site';
 
 const lang = langFromPath(Astro.url.pathname);
 const t = {
@@ -15,11 +16,21 @@ const t = {
     chips: ['How much is a website?', 'Which website package fits me?', 'Can I see examples of your work?', 'How do I get started?'],
     placeholder: 'Type your question',
     send: 'Send',
-    note: 'AI answers can be wrong; prices are confirmed in writing before any work. Chats aren\'t saved.',
+    note: 'AI answers can be wrong; prices are confirmed in writing before any work. Chats aren\'t saved unless you send one to Alexandria.',
     privacy: 'Privacy',
     restart: 'Start over',
     thinking: 'Thinking…',
     offline: "Sorry, I couldn't connect. Please try again, or email hello@auvastudio.com.",
+    share: 'Send this chat to Alexandria',
+    shareIntro: "Alexandria will read this chat and reply by email, usually within 24 to 48 hours.",
+    name: 'Your name',
+    email: 'Email',
+    shareNote: 'Anything to add? (optional)',
+    shareSend: 'Send chat',
+    cancel: 'Cancel',
+    sending: 'Sending…',
+    sent: "Sent! Alexandria has your chat and will reply by email, usually within 24 to 48 hours.",
+    shareFail: "Sorry, that didn't send. Please try again, or email hello@auvastudio.com.",
   },
   es: {
     open: 'Pregunte a Auva',
@@ -30,15 +41,25 @@ const t = {
     chips: ['¿Cuánto cuesta un sitio web?', '¿Qué paquete me conviene?', '¿Puedo ver ejemplos de su trabajo?', '¿Cómo empiezo?'],
     placeholder: 'Escriba su pregunta',
     send: 'Enviar',
-    note: 'Las respuestas de la IA pueden tener errores; los precios se confirman por escrito antes de empezar. Las conversaciones no se guardan.',
+    note: 'Las respuestas de la IA pueden tener errores; los precios se confirman por escrito antes de empezar. Las conversaciones no se guardan, salvo que usted envíe una a Alexandria.',
     privacy: 'Privacidad',
     restart: 'Empezar de nuevo',
     thinking: 'Pensando…',
     offline: 'Lo siento, no pude conectarme. Inténtelo de nuevo o escriba a hello@auvastudio.com.',
+    share: 'Enviar esta conversación a Alexandria',
+    shareIntro: 'Alexandria leerá esta conversación y le responderá por correo, normalmente en 24 a 48 horas.',
+    name: 'Su nombre',
+    email: 'Correo electrónico',
+    shareNote: '¿Algo más que agregar? (opcional)',
+    shareSend: 'Enviar conversación',
+    cancel: 'Cancelar',
+    sending: 'Enviando…',
+    sent: '¡Enviado! Alexandria tiene su conversación y le responderá por correo, normalmente en 24 a 48 horas.',
+    shareFail: 'Lo siento, no se pudo enviar. Inténtelo de nuevo o escriba a hello@auvastudio.com.',
   },
 }[lang];
 ---
-<div class="assistant" data-lang={lang} data-thinking={t.thinking} data-offline={t.offline}>
+<div class="assistant" data-lang={lang} data-thinking={t.thinking} data-offline={t.offline} data-sending={t.sending} data-sent={t.sent} data-share-fail={t.shareFail} data-key={site.web3formsKey}>
   <button class="assistant-open" type="button" aria-expanded="false" aria-controls="assistant-panel">
     <Icon name="chat" size={20} /><span>{t.open}</span>
   </button>
@@ -58,6 +79,21 @@ const t = {
         {t.chips.map((c) => <button type="button">{c}</button>)}
       </div>
     </div>
+    <button class="assistant-share" type="button" hidden>{t.share}</button>
+    <form class="assistant-send" hidden>
+      <p>{t.shareIntro}</p>
+      <label class="sr-only" for="assistant-name">{t.name}</label>
+      <input id="assistant-name" name="name" autocomplete="name" placeholder={t.name} required maxlength="100" />
+      <label class="sr-only" for="assistant-email">{t.email}</label>
+      <input id="assistant-email" name="email" type="email" autocomplete="email" placeholder={t.email} required maxlength="200" />
+      <label class="sr-only" for="assistant-extra">{t.shareNote}</label>
+      <input id="assistant-extra" name="extra" placeholder={t.shareNote} maxlength="500" />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div class="assistant-send-actions">
+        <button type="button" class="assistant-cancel">{t.cancel}</button>
+        <button type="submit" class="btn btn-small">{t.shareSend}</button>
+      </div>
+    </form>
     <form class="assistant-form">
       <label class="sr-only" for="assistant-input">{t.placeholder}</label>
       <textarea id="assistant-input" rows="1" maxlength="600" placeholder={t.placeholder} enterkeyhint="send"></textarea>
@@ -118,6 +154,14 @@ const t = {
   /* 16px text stops phones from zooming in on the box. */
   .assistant-form textarea { flex: 1; resize: none; max-height: 120px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; font: 16px/1.4 var(--font-body); color: var(--ink); }
   .assistant-form .btn { flex: none; }
+  .assistant-share { margin: 0; padding: 8px 12px 0; border: 0; background: none; color: var(--primary); font: 600 14px/1.3 var(--font-body); text-decoration: underline; cursor: pointer; text-align: left; }
+  .assistant-share[hidden], .assistant-send[hidden], .assistant-form[hidden] { display: none; }
+  .assistant-send { display: grid; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+  .assistant-send p { margin: 0; font-size: 14px; line-height: 1.4; }
+  .assistant-send input:not(.hp) { padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; font: 16px/1.4 var(--font-body); color: var(--ink); }
+  .assistant-send .hp { display: none; }
+  .assistant-send-actions { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+  .assistant-cancel { border: 0; background: none; color: var(--muted); font: 500 14px var(--font-body); cursor: pointer; text-decoration: underline; }
   .assistant-note { margin: 0; padding: 0 12px 10px; font-size: 12px; line-height: 1.4; color: var(--muted); }
 </style>
 
@@ -132,6 +176,9 @@ const t = {
   const sendBtn = form.querySelector<HTMLButtonElement>('button')!;
   const lang = root.dataset.lang;
   const KEY = 'auva-assistant';
+  const shareBtn = root.querySelector<HTMLButtonElement>('.assistant-share')!;
+  const shareForm = root.querySelector<HTMLFormElement>('.assistant-send')!;
+  const WEB3FORMS_KEY = root.dataset.key!;
 
   type Turn = { role: 'user' | 'assistant'; content: string };
   let turns: Turn[] = [];
@@ -226,16 +273,55 @@ const t = {
     } catch {}
     if (!answer.trim()) { answer = root.dataset.offline!; el.classList.remove('is-waiting'); render(el, answer); turns.pop(); }
     else turns.push({ role: 'assistant', content: answer });
+    shareBtn.hidden = !turns.length;
     save();
     busy = false; sendBtn.disabled = false;
   }
+
+  // "Send this chat to Alexandria": the visitor adds a name and email, and the chat goes to her inbox through Web3Forms.
+  function showShare(show: boolean) {
+    shareForm.hidden = !show; form.hidden = show; shareBtn.hidden = show || !turns.length;
+    if (show) (shareForm.elements.namedItem('name') as HTMLInputElement).focus();
+  }
+  shareBtn.addEventListener('click', () => showShare(true));
+  shareForm.querySelector('.assistant-cancel')!.addEventListener('click', () => showShare(false));
+  shareForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(shareForm);
+    if (fd.get('botcheck')) return;
+    const submit = shareForm.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = submit.textContent;
+    submit.disabled = true; submit.textContent = root.dataset.sending!;
+    const transcript = turns.map((t) => `${t.role === 'user' ? 'Visitor' : 'Ask Auva'}: ${t.content}`).join('\n\n');
+    const extra = String(fd.get('extra') || '').trim();
+    let ok = false;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Ask Auva chat from auvastudio.com' + (lang === 'es' ? ' (Spanish)' : ''),
+          from_name: 'Auva Studio website',
+          name: fd.get('name'),
+          email: fd.get('email'),
+          page: location.pathname,
+          message: (extra ? `Note from visitor: ${extra}\n\n` : '') + transcript,
+        }),
+      });
+      ok = res.ok && (await res.json()).success;
+    } catch {}
+    submit.disabled = false; submit.textContent = label;
+    if (ok) { shareForm.reset(); showShare(false); shareBtn.hidden = true; bubble('assistant', root.dataset.sent!); }
+    else bubble('assistant', root.dataset.shareFail!);
+  });
 
   openBtn.addEventListener('click', () => setOpen(true));
   root.querySelector('.assistant-close')!.addEventListener('click', () => setOpen(false));
   root.querySelector('.assistant-restart')!.addEventListener('click', () => {
     turns = [];
     log.querySelectorAll('.assistant-msg:not(:first-child)').forEach((m) => m.remove());
-    chips.hidden = false; save(); input.focus();
+    chips.hidden = false; shareBtn.hidden = true; showShare(false); save(); input.focus();
   });
   panel.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   chips.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest('button'); if (b) ask(b.textContent!); });
@@ -251,7 +337,7 @@ const t = {
   try {
     const saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
     if (saved?.turns?.length) {
-      turns = saved.turns; chips.hidden = true;
+      turns = saved.turns; chips.hidden = true; shareBtn.hidden = false;
       for (const t of turns) bubble(t.role, t.content);
       if (saved.open && matchMedia('(min-width: 521px)').matches) { panel.hidden = false; openBtn.setAttribute('aria-expanded', 'true'); }
     }
