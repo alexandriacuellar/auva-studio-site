@@ -1,5 +1,5 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, packageBasics, aiOffers, addons, care, monthly } from '../data/site';
+import { site, consulting, packages, packageBasics, aiOffers, addons, care, plans, monthly } from '../data/site';
 import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
@@ -15,7 +15,7 @@ export function GET() {
     'Every engagement starts with a free 30-minute call, and all work is scoped and priced in writing before it begins. Clients keep ownership of their website, content, domain, and accounts.',
     '',
     '## Pages',
-    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $50 each or a monthly web producer from $650`,
+    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $59 each, monthly update plans from $99, or a monthly web producer from $650`,
     `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), monthly project management`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
@@ -36,8 +36,9 @@ export function GET() {
     `- Free website prep checklist (${site.url}/websites/get-ready/): the business basics, photos, words, and accounts to gather before a new website is built.`,
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
+    ...plans.map((p) => `- [Help After Launch](${site.url}/websites/help-after-launch/#care), ${p.name} (${p.price}): ${p.text} Optional, 3-month minimum, then 30 days' notice; start or switch any time.`),
     `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly block of web producer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. 3-month minimum, then 30 days' notice; same-day help with urgent problems. Marketing, ads, and content writing are not included.`,
-    '- Help After Launch pay-as-you-go updates are for websites Auva Studio built. The monthly plan can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
+    '- Help After Launch pay-as-you-go updates are for websites Auva Studio built. Monthly plans can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
     '## Tech, Automation & AI',
     ...consulting.map((c) => `- ${c.title}: ${c.text} ${c.price}`),

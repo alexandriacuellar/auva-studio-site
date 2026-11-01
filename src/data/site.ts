@@ -175,11 +175,17 @@ export const process = [
 
 // Help After Launch: pay as you go, or one monthly plan sized on a call. A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days.' },
+  { name: 'Updates and fixes', price: '$59 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
 
 // The only monthly offer: a block of web producer hours. Sold on outcomes; hours set the price.
+// Monthly update plans (2026-11-01): sized by how often a client needs help. Optional, start or switch any time.
+export const plans = [
+  { name: 'Monthly updates', price: '$99 a month', hours: '1 hour', text: '1 hour of updates a month, about 2 updates, plus a monthly check that your forms, links, and buttons work. Done within 2 business days.' },
+  { name: 'Monthly updates plus', price: '$179 a month', hours: '2 hours', text: '2 hours a month for updates, CMS changes, or a simple new page in an existing page design, a monthly check, and a search review every 3 months. Done within 1 business day.' },
+];
+
 export const monthly = {
   name: 'Monthly web producer',
   price: 'From $650 a month for 5 hours',
