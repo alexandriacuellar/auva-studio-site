@@ -36,7 +36,7 @@ export const site = {
 
 export const nav = [
   { href: '/websites/', label: 'Websites' },
-  { href: '/technology-consulting/', label: 'Consulting' },
+  { href: '/technology-consulting/', label: 'Consulting & AI' },
   { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
   { href: '/about/', label: 'About' },
 ];
