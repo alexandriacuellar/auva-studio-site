@@ -32,6 +32,10 @@ const t = {
     founded: 'Founded by Alexandria Cuellar, digital technology and solutions consultant.',
     socialLabel: (name: string) => `Auva Studio on ${name}`,
     services: 'Services',
+    ftWebsites: 'Websites',
+    ftMore: 'More services',
+    ftTools: 'Free tools',
+    ftAbout: 'About Alexandria',
     footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/technology-consulting/', 'Consulting & Project Support'], ['/ai-emerging-tech/', 'AI & Emerging Tech'], ['/development-partnerships/', 'Development Partnerships']],
     getStarted: 'Get started',
     contact: 'Contact',
@@ -69,6 +73,10 @@ const t = {
     founded: 'Fundado por Alexandria Cuellar, consultora de tecnología y soluciones digitales.',
     socialLabel: (name: string) => `Auva Studio en ${name}`,
     services: 'Servicios',
+    ftWebsites: 'Sitios web',
+    ftMore: 'Más servicios',
+    ftTools: 'Herramientas gratis',
+    ftAbout: 'Sobre Alexandria',
     footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/technology-consulting/', 'Consultoría y apoyo en proyectos'], ['/ai-emerging-tech/', 'IA y Tecnología Emergente'], ['/development-partnerships/', 'Colaboraciones para agencias']],
     getStarted: 'Para empezar',
     contact: 'Contacto',
@@ -255,36 +263,49 @@ const schema = {
         <div class="footer-brand">
           <img src="/auva-logo-stacked-light.png" alt="Auva Studio" width="509" height="438" />
           <p>{site.tagline}</p>
-          <p class="small">{t.founded}</p>
+          <p class="small">{t.founded} <a class="footer-about" href={l('/about/')}>{t.ftAbout}</a></p>
           <ul class="social">
             {site.social.filter((s) => s.footer !== false).map((s) => <li><a href={s.href} target="_blank" rel="noopener" aria-label={t.socialLabel(s.name)}><Icon name={s.icon} size={22} /></a></li>)}
           </ul>
         </div>
-        <div>
-          <h2>{t.services}</h2>
-          <ul>
-            {t.footerServices.map(([href, label, sub]) => <li class:list={{ 'footer-sub': sub }}><a href={l(href as string)}>{label}</a></li>)}
-          </ul>
+        <div class="footer-links">
+          <div>
+            <h2>{t.ftWebsites}</h2>
+            <ul>
+              {t.footerServices.filter(([href, , sub]) => sub || href === '/websites/').map(([href, label]) => <li><a href={l(href as string)}>{label}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2>{t.ftMore}</h2>
+            <ul>
+              {t.footerServices.filter(([href, , sub]) => !sub && href !== '/websites/').map(([href, label]) => <li><a href={l(href as string)}>{label}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2>{t.ftTools}</h2>
+            <ul>
+              <li><a href={l('/website-check/')}>{t.websiteCheck}</a></li>
+              <li><a href={l('/google-profile-check/')}>{t.profileCheck}</a></li>
+              <li><a href={l('/websites/get-ready/')}>{t.prepChecklist}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>{t.getInTouch}</h2>
+            <ul>
+              <li><a href={site.booking} target="_blank" rel="noopener">{t.bookCall}</a></li>
+              <li><a href={l('/contact/')}>{t.contact}</a></li>
+              <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h2>{t.getStarted}</h2>
-          <ul>
-            <li><a href={l('/contact/')}>{t.contact}</a></li>
-            <li><a href={site.booking} target="_blank" rel="noopener">{t.bookCall}</a></li>
-            <li><a href={l('/website-check/')}>{t.websiteCheck}</a></li>
-            <li><a href={l('/google-profile-check/')}>{t.profileCheck}</a></li>
-            <li><a href={l('/websites/get-ready/')}>{t.prepChecklist}</a></li>
-            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>{t.serviceArea}</h2>
-          <ul>
-            {site.regions.map(([region, counties]) => <li><b>{region}:</b> {t.counties(counties)}</li>)}
-            <li><b>{t.nyc}</b></li>
-            <li>{t.remote}</li>
-          </ul>
-        </div>
+      </div>
+      <div class="wrap footer-area">
+        <h2>{t.serviceArea}</h2>
+        <ul>
+          {site.regions.map(([region, counties]) => <li><b>{region}:</b> {t.counties(counties)}</li>)}
+          <li><b>{t.nyc}</b></li>
+          <li>{t.remote}</li>
+        </ul>
       </div>
       <div class="wrap footer-legal">
         <p><span>© {year} {site.name}. {t.rights}</span> <span>{t.based}</span> <a href={l('/privacy/')}>{t.privacy}</a></p>
