@@ -76,19 +76,8 @@ export const consulting = [
   { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Monthly project management'] },
 ];
 
-export const whyAuva = [
-  { title: 'Technical depth', text: 'Recommendations reflect how systems actually work, connect, and get maintained.' },
-  { title: 'Business-minded guidance', text: 'Your goals, budget, team, and customers come before any new platform.' },
-  { title: 'Strategy through delivery', text: 'One person from the first review through setup and training.' },
-  { title: 'Broad experience', text: 'Websites, APIs, digital products, project management, games, XR, and interactive experiences.' },
-];
 
 // How every engagement runs, from a small website to a complex project.
-export const journey = [
-  { title: 'Talk it through', text: "A free 30-minute call about your goals, your current setup, and what's getting in the way." },
-  { title: 'Get a clear plan', text: 'A written scope and price before any work begins, with no surprises.' },
-  { title: 'Get it done, and keep it', text: 'I do the work with you, then hand over documentation and training so your team can carry on.' },
-];
 
 // Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
 export const samples = [

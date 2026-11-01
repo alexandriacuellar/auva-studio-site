@@ -1,5 +1,6 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
 import { site, consulting, packages, aiOffers, addons, care, monthly } from '../data/site';
+import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.groups.flatMap((g) => g.items).map((i) => i.replace(/ I'll help you choose\.$/, '').replace(/\.$/, '')).join('; ');
 
@@ -45,6 +46,9 @@ export function GET() {
     '## Production & Emerging Tech',
     ...aiOffers.filter((o) => o.group !== 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
     `- Live AR example: ${site.url}/card/ (Alexandria's AR business card). Bigger productions go to a trusted studio partner, with Alexandria as producer.`,
+    '',
+    '## More answers',
+    ...moreAnswers.map((m) => `- ${m.q} ${m.a} (${m.page}: ${site.url}${m.path})`),
     '',
     '## Contact',
     `- Book a free 30-minute call: ${site.booking}`,

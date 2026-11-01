@@ -7,16 +7,13 @@ import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
 
 const faqs = [
-  { q: '¿Qué incluye la Revisión Tecnológica?', a: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios en orden, costos aproximados y dónde ayudaría la automatización o la IA. Cuesta $250, que se acreditan a cualquier configuración conmigo que empiece en 90 días.' },
-  { q: '¿Qué herramientas de proyectos configura?', a: 'Asana, ClickUp, Jira, monday.com, Notion y Trello, y otras según lo que necesite su equipo. Si todavía no tiene una, le ayudo a elegir.' },
-  { q: '¿Ofrece apoyo puntual y continuo?', a: 'Sí. El trabajo va desde una sola configuración o sesión hasta gestión de proyectos continua, por hora o en bloques mensuales.' },
-  { q: '¿Trabaja en persona?', a: 'La mayor parte del trabajo es a distancia. Cuando una visita en persona ayuda, la planificamos juntos. El tiempo en sus instalaciones se cobra a la tarifa de consultoría de $65 por hora. Trabajo en persona desde la ciudad de Nueva York y Westchester hasta Albany. Fuera del Mid-Hudson Valley, el tiempo de viaje se cobra a la mitad de mi tarifa por hora y los gastos, como millaje y hospedaje, al costo, todo acordado por escrito antes de reservar.' },
-  { q: '¿Cómo funciona la gestión de proyectos mensual?', a: 'Una gerente de proyectos que trabaja con su equipo a tiempo parcial, desde $650 al mes por 10 horas, con un mínimo de 3 meses. 20 horas cuestan $1,200 y 40 horas $2,200 al mes.' },
+  { q: "¿Qué incluye la Revisión Tecnológica?", a: "Una llamada de 60 minutos y luego un informe escrito en 5 días hábiles con sus principales arreglos en orden y costos aproximados. Los $250 se abonan a cualquier configuración conmigo que empiece dentro de 90 días." },
+  { q: "¿Trabaja en persona?", a: "Sí, desde la ciudad de Nueva York y Westchester hasta Albany, aunque la mayor parte del trabajo es a distancia. El tiempo en sus instalaciones cuesta $65 por hora, y cualquier viaje fuera del Mid-Hudson Valley se acuerda por escrito antes de reservar." },
   { q: '¿Puede trabajar con nuestros proveedores actuales o nuestro soporte de TI?', a: 'Sí. Muchas veces trabajo junto a equipos y proveedores existentes, y puedo ayudarle a evaluar sus propuestas.' },
   { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini en su trabajo real.' },
   { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada taller cubre los riesgos de privacidad y calidad, y una Revisión Tecnológica le recomienda herramientas que respetan sus reglas.' },
 ];
-import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
+import { consulting, aiOffers, site, testimonials, serviceSchema } from '../../data/site.es';
 
 const aiConsulting = aiOffers.filter((o) => o.group === 'consulting');
 const schema = serviceSchema([...consulting, ...aiConsulting].map((c) => ({ name: c.title, description: c.text, price: c.price })), '/es/technology-consulting/');
@@ -31,7 +28,6 @@ const aiTasks = [
   { icon: 'layers', title: 'Primeros borradores de cotizaciones y propuestas', text: 'Empiece con un borrador en vez de una página en blanco.' },
 ];
 
-
 ---
 <Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para pequeños negocios | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y gestión de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
@@ -42,30 +38,62 @@ const aiTasks = [
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#planning">Empiece con una Revisión Tecnológica de $250</a>
       </div>
-      <ul class="hero-strip">{['Precio fijo para empezar', 'Un plan en lenguaje sencillo', 'Trabajo con sus proveedores actuales', 'Desarrolladora y gerente de proyectos'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+      <ul class="hero-strip">{['Precio fijo para empezar', 'Un plan en lenguaje sencillo', 'Trabajo con sus proveedores actuales', 'Experiencia en software y gestión de proyectos'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
   <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Soy desarrolladora de software y gerente de proyectos técnicos, con más de 20 años en software y tecnología digital. Trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a></span></div>
+    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria,</b> fundadora de Auva Studio. Mi experiencia está en el desarrollo de software y la gestión de proyectos técnicos, así que sé cómo funciona la tecnología y cómo mantener a un equipo al día. Trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a><ul class="hello-facts"><li><b>20+</b> años en software</li><li><b>14+</b> proyectos dirigidos</li><li><b>Jira, Trello, Notion, ClickUp</b></li></ul></span></div>
   </section>
 
-  <section class="alt" id="problems">
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">¿Le suena <em>conocido?</em></h2>
-        <p class="lede">Elija lo que más se parezca a su caso. Cada uno le muestra el servicio que lo resuelve.</p>
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+        <p class="lede">Busque el que más se parezca a su caso. Cada uno le indica el servicio que más le ayuda.</p>
       </div>
-      <ul class="route-list">
-        <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>Paga aplicaciones que nadie usa</b><span class="muted">O tiene tantas herramientas que ninguna se conecta con las demás.</span></span></a></li>
-        <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>Necesita un programa nuevo y no sabe cuál</b><span class="muted">Reservas, punto de venta, contabilidad, correo o lista de clientes, con demasiadas opciones para comparar.</span></span></a></li>
-        <li><a href="#automation"><span class="icon"><Icon name="chart" /></span><span><b>Su equipo escribe lo mismo dos veces</b><span class="muted">La información vive en tres lugares, y se acumulan errores y trabajo extra.</span></span></a></li>
-        <li><a href="#automation"><span class="icon"><Icon name="gear" /></span><span><b>Los seguimientos y reportes le consumen la semana</b><span class="muted">Correos de recordatorio, papeleo de clientes nuevos y el mismo reporte mensual, todo a mano.</span></span></a></li>
-        <li><a href="#automation"><span class="icon"><Icon name="clock" /></span><span><b>Una tarea sencilla toma horas</b><span class="muted">Hojas de cálculo, parches y "así lo hemos hecho siempre".</span></span></a></li>
-        <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>Sabe que la IA podría ayudar, pero no dónde</b><span class="muted">Su equipo probó un chatbot una vez, o nadie ha tenido tiempo de averiguarlo.</span></span></a></li>
-        <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>Un proyecto tecnológico siempre se atrasa</b><span class="muted">Un sistema nuevo, una mudanza o una actualización sin nadie claramente a cargo.</span></span></a></li>
-        <li><a href="#delivery"><span class="icon"><Icon name="shield" /></span><span><b>Necesita a alguien de su lado frente a un proveedor</b><span class="muted">Alguien que entienda la tecnología y haga las preguntas correctas.</span></span></a></li>
-      </ul>
+      <div class="grid grid-3 who">
+        <div class="card">
+          <div class="icon"><Icon name="globe" size={32} /></div>
+          <h3>Pequeños negocios</h3>
+          <p class="small muted">Tiendas, restaurantes, posadas, consultorios y servicios locales.</p>
+          <p class="who-text">Paga aplicaciones que nadie usa, o necesita un programa nuevo y no sabe cuál. Le ayudo a elegir las herramientas adecuadas, conectarlas y lograr que su equipo las use.</p>
+          <a class="more" href="#planning" style="margin-top: 12px">Empiece con una Revisión Tecnológica <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="book" size={32} /></div>
+          <h3>Organizaciones sin fines de lucro y cultura</h3>
+          <p class="small muted">Museos, consejos de arte, fideicomisos de tierras y grupos comunitarios.</p>
+          <p class="who-text">Su equipo escribe lo mismo dos veces y las tareas sencillas toman horas. Automatice el trabajo repetitivo para que un presupuesto ajustado rinda más.</p>
+          <a class="more" href="#automation" style="margin-top: 12px">Vea la configuración de automatización <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="key" size={32} /></div>
+          <h3>Startups</h3>
+          <p class="small muted">Equipos nuevos que crean su primer producto o montan sus sistemas.</p>
+          <p class="who-text">Un proyecto siempre se atrasa, o necesita a alguien de su lado frente a un proveedor. Obtenga un plan claro y una gerente de proyectos sin contratar a nadie de tiempo completo.</p>
+          <a class="more" href="#delivery" style="margin-top: 12px">Vea la gestión de proyectos <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="chart" size={32} /></div>
+          <h3>Equipos en crecimiento</h3>
+          <p class="small muted">Empresas que suman personas, sedes o servicios.</p>
+          <p class="who-text">Los seguimientos y reportes le consumen la semana, y sabe que la IA podría ayudar, pero no dónde. Organice su trabajo y ponga la IA a trabajar.</p>
+          <a class="more" href="#ai" style="margin-top: 12px">Vea IA para su equipo <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="layers" size={32} /></div>
+          <h3>Agencias y diseñadores</h3>
+          <p class="who-text">¿Necesita un desarrollador confiable detrás de su equipo? Colaboro con agencias de marketing, estudios creativos y diseñadores independientes.</p>
+          <a class="more" href="/es/development-partnerships/" style="margin-top: 12px">Vea Colaboraciones para agencias <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Otra cosa?</h3>
+          <p>Cuénteme en qué está trabajando, y le sugiero por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -128,6 +156,7 @@ const aiTasks = [
           </div>
         </div>
       </div>
+      <p class="muted" style="margin-top: 24px"><b>¿También necesita un sitio web?</b> Vea los <a href="/es/websites/#packages">paquetes web desde $1,500</a>, o empiece con un <a href="/es/websites/diagnostic/">Diagnóstico Web de $199</a> del sitio que ya tiene.</p>
     </div>
   </section>
 
@@ -166,76 +195,6 @@ const aiTasks = [
     </div>
   </section>
 
-
-  <section class="alt" id="who">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
-      </div>
-      <div class="grid grid-3 who">
-        <div class="card">
-          <div class="icon"><Icon name="globe" size={32} /></div>
-          <h3>Pequeños negocios</h3>
-          <p class="small muted">Tiendas, restaurantes, posadas, consultorios y servicios locales.</p>
-          <p class="who-text">Demasiadas herramientas y poco tiempo. Elija las adecuadas, configúrelas y logre que su equipo las use.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="book" size={32} /></div>
-          <h3>Organizaciones sin fines de lucro y cultura</h3>
-          <p class="small muted">Museos, consejos de arte, fideicomisos de tierras y grupos comunitarios.</p>
-          <p class="who-text">Haga rendir un presupuesto ajustado. Elija herramientas, planifique mejoras y mantenga en marcha los proyectos financiados con subvenciones.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="key" size={32} /></div>
-          <h3>Startups</h3>
-          <p class="small muted">Equipos nuevos que crean su primer producto o montan sus sistemas.</p>
-          <p class="who-text">Convierta una idea en un plan, con requisitos claros, los proveedores adecuados y una gerente de proyectos sin contratar a nadie de tiempo completo.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="chart" size={32} /></div>
-          <h3>Equipos en crecimiento</h3>
-          <p class="small muted">Empresas que suman personas, sedes o servicios.</p>
-          <p class="who-text">Arregle los flujos de trabajo que se rompen al crecer y mantenga en marcha los proyectos grandes.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-        <div class="card">
-          <div class="icon"><Icon name="layers" size={32} /></div>
-          <h3>Agencias y diseñadores</h3>
-          <p class="who-text">¿Necesita un desarrollador confiable detrás de su equipo? Colaboro con agencias de marketing, estudios creativos y diseñadores independientes.</p>
-          <a class="more" href="/es/development-partnerships/" style="margin-top: 12px">Vea Colaboraciones para agencias <Icon name="arrow" size={16} /></a>
-        </div>
-        <div class="card who-other">
-          <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>¿Otra cosa?</h3>
-          <p>Cuénteme en qué está trabajando, y le sugiero por dónde empezar.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">Una desarrolladora y gerente de proyectos <em>de su lado.</em></h2>
-        <p class="lede">Empecé como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de otros sitios de periódicos locales. Desde 2023 soy gerente de proyectos técnicos y he dirigido más de 14 proyectos de realidad virtual y juegos para celular, con sprints, cronogramas y tableros de tareas. He gestionado proyectos en Jira, Trello, Notion y ClickUp, y automatizo tareas con Zapier. Como soy tanto desarrolladora como gerente de proyectos, entiendo cómo funciona la tecnología y armo planes que su equipo realmente puede seguir.</p>
-        <div class="stats">
-          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
-          <div><span class="stat">14+</span><span class="muted">proyectos de realidad virtual y juegos para celular dirigidos</span></div>
-          <div class="stat-wide"><span class="stat">Casi 20</span><span class="muted">años creando sitios web y aplicaciones web para periódicos</span></div>
-        </div>
-      </div>
-      <div class="values">
-        {whyAuva.map((w) => (
-          <div class="card"><h3>{w.title}</h3><p class="muted">{w.text}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="alt">
     <div class="wrap">
       <div class="section-head">
@@ -252,7 +211,6 @@ const aiTasks = [
       </div>
     </div>
   </section>
-
 
   <Faq faqs={faqs} />
   <InquiryForm kind="consulting" alt />
