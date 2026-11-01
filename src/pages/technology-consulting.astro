@@ -9,9 +9,9 @@ import Faq from '../components/Faq.astro';
 const faqs = [
   { q: "What's in the Tech Review?", a: 'A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order, rough costs, and where automation or AI would help. It costs $250, credited toward any setup with me that starts within 90 days.' },
   { q: 'Which project tools do you set up?', a: "Asana, ClickUp, Jira, monday.com, Notion, and Trello, and others as your team needs them. If you don't have one yet, I'll help you choose." },
-  { q: 'Do you offer one-time and ongoing support?', a: 'Yes. Work ranges from a single setup or session to ongoing project leadership, billed by the hour or in monthly blocks.' },
+  { q: 'Do you offer one-time and ongoing support?', a: 'Yes. Work ranges from a single setup or session to ongoing project management, billed by the hour or in monthly blocks.' },
   { q: 'Do you work in person?', a: "Most work happens remotely. When an on-site visit would help, we'll plan it together. On-site time is billed at the $65 hourly consulting rate. I work in person from New York City and Westchester up to Albany. Outside the Mid-Hudson Valley, travel time is billed at half my hourly rate and expenses such as mileage and lodging at cost, all agreed in writing before booking." },
-  { q: 'What is fractional project leadership?', a: 'A project leader who works with your team part time, from $650 a month for 10 hours, with a 3-month minimum. 20 hours is $1,200 and 40 hours is $2,200 a month.' },
+  { q: 'How does monthly project management work?', a: 'A project manager who works with your team part time, from $650 a month for 10 hours, with a 3-month minimum. 20 hours is $1,200 and 40 hours is $2,200 a month.' },
   { q: 'Can you work with our current vendors or IT provider?', a: 'Yes. I often work alongside existing teams and vendors, and can help you evaluate their proposals.' },
   { q: 'Do we need technical skills to use AI?', a: 'No. Workshops are built for non-technical teams, using tools like ChatGPT, Claude, and Gemini in your real work.' },
   { q: 'Is it safe to use AI with our business data?', a: 'It can be, with the right tools and settings. Every workshop covers privacy and quality risks, and a Tech Review recommends tools that fit your rules.' },
@@ -38,11 +38,11 @@ const glance = [
   { name: 'Automation setup', note: 'One workflow, with a how-to guide', price: 'From $500' },
   { name: 'Project workspace setup', note: 'Setup and team training', price: 'From $1,500' },
   { name: 'Team AI Workshop', note: '90 minutes, up to 10 people', price: '$750' },
-  { name: 'Project lead, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
+  { name: 'Project management, monthly', note: '3-month minimum', price: '10 hrs $650, 20 hrs $1,200, 40 hrs $2,200' },
   { name: 'Consulting or project help, as needed', price: '$65/hr' },
 ];
 ---
-<Base title="Tech, Automation & AI" seoTitle="Tech, Automation & AI Help for Small Businesses | Auva Studio" schema={schema} description="A $250 Tech Review, automation setup, project workspace setup, AI workshops, and project leadership for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
+<Base title="Tech, Automation & AI" seoTitle="Tech, Automation & AI Help for Small Businesses | Auva Studio" schema={schema} description="A $250 Tech Review, automation setup, project workspace setup, AI workshops, and project management for small businesses, nonprofits, startups, and growing teams in the Hudson Valley and beyond.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
@@ -130,7 +130,7 @@ const glance = [
           <div>
             <h3>Someone to run the project</h3>
             <p class="svc-meta"><span>Project Management</span> <b>$65/hr, or monthly from $650</b></p>
-            <p class="muted">A part-time project lead who plans the work, keeps your team and vendors on schedule, and flags problems early, without a full-time hire.</p>
+            <p class="muted">A part-time project manager who plans the work, keeps your team and vendors on schedule, and flags problems early, without a full-time hire.</p>
             <ul class="ticks small"><li><Icon name="tick" size={16} />A plan and schedule everyone can follow</li><li><Icon name="tick" size={16} />Your team and vendors kept in step</li><li><Icon name="tick" size={16} />Early warning on delays and risks</li><li><Icon name="tick" size={16} />Hourly, or a monthly block of hours</li></ul>
             <a class="more" href="/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Ask about this</a>
             <p class="small muted" style="margin-top: 12px">Making a game or XR project? See <a href="/production-emerging-tech/#production">Production Support</a>.</p>
@@ -191,7 +191,7 @@ const glance = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Pricing <em>at a glance.</em></h2>
-        <p class="lede">Every engagement starts with a free 30-minute call. Then I scope and quote the work in writing before anything begins, whether it's a single session, a defined project, or part-time project leadership.</p>
+        <p class="lede">Every engagement starts with a free 30-minute call. Then I scope and quote the work in writing before anything begins, whether it's a single session, a defined project, or monthly project management.</p>
       </div>
       <dl class="card glance">
         {glance.map((g) => (
@@ -229,7 +229,7 @@ const glance = [
           <div class="icon"><Icon name="key" size={32} /></div>
           <h3>Startups</h3>
           <p class="small muted">Early teams building a first product or setting up their systems.</p>
-          <p class="who-text">Turn an idea into a plan, with clear requirements, the right vendors, and a project lead without a full-time hire.</p>
+          <p class="who-text">Turn an idea into a plan, with clear requirements, the right vendors, and a project manager without a full-time hire.</p>
           <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through</a>
         </div>
         <div class="card">
