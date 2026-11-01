@@ -23,9 +23,8 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
-      <p class="bd-pill">Sitios web, Consultoría, e IA y Tecnología Emergente</p>
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.</p>
+      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento: sitios web, consultoría, e IA y Tecnología Emergente.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
@@ -77,7 +76,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
             </div>
             <div class="bd-body">
               <span class="bd-tag">{c.href === '/es/websites/' ? 'Desde $1,500' : c.href === '/es/ai-emerging-tech/' ? 'Desde $500' : 'Desde $65/hora'}</span>
-              <h3 style={`view-transition-name: svc-${c.href.replace('/es/', '').replaceAll('/', '')}`}>{c.title}</h3>
+              <h3>{c.title}</h3>
               <p class="muted">{c.text}</p>
               <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
               <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>

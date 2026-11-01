@@ -78,7 +78,6 @@
 @media (max-width: 640px) {
   .bd-hero { padding: 56px 0 64px; }
   /* Phones: a smaller, balanced service label and a left-aligned intro, which reads more easily than 7 centered lines. */
-  .bd-hero .bd-pill { font-size: 0.875rem; padding: 6px 16px; border-radius: 16px; max-width: 16rem; text-wrap: balance; }
   .bd-hero-inner .lede { text-align: left; }
 }
 

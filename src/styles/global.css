@@ -364,7 +364,6 @@ a.card.card-row:hover { border-color: var(--primary); }
 .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
 .bd-hero-inner .hero-actions { justify-content: center; }
-.bd-pill { display: inline-block; font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 7px 18px; margin-bottom: 24px; }
 
 /* Inside-page hero: compact, with a row of sub-service links. */
 .bd-inner-hero { padding: 72px 0 64px; }
