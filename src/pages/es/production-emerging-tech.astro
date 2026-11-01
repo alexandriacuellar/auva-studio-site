@@ -55,7 +55,30 @@ const audiences = [
     <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Soy productora para estudios independientes de videojuegos y equipos de XR, y trabajará directamente conmigo desde la primera idea hasta el lanzamiento. <a href="/es/about/">Más sobre mí</a><ul class="hello-facts"><li><b>14+</b> experiencias de realidad virtual y juegos</li><li><b>Meta Horizon</b> Start y Creator Program</li><li><b>20+</b> años en software</li></ul></span></div>
   </section>
 
-  <section class="alt" id="production">
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Algo diferente?</h3>
+          <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="production">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Apoyo de <em>Producción.</em></h2>
@@ -77,26 +100,6 @@ const audiences = [
             <blockquote>“{t.quote}”</blockquote>
             <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
           </figure>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="ideas">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
-        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar la suya.</p>
-      </div>
-      <div class="grid grid-3">
-        {ideas.map((i) => (
-          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
-            <div class="icon"><Icon name={i.icon} size={32} /></div>
-            {i.live ? <span class="idea-tag">Demo en vivo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
-            <h3>{i.title}</h3>
-            <p class="muted">{i.text}</p>
-            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Pruébela con mi tarjeta <Icon name="arrow" size={16} /></a>}
-          </div>
         ))}
       </div>
     </div>
@@ -129,8 +132,27 @@ const audiences = [
     </div>
   </section>
 
+  <section id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Lo que podríamos <em>crear juntos.</em></h2>
+        <p class="lede">AR y VR para teléfonos, Meta Quest y lentes de Meta. La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar la suya.</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Demo en vivo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Pruébela con mi tarjeta <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <section id="how">
+  <section class="alt" id="how">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Cómo <em>funciona.</em></h2>
@@ -142,28 +164,6 @@ const audiences = [
         <li><span class="num" aria-hidden="true">3</span><h3>Producción</h3><p>Sprints, calendarios, pruebas de juego y revisiones de hitos, con actualizaciones durante el proceso. Los proyectos de AR se crean con un socio desarrollador cuando hace falta.</p></li>
         <li><span class="num" aria-hidden="true">4</span><h3>Lanzamiento y entrega</h3><p>Su equipo se queda con el plan, los documentos y los archivos, para que pueda seguir sin mí.</p></li>
       </ol>
-    </div>
-  </section>
-  <section class="alt" id="who">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
-      </div>
-      <div class="grid grid-3 who">
-        {audiences.map((a) => (
-          <div class="card">
-            <div class="icon"><Icon name={a.icon} size={32} /></div>
-            <h3>{a.title}</h3>
-            <p class="muted">{a.text}</p>
-          </div>
-        ))}
-        <div class="card who-other">
-          <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>¿Algo diferente?</h3>
-          <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
-        </div>
-      </div>
     </div>
   </section>
 
