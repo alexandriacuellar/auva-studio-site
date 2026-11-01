@@ -37,7 +37,7 @@ export const site = {
 export const nav = [
   { href: '/websites/', label: 'Websites' },
   { href: '/technology-consulting/', label: 'Consulting' },
-  { href: '/ai-emerging-tech/', label: 'AI & Emerging Tech' },
+  { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
   { href: '/about/', label: 'About' },
 ];
 
@@ -53,19 +53,19 @@ export const categories = [
   },
   {
     icon: 'bulb',
-    title: 'Consulting & Project Support',
-    text: 'Choose the right tools, fix how work gets done, and keep projects on track.',
-    items: ['Technology planning', 'Workflow and process reviews', 'Project management', 'Fractional project leadership'],
+    title: 'Consulting & AI',
+    text: 'Choose the right tools, put AI to work, fix how work gets done, and keep projects on track.',
+    items: ['Technology planning', 'Workflow and process reviews', 'AI workshops and readiness plans', 'Project management'],
     href: '/technology-consulting/',
     cta: 'Explore consulting',
   },
   {
     icon: 'bolt',
-    title: 'AI & Emerging Tech',
-    text: 'Explore AI, XR, and interactive ideas with small, low-risk steps.',
-    items: ['AI Readiness Plan', 'Team AI Workshop', 'Feasibility reviews and prototypes', 'Production support'],
-    href: '/ai-emerging-tech/',
-    cta: 'Explore AI & Emerging Tech',
+    title: 'Production & Emerging Tech',
+    text: 'A producer for game, XR, and interactive projects, plus small prototypes to test new ideas.',
+    items: ['Production support for game and XR teams', 'AR and VR for phones, Meta Quest, and Meta glasses', 'Concept & Feasibility Review', 'AI and XR prototypes'],
+    href: '/production-emerging-tech/',
+    cta: 'Explore Production & Emerging Tech',
   },
 ];
 
@@ -73,7 +73,6 @@ export const consulting = [
   { id: 'planning', price: 'Technology Assessment $650, sessions $65/hr', icon: 'compass', title: 'Technology Planning', text: 'The big picture. I look at all the tools you use, find the gaps, and give you a plan for what to fix, replace, or add first.', items: ['Technology assessments and audits', 'Roadmaps and priorities', 'Platform and tool recommendations'] },
   { id: 'analysis', price: 'From $1,000', icon: 'chart', title: 'Business Analysis & Process Review', text: "One process, in depth. I map how a task gets done today, find what's slowing your team down, and spell out what a fix needs before you build or buy. Available on its own, with no obligation to hire me for the next step.", items: ['Workflow and process mapping', 'Requirements and specifications', 'Solution options compared'] },
   { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Fractional project leadership'] },
-  { id: 'ai', price: 'From $500', icon: 'bolt', title: 'AI & Emerging Tech', text: 'Find practical ways to use AI, XR, and interactive technology, and test ideas before you invest.', items: ['Getting your team started with AI tools', 'Planning XR and immersive experiences', 'Checking whether an interactive or game idea is doable', 'Production support for XR and game teams'] },
 ];
 
 export const whyAuva = [
@@ -199,15 +198,15 @@ export const testimonials = [
   { quote: 'She was always super organized, dependable, and really good at keeping everything moving in the right direction.', name: 'Matthew Udy', role: 'CEO, Flip Key Studios' },
 ];
 
-// AI & Emerging Tech offers (AI page, search data, llms.txt).
-// Grouped by buyer: AI for everyday teams, XR and interactive for studios and cultural organizations.
+// AI, prototype, and production offers. group 'consulting' lives on the Consulting page (AI for small businesses);
+// 'prototype' and 'production' live on the Production & Emerging Tech page.
 export const aiOffers = [
-  { id: 'workshop', group: 'ai', icon: 'chat', title: 'Team AI Workshop', price: 'From $500', text: 'A 2-hour hands-on session for up to 10 people. Your team practices AI tools on real work and leaves with a one-page guide.' },
-  { id: 'readiness', group: 'ai', icon: 'compass', title: 'AI Readiness Plan', price: '$650', text: 'Where AI can save your team time in the work you already do, which tools fit, and how to use them safely. Three one-hour sessions and a written plan.' },
-  { id: 'ai-sprint', group: 'ai', icon: 'bolt', title: 'AI Prototype Sprint', price: 'From $2,500', text: 'A small, working test of an AI tool for your business, like a chatbot that answers customer questions or a workflow that drafts routine emails. Then a walkthrough of what we learned, all in 2–3 weeks.' },
-  { id: 'review', group: 'xr', icon: 'search', title: 'Concept & Feasibility Review', price: '$650', text: "Have an XR, game, or interactive idea? Find out if it's doable, which technology fits, a rough budget, and the team it would take. About 2 weeks." },
-  { id: 'xr-sprint', group: 'xr', icon: 'layers', title: 'XR Prototype Sprint', price: 'From $7,500', text: 'A small, working test of your XR or interactive idea, built with a developer partner, then a walkthrough of what we learned. 4–6 weeks.' },
-  { id: 'production', group: 'xr', icon: 'star', title: 'Production Support', price: '$65/hr, or monthly from $650', text: 'Producer and project management help for XR, game, and immersive teams: plans, schedules, documents, and keeping everyone aligned.' },
+  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Team AI Workshop', price: 'From $500', text: 'A 2-hour hands-on session for up to 10 people. Your team practices AI tools on real work and leaves with a one-page guide.' },
+  { id: 'readiness', group: 'consulting', icon: 'compass', title: 'AI Readiness Plan', price: '$650', text: 'Where AI can save your team time in the work you already do, which tools fit, and how to use them safely. Three one-hour sessions and a written plan.' },
+  { id: 'ai-sprint', group: 'prototype', icon: 'bolt', title: 'AI Prototype Sprint', price: 'From $2,500', text: 'A small, working test of an AI tool for your business, like a chatbot that answers customer questions or a workflow that drafts routine emails. Then a walkthrough of what we learned, all in 2–3 weeks.' },
+  { id: 'review', group: 'prototype', icon: 'search', title: 'Concept & Feasibility Review', price: '$650', text: "Have an XR, game, or interactive idea? Find out if it's doable, which technology fits, a rough budget, and the team it would take. About 2 weeks." },
+  { id: 'xr-sprint', group: 'prototype', icon: 'layers', title: 'XR Prototype Sprint', price: 'From $7,500', text: 'A small, working test of your XR or interactive idea, built with a developer partner, then a walkthrough of what we learned. 4–6 weeks.' },
+  { id: 'production', group: 'production', icon: 'star', title: 'Production Support', price: '$65/hr, or monthly from $650', text: 'Producer and project management help for game, XR, and immersive teams: plans, schedules, design documents, playtests, and keeping everyone aligned.' },
 ];
 
 // Search data for a list of services on one page. Prices stay as written; "From" or "+" becomes a minimum price.

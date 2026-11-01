@@ -14,38 +14,45 @@ const faqs = [
   { q: '¿Cómo se definen los precios?', a: 'El precio depende del servicio, el alcance del proyecto, el tiempo previsto y si hace falta viajar. Mis tarifas aparecen en Precios de un vistazo. Para trabajos más grandes, los costos y las expectativas se acuerdan antes de empezar.' },
   { q: '¿Qué es el liderazgo de proyectos a tiempo parcial?', a: 'Una líder de proyecto que trabaja con su equipo a tiempo parcial, desde $650 al mes por 10 horas, con un mínimo de 3 meses. 20 horas cuestan $1,200 y 40 horas $2,200 al mes.' },
   { q: '¿Puede trabajar con nuestros proveedores actuales o nuestro soporte de TI?', a: 'Sí. Muchas veces trabajo junto a equipos y proveedores existentes, y puedo ayudarle a evaluar sus propuestas.' },
+  { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los Planes de Preparación y los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini aplicadas a su trabajo real.' },
+  { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada Plan de Preparación cubre los riesgos de privacidad y de calidad, y recomienda herramientas que se ajusten a sus reglas.' },
+  { q: '¿Cuál es la diferencia entre el Plan de Preparación para IA y la Evaluación Tecnológica?', a: 'El Plan de Preparación se enfoca solo en la IA. La Evaluación revisa todos sus sistemas y herramientas. Ambos cuestan $650, con tres sesiones de una hora y un plan por escrito.' },
 ];
-import { consulting, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
+import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
 
-const schema = serviceSchema(consulting.map((c) => ({ name: c.title, description: c.text, price: c.price })), '/es/technology-consulting/');
+const aiConsulting = aiOffers.filter((o) => o.group === 'consulting');
+const schema = serviceSchema([...consulting, ...aiConsulting].map((c) => ({ name: c.title, description: c.text, price: c.price })), '/es/technology-consulting/');
 
-const audiences = [
-  { icon: 'globe', title: 'Pequeños negocios', who: 'Tiendas, restaurantes, posadas, consultorios y servicios locales.', text: 'Demasiadas herramientas y poco tiempo. Elija las adecuadas, configúrelas y logre que su equipo las use.' },
-  { icon: 'key', title: 'Startups', who: 'Equipos nuevos que crean su primer producto o montan sus sistemas.', text: 'Convierta una idea en un plan, con requisitos claros, los proveedores adecuados y una gestora de proyectos sin contratar a nadie de tiempo completo.' },
-  { icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', who: 'Museos, consejos de arte, fideicomisos de tierras y grupos comunitarios.', text: 'Haga rendir un presupuesto ajustado. Elija herramientas, planifique mejoras y mantenga en marcha los proyectos financiados con subvenciones.' },
-  { icon: 'star', title: 'Estudios creativos, de videojuegos y XR', who: 'Estudios independientes, en cualquier lugar.', text: 'Una productora que maneje calendarios, documentos y equipos, para que sus líderes creativos se concentren en el trabajo.' },
-  { icon: 'chart', title: 'Equipos en crecimiento', who: 'Empresas que suman personas, sedes o servicios.', text: 'Arregle los flujos de trabajo que se rompen al crecer y mantenga en marcha los proyectos grandes.' },
+// Tareas diarias que los equipos pequeños le pasan a la IA. Solo ejemplos, sin prometer resultados.
+const aiTasks = [
+  { icon: 'mail', title: 'Responder correos de clientes más rápido', text: 'Borradores de respuestas a preguntas comunes, que usted revisa y envía.' },
+  { icon: 'book', title: 'Escribir anuncios de empleo y descripciones', text: 'Convierta unas notas en un primer borrador claro.' },
+  { icon: 'clock', title: 'Convertir reuniones en tareas', text: 'Resúmenes y próximos pasos, sin volver a escribir sus notas.' },
+  { icon: 'chat', title: 'Redactar publicaciones y boletines', text: 'Una semana de ideas y borradores con su propia voz.' },
+  { icon: 'search', title: 'Encontrar respuestas en sus documentos', text: 'Pregúntele algo a su manual, sus políticas o su lista de precios.' },
+  { icon: 'layers', title: 'Primeros borradores de cotizaciones y propuestas', text: 'Empiece con un borrador en vez de una página en blanco.' },
 ];
+
 
 const glance = [
-  { name: 'Consultoría o ayuda con proyectos, según la necesite', price: '$65/hora' },
-  { name: 'Evaluación Tecnológica', note: '3 sesiones, investigación y una hoja de ruta por escrito', price: '$650' },
+  { name: 'Evaluación Tecnológica', note: '3 sesiones, investigación y un plan por escrito', price: '$650' },
   { name: 'Análisis de Negocio y Revisión de Procesos', note: 'Un proceso, unas 15 horas', price: 'Desde $1,000' },
-  { name: 'Liderazgo de proyectos a tiempo parcial, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
-  { name: 'IA y Tecnología Emergente', note: 'Vea la página de IA y Tecnología Emergente para más detalles', price: 'Desde $500' },
+  { name: 'Líder de proyecto, mensual', note: 'Mínimo de 3 meses', price: '10 h $650, 20 h $1,200, 40 h $2,200' },
+  { name: 'Taller de IA para Equipos', note: '2 horas, hasta 10 personas', price: 'Desde $500' },
+  { name: 'Plan de Preparación para IA', note: '3 sesiones y un plan por escrito', price: '$650' },
+  { name: 'Consultoría o ayuda con proyectos, según la necesite', price: '$65/hora' },
 ];
 ---
-<Base title="Consultoría y apoyo en proyectos" seoTitle="Consultoría tecnológica y gestión de proyectos | Auva Studio" schema={schema} description="Planificación tecnológica, análisis de negocio, gestión de proyectos y consultoría en IA y Tecnología Emergente para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento.">
+<Base title="Consultoría e IA" seoTitle="Consultoría tecnológica y de IA para pequeños negocios | Auva Studio" schema={schema} description="Ayuda para elegir las herramientas adecuadas, poner la IA a trabajar, mejorar procesos lentos y mantener en marcha los proyectos tecnológicos, para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">Decisiones tecnológicas, <em>tomadas con confianza.</em></h1>
-      <p class="lede">Consultoría tecnológica y apoyo en proyectos pensados en sus metas. Empiece con una evaluación, resuelva un reto concreto o sume liderazgo con experiencia para un proyecto más grande.</p>
+      <h1 class="mag-head">Las herramientas adecuadas, <em>configuradas y trabajando para usted.</em></h1>
+      <p class="lede">¿Demasiadas aplicaciones, un proceso sostenido con parches o un proyecto que siempre se atrasa? Ayudo a pequeños negocios, organizaciones sin fines de lucro y equipos en crecimiento a elegir las herramientas adecuadas, poner la IA a trabajar, mejorar cómo se hace el trabajo y mantener los proyectos en marcha.</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#planning">Vea la Evaluación Tecnológica de $650</a>
       </div>
-      <nav class="bd-sublinks" aria-label="Servicios de consultoría">
-        {consulting.map((c) => <a href={c.id === 'ai' ? '/es/ai-emerging-tech/' : `#${c.id}`}>{c.title}</a>)}
-      </nav>
+      <ul class="hero-strip">{['Precio fijo para empezar', 'Un plan en lenguaje sencillo', 'Trabajo con sus proveedores actuales', 'Trabaja directamente conmigo'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
@@ -53,51 +60,120 @@ const glance = [
     <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria.</b> Llevo más de 20 años en software y tecnología digital, desde sitios web de periódicos hasta realidad virtual y videojuegos, y trabajará directamente conmigo. <a href="/es/about/">Más sobre mí</a></span></div>
   </section>
 
-  <section class="alt" id="who">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Ayuda a la medida <em>de su tipo de organización.</em></h2>
+  <section class="alt" id="problems">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="mag-head">¿Le suena <em>conocido?</em></h2>
+        <p class="lede">Elija lo que más se parezca a su caso. Cada uno le muestra el servicio que lo resuelve.</p>
       </div>
-      <div class="grid grid-3 who">
-        {audiences.map((a) => (
-          <div class="card">
-            <div class="icon"><Icon name={a.icon} size={32} /></div>
-            <h3>{a.title}</h3>
-            <p class="small muted">{a.who}</p>
-            <p class="who-text">{a.text}</p>
-            <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-          </div>
-        ))}
-        <div class="card who-other">
-          <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>¿Otra cosa?</h3>
-          <p>Cuénteme en qué está trabajando, y le sugiero por dónde empezar.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
-        </div>
-      </div>
+      <ul class="route-list">
+        <li><a href="#planning"><span class="icon"><Icon name="compass" /></span><span><b>Paga aplicaciones que nadie usa</b><span class="muted">O tiene tantas herramientas que ninguna se conecta con las demás.</span></span></a></li>
+        <li><a href="#planning"><span class="icon"><Icon name="search" /></span><span><b>Necesita un programa nuevo y no sabe cuál</b><span class="muted">Reservas, punto de venta, contabilidad, correo o lista de clientes, con demasiadas opciones para comparar.</span></span></a></li>
+        <li><a href="#analysis"><span class="icon"><Icon name="chart" /></span><span><b>Su equipo escribe lo mismo dos veces</b><span class="muted">La información vive en tres lugares, y se acumulan errores y trabajo extra.</span></span></a></li>
+        <li><a href="#analysis"><span class="icon"><Icon name="clock" /></span><span><b>Una tarea sencilla toma horas</b><span class="muted">Hojas de cálculo, parches y "así lo hemos hecho siempre".</span></span></a></li>
+        <li><a href="#ai"><span class="icon"><Icon name="bolt" /></span><span><b>Sabe que la IA podría ayudar, pero no dónde</b><span class="muted">Su equipo probó un chatbot una vez, o nadie ha tenido tiempo de averiguarlo.</span></span></a></li>
+        <li><a href="#delivery"><span class="icon"><Icon name="check" /></span><span><b>Un proyecto tecnológico siempre se atrasa</b><span class="muted">Un sistema nuevo, una mudanza o una actualización sin nadie claramente a cargo.</span></span></a></li>
+        <li><a href="#delivery"><span class="icon"><Icon name="shield" /></span><span><b>Necesita a alguien de su lado frente a un proveedor</b><span class="muted">Alguien que entienda la tecnología y haga las preguntas correctas.</span></span></a></li>
+      </ul>
     </div>
   </section>
 
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Tres formas de ayudarle, <em>más IA y Tecnología Emergente.</em></h2>
+        <h2 class="mag-head">Cuatro formas <em>de ayudarle.</em></h2>
+        <p class="lede">Todas empiezan con una llamada gratis, y recibe un precio por escrito antes de empezar cualquier trabajo.</p>
       </div>
       <div class="grid grid-2">
-        {consulting.map((c) => (
-          <div class="card card-row" id={c.id}>
-            <div class="icon"><Icon name={c.icon} size={36} /></div>
+        <div class="card card-row" id="planning">
+          <div class="icon"><Icon name="compass" size={36} /></div>
+          <div>
+            <h3>Un plan para sus herramientas</h3>
+            <p class="svc-meta"><span>Evaluación Tecnológica</span> <b>$650</b></p>
+            <p class="muted">Reviso cada herramienta que paga, encuentro lo que falta o sobra, y le doy un plan por escrito de qué mantener, reemplazar o agregar primero.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Una revisión de sus herramientas y suscripciones</li><li><Icon name="tick" size={16} />Un plan por escrito en orden de prioridad</li><li><Icon name="tick" size={16} />Ayuda para elegir programas o proveedores nuevos</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=planning#start" style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        </div>
+        <div class="card card-row" id="analysis">
+          <div class="icon"><Icon name="chart" size={36} /></div>
+          <div>
+            <h3>Mejore un proceso que le frena</h3>
+            <p class="svc-meta"><span>Análisis de Negocio y Revisión de Procesos</span> <b>Desde $1,000</b></p>
+            <p class="muted">Describo cómo se hace hoy una tarea, encuentro qué está frenando a su equipo y dejo por escrito lo que necesita una solución antes de construir o comprar. Disponible por sí solo, sin obligación de contratarme para el siguiente paso.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Un mapa claro de cómo se hace el trabajo hoy</li><li><Icon name="tick" size={16} />Lo que necesita una solución, por escrito</li><li><Icon name="tick" size={16} />Opciones comparadas lado a lado</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=analysis#start" style="margin-top: 12px">Pregunte por esto</a>
+          </div>
+        </div>
+        <div class="card card-row" id="delivery">
+          <div class="icon"><Icon name="check" size={36} /></div>
+          <div>
+            <h3>Alguien que dirija el proyecto</h3>
+            <p class="svc-meta"><span>Gestión de Proyectos</span> <b>$65/hora, o mensual desde $650</b></p>
+            <p class="muted">Una líder de proyecto a tiempo parcial que planifica el trabajo, mantiene a su equipo y a sus proveedores al día y avisa a tiempo de los problemas, sin contratar a nadie de tiempo completo.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Un plan y un calendario que todos pueden seguir</li><li><Icon name="tick" size={16} />Su equipo y sus proveedores coordinados</li><li><Icon name="tick" size={16} />Aviso temprano de retrasos y riesgos</li><li><Icon name="tick" size={16} />Por hora, o un bloque mensual de horas</li></ul>
+            <a class="more" href="/es/technology-consulting/?topic=delivery#start" style="margin-top: 12px">Pregunte por esto</a>
+            <p class="small muted" style="margin-top: 12px">¿Está creando un videojuego o un proyecto XR? Vea el <a href="/es/production-emerging-tech/#production">Apoyo de Producción</a>.</p>
+          </div>
+        </div>
+        <div class="card card-row">
+          <div class="icon"><Icon name="bolt" size={36} /></div>
+          <div>
+            <h3>Ponga la IA a trabajar</h3>
+            <p class="svc-meta"><span>Taller de IA para Equipos o Plan de Preparación para IA</span> <b>Desde $500</b></p>
+            <p class="muted">Descubra dónde la IA puede ahorrarle tiempo a su equipo, elija herramientas confiables y logre que todos las usen.</p>
+            <ul class="ticks small"><li><Icon name="tick" size={16} />Práctica con sus tareas reales, no demostraciones</li><li><Icon name="tick" size={16} />Privacidad y calidad cubiertas</li><li><Icon name="tick" size={16} />Pensado para equipos sin perfil técnico</li></ul>
+            <a class="more" href="#ai" style="margin-top: 12px">Vea IA para su equipo <Icon name="arrow" size={16} /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="ai">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Ponga la IA a trabajar <em>en lo que ya hace.</em></h2>
+        <p class="lede">Uso herramientas de IA en mi propio trabajo todos los días. Le mostraré a su equipo dónde ayudan con las tareas que ya hacen, en qué herramientas confiar y cómo usarlas de forma segura.</p>
+      </div>
+      <h3 class="glance-title" style="margin-top: 0">Para qué usan la IA los equipos pequeños</h3>
+      <div class="grid grid-3 ai-tasks">
+        {aiTasks.map((t) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={t.icon} size={28} /></div>
+            <div><h3>{t.title}</h3><p class="muted small">{t.text}</p></div>
+          </div>
+        ))}
+      </div>
+      <div class="grid grid-2" style="margin-top: 32px">
+        {aiConsulting.map((o) => (
+          <div class="card card-row" id={o.id}>
+            <div class="icon"><Icon name={o.icon} size={36} /></div>
             <div>
-              <h3>{c.title}</h3>
-              <p class="muted">{c.text}</p>
-              <ul class="ticks small">{c.items.map((it) => <li><Icon name="tick" size={16} />{it}</li>)}</ul>
-              {c.id === 'ai'
-                ? <a class="more" href="/es/ai-emerging-tech/" style="margin-top: 12px">Ver IA y Tecnología Emergente <Icon name="arrow" size={16} /></a>
-                : <a class="more" href={`/es/technology-consulting/?topic=${c.id}#start`} style="margin-top: 12px">Pregunte por esto</a>}
+              <h3>{o.title}</h3>
+              <p class="svc-meta"><b>{o.price}</b></p>
+              <p class="muted">{o.text}</p>
+              <a class="more" href={`/es/technology-consulting/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto</a>
             </div>
           </div>
         ))}
       </div>
+      <p class="small muted" style="margin-top: 20px"><b>Herramientas que uso.</b> ChatGPT, Claude, Gemini, Meta AI y Zapier. ¿Quiere probar una herramienta de IA hecha para su negocio, como un chatbot para preguntas de clientes? Vea el <a href="/es/production-emerging-tech/#ai-sprint">Sprint de Prototipo de IA</a>.</p>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo <em>funciona.</em></h2>
+        <p class="lede">Fácil de empezar, y sin sorpresas en el camino.</p>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Llamada gratis</h3><p>Cuénteme qué está pasando. Le diré con honestidad si puedo ayudarle y por dónde empezar.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Alcance y precio por escrito</h3><p>Una propuesta corta con lo que haré, cuánto tarda y el precio, antes de empezar cualquier trabajo.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>El trabajo</h3><p>Sesiones, investigación y ayuda práctica. Trabaja directamente conmigo y recibe novedades sobre la marcha.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Entrega</h3><p>Documentos claros y capacitación, para que su equipo pueda seguir sin mí.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -115,15 +191,65 @@ const glance = [
           </div>
         ))}
       </dl>
-      <p class="small muted" style="margin-top: 16px">¿Quiere probar una idea antes de comprometerse? <a href="/es/ai-emerging-tech/#sprint">Vea los Sprints de Prototipo</a>. Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
+      <p class="small muted" style="margin-top: 16px">¿Quiere probar una idea antes de comprometerse? <a href="/es/production-emerging-tech/#prototypes">Vea los Sprints de Prototipo</a>. Cada trabajo termina con documentación clara y capacitación, para que su equipo pueda seguir sin mí. El tiempo de viaje fuera del Mid-Hudson Valley se cobra a la mitad de mi tarifa por hora, más gastos, acordado antes de reservar.</p>
     </div>
   </section>
 
-  <section>
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        <div class="card">
+          <div class="icon"><Icon name="globe" size={32} /></div>
+          <h3>Pequeños negocios</h3>
+          <p class="small muted">Tiendas, restaurantes, posadas, consultorios y servicios locales.</p>
+          <p class="who-text">Demasiadas herramientas y poco tiempo. Elija las adecuadas, configúrelas y logre que su equipo las use.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="book" size={32} /></div>
+          <h3>Organizaciones sin fines de lucro y cultura</h3>
+          <p class="small muted">Museos, consejos de arte, fideicomisos de tierras y grupos comunitarios.</p>
+          <p class="who-text">Haga rendir un presupuesto ajustado. Elija herramientas, planifique mejoras y mantenga en marcha los proyectos financiados con subvenciones.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="key" size={32} /></div>
+          <h3>Startups</h3>
+          <p class="small muted">Equipos nuevos que crean su primer producto o montan sus sistemas.</p>
+          <p class="who-text">Convierta una idea en un plan, con requisitos claros, los proveedores adecuados y una líder de proyecto sin contratar a nadie de tiempo completo.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="chart" size={32} /></div>
+          <h3>Equipos en crecimiento</h3>
+          <p class="small muted">Empresas que suman personas, sedes o servicios.</p>
+          <p class="who-text">Arregle los flujos de trabajo que se rompen al crecer y mantenga en marcha los proyectos grandes.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="layers" size={32} /></div>
+          <h3>Agencias y diseñadores</h3>
+          <p class="who-text">¿Necesita un desarrollador confiable detrás de su equipo? Colaboro con agencias de marketing, estudios creativos y diseñadores independientes.</p>
+          <a class="more" href="/es/development-partnerships/" style="margin-top: 12px">Vea Colaboraciones para agencias <Icon name="arrow" size={16} /></a>
+        </div>
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Otra cosa?</h3>
+          <p>Cuénteme en qué está trabajando, y le sugiero por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablémoslo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">Orientación práctica <em>respaldada por experiencia técnica y de ejecución.</em></h2>
-        <p class="lede">Empecé como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de otros sitios de periódicos locales, y luego pasé a la gestión de proyectos técnicos de productos digitales, videojuegos y experiencias interactivas. Mi experiencia abarca desarrollo de software, gestión de proyectos técnicos, productos digitales, videojuegos y experiencias interactivas. Esa combinación me permite ver más allá de la superficie de un proyecto, entender cómo funciona la tecnología y armar un plan realista para el equipo que lo va a mantener.</p>
+        <p class="lede">Empecé como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de otros sitios de periódicos locales, y luego pasé a la gestión de proyectos técnicos de productos digitales, videojuegos y experiencias interactivas. Esa combinación me permite ver más allá de la superficie de un proyecto, entender cómo funciona la tecnología y armar un plan realista para el equipo que lo va a mantener.</p>
         <div class="stats">
           <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
           <div><span class="stat">14+</span><span class="muted">experiencias de realidad virtual y juegos para celular</span></div>
@@ -138,7 +264,7 @@ const glance = [
     </div>
   </section>
 
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organizada, confiable y <em>fácil de tratar.</em></h2>
@@ -156,6 +282,6 @@ const glance = [
   </section>
 
 
-  <Faq faqs={faqs} />
-  <InquiryForm kind="consulting" alt />
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
 </Base>
