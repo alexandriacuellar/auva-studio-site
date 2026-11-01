@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import '../styles/pages/home.css';
 import Icon from '../components/Icon.astro';
 import Cta from '../components/Cta.astro';
-import { categories, journey, site, testimonials } from '../data/site';
+import { categories, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import hero from '../assets/cover-hero-workspace.png';
 import headshot from '../assets/alexandria-cuellar.jpg';
@@ -108,30 +108,5 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Simple to start, <em>clear at every step.</em></h2>
-        <p class="lede">Whatever you need, it starts the same way.</p>
-      </div>
-      <ol class="steps steps-3">
-        {journey.map((s, i) => (
-          <li>
-            <span class="num" aria-hidden="true">{i + 1}</span>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </li>
-        ))}
-      </ol>
-      <div class="work-foot">
-        <p><a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a></p>
-        <div class="name-note">
-          <h3><span class="name-star" aria-hidden="true"></span>What's in a name?</h3>
-          <p class="muted">The amber star at the end of every set of steps is Auva, or Delta Virginis (officially Minelauva), a cool red giant star in the constellation Virgo.</p>
-          <p class="name-line">A little inspiration from the stars, a little curiosity about what's possible.</p>
-        </div>
-      </div>
-    </div>
-  </section>
   <Cta />
 </Base>

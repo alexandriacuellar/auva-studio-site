@@ -129,7 +129,22 @@ const audiences = [
     </div>
   </section>
 
-  <section id="who">
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it <em>works.</em></h2>
+        <p class="lede">Simple to start, with no surprises along the way.</p>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me about your game, XR, or AR project and where it stands today.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>A short proposal with what I'll do, how long it takes, and the price. New projects often start with a Production Plan Review.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Production</h3><p>Sprints, schedules, playtests, and milestone reviews, with updates as we go. AR projects are built with a developer partner when needed.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Launch and handover</h3><p>Your team keeps the plan, documents, and files, so you can carry on without me.</p></li>
+      </ol>
+    </div>
+  </section>
+  <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Who I <em>work with.</em></h2>
@@ -152,6 +167,6 @@ const audiences = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" alt />
 </Base>

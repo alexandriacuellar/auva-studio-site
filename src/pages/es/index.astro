@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import '../../styles/pages/home.css';
 import Icon from '../../components/Icon.astro';
 import Cta from '../../components/Cta.astro';
-import { categories, journey, site, testimonials } from '../../data/site.es';
+import { categories, site, testimonials } from '../../data/site.es';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import hero from '../../assets/cover-hero-workspace.png';
 import headshot from '../../assets/alexandria-cuellar.jpg';
@@ -108,30 +108,5 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Fácil de empezar, <em>claro en cada paso.</em></h2>
-        <p class="lede">Sea lo que sea que necesite, empieza de la misma manera.</p>
-      </div>
-      <ol class="steps steps-3">
-        {journey.map((s, i) => (
-          <li>
-            <span class="num" aria-hidden="true">{i + 1}</span>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </li>
-        ))}
-      </ol>
-      <div class="work-foot">
-        <p><a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a></p>
-        <div class="name-note">
-          <h3><span class="name-star" aria-hidden="true"></span>¿Qué hay en un nombre?</h3>
-          <p class="muted">La estrella ámbar al final de cada serie de pasos es Auva, o Delta Virginis (oficialmente Minelauva), una gigante roja fría de la constelación de Virgo.</p>
-          <p class="name-line">Un poco de inspiración de las estrellas, un poco de curiosidad por lo que es posible.</p>
-        </div>
-      </div>
-    </div>
-  </section>
   <Cta />
 </Base>

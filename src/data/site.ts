@@ -78,11 +78,6 @@ export const consulting = [
 
 
 // How every engagement runs, from a small website to a complex project.
-export const journey = [
-  { title: 'Talk it through', text: "A free 30-minute call about your goals, your current setup, and what's getting in the way." },
-  { title: 'Get a clear plan', text: 'A written scope and price before any work begins, with no surprises.' },
-  { title: 'Get it done, and keep it', text: 'I do the work with you, then hand over documentation and training so your team can carry on.' },
-];
 
 // Sample sites on the Websites page, one per package. Fictional businesses, hosted at /samples/<slug>/ (noindex).
 export const samples = [

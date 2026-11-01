@@ -56,11 +56,6 @@ export const consulting = [
 ];
 
 
-export const journey = [
-  { title: 'Hablemos', text: 'Una llamada gratis de 30 minutos sobre sus metas, lo que usa hoy y lo que le está estorbando.' },
-  { title: 'Un plan claro', text: 'Un alcance y un precio por escrito antes de empezar cualquier trabajo, sin sorpresas.' },
-  { title: 'Hecho, y suyo', text: 'Hago el trabajo con usted y luego le entrego documentación y capacitación para que su equipo pueda seguir adelante.' },
-];
 
 export const samples = [
   { package: 'Presencia Esencial', slug: 'skytop-floor-co', name: 'Skytop Floor Co.', text: 'Un sitio de una sola página para una empresa de pisos de madera, con servicios, fotos de antes y después, y un formulario para pedir un presupuesto gratis.', goodFor: 'Ideal para oficios y servicios para el hogar, como contratistas, limpieza, jardinería y talleres de reparación.' },

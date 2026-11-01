@@ -129,7 +129,22 @@ const audiences = [
     </div>
   </section>
 
-  <section id="who">
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo <em>funciona.</em></h2>
+        <p class="lede">Fácil de empezar, sin sorpresas en el camino.</p>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Llamada gratis</h3><p>Cuénteme sobre su proyecto de videojuego, XR o AR y en qué punto está hoy.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Alcance y precio por escrito</h3><p>Una propuesta breve con lo que haré, cuánto tiempo toma y el precio. Los proyectos nuevos suelen empezar con una Revisión del Plan de Producción.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Producción</h3><p>Sprints, calendarios, pruebas de juego y revisiones de hitos, con actualizaciones durante el proceso. Los proyectos de AR se crean con un socio desarrollador cuando hace falta.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Lanzamiento y entrega</h3><p>Su equipo se queda con el plan, los documentos y los archivos, para que pueda seguir sin mí.</p></li>
+      </ol>
+    </div>
+  </section>
+  <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
@@ -152,6 +167,6 @@ const audiences = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" alt />
 </Base>
