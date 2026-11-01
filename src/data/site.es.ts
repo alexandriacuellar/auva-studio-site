@@ -55,12 +55,6 @@ export const consulting = [
   { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Gestión de proyectos mensual'] },
 ];
 
-export const whyAuva = [
-  { title: 'Profundidad técnica', text: 'Recomendaciones basadas en cómo los sistemas realmente funcionan, se conectan y se mantienen.' },
-  { title: 'Visión de negocio', text: 'Sus metas, su presupuesto, su equipo y sus clientes van antes que cualquier plataforma nueva.' },
-  { title: 'De la estrategia a la entrega', text: 'Una sola persona de confianza desde la primera revisión hasta la configuración y la capacitación.' },
-  { title: 'Experiencia amplia', text: 'Sitios web, APIs, productos digitales, gestión de proyectos, videojuegos, XR y experiencias interactivas.' },
-];
 
 export const journey = [
   { title: 'Hablemos', text: 'Una llamada gratis de 30 minutos sobre sus metas, lo que usa hoy y lo que le está estorbando.' },

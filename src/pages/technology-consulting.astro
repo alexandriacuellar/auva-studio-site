@@ -16,7 +16,7 @@ const faqs = [
   { q: 'Do we need technical skills to use AI?', a: 'No. Workshops are built for non-technical teams, using tools like ChatGPT, Claude, and Gemini in your real work.' },
   { q: 'Is it safe to use AI with our business data?', a: 'It can be, with the right tools and settings. Every workshop covers privacy and quality risks, and a Tech Review recommends tools that fit your rules.' },
 ];
-import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../data/site';
+import { consulting, aiOffers, site, testimonials, serviceSchema } from '../data/site';
 
 const aiConsulting = aiOffers.filter((o) => o.group === 'consulting');
 const schema = serviceSchema([...consulting, ...aiConsulting].map((c) => ({ name: c.title, description: c.text, price: c.price })), '/technology-consulting/');
@@ -30,7 +30,6 @@ const aiTasks = [
   { icon: 'search', title: 'Find answers in your own documents', text: 'Ask your handbook, policies, or price list a question.' },
   { icon: 'layers', title: 'First drafts of quotes and proposals', text: 'Start from a draft instead of a blank page.' },
 ];
-
 
 // Every consulting price in one place.
 ---
@@ -167,7 +166,6 @@ const aiTasks = [
     </div>
   </section>
 
-
   <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
@@ -219,25 +217,6 @@ const aiTasks = [
   </section>
 
   <section>
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">A developer and project manager <em>on your side.</em></h2>
-        <p class="lede">I started as one of many developers behind the Times Herald-Record and other local newspaper websites. Since 2023 I've been a technical project manager, leading 14+ VR and mobile game projects with sprints, schedules, and task boards. I've managed projects in Jira, Trello, Notion, and ClickUp, and I automate work with Zapier. Because I'm both a developer and a project manager, I understand how the technology works and build plans your team can actually keep up with.</p>
-        <div class="stats">
-          <div><span class="stat">20+</span><span class="muted">years in software and digital technology</span></div>
-          <div><span class="stat">14+</span><span class="muted">VR and mobile game projects managed</span></div>
-          <div class="stat-wide"><span class="stat">Nearly 20</span><span class="muted">years building websites and web apps for newspapers</span></div>
-        </div>
-      </div>
-      <div class="values">
-        {whyAuva.map((w) => (
-          <div class="card"><h3>{w.title}</h3><p class="muted">{w.text}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organized, dependable, and <em>easy to work with.</em></h2>
@@ -254,7 +233,6 @@ const aiTasks = [
     </div>
   </section>
 
-
-  <Faq faqs={faqs} />
-  <InquiryForm kind="consulting" alt />
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
 </Base>

@@ -16,7 +16,7 @@ const faqs = [
   { q: '¿Necesitamos conocimientos técnicos para usar la IA?', a: 'No. Los talleres están pensados para equipos sin perfil técnico, con herramientas como ChatGPT, Claude y Gemini en su trabajo real.' },
   { q: '¿Es seguro usar la IA con los datos de nuestro negocio?', a: 'Puede serlo, con las herramientas y la configuración adecuadas. Cada taller cubre los riesgos de privacidad y calidad, y una Revisión Tecnológica le recomienda herramientas que respetan sus reglas.' },
 ];
-import { consulting, aiOffers, whyAuva, site, testimonials, serviceSchema } from '../../data/site.es';
+import { consulting, aiOffers, site, testimonials, serviceSchema } from '../../data/site.es';
 
 const aiConsulting = aiOffers.filter((o) => o.group === 'consulting');
 const schema = serviceSchema([...consulting, ...aiConsulting].map((c) => ({ name: c.title, description: c.text, price: c.price })), '/es/technology-consulting/');
@@ -30,7 +30,6 @@ const aiTasks = [
   { icon: 'search', title: 'Encontrar respuestas en sus documentos', text: 'Pregúntele algo a su manual, sus políticas o su lista de precios.' },
   { icon: 'layers', title: 'Primeros borradores de cotizaciones y propuestas', text: 'Empiece con un borrador en vez de una página en blanco.' },
 ];
-
 
 ---
 <Base title="Tecnología, Automatización e IA" seoTitle="Tecnología, automatización e IA para pequeños negocios | Auva Studio" schema={schema} description="Una Revisión Tecnológica de $250, configuración de automatizaciones y de espacios de proyectos, talleres de IA y gestión de proyectos para pequeños negocios, organizaciones sin fines de lucro, startups y equipos en crecimiento.">
@@ -166,7 +165,6 @@ const aiTasks = [
     </div>
   </section>
 
-
   <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
@@ -218,25 +216,6 @@ const aiTasks = [
   </section>
 
   <section>
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">Una desarrolladora y gerente de proyectos <em>de su lado.</em></h2>
-        <p class="lede">Empecé como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de otros sitios de periódicos locales. Desde 2023 soy gerente de proyectos técnicos y he dirigido más de 14 proyectos de realidad virtual y juegos para celular, con sprints, cronogramas y tableros de tareas. He gestionado proyectos en Jira, Trello, Notion y ClickUp, y automatizo tareas con Zapier. Como soy tanto desarrolladora como gerente de proyectos, entiendo cómo funciona la tecnología y armo planes que su equipo realmente puede seguir.</p>
-        <div class="stats">
-          <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
-          <div><span class="stat">14+</span><span class="muted">proyectos de realidad virtual y juegos para celular dirigidos</span></div>
-          <div class="stat-wide"><span class="stat">Casi 20</span><span class="muted">años creando sitios web y aplicaciones web para periódicos</span></div>
-        </div>
-      </div>
-      <div class="values">
-        {whyAuva.map((w) => (
-          <div class="card"><h3>{w.title}</h3><p class="muted">{w.text}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Organizada, confiable y <em>fácil de tratar.</em></h2>
@@ -253,7 +232,6 @@ const aiTasks = [
     </div>
   </section>
 
-
-  <Faq faqs={faqs} />
-  <InquiryForm kind="consulting" alt />
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
 </Base>
