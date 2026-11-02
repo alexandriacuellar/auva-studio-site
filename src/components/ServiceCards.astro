@@ -11,7 +11,7 @@ interface Props { categories: any[]; lang?: 'en' | 'es' }
 const { categories, lang = 'en' } = Astro.props;
 const photos: Record<string, { src: any; alt: { en: string; es: string } }> = {
   websites: { src: websites, alt: { en: 'A laptop and phone showing a bright, simple website on a sunny desk', es: 'Una computadora portátil y un teléfono con un sitio web claro y sencillo sobre un escritorio soleado' } },
-  tech: { src: tech, alt: { en: 'A woman planning work with sticky notes on a glass wall', es: 'Una mujer organizando el trabajo con notas adhesivas en una pared de vidrio' } },
+  tech: { src: tech, alt: { en: 'A notebook with a hand-drawn workflow next to a laptop dashboard on a sunny desk', es: 'Un cuaderno con un flujo de trabajo dibujado a mano junto a una computadora con un panel de datos, sobre un escritorio soleado' } },
   production: { src: production, alt: { en: 'VR glasses and smart glasses side by side on a sunny wooden desk', es: 'Gafas de realidad virtual y gafas inteligentes juntas sobre un escritorio de madera soleado' } },
 };
 const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('technology') ? 'tech' : 'production';
