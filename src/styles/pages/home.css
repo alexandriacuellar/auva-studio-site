@@ -1,19 +1,10 @@
 /* index page styles, shared by the English and Spanish versions. */
-/* Home hero: centered headline and buttons over a big photo stage. */
-.bd-hero { padding: 80px 0 96px; }
+/* Home hero: centered headline, intro, and buttons on white (no photo, alexandria 2026-11-02). */
+.bd-hero { padding: 120px 0 112px; }
 .bd-hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .bd-hero-inner .lede { margin: 0 auto 32px; max-width: 640px; }
 .bd-hero-inner .hero-actions { justify-content: center; }
 .bd-hero h1 { max-width: 15ch; }
-
-.bd-stage { position: relative; margin: 56px 0 0; width: 100%; max-width: 1080px; }
-.bd-stage > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; object-position: center 72%; border-radius: 28px; box-shadow: var(--shadow-strong); }
-.bd-chip { position: absolute; left: 28px; bottom: -28px; display: flex; gap: 14px; align-items: center; text-align: left; max-width: 400px; background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-strong); font-size: 0.95rem; }
-.bd-chip img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
-@media (max-width: 960px) {
-  .bd-stage > img { aspect-ratio: 4 / 3; }
-  .bd-chip { position: relative; left: auto; bottom: auto; margin: -40px 16px 0; max-width: none; }
-}
 
 /* How I work: the book button, and the note on the studio's name beside it */
 .work-foot { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 28px 48px; }
@@ -69,7 +60,7 @@
 @media (prefers-reduced-motion: reduce) { .svc-photo img { transition: none; } .svc-card:hover .svc-photo img { transform: none; } }
 
 @media (max-width: 640px) {
-  .bd-hero { padding: 56px 0 64px; }
+  .bd-hero { padding: 64px 0 64px; }
   /* Phones: a smaller, balanced service label and a left-aligned intro, which reads more easily than 7 centered lines. */
   .bd-hero-inner .lede { text-align: left; }
 }

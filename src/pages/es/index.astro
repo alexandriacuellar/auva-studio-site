@@ -7,7 +7,6 @@ import ServiceCards from '../../components/ServiceCards.astro';
 import Cta from '../../components/Cta.astro';
 import { categories, site, testimonials } from '../../data/site.es';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
-import hero from '../../assets/cover-hero-workspace.png';
 import headshot from '../../assets/alexandria-cuellar.jpg';
 
 const situations = [
@@ -31,9 +30,6 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
       </div>
       <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-      <figure class="bd-stage">
-        <Image src={hero} alt="Un espacio de trabajo soleado con una laptop, una taza de café y plantas" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-      </figure>
     </div>
   </section>
 
