@@ -6,7 +6,17 @@ import '../../styles/pages/about.css';
 import Icon from '../../components/Icon.astro';
 import Cta from '../../components/Cta.astro';
 import { site, testimonials } from '../../data/site.es';
+import bearMountain from '../../assets/about/bear-mountain-bridge.jpg';
+import nyack from '../../assets/about/nyack-broadway.jpg';
+import mohonk from '../../assets/about/mohonk-new-paltz.jpg';
+import centralPark from '../../assets/about/central-park-nyc.jpg';
 import headshot from '../../assets/alexandria-cuellar.jpg';
+const places = [
+  { src: bearMountain, place: 'Puente Bear Mountain', alt: 'El puente Bear Mountain sobre el río Hudson en otoño' },
+  { src: nyack, place: 'Nyack', alt: 'Fachadas de ladrillo y un café en la acera de Broadway, en Nyack' },
+  { src: mohonk, place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
+  { src: centralPark, place: 'Central Park, Nueva York', alt: 'El paseo del Central Park con árboles de otoño y faroles' }
+];
 ---
 <Base title="Sobre mí" seoTitle="Sobre Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, fundadora de Auva Studio: más de 20 años ayudando a organizaciones a resolver problemas con tecnología, desde el Mid-Hudson Valley.">
   <section class="hero about-hero">
@@ -24,7 +34,7 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
     </div>
   </section>
 
-  <section class="alt about-story">
+  <section class="band-cream about-story">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head" set:html={`Más de 20 años haciendo que <em>la tecnología funcione para las personas.</em>`} />
@@ -81,6 +91,16 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
     <div class="wrap about-home">
       <h2 class="mag-head" set:html={`Con raíces en <em>el Hudson Valley.</em>`} />
       <p class="lede">Vivo en el Mid-Hudson Valley y trabajo con negocios y organizaciones en todo el Hudson Valley, en la ciudad de Nueva York y en cualquier parte de Estados Unidos. Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna.</p>
+      <ul class="place-strip" aria-label="Lugares que me encantan en el Hudson Valley y Nueva York">
+        {places.map((pl) => (
+          <li>
+            <figure>
+              <Image src={pl.src} alt={pl.alt} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <figcaption>{pl.place}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
   <Cta />

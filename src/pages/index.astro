@@ -3,12 +3,12 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import '../styles/pages/home.css';
 import Icon from '../components/Icon.astro';
+import ServiceCards from '../components/ServiceCards.astro';
 import Cta from '../components/Cta.astro';
 import { categories, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import hero from '../assets/cover-hero-workspace.png';
 import headshot from '../assets/alexandria-cuellar.jpg';
-import siteMockup from '../assets/website-mockup-happy-tails.png';
 
 const situations = [
   { title: 'You need a website', text: "You don't have one yet, or you're starting something new.", href: '/websites/', icon: 'globe' },
@@ -37,7 +37,7 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
-  <section class="alt">
+  <section class="home-routes">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">What are you <em>working on?</em></h2>
@@ -61,35 +61,12 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
         <h2 class="mag-head">Three ways <em>I help.</em></h2>
         <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
       </div>
-      <div class="grid grid-3">
-        {categories.map((c) => (
-          <a class="card category bd-card" href={c.href}>
-            <div class="bd-media">
-              {c.href === '/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
-            <div class="float f1"><span class="k">Tech Review</span><b>Top 5 fixes, in order</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
-            <div class="float f2"><span class="k">Now automated</span><ul><li><Icon name="tick" size={14} />New client follow-up</li><li><Icon name="tick" size={14} />Monthly report</li></ul></div>
-          </div>)}
-              {c.href === '/production-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
-            <div class="float f1 chat"><span class="k">Sprint 4 of 6</span><p class="q">Can we ship the Quest demo by the 20th?</p><p class="a">Yes, if art locks Friday. Playtest booked.</p></div>
-            <div class="float f2"><span class="k">Quest demo milestone</span><span class="bar"><i style="width:66%"></i></span></div>
-          </div>)}
-              {c.href === '/websites/' && <Image src={siteMockup} alt="A sample nonprofit website shown on a laptop and a phone on a sunny desk" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
-            </div>
-            <div class="bd-body">
-              <span class="bd-tag">{c.href === '/websites/' ? 'From $1,500' : c.href === '/technology-consulting/' ? 'From $250' : 'From $65/hr'}</span>
-              <h3>{c.title}</h3>
-              <p class="muted">{c.text}</p>
-              <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
-              <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <p class="hero-checks" style="text-align: center; margin-top: 28px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
+      <ServiceCards categories={categories} lang="en" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 
-  <section class="alt" id="about">
+  <section class="home-about-band" id="about">
     <div class="wrap home-about">
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
       <div class="home-about-text">

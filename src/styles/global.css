@@ -8,6 +8,8 @@
   --success: #1fa463;
   --tint: #dce8ff;
   --surface: #f3f7ff;
+  --band-blue: #eaf1ff;
+  --band-cream: #faf6ef;
   --paper: #fbfcff;
   --border: #d3def3;
   --white: #ffffff;
@@ -34,7 +36,7 @@ body {
   font-size: 18px;
   line-height: 1.6;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--white);
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -95,7 +97,11 @@ p { margin: 0 0 1em; }
 
 /* Sections */
 section { padding: 88px 0; }
-.alt { background: var(--surface); }
+/* Section bands (2026-11-01): white by default, soft blue for .alt, warm cream for the "who it's for" section,
+   so each section reads as its own band, like greaterpurposeweb.com and booshdigital.co.uk. */
+.alt { background: var(--band-blue); }
+section#who, .band-cream { background: var(--band-cream); }
+.alt .card { border-color: #d6e2fb; }
 .eyebrow { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
 .lede { font-size: 1.25rem; color: var(--muted); max-width: 760px; }
 .section-head { margin-bottom: 44px; }

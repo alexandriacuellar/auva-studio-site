@@ -1,0 +1,39 @@
+---
+// Home page service cards: one photo, the name, one line, a short price list, and a link.
+// Modeled on the simple photo cards at greaterpurposeweb.com (alexandria, 2026-11-01).
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import websites from '../assets/home/websites.jpg';
+import tech from '../assets/home/tech.jpg';
+import production from '../assets/home/production.jpg';
+
+interface Props { categories: any[]; lang?: 'en' | 'es' }
+const { categories, lang = 'en' } = Astro.props;
+const photos: Record<string, { src: any; alt: { en: string; es: string } }> = {
+  websites: { src: websites, alt: { en: 'A laptop and phone showing a bright, simple website on a sunny desk', es: 'Una computadora portátil y un teléfono con un sitio web claro y sencillo sobre un escritorio soleado' } },
+  tech: { src: tech, alt: { en: 'A notebook with a hand-drawn workflow next to a laptop dashboard on a sunny desk', es: 'Un cuaderno con un flujo de trabajo dibujado a mano junto a una computadora con un panel de datos, sobre un escritorio soleado' } },
+  production: { src: production, alt: { en: 'VR glasses and smart glasses side by side on a sunny wooden desk', es: 'Gafas de realidad virtual y gafas inteligentes juntas sobre un escritorio de madera soleado' } },
+};
+const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('technology') ? 'tech' : 'production';
+---
+<div class="svc-cards">
+  {categories.map((c) => {
+    const p = photos[key(c.href)];
+    return (
+      <a class="svc-card" href={c.href}>
+        <div class="svc-photo"><Image src={p.src} alt={p.alt[lang]} widths={[480, 760, 960]} sizes="(max-width: 960px) 100vw, 380px" /></div>
+        <div class="svc-body">
+          <h3>{c.title}</h3>
+          <p class="svc-line">{c.text}</p>
+          <div class="svc-list">
+          <ul class="svc-offers">
+            {c.offers.map(([name, price]: [string, string]) => <li><span>{name}</span><b>{price}</b></li>)}
+          </ul>
+          {c.note && <p class="svc-note">{c.note}</p>}
+          </div>
+          <span class="svc-more">{c.cta.split(' ').slice(0, -1).join(' ')} <span class="nowrap">{c.cta.split(' ').at(-1)}<Icon name="arrow" size={16} /></span></span>
+        </div>
+      </a>
+    );
+  })}
+</div>

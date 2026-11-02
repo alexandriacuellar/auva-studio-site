@@ -3,12 +3,12 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import '../../styles/pages/home.css';
 import Icon from '../../components/Icon.astro';
+import ServiceCards from '../../components/ServiceCards.astro';
 import Cta from '../../components/Cta.astro';
 import { categories, site, testimonials } from '../../data/site.es';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import hero from '../../assets/cover-hero-workspace.png';
 import headshot from '../../assets/alexandria-cuellar.jpg';
-import siteMockup from '../../assets/website-mockup-happy-tails.png';
 
 const situations = [
   { title: 'Necesita un sitio web', text: 'Todavía no tiene uno, o está empezando algo nuevo.', href: '/es/websites/', icon: 'globe' },
@@ -37,7 +37,7 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
-  <section class="alt">
+  <section class="home-routes">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head">¿En qué está <em>trabajando?</em></h2>
@@ -61,35 +61,12 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
         <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
         <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
       </div>
-      <div class="grid grid-3">
-        {categories.map((c) => (
-          <a class="card category bd-card" href={c.href}>
-            <div class="bd-media">
-              {c.href === '/es/technology-consulting/' && (<div class="bd-art bd-art-plan" aria-hidden="true">
-            <div class="float f1"><span class="k">Revisión Tecnológica</span><b>5 arreglos principales, en orden</b><span class="bar"><i style="width:82%"></i></span><span class="bar"><i style="width:56%"></i></span></div>
-            <div class="float f2"><span class="k">Ya automatizado</span><ul><li><Icon name="tick" size={14} />Seguimiento a clientes nuevos</li><li><Icon name="tick" size={14} />Informe mensual</li></ul></div>
-          </div>)}
-              {c.href === '/es/production-emerging-tech/' && (<div class="bd-art bd-art-ai" aria-hidden="true">
-            <div class="float f1 chat"><span class="k">Sprint 4 de 6</span><p class="q">¿Podemos entregar la demo de Quest el día 20?</p><p class="a">Sí, si el arte se cierra el viernes. Prueba de juego reservada.</p></div>
-            <div class="float f2"><span class="k">Hito de la demo para Quest</span><span class="bar"><i style="width:66%"></i></span></div>
-          </div>)}
-              {c.href === '/es/websites/' && <Image src={siteMockup} alt="Un sitio web de muestra para una organización sin fines de lucro, en una laptop y un celular sobre un escritorio soleado" widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" loading="eager" />}
-            </div>
-            <div class="bd-body">
-              <span class="bd-tag">{c.href === '/es/websites/' ? 'Desde $1,500' : c.href === '/es/technology-consulting/' ? 'Desde $250' : 'Desde $65/hora'}</span>
-              <h3>{c.title}</h3>
-              <p class="muted">{c.text}</p>
-              <ul class="ticks">{c.items.map((it) => <li><Icon name="tick" size={18} />{it}</li>)}</ul>
-              <span class="more">{c.cta} <Icon name="arrow" size={16} /></span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <p class="hero-checks" style="text-align: center; margin-top: 28px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
+      <ServiceCards categories={categories} lang="es" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
-  <section class="alt" id="about">
+  <section class="home-about-band" id="about">
     <div class="wrap home-about">
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
       <div class="home-about-text">
