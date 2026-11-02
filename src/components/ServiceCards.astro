@@ -12,7 +12,7 @@ const { categories, lang = 'en' } = Astro.props;
 const photos: Record<string, { src: any; alt: { en: string; es: string } }> = {
   websites: { src: websites, alt: { en: 'A laptop and phone showing a bright, simple website on a sunny desk', es: 'Una computadora portátil y un teléfono con un sitio web claro y sencillo sobre un escritorio soleado' } },
   tech: { src: tech, alt: { en: 'A woman planning work with sticky notes on a glass wall', es: 'Una mujer organizando el trabajo con notas adhesivas en una pared de vidrio' } },
-  production: { src: production, alt: { en: 'A woman exploring a virtual world in a VR headset', es: 'Una mujer explorando un mundo virtual con un visor de realidad virtual' } },
+  production: { src: production, alt: { en: 'VR glasses and smart glasses side by side on a sunny wooden desk', es: 'Gafas de realidad virtual y gafas inteligentes juntas sobre un escritorio de madera soleado' } },
 };
 const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('technology') ? 'tech' : 'production';
 ---
