@@ -51,7 +51,7 @@ export const categories = [
   {
     icon: 'bolt',
     title: 'Producción y Tecnología Emergente',
-    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos pequeños de AR para negocios.',
+    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos de AR y VR para negocios.',
     offers: [['Apoyo de producción para equipos de videojuegos y XR', '$65/hora'], ['Revisión del Plan de Producción', '$650'], ['Proyecto AR Inicial', 'Desde $1,500']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
     href: '/es/production-emerging-tech/',
@@ -153,20 +153,20 @@ export const process = [
 ];
 
 export const care = [
-  { name: 'Cambios y arreglos', price: '$59 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles.' },
+  { name: 'Cambios y arreglos', price: '$59 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles. O compre 5 por adelantado por $249, válidos por 12 meses.' },
   { name: 'Páginas y funciones nuevas', price: '$125/hora, con presupuesto previo', text: 'Páginas nuevas, funciones nuevas o más colecciones para su CMS.' },
 ];
 
-export const plans = [
-  { name: 'Cambios mensuales', price: '$99 al mes', hours: '1 hora', text: '1 hora de cambios al mes, unos 2 cambios, más una revisión mensual de que sus formularios, enlaces y botones funcionan. Listo en 2 días hábiles.' },
-  { name: 'Cambios mensuales plus', price: '$179 al mes', hours: '2 horas', text: '2 horas al mes para cambios, ajustes en su CMS o una página nueva sencilla con un diseño de página actual, una revisión mensual y una revisión de búsqueda cada 3 meses. Listo en 1 día hábil.' },
+export const hourPacks = [
+  { name: 'Paquete de 5 horas', price: '$575', hours: '5 horas', text: '5 horas para cambios, secciones nuevas, páginas nuevas sencillas con sus diseños de página actuales, agregar formularios, mapas, videos o enlaces de reservas, y ayuda con su CMS. Válidas por 12 meses. Listo en 2 días hábiles.' },
+  { name: 'Paquete de 10 horas', price: '$1,100', hours: '10 horas', text: '10 horas para cambios, secciones nuevas, páginas nuevas sencillas con sus diseños de página actuales, agregar formularios, mapas, videos o enlaces de reservas, y ayuda con su CMS. Válidas por 12 meses. Listo en 2 días hábiles.' },
 ];
 
 export const monthly = {
-  name: 'Productora web mensual',
+  name: 'Retainer mensual para su sitio web',
   price: 'Desde $650 al mes por 5 horas',
-  text: 'Su propia productora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
-  outcomes: ['Se mantiene rápido, seguro y funcionando', 'Recibe páginas nuevas para sus campañas, eventos y productos', 'Se mantiene al día con lo que la gente busca', 'Viene con un informe breve: qué cambió, qué logró y qué sigue'],
+  text: 'Su propia desarrolladora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
+  outcomes: ['Una llamada mensual para planear', 'Páginas nuevas para sus campañas, eventos y productos', 'Una revisión mensual del sitio y de su salud en Google', 'Un informe breve: qué cambió, qué logró y qué sigue'],
 };
 
 // Client quotes stay in their own words, in English.

@@ -14,11 +14,11 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
 const places = [
   { src: bearMountain, place: 'Puente Bear Mountain', alt: 'El puente Bear Mountain sobre el río Hudson en otoño' },
   { src: nyack, place: 'Nyack', alt: 'Fachadas de ladrillo y un café en la acera de Broadway, en Nyack' },
-  { src: mohonk, place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
+  { src: mohonk, pos: 'right center', place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
   { src: centralPark, place: 'Central Park, Nueva York', alt: 'El paseo del Central Park con árboles de otoño y faroles' }
 ];
 ---
-<Base title="Sobre mí" seoTitle="Sobre Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, fundadora de Auva Studio: más de 20 años ayudando a organizaciones a resolver problemas con tecnología, desde el Mid-Hudson Valley.">
+<Base title="Sobre mí" seoTitle="Sobre Alexandria Cuellar, desarrolladora web y productora XR | Auva Studio" description="Alexandria Cuellar, fundadora de Auva Studio. Trabaje directamente con ella en sitios web, herramientas, IA y XR, en español o inglés, desde el Hudson Valley.">
   <section class="hero about-hero">
     <div class="wrap">
       <Image class="about-photo" src={headshot} alt="Alexandria Cuellar" width={300} height={300} densities={[1, 2]} loading="eager" />
@@ -38,7 +38,7 @@ const places = [
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head" set:html={`Más de 20 años haciendo que <em>la tecnología funcione para las personas.</em>`} />
-        <p>Empecé mi carrera como una de muchas desarrolladoras detrás del sitio web del Times Herald-Record y de los sitios de periódicos locales que hoy pertenecen a USA TODAY Co., y pasé casi dos décadas creando sitios web y aplicaciones web para periódicos. Desde 2023 trabajo como gerente de proyectos técnicos y he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Como mi experiencia está tanto en el desarrollo de software como en la gestión de proyectos, entiendo cómo funciona la tecnología y armo planes que los equipos realmente pueden seguir. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
+        <p>Pasé casi dos décadas como desarrolladora detrás de sitios web y aplicaciones web de periódicos, desde el Times Herald-Record hasta más de 150 diarios que hoy pertenecen a USA TODAY Co. Desde 2023 trabajo como gerente de proyectos técnicos y he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Como mi experiencia está tanto en el desarrollo de software como en la gestión de proyectos, entiendo cómo funciona la tecnología y armo planes que los equipos realmente pueden seguir. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
         <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> Proyectos: Jira, Trello, Notion, ClickUp y Zapier. XR y videojuegos: Unity, Meta Quest, lentes de Meta, Meta Horizon y AR en el navegador. IA: ChatGPT, Claude, Gemini y Meta AI.</p>
       </div>
       <div class="stats">
@@ -95,7 +95,7 @@ const places = [
         {places.map((pl) => (
           <li>
             <figure>
-              <Image src={pl.src} alt={pl.alt} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <Image src={pl.src} alt={pl.alt} style={pl.pos ? `object-position: ${pl.pos}` : undefined} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
               <figcaption>{pl.place}</figcaption>
             </figure>
           </li>

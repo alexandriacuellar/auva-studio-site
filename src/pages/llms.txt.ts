@@ -1,5 +1,5 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, packageBasics, aiOffers, addons, care, plans, monthly } from '../data/site';
+import { site, consulting, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
 import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
@@ -8,19 +8,26 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a digital technology and solutions consultant, web producer, and game and XR producer with 20+ years in technology, nearly 20 years building websites and web apps for newspapers, and 14+ VR experiences and mobile games produced for indie game studios.`,
+    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
     'Every engagement starts with a free 30-minute call, and all work is scoped and priced in writing before it begins. Clients keep ownership of their website, content, domain, and accounts.',
     '',
     '## Pages',
-    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $59 each, monthly update plans from $99, or a monthly web producer from $650`,
+    `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $59 each, prepaid hour packs from $575, or a monthly website retainer from $650`,
     `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), monthly project management`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
     `- [Sitio en español](${site.url}/es/): the whole site, except the sample sites, is also available in Spanish under /es/; Alexandria works with clients in English or Spanish`,
+    '',
+    '## About Alexandria Cuellar',
+    '- Alexandria Cuellar is the founder of Auva Studio, a web developer and software engineer, and a game and XR producer. She builds websites, sets up tools and automation, and produces games and XR.',
+    '- Clients work with her directly, in English or Spanish. She is based in the Mid-Hudson Valley, New York, and works remotely anywhere in the US.',
+    '- Her background is in software development and technical project management. She spent nearly two decades as a developer behind newspaper websites, from the Times Herald-Record to more than 150 daily newspapers.',
+    '- Since 2023, she has managed 14+ VR experiences and mobile games for indie game studios.',
+    '- She is part of Meta Horizon Start and the Meta Horizon Creator Program.',
     '',
     '## Website Services',
     `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website): a review of an existing site for usability, mobile, search, and performance.`,
@@ -36,9 +43,9 @@ export function GET() {
     `- Free website prep checklist (${site.url}/websites/get-ready/): the business basics, photos, words, and accounts to gather before a new website is built.`,
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
-    ...plans.map((p) => `- [Help After Launch](${site.url}/websites/help-after-launch/#care), ${p.name} (${p.price}): ${p.text} Optional, 3-month minimum, then 30 days' notice; start or switch any time.`),
-    `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly block of web producer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. 3-month minimum, then 30 days' notice; same-day help with urgent problems. Marketing, ads, and content writing are not included.`,
-    '- Help After Launch pay-as-you-go updates are for websites Auva Studio built. Monthly plans can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
+    ...hourPacks.map((p) => `- [Help After Launch](${site.url}/websites/help-after-launch/#care), ${p.name} (${p.price}): ${p.text} Tracked in 15-minute steps.`),
+    `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly website retainer: a block of web developer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. Includes a monthly planning call, a monthly site check and Google health check (errors, indexing, and speed in Search Console), 1-business-day turnaround, and same-day help with urgent problems. Month to month, cancel any time; unused hours carry over one month.`,
+    '- Help After Launch updates and hour packs are for websites Auva Studio built. The monthly retainer can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
     '## Tech, Automation & AI',
     ...consulting.map((c) => `- ${c.title}: ${c.text} ${c.price}`),

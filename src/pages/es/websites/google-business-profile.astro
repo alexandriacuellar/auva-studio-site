@@ -18,7 +18,6 @@ const guide = [
   { icon: 'shield', title: 'Cómo protegerse', text: 'Cómo detectar llamadas fraudulentas y ediciones equivocadas, y quién tiene acceso a su perfil.' },
 ];
 
-const notIncluded = ['Gestión mensual del perfil', 'Responder reseñas por usted', 'Campañas de Google Ads', 'Publicaciones periódicas en su perfil', 'Campañas en directorios y listados', 'Promesas de posiciones o de clientes'];
 
 const faqs = [
   { q: '¿Cuál necesito, configuración u optimización?', a: 'Si todavía no tiene perfil, o no puede entrar al que existe, necesita la configuración. Si tiene un perfil que puede editar, la optimización lo hace rendir más. ¿Aún tiene dudas? Haga la revisión gratis de su perfil de Google, o pregúnteme.' },
@@ -33,7 +32,7 @@ const schema = serviceSchema([
   { name: 'Optimización del Perfil de Negocio de Google', description: 'Revisar un Perfil de Negocio de Google existente y mejorar sus categorías, descripción, servicios, atributos, fotos y enlaces al sitio web.', price: '$500' },
 ], '/es/websites/google-business-profile/');
 ---
-<Base title="Configuración y optimización del Perfil de Negocio de Google" seoTitle="Configuración del Perfil de Negocio de Google, $500 | Auva Studio" schema={schema} description="Configuración u optimización de su Perfil de Negocio de Google (Google Business Profile) para pequeños negocios del Hudson Valley y más allá. Pago único de $500, con una guía para mantenerlo al día por su cuenta.">
+<Base title="Configuración y optimización del Perfil de Negocio de Google" seoTitle="Configuración del Perfil de Negocio de Google, $500 | Auva Studio" schema={schema} description="Configuración u optimización de su Perfil de Negocio de Google para pequeños negocios del Hudson Valley. Pago único de $500, con una guía para mantenerlo al día.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Aparezca <em>en Google Maps.</em></h1>
@@ -71,7 +70,7 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Una guía para mantenerlo al día.</h2>
-        <p class="lede">No administro su perfil mes a mes, así que recibe una guía breve para cuidarlo usted.</p>
+        <p class="lede">Recibe una guía breve para mantener su perfil al día usted.</p>
       </div>
       <div class="grid grid-4 plain-grid">
         {guide.map((g) => (
@@ -87,14 +86,7 @@ const schema = serviceSchema([
 
   <section>
     <div class="wrap">
-      <div class="grid grid-2">
-        <div>
-          <h2 class="mag-head">Lo que no incluye.</h2>
-          <p class="lede">Son servicios de configuración y mejora, no de marketing continuo. Con gusto le oriento sobre cualquiera de estos.</p>
-        </div>
-        <ul class="ticks not-included">{notIncluded.map((n) => <li><span class="dash" aria-hidden="true">–</span>{n}</li>)}</ul>
-      </div>
-      <div class="band" style="margin-top: 48px">
+      <div class="band">
         <div>
           <h2>Ahorre $150 en un sitio web.</h2>
           <p>Si empieza un sitio web conmigo al mismo tiempo o en los siguientes 6 meses, se abonan $150 del servicio de su perfil.</p>

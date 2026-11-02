@@ -14,11 +14,11 @@ import headshot from '../assets/alexandria-cuellar.jpg';
 const places = [
   { src: bearMountain, place: 'Bear Mountain Bridge', alt: 'Bear Mountain Bridge over the Hudson River in autumn' },
   { src: nyack, place: 'Nyack', alt: 'Brick storefronts and a sidewalk café on Broadway in Nyack' },
-  { src: mohonk, place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House above Lake Mohonk in fall color' },
+  { src: mohonk, pos: 'right center', place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House above Lake Mohonk in fall color' },
   { src: centralPark, place: 'Central Park, New York City', alt: 'Central Park Mall lined with autumn trees and lamps' }
 ];
 ---
-<Base title="About" seoTitle="About Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, founder of Auva Studio: 20+ years helping organizations solve problems with technology, based in the Mid-Hudson Valley.">
+<Base title="About" seoTitle="About Alexandria Cuellar, Web Developer and XR Producer | Auva Studio" description="Meet Alexandria Cuellar, founder of Auva Studio. Work with her directly on websites, tools, AI, and XR, in English or Spanish, from the Mid-Hudson Valley.">
   <section class="hero about-hero">
     <div class="wrap">
       <Image class="about-photo" src={headshot} alt="Alexandria Cuellar" width={300} height={300} densities={[1, 2]} loading="eager" />
@@ -38,7 +38,7 @@ const places = [
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head" set:html={`20+ years of making <em>technology work for people.</em>`} />
-        <p>I started my career as one of many developers behind the Times Herald-Record website and the local newspaper sites now owned by USA TODAY Co., and spent nearly two decades building websites and web apps for newspapers. Since 2023 I've worked as a technical project manager, managing 14+ VR experiences and mobile games for indie game studios. I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Because my background is in both software development and project management, I understand how the technology works and build plans teams can actually keep up with. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
+        <p>I spent nearly two decades as a developer behind newspaper websites and web apps, from the Times Herald-Record to more than 150 daily newspapers now owned by USA TODAY Co. Since 2023 I've worked as a technical project manager, managing 14+ VR experiences and mobile games for indie game studios. I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Because my background is in both software development and project management, I understand how the technology works and build plans teams can actually keep up with. Now I bring that experience to businesses that need a website, want more from the tools they have, or are curious about AI and emerging technology.</p>
         <p class="small muted" style="margin-top: 20px"><b>Tools I work with.</b> Projects: Jira, Trello, Notion, ClickUp, and Zapier. XR and games: Unity, Meta Quest, Meta glasses, Meta Horizon, and AR in the browser. AI: ChatGPT, Claude, Gemini, and Meta AI.</p>
       </div>
       <div class="stats">
@@ -95,7 +95,7 @@ const places = [
         {places.map((pl) => (
           <li>
             <figure>
-              <Image src={pl.src} alt={pl.alt} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <Image src={pl.src} alt={pl.alt} style={pl.pos ? `object-position: ${pl.pos}` : undefined} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
               <figcaption>{pl.place}</figcaption>
             </figure>
           </li>
