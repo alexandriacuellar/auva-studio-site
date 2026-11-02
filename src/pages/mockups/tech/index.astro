@@ -1,0 +1,136 @@
+---
+// MOCKUP (2026-11-02): main Tech, Automation & AI page with 3 cards that open sub pages.
+// Hidden: noindex via public/_headers (/mockups/*), not in the sitemap, not linked.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import HelloBand from '../../../components/HelloBand.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, testimonials } from '../../../data/site';
+import { services, safety, inPerson, vendors } from './_data';
+
+const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
+
+const audiences = [
+  { icon: 'globe', title: 'Shops, restaurants, and local services', text: 'Inquiries slip through, reviews never get asked for, and invoices need chasing.', to: 'automation' },
+  { icon: 'book', title: 'Nonprofits', text: 'A small team doing the same tasks twice, on a tight budget.', to: 'automation' },
+  { icon: 'key', title: 'Startups', text: 'A first product, new systems, and a project that needs someone keeping it on track.', to: 'pm' },
+  { icon: 'chart', title: 'Offices and growing teams', text: 'More people and more projects, with work spread across email, chats, and spreadsheets.', to: 'pm' },
+  { icon: 'bulb', title: 'Teams curious about AI', text: "You know AI could help, but not where to start or what's safe to share with it.", to: 'ai' },
+];
+const byId = Object.fromEntries(services.map((s) => [s.id, s]));
+
+const faqs = [
+  { q: "What's in the Tech Review?", a: 'A 60-minute call, then a written report within 5 business days with your top fixes in order and rough costs. The $250 is credited toward any package with me that starts within 90 days.' },
+  inPerson,
+  vendors,
+];
+---
+<Base title="Tech, Automation & AI (mockup)" description="Mockup of the Tech, Automation & AI main page.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
+      <p class="lede">The right software for how you work, automation for the repetitive work, and AI your team can use with confidence.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#services">See how I help</a>
+      </div>
+    </div>
+  </section>
+
+  <HelloBand facts={["<b>20+</b> years in web development", "<b>14+</b> projects managed", "<b>AI</b> in my daily work"]} />
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Who I <em>work with.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+            <a class="more" href={byId[a.to].href} style="margin-top: 12px">{byId[a.to].link} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me what's slowing your team down, and I'll suggest where to start.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Fixed prices, written up front. Pick one, or start with a Tech Review and I'll tell you which is worth it.</p>
+      </div>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <a class="card offer" href={s.href}>
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="svc-meta"><b>{s.price}</b></p>
+            <p class="muted">{s.text}</p>
+            <span class="more" style="margin-top: auto; padding-top: 12px">{s.link} <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+
+      <div class="card card-row bigger" style="margin-top: 32px" id="planning">
+        <div class="icon"><Icon name="search" size={36} /></div>
+        <div>
+          <h3>Not sure where to start? Tech Review, $250</h3>
+          <p class="muted">A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order. Credited toward any package within 90 days.</p>
+          <a class="more" href="?topic=planning#start" style="margin-top: 12px">Book a Tech Review <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 32px">Just need advice? Consulting sessions are $65 an hour. Need a website too? See <a href="/websites/#packages">website packages from $1,500</a>.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="safe">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Built to be safe, <em>and yours.</em></h2>
+        <p class="lede">The same rules for everything I set up.</p>
+      </div>
+      <div class="grid grid-2">
+        {safety.map((s) => (
+          <div class="card">
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it <em>works.</em></h2>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me what eats your week. I'll point you to the right help, or a Tech Review if it isn't clear yet.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>What I'll do, in which tools, and the price, before any work starts.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>The work</h3><p>Built in your accounts. You approve the wording and we test it together.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Handover</h3><p>A short how-to guide, a walkthrough with your team, and 30 days of fixes.</p></li>
+      </ol>
+      <figure class="card quote" style="max-width: 720px; margin: 48px auto 0">
+        <blockquote>“{quote.quote}”</blockquote>
+        <figcaption><b>{quote.name}</b><span class="muted">{quote.role}</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
+</Base>

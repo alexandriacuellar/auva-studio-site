@@ -1,13 +1,13 @@
 ---
 // MOCKUP (2026-11-02): proposed rebuild of /technology-consulting/ as fixed-scope packages.
 // Hidden: noindex via public/_headers (/mockups/*), not in the sitemap, not linked. Prices are suggestions for alexandria to decide.
-import Base from '../../layouts/Base.astro';
-import '../../styles/pages/production-emerging-tech.css';
-import Icon from '../../components/Icon.astro';
-import HelloBand from '../../components/HelloBand.astro';
-import InquiryForm from '../../components/InquiryForm.astro';
-import Faq from '../../components/Faq.astro';
-import { site, testimonials } from '../../data/site';
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import HelloBand from '../../../components/HelloBand.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, testimonials } from '../../../data/site';
 
 const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
 

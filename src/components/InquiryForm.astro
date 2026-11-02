@@ -252,13 +252,13 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
               ) : isAi ? (
                 <label>{t.interested}
                   <select name="topic">
-                    {t.aiTopics.map(([value, label]) => <option value={value}>{label}</option>)}
+                    {t.aiTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                   </select>
                 </label>
               ) : (
                 <label>{t.area}
                   <select name="topic">
-                    {t.consultingTopics.map(([value, label]) => <option value={value}>{label}</option>)}
+                    {t.consultingTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                   </select>
                 </label>
               )}

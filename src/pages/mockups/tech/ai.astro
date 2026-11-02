@@ -1,0 +1,84 @@
+---
+// MOCKUP (2026-11-02): AI sub page of Tech, Automation & AI.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site } from '../../../data/site';
+import { base } from './_data';
+
+const aiPackages = [
+  { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'], link: 'Ask about this', topic: 'ai-session' },
+  { icon: 'chat', title: 'Team AI Workshop', price: 'Coming soon', text: 'The same hands-on approach for up to 10 people, with safe account setup, saved prompts, and one-page AI rules for your team.', items: ['Practice on real tasks together', 'What is safe to share, and what is not', 'A one-page guide to keep'], link: 'Ask to be first in line', topic: 'workshop' },
+];
+
+const aiTasks = [
+  { icon: 'mail', title: 'Answer customer emails faster', text: 'Draft replies to common questions, then check and send.' },
+  { icon: 'book', title: 'Write job posts and descriptions', text: 'Turn a few notes into a clear first draft.' },
+  { icon: 'clock', title: 'Turn meetings into to-dos', text: 'Summaries and next steps, without retyping your notes.' },
+  { icon: 'chat', title: 'Draft social posts and newsletters', text: 'A week of ideas and drafts in your own voice.' },
+  { icon: 'search', title: 'Find answers in your own documents', text: 'Ask your handbook, policies, or price list a question.' },
+  { icon: 'layers', title: 'First drafts of quotes and proposals', text: 'Start from a draft instead of a blank page.' },
+];
+
+const faqs = [
+  { q: 'Do I need technical skills?', a: 'No. Sessions are made for non-technical people, using tools like ChatGPT, Claude, and Gemini on your real work.' },
+  { q: 'Is it safe to use AI with our business data?', a: 'It can be, with business accounts and the right settings. Every AI session covers what is safe to share.' },
+  { q: 'Can you put an AI chatbot on my website?', a: 'Yes. That is a website add-on, quoted for your site. See website add-ons.' },
+];
+---
+<Base title="AI for You and Your Team (mockup)" description="Mockup of the AI sub page.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <p class="small"><a href={`${base}/`}>Tech, Automation & AI</a></p>
+      <h1 class="mag-head">Put AI to work <em>in the work you already do.</em></h1>
+      <p class="lede">I use AI tools in my own work every day. I'll show you where they help, which ones to trust, and how to use them safely.</p>
+      <div class="hero-actions">
+        <a class="btn" href="?topic=ai-session#start">Book a 1-on-1 AI Session, $150 <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Hands-on, <em>on your real work.</em></h2>
+        <p class="lede">No technical skills needed. Using ChatGPT, Claude, Gemini, or Meta AI.</p>
+      </div>
+      <div class="grid grid-2">
+        {aiPackages.map((p) => (
+          <div class="card offer">
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.topic}#start`} style="margin-top: 12px">{p.link} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="uses">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What small teams <em>use AI for.</em></h2>
+      </div>
+      <div class="grid grid-3 ai-tasks">
+        {aiTasks.map((t) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={t.icon} size={28} /></div>
+            <div><h3>{t.title}</h3><p class="muted small">{t.text}</p></div>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top: 20px"><b>Tools I use.</b> ChatGPT, Claude, Gemini, Meta AI, and Zapier. Want a chatbot on your website? See <a href="/websites/#addons">website add-ons</a>.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" topic="ai-session" />
+</Base>
