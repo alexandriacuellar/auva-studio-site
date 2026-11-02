@@ -17,7 +17,11 @@ const basics = ['Send requests by email, any time', 'I tell you first if somethi
 const paths = [
   { tag: 'A few changes a year', name: 'Updates', price: '$59', unit: 'per update', extra: 'Or buy 5 ahead for $249 and save $46.', blurb: 'Pay only when you need a change.', specs: [['Time', 'About 30 min each'], ['Done within', '2 business days'], ['Planning', null], ['Site check and report', null], ['Google health check', null], ['Urgent help', null]], covers: ['Text, photos, prices, hours, and menus', 'A new team member, event, or news post', 'A broken link, or something that looks off on phones'], cta: 'Send an update', href: '#start' },
   { tag: 'Changes most months', name: 'Hour packs', price: '$575', unit: 'for 5 hours', extra: 'Or 10 hours for $1,100.', blurb: 'Pay ahead and use the hours as you need them.', specs: [['Time', '5 or 10 hours'], ['Done within', '2 business days'], ['Planning', null], ['Site check and report', null], ['Google health check', null], ['Urgent help', null]], covers: ['Everything in Updates', 'A new section, or a simple new page in one of your page designs', 'Adding a form, button, map, video, or booking link', 'Help with your CMS'], cta: 'Buy an hour pack', href: '#start' },
-  { tag: 'Your own web developer', name: monthly.name, price: 'From $125', unit: 'a month for 1 hour', extra: 'Or 5 hours for $625. Month to month. Cancel any time.', blurb: 'Your own web developer, without hiring one.', specs: [['Time', '1 or 5+ hours a month'], ['Done within', '1–2 business days'], ['Planning', 'Monthly call, 5+ hrs'], ['Site check and report', 'Monthly'], ['Google health check', 'Monthly'], ['Urgent help', 'Same day, 5+ hrs']], covers: ['1 hour: updates and fixes, done within 2 business days', '5+ hours: everything in Hour packs, plus landing pages and small features, done within 1 business day', 'A short monthly report on what changed and what\'s next', 'Works alongside your marketer or SEO person'], cta: "Let's talk about what you need", href: site.booking, featured: true },
+  { tag: 'Your own web developer', name: monthly.name, extra: 'Month to month. Cancel any time.', blurb: 'Your own web developer, without hiring one.', toggleLabel: 'Hours each month', tierDefault: 1, specs: ['Time', 'Done within', 'Planning', 'Site check and report', 'Google health check', 'Urgent help'],
+    tiers: [
+      { label: '1 hour', price: '$125', unit: 'a month for 1 hour', specs: ['1 hour a month', '2 business days', null, 'Monthly', 'Monthly', null], covers: ['Everything in Updates', 'A short monthly note on your site check', 'Steady help, without buying a pack'] },
+      { label: '5 hours', price: '$625', unit: 'a month for 5 hours', specs: ['5+ hours a month', '1 business day', 'Monthly call', 'Monthly', 'Monthly', 'Same day'], covers: ['Everything in Hour packs', 'Landing pages for campaigns and events, and small features', 'A short monthly report on what changed and what\'s next', 'Works alongside your marketer or SEO person'] },
+    ], cta: "Let's talk about what you need", href: site.booking, featured: true },
 ];
 
 const faqs = [
@@ -77,15 +81,30 @@ const schema = serviceSchema([
       </div>
       <div class="grid grid-3 packages">
         {paths.map((p) => (
-          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]}>
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]} data-tier={p.tiers ? p.tierDefault : undefined}>
             <span class="tag">{p.tag}</span>
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
-            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
-            {p.extra && <p class="pk-extra muted">{p.extra}</p>}
-            <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd></div>)}</dl>
-            <p class="pk-covers-title">What it covers</p>
-            <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+            {p.tiers ? (
+              <>
+                <p class="price">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
+                <div class="pk-extra">
+                  <div class="pk-toggle" role="group" aria-label={p.toggleLabel}>{p.tiers.map((t, i) => <button type="button" data-t-btn={i} aria-pressed={i === p.tierDefault ? 'true' : 'false'}>{t.label}</button>)}</div>
+                  <p class="muted">{p.extra}</p>
+                </div>
+                <dl class="pk-specs">{p.specs.map((k, r) => <div><dt>{k}</dt>{p.tiers.map((t, i) => { const v = t.specs[r]; return <dd data-t={i} class:list={['pk-tier', { none: !v }]}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd>; })}</div>)}</dl>
+                <p class="pk-covers-title">What it covers</p>
+                <div>{p.tiers.map((t, i) => <ul data-t={i} class="ticks small pk-covers pk-tier">{t.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>)}</div>
+              </>
+            ) : (
+              <>
+                <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+                {p.extra && <p class="pk-extra muted">{p.extra}</p>}
+                <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd></div>)}</dl>
+                <p class="pk-covers-title">What it covers</p>
+                <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+              </>
+            )}
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
@@ -106,4 +125,15 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} />
   <InquiryForm kind="website" topic="care" alt />
+
+  <script>
+    document.querySelectorAll<HTMLElement>('.package[data-tier]').forEach((card) => {
+      card.querySelectorAll<HTMLButtonElement>('[data-t-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          card.dataset.tier = btn.dataset.tBtn;
+          card.querySelectorAll('[data-t-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+    });
+  </script>
 </Base>

@@ -17,7 +17,11 @@ const basics = ['Envíe sus solicitudes por correo, cuando quiera', 'Le aviso an
 const paths = [
   { tag: 'Algunos cambios al año', name: 'Cambios', price: '$59', unit: 'por cambio', extra: 'O compre 5 por adelantado por $249 y ahorre $46.', blurb: 'Pague solo cuando necesite un cambio.', specs: [['Tiempo', 'Unos 30 min cada uno'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Textos, fotos, precios, horarios y menús', 'Un nuevo miembro del equipo, evento o noticia', 'Un enlace roto, o algo que se ve mal en el teléfono'], cta: 'Enviar un cambio', href: '#start' },
   { tag: 'Cambios casi todos los meses', name: 'Paquetes de horas', price: '$575', unit: 'por 5 horas', extra: 'O 10 horas por $1,100.', blurb: 'Pague por adelantado y use las horas cuando las necesite.', specs: [['Tiempo', '5 o 10 horas'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Todo lo de Cambios', 'Una sección nueva, o una página nueva sencilla con uno de sus diseños de página', 'Agregar un formulario, botón, mapa, video o enlace de reservas', 'Ayuda con su CMS'], cta: 'Comprar un paquete de horas', href: '#start' },
-  { tag: 'Su propia desarrolladora web', name: monthly.name, price: 'Desde $125', unit: 'al mes por 1 hora', extra: 'O 5 horas por $625. Mes a mes. Cancele cuando quiera.', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', specs: [['Tiempo', '1 o 5+ horas al mes'], ['Listo en', '1–2 días hábiles'], ['Planificación', 'Llamada mensual, 5+ h'], ['Revisión e informe', 'Mensual'], ['Salud en Google', 'Mensual'], ['Ayuda urgente', 'El mismo día, 5+ h']], covers: ['1 hora: cambios y arreglos, listos en 2 días hábiles', '5+ horas: todo lo de Paquetes de horas, más páginas para campañas y funciones pequeñas, listo en 1 día hábil', 'Un informe mensual breve: qué cambió y qué sigue', 'Trabajo junto a su persona de marketing o SEO'], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
+  { tag: 'Su propia desarrolladora web', name: monthly.name, extra: 'Mes a mes. Cancele cuando quiera.', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', toggleLabel: 'Horas al mes', tierDefault: 1, specs: ['Tiempo', 'Listo en', 'Planificación', 'Revisión e informe', 'Salud en Google', 'Ayuda urgente'],
+    tiers: [
+      { label: '1 hora', price: '$125', unit: 'al mes por 1 hora', specs: ['1 hora al mes', '2 días hábiles', null, 'Mensual', 'Mensual', null], covers: ['Todo lo de Cambios', 'Una nota mensual breve sobre la revisión de su sitio', 'Ayuda constante, sin comprar un paquete'] },
+      { label: '5 horas', price: '$625', unit: 'al mes por 5 horas', specs: ['5+ horas al mes', '1 día hábil', 'Llamada mensual', 'Mensual', 'Mensual', 'El mismo día'], covers: ['Todo lo de Paquetes de horas', 'Páginas para campañas y eventos, y funciones pequeñas', 'Un informe mensual breve: qué cambió y qué sigue', 'Trabajo junto a su persona de marketing o SEO'] },
+    ], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
 ];
 
 const faqs = [
@@ -77,15 +81,30 @@ const schema = serviceSchema([
       </div>
       <div class="grid grid-3 packages">
         {paths.map((p) => (
-          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]}>
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]} data-tier={p.tiers ? p.tierDefault : undefined}>
             <span class="tag">{p.tag}</span>
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
-            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
-            {p.extra && <p class="pk-extra muted">{p.extra}</p>}
-            <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd></div>)}</dl>
-            <p class="pk-covers-title">Qué incluye</p>
-            <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+            {p.tiers ? (
+              <>
+                <p class="price">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
+                <div class="pk-extra">
+                  <div class="pk-toggle" role="group" aria-label={p.toggleLabel}>{p.tiers.map((t, i) => <button type="button" data-t-btn={i} aria-pressed={i === p.tierDefault ? 'true' : 'false'}>{t.label}</button>)}</div>
+                  <p class="muted">{p.extra}</p>
+                </div>
+                <dl class="pk-specs">{p.specs.map((k, r) => <div><dt>{k}</dt>{p.tiers.map((t, i) => { const v = t.specs[r]; return <dd data-t={i} class:list={['pk-tier', { none: !v }]}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd>; })}</div>)}</dl>
+                <p class="pk-covers-title">Qué incluye</p>
+                <div>{p.tiers.map((t, i) => <ul data-t={i} class="ticks small pk-covers pk-tier">{t.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>)}</div>
+              </>
+            ) : (
+              <>
+                <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+                {p.extra && <p class="pk-extra muted">{p.extra}</p>}
+                <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd></div>)}</dl>
+                <p class="pk-covers-title">Qué incluye</p>
+                <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+              </>
+            )}
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
@@ -106,4 +125,15 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} />
   <InquiryForm kind="website" topic="care" alt />
+
+  <script>
+    document.querySelectorAll<HTMLElement>('.package[data-tier]').forEach((card) => {
+      card.querySelectorAll<HTMLButtonElement>('[data-t-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          card.dataset.tier = btn.dataset.tBtn;
+          card.querySelectorAll('[data-t-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+    });
+  </script>
 </Base>
