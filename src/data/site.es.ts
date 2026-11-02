@@ -164,7 +164,7 @@ export const hourPacks = [
 
 export const monthly = {
   name: 'Retainer mensual para su sitio web',
-  price: 'Desde $125 al mes por 1 hora, o $625 por 5 horas',
+  price: 'Desde $125 al mes por 1 hora, o $575 por 5 horas',
   text: 'Su propia desarrolladora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
   outcomes: ['Una llamada mensual para planear', 'Páginas nuevas para sus campañas, eventos y productos', 'Una revisión mensual del sitio y de su salud en Google', 'Un informe breve: qué cambió, qué logró y qué sigue'],
 };
