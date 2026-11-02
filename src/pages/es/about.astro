@@ -14,7 +14,7 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
 const places = [
   { src: bearMountain, place: 'Puente Bear Mountain', alt: 'El puente Bear Mountain sobre el río Hudson en otoño' },
   { src: nyack, place: 'Nyack', alt: 'Fachadas de ladrillo y un café en la acera de Broadway, en Nyack' },
-  { src: mohonk, place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
+  { src: mohonk, pos: 'right center', place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
   { src: centralPark, place: 'Central Park, Nueva York', alt: 'El paseo del Central Park con árboles de otoño y faroles' }
 ];
 ---
@@ -95,7 +95,7 @@ const places = [
         {places.map((pl) => (
           <li>
             <figure>
-              <Image src={pl.src} alt={pl.alt} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <Image src={pl.src} alt={pl.alt} style={pl.pos ? `object-position: ${pl.pos}` : undefined} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
               <figcaption>{pl.place}</figcaption>
             </figure>
           </li>
