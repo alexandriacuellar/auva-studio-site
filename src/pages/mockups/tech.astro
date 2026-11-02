@@ -21,8 +21,8 @@ const audiences = [
 
 
 const aiPackages = [
-  { icon: 'chat', title: 'Team AI Workshop', price: '$750', text: 'A 90-minute hands-on session for up to 10 people. I set your team up on ChatGPT, Claude, or Gemini the safe way, then everyone practices on a real task.', items: ['Business accounts and privacy settings', 'Saved prompts for the tasks you repeat', 'One-page AI rules for your team'] },
-  { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'] },
+  { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'], link: 'Ask about this' },
+  { icon: 'chat', title: 'Team AI Workshop', price: 'Coming soon', text: 'The same hands-on approach for up to 10 people, with safe account setup, saved prompts, and one-page AI rules for your team.', items: ['Practice on real tasks together', 'What is safe to share, and what is not', 'A one-page guide to keep'], link: 'Ask to be first in line' },
 ];
 
 const projectPackages = [
@@ -115,8 +115,8 @@ const faqs = [
       </div>
 
       <div class="offer-group" style="margin-top: 48px" id="ai">
-        <h3 class="offer-group-title">AI for your team</h3>
-        <p class="muted">For non-technical teams, using ChatGPT, Claude, Gemini, or Meta AI.</p>
+        <h3 class="offer-group-title">AI for you and your team</h3>
+        <p class="muted">No technical skills needed. Using ChatGPT, Claude, Gemini, or Meta AI.</p>
         <div class="grid grid-2">
           {aiPackages.map((p) => (
             <div class="card offer">
@@ -125,7 +125,7 @@ const faqs = [
               <p class="svc-meta"><b>{p.price}</b></p>
               <p class="muted">{p.text}</p>
               <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-              <a class="more" href="?topic=workshop#start" style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+              <a class="more" href="?topic=workshop#start" style="margin-top: 12px">{p.link} <Icon name="arrow" size={16} /></a>
             </div>
           ))}
         </div>
