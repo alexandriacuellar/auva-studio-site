@@ -6,7 +6,8 @@ import headshot from '../assets/alexandria-cuellar.jpg';
 import Icon from './Icon.astro';
 import { langFromPath, localize } from '../i18n';
 
-interface Props { facts: [string, string][] }
+// Each fact is a short line of HTML with its number in <b>, like '<b>20+</b> years in web development'.
+interface Props { facts: string[] }
 const { facts } = Astro.props;
 const lang = langFromPath(Astro.url.pathname);
 const t = {
@@ -15,5 +16,5 @@ const t = {
 }[lang];
 ---
 <section class="hello-band" aria-label="Alexandria Cuellar">
-  <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>{t.hi}</b> {t.line}<span class="hello-foot"><ul class="hello-facts">{facts.map(([n, label]) => <li><b>{n}</b> {label}</li>)}</ul><a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a></span></span></div>
+  <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>{t.hi}</b> {t.line}<span class="hello-foot"><ul class="hello-facts">{facts.map((f) => <li set:html={f} />)}</ul><a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a></span></span></div>
 </section>
