@@ -67,7 +67,7 @@ const audiences = [
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>¿Algo diferente?</h3>
           <p>Cuénteme en qué está trabajando y le sugeriré por dónde empezar.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos</a>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@ const audiences = [
             <h3>{o.title}</h3>
             <p class="svc-meta"><b>{o.price}</b></p>
             <p class="muted">{o.text}</p>
-            <a class="more" href={`/es/production-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto</a>
+            <a class="more" href={`/es/production-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Pregunte por esto <Icon name="arrow" size={16} /></a>
           </div>
         ))}
       </div>

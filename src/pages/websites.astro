@@ -72,14 +72,14 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Ask about my nonprofit discount.</p>}
-            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site</a>
+            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
           </div>
         ))}
         <div class="card who-other who-wide">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>Something else?</h3>
           <p>Tell me about your business or project, and I'll recommend the package that fits.</p>
-          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site</a>
+          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@ const audiences = [
               <h3>{sm.name}</h3>
               <p class="muted">{sm.text}</p>
               <p class="sample-for">{sm.goodFor}</p>
-              <span class="sample-go">Visit the sample site <span aria-hidden="true">→</span></span>
+              <span class="sample-go">Visit the sample site <Icon name="arrow" size={16} /></span>
             </a>
           );
         })}
@@ -185,7 +185,7 @@ const audiences = [
         <div>
           <h3>Would you rather I make the changes?</h3>
           <p class="muted">Send me updates when you need them for <b style="color: var(--primary)">$59 each</b>, with no monthly fee. If your site changes often, use an hour pack or a monthly retainer.</p>
-          <a class="more" href="/websites/help-after-launch/" style="margin-top: 8px">See how updates work</a>
+          <a class="more" href="/websites/help-after-launch/" style="margin-top: 8px">See how updates work <Icon name="arrow" size={16} /></a>
         </div>
       </div>
 

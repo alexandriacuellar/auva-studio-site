@@ -61,14 +61,14 @@ const schema = serviceSchema(services.map((s) => ({ name: s.title, description: 
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
             <p>{a.text}</p>
-            <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+            <a class="more" href="#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
           </div>
         ))}
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>¿Algo diferente?</h3>
           <p>Cuénteme sobre su equipo y sus clientes, y le sugeriré cómo podríamos trabajar juntos.</p>
-          <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+          <a class="more" href="#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>

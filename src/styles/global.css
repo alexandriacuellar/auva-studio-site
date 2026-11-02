@@ -734,3 +734,36 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .package .pk-toggle button[aria-pressed="true"] { background: var(--primary); color: #fff; }
 .package .pk-toggle button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .package .pk-extra p { margin: 0; font-size: 0.92rem; }
+
+/* Design polish (2026-11-02) */
+/* Navy boxes use the same light headline as every other section. */
+.band h2 { font-weight: 300; letter-spacing: -0.035em; line-height: 1.06; text-wrap: balance; }
+/* Recommended badge: deeper green so white text passes 4.5:1. */
+.package .rec { background: #13804b; }
+/* Card links sit at the bottom of each card, so links in a row line up. */
+.grid > .card:has(> .more:last-child) { display: flex; flex-direction: column; }
+.grid > .card-row > div:last-child:has(> .more:last-child) { display: flex; flex-direction: column; align-self: stretch; }
+.grid > .card > .more:last-child, .grid > .card-row > div > .more:last-child { margin-top: auto !important; padding-top: 12px; align-self: flex-start; }
+#addons .grid > .card { display: flex; flex-direction: column; }
+#addons .grid > .card > p:last-child { margin-top: auto; }
+/* One arrow style: the icon arrow, kept out of the underline. */
+.sample-go { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; }
+.sample:hover .sample-go { text-decoration: none; }
+.sample:hover .sample-go, .pv-open:hover { text-decoration: none; }
+.pv-open:hover > span { text-decoration: underline; }
+.package .sample-link { gap: 6px; }
+@media (max-width: 640px) {
+  /* Phones: stacked hero buttons share one width. */
+  .hero-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin-inline: auto; }
+  .hero-actions .btn { justify-content: center; }
+  /* Phones: less empty scrolling around heroes and inside navy boxes. */
+  section { padding: 56px 0; }
+  .bd-inner-hero { padding: 48px 0 48px; }
+  .band { gap: 24px; }
+  /* Phones: side-by-side "who it's for" cards get wider lines. */
+  .who .card { padding: 16px 14px; }
+  .who .card h3 { font-size: 1.05rem; }
+  .who .card p { font-size: 0.95rem; }
+}
+/* Home: the "What are you working on?" intro stays in view beside the list on wide screens. */
+@media (min-width: 961px) { .home-routes .about-grid { align-items: start; } .home-routes .about-grid > div:first-child { position: sticky; top: 120px; } }
