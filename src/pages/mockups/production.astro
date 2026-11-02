@@ -10,10 +10,10 @@ import Faq from '../../components/Faq.astro';
 import { site, testimonials } from '../../data/site';
 
 const audiences = [
-  { icon: 'layers', title: 'Shops and makers', text: 'Furniture, decor, jewelry, and gifts. Let customers see your product at home before they buy.' },
-  { icon: 'book', title: 'Cafés, restaurants, and food makers', text: 'Menus, labels, and boxes that come alive when someone scans them.' },
+  { icon: 'layers', title: 'Shops, makers, and restaurants', text: 'Let customers see a product at home before they buy, or scan a menu or label that comes alive.' },
   { icon: 'compass', title: 'Architects, builders, and developers', text: "Show clients a home or building that isn't built yet, on the table or full size on the lot." },
-  { icon: 'globe', title: 'Museums, venues, and tourism', text: 'Signs and exhibits that show a scene, a voice, or a 3D object through a phone.' },
+  { icon: 'book', title: 'Museums, educators, and cultural organizations', text: 'Exhibits, lessons, and historic sites that show a scene, a voice, or a 3D object through a phone or headset.' },
+  { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, events, and campaigns people remember, from a scan-to-play poster to a Meta Horizon world.' },
   { icon: 'star', title: 'Game and XR studios', text: 'An experienced producer and a schedule people trust, without a full-time hire.' },
 ];
 
@@ -122,6 +122,20 @@ const faqs = [
             {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="next" style="padding-bottom: 0">
+    <div class="wrap">
+      <div class="card card-row bigger next-card">
+        <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div>
+          <span class="idea-tag">Coming in 2027</span>
+          <h3>Next up: VR and Meta's AI glasses</h3>
+          <p class="muted">I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Next I'm building for Meta Quest headsets and Meta's AI glasses: hands-free guides and tours, step-by-step help for staff, and VR training. Have an idea? Tell me now and you'll be first in line.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Share your idea <Icon name="arrow" size={16} /></a>
+        </div>
       </div>
     </div>
   </section>
