@@ -12,12 +12,13 @@ const atLaunch = [
   { icon: 'key', title: 'Everything in your name', text: 'Your domain, hosting, and accounts, so you never depend on me to get in.' },
 ];
 
-// Four ways to get help after launch, shown like the website package cards.
+// Four ways to get help after launch, laid out like the website package cards: same rows on every card.
+const basics = ['Changes made in your existing page designs', 'A quote first for anything bigger', 'New pages and features at $125/hr', 'Send requests by email, any time'];
 const paths = [
-  { tag: 'Now and then', name: 'Pay as you go', price: '$59', unit: 'per update', blurb: 'Send me what to change and I take care of it.', items: ['Up to about 30 minutes of edits per update, sent together in one request', 'Done within 2 business days', 'Buy 5 updates ahead for $249 and save $46', 'New pages and features at $125/hr, quoted first.', 'No commitment. Pay only when you need something.'], cta: 'Send an update', href: '#start' },
-  { tag: 'A little each month', name: plans[0].name, price: '$99', unit: 'a month', blurb: 'For sites with a few small changes most months.', items: ['1 hour of updates a month, about 2 updates', 'A monthly check that your forms, links, and buttons work', 'Done within 2 business days', 'Unused time carries over one month', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates', href: '#start' },
-  { tag: 'More each month', name: plans[1].name, price: '$179', unit: 'a month', blurb: 'For busy sites with lots of changes each month.', items: ['2 hours a month for updates, CMS changes, or a simple new page in one of your existing page designs', 'The same monthly check', 'A search review every 3 months, with what to fix', 'Done within 1 business day', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates plus', href: '#start' },
-  { tag: 'Every month', name: 'Monthly website retainer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
+  { tag: 'Now and then', name: 'Pay as you go', price: '$59', unit: 'per update', blurb: 'For sites that change a few times a year.', specs: [['Time', 'About 30 min per update'], ['Done within', '2 business days'], ['Site check', null], ['Search review', null], ['Urgent help', null], ['Commitment', 'None']], cta: 'Send an update', href: '#start' },
+  { tag: 'A little each month', name: plans[0].name, price: '$99', unit: 'a month', blurb: 'For a few small changes most months.', specs: [['Time', '1 hour a month'], ['Done within', '2 business days'], ['Site check', 'Monthly'], ['Search review', null], ['Urgent help', null], ['Commitment', '3 months']], cta: 'Start monthly updates', href: '#start' },
+  { tag: 'More each month', name: plans[1].name, price: '$179', unit: 'a month', blurb: 'For busy sites with lots of changes.', specs: [['Time', '2 hours a month'], ['Done within', '1 business day'], ['Site check', 'Monthly'], ['Search review', 'Every 3 months'], ['Urgent help', null], ['Commitment', '3 months']], cta: 'Start monthly updates plus', href: '#start' },
+  { tag: 'Every month', name: 'Monthly website retainer', price: 'From $650', unit: 'a month for 5 hours', blurb: 'Your own web developer, without hiring one.', specs: [['Time', '5+ hours a month'], ['Done within', 'Planned together'], ['Site check', 'Monthly, with a report'], ['Search review', 'Ongoing'], ['Urgent help', 'Same day'], ['Commitment', '3 months']], cta: "Let's talk about what you need", href: site.booking, featured: true },
 ];
 
 const faqs = [
@@ -70,6 +71,10 @@ const schema = serviceSchema([
         <h2 class="mag-head">After launch, <em>four ways to get help.</em></h2>
         <p class="lede">No monthly fee unless you want one. Pick what fits how often your site changes, and start or switch plans any time.</p>
       </div>
+      <div class="pk-basics">
+        <p class="pk-basics-title">Every option includes</p>
+        <ul class="ticks">{basics.map((b) => <li><Icon name="tick" size={18} />{b}</li>)}</ul>
+      </div>
       <div class="grid grid-4 packages">
         {paths.map((p) => (
           <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
@@ -77,12 +82,12 @@ const schema = serviceSchema([
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
             <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
-            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd></div>)}</dl>
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
       </div>
-      <p class="fine"><b>Adding several pages or new features?</b> If your site is on Essential or Expanded, <a href="/websites/#packages">upgrading to the next package</a> and paying only the difference often costs less. Monthly hours are one flexible allowance across anything on the list, and unused hours carry over one month. Third-party fees, like platforms or apps, are separate. I keep your site fast, secure, and easy for Google to read, and I'll show you what's working.</p>
+      <p class="fine"><b>Good to know.</b> Buy 5 updates ahead for $249 and save $46. After the 3-month minimum, switch or stop with 30 days' notice. <b>Adding several pages or new features?</b> If your site is on Essential or Expanded, <a href="/websites/#packages">upgrading to the next package</a> and paying only the difference often costs less. Monthly hours are one flexible allowance across anything on the list, and unused hours carry over one month. Third-party fees, like platforms or apps, are separate. I keep your site fast, secure, and easy for Google to read, and I'll show you what's working.</p>
     </div>
   </section>
 
