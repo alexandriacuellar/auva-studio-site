@@ -29,7 +29,6 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
-      <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
@@ -81,5 +80,5 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
-  <Cta />
+  <Cta promises={strip} />
 </Base>
