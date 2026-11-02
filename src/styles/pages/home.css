@@ -89,10 +89,7 @@
   .home-about-photo { width: 180px; height: 180px; }
 }
 
-/* Home section backgrounds: clearly different shades so each section reads as its own band
-   (white hero, warm cream for "What are you working on?", soft blue behind the white service cards, white About, navy closing band). */
-body:has(.bd-hero) { background: var(--white); }
-.home-routes { background: #faf6ef; }
-#services { background: #eaf1ff; }
+/* Home section bands: white hero, cream "What are you working on?", blue behind the service cards, white About, navy closing band. */
+.home-routes { background: var(--band-cream); }
+#services { background: var(--band-blue); }
 #services .svc-card { border-color: #d6e2fb; }
-#about.home-about-band { background: var(--white); }
