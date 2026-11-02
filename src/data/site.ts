@@ -72,7 +72,7 @@ export const categories = [
   {
     icon: 'bolt',
     title: 'Production & Emerging Tech',
-    text: 'A producer for game, XR, and interactive projects, plus small AR projects for businesses.',
+    text: 'A producer for game, XR, and interactive projects, plus AR and VR projects for businesses.',
     offers: [['Production support for game and XR teams', '$65/hr'], ['Production Plan Review', '$650'], ['AR Starter Project', 'From $1,500']],
     note: 'AR and VR for phones, Meta Quest, and Meta glasses.',
     href: '/production-emerging-tech/',

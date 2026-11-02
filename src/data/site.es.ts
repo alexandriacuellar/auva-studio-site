@@ -51,7 +51,7 @@ export const categories = [
   {
     icon: 'bolt',
     title: 'Producción y Tecnología Emergente',
-    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos pequeños de AR para negocios.',
+    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos de AR y VR para negocios.',
     offers: [['Apoyo de producción para equipos de videojuegos y XR', '$65/hora'], ['Revisión del Plan de Producción', '$650'], ['Proyecto AR Inicial', 'Desde $1,500']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
     href: '/es/production-emerging-tech/',
