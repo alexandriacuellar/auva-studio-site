@@ -17,7 +17,7 @@ const paths = [
   { tag: 'Now and then', name: 'Pay as you go', price: '$59', unit: 'per update', blurb: 'Send me what to change and I take care of it.', items: ['Up to about 30 minutes of edits per update, sent together in one request', 'Done within 2 business days', 'Buy 5 updates ahead for $249 and save $46', 'New pages and features at $125/hr, quoted first.', 'No commitment. Pay only when you need something.'], cta: 'Send an update', href: '#start' },
   { tag: 'A little each month', name: plans[0].name, price: '$99', unit: 'a month', blurb: 'For sites with a few small changes most months.', items: ['1 hour of updates a month, about 2 updates', 'A monthly check that your forms, links, and buttons work', 'Done within 2 business days', 'Unused time carries over one month', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates', href: '#start' },
   { tag: 'More each month', name: plans[1].name, price: '$179', unit: 'a month', blurb: 'For busy sites with lots of changes each month.', items: ['2 hours a month for updates, CMS changes, or a simple new page in one of your existing page designs', 'The same monthly check', 'A search review every 3 months, with what to fix', 'Done within 1 business day', "3-month minimum, then 30 days' notice to stop"], cta: 'Start monthly updates plus', href: '#start' },
-  { tag: 'Every month', name: 'Monthly web producer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
+  { tag: 'Every month', name: 'Monthly website retainer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
 ];
 
 const faqs = [
@@ -34,11 +34,11 @@ const schema = serviceSchema([
   { name: 'CMS (content management system)', description: 'A simple dashboard to update page text, photos, and collections like news or events yourself, with no code.', price: 'From $1,750' },
 ], '/websites/help-after-launch/');
 ---
-<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $59 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $59 per update, monthly update plans from $99, a monthly web producer from $650, or a CMS so you can make changes yourself.">
+<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $59 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $59 per update, monthly update plans from $99, a monthly website retainer from $650, or a CMS so you can make changes yourself.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Help when you need it, <em>or every month.</em></h1>
-      <p class="lede">Keep your site current without paying for upkeep you don't need. Send me a change when something's new, update it yourself, or keep me on as your web producer to improve your site every month.</p>
+      <p class="lede">Keep your site current without paying for upkeep you don't need. Send me a change when something's new, update it yourself, or keep me on a monthly retainer to improve your site every month.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
         <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
