@@ -18,7 +18,6 @@ const guide = [
   { icon: 'shield', title: 'Staying safe', text: 'How to spot scam calls and wrong edits, and who has access to your profile.' },
 ];
 
-const notIncluded = ['Month-to-month profile management', 'Replying to reviews for you', 'Running Google Ads', 'Regular posts on your profile', 'Directory and listing campaigns', 'Promises about rankings or leads'];
 
 const faqs = [
   { q: 'Which one do I need, setup or optimization?', a: "If you don't have a profile yet, or you can't sign in to the one that exists, you need setup. If you have a profile you can edit, optimization makes it work harder. Not sure? Take the free Google profile check, or ask me." },
@@ -71,7 +70,7 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">A guide for keeping it up to date.</h2>
-        <p class="lede">I don't manage your profile month to month, so you get a short guide for looking after it yourself.</p>
+        <p class="lede">You get a short guide for keeping your profile up to date yourself.</p>
       </div>
       <div class="grid grid-4 plain-grid">
         {guide.map((g) => (
@@ -87,14 +86,7 @@ const schema = serviceSchema([
 
   <section>
     <div class="wrap">
-      <div class="grid grid-2">
-        <div>
-          <h2 class="mag-head">What's not included.</h2>
-          <p class="lede">These are setup and improvement services, not ongoing marketing. I'm happy to point you in the right direction on any of these.</p>
-        </div>
-        <ul class="ticks not-included">{notIncluded.map((n) => <li><span class="dash" aria-hidden="true">–</span>{n}</li>)}</ul>
-      </div>
-      <div class="band" style="margin-top: 48px">
+      <div class="band">
         <div>
           <h2>Save $150 on a website.</h2>
           <p>If you start a website with me at the same time or within 6 months, $150 of your profile service is credited toward it.</p>
