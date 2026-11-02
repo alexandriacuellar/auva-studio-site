@@ -10,13 +10,12 @@ const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import headshot from '../../assets/alexandria-cuellar.jpg';
 
 const situations = [
-  { title: 'Necesita un sitio web', text: 'Todavía no tiene uno, o está empezando algo nuevo.', href: '/es/websites/', icon: 'globe' },
-  { title: 'Su sitio web necesita atención', text: 'Está desactualizado, es lento, cuesta actualizarlo o no le trae consultas.', href: '/es/websites/diagnostic/', icon: 'search' },
-  { title: 'Sus clientes no lo encuentran en Google Maps', text: 'Su perfil de Google falta, está incompleto o tiene datos equivocados.', href: '/es/websites/google-business-profile/', icon: 'star' },
-  { title: 'Sus herramientas no le están funcionando', text: 'Demasiadas aplicaciones, demasiados parches, o no sabe dónde encaja la IA.', href: '/es/technology-consulting/#planning', icon: 'compass' },
-  { title: 'Su equipo hace las mismas tareas a mano', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/#automation', icon: 'gear' },
-  { title: 'Un proyecto necesita quien lo dirija', text: 'Un proyecto tecnológico necesita a alguien que mantenga el alcance, el calendario, los proveedores y el equipo en orden.', href: '/es/technology-consulting/#delivery', icon: 'check' },
-  { title: 'Está creando un videojuego o un proyecto XR o AR', text: 'Consiga una productora que lo mantenga en marcha, o empiece con algo pequeño, como un proyecto AR que se abre en el celular.', href: '/es/production-emerging-tech/', icon: 'bolt' },
+  { title: 'Necesito un sitio web', text: 'Está empezando algo nuevo, o nunca ha tenido uno.', href: '/es/websites/', to: 'Sitios web', icon: 'globe' },
+  { title: 'Mi sitio web no me está funcionando', text: 'Está desactualizado, es lento, cuesta actualizarlo o sus clientes no lo encuentran en Google Maps.', href: '/es/websites/diagnostic/', to: 'Diagnóstico Web', icon: 'search' },
+  { title: 'Mis herramientas no se ajustan a cómo trabajamos', text: 'Demasiadas aplicaciones, demasiados parches, y no sabe dónde encaja la IA.', href: '/es/technology-consulting/#planning', to: 'Tecnología, Automatización e IA', icon: 'compass' },
+  { title: 'Hacemos las mismas tareas a mano cada semana', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/#automation', to: 'Tecnología, Automatización e IA', icon: 'gear' },
+  { title: 'Este proyecto necesita quien lo dirija', text: 'Alguien que mantenga en orden el alcance, el calendario, los proveedores y el equipo.', href: '/es/technology-consulting/#delivery', to: 'Tecnología, Automatización e IA', icon: 'check' },
+  { title: 'Estamos creando un videojuego o un proyecto XR o AR', text: 'Una productora que lo mantenga en marcha, o un proyecto AR pequeño que se abre en el celular.', href: '/es/production-emerging-tech/', to: 'Producción y Tecnología Emergente', icon: 'bolt' },
 ];
 const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar', 'Todo es suyo', 'Trabaja directamente conmigo'];
 ---
@@ -46,15 +45,14 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
   <section class="home-routes">
     <div class="wrap about-grid">
       <div>
-        <h2 class="mag-head">¿En qué está <em>trabajando?</em></h2>
-        <p class="lede">No necesita saber qué servicio necesita. Empiece por la situación que más se parezca a la suya.</p>
-        <p class="muted">¿No sabe cuál le corresponde? Los problemas reales muchas veces abarcan más de uno. <a href="/es/contact/">Cuénteme qué está pasando</a> y le sugiero un siguiente paso.</p>
+        <h2 class="mag-head">¿No sabe por dónde empezar? <em>Encuentre su situación.</em></h2>
+        <p class="lede">Elija la que más se parezca a la suya, o <a href="/es/contact/">cuénteme qué está pasando</a>.</p>
       </div>
       <ul class="route-list">
         {situations.map((x) => (
           <li><a href={x.href}>
             <span class="icon"><Icon name={x.icon} /></span>
-            <span><b>{x.title}</b><span class="muted">{x.text}</span></span>
+            <span><b>{x.title}</b><span class="muted">{x.text}</span><span class="route-to">{x.to} <Icon name="arrow" size={16} /></span></span>
           </a></li>
         ))}
       </ul>

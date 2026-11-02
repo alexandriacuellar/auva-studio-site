@@ -722,6 +722,9 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .route-list b { display: block; font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 2px; }
 .route-list .muted { display: block; }
 .route-list a:hover b { color: var(--primary); }
+.route-list .route-to { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--primary); font-weight: 700; font-size: 0.92rem; }
+.route-list .route-to svg { transition: transform .15s; }
+.route-list a:hover .route-to svg { transform: translateX(3px); }
 /* Consulting: everyday AI tasks */
 .ai-tasks .card { padding: 22px; gap: 14px; }
 .ai-tasks h3 { font-size: 1.02rem; margin-bottom: 4px; }
