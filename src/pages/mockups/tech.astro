@@ -19,12 +19,6 @@ const audiences = [
   { icon: 'bulb', title: 'Teams curious about AI', text: "You know AI could help, but not where to start or what's safe to share with it." },
 ];
 
-const automations = [
-  { icon: 'mail', title: 'Lead Follow-up', price: '$500', text: 'Every website inquiry gets an instant, friendly reply and lands in one list, with a reminder to you if nobody has answered in 2 days.', items: ['Instant reply in your words', 'Every lead in one list', 'A nudge before a lead goes cold'] },
-  { icon: 'star', title: 'Review Requests', price: '$500', text: 'After a job or visit, customers get a thank-you with your Google review link, and one gentle reminder.', items: ['Sent at the right moment', 'Your Google review link', 'One reminder, then it stops'] },
-  { icon: 'clock', title: 'Invoice Reminders', price: '$500', text: 'Polite reminders go out when an invoice is late, from the accounting tool you already use.', items: ['Reminders at 3, 7, and 14 days', 'Uses your current accounting tool', 'Stops the moment it is paid'] },
-  { icon: 'gear', title: 'Your own automation', price: 'From $500', text: 'Something else your team does by hand every week, like onboarding new clients or a monthly report.', items: ['One workflow per price', 'Scoped and priced in writing first', 'Often found in a Tech Review'] },
-];
 
 const aiPackages = [
   { icon: 'chat', title: 'Team AI Workshop', price: '$750', text: 'A 90-minute hands-on session for up to 10 people. Everyone brings a real task and leaves with prompts that work for it.', items: ['Practice on your real work', 'What is safe to share, and what is not', 'A one-page guide to keep'] },
@@ -105,24 +99,22 @@ const faqs = [
         </div>
       </div>
 
-      <div class="offer-group" style="margin-top: 48px" id="automation">
-        <h3 class="offer-group-title">Automations</h3>
-        <p class="muted">Set up in the tools you already use. Each one is a single workflow.</p>
-        <div class="grid grid-2">
-          {automations.map((p) => (
-            <div class="card offer">
-              <div class="icon"><Icon name={p.icon} size={32} /></div>
-              <h3>{p.title}</h3>
-              <p class="svc-meta"><b>{p.price}</b></p>
-              <p class="muted">{p.text}</p>
-              <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-              <a class="more" href="?topic=automation#start" style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
-            </div>
-          ))}
+      <div class="card card-row bigger" style="margin-top: 24px" id="automation">
+        <div class="icon"><Icon name="gear" size={36} /></div>
+        <div>
+          <h3>Automation setup, $500 per workflow</h3>
+          <p class="muted">I connect the tools you already use so routine work happens on its own. One workflow, set up in your accounts, with a short how-to guide.</p>
+          <ul class="ticks">
+            <li><Icon name="tick" size={18} /><span><b>Lead follow-up:</b> every website inquiry gets an instant reply and lands in one list, with a nudge to you if nobody answers in 2 days.</span></li>
+            <li><Icon name="tick" size={18} /><span><b>Review requests:</b> after a job or visit, a thank-you with your Google review link and one gentle reminder.</span></li>
+            <li><Icon name="tick" size={18} /><span><b>Your own:</b> client onboarding, a monthly report, or another task your team does by hand.</span></li>
+          </ul>
+          <p class="small muted" style="margin-top: 12px">Automations with several steps usually need your own paid Zapier or Make plan, about $20 to $30 a month. I'll tell you before we start.</p>
+          <a class="more" href="?topic=automation#start" style="margin-top: 12px">Ask about automation <Icon name="arrow" size={16} /></a>
         </div>
       </div>
 
-      <div class="offer-group" id="ai">
+      <div class="offer-group" style="margin-top: 48px" id="ai">
         <h3 class="offer-group-title">AI for your team</h3>
         <p class="muted">For non-technical teams, using ChatGPT, Claude, Gemini, or Meta AI.</p>
         <div class="grid grid-2">
