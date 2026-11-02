@@ -8,38 +8,43 @@ import Faq from '../components/Faq.astro';
 import { site, testimonials, aiOffers, serviceSchema } from '../data/site';
 
 const offers = aiOffers.filter((o) => o.group !== 'consulting');
+const packages = offers.filter((o) => o.group === 'ar');
+const review = offers.find((o) => o.id === 'review')!;
 const production = offers.find((o) => o.id === 'production')!;
-const prototypes = ['review', 'ar-starter'].map((id) => offers.find((o) => o.id === id)!);
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
 
-const faqs = [
-  { q: 'Do you build full XR or game productions?', a: "I plan and manage them as your producer. AR projects are built with a developer partner when needed, and bigger builds go to a trusted studio partner, with me as your producer if you'd like." },
-  { q: 'Can you join a project that is already underway?', a: 'Yes. Production Support often starts mid-project: I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
+const audiences = [
+  { icon: 'layers', title: 'Shops, makers, and restaurants', text: 'Let customers see a product at home before they buy, or scan a menu or label that comes alive.' },
+  { icon: 'compass', title: 'Architects, builders, and developers', text: "Show clients a home or building that isn't built yet, on the table or full size on the lot." },
+  { icon: 'book', title: 'Museums, educators, and cultural organizations', text: 'Exhibits, lessons, and historic sites that show a scene, a voice, or a 3D object through a phone or headset.' },
+  { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, events, and campaigns people remember, from a scan-to-play poster to a Meta Horizon world.' },
+  { icon: 'star', title: 'Game and XR studios', text: 'An experienced producer and a schedule people trust, without a full-time hire.' },
 ];
 
-const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
 
 const ideas = [
   { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
-  { icon: 'book', title: 'An exhibit that comes alive', text: 'Museum labels or historic signs that show a scene, a voice, or a 3D object through a phone.' },
-  { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step, a tour, or a hard conversation on Meta Quest before doing it for real.' },
+  { icon: 'layers', title: 'A sofa in your living room', text: 'Shoppers see the real size and color at home before they order.' },
+  { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
+  { icon: 'compass', title: 'A house on the empty lot', text: 'Buyers stand on the land and see the finished home around them.' },
+  { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },
+  { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step or a hard conversation on Meta Quest before doing it for real.', partner: true },
 ];
 
-const audiences = [
-  { icon: 'star', title: 'Game and XR studios', text: 'You need production structure, a schedule people trust, or an experienced producer without a full-time hire.' },
-  { icon: 'book', title: 'Museums, educators, and cultural organizations', text: "You're planning an immersive or interactive experience and want a realistic scope before you commit." },
-  { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, event spaces, retailers, and visitor centers planning something people will remember. Know the budget first.' },
-  { icon: 'bulb', title: 'Small businesses and startups', text: 'Curious about AR for your business? Start small, with a business card, flyer, or product that comes to life on a phone.' },
+const faqs = [
+  { q: 'Do my customers need an app?', a: "No. They scan a code or open a link, and it works in their phone's browser." },
+  { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced XR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
+  { q: 'Can you join a game or XR project already underway?', a: 'Yes. I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
 ];
-
 ---
-<Base title="Production & Emerging Tech" seoTitle="Game & XR Producer, AR & VR Projects | Auva Studio" schema={schema} description="A game and XR producer for studios, plus AR and VR projects for museums, venues, and small businesses, including AR that opens in a phone's browser.">
+<Base title="Production & Emerging Tech" seoTitle="AR Packages, VR & Game Producer | Auva Studio" schema={schema} description="AR packages from $750 for businesses, architects, museums, and brands, opening on any phone with no app, plus a game and XR producer for studios.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">A producer for your game, <em>XR, or interactive project.</em></h1>
-      <p class="lede">A schedule your team can trust, a clear plan before you build, and AR and VR that bring your products and places to life.</p>
+      <h1 class="mag-head">AR and VR people remember, <em>and a producer to get it built.</em></h1>
+      <p class="lede">AR that brings your products, menus, and places to life on any phone, and production support for game and XR teams.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#production">See Production Support</a>
+        <a class="btn btn-ghost" href="#packages">See AR packages</a>
       </div>
     </div>
   </section>
@@ -62,8 +67,72 @@ const audiences = [
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>Something else?</h3>
-          <p>Tell me what you're working on, and I'll suggest where to start.</p>
+          <p>Tell me what you have in mind, and I'll suggest where to start.</p>
           <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">AR packages, <em>priced up front.</em></h2>
+        <p class="lede">Each one opens in a phone's browser, with no app to download. Founding prices for my first AR clients.</p>
+      </div>
+      <div class="grid grid-2">
+        {packages.map((p) => (
+          <div class="card offer" id={p.id}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">
+              {p.items!.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}
+            </ul>
+            <a class="more" href={`?topic=${p.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+      <div class="card card-row bigger" style="margin-top: 32px">
+        <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div>
+          <h3>Need something bigger?</h3>
+          <p class="muted">VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced XR developer partner who joins at the start. I stay on as your producer. Quoted for your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What we could <em>build together.</em></h2>
+        <p class="lede">The first one is my own business card. The others are ideas to spark yours.</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Live demo</span> : <span class="idea-tag idea-tag-plain">{i.partner ? 'Idea, with partner' : 'Idea'}</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="next" style="padding-bottom: 0">
+    <div class="wrap">
+      <div class="card card-row bigger next-card">
+        <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div>
+          <span class="idea-tag">Coming in 2027</span>
+          <h3>Next up: VR and Meta's AI glasses</h3>
+          <p class="muted">I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Next I'm building for Meta Quest headsets and Meta's AI glasses: hands-free guides and tours, step-by-step help for staff, and VR training. Have an idea? Tell me now and you'll be first in line.</p>
+          <a class="more" href="?topic=xr-idea#start" style="margin-top: 12px">Share your idea <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
@@ -72,18 +141,14 @@ const audiences = [
   <section id="production">
     <div class="wrap about-grid">
       <div>
-        <h2 class="mag-head">Production <em>Support.</em></h2>
-        <p class="svc-meta"><span>For game, XR, and immersive teams</span> <b>{production.price}</b></p>
-        <p class="lede">{production.text} Join at the start or partway through, for a few hours a week or as your embedded producer.</p>
+        <h2 class="mag-head">For game and XR <em>studios.</em></h2>
+        <p class="lede">Producer and project management help: plans, schedules, design documents, playtests, and keeping everyone aligned. Join at the start or partway through.</p>
         <ul class="ticks">
-          <li><Icon name="tick" size={18} />Agile workflow, sprints, and a schedule people trust</li>
-          <li><Icon name="tick" size={18} />Design documents and task tracking kept up to date</li>
-          <li><Icon name="tick" size={18} />Playtests, feedback, and milestone reviews</li>
-          <li><Icon name="tick" size={18} />Team, vendor, and partner coordination</li>
-          <li><Icon name="tick" size={18} />Hourly, or monthly: 10 hrs $650, 20 hrs $1,200, or 40 hrs $2,200, with a 3-month minimum</li>
+          <li><Icon name="tick" size={18} /><span><b>{review.title}, {review.price}.</b> I review your scope, milestones, and risks, and give you a plan your team can follow. About 2 weeks.</span></li>
+          <li><Icon name="tick" size={18} /><span><b>{production.title}, $65/hr.</b> Or monthly: 10 hrs $650, 20 hrs $1,200, or 40 hrs $2,200, with a 3-month minimum.</span></li>
+          <li><Icon name="tick" size={18} />Agile workflow, sprints, design documents, and playtests</li>
         </ul>
         <a class="btn" href="/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Ask about Production Support</a>
-        <p class="small muted" style="margin-top: 16px">Running a website, software, or tools project for a small business? See <a href="/technology-consulting/#delivery">project management on Tech, Automation &amp; AI</a>.</p>
       </div>
       <div class="values">
         {testimonials.map((t) => (
@@ -96,55 +161,6 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt" id="prototypes">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Start small, <em>then grow.</em></h2>
-        <p class="lede">A plan review for studios, or a small AR project for businesses. Bigger builds go to a trusted studio partner.</p>
-      </div>
-      <div class="grid grid-2">
-        {prototypes.map((o) => (
-          <div class="card offer" id={o.id}>
-            <div class="icon"><Icon name={o.icon} size={32} /></div>
-            <h3>{o.title}</h3>
-            <p class="svc-meta"><b>{o.price}</b></p>
-            <p class="muted">{o.text}</p>
-            <a class="more" href={`/production-emerging-tech/?topic=${o.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
-          </div>
-        ))}
-      </div>
-      <div class="card card-row bigger" style="margin-top: 32px">
-        <div class="icon"><Icon name="layers" size={36} /></div>
-        <div>
-          <h3>Need something bigger?</h3>
-          <p class="muted">Full productions go to a trusted studio partner, and I can stay on as your producer. You get one person who knows the project from the first idea.</p>
-        </div>
-      </div>
-      <p class="muted" style="margin-top: 24px"><b>Need a website for your studio or game?</b> See <a href="/websites/#packages">website packages from $1,500</a>. For tools, automation, or AI for your team, see <a href="/technology-consulting/">Tech, Automation &amp; AI</a>.</p>
-    </div>
-  </section>
-
-  <section id="ideas">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">What we could <em>build together.</em></h2>
-        <p class="lede">AR and VR for phones, Meta Quest, and Meta glasses. The first one is my own business card. The others are ideas to spark yours.</p>
-      </div>
-      <div class="grid grid-3">
-        {ideas.map((i) => (
-          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
-            <div class="icon"><Icon name={i.icon} size={32} /></div>
-            {i.live ? <span class="idea-tag">Live demo</span> : <span class="idea-tag idea-tag-plain">Idea</span>}
-            <h3>{i.title}</h3>
-            <p class="muted">{i.text}</p>
-            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
-          </div>
-        ))}
-      </div>
-      <p class="muted" style="margin-top: 24px"><b>More ideas:</b> a hands-free guide on Ray-Ban Meta or Meta Ray-Ban Display glasses, a Meta Horizon world for your venue or event, or a small playable demo to pitch a bigger game.</p>
-    </div>
-  </section>
-
   <section class="alt" id="how">
     <div class="wrap">
       <div class="section-head">
@@ -152,11 +168,12 @@ const audiences = [
         <p class="lede">Simple to start, with no surprises along the way.</p>
       </div>
       <ol class="steps steps-4">
-        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me about your game, XR, or AR project and where it stands today.</p></li>
-        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>A short proposal with what I'll do, how long it takes, and the price. New projects often start with a Production Plan Review.</p></li>
-        <li><span class="num" aria-hidden="true">3</span><h3>Production</h3><p>Sprints, schedules, playtests, and milestone reviews, with updates as we go. AR projects are built with a developer partner when needed.</p></li>
-        <li><span class="num" aria-hidden="true">4</span><h3>Launch and handover</h3><p>Your team keeps the plan, documents, and files, so you can carry on without me.</p></li>
+        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me what you want people to see, or where your game or XR project stands.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>A short proposal with what I'll make, how long it takes, and the price.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Build and review</h3><p>You try your AR on your own phone and send changes. Studios get sprints, playtests, and milestone reviews.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Launch and handover</h3><p>You get the link, the printed code, and your files, so it stays yours.</p></li>
       </ol>
+      <p class="muted" style="margin-top: 32px"><b>Need a website too?</b> See <a href="/websites/#packages">website packages from $1,500</a>. AR Product View can be added to any of them.</p>
     </div>
   </section>
 

@@ -52,7 +52,7 @@ export const categories = [
     icon: 'bolt',
     title: 'Producción y Tecnología Emergente',
     text: 'Realidad aumentada (AR) que da vida a sus productos, menús y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
-    offers: [['Proyecto AR Inicial', 'Desde $1,500'], ['Revisión del Plan de Producción', '$650'], ['Apoyo de producción para equipos de videojuegos y XR', '$65/hora']],
+    offers: [['Paquetes de AR', 'Desde $750'], ['Revisión del Plan de Producción', '$650'], ['Apoyo de producción para equipos de videojuegos y XR', '$65/hora']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
     href: '/es/production-emerging-tech/',
     cta: 'Ver Producción y Tecnología Emergente',
@@ -175,6 +175,9 @@ export { testimonials } from './site';
 export const aiOffers = [
   { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: '$750', text: 'Una sesión práctica de 90 minutos para hasta 10 personas. Su equipo practica ChatGPT, Claude o Gemini con trabajo real y se lleva una guía de una página.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión del Plan de Producción', price: '$650', text: 'Para proyectos de videojuegos, XR e interactivos. Reviso su alcance, sus hitos y sus riesgos, y le entrego un plan que su equipo pueda seguir, con sus herramientas de proyecto configuradas si las necesita. Unas 2 semanas.' },
-  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'Proyecto AR Inicial', price: 'Desde $1,500', text: 'Una pieza pequeña de AR que se abre en el navegador del teléfono, sin descargar ninguna app: una tarjeta de presentación, un volante, un póster o un producto que cobra vida. Construida con un desarrollador colaborador cuando hace falta. 2–4 semanas.' },
+  { id: 'ar-card', group: 'ar', icon: 'star', title: 'Tarjeta o Volante con AR', price: 'Desde $750', text: 'Una tarjeta, un volante o un letrero que cobra vida cuando alguien lo apunta con el teléfono.', items: ['Una pieza impresa', 'Un video corto o un objeto 3D', 'Botones para reservar, llamar o visitar su sitio'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'Menú o Empaque con AR', price: 'Desde $1,000', text: 'Un menú, una etiqueta o una caja que muestra un plato en 3D, cómo se hace algo o un saludo del dueño.', items: ['Un menú, una etiqueta o una caja', 'Hasta 3 artículos en 3D o video', 'Un código impreso que lo abre'] },
+  { id: 'ar-product', group: 'ar', icon: 'layers', title: 'Vista de Producto con AR', price: 'Desde $1,500', text: 'Sus clientes colocan sus productos en su sala, o se los prueban, directo desde su sitio web.', items: ['Hasta 5 productos en 3D', 'Véalo en su espacio o pruébeselo', 'Agregado a las páginas de producto de su sitio'] },
+  { id: 'ar-project', group: 'ar', icon: 'compass', title: 'Visor de Proyectos con AR', price: 'Desde $1,500', text: 'Para arquitectos y constructores: su modelo 3D en el teléfono, sobre la mesa de reuniones o a tamaño real en el terreno.', items: ['Usa el modelo que ya tiene', 'Vista sobre la mesa o a tamaño real', 'Un enlace que puede enviar a sus clientes'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
 ];

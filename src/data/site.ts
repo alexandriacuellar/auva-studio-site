@@ -73,7 +73,7 @@ export const categories = [
     icon: 'bolt',
     title: 'Production & Emerging Tech',
     text: 'AR that brings your products, menus, and flyers to life on a phone, plus a producer for game and XR teams.',
-    offers: [['AR Starter Project', 'From $1,500'], ['Production Plan Review', '$650'], ['Production support for game and XR teams', '$65/hr']],
+    offers: [['AR packages', 'From $750'], ['Production Plan Review', '$650'], ['Production support for game and XR teams', '$65/hr']],
     note: 'AR and VR for phones, Meta Quest, and Meta glasses.',
     href: '/production-emerging-tech/',
     cta: 'Explore Production & Emerging Tech',
@@ -204,11 +204,14 @@ export const testimonials = [
 ];
 
 // AI and production offers. group 'consulting' lives on the Tech, Automation & AI page;
-// 'prototype' (first steps) and 'production' live on the Production & Emerging Tech page.
+// 'ar' (AR packages), 'prototype' (Plan Review) and 'production' live on the Production & Emerging Tech page.
 export const aiOffers = [
   { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Team AI Workshop', price: '$750', text: 'A 90-minute hands-on session for up to 10 people. Your team practices ChatGPT, Claude, or Gemini on real work and leaves with a one-page guide.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Production Plan Review', price: '$650', text: 'For game, XR, and interactive projects. I review your scope, milestones, and risks, and give you a plan your team can follow, with your project tools set up if you need them. About 2 weeks.' },
-  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'AR Starter Project', price: 'From $1,500', text: "A small AR piece that opens in a phone's browser, with no app needed: a business card, flyer, poster, or product that comes to life. Built with a developer partner when needed. 2–4 weeks." },
+  { id: 'ar-card', group: 'ar', icon: 'star', title: 'AR Card or Flyer', price: 'From $750', text: 'A card, flyer, or sign that comes alive when someone points a phone at it.', items: ['One printed piece', 'A short video or 3D object', 'Buttons to book, call, or visit your site'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'AR Menu or Packaging', price: 'From $1,000', text: 'A menu, label, or box that shows a dish in 3D, how something is made, or a hello from the owner.', items: ['One menu, label, or box', 'Up to 3 items in 3D or video', 'A printed code that opens it'] },
+  { id: 'ar-product', group: 'ar', icon: 'layers', title: 'AR Product View', price: 'From $1,500', text: 'Customers place your products in their room, or try them on, right from your website.', items: ['Up to 5 products in 3D', 'View in your space or try on', 'Added to your website product pages'] },
+  { id: 'ar-project', group: 'ar', icon: 'compass', title: 'AR Project Viewer', price: 'From $1,500', text: 'For architects and builders: your 3D model on a phone, at the meeting table or full size on site.', items: ['Uses the model you already have', 'Tabletop or full-size view', 'A link you can send to clients'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Production Support', price: '$65/hr, or monthly from $650', text: 'Producer and project management help for game, XR, and immersive teams: plans, schedules, design documents, playtests, and keeping everyone aligned.' },
 ];
 
