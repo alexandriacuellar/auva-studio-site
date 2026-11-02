@@ -1,25 +1,26 @@
 ---
-// The navy intro band under each service page hero: photo, a short hello, three facts, and a link to About.
-// Same layout on Websites, Tech, and Production (EN + ES), so only the words change from page to page.
+// The navy intro band under each service page hero: one short hello, three facts that do the work, then the About link.
+// Same layout on Websites, Tech, and Production (EN + ES); only the facts change from page to page.
 import { Image } from 'astro:assets';
 import headshot from '../assets/alexandria-cuellar.jpg';
 import Icon from './Icon.astro';
 import { langFromPath, localize } from '../i18n';
 
-interface Props { text: string; facts: [string, string][] }
-const { text, facts } = Astro.props;
+interface Props { facts: [string, string][] }
+const { facts } = Astro.props;
 const lang = langFromPath(Astro.url.pathname);
-const t = { en: { hi: "Hi, I'm Alexandria,", more: 'More about me' }, es: { hi: 'Hola, soy Alexandria,', more: 'Más sobre mí' } }[lang];
+const t = {
+  en: { hi: "Hi, I'm Alexandria,", line: "founder of Auva Studio. You'll work with me directly.", more: 'More about me' },
+  es: { hi: 'Hola, soy Alexandria,', line: 'fundadora de Auva Studio. Trabajará directamente conmigo.', more: 'Más sobre mí' },
+}[lang];
 ---
 <section class="hello-band" aria-label="Alexandria Cuellar">
   <div class="wrap hello">
-    <Image src={headshot} alt="" width={112} height={112} densities={[1, 2]} />
-    <div class="hello-body">
-      <p class="hello-text"><b>{t.hi}</b> {text}</p>
-      <div class="hello-foot">
-        <ul class="hello-facts">{facts.map(([b, rest]) => <li>{b && <b>{b}</b>} {rest}</li>)}</ul>
-        <a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a>
-      </div>
+    <div class="hello-intro">
+      <Image src={headshot} alt="" width={72} height={72} densities={[1, 2]} />
+      <p><b>{t.hi}</b> {t.line}</p>
     </div>
+    <ul class="hello-facts">{facts.map(([n, label]) => <li><b>{n}</b><span>{label}</span></li>)}</ul>
+    <a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a>
   </div>
 </section>
