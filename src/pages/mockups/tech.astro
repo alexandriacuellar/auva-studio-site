@@ -21,14 +21,23 @@ const audiences = [
 
 
 const aiPackages = [
-  { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'], link: 'Ask about this' },
-  { icon: 'chat', title: 'Team AI Workshop', price: 'Coming soon', text: 'The same hands-on approach for up to 10 people, with safe account setup, saved prompts, and one-page AI rules for your team.', items: ['Practice on real tasks together', 'What is safe to share, and what is not', 'A one-page guide to keep'], link: 'Ask to be first in line' },
+  { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'], link: 'Ask about this', topic: 'ai-session' },
+  { icon: 'chat', title: 'Team AI Workshop', price: 'Coming soon', text: 'The same hands-on approach for up to 10 people, with safe account setup, saved prompts, and one-page AI rules for your team.', items: ['Practice on real tasks together', 'What is safe to share, and what is not', 'A one-page guide to keep'], link: 'Ask to be first in line', topic: 'workshop' },
 ];
 
 const projectPackages = [
   { icon: 'layers', title: 'Project workspace setup', price: 'From $400', text: 'Get work out of email and spreadsheets and into one tool, like Asana, ClickUp, monday.com, Notion, or Trello. You choose the tool, or I’ll recommend one. More boards or projects to move are quoted, usually $750 to $1,500.', items: ['1 board with your stages', 'Up to 3 templates for repeat work', 'Up to 5 current projects moved in', 'A 1-hour team training and 30 days of questions'] },
   { icon: 'check', title: 'Project Kickoff Plan', price: '$650', text: 'Before a project starts: a clear scope, timeline, owners, and risks, ready to bring into your tool.', items: ['Up to 2 planning sessions with your team', 'Scope and milestones in writing', 'Who does what, and when', 'Written plan within 5 business days', 'A task list that imports into Asana, ClickUp, monday.com, Notion, and most other tools', 'Credited toward your first month of project management'] },
   { icon: 'compass', title: 'Monthly project management', price: 'From $650/mo', text: 'Someone to keep your project on track, run check-ins, and handle vendors, without a full-time hire.', items: ['10 hrs $650, 20 hrs $1,200, 40 hrs $2,200', 'A short written update every week', '3-month minimum'] },
+];
+
+const aiTasks = [
+  { icon: 'mail', title: 'Answer customer emails faster', text: 'Draft replies to common questions, then check and send.' },
+  { icon: 'book', title: 'Write job posts and descriptions', text: 'Turn a few notes into a clear first draft.' },
+  { icon: 'clock', title: 'Turn meetings into to-dos', text: 'Summaries and next steps, without retyping your notes.' },
+  { icon: 'chat', title: 'Draft social posts and newsletters', text: 'A week of ideas and drafts in your own voice.' },
+  { icon: 'search', title: 'Find answers in your own documents', text: 'Ask your handbook, policies, or price list a question.' },
+  { icon: 'layers', title: 'First drafts of quotes and proposals', text: 'Start from a draft instead of a blank page.' },
 ];
 
 const safety = [
@@ -39,8 +48,9 @@ const safety = [
 ];
 
 const faqs = [
-  { q: 'Is it safe to use AI with our business data?', a: 'It can be, with business accounts and the right settings. The AI Starter Setup and every workshop cover what is safe to share.' },
+  { q: 'Is it safe to use AI with our business data?', a: 'It can be, with business accounts and the right settings. Every AI session covers what is safe to share.' },
   { q: 'What if an app we use changes and an automation stops?', a: 'Fixes are free for 30 days. After that, a fix is usually under an hour at my $125 hourly rate, quoted first.' },
+  { q: 'Do you work in person?', a: 'Yes, from New York City and Westchester up to Albany, though most work happens remotely. On-site time is $65 an hour, and any travel outside the Mid-Hudson Valley is agreed in writing before booking.' },
   { q: 'Can you work with our current vendors or IT provider?', a: 'Yes. I often work alongside existing teams and vendors, and can help you review their proposals.' },
 ];
 
@@ -124,7 +134,7 @@ const faqs = [
               <p class="svc-meta"><b>{p.price}</b></p>
               <p class="muted">{p.text}</p>
               <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-              <a class="more" href="?topic=workshop#start" style="margin-top: 12px">{p.link} <Icon name="arrow" size={16} /></a>
+              <a class="more" href={`?topic=${p.topic}#start`} style="margin-top: 12px">{p.link} <Icon name="arrow" size={16} /></a>
             </div>
           ))}
         </div>
@@ -141,7 +151,7 @@ const faqs = [
               <p class="svc-meta"><b>{p.price}</b></p>
               <p class="muted">{p.text}</p>
               <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
-              <a class="more" href={`?topic=${p.title.includes('Workspace') ? 'workspace' : 'delivery'}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+              <a class="more" href={`?topic=${p.title.includes('workspace') ? 'workspace' : 'delivery'}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
             </div>
           ))}
         </div>
@@ -150,7 +160,25 @@ const faqs = [
     </div>
   </section>
 
-  <section class="alt" id="safe">
+  <section class="alt" id="ai-uses">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Put AI to work <em>in the work you already do.</em></h2>
+        <p class="lede">I use AI tools in my own work every day. Here's what small teams use them for.</p>
+      </div>
+      <div class="grid grid-3 ai-tasks">
+        {aiTasks.map((t) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={t.icon} size={28} /></div>
+            <div><h3>{t.title}</h3><p class="muted small">{t.text}</p></div>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top: 20px"><b>Tools I use.</b> ChatGPT, Claude, Gemini, Meta AI, and Zapier.</p>
+    </div>
+  </section>
+
+  <section id="safe">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Built to be safe, <em>and yours.</em></h2>
@@ -168,7 +196,7 @@ const faqs = [
     </div>
   </section>
 
-  <section id="how">
+  <section class="alt" id="how">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">How it <em>works.</em></h2>
@@ -186,6 +214,6 @@ const faqs = [
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="consulting" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="consulting" alt />
 </Base>
