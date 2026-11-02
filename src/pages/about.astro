@@ -6,7 +6,17 @@ import '../styles/pages/about.css';
 import Icon from '../components/Icon.astro';
 import Cta from '../components/Cta.astro';
 import { site, testimonials } from '../data/site';
+import bearMountain from '../assets/about/bear-mountain-bridge.jpg';
+import nyack from '../assets/about/nyack-broadway.jpg';
+import mohonk from '../assets/about/mohonk-new-paltz.jpg';
+import centralPark from '../assets/about/central-park-nyc.jpg';
 import headshot from '../assets/alexandria-cuellar.jpg';
+const places = [
+  { src: bearMountain, place: 'Bear Mountain Bridge', alt: 'Bear Mountain Bridge over the Hudson River in autumn' },
+  { src: nyack, place: 'Nyack', alt: 'Brick storefronts and a sidewalk café on Broadway in Nyack' },
+  { src: mohonk, place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House above Lake Mohonk in fall color' },
+  { src: centralPark, place: 'Central Park, New York City', alt: 'Central Park Mall lined with autumn trees and lamps' }
+];
 ---
 <Base title="About" seoTitle="About Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, founder of Auva Studio: 20+ years helping organizations solve problems with technology, based in the Mid-Hudson Valley.">
   <section class="hero about-hero">
@@ -81,6 +91,16 @@ import headshot from '../assets/alexandria-cuellar.jpg';
     <div class="wrap about-home">
       <h2 class="mag-head" set:html={`Rooted in <em>the Hudson Valley.</em>`} />
       <p class="lede">I'm based in the Mid-Hudson Valley and work with businesses and organizations across the Hudson Valley, New York City, and anywhere in the US. When I'm not working, you'll find me on long walks with my dog, Midna.</p>
+      <ul class="place-strip" aria-label="Places I love in the Hudson Valley and New York City">
+        {places.map((pl) => (
+          <li>
+            <figure>
+              <Image src={pl.src} alt={pl.alt} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <figcaption>{pl.place}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
   <Cta />
