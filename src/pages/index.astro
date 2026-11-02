@@ -24,11 +24,22 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio in the Hudson Valley. I build websites, set up tools and automation, and produce games and XR.</p>
+      <p class="lede">Websites, automation, and AI for small businesses in the Hudson Valley, plus production for games and XR.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
+      </div>
+      <ServiceCards categories={categories} lang="en" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 
@@ -47,17 +58,6 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
           </a></li>
         ))}
       </ul>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Three ways <em>I help.</em></h2>
-        <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
-      </div>
-      <ServiceCards categories={categories} lang="en" />
-      <p class="hero-checks" style="text-align: center; margin-top: 64px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 

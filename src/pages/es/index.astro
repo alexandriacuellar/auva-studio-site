@@ -24,11 +24,22 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales en el Hudson Valley. Creo sitios web, configuro herramientas y automatizaciones, y produzco videojuegos y experiencias XR.</p>
+      <p class="lede">Sitios web, automatización e IA para pequeños negocios en el Hudson Valley, además de producción para videojuegos y XR.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
       </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
+        <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
+      </div>
+      <ServiceCards categories={categories} lang="es" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
@@ -47,17 +58,6 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
           </a></li>
         ))}
       </ul>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
-        <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
-      </div>
-      <ServiceCards categories={categories} lang="es" />
-      <p class="hero-checks" style="text-align: center; margin-top: 64px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
