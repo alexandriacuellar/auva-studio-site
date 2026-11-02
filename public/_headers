@@ -14,3 +14,7 @@
 
 /card/auva-star.glb
   Content-Type: model/gltf-binary
+
+# Page mockups for review: keep them out of search results.
+/mockups/*
+  X-Robots-Tag: noindex, nofollow
