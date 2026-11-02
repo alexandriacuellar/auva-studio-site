@@ -1,8 +1,9 @@
 ---
-// The navy intro band under each service page hero (original layout): photo, one hello line with the About link, three short facts.
+// The navy intro band under each service page hero (original layout): photo, one hello line, three short facts, then the About link.
 // Same layout on Websites, Tech, and Production (EN + ES); only the facts change from page to page.
 import { Image } from 'astro:assets';
 import headshot from '../assets/alexandria-cuellar.jpg';
+import Icon from './Icon.astro';
 import { langFromPath, localize } from '../i18n';
 
 interface Props { facts: [string, string][] }
@@ -14,5 +15,5 @@ const t = {
 }[lang];
 ---
 <section class="hello-band" aria-label="Alexandria Cuellar">
-  <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>{t.hi}</b> {t.line} <a href={localize('/about/', lang)}>{t.more}</a><ul class="hello-facts">{facts.map(([n, label]) => <li><b>{n}</b> {label}</li>)}</ul></span></div>
+  <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>{t.hi}</b> {t.line}<span class="hello-foot"><ul class="hello-facts">{facts.map(([n, label]) => <li><b>{n}</b> {label}</li>)}</ul><a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a></span></span></div>
 </section>
