@@ -8,7 +8,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a web producer and game and XR producer with 20+ years in technology.`,
+    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
@@ -23,7 +23,7 @@ export function GET() {
     `- [Sitio en español](${site.url}/es/): the whole site, except the sample sites, is also available in Spanish under /es/; Alexandria works with clients in English or Spanish`,
     '',
     '## About Alexandria Cuellar',
-    '- Alexandria Cuellar is the founder of Auva Studio. She builds websites, sets up tools and automation, and produces games and XR.',
+    '- Alexandria Cuellar is the founder of Auva Studio, a web developer and software engineer, and a game and XR producer. She builds websites, sets up tools and automation, and produces games and XR.',
     '- Clients work with her directly, in English or Spanish. She is based in the Mid-Hudson Valley, New York, and works remotely anywhere in the US.',
     '- Her background is in software development and technical project management. She spent nearly two decades as a developer behind newspaper websites, from the Times Herald-Record to more than 150 daily newspapers.',
     '- Since 2023, she has managed 14+ VR experiences and mobile games for indie game studios.',
