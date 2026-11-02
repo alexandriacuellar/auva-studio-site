@@ -15,14 +15,18 @@ const atLaunch = [
 // Tres formas de recibir ayuda después del lanzamiento (2026-11-02): cambios sueltos, paquetes de horas o un retainer mensual.
 const basics = ['Envíe sus solicitudes por correo, cuando quiera', 'Le aviso antes si algo va a tomar más tiempo', 'Cambios con sus diseños de página actuales', 'Trabajos mayores con presupuesto previo, a $125/hora'];
 const paths = [
-  { tag: 'Algunos cambios al año', name: 'Cambios', price: '$59', unit: 'por cambio', extra: 'O compre 5 por adelantado por $249 y ahorre $46.', blurb: 'Pague solo cuando necesite un cambio.', specs: [['Tiempo', 'Unos 30 min cada uno'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Textos, fotos, precios, horarios y menús', 'Un nuevo miembro del equipo, evento o noticia', 'Un enlace roto, o algo que se ve mal en el teléfono'], cta: 'Enviar un cambio', href: '#start' },
-  { tag: 'Cambios casi todos los meses', name: 'Paquetes de horas', price: '$575', unit: 'por 5 horas', extra: 'O 10 horas por $1,100.', blurb: 'Pague por adelantado y use las horas cuando las necesite.', specs: [['Tiempo', '5 o 10 horas'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Todo lo de Cambios', 'Una sección nueva, o una página nueva sencilla con uno de sus diseños de página', 'Agregar un formulario, botón, mapa, video o enlace de reservas', 'Ayuda con su CMS'], cta: 'Comprar un paquete de horas', href: '#start' },
-  { tag: 'Su propia desarrolladora web', name: monthly.name, price: 'Desde $650', unit: 'al mes por 5 horas', extra: 'Mes a mes. Cancele cuando quiera.', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', specs: [['Tiempo', '5+ horas al mes'], ['Listo en', '1 día hábil'], ['Planificación', 'Llamada mensual'], ['Revisión e informe', 'Mensual'], ['Salud en Google', 'Mensual'], ['Ayuda urgente', 'El mismo día']], covers: ['Todo lo de Paquetes de horas', 'Páginas para campañas y eventos, y funciones pequeñas', 'Un informe mensual breve: qué cambió y qué sigue', 'Trabajo junto a su persona de marketing o SEO'], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
+  { tag: 'Algunos cambios al año', name: 'Cambios', price: '$59', unit: 'por cambio', extra: 'O compre 5 por adelantado por $249 y ahorre $46. Válidos por 12 meses.', blurb: 'Pague solo cuando necesite un cambio.', specs: [['Tiempo', 'Unos 30 min cada uno'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Textos, fotos, precios, horarios y menús', 'Un nuevo miembro del equipo, evento o noticia', 'Un enlace roto, o algo que se ve mal en el teléfono'], cta: 'Enviar un cambio', href: '#start' },
+  { tag: 'Cambios casi todos los meses', name: 'Paquetes de horas', price: '$575', unit: 'por 5 horas', extra: 'O 10 horas por $1,100. Válidas por 12 meses, en pasos de 15 minutos.', blurb: 'Pague por adelantado y use las horas cuando las necesite.', specs: [['Tiempo', '5 o 10 horas'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Todo lo de Cambios', 'Una sección nueva, o una página nueva sencilla con uno de sus diseños de página', 'Agregar un formulario, botón, mapa, video o enlace de reservas', 'Ayuda con su CMS'], cta: 'Comprar un paquete de horas', href: '#start' },
+  { tag: 'Su propia desarrolladora web', name: monthly.name, extra: 'Mes a mes, cancele cuando quiera. Las horas que no use pasan al mes siguiente.', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', toggleLabel: 'Horas al mes', tierDefault: 1, specs: ['Tiempo', 'Listo en', 'Planificación', 'Revisión e informe', 'Salud en Google', 'Ayuda urgente'],
+    tiers: [
+      { label: '1 hora', price: '$125', unit: 'al mes por 1 hora', specs: ['1 hora al mes', '2 días hábiles', null, 'Mensual', 'Mensual', null], covers: ['Todo lo de Cambios', 'Una nota mensual breve sobre la revisión de su sitio', 'Ayuda constante, sin comprar un paquete'] },
+      { label: '5 horas', price: '$575', unit: 'al mes por 5 horas', specs: ['5+ horas al mes', '1 día hábil', 'Llamada mensual', 'Mensual', 'Mensual', 'El mismo día'], covers: ['Todo lo de Paquetes de horas', 'Páginas para campañas y eventos, y funciones pequeñas', 'Un informe mensual breve: qué cambió y qué sigue', 'Trabajo junto a su persona de marketing o SEO'] },
+    ], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
 ];
 
 const faqs = [
   { q: "¿Qué cuenta como un cambio?", a: "Hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud, como un horario nuevo, algunas fotos nuevas y un error de escritura. Si una solicitud va a tomar más, se lo digo antes." },
-  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si su sitio cambia a menudo, un paquete de horas o el retainer es más sencillo. El retainer es mes a mes, así que puede dejarlo cuando quiera." },
+  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si su sitio cambia a menudo, un paquete de horas o el retainer es más sencillo. El retainer empieza en $125 por 1 hora al mes, y es mes a mes, así que puede dejarlo cuando quiera." },
   { q: "¿Cuánto rinde una hora?", a: "Un horario nuevo y un par de fotos toman unos 15 minutos. Un nuevo miembro del equipo con foto y biografía toma unos 30 minutos. Una página nueva sencilla con uno de sus diseños de página actuales toma de 1 a 2 horas. Registro el tiempo en pasos de 15 minutos y le muestro lo que queda en su paquete después de cada solicitud." },
   { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios y los paquetes de horas son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir el retainer o un cambio puntual pequeño." },
   { q: "¿Cuánto cuesta mantener mi sitio funcionando?", a: "Su dominio cuesta unos $20 al año, y el hosting es gratis o de bajo costo para la mayoría de los sitios que construyo, a su nombre. Si su sitio necesita una plataforma con cuota mensual, se lo digo antes de empezar." },
@@ -35,7 +39,7 @@ const schema = serviceSchema([
   { name: 'CMS (sistema de gestión de contenidos)', description: 'Un panel sencillo para actualizar por su cuenta los textos, las fotos y colecciones como noticias o eventos, sin programar.', price: 'Desde $1,750' },
 ], '/es/websites/help-after-launch/');
 ---
-<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $59 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $59 por cambio, paquetes de horas desde $575, un retainer mensual desde $650, o un CMS para hacer cambios usted.">
+<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $59 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $59 por cambio, paquetes de horas desde $575, un retainer mensual desde $125, o un CMS para hacer cambios usted.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Ayuda cuando la necesite, <em>o cada mes.</em></h1>
@@ -44,7 +48,7 @@ const schema = serviceSchema([
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
         <a class="btn btn-ghost" href="/es/websites/#packages">Ver paquetes de sitios web <Icon name="arrow" size={18} /></a>
       </div>
-      <p class="hero-note">Los cambios cuestan $59 cada uno, los paquetes de horas desde $575 y el retainer mensual desde $650. Empiece cuando quiera, al lanzar o más adelante.</p>
+      <p class="hero-note">Los cambios cuestan $59 cada uno, los paquetes de horas desde $575 y el retainer mensual desde $125 por 1 hora. Empiece cuando quiera, al lanzar o más adelante.</p>
     </div>
   </section>
 
@@ -77,15 +81,30 @@ const schema = serviceSchema([
       </div>
       <div class="grid grid-3 packages">
         {paths.map((p) => (
-          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]}>
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]} data-tier={p.tiers ? p.tierDefault : undefined}>
             <span class="tag">{p.tag}</span>
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
-            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
-            {p.extra && <p class="pk-extra muted">{p.extra}</p>}
-            <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd></div>)}</dl>
-            <p class="pk-covers-title">Qué incluye</p>
-            <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+            {p.tiers ? (
+              <>
+                <p class="price">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
+                <div class="pk-extra">
+                  <div class="pk-toggle" role="group" aria-label={p.toggleLabel}>{p.tiers.map((t, i) => <button type="button" data-t-btn={i} aria-pressed={i === p.tierDefault ? 'true' : 'false'}>{t.label}</button>)}</div>
+                  <p class="muted">{p.extra}</p>
+                </div>
+                <dl class="pk-specs">{p.specs.map((k, r) => <div><dt>{k}</dt>{p.tiers.map((t, i) => { const v = t.specs[r]; return <dd data-t={i} class:list={['pk-tier', { none: !v }]}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd>; })}</div>)}</dl>
+                <p class="pk-covers-title">Qué incluye</p>
+                <div>{p.tiers.map((t, i) => <ul data-t={i} class="ticks small pk-covers pk-tier">{t.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>)}</div>
+              </>
+            ) : (
+              <>
+                <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+                {p.extra && <p class="pk-extra muted">{p.extra}</p>}
+                <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd></div>)}</dl>
+                <p class="pk-covers-title">Qué incluye</p>
+                <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+              </>
+            )}
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
@@ -106,4 +125,15 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} />
   <InquiryForm kind="website" topic="care" alt />
+
+  <script>
+    document.querySelectorAll<HTMLElement>('.package[data-tier]').forEach((card) => {
+      card.querySelectorAll<HTMLButtonElement>('[data-t-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          card.dataset.tier = btn.dataset.tBtn;
+          card.querySelectorAll('[data-t-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+    });
+  </script>
 </Base>

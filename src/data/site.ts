@@ -187,11 +187,11 @@ export const hourPacks = [
   { name: '10-hour pack', price: '$1,100', hours: '10 hours', text: '10 hours for updates, new sections, simple new pages in your existing page designs, adding forms, maps, videos, or booking links, and CMS help. Good for 12 months. Done within 2 business days.' },
 ];
 
-// The monthly offer: your own web developer. Month to month (alexandria 2026-11-02).
+// The monthly offer: your own web developer. Month to month: 1 hour $125 (list rate) or 5 hours $575 (same rate as the 5-hour pack) (alexandria 2026-11-02).
 
 export const monthly = {
   name: 'Monthly website retainer',
-  price: 'From $650 a month for 5 hours',
+  price: 'From $125 a month for 1 hour, or $575 for 5 hours',
   text: 'Your own web developer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
   outcomes: ['A monthly planning call', 'New pages for your campaigns, events, and products', 'A monthly site check and Google health check', 'A short report on what changed, what it did, and what\'s next'],
 };
