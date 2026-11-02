@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/pages/websites.css';
 import Icon from '../components/Icon.astro';
+import HelloBand from '../components/HelloBand.astro';
 import PathBand from '../components/PathBand.astro';
 import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
@@ -54,9 +55,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria,</b> founder of Auva Studio. I spent nearly 20 years as a developer behind newspaper websites, from the Times Herald-Record to more than 150 daily newspapers. Now I build fast, custom sites for small businesses, and you'll work with me directly from the first call to launch. <a href="/about/">More about me</a><ul class="hello-facts"><li><b>Nearly 20</b> years building websites</li><li><b>20+</b> years in software</li></ul></span></div>
-  </section>
+  <HelloBand text={"founder of Auva Studio. I spent nearly 20 years as a developer behind newspaper websites, from the Times Herald-Record to more than 150 daily newspapers. Now I build fast, custom sites for small businesses, and you'll work with me directly from the first call to launch."} facts={[["20+", "years in software"], ["Nearly 20", "years building websites"], ["150+", "daily newspaper sites"]]} />
 
   <section class="alt" id="who">
     <div class="wrap">

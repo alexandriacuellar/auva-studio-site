@@ -1,9 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
-import { Image } from 'astro:assets';
-import headshot from '../assets/alexandria-cuellar.jpg';
 import '../styles/pages/production-emerging-tech.css';
 import Icon from '../components/Icon.astro';
+import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import { site, testimonials, aiOffers, serviceSchema } from '../data/site';
@@ -45,9 +44,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hi, I'm Alexandria,</b> founder of Auva Studio and a producer for indie game studios and XR teams. You'll work with me directly from first idea to launch. <a href="/about/">More about me</a><ul class="hello-facts"><li><b>14+</b> VR experiences and mobile games</li><li><b>Meta Horizon</b> Start and Creator Program</li><li><b>20+</b> years in software</li></ul></span></div>
-  </section>
+  <HelloBand text={"founder of Auva Studio and a producer for indie game studios and XR teams. You'll work with me directly from first idea to launch."} facts={[["20+", "years in software"], ["14+", "VR experiences and mobile games"], ["Meta Horizon", "Start and Creator Program"]]} />
 
   <section class="alt" id="who">
     <div class="wrap">

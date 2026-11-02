@@ -642,17 +642,28 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 }
 .pv-open svg { vertical-align: -3px; margin-left: 4px; }
 
-/* Websites hero: a small hello from Alexandria with her photo. */
-.hello-band { padding: 36px 0; background: var(--night); color: var(--white); }
-.hello { display: flex; align-items: center; justify-content: center; gap: 28px; font-size: 1.25rem; line-height: 1.5; }
-.hello span { max-width: 52ch; }
-.hello b { color: var(--white); }
-.hello a { color: var(--white); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.hello-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; font-size: 0.88rem; line-height: 1.3; }
-.hello-facts li { padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.88); }
+/* Service pages: the navy hello band under the hero (HelloBand.astro). Same layout on Websites, Tech, and Production:
+   photo, one short paragraph, then three facts with the About link at the end of the row. */
+.hello-band { padding: 48px 0; background: var(--night); color: var(--white); }
+.hello { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 32px; align-items: center; max-width: 920px; }
+.hello img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 3px solid rgb(255 255 255 / 0.85); }
+.hello-text { margin: 0; font-size: 1.15rem; line-height: 1.6; color: #dfe7fb; max-width: 62ch; }
+.hello-text b { color: var(--white); }
+.hello-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 18px; }
+.hello-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; font-size: 0.88rem; line-height: 1.3; }
+.hello-facts li { padding: 6px 12px; border-radius: 999px; background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.2); color: rgb(255 255 255 / 0.85); }
 .hello-facts b { color: var(--white); }
-.hello img { width: 120px; height: 120px; border-radius: 50%; flex: none; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.85); }
-@media (max-width: 640px) { .hello-band { padding: 28px 0; } .hello { gap: 16px; font-size: 1.02rem; justify-content: flex-start; } .hello img { width: 84px; height: 84px; } }
+.hello-more { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; color: var(--white); font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+.hello-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+.hello-more svg { transition: transform .15s; }
+.hello-more:hover svg { transform: translateX(3px); }
+@media (max-width: 640px) {
+  .hello-band { padding: 36px 0; }
+  .hello { grid-template-columns: 1fr; gap: 16px; }
+  .hello img { width: 72px; height: 72px; border-width: 2px; }
+  .hello-text { font-size: 1.02rem; }
+  .hello-foot { margin-top: 14px; }
+}
 
 /* Style picker in the Websites inquiry form: six optional tiles, each with a tiny drawn mock. */
 .style-pick { border: 0; margin: 4px 0 0; padding: 0; min-width: 0; }

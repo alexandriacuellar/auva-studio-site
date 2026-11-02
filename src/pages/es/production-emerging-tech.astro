@@ -1,9 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { Image } from 'astro:assets';
-import headshot from '../../assets/alexandria-cuellar.jpg';
 import '../../styles/pages/production-emerging-tech.css';
 import Icon from '../../components/Icon.astro';
+import HelloBand from '../../components/HelloBand.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
 import { site, testimonials, aiOffers, serviceSchema } from '../../data/site.es';
@@ -45,9 +44,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria,</b> fundadora de Auva Studio y productora para estudios independientes de videojuegos y equipos de XR. Trabajará directamente conmigo desde la primera idea hasta el lanzamiento. <a href="/es/about/">Más sobre mí</a><ul class="hello-facts"><li><b>14+</b> experiencias de realidad virtual y juegos</li><li><b>Meta Horizon</b> Start y Creator Program</li><li><b>20+</b> años en software</li></ul></span></div>
-  </section>
+  <HelloBand text={"fundadora de Auva Studio y productora para estudios independientes de videojuegos y equipos de XR. Trabajará directamente conmigo desde la primera idea hasta el lanzamiento."} facts={[["20+", "años en software"], ["14+", "experiencias de realidad virtual y juegos"], ["Meta Horizon", "Start y Creator Program"]]} />
 
   <section class="alt" id="who">
     <div class="wrap">
