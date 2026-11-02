@@ -177,22 +177,23 @@ export const process = [
 
 // Help After Launch: pay as you go, or one monthly plan sized on a call. A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$59 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days.' },
+  { name: 'Updates and fixes', price: '$59 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. Or buy 5 ahead for $249, good for 12 months.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
 
-// The only monthly offer: a block of web developer hours. Sold on outcomes; hours set the price.
-// Monthly update plans (2026-11-01): sized by how often a client needs help. Optional, start or switch any time.
-export const plans = [
-  { name: 'Monthly updates', price: '$99 a month', hours: '1 hour', text: '1 hour of updates a month, about 2 updates, plus a monthly check that your forms, links, and buttons work. Done within 2 business days.' },
-  { name: 'Monthly updates plus', price: '$179 a month', hours: '2 hours', text: '2 hours a month for updates, CMS changes, or a simple new page in an existing page design, a monthly check, and a search review every 3 months. Done within 1 business day.' },
+// Prepaid hour packs (2026-11-02): for sites that change regularly. Good for 12 months, tracked in 15-minute steps.
+export const hourPacks = [
+  { name: '5-hour pack', price: '$575', hours: '5 hours', text: '5 hours for updates, new sections, simple new pages in your existing page designs, adding forms, maps, videos, or booking links, and CMS help. Good for 12 months. Done within 2 business days.' },
+  { name: '10-hour pack', price: '$1,100', hours: '10 hours', text: '10 hours for updates, new sections, simple new pages in your existing page designs, adding forms, maps, videos, or booking links, and CMS help. Good for 12 months. Done within 2 business days.' },
 ];
+
+// The monthly offer: your own web developer. Month to month (alexandria 2026-11-02).
 
 export const monthly = {
   name: 'Monthly website retainer',
   price: 'From $650 a month for 5 hours',
   text: 'Your own web developer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
-  outcomes: ['Stays fast, secure, and working', 'Gets new pages for your campaigns, events, and products', 'Keeps up with what people are searching for', 'Comes with a short report on what changed, what it did, and what\'s next'],
+  outcomes: ['A monthly planning call', 'New pages for your campaigns, events, and products', 'A monthly site check and Google health check', 'A short report on what changed, what it did, and what\'s next'],
 };
 
 

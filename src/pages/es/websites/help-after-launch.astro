@@ -3,7 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import InquiryForm from '../../../components/InquiryForm.astro';
 import Faq from '../../../components/Faq.astro';
-import { care, plans, monthly, serviceSchema, site } from '../../../data/site.es';
+import { care, hourPacks, monthly, serviceSchema, site } from '../../../data/site.es';
 
 const atLaunch = [
   { icon: 'chat', title: 'Un recorrido', text: 'Le muestro su sitio nuevo y respondo sus preguntas.' },
@@ -12,30 +12,30 @@ const atLaunch = [
   { icon: 'key', title: 'Todo a su nombre', text: 'Su dominio, su hosting y sus cuentas, para que nunca dependa de mí para entrar.' },
 ];
 
-// Cuatro formas de recibir ayuda después del lanzamiento, como las tarjetas de paquetes: las mismas filas en cada tarjeta.
-const basics = ['Cambios con sus diseños de página actuales', 'Presupuesto previo para cualquier trabajo mayor', 'Páginas y funciones nuevas a $125/hora', 'Envíe sus solicitudes por correo, cuando quiera'];
+// Tres formas de recibir ayuda después del lanzamiento (2026-11-02): cambios sueltos, paquetes de horas o un retainer mensual.
+const basics = ['Envíe sus solicitudes por correo, cuando quiera', 'Le aviso antes si algo va a tomar más tiempo', 'Cambios con sus diseños de página actuales', 'Trabajos mayores con presupuesto previo, a $125/hora'];
 const paths = [
-  { tag: 'De vez en cuando', name: 'Pague por cambio', price: '$59', unit: 'por cambio', blurb: 'Para sitios que cambian pocas veces al año.', specs: [['Tiempo', 'Unos 30 min por cambio'], ['Listo en', '2 días hábiles'], ['Revisión del sitio', null], ['Revisión de búsqueda', null], ['Ayuda urgente', null], ['Compromiso', 'Ninguno']], cta: 'Enviar un cambio', href: '#start' },
-  { tag: 'Un poco cada mes', name: plans[0].name, price: '$99', unit: 'al mes', blurb: 'Para algunos cambios pequeños casi todos los meses.', specs: [['Tiempo', '1 hora al mes'], ['Listo en', '2 días hábiles'], ['Revisión del sitio', 'Mensual'], ['Revisión de búsqueda', null], ['Ayuda urgente', null], ['Compromiso', '3 meses']], cta: 'Empezar cambios mensuales', href: '#start' },
-  { tag: 'Más cada mes', name: plans[1].name, price: '$179', unit: 'al mes', blurb: 'Para sitios con muchos cambios.', specs: [['Tiempo', '2 horas al mes'], ['Listo en', '1 día hábil'], ['Revisión del sitio', 'Mensual'], ['Revisión de búsqueda', 'Cada 3 meses'], ['Ayuda urgente', null], ['Compromiso', '3 meses']], cta: 'Empezar cambios mensuales plus', href: '#start' },
-  { tag: 'Cada mes', name: 'Retainer mensual para su sitio web', price: 'Desde $650', unit: 'al mes por 5 horas', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', specs: [['Tiempo', '5+ horas al mes'], ['Listo en', 'Lo planeamos juntos'], ['Revisión del sitio', 'Mensual, con informe'], ['Revisión de búsqueda', 'Continua'], ['Ayuda urgente', 'El mismo día'], ['Compromiso', '3 meses']], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
+  { tag: 'Algunos cambios al año', name: 'Cambios', price: '$59', unit: 'por cambio', extra: 'O compre 5 por adelantado por $249 y ahorre $46.', blurb: 'Pague solo cuando necesite un cambio.', specs: [['Tiempo', 'Unos 30 min cada uno'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Textos, fotos, precios, horarios y menús', 'Un nuevo miembro del equipo, evento o noticia', 'Un enlace roto, o algo que se ve mal en el teléfono'], cta: 'Enviar un cambio', href: '#start' },
+  { tag: 'Cambios casi todos los meses', name: 'Paquetes de horas', price: '$575', unit: 'por 5 horas', extra: 'O 10 horas por $1,100.', blurb: 'Pague por adelantado y use las horas cuando las necesite.', specs: [['Tiempo', '5 o 10 horas'], ['Listo en', '2 días hábiles'], ['Planificación', null], ['Revisión e informe', null], ['Salud en Google', null], ['Ayuda urgente', null]], covers: ['Todo lo de Cambios', 'Una sección nueva, o una página nueva sencilla con uno de sus diseños de página', 'Agregar un formulario, botón, mapa, video o enlace de reservas', 'Ayuda con su CMS'], cta: 'Comprar un paquete de horas', href: '#start' },
+  { tag: 'Su propia desarrolladora web', name: monthly.name, price: 'Desde $650', unit: 'al mes por 5 horas', extra: 'Mes a mes. Cancele cuando quiera.', blurb: 'Su propia desarrolladora web, sin tener que contratar a nadie.', specs: [['Tiempo', '5+ horas al mes'], ['Listo en', '1 día hábil'], ['Planificación', 'Llamada mensual'], ['Revisión e informe', 'Mensual'], ['Salud en Google', 'Mensual'], ['Ayuda urgente', 'El mismo día']], covers: ['Todo lo de Paquetes de horas', 'Páginas para campañas y eventos, y funciones pequeñas', 'Un informe mensual breve: qué cambió y qué sigue', 'Trabajo junto a su persona de marketing o SEO'], cta: 'Hablemos de lo que necesita', href: site.booking, featured: true },
 ];
 
 const faqs = [
   { q: "¿Qué cuenta como un cambio?", a: "Hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud, como un horario nuevo, algunas fotos nuevas y un error de escritura. Si una solicitud va a tomar más, se lo digo antes." },
-  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si cambia cosas casi todos los meses, un plan es más sencillo, y puede empezarlo, cambiarlo o dejarlo cuando quiera después de los primeros 3 meses." },
-  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios sin plan mensual son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir un plan mensual o un cambio puntual pequeño." },
+  { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si su sitio cambia a menudo, un paquete de horas o el retainer es más sencillo. El retainer es mes a mes, así que puede dejarlo cuando quiera." },
+  { q: "¿Cuánto rinde una hora?", a: "Un horario nuevo y un par de fotos toman unos 15 minutos. Un nuevo miembro del equipo con foto y biografía toma unos 30 minutos. Una página nueva sencilla con uno de sus diseños de página actuales toma de 1 a 2 horas. Registro el tiempo en pasos de 15 minutos y le muestro lo que queda en su paquete después de cada solicitud." },
+  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios y los paquetes de horas son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir el retainer o un cambio puntual pequeño." },
   { q: "¿Cuánto cuesta mantener mi sitio funcionando?", a: "Su dominio cuesta unos $20 al año, y el hosting es gratis o de bajo costo para la mayoría de los sitios que construyo, a su nombre. Si su sitio necesita una plataforma con cuota mensual, se lo digo antes de empezar." },
 ];
 
 const schema = serviceSchema([
   ...care.map((c) => ({ name: `Ayuda después del lanzamiento: ${c.name}`, description: c.text, price: c.price })),
-  ...plans.map((p) => ({ name: `Ayuda después del lanzamiento: ${p.name}`, description: p.text, price: p.price })),
+  ...hourPacks.map((p) => ({ name: `Ayuda después del lanzamiento: ${p.name}`, description: p.text, price: p.price })),
   { name: `Ayuda después del lanzamiento: ${monthly.name}`, description: monthly.text, price: monthly.price },
   { name: 'CMS (sistema de gestión de contenidos)', description: 'Un panel sencillo para actualizar por su cuenta los textos, las fotos y colecciones como noticias o eventos, sin programar.', price: 'Desde $1,750' },
 ], '/es/websites/help-after-launch/');
 ---
-<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $59 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $59 por cambio, planes mensuales desde $99, retainer mensual desde $650, o un CMS para hacerlos usted.">
+<Base title="Ayuda después del lanzamiento" seoTitle="Cambios en su sitio web y ayuda después del lanzamiento, $59 por cambio | Auva Studio" schema={schema} description="Cambios en su sitio web cuando los necesite: $59 por cambio, paquetes de horas desde $575, un retainer mensual desde $650, o un CMS para hacer cambios usted.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Ayuda cuando la necesite, <em>o cada mes.</em></h1>
@@ -44,7 +44,7 @@ const schema = serviceSchema([
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
         <a class="btn btn-ghost" href="/es/websites/#packages">Ver paquetes de sitios web <Icon name="arrow" size={18} /></a>
       </div>
-      <p class="hero-note">Los cambios cuestan $59 cada uno, o elija un plan mensual desde $99. Empiece cuando quiera, al lanzar o más adelante.</p>
+      <p class="hero-note">Los cambios cuestan $59 cada uno, los paquetes de horas desde $575 y el retainer mensual desde $650. Empiece cuando quiera, al lanzar o más adelante.</p>
     </div>
   </section>
 
@@ -68,26 +68,29 @@ const schema = serviceSchema([
   <section class="alt" id="care">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Después del lanzamiento, <em>cuatro formas de recibir ayuda.</em></h2>
-        <p class="lede">Sin tarifa mensual, a menos que usted la quiera. Elija lo que mejor se adapte a la frecuencia con que cambia su sitio, y empiece o cambie de plan cuando quiera.</p>
+        <h2 class="mag-head">Después del lanzamiento, <em>tres formas de recibir ayuda.</em></h2>
+        <p class="lede">Sin tarifa mensual, a menos que usted la quiera. Elija lo que mejor se adapte a la frecuencia con que cambia su sitio, y cambie cuando quiera.</p>
       </div>
       <div class="pk-basics">
         <p class="pk-basics-title">Todas las opciones incluyen</p>
         <ul class="ticks">{basics.map((b) => <li><Icon name="tick" size={18} />{b}</li>)}</ul>
       </div>
-      <div class="grid grid-4 packages">
+      <div class="grid grid-3 packages">
         {paths.map((p) => (
-          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]}>
             <span class="tag">{p.tag}</span>
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
             <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+            {p.extra && <p class="pk-extra muted">{p.extra}</p>}
             <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">No incluido</span></>}</dd></div>)}</dl>
+            <p class="pk-covers-title">Qué incluye</p>
+            <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
       </div>
-      <p class="fine"><b>Bueno saber.</b> Compre 5 cambios por adelantado por $249 y ahorre $46. Después del mínimo de 3 meses, cambie o termine con un aviso de 30 días. <b>¿Quiere agregar varias páginas o funciones nuevas?</b> Si su sitio tiene Presencia Esencial o Presencia Ampliada, <a href="/es/websites/#packages">pasar al siguiente paquete</a> y pagar solo la diferencia suele costar menos. Las horas mensuales son un solo saldo flexible para cualquier cosa de la lista, y las horas que no use pasan al mes siguiente. Las tarifas de terceros, como plataformas o aplicaciones, se pagan aparte. Mantengo su sitio rápido, seguro y fácil de leer para Google, y le mostraré lo que está funcionando.</p>
+      <p class="fine"><b>Bueno saber.</b> Los cambios prepagados y las horas de los paquetes son válidos por 12 meses. El retainer es mes a mes, y las horas del retainer que no use pasan al mes siguiente. <b>¿Quiere agregar varias páginas o funciones nuevas?</b> Si su sitio tiene Presencia Esencial o Presencia Ampliada, <a href="/es/websites/#packages">pasar al siguiente paquete</a> y pagar solo la diferencia suele costar menos. Las tarifas de terceros, como plataformas o aplicaciones, se pagan aparte. Mantengo su sitio rápido, seguro y fácil de leer para Google, y le mostraré lo que está funcionando.</p>
     </div>
   </section>
 

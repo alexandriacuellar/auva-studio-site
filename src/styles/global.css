@@ -723,3 +723,7 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .ai-tasks h3 { font-size: 1.02rem; margin-bottom: 4px; }
 .ai-tasks .icon { margin: 0; }
 .tech-quote { max-width: 760px; }
+.package .pk-extra { margin: 4px 0 0; font-size: 0.92rem; }
+.package .pk-covers-title { margin: 16px 0 6px; font-weight: 700; color: var(--ink); font-size: 0.95rem; }
+.package .pk-covers { margin: 0 0 20px; }
+.package.pk-9 { grid-row: span 9; }
