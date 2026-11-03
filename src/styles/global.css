@@ -577,6 +577,15 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .plain-grid h3 { font-size: 1.15rem; margin-bottom: 6px; }
 .plain-grid p { margin: 0; }
 @media (max-width: 640px) { .plain-grid { gap: 24px; } }
+.benefit-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 32px; align-items: start; }
+.benefit-list li { border-top: 2px solid var(--border); }
+.benefit-list summary { display: flex; align-items: center; gap: 12px; padding: 16px 0; min-height: 44px; cursor: pointer; list-style: none; font-weight: 600; color: var(--ink); }
+.benefit-list summary::-webkit-details-marker { display: none; }
+.benefit-list summary span { flex: 1; }
+.benefit-list summary::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--primary); font-weight: 400; }
+.benefit-list details[open] summary::after { content: "\2212"; }
+.benefit-list details p { margin: -4px 0 16px 34px; }
+.benefit-list svg { color: var(--primary); flex: none; }
 
 /* Path band: a free route and a paid route, side by side, each one whole card a link. */
 .path-band { grid-template-columns: 1fr 1.25fr; }

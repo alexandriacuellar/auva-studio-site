@@ -135,11 +135,11 @@ const audiences = [
         <h2 class="mag-head">Rápido, económico <em>y suyo.</em></h2>
         <p class="lede">Construyo la mayoría de mis sitios con Astro, un framework moderno para sitios rápidos y ligeros. Esto es lo que significa para usted.</p>
       </div>
-      <div class="grid grid-3 plain-grid">
+      <ul class="benefit-list">
         {comparison.benefits.map((b) => (
-          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+          <li><details><summary><Icon name={b.icon} size={22} /><span>{b.title}</span></summary><p class="muted">{b.text}</p></details></li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 

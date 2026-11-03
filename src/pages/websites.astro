@@ -136,11 +136,11 @@ const audiences = [
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
         <p class="lede">I build most websites with Astro, a modern framework for fast, lightweight sites. Here’s what that means for you.</p>
       </div>
-      <div class="grid grid-3 plain-grid">
+      <ul class="benefit-list">
         {comparison.benefits.map((b) => (
-          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+          <li><details><summary><Icon name={b.icon} size={22} /><span>{b.title}</span></summary><p class="muted">{b.text}</p></details></li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
