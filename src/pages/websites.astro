@@ -19,6 +19,7 @@ const faqs = [
   { q: "What if something breaks after launch?", a: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see Help After Launch, and I always explain the cause and the cost before fixing anything.", html: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see <a href=\"/websites/help-after-launch/\">Help After Launch</a>, and I always explain the cause and the cost before fixing anything." },
   { q: "Will people find me on Google?", a: "Every package is built to be found, with clear page titles, search data, a sitemap, and fast pages that Google and AI tools like ChatGPT can read. No one can honestly promise a ranking, but your site starts with everything search engines look for." },
   { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I keep your content and the page addresses Google already knows, so you don't lose visitors, and moving the pages in your package is included. If your site already works well where it is, switching may not be worth it, and I'll tell you honestly." },
+  { q: "Do you work with agencies or designers?", a: "Yes. I build sites for agencies and independent designers, white-label or credited. See Development Partnerships.", html: "Yes. I build sites for agencies and independent designers, white-label or credited. See <a href=\"/development-partnerships/\">Development Partnerships</a>." },
 ];
 
 const schema = serviceSchema([
@@ -73,15 +74,9 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Ask about my nonprofit discount.</p>}
-            <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
           </div>
         ))}
-          <h3>Something else?</h3>
-          <p>Tell me about your business or project, and I'll recommend the package that fits.</p>
-          <a class="more" href="?topic=website#start" style="margin-top: 12px">Talk about your site <Icon name="arrow" size={16} /></a>
-        </div>
       </div>
-      <p class="muted" style="margin-top: 32px"><b>Something else?</b> <a href="?topic=website#start">Tell me about your business</a>, and I'll recommend the package that fits. <b>Agency or designer?</b> I also build sites for agencies and independent designers, white-label or credited. See <a href="/development-partnerships/">Development Partnerships</a>.</p>
     </div>
   </section>
 

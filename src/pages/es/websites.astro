@@ -19,6 +19,7 @@ const faqs = [
   { q: "¿Y si algo falla después del lanzamiento?", a: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea Ayuda después del lanzamiento, y siempre le explico la causa y el costo antes de arreglar nada.", html: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea <a href=\"/es/websites/help-after-launch/\">Ayuda después del lanzamiento</a>, y siempre le explico la causa y el costo antes de arreglar nada." },
   { q: "¿Me encontrarán en Google?", a: "Cada paquete está hecho para que lo encuentren, con títulos de página claros, datos para buscadores, un mapa del sitio y páginas rápidas que Google y herramientas de IA como ChatGPT pueden leer. Nadie puede prometer honestamente una posición, pero su sitio empieza con todo lo que buscan los buscadores." },
   { q: "Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?", a: "Lo más probable es que sí. Conservo su contenido y las direcciones de página que Google ya conoce, para que no pierda visitas, y mudar las páginas de su paquete está incluido. Si su sitio ya funciona bien donde está, quizá no valga la pena cambiar, y se lo diré con honestidad." },
+  { q: "¿Trabaja con agencias o diseñadores?", a: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea Colaboraciones para agencias.", html: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea <a href=\"/es/development-partnerships/\">Colaboraciones para agencias</a>." },
 ];
 
 const schema = serviceSchema([
@@ -72,15 +73,9 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Pregunte por mi descuento para organizaciones sin fines de lucro.</p>}
-            <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio <Icon name="arrow" size={16} /></a>
           </div>
         ))}
-          <h3>¿Otra cosa?</h3>
-          <p>Cuénteme sobre su negocio o proyecto, y le recomiendo el paquete que le conviene.</p>
-          <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio <Icon name="arrow" size={16} /></a>
-        </div>
       </div>
-      <p class="muted" style="margin-top: 32px"><b>¿Otra cosa?</b> <a href="?topic=website#start">Cuénteme sobre su negocio</a> y le recomiendo el paquete que le conviene. <b>¿Tiene una agencia o es diseñador?</b> También creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea <a href="/es/development-partnerships/">Colaboraciones para agencias</a>.</p>
     </div>
   </section>
 
