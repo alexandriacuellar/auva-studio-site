@@ -8,7 +8,7 @@ export const t = {
   desc: 'AR packages from $750 for businesses, architects, museums, and brands, opening on any phone with no app, plus a game and XR producer for studios.',
   heroH: 'AR and VR people remember, <em>and a producer to get it built.</em>',
   heroL: 'AR that works on any phone, VR on Meta Quest, and a producer who keeps game and XR teams on schedule.',
-  book: 'Book a free 30-minute call', seeHow: 'See how I help',
+  book: 'Book a free 30-minute call', seeHow: 'How I help',
   facts: ['<b>20+</b> years in web development', '<b>14+</b> projects managed', '<b>Mixed Reality (XR)</b> Certificate'],
   whoH: 'Who I <em>work with.</em>', elseH: 'Something else?', elseP: "Tell me what you have in mind, and I'll suggest where to start.", talk: 'Talk it through',
   twoH: 'Two ways <em>I help.</em>', twoL: 'Fixed prices for AR, written up front. Producer help for studios by the hour or month.',
