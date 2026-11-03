@@ -1,0 +1,59 @@
+---
+// Project management sub page.
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, testimonials, serviceSchema } from '../../data/site';
+import { pmPackages, faq } from '../../data/tech';
+
+const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
+const faqs = [faq.whichPm, faq.vendors, faq.inPerson];
+const schema = serviceSchema(pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })), '/technology-consulting/project-management/');
+---
+<Base title="Project Management" seoTitle="Project Management for Small Teams, from $400 | Auva Studio" schema={schema} description="Project workspace setup from $400, a $650 Project Kickoff Plan, and monthly project management from $650, without a full-time hire.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Projects that finish, <em>without a full-time hire.</em></h1>
+      <p class="lede">A clear plan, one place for the work, and someone to keep your team and vendors on schedule.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#packages">See packages</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Three ways <em>to get organized.</em></h2>
+        <p class="lede">Start with one. Each one leads into the next when you're ready.</p>
+      </div>
+      <div class="grid grid-3">
+        {pmPackages.map((p) => (
+          <div class="card offer" id={p.topic}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.topic}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="wrap">
+      <figure class="card quote" style="max-width: 720px; margin: 0 auto">
+        <blockquote>“{quote.quote}”</blockquote>
+        <figcaption><b>{quote.name}</b><span class="muted">{quote.role}</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" topic="delivery" />
+</Base>

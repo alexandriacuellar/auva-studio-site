@@ -45,7 +45,17 @@ export const nav = [
       { href: '/websites/brand-essentials/', label: 'Brand Essentials' },
     ],
   },
-  { href: '/technology-consulting/', label: 'Tech, Automation & AI' },
+  {
+    href: '/technology-consulting/',
+    label: 'Automation, AI & Projects',
+    menuLabel: 'Automation, AI & Projects pages',
+    children: [
+      { href: '/technology-consulting/', label: 'Overview and Tech Review' },
+      { href: '/technology-consulting/automation/', label: 'Automation' },
+      { href: '/technology-consulting/ai/', label: 'AI for you and your team' },
+      { href: '/technology-consulting/project-management/', label: 'Project management' },
+    ],
+  },
   { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
   { href: '/about/', label: 'About' },
 ];
@@ -63,11 +73,11 @@ export const categories = [
   },
   {
     icon: 'bulb',
-    title: 'Tech, Automation & AI',
-    text: 'Get the right tools set up, automate the busywork, put AI to work, and keep projects on track.',
-    offers: [['Tech Review', '$250'], ['Automation setup', 'From $500'], ['Project workspace setup', 'From $1,500'], ['Team AI workshop', '$750'], ['Project management', '$65/hr']],
+    title: 'Automation, AI & Projects',
+    text: 'Automate the busywork, put AI to work safely, and keep projects on track.',
+    offers: [['Automation', '$500 per workflow'], ['1-on-1 AI Session', '$150'], ['Project workspace setup', 'From $400'], ['Project management', 'From $650/mo'], ['Tech Review', '$250']],
     href: '/technology-consulting/',
-    cta: 'Explore Tech, Automation & AI',
+    cta: 'Explore Automation, AI & Projects',
   },
   {
     icon: 'bolt',
@@ -80,12 +90,6 @@ export const categories = [
   },
 ];
 
-export const consulting = [
-  { id: 'planning', price: '$250, credited toward a setup within 90 days', icon: 'search', title: 'Tech Review', text: 'A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order, rough costs, and where automation or AI would help.', items: ['Tools and subscriptions review', 'Workflow review', 'Prioritized written report'] },
-  { id: 'automation', price: 'From $500', icon: 'gear', title: 'Automation setup', text: 'I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, and monthly reports. One workflow, set up in your own accounts, with a short how-to guide.', items: ['Workflow automation', 'Connecting the apps you already use', 'How-to guide for your team'] },
-  { id: 'workspace', price: 'From $1,500', icon: 'layers', title: 'Project workspace setup', text: 'I set up the tool your team plans work in, like Asana, ClickUp, Jira, monday.com, Notion, or Trello, with boards, templates, and clear ownership, then train your team to use it.', items: ['Workspace and template setup', 'Team training', '30 days of questions after setup'] },
-  { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Monthly project management'] },
-];
 
 
 // How every engagement runs, from a small website to a complex project.
@@ -203,10 +207,9 @@ export const testimonials = [
   { quote: 'She was always super organized, dependable, and really good at keeping everything moving in the right direction.', name: 'Matthew Udy', role: 'CEO, Flip Key Studios' },
 ];
 
-// AI and production offers. group 'consulting' lives on the Tech, Automation & AI page;
+// AI and production offers. group 'consulting' lives on the Automation, AI & Projects pages;
 // 'ar' (AR packages), 'prototype' (Plan Review) and 'production' live on the Production & Emerging Tech page.
 export const aiOffers = [
-  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Team AI Workshop', price: '$750', text: 'A 90-minute hands-on session for up to 10 people. Your team practices ChatGPT, Claude, or Gemini on real work and leaves with a one-page guide.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Production Plan Review', price: '$650', text: 'For game, XR, and interactive projects. I review your scope, milestones, and risks, and give you a plan your team can follow, with your project tools set up if you need them. About 2 weeks.' },
   { id: 'ar-card', group: 'ar', icon: 'star', title: 'AR Card or Flyer', price: 'From $750', text: 'A card, flyer, or sign that comes alive when someone points a phone at it.', items: ['One printed piece', 'A short video or 3D object', 'Buttons to book, call, or visit your site'] },
   { id: 'ar-menu', group: 'ar', icon: 'book', title: 'AR Menu or Packaging', price: 'From $1,000', text: 'A menu, label, or box that shows a dish in 3D, how something is made, or a hello from the owner.', items: ['One menu, label, or box', 'Up to 3 items in 3D or video', 'A printed code that opens it'] },

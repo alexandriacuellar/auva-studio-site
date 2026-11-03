@@ -1,5 +1,6 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
+import { aiPackages as techAi, pmPackages as techPm, automationExamples } from '../data/tech';
+import { site, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
 import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
@@ -16,7 +17,7 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $59 each, prepaid hour packs from $575, or a monthly website retainer from $125 (1 hour) or $575 (5 hours)`,
-    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), monthly project management`,
+    `- [Automation, AI & Projects](${site.url}/technology-consulting/): a $250 Tech Review (credited toward any package within 90 days), plus three sub pages: [Automation](${site.url}/technology-consulting/automation/) ($500 per workflow), [AI for you and your team](${site.url}/technology-consulting/ai/) (1-on-1 AI Session $150; Team AI Workshop coming soon), and [Project management](${site.url}/technology-consulting/project-management/) (workspace setup from $400, Project Kickoff Plan $650, monthly from $650)`,
     `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
@@ -47,9 +48,11 @@ export function GET() {
     `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly website retainer: a block of web developer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. Every retainer includes a monthly site check and Google health check (errors, indexing, and speed in Search Console). The 1-hour retainer covers updates and fixes within 2 business days. The 5-hour retainer adds a monthly planning call, landing pages and small features, 1-business-day turnaround, and same-day help with urgent problems. Month to month, cancel any time; unused hours carry over one month.`,
     '- Help After Launch updates and hour packs are for websites Auva Studio built. The monthly retainer can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
-    '## Tech, Automation & AI',
-    ...consulting.map((c) => `- ${c.title}: ${c.text} ${c.price}`),
-    ...aiOffers.filter((o) => o.group === 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
+    '## Automation, AI & Projects',
+    '- Tech Review ($250): a 60-minute call, then a written report within 5 business days with top fixes in order and rough costs. Credited toward any package within 90 days.',
+    `- Automation ($500 per workflow): one workflow set up in the client's own accounts, with a how-to guide and 30 days of fixes. Examples: ${automationExamples.map((e) => `${e.title.toLowerCase()} (${e.text})`).join('; ')} Multi-step automations usually need the client's own Zapier or Make plan, about $20 to $30 a month.`,
+    ...techAi.map((p) => `- ${p.title} (${p.price}): ${p.text} ${p.items.join('; ')}.`),
+    ...techPm.map((p) => `- ${p.title} (${p.price}): ${p.text} ${p.items.join('; ')}.`),
     '- Monthly project management and monthly Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
     '',
     '## Production & Emerging Tech',

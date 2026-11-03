@@ -36,7 +36,7 @@
 .svc-line { margin: 0 0 28px; color: var(--muted); }
 .svc-offers { list-style: none; margin: 0 0 14px; padding: 0; }
 .svc-offers li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid var(--border); font-size: 0.97rem; line-height: 1.35; }
-.svc-offers b { flex: none; font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: var(--deep); white-space: nowrap; }
+.svc-offers b { flex: 0 1 auto; font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: var(--deep); text-align: right; }
 .svc-note { margin: 0 0 18px; font-size: 0.9rem; color: var(--muted); }
 .svc-more { margin-top: auto; padding-top: 6px; color: var(--primary); font-weight: 700; font-size: 0.95rem; }
 .svc-more svg { vertical-align: -2px; margin-left: 6px; }

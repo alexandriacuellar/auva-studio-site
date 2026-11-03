@@ -1,0 +1,66 @@
+---
+// Automation sub page.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, serviceSchema } from '../../../data/site.es';
+import { base, safety, automationExamples, services, faq } from '../../../data/tech.es';
+
+const faqs = [faq.needAi, faq.appChanges, faq.tools, faq.vendors];
+const svc = services.find((x) => x.id === 'automation')!;
+const schema = serviceSchema([{ name: svc.title, description: svc.text, price: svc.price }], '/es/technology-consulting/automation/');
+---
+<Base title="Automatización" seoTitle="Automatización, $500 por flujo de trabajo | Auva Studio" schema={schema} description="Conecto las herramientas que ya usa para que los seguimientos, las solicitudes de reseñas y la bienvenida a clientes se hagan solos. $500 por flujo de trabajo, en sus cuentas.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Automatice el trabajo repetitivo, <em>$500 por flujo de trabajo.</em></h1>
+      <p class="lede">Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo. Configurado en sus cuentas, con una guía breve.</p>
+      <div class="hero-actions">
+        <a class="btn" href="?topic=automation#start">Pregunte por la automatización <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="examples">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Lo que puedo <em>automatizar.</em></h2>
+        <p class="lede">Un flujo de trabajo es una tarea de principio a fin. Estos son los más comunes.</p>
+      </div>
+      <div class="grid grid-3">
+        {automationExamples.map((e) => (
+          <div class="card">
+            <div class="icon"><Icon name={e.icon} size={32} /></div>
+            <h3>{e.title}</h3>
+            <p class="muted">{e.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top: 24px">Las automatizaciones de varios pasos suelen necesitar su propio plan de pago de Zapier o Make, de unos $20 a $30 al mes. Se lo digo antes de empezar.</p>
+    </div>
+  </section>
+
+  <section id="safe">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Hecho para ser seguro, <em>y suyo.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {safety.map((s) => (
+          <div class="card">
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top: 32px"><b>¿No sabe qué automatizar primero?</b> Empiece con una <a href={`${base}/#planning`}>Revisión Tecnológica de $250</a>, que se abona a su primer flujo de trabajo.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" topic="automation" />
+</Base>
