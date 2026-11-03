@@ -577,6 +577,8 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .plain-grid h3 { font-size: 1.15rem; margin-bottom: 6px; }
 .plain-grid p { margin: 0; }
 @media (max-width: 640px) { .plain-grid { gap: 24px; } }
+.pk-pay { text-align: center; color: var(--muted); margin: 24px auto 0; max-width: 62ch; }
+.pk-pay b { color: var(--ink); }
 .benefit-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 32px; align-items: start; }
 .benefit-list li { border-top: 2px solid var(--border); }
 .benefit-list summary { display: flex; align-items: center; gap: 12px; padding: 16px 0; min-height: 44px; cursor: pointer; list-style: none; font-weight: 600; color: var(--ink); }
