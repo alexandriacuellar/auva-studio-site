@@ -157,7 +157,7 @@ function xrFailed(err) {
 const xr = { session: null, renderer: null, scene: null, camera: null, ref: null, refType: 'local', house: null, holder: null,
   viewerHit: null, ctrlHit: new Map(), lastHit: new Map(), following: true, target: null, reticle: null,
   panel: null, panelItems: [], panelPlaced: false, rays: [] };
-if (location.search.includes('debug')) { window.__arDemo = xr; window.__state = state; }
+if (location.search.includes('debug')) { window.__arDemo = xr; window.__state = state; window.__pv = pv; }
 
 function shadowTexture() {
   const c = document.createElement('canvas'); c.width = c.height = 128;
@@ -183,7 +183,7 @@ function initThree() {
   renderer.domElement.style.display = 'none';
   document.body.appendChild(renderer.domElement);
   const scene = makeScene(renderer);
-  const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.01, 200);
+  const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.05, 60); // a near plane at 5 cm keeps depth precise at table scale
 
   const reticle = new THREE.Group();
   reticle.add(new THREE.Mesh(new THREE.RingGeometry(0.1, 0.122, 48).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })));
