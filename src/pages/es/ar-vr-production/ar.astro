@@ -1,16 +1,16 @@
 ---
-// AR Packages sub page. Packages come from aiOffers group 'ar' in site.ts.
-import Base from '../../layouts/Base.astro';
-import '../../styles/pages/production-emerging-tech.css';
-import Icon from '../../components/Icon.astro';
-import InquiryForm from '../../components/InquiryForm.astro';
-import Faq from '../../components/Faq.astro';
-import { site, aiOffers, serviceSchema } from '../../data/site';
-import { t, ideas, faq } from '../../data/production';
+// AR Packages sub page. Packages come from aiOffers group 'ar' in site.es.ts.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, aiOffers, serviceSchema } from '../../../data/site.es';
+import { t, ideas, faq } from '../../../data/production.es';
 
 const packages = aiOffers.filter((o) => o.group === 'ar');
 const faqs = [faq.app, faq.models, faq.bigger];
-const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/ar/');
+const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ar-vr-production/ar/');
 ---
 <Base title={t.arTitle} seoTitle={t.arSeo} schema={schema} description={t.arDesc}>
   <section class="hero bd-hero bd-inner-hero">

@@ -1,9 +1,19 @@
 # Old page addresses, kept so links and search results still work.
-/ai /technology-consulting/ai/ 301
-/ai/ /technology-consulting/ai/ 301
-/ai-emerging-tech /production-emerging-tech/ 301
-/ai-emerging-tech/ /production-emerging-tech/ 301
-/es/ai-emerging-tech /es/production-emerging-tech/ 301
-/es/ai-emerging-tech/ /es/production-emerging-tech/ 301
-/consulting /technology-consulting/ 301
-/consulting/ /technology-consulting/ 301
+/ai /automation-ai-projects/ai/ 301
+/ai/ /automation-ai-projects/ai/ 301
+/ai-emerging-tech /ar-vr-production/ 301
+/ai-emerging-tech/ /ar-vr-production/ 301
+/es/ai-emerging-tech /es/ar-vr-production/ 301
+/es/ai-emerging-tech/ /es/ar-vr-production/ 301
+/consulting /automation-ai-projects/ 301
+/consulting/ /automation-ai-projects/ 301
+
+# Section renames (2026-11-03): Automation, AI & Projects and AR, VR & Production.
+/technology-consulting /automation-ai-projects/ 301
+/technology-consulting/* /automation-ai-projects/:splat 301
+/production-emerging-tech /ar-vr-production/ 301
+/production-emerging-tech/* /ar-vr-production/:splat 301
+/es/technology-consulting /es/automation-ai-projects/ 301
+/es/technology-consulting/* /es/automation-ai-projects/:splat 301
+/es/production-emerging-tech /es/ar-vr-production/ 301
+/es/production-emerging-tech/* /es/ar-vr-production/:splat 301

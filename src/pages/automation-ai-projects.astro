@@ -17,7 +17,7 @@ const schema = serviceSchema([
   ...services.map((x) => ({ name: x.title, description: x.text, price: x.price })),
   ...aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })),
   ...pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })),
-], '/technology-consulting/');
+], '/automation-ai-projects/');
 ---
 <Base title={sectionName} seoTitle="Automation, AI & Project Management Help | Auva Studio" schema={schema} description="Automation from $500 per workflow, 1-on-1 AI sessions from $150, and project management from $400 for Hudson Valley small businesses, nonprofits, and teams.">
   <section class="hero bd-hero bd-inner-hero">

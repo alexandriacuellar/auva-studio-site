@@ -1,6 +1,6 @@
 // AR, VR & Production: main page + AR Packages and Game & XR Production sub pages (alexandria 2026-11-03).
 // Spanish copy is in production.es.ts. Package prices live in aiOffers in site.ts.
-export const base = '/production-emerging-tech';
+export const base = '/ar-vr-production';
 
 export const t = {
   title: 'AR, VR & Production',
@@ -12,8 +12,8 @@ export const t = {
   facts: ['<b>20+</b> years in web development', '<b>14+</b> projects managed', '<b>Mixed Reality (XR)</b> Certificate'],
   whoH: 'Who I <em>work with.</em>', elseH: 'Something else?', elseP: "Tell me what you have in mind, and I'll suggest where to start.", talk: 'Talk it through',
   twoH: 'Two ways <em>I help.</em>', twoL: 'Fixed prices for AR, written up front. Producer help for studios by the hour or month.',
-  nextTag: 'Coming in 2027', nextH: "Next up: VR and Meta's AI glasses",
-  nextP: "I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Next I'm building for Meta Quest headsets and Meta's AI glasses: hands-free guides and tours, step-by-step help for staff, and VR training. Have an idea? Tell me now and you'll be first in line.",
+  nextTag: 'Coming in 2027', nextH: "Next up: Meta's new VR glasses",
+  nextP: "I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Meta's new VR glasses arrive in 2027, and I'm getting ready to build for them: hands-free guides and tours, and step-by-step help for staff. Have an idea? Tell me now and you'll be first in line.",
   nextA: 'Share your idea',
   howH: 'How it <em>works.</em>', howL: 'Simple to start, with no surprises along the way.',
   steps: [
@@ -72,5 +72,6 @@ export const faq = {
   underway: { q: 'Can you join a game or XR project already underway?', a: 'Yes. I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
   models: { q: 'Do I need 3D models?', a: 'No. I can make them from your photos or product files. Architects and builders can use the model they already have.' },
   engines: { q: 'Which engines and platforms have you worked with?', a: 'Unity and Meta Quest, plus Meta Horizon Worlds. I manage the work and the schedule; your developers build in the engine you use.' },
+  glasses: { q: 'Can you build for smart glasses?', a: 'Yes. I can build for AI glasses and display glasses, like Ray-Ban Meta and Meta Ray-Ban Display, for things like hands-free guides, tours, and step-by-step help. It isn’t a package yet, so it’s quoted for your project.' },
   remote: { q: 'Do you work remotely?', a: 'Yes. Most studio work is remote, across time zones, with the tools your team already uses.' },
 };

@@ -9,7 +9,7 @@ import { site, serviceSchema } from '../../../data/site.es';
 import { aiPackages, aiTasks, faq } from '../../../data/tech.es';
 
 const faqs = [faq.skills, faq.aiSafe, faq.chatbot];
-const schema = serviceSchema(aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })), '/es/technology-consulting/ai/');
+const schema = serviceSchema(aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })), '/es/automation-ai-projects/ai/');
 ---
 <Base title="IA para usted y su equipo" seoTitle="Sesiones de IA 1 a 1 desde $150 | Auva Studio" schema={schema} description="Ayuda práctica con IA para dueños y equipos: una sesión 1 a 1 de 90 minutos por $150, con ChatGPT, Claude o Gemini en su trabajo real, de forma segura.">
   <section class="hero bd-hero bd-inner-hero">

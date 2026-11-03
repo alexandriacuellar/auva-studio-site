@@ -1,7 +1,7 @@
-// Automation, AI & Projects (URL /technology-consulting/): main page + 3 sub pages (alexandria 2026-11-02).
+// Automation, AI & Projects (URL /automation-ai-projects/): main page + 3 sub pages (alexandria 2026-11-02).
 // The section name lives here so a rename is one line. Spanish copy is in tech.es.ts.
 export const sectionName = 'Automation, AI & Projects';
-export const base = '/technology-consulting';
+export const base = '/automation-ai-projects';
 
 export const services = [
   { id: 'automation', icon: 'gear', title: 'Automation', price: '$500 per workflow', text: 'Routine work that happens on its own, like follow-ups, review requests, and onboarding.', href: `${base}/automation/`, link: 'See automation' },

@@ -17,7 +17,7 @@ const schema = serviceSchema([
   ...services.map((x) => ({ name: x.title, description: x.text, price: x.price })),
   ...aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })),
   ...pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })),
-], '/es/technology-consulting/');
+], '/es/automation-ai-projects/');
 ---
 <Base title={sectionName} seoTitle="Ayuda con automatización, IA y gestión de proyectos | Auva Studio" schema={schema} description="Automatización desde $500 por flujo de trabajo, sesiones de IA 1 a 1 desde $150 y gestión de proyectos desde $400 para pequeños negocios, organizaciones y equipos del Hudson Valley.">
   <section class="hero bd-hero bd-inner-hero">

@@ -10,7 +10,7 @@ import { pmPackages, faq } from '../../data/tech';
 
 const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
 const faqs = [faq.whichPm, faq.vendors, faq.inPerson];
-const schema = serviceSchema(pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })), '/technology-consulting/project-management/');
+const schema = serviceSchema(pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })), '/automation-ai-projects/project-management/');
 ---
 <Base title="Project Management" seoTitle="Project Management for Small Teams, from $400 | Auva Studio" schema={schema} description="Project workspace setup from $400, a $650 Project Kickoff Plan, and monthly project management from $650, without a full-time hire.">
   <section class="hero bd-hero bd-inner-hero">

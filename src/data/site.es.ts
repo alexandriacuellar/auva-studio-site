@@ -26,26 +26,26 @@ export const nav = [
     ],
   },
   {
-    href: '/es/technology-consulting/',
+    href: '/es/automation-ai-projects/',
     label: 'Automatización e IA',
     // Full name for search data; the menu shows the short label so the header stays on one row.
     title: 'Automatización, IA y Proyectos',
     menuLabel: 'Páginas de automatización, IA y proyectos',
     children: [
-      { href: '/es/technology-consulting/', label: 'Resumen y Revisión Tecnológica' },
-      { href: '/es/technology-consulting/automation/', label: 'Automatización' },
-      { href: '/es/technology-consulting/ai/', label: 'IA para usted y su equipo' },
-      { href: '/es/technology-consulting/project-management/', label: 'Gestión de proyectos' },
+      { href: '/es/automation-ai-projects/', label: 'Resumen y Revisión Tecnológica' },
+      { href: '/es/automation-ai-projects/automation/', label: 'Automatización' },
+      { href: '/es/automation-ai-projects/ai/', label: 'IA para usted y su equipo' },
+      { href: '/es/automation-ai-projects/project-management/', label: 'Gestión de proyectos' },
     ],
   },
   {
-    href: '/es/production-emerging-tech/',
+    href: '/es/ar-vr-production/',
     label: 'AR, VR y Producción',
     menuLabel: 'Páginas de producción y tecnología emergente',
     children: [
-      { href: '/es/production-emerging-tech/', label: 'Resumen' },
-      { href: '/es/production-emerging-tech/ar/', label: 'Paquetes de AR' },
-      { href: '/es/production-emerging-tech/studios/', label: 'Producción de videojuegos y XR' },
+      { href: '/es/ar-vr-production/', label: 'Resumen' },
+      { href: '/es/ar-vr-production/ar/', label: 'Paquetes de AR' },
+      { href: '/es/ar-vr-production/studios/', label: 'Producción de videojuegos y XR' },
     ],
   },
   { href: '/es/about/', label: 'Sobre mí' },
@@ -66,7 +66,7 @@ export const categories = [
     title: 'Automatización, IA y Proyectos',
     text: 'Automatice el trabajo repetitivo, ponga la IA a trabajar de forma segura y mantenga sus proyectos en marcha.',
     offers: [['Automatización', '$500 por flujo de trabajo'], ['IA para usted y su equipo', 'Desde $150'], ['Gestión de proyectos', 'Desde $400']],
-    href: '/es/technology-consulting/',
+    href: '/es/automation-ai-projects/',
     cta: 'Ver Automatización, IA y Proyectos',
   },
   {
@@ -75,7 +75,7 @@ export const categories = [
     text: 'Realidad aumentada (AR) que da vida a sus productos, menús y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
     offers: [['Paquetes de AR', 'Desde $750'], ['Producción de videojuegos y XR', 'Desde $650']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
-    href: '/es/production-emerging-tech/',
+    href: '/es/ar-vr-production/',
     cta: 'Ver AR, VR y Producción',
   },
 ];

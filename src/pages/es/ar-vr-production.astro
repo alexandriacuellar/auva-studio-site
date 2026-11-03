@@ -1,17 +1,17 @@
 ---
-// AR, VR & Production main page: 2 cards that open the AR and studio sub pages (alexandria 2026-11-03). Copy in data/production.ts.
-import Base from '../layouts/Base.astro';
-import '../styles/pages/production-emerging-tech.css';
-import Icon from '../components/Icon.astro';
-import HelloBand from '../components/HelloBand.astro';
-import InquiryForm from '../components/InquiryForm.astro';
-import Faq from '../components/Faq.astro';
-import { site, aiOffers, serviceSchema } from '../data/site';
-import { t, services, audiences, faq } from '../data/production';
+// AR, VR & Production main page: 2 cards that open the AR and studio sub pages (alexandria 2026-11-03). Copy in data/production.es.ts.
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import HelloBand from '../../components/HelloBand.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, aiOffers, serviceSchema } from '../../data/site.es';
+import { t, services, audiences, faq } from '../../data/production.es';
 
 const byId = Object.fromEntries(services.map((x) => [x.id, x]));
-const faqs = [faq.app, faq.bigger, faq.underway];
-const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
+const faqs = [faq.app, faq.bigger, faq.glasses, faq.underway];
+const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ar-vr-production/');
 ---
 <Base title={t.title} seoTitle={t.seo} schema={schema} description={t.desc}>
   <section class="hero bd-hero bd-inner-hero">

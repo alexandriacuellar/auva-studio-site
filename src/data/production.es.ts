@@ -1,5 +1,5 @@
 // AR, VR y Producción: página principal + subpáginas (versión en español de production.ts).
-export const base = '/es/production-emerging-tech';
+export const base = '/es/ar-vr-production';
 
 export const t = {
   title: 'AR, VR y Producción',
@@ -11,8 +11,8 @@ export const t = {
   facts: ['<b>20+</b> años en desarrollo web', '<b>14+</b> proyectos dirigidos', 'Certificado en <b>realidad mixta (XR)</b>'],
   whoH: 'Con quién <em>trabajo.</em>', elseH: '¿Algo diferente?', elseP: 'Cuénteme qué tiene en mente y le sugiero por dónde empezar.', talk: 'Hablemos',
   twoH: 'Dos formas <em>en que ayudo.</em>', twoL: 'Precios fijos para AR, por escrito desde el principio. Ayuda de producción para estudios por hora o por mes.',
-  nextTag: 'Llega en 2027', nextH: 'Lo que viene: VR y los lentes con IA de Meta',
-  nextP: 'Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Lo próximo es crear para los visores Meta Quest y los lentes con IA de Meta: guías y recorridos sin usar las manos, ayuda paso a paso para su personal y capacitación en VR. ¿Tiene una idea? Cuéntemela ahora y será de los primeros en la lista.',
+  nextTag: 'Llega en 2027', nextH: 'Lo que viene: los nuevos lentes de VR de Meta',
+  nextP: 'Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Los nuevos lentes de VR de Meta llegan en 2027, y me estoy preparando para crear para ellos: guías y recorridos sin usar las manos, y ayuda paso a paso para su personal. ¿Tiene una idea? Cuéntemela ahora y será de los primeros en la lista.',
   nextA: 'Comparta su idea',
   howH: 'Cómo <em>funciona.</em>', howL: 'Fácil de empezar, sin sorpresas en el camino.',
   steps: [
@@ -69,5 +69,6 @@ export const faq = {
   underway: { q: '¿Puede unirse a un proyecto de videojuego o XR que ya está en marcha?', a: 'Sí. Reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },
   models: { q: '¿Necesito modelos 3D?', a: 'No. Puedo crearlos a partir de sus fotos o archivos de producto. Los arquitectos y constructores pueden usar el modelo que ya tienen.' },
   engines: { q: '¿Con qué motores y plataformas ha trabajado?', a: 'Unity y Meta Quest, además de Meta Horizon Worlds. Yo dirijo el trabajo y el calendario; sus desarrolladores construyen en el motor que usan.' },
+  glasses: { q: '¿Puede crear para lentes inteligentes?', a: 'Sí. Puedo crear para lentes con IA y lentes con pantalla, como Ray-Ban Meta y Meta Ray-Ban Display, para cosas como guías y recorridos sin usar las manos o ayuda paso a paso. Todavía no es un paquete, así que se cotiza para su proyecto.' },
   remote: { q: '¿Trabaja a distancia?', a: 'Sí. La mayor parte del trabajo con estudios es a distancia, en distintas zonas horarias, con las herramientas que su equipo ya usa.' },
 };

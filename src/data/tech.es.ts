@@ -1,6 +1,6 @@
 // Automatización, IA y Proyectos: página principal + 3 subpáginas (versión en español de tech.ts).
 export const sectionName = 'Automatización, IA y Proyectos';
-export const base = '/es/technology-consulting';
+export const base = '/es/automation-ai-projects';
 
 export const services = [
   { id: 'automation', icon: 'gear', title: 'Automatización', price: '$500 por flujo de trabajo', text: 'Trabajo de rutina que se hace solo, como seguimientos, solicitudes de reseñas y bienvenida a clientes.', href: `${base}/automation/`, link: 'Vea automatización' },

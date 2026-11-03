@@ -2,7 +2,7 @@
 import { site } from '../data/site';
 import { translatedPages } from '../i18n';
 
-const pages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/technology-consulting/', '/technology-consulting/automation/', '/technology-consulting/ai/', '/technology-consulting/project-management/', '/production-emerging-tech/', '/production-emerging-tech/ar/', '/production-emerging-tech/studios/', '/development-partnerships/', '/about/', '/contact/', '/privacy/'];
+const pages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/automation-ai-projects/', '/automation-ai-projects/automation/', '/automation-ai-projects/ai/', '/automation-ai-projects/project-management/', '/ar-vr-production/', '/ar-vr-production/ar/', '/ar-vr-production/studios/', '/development-partnerships/', '/about/', '/contact/', '/privacy/'];
 
 export function GET() {
   // Each English page and its Spanish twin point to each other, so search engines show the right language.

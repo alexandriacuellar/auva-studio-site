@@ -1,17 +1,17 @@
 ---
 // Game and XR Production sub page.
-import Base from '../../layouts/Base.astro';
-import '../../styles/pages/production-emerging-tech.css';
-import Icon from '../../components/Icon.astro';
-import InquiryForm from '../../components/InquiryForm.astro';
-import Faq from '../../components/Faq.astro';
-import { site, testimonials, aiOffers, serviceSchema } from '../../data/site';
-import { t, studioOffers, faq } from '../../data/production';
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, testimonials, aiOffers, serviceSchema } from '../../../data/site.es';
+import { t, studioOffers, faq } from '../../../data/production.es';
 
 const titles = Object.fromEntries(aiOffers.map((o) => [o.id, o.title]));
 const offers = studioOffers.map((o) => ({ ...o, title: titles[o.topic] }));
 const faqs = [faq.underway, faq.engines, faq.remote];
-const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/studios/');
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ar-vr-production/studios/');
 ---
 <Base title={t.stTitle} seoTitle={t.stSeo} schema={schema} description={t.stDesc}>
   <section class="hero bd-hero bd-inner-hero">
