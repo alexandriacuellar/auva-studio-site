@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/pages/production-emerging-tech.css';
 import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
 import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -120,4 +121,5 @@ const schema = serviceSchema([
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="consulting" />
+  <ToolGrid set="automation" lede="The automation and AI tools I use to save your team time." alt />
 </Base>

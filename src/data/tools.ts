@@ -17,6 +17,7 @@ const T: Record<string, Tool> = {
   chatgpt: { name: 'ChatGPT', mark: 'GPT' },
   claude: { name: 'Claude', icon: 'claude' },
   gemini: { name: 'Gemini', icon: 'googlegemini' },
+  metaai: { name: 'Meta AI', icon: 'meta' },
   notion: { name: 'Notion', icon: 'notion' },
   jira: { name: 'Jira', icon: 'jira' },
   gworkspace: { name: 'Google Workspace', mark: 'G' },
@@ -30,6 +31,7 @@ const T: Record<string, Tool> = {
 export const toolSets: Record<string, Tool[]> = {
   // Websites and Development Partnerships share one list (alexandria 2026-11-03).
   websites: [T.astro, T.next, T.react, T.typescript, T.webflow, T.shopify, T.sanity, T.cloudflare],
-  automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.notion, T.jira, T.gworkspace, T.m365],
+  // Automation (new service, alexandria 2026-11-03): only tools she has used. Add apps as she connects them for clients.
+  automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.metaai],
   xr: [T.quest, T.horizon, T.unity, T.blender, T.jira],
 };
