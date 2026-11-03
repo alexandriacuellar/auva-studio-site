@@ -14,7 +14,7 @@ const photos: Record<string, { src: any; alt: { en: string; es: string } }> = {
   tech: { src: tech, alt: { en: 'A notebook with a hand-drawn workflow next to a laptop dashboard on a sunny desk', es: 'Un cuaderno con un flujo de trabajo dibujado a mano junto a una computadora con un panel de datos, sobre un escritorio soleado' } },
   production: { src: production, alt: { en: 'VR glasses and smart glasses side by side on a sunny wooden desk', es: 'Gafas de realidad virtual y gafas inteligentes juntas sobre un escritorio de madera soleado' } },
 };
-const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('technology') ? 'tech' : 'production';
+const key = (href: string) => href.includes('websites') ? 'websites' : href.includes('automation') ? 'tech' : 'production';
 ---
 <div class="svc-cards">
   {categories.map((c) => {
