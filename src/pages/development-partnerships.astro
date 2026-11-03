@@ -32,7 +32,7 @@ const faqs = [
   { q: 'Who owns the finished website?', a: 'Your client does. Code, hosting, and accounts are set up in their name or yours, never mine, and I hand everything over at the end of the project.' },
   { q: 'What do you build with?', a: 'I build most sites with Astro, which keeps them fast, secure, and low-cost to host. When a project calls for a different platform, we decide that together during scoping.' },
   { q: 'How does pricing work?', a: 'Partners get preferred rates, quoted for each project based on its scope, my responsibilities, and how much work we expect to do together. Every project is scoped and priced in writing before it begins.' },
-  { q: 'Can you help with AI, XR, or game projects too?', a: "Yes. If a client asks for something like an AI workflow or an AR project, I can support it the same way. See the Production & Emerging Tech page for what that work looks like." },
+  { q: 'Can you help with AI, XR, or game projects too?', a: "Yes. If a client asks for something like an AI workflow or an AR project, I can support it the same way. See the AR, VR & Production page for what that work looks like." },
 ];
 
 const schema = serviceSchema(services.map((s) => ({ name: s.title, description: s.text, price: '' })), '/development-partnerships/');
@@ -60,14 +60,14 @@ const schema = serviceSchema(services.map((s) => ({ name: s.title, description: 
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
             <p>{a.text}</p>
-            <a class="more" href="#start" style="margin-top: 12px">Talk it through</a>
+            <a class="more" href="#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
           </div>
         ))}
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>Something else?</h3>
           <p>Tell me about your team and your clients, and I'll suggest how we could work together.</p>
-          <a class="more" href="#start" style="margin-top: 12px">Talk it through</a>
+          <a class="more" href="#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>

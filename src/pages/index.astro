@@ -7,17 +7,33 @@ import ServiceCards from '../components/ServiceCards.astro';
 import Cta from '../components/Cta.astro';
 import { categories, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
-import hero from '../assets/cover-hero-workspace.png';
 import headshot from '../assets/alexandria-cuellar.jpg';
 
-const situations = [
-  { title: 'You need a website', text: "You don't have one yet, or you're starting something new.", href: '/websites/', icon: 'globe' },
-  { title: 'Your website needs attention', text: "It's outdated, slow, hard to update, or not bringing in inquiries.", href: '/websites/diagnostic/', icon: 'search' },
-  { title: "Customers can't find you on Google Maps", text: 'Your Google profile is missing, thin, or has the wrong details.', href: '/websites/google-business-profile/', icon: 'star' },
-  { title: "Your tools aren't working for you", text: "Too many apps, too many workarounds, or you're not sure where AI fits.", href: '/technology-consulting/#planning', icon: 'compass' },
-  { title: 'Your team does the same tasks by hand', text: 'Follow-ups, data entry, and reports that could run on their own.', href: '/technology-consulting/#automation', icon: 'gear' },
-  { title: 'A project needs a leader', text: 'A technology project needs someone to keep scope, schedule, vendors, and people on track.', href: '/technology-consulting/#delivery', icon: 'check' },
-  { title: "You're making a game, XR, or AR project", text: 'Get a producer to keep it on track, or start small with an AR project that opens on a phone.', href: '/production-emerging-tech/', icon: 'bolt' },
+const columns = [
+  {
+    icon: 'globe', name: 'Websites', href: '/websites/',
+    items: [
+      { title: 'I need a website', text: "You're starting something new, or you've never had one.", href: '/websites/', to: 'Website packages' },
+      { title: "My website isn't working for me", text: "It's outdated, slow, or hard to update.", href: '/websites/diagnostic/', to: 'Website Diagnostic' },
+      { title: "Customers can't find me on Google Maps", text: 'Your listing is missing, out of date, or buried.', href: '/websites/google-business-profile/', to: 'Google Business Profile' },
+    ],
+  },
+  {
+    icon: 'bulb', name: 'Automation, AI & Projects', href: '/automation-ai-projects/',
+    items: [
+      { title: 'We do the same tasks by hand every week', text: 'Follow-ups, data entry, and reports that could run on their own.', href: '/automation-ai-projects/automation/', to: 'Automation' },
+      { title: "I want to use AI, but I'm not sure where to start", text: "Or what's safe to share with it.", href: '/automation-ai-projects/ai/', to: 'AI for you and your team' },
+      { title: 'This project needs someone to lead it', text: 'Scope, schedule, vendors, and people, kept on track.', href: '/automation-ai-projects/project-management/', to: 'Project management' },
+    ],
+  },
+  {
+    icon: 'bolt', name: 'AR, VR & Production', href: '/ar-vr-production/',
+    items: [
+      { title: 'I want customers to see my product before they buy', text: 'Your product in 3D, in their room, right from their phone. No app needed.', href: '/ar-vr-production/ar/#ar-product', to: 'AR packages' },
+      { title: 'I want my menu, packaging, or flyer to do more', text: 'Scan it and it comes to life, with buttons to order or book.', href: '/ar-vr-production/ar/#ar-menu', to: 'AR packages' },
+      { title: "We're making a game or XR project", text: 'An experienced producer to keep scope, schedule, and the team on track.', href: '/ar-vr-production/studios/', to: 'Game and XR production' },
+    ],
+  },
 ];
 const strip = ['Published prices', 'Written quote before work starts', 'You own everything', 'Work with me directly'];
 ---
@@ -25,33 +41,11 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Auva Studio is a digital technology and solutions studio in the Hudson Valley. I build websites, set up tools and automation, and produce games and XR.</p>
+      <p class="lede">Websites, automation, and AI for small businesses in the Hudson Valley, plus AR, VR, and game production.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">How I help</a>
       </div>
-      <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-      <figure class="bd-stage">
-        <Image src={hero} alt="Sunlit workspace with a laptop, coffee mug, and plants" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-      </figure>
-    </div>
-  </section>
-
-  <section class="home-routes">
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">What are you <em>working on?</em></h2>
-        <p class="lede">You don't need to know which service you need. Start with the situation that sounds most like yours.</p>
-        <p class="muted">Not sure which fits? Real problems often span more than one. <a href="/contact/">Tell me what's happening</a> and I'll suggest a next step.</p>
-      </div>
-      <ul class="route-list">
-        {situations.map((x) => (
-          <li><a href={x.href}>
-            <span class="icon"><Icon name={x.icon} /></span>
-            <span><b>{x.title}</b><span class="muted">{x.text}</span></span>
-          </a></li>
-        ))}
-      </ul>
     </div>
   </section>
 
@@ -66,13 +60,38 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
+  <section class="home-routes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Not sure where to start? <em>Find your situation.</em></h2>
+        <p class="lede">Pick the one that sounds most like you.</p>
+      </div>
+      <div class="sit-board">
+        {columns.map((c) => (
+          <div class="sit-col">
+            <a class="sit-col-head" href={c.href}><Icon name={c.icon} size={20} /> {c.name}</a>
+            <ul>
+              {c.items.map((x) => (
+                <li><a class="sit-card" href={x.href}>
+                  <b>{x.title}</b>
+                  <span class="muted">{x.text}</span>
+                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
+                </a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="sit-else"><b>Something else?</b> Not sure what you need? <a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a> or <a href="/contact/">tell me what's happening</a>.</p>
+    </div>
+  </section>
+
   <section class="home-about-band" id="about">
     <div class="wrap home-about">
-      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
+      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={200} height={200} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
-        <p class="lede">My background is in software development and technical project management. I spent nearly 20 years as a developer behind newspaper websites, from the Times Herald-Record to more than 150 daily newspapers, and since 2023 I've managed 14+ VR and mobile game projects. I founded Auva Studio to put that experience to work for small businesses, startups, nonprofits, and growing teams. I help with <a href="/websites/">websites</a>, <a href="/technology-consulting/">tech, automation, and AI</a>, and <a href="/production-emerging-tech/">production for games, XR, and AR</a>.</p>
-        <p class="home-about-name"><b>Alexandria Cuellar</b>, founder of Auva Studio<br />I build websites, set up tools and automation, and produce games and XR.<br /><span class="muted">When I'm not working, you'll find me on long walks with my dog, Midna, around the Mid-Hudson Valley.</span></p>
+        <p class="lede">Hi, I'm Alexandria, founder of Auva Studio. I bring 20+ years in web development and project management to small businesses, startups, nonprofits, and growing teams. I also hold a Mixed Reality (XR) Certificate and use AI in my work every day.</p>
         <figure class="quote home-about-quote">
         <blockquote>“{featured.quote}”</blockquote>
         <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
@@ -85,5 +104,5 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
-  <Cta />
+  <Cta promises={strip} />
 </Base>

@@ -1,0 +1,66 @@
+---
+// Automation sub page.
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, serviceSchema } from '../../data/site';
+import { base, safety, automationExamples, services, faq } from '../../data/tech';
+
+const faqs = [faq.needAi, faq.appChanges, faq.tools, faq.vendors];
+const svc = services.find((x) => x.id === 'automation')!;
+const schema = serviceSchema([{ name: svc.title, description: svc.text, price: svc.price }], '/automation-ai-projects/automation/');
+---
+<Base title="Automation" seoTitle="Automation Setup, $500 per Workflow | Auva Studio" schema={schema} description="I connect the tools you already use so follow-ups, review requests, and onboarding happen on their own. $500 per workflow, set up in your accounts.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Automate the busywork, <em>$500 per workflow.</em></h1>
+      <p class="lede">I connect the tools you already use so routine work happens on its own. Set up in your accounts, with a short how-to guide.</p>
+      <div class="hero-actions">
+        <a class="btn" href="?topic=automation#start">Ask about automation <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="examples">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What I can <em>automate.</em></h2>
+        <p class="lede">Start with the one task that bugs you most. At $500, it’s small enough to judge my work before you add more. One workflow is one task from start to finish, like these.</p>
+      </div>
+      <div class="grid grid-3">
+        {automationExamples.map((e) => (
+          <div class="card">
+            <div class="icon"><Icon name={e.icon} size={32} /></div>
+            <h3>{e.title}</h3>
+            <p class="muted">{e.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top: 24px">Automations with several steps usually need your own paid Zapier or Make plan, about $20 to $30 a month. I’ll tell you before we start.</p>
+    </div>
+  </section>
+
+  <section id="safe">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Built to be safe, <em>and yours.</em></h2>
+      </div>
+      <div class="grid grid-2">
+        {safety.map((s) => (
+          <div class="card">
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top: 32px"><b>Not sure what to automate first?</b> <a href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a> and I'll help you pick. If your setup needs a closer look, a <a href={`${base}/#planning`}>$250 Tech Review</a> is credited toward your first workflow.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" topic="automation" />
+</Base>

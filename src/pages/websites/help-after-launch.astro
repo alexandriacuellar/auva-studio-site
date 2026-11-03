@@ -52,7 +52,7 @@ const schema = serviceSchema([
     </div>
   </section>
 
-  <section>
+  <section class="band-cream">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Included with every website.</h2>
@@ -123,8 +123,8 @@ const schema = serviceSchema([
     </div>
   </section>
 
-  <Faq faqs={faqs} />
-  <InquiryForm kind="website" topic="care" alt />
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="care" />
 
   <script>
     document.querySelectorAll<HTMLElement>('.package[data-tier]').forEach((card) => {

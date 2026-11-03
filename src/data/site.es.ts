@@ -25,8 +25,29 @@ export const nav = [
       { href: '/es/websites/brand-essentials/', label: 'Identidad de Marca' },
     ],
   },
-  { href: '/es/technology-consulting/', label: 'Tecnología e IA' },
-  { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
+  {
+    href: '/es/automation-ai-projects/',
+    label: 'Automatización e IA',
+    // Full name for search data; the menu shows the short label so the header stays on one row.
+    title: 'Automatización, IA y Proyectos',
+    menuLabel: 'Páginas de automatización, IA y proyectos',
+    children: [
+      { href: '/es/automation-ai-projects/', label: 'Resumen y Revisión Tecnológica' },
+      { href: '/es/automation-ai-projects/automation/', label: 'Automatización' },
+      { href: '/es/automation-ai-projects/ai/', label: 'IA para usted y su equipo' },
+      { href: '/es/automation-ai-projects/project-management/', label: 'Gestión de proyectos' },
+    ],
+  },
+  {
+    href: '/es/ar-vr-production/',
+    label: 'AR, VR y Producción',
+    menuLabel: 'Páginas de producción y tecnología emergente',
+    children: [
+      { href: '/es/ar-vr-production/', label: 'Resumen' },
+      { href: '/es/ar-vr-production/ar/', label: 'Paquetes de AR' },
+      { href: '/es/ar-vr-production/studios/', label: 'Producción de videojuegos y XR' },
+    ],
+  },
   { href: '/es/about/', label: 'Sobre mí' },
 ];
 
@@ -42,29 +63,23 @@ export const categories = [
   },
   {
     icon: 'bulb',
-    title: 'Tecnología, Automatización e IA',
-    text: 'Configure las herramientas adecuadas, automatice el trabajo repetitivo, ponga la IA a trabajar y mantenga sus proyectos en marcha.',
-    offers: [['Revisión Tecnológica', '$250'], ['Configuración de automatizaciones', 'Desde $500'], ['Configuración de espacios de proyectos', 'Desde $1,500'], ['Taller de IA para equipos', '$750'], ['Gestión de proyectos', '$65/hora']],
-    href: '/es/technology-consulting/',
-    cta: 'Ver Tecnología, Automatización e IA',
+    title: 'Automatización, IA y Proyectos',
+    text: 'Automatice el trabajo repetitivo, ponga la IA a trabajar de forma segura y mantenga sus proyectos en marcha.',
+    offers: [['Automatización', '$500 por flujo de trabajo'], ['IA para usted y su equipo', 'Desde $150'], ['Gestión de proyectos', 'Desde $400']],
+    href: '/es/automation-ai-projects/',
+    cta: 'Ver Automatización, IA y Proyectos',
   },
   {
     icon: 'bolt',
-    title: 'Producción y Tecnología Emergente',
-    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos de AR y VR para negocios.',
-    offers: [['Apoyo de producción para equipos de videojuegos y XR', '$65/hora'], ['Revisión del Plan de Producción', '$650'], ['Proyecto AR Inicial', 'Desde $1,500']],
+    title: 'AR, VR y Producción',
+    text: 'Realidad aumentada (AR) que da vida a sus productos, menús y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
+    offers: [['Paquetes de AR', 'Desde $750'], ['Producción de videojuegos y XR', 'Desde $650']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
-    href: '/es/production-emerging-tech/',
-    cta: 'Ver Producción y Tecnología Emergente',
+    href: '/es/ar-vr-production/',
+    cta: 'Ver AR, VR y Producción',
   },
 ];
 
-export const consulting = [
-  { id: 'planning', price: '$250, se acredita a una configuración en 90 días', icon: 'search', title: 'Revisión Tecnológica', text: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios, costos aproximados y dónde ayudaría la automatización o la IA.', items: ['Revisión de herramientas y suscripciones', 'Revisión de flujos de trabajo', 'Informe por escrito con prioridades'] },
-  { id: 'automation', price: 'Desde $500', icon: 'gear', title: 'Configuración de automatización', text: 'Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos y reportes mensuales. Un flujo de trabajo, configurado en sus propias cuentas, con una guía breve.', items: ['Automatización de flujos de trabajo', 'Conexión de las aplicaciones que ya usa', 'Guía para su equipo'] },
-  { id: 'workspace', price: 'Desde $1,500', icon: 'layers', title: 'Configuración de espacio de proyectos', text: 'Configuro la herramienta donde su equipo planifica el trabajo, como Asana, ClickUp, Jira, monday.com, Notion o Trello, con tableros, plantillas y responsables claros, y luego capacito a su equipo.', items: ['Configuración del espacio y las plantillas', 'Capacitación para su equipo', '30 días de preguntas después de la configuración'] },
-  { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Gestión de proyectos mensual'] },
-];
 
 
 
@@ -173,8 +188,10 @@ export const monthly = {
 export { testimonials } from './site';
 
 export const aiOffers = [
-  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: '$750', text: 'Una sesión práctica de 90 minutos para hasta 10 personas. Su equipo practica ChatGPT, Claude o Gemini con trabajo real y se lleva una guía de una página.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión del Plan de Producción', price: '$650', text: 'Para proyectos de videojuegos, XR e interactivos. Reviso su alcance, sus hitos y sus riesgos, y le entrego un plan que su equipo pueda seguir, con sus herramientas de proyecto configuradas si las necesita. Unas 2 semanas.' },
-  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'Proyecto AR Inicial', price: 'Desde $1,500', text: 'Una pieza pequeña de AR que se abre en el navegador del teléfono, sin descargar ninguna app: una tarjeta de presentación, un volante, un póster o un producto que cobra vida. Construida con un desarrollador colaborador cuando hace falta. 2–4 semanas.' },
+  { id: 'ar-card', group: 'ar', icon: 'star', title: 'Tarjeta o Volante con AR', price: 'Desde $750', text: 'Una tarjeta, un volante o un letrero que cobra vida cuando alguien lo apunta con el teléfono.', items: ['Una pieza impresa', 'Un video corto o un objeto 3D', 'Botones para reservar, llamar o visitar su sitio'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'Menú o Empaque con AR', price: 'Desde $1,000', text: 'Un menú, una etiqueta o una caja que muestra un plato en 3D, cómo se hace algo o un saludo del dueño.', items: ['Un menú, una etiqueta o una caja', 'Hasta 3 artículos en 3D o video', 'Un código impreso que lo abre'] },
+  { id: 'ar-product', group: 'ar', icon: 'layers', title: 'Vista de Producto con AR', price: 'Desde $1,500', text: 'Sus clientes colocan sus productos en su sala, o se los prueban, directo desde su sitio web.', items: ['Hasta 5 productos en 3D', 'Véalo en su espacio o pruébeselo', 'Agregado a las páginas de producto de su sitio'] },
+  { id: 'ar-project', group: 'ar', icon: 'compass', title: 'Visor de Proyectos con AR', price: 'Desde $1,500', text: 'Para arquitectos y constructores: su modelo 3D en el teléfono, sobre la mesa de reuniones o a tamaño real en el terreno.', items: ['Usa el modelo que ya tiene', 'Vista sobre la mesa o a tamaño real', 'Un enlace que puede enviar a sus clientes'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
 ];

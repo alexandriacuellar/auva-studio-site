@@ -1,5 +1,6 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
-import { site, consulting, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
+import { aiPackages as techAi, pmPackages as techPm, automationExamples } from '../data/tech';
+import { site, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
 import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
@@ -8,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
+    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It builds fast websites clients own, sets up automation and AI, and manages projects, plus AR packages and production support for game and XR teams. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
@@ -16,8 +17,8 @@ export function GET() {
     '',
     '## Pages',
     `- [Website Services](${site.url}/websites/): website packages built with Astro, free or low-cost hosting, updates $59 each, prepaid hour packs from $575, or a monthly website retainer from $125 (1 hour) or $575 (5 hours)`,
-    `- [Tech, Automation & AI](${site.url}/technology-consulting/): a $250 Tech Review, automation setup (from $500, one workflow), project workspace setup in tools like Asana, ClickUp, Jira, monday.com, Notion, and Trello (from $1,500), team AI workshops ($750), monthly project management`,
-    `- [Production & Emerging Tech](${site.url}/production-emerging-tech/): producer support for game, XR, and interactive teams; production plan reviews; small AR starter projects; AR and VR for phones, Meta Quest, Meta glasses, and Meta Horizon`,
+    `- [Automation, AI & Projects](${site.url}/automation-ai-projects/): a $250 Tech Review (credited toward any package within 90 days), plus three sub pages: [Automation](${site.url}/automation-ai-projects/automation/) ($500 per workflow), [AI for you and your team](${site.url}/automation-ai-projects/ai/) (1-on-1 AI Session $150; Team AI Workshop coming soon), and [Project management](${site.url}/automation-ai-projects/project-management/) (workspace setup from $400, Project Kickoff Plan $650, monthly from $650)`,
+    `- [AR, VR & Production](${site.url}/ar-vr-production/): two sub pages. [AR packages](${site.url}/ar-vr-production/ar/) from $750 for businesses, architects, museums, and brands (AR Card or Flyer from $750, AR Menu or Packaging from $1,000, AR Product View from $1,500, AR Project Viewer from $1,500), opening in any phone browser with no app; bigger VR and XR work is built with an experienced XR developer partner. [Game and XR production](${site.url}/ar-vr-production/studios/) for indie studios: Production Plan Review $650, Production Support $65/hr or monthly from $650. VR on Meta Quest is available now (built with the XR developer partner); apps for AI glasses and display glasses (Ray-Ban Meta, Meta Ray-Ban Display) are quoted per project; work for Meta's new VR glasses starts when they arrive in 2027.`,
     `- [Development Partnerships](${site.url}/development-partnerships/): white-label, subcontracted, or collaborative website development and technical implementation for marketing agencies, creative studios, and independent designers; partner rates quoted per project`,
     `- [Contact](${site.url}/contact/): start a project or book a call`,
     `- [Sitio en español](${site.url}/es/): the whole site, except the sample sites, is also available in Spanish under /es/; Alexandria works with clients in English or Spanish`,
@@ -47,12 +48,14 @@ export function GET() {
     `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly website retainer: a block of web developer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. Every retainer includes a monthly site check and Google health check (errors, indexing, and speed in Search Console). The 1-hour retainer covers updates and fixes within 2 business days. The 5-hour retainer adds a monthly planning call, landing pages and small features, 1-business-day turnaround, and same-day help with urgent problems. Month to month, cancel any time; unused hours carry over one month.`,
     '- Help After Launch updates and hour packs are for websites Auva Studio built. The monthly retainer can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
     '',
-    '## Tech, Automation & AI',
-    ...consulting.map((c) => `- ${c.title}: ${c.text} ${c.price}`),
-    ...aiOffers.filter((o) => o.group === 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
+    '## Automation, AI & Projects',
+    '- Tech Review ($250): a 60-minute call, then a written report within 5 business days with top fixes in order and rough costs. Credited toward any package within 90 days.',
+    `- Automation ($500 per workflow): one workflow set up in the client's own accounts, with a how-to guide and 30 days of fixes. Examples: ${automationExamples.map((e) => `${e.title.toLowerCase()} (${e.text})`).join('; ')} Multi-step automations usually need the client's own Zapier or Make plan, about $20 to $30 a month.`,
+    ...techAi.map((p) => `- ${p.title} (${p.price}): ${p.text} ${p.items.join('; ')}.`),
+    ...techPm.map((p) => `- ${p.title} (${p.price}): ${p.text} ${p.items.join('; ')}.`),
     '- Monthly project management and monthly Production Support: 10 hrs $650, 20 hrs $1,200, 40 hrs $2,200, with a 3-month minimum.',
     '',
-    '## Production & Emerging Tech',
+    '## AR, VR & Production',
     ...aiOffers.filter((o) => o.group !== 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
     `- Live AR example: ${site.url}/card/ (Alexandria's AR business card). Bigger productions go to a trusted studio partner, with Alexandria as producer.`,
     '',

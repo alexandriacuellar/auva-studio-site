@@ -30,7 +30,7 @@ const t = {
         ))}
       </dl>
       <p class="time"><Icon name="clock" size={18} />{p.timeline} {t.once}</p>
-      {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>{t.sample(p.short)} <span aria-hidden="true">→</span></a>; })()}
+      {(() => { const sm = samples.find((x) => x.package === p.name); return sm && <a class="sample-link" href={`/samples/${sm.slug}/`}>{t.sample(p.short)} <Icon name="arrow" size={16} /></a>; })()}
       <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={`${base}?package=${encodeURIComponent(p.name)}#start`}>{t.start(p.short)}</a>
     </article>
   ))}
@@ -39,4 +39,4 @@ const t = {
   <p set:html={t.bigger} />
   <a class="btn btn-ghost" href={`${base}?topic=website&package=${encodeURIComponent(t.customPkg)}#start`}>{t.custom}</a>
 </div>
-<p class="upgrade" set:html={t.upgrade} />
+

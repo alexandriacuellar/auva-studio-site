@@ -7,17 +7,33 @@ import ServiceCards from '../../components/ServiceCards.astro';
 import Cta from '../../components/Cta.astro';
 import { categories, site, testimonials } from '../../data/site.es';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
-import hero from '../../assets/cover-hero-workspace.png';
 import headshot from '../../assets/alexandria-cuellar.jpg';
 
-const situations = [
-  { title: 'Necesita un sitio web', text: 'Todavía no tiene uno, o está empezando algo nuevo.', href: '/es/websites/', icon: 'globe' },
-  { title: 'Su sitio web necesita atención', text: 'Está desactualizado, es lento, cuesta actualizarlo o no le trae consultas.', href: '/es/websites/diagnostic/', icon: 'search' },
-  { title: 'Sus clientes no lo encuentran en Google Maps', text: 'Su perfil de Google falta, está incompleto o tiene datos equivocados.', href: '/es/websites/google-business-profile/', icon: 'star' },
-  { title: 'Sus herramientas no le están funcionando', text: 'Demasiadas aplicaciones, demasiados parches, o no sabe dónde encaja la IA.', href: '/es/technology-consulting/#planning', icon: 'compass' },
-  { title: 'Su equipo hace las mismas tareas a mano', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/#automation', icon: 'gear' },
-  { title: 'Un proyecto necesita quien lo dirija', text: 'Un proyecto tecnológico necesita a alguien que mantenga el alcance, el calendario, los proveedores y el equipo en orden.', href: '/es/technology-consulting/#delivery', icon: 'check' },
-  { title: 'Está creando un videojuego o un proyecto XR o AR', text: 'Consiga una productora que lo mantenga en marcha, o empiece con algo pequeño, como un proyecto AR que se abre en el celular.', href: '/es/production-emerging-tech/', icon: 'bolt' },
+const columns = [
+  {
+    icon: 'globe', name: 'Sitios web', href: '/es/websites/',
+    items: [
+      { title: 'Necesito un sitio web', text: 'Está empezando algo nuevo, o nunca ha tenido uno.', href: '/es/websites/', to: 'Paquetes de sitios web' },
+      { title: 'Mi sitio web no me está funcionando', text: 'Está desactualizado, es lento o cuesta actualizarlo.', href: '/es/websites/diagnostic/', to: 'Diagnóstico Web' },
+      { title: 'Mis clientes no me encuentran en Google Maps', text: 'Su perfil no aparece, está desactualizado o queda escondido.', href: '/es/websites/google-business-profile/', to: 'Perfil de Negocio de Google' },
+    ],
+  },
+  {
+    icon: 'bulb', name: 'Automatización, IA y Proyectos', href: '/es/automation-ai-projects/',
+    items: [
+      { title: 'Hacemos las mismas tareas a mano cada semana', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/automation-ai-projects/automation/', to: 'Automatización' },
+      { title: 'Quiero usar la IA, pero no sé por dónde empezar', text: 'Ni qué es seguro compartir con ella.', href: '/es/automation-ai-projects/ai/', to: 'IA para usted y su equipo' },
+      { title: 'Este proyecto necesita quien lo dirija', text: 'Alcance, calendario, proveedores y equipo, en orden.', href: '/es/automation-ai-projects/project-management/', to: 'Gestión de proyectos' },
+    ],
+  },
+  {
+    icon: 'bolt', name: 'AR, VR y Producción', href: '/es/ar-vr-production/',
+    items: [
+      { title: 'Quiero que mis clientes vean mi producto antes de comprarlo', text: 'Su producto en 3D, en su sala, directo desde el celular. Sin descargar ninguna aplicación.', href: '/es/ar-vr-production/ar/#ar-product', to: 'Paquetes de AR' },
+      { title: 'Quiero que mi menú, empaque o volante haga más', text: 'Lo escanean y cobra vida, con botones para pedir o reservar.', href: '/es/ar-vr-production/ar/#ar-menu', to: 'Paquetes de AR' },
+      { title: 'Estamos creando un videojuego o un proyecto XR', text: 'Una productora con experiencia que mantiene en orden el alcance, el calendario y el equipo.', href: '/es/ar-vr-production/studios/', to: 'Producción de videojuegos y XR' },
+    ],
+  },
 ];
 const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar', 'Todo es suyo', 'Trabaja directamente conmigo'];
 ---
@@ -25,33 +41,11 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Auva Studio es un estudio de tecnología y soluciones digitales en el Hudson Valley. Creo sitios web, configuro herramientas y automatizaciones, y produzco videojuegos y experiencias XR.</p>
+      <p class="lede">Sitios web, automatización e IA para pequeños negocios en el Hudson Valley, además de producción de AR, VR y videojuegos.</p>
       <div class="hero-actions">
         <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#services">Cómo le ayudo</a>
       </div>
-      <ul class="hero-strip">{strip.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-      <figure class="bd-stage">
-        <Image src={hero} alt="Un espacio de trabajo soleado con una laptop, una taza de café y plantas" widths={[800, 1200, 1600]} sizes="(max-width: 1180px) 100vw, 1080px" loading="eager" />
-      </figure>
-    </div>
-  </section>
-
-  <section class="home-routes">
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">¿En qué está <em>trabajando?</em></h2>
-        <p class="lede">No necesita saber qué servicio necesita. Empiece por la situación que más se parezca a la suya.</p>
-        <p class="muted">¿No sabe cuál le corresponde? Los problemas reales muchas veces abarcan más de uno. <a href="/es/contact/">Cuénteme qué está pasando</a> y le sugiero un siguiente paso.</p>
-      </div>
-      <ul class="route-list">
-        {situations.map((x) => (
-          <li><a href={x.href}>
-            <span class="icon"><Icon name={x.icon} /></span>
-            <span><b>{x.title}</b><span class="muted">{x.text}</span></span>
-          </a></li>
-        ))}
-      </ul>
     </div>
   </section>
 
@@ -66,13 +60,38 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
+  <section class="home-routes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">¿No sabe por dónde empezar? <em>Encuentre su situación.</em></h2>
+        <p class="lede">Elija la que más se parezca a la suya.</p>
+      </div>
+      <div class="sit-board">
+        {columns.map((c) => (
+          <div class="sit-col">
+            <a class="sit-col-head" href={c.href}><Icon name={c.icon} size={20} /> {c.name}</a>
+            <ul>
+              {c.items.map((x) => (
+                <li><a class="sit-card" href={x.href}>
+                  <b>{x.title}</b>
+                  <span class="muted">{x.text}</span>
+                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
+                </a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="sit-else"><b>¿Otra cosa?</b> ¿No sabe qué necesita? <a href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a> o <a href="/es/contact/">cuénteme qué está pasando</a>.</p>
+    </div>
+  </section>
+
   <section class="home-about-band" id="about">
     <div class="wrap home-about">
-      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={260} height={260} densities={[1, 2]} />
+      <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={200} height={200} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Orientación tecnológica práctica, <em>pensada para las personas.</em></h2>
-        <p class="lede">Mi experiencia está en el desarrollo de software y la gestión de proyectos técnicos. Pasé casi 20 años como desarrolladora detrás de sitios web de periódicos, desde el Times Herald-Record hasta más de 150 diarios, y desde 2023 he dirigido más de 14 proyectos de realidad virtual y juegos para celular. Fundé Auva Studio para poner esa experiencia al servicio de pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/technology-consulting/">tecnología, automatización e IA</a>, y <a href="/es/production-emerging-tech/">producción para videojuegos, XR y AR</a>.</p>
-        <p class="home-about-name"><b>Alexandria Cuellar</b>, fundadora de Auva Studio<br />Creo sitios web, configuro herramientas y automatizaciones, y produzco videojuegos y XR.<br /><span class="muted">Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna, por el Mid-Hudson Valley.</span></p>
+        <p class="lede">Hola, soy Alexandria, fundadora de Auva Studio. Pongo más de 20 años en desarrollo web y gestión de proyectos al servicio de pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. También tengo un certificado en realidad mixta (XR) y uso IA en mi trabajo todos los días.</p>
         <figure class="quote home-about-quote" lang="en">
         <blockquote>“{featured.quote}”</blockquote>
         <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>
@@ -85,5 +104,5 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
-  <Cta />
+  <Cta promises={strip} />
 </Base>

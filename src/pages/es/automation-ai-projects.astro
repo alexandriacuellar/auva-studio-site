@@ -1,0 +1,123 @@
+---
+// Página principal de Tecnología, Automatización e IA: 3 cards that open the sub pages (alexandria 2026-11-02).
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import HelloBand from '../../components/HelloBand.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, serviceSchema } from '../../data/site.es';
+import { sectionName, services, audiences, safety, aiPackages, pmPackages, faq } from '../../data/tech.es';
+
+const byId = Object.fromEntries(services.map((x) => [x.id, x]));
+const faqs = [faq.review, faq.inPerson, faq.vendors];
+const schema = serviceSchema([
+  { name: 'Tech Review', description: faq.review.a, price: '$250' },
+  ...services.map((x) => ({ name: x.title, description: x.text, price: x.price })),
+  ...aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })),
+  ...pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })),
+], '/es/automation-ai-projects/');
+---
+<Base title={sectionName} seoTitle="Ayuda con automatización, IA y gestión de proyectos | Auva Studio" schema={schema} description="Automatización desde $500 por flujo de trabajo, sesiones de IA 1 a 1 desde $150 y gestión de proyectos desde $400 para pequeños negocios, organizaciones y equipos del Hudson Valley.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Menos trabajo repetitivo, mejores herramientas, <em>proyectos que se terminan.</em></h1>
+      <p class="lede">El software adecuado para su forma de trabajar, automatización para el trabajo repetitivo e IA que su equipo puede usar con confianza.</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#services">Vea cómo ayudo</a>
+      </div>
+    </div>
+  </section>
+
+  <HelloBand facts={["<b>20+</b> años en desarrollo web", "<b>14+</b> proyectos dirigidos", "<b>IA</b> en mi trabajo diario"]} />
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Con quién <em>trabajo.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+            <a class="more" href={byId[a.to].href} style="margin-top: 12px">{byId[a.to].link} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>¿Otra cosa?</h3>
+          <p>Cuénteme qué frena a su equipo y le sugiero por dónde empezar.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Tres formas <em>en que ayudo.</em></h2>
+        <p class="lede">Precios fijos, por escrito desde el principio. ¿No sabe cuál necesita? Empiece con una llamada gratis de 30 minutos.</p>
+      </div>
+      <div class="grid grid-3">
+        {services.map((x) => (
+          <a class="card offer" href={x.href} id={x.id}>
+            <div class="icon"><Icon name={x.icon} size={32} /></div>
+            <h3>{x.title}</h3>
+            <p class="svc-meta"><b>{x.price}</b></p>
+            <p class="muted">{x.text}</p>
+            <span class="more" style="margin-top: auto; padding-top: 12px">{x.link} <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+
+      <div class="card card-row bigger" style="margin-top: 32px" id="planning">
+        <div class="icon"><Icon name="search" size={36} /></div>
+        <div>
+          <h3>¿Necesita una mirada más profunda? Revisión Tecnológica, $250</h3>
+          <p class="muted">Si la llamada gratis muestra que sus herramientas necesitan más que una respuesta rápida: una revisión a fondo de 60 minutos sobre su forma de trabajar, y luego un informe escrito en 5 días hábiles con sus principales arreglos en orden. Se abona a cualquier paquete dentro de 90 días.</p>
+          <a class="more" href="?topic=planning#start" style="margin-top: 12px">Reserve una Revisión Tecnológica <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 32px">¿Solo necesita un consejo? Las sesiones de consultoría cuestan $65 por hora. ¿También necesita un sitio web? Vea los <a href="/es/websites/#packages">paquetes de sitios web desde $1,500</a>.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="safe">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Hecho para ser seguro, <em>y suyo.</em></h2>
+        <p class="lede">Las mismas reglas para todo lo que configuro.</p>
+      </div>
+      <div class="grid grid-2">
+        {safety.map((s) => (
+          <div class="card">
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Cómo <em>funciona.</em></h2>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Llamada gratis</h3><p>Cuénteme qué le quita la semana. Le indico la ayuda adecuada, o una Revisión Tecnológica si todavía no está claro.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Alcance y precio por escrito</h3><p>Qué haré, en qué herramientas y el precio, antes de empezar cualquier trabajo.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>El trabajo</h3><p>Todo se crea en sus cuentas. Usted aprueba los textos y lo probamos juntos.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Entrega</h3><p>Una guía breve, un recorrido con su equipo y 30 días de arreglos.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
+</Base>
