@@ -4,7 +4,7 @@
 const KEY = 'ba9485ce-3d10-468e-943f-00ffc9224cd4';
 const CSS = `
 .mf { position: fixed; inset: 0; z-index: 30; display: grid; align-items: end; justify-items: center; background: rgba(5, 10, 35, 0.55); font-family: 'DM Sans', Arial, sans-serif; }
-.mf[hidden] { display: none; }
+.mf[hidden], .mf [hidden] { display: none !important; }
 .mf-sheet { width: min(480px, 100%); max-height: 92vh; overflow: auto; background: #fff; color: #12235e; border-radius: 24px 24px 0 0;
   padding: 22px 20px max(22px, env(safe-area-inset-bottom)); box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.35); animation: mf-up .28s ease-out; }
 @media (min-width: 640px) { .mf { align-items: center; } .mf-sheet { border-radius: 24px; } }
