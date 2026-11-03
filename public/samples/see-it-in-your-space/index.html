@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>See It in Your Room | Rondout Mercantile AR Demo</title>
+<meta name="description" content="Place real-size products in your own room from the browser. An AR demo by Auva Studio for a fictional Kingston, NY store.">
+<meta name="theme-color" content="#f3f1ec">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+<script type="module" src="./vendor/model-viewer.min.js"></script>
+<style>
+  :root {
+    --linen: #f3f1ec; --sand: #e7e3da; --paper: #fbfaf7; --ink: #1f2330; --muted: #5b6070;
+    --indigo: #2c3f73; --indigo-deep: #1f2d57; --night: #171c2c; --honey: #a66f12; --honey-light: #e8c27a;
+    --line: rgb(31 35 48 / .12);
+    --serif: "Instrument Serif", Georgia, serif; --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--linen); color: var(--ink); font: 400 1.0625rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: var(--indigo); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: max(14px, env(safe-area-inset-top)) 0 14px; }
+  .brand { font: 400 1.6rem/1 var(--serif); color: var(--ink); text-decoration: none; letter-spacing: .01em; }
+  .brand small { display: block; font: 500 .7rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .pill { font: 500 .78rem/1 var(--sans); padding: 8px 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--muted); text-decoration: none; white-space: nowrap; }
+
+  .product { display: grid; gap: 22px; padding: 6px 0 40px; }
+  @media (min-width: 900px) { .product { grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: start; padding-top: 20px; } }
+  .stage { position: relative; border-radius: 22px; overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, var(--paper), var(--sand)); border: 1px solid var(--line); }
+  model-viewer { width: 100%; height: min(62vh, 560px); min-height: 340px; --poster-color: transparent; }
+  model-viewer::part(default-progress-bar) { background: var(--honey); }
+  .stage .size-tag { position: absolute; left: 14px; top: 14px; font: 500 .78rem/1 var(--sans); background: rgb(251 250 247 / .9); border: 1px solid var(--line); padding: 7px 10px; border-radius: 999px; color: var(--muted); }
+  .stage .drag { position: absolute; right: 14px; top: 14px; font: 500 .78rem/1 var(--sans); color: var(--muted); }
+
+  .eyebrow { font: 600 .74rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--honey); margin: 0 0 10px; }
+  h1 { font: 400 clamp(2.1rem, 6vw, 3.2rem)/1.05 var(--serif); margin: 0 0 10px; text-wrap: balance; }
+  h1 em { color: var(--indigo); }
+  .price { font: 600 1.15rem/1 var(--sans); margin: 0 0 14px; }
+  .blurb { color: var(--muted); margin: 0 0 22px; max-width: 46ch; }
+
+  .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; margin: 0 -2px 18px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .product .chips { flex-wrap: wrap; overflow: visible; }
+  .chip { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); font: 500 .92rem/1 var(--sans); color: var(--ink); cursor: pointer; min-height: 48px; }
+  .chip img { width: 36px; height: 36px; border-radius: 50%; background: var(--sand); object-fit: cover; }
+  .chip[aria-pressed="true"] { border-color: var(--indigo); box-shadow: 0 0 0 1px var(--indigo); }
+  .chip:focus-visible, .btn:focus-visible { outline: 3px solid var(--honey-light); outline-offset: 2px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 14px 24px; border-radius: 999px; border: 0; font: 600 1.02rem/1 var(--sans); text-decoration: none; cursor: pointer; }
+  .btn-main { width: 100%; background: var(--indigo); color: #fff; }
+  .btn-main:hover { background: var(--indigo-deep); }
+  .btn-main svg { width: 22px; height: 22px; }
+  .hint { font-size: .92rem; color: var(--muted); margin: 12px 0 0; text-align: center; }
+  .qr { display: none; margin-top: 18px; padding: 18px; border-radius: 18px; background: var(--paper); border: 1px solid var(--line); align-items: center; gap: 18px; }
+  .qr.show { display: flex; }
+  .qr img { width: 120px; height: 120px; flex: 0 0 auto; }
+  .qr p { margin: 0; font-size: .95rem; color: var(--muted); }
+  .qr b { color: var(--ink); }
+
+  section.how { border-top: 1px solid var(--line); padding: 40px 0; }
+  section.how h2, .auva h2 { font: 400 clamp(1.7rem, 4.5vw, 2.3rem)/1.1 var(--serif); margin: 0 0 22px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps li { counter-increment: s; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 20px; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--indigo); color: #fff; font: 600 .9rem/1 var(--sans); margin-bottom: 12px; }
+  .steps b { display: block; margin-bottom: 4px; }
+  .steps p { margin: 0; color: var(--muted); font-size: .97rem; }
+  .devices { margin: 18px 0 0; color: var(--muted); font-size: .95rem; }
+
+  .auva { background: #0f1d52; color: #fff; border-radius: 22px; padding: 28px 22px; margin: 0 0 40px; display: grid; gap: 18px; }
+  @media (min-width: 760px) { .auva { grid-template-columns: 1.4fr 1fr; align-items: center; padding: 36px; } }
+  .auva .eyebrow { color: #f39a3b; }
+  .auva h2 { margin-bottom: 10px; font-family: 'Montserrat', var(--sans); font-weight: 300; }
+  .auva p { margin: 0; color: #b8c6ea; }
+  .auva .acts { display: grid; gap: 10px; }
+  .btn-star { background: #f39a3b; color: #0a1440; }
+  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgb(220 232 255 / .35); }
+  footer { padding: 0 0 max(28px, env(safe-area-inset-bottom)); color: var(--muted); font-size: .85rem; }
+
+  /* AR overlay (phones). Shown only inside the AR session. */
+  #ar-ui { display: none; position: fixed; inset: 0; pointer-events: none; font-family: var(--sans); color: #fff; }
+  #ar-ui.on { display: block; }
+  #ar-ui .msg { position: absolute; left: 50%; top: max(18px, env(safe-area-inset-top)); transform: translateX(-50%); width: min(92vw, 420px); text-align: center; background: rgb(23 28 44 / .78); padding: 12px 16px; border-radius: 16px; font-size: 1rem; line-height: 1.35; }
+  #ar-ui .bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 12px max(16px, env(safe-area-inset-bottom)); display: grid; gap: 10px; pointer-events: auto; background: linear-gradient(transparent, rgb(23 28 44 / .55)); }
+  #ar-ui .chips { margin: 0; padding: 0 2px 2px; }
+  #ar-ui .chip { background: rgb(251 250 247 / .94); }
+  #ar-ui .tools { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  #ar-ui .tool { min-height: 50px; border-radius: 999px; border: 0; background: rgb(251 250 247 / .94); color: var(--ink); font: 600 .95rem/1 var(--sans); }
+  #ar-ui .tool.done { background: var(--indigo); color: #fff; }
+  #ar-ui .tool:disabled { opacity: .5; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/samples/rondout-mercantile/">Rondout Mercantile<small>Kingston, NY · Est. 1884</small></a>
+    <a class="pill" href="#auva">AR demo by Auva Studio</a>
+  </header>
+
+  <main class="product">
+    <div class="stage">
+      <model-viewer id="viewer" src="./models/dress-form.glb" alt="A tailor's dress form in 3D" camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="2500" rotation-per-second="18deg" shadow-intensity="1" shadow-softness="0.9" exposure="1.05" environment-image="neutral" ar ar-modes="scene-viewer quick-look" ar-placement="floor" ar-scale="fixed" interaction-prompt="none">
+        <button slot="ar-button" hidden></button>
+      </model-viewer>
+      <span class="size-tag" id="size-tag">61 in tall</span>
+      <span class="drag" aria-hidden="true">Drag to turn</span>
+    </div>
+
+    <div>
+      <p class="eyebrow" id="dept">Tailoring</p>
+      <h1 id="name">Tailor's dress form</h1>
+      <p class="price" id="price">$285</p>
+      <p class="blurb" id="blurb">Linen-covered and pinnable, on a walnut tripod with brass feet. See how it fits by your window before it leaves the shop.</p>
+
+      <div class="chips" id="chips" role="group" aria-label="Choose a product"></div>
+
+      <button class="btn btn-main" id="ar-start" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="m12 7 5 3v5l-5 3-5-3v-5z"/><path d="M12 12v6M12 12l5-2M12 12l-5-2"/></svg>
+        <span>See it in your room</span>
+      </button>
+      <p class="hint" id="hint">Full size, right in your space. No app needed.</p>
+      <div class="qr" id="qr">
+        <img src="./qr.svg" alt="QR code for this page">
+        <p><b>Open this page on your phone or Meta Quest 3</b> to place it in your room. Scan the code with your phone camera.</p>
+      </div>
+    </div>
+  </main>
+
+  <section class="how" aria-labelledby="how-h">
+    <h2 id="how-h">How it works</h2>
+    <ol class="steps">
+      <li><b>Tap “See it in your room”</b><p>Your camera opens in the browser. Nothing to download.</p></li>
+      <li><b>Point at the floor or a table</b><p>Move slowly until the ring appears where you want it.</p></li>
+      <li><b>Tap to place it</b><p>It appears at real size. Add more pieces, turn them, or start over.</p></li>
+    </ol>
+    <p class="devices">Works on Android phones and iPhones. On Meta Quest 3, open this page in the Quest browser, point at the floor, and pull the trigger to place things in your room.</p>
+  </section>
+
+  <section class="auva" id="auva" aria-labelledby="auva-h">
+    <div>
+      <p class="eyebrow">Made by Auva Studio</p>
+      <h2 id="auva-h">Want this for your products?</h2>
+      <p>I build AR product views that run right on your website. Customers see your products at real size in their own space, on a phone or a Meta Quest. Rondout Mercantile is a fictional store I made for this demo.</p>
+    </div>
+    <div class="acts">
+      <a class="btn btn-star" href="/ar-vr-production/ar/">See AR packages</a>
+      <a class="btn btn-ghost" href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    </div>
+  </section>
+
+  <footer>Rondout Mercantile is a fictional business. Products, prices, and details are made up for this demo. © Auva Studio</footer>
+</div>
+
+<div id="ar-ui" aria-live="polite">
+  <div class="msg" id="ar-msg">Move your phone slowly to find the floor.</div>
+  <div class="bar" id="ar-bar">
+    <div class="chips" id="ar-chips" role="group" aria-label="Choose a product"></div>
+    <div class="tools">
+      <button class="tool" id="ar-turn" type="button" disabled>Turn</button>
+      <button class="tool" id="ar-undo" type="button" disabled>Undo</button>
+      <button class="tool done" id="ar-done" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
