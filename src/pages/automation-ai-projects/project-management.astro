@@ -5,9 +5,10 @@ import '../../styles/pages/production-emerging-tech.css';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
-import { site, serviceSchema } from '../../data/site';
+import { site, testimonials, serviceSchema } from '../../data/site';
 import { pmPackages, faq } from '../../data/tech';
 
+const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
 const faqs = [faq.whichPm, faq.vendors, faq.inPerson];
 const schema = serviceSchema(pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })), '/automation-ai-projects/project-management/');
 ---
@@ -44,7 +45,15 @@ const schema = serviceSchema(pmPackages.map((p) => ({ name: p.title, description
     </div>
   </section>
 
+  <section id="proof">
+    <div class="wrap">
+      <figure class="card quote" style="max-width: 720px; margin: 0 auto">
+        <blockquote>“{quote.quote}”</blockquote>
+        <figcaption><b>{quote.name}</b><span class="muted">{quote.role}</span></figcaption>
+      </figure>
+    </div>
+  </section>
 
-  <Faq faqs={faqs} />
+  <Faq faqs={faqs} alt />
   <InquiryForm kind="consulting" topic="delivery" />
 </Base>
