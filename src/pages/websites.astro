@@ -19,6 +19,7 @@ const faqs = [
   { q: "What if something breaks after launch?", a: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see Help After Launch, and I always explain the cause and the cost before fixing anything.", html: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see <a href=\"/websites/help-after-launch/\">Help After Launch</a>, and I always explain the cause and the cost before fixing anything." },
   { q: "Will people find me on Google?", a: "Every package is built to be found, with clear page titles, search data, a sitemap, and fast pages that Google and AI tools like ChatGPT can read. No one can honestly promise a ranking, but your site starts with everything search engines look for." },
   { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I keep your content and the page addresses Google already knows, so you don't lose visitors, and moving the pages in your package is included. If your site already works well where it is, switching may not be worth it, and I'll tell you honestly." },
+  { q: "Why do you build with Astro?", a: "Astro sites load fast, have little to maintain, and cost little to host, which keeps your costs down. 71% of real-world Astro sites pass Google’s Core Web Vitals check, compared with 48% of WordPress sites (HTTP Archive and Chrome UX Report). For web apps, like client portals or custom tools, I use other frameworks that fit the job.", html: "Astro sites load fast, have little to maintain, and cost little to host, which keeps your costs down. 71% of real-world Astro sites pass Google’s Core Web Vitals check, compared with 48% of WordPress sites (<a href=\"https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress&geo=ALL&rank=ALL\" target=\"_blank\" rel=\"noopener\">HTTP Archive</a> and <a href=\"https://developer.chrome.com/docs/crux\" target=\"_blank\" rel=\"noopener\">Chrome UX Report</a>). For web apps, like client portals or custom tools, I use other frameworks that fit the job." },
   { q: "Do you work with agencies or designers?", a: "Yes. I build sites for agencies and independent designers, white-label or credited. See Development Partnerships.", html: "Yes. I build sites for agencies and independent designers, white-label or credited. See <a href=\"/development-partnerships/\">Development Partnerships</a>." },
 ];
 
@@ -133,14 +134,13 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Fast, affordable, <em>and yours.</em></h2>
-        <p class="lede">I build every site with Astro, a modern tool for fast, lightweight websites. It keeps your site fast and my prices fair.</p>
+        <p class="lede">I build most websites with Astro, a modern framework for fast, lightweight sites. Here’s what that means for you.</p>
       </div>
       <div class="grid grid-3 plain-grid">
         {comparison.benefits.map((b) => (
           <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
       </div>
-      <p class="fine">71% of real-world Astro sites pass Google's Core Web Vitals check, compared with 48% of WordPress sites (<a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> and <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>). <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">View the full dataset</a>.</p>
     </div>
   </section>
 

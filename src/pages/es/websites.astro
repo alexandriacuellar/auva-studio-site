@@ -19,6 +19,7 @@ const faqs = [
   { q: "¿Y si algo falla después del lanzamiento?", a: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea Ayuda después del lanzamiento, y siempre le explico la causa y el costo antes de arreglar nada.", html: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea <a href=\"/es/websites/help-after-launch/\">Ayuda después del lanzamiento</a>, y siempre le explico la causa y el costo antes de arreglar nada." },
   { q: "¿Me encontrarán en Google?", a: "Cada paquete está hecho para que lo encuentren, con títulos de página claros, datos para buscadores, un mapa del sitio y páginas rápidas que Google y herramientas de IA como ChatGPT pueden leer. Nadie puede prometer honestamente una posición, pero su sitio empieza con todo lo que buscan los buscadores." },
   { q: "Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?", a: "Lo más probable es que sí. Conservo su contenido y las direcciones de página que Google ya conoce, para que no pierda visitas, y mudar las páginas de su paquete está incluido. Si su sitio ya funciona bien donde está, quizá no valga la pena cambiar, y se lo diré con honestidad." },
+  { q: "¿Por qué usa Astro?", a: "Los sitios hechos con Astro cargan rápido, necesitan poco mantenimiento y cuestan poco de alojar, así que sus costos se mantienen bajos. El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (HTTP Archive y Chrome UX Report). Para aplicaciones web, como portales para clientes o herramientas a la medida, uso otros frameworks según el proyecto.", html: "Los sitios hechos con Astro cargan rápido, necesitan poco mantenimiento y cuestan poco de alojar, así que sus costos se mantienen bajos. El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (<a href=\"https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress&geo=ALL&rank=ALL\" target=\"_blank\" rel=\"noopener\">HTTP Archive</a> y <a href=\"https://developer.chrome.com/docs/crux\" target=\"_blank\" rel=\"noopener\">Chrome UX Report</a>). Para aplicaciones web, como portales para clientes o herramientas a la medida, uso otros frameworks según el proyecto." },
   { q: "¿Trabaja con agencias o diseñadores?", a: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea Colaboraciones para agencias.", html: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea <a href=\"/es/development-partnerships/\">Colaboraciones para agencias</a>." },
 ];
 
@@ -132,14 +133,13 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Rápido, económico <em>y suyo.</em></h2>
-        <p class="lede">Construyo cada sitio con Astro, una herramienta moderna para sitios web rápidos y ligeros. Así su sitio se mantiene rápido y mis precios, justos.</p>
+        <p class="lede">Construyo la mayoría de mis sitios con Astro, un framework moderno para sitios rápidos y ligeros. Esto es lo que significa para usted.</p>
       </div>
       <div class="grid grid-3 plain-grid">
         {comparison.benefits.map((b) => (
           <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
         ))}
       </div>
-      <p class="fine">El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (<a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> y <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>). <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">Ver todos los datos</a>.</p>
     </div>
   </section>
 
