@@ -28,6 +28,8 @@ export const nav = [
   {
     href: '/es/technology-consulting/',
     label: 'IA y Proyectos',
+    // Full name for search data; the menu shows the short label so the header stays on one row.
+    title: 'Automatización, IA y Proyectos',
     menuLabel: 'Páginas de automatización, IA y proyectos',
     children: [
       { href: '/es/technology-consulting/', label: 'Resumen y Revisión Tecnológica' },
@@ -36,7 +38,16 @@ export const nav = [
       { href: '/es/technology-consulting/project-management/', label: 'Gestión de proyectos' },
     ],
   },
-  { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
+  {
+    href: '/es/production-emerging-tech/',
+    label: 'Producción y Tecnología Emergente',
+    menuLabel: 'Páginas de producción y tecnología emergente',
+    children: [
+      { href: '/es/production-emerging-tech/', label: 'Resumen' },
+      { href: '/es/production-emerging-tech/ar/', label: 'Paquetes de AR' },
+      { href: '/es/production-emerging-tech/studios/', label: 'Producción de videojuegos y XR' },
+    ],
+  },
   { href: '/es/about/', label: 'Sobre mí' },
 ];
 

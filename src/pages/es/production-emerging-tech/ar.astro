@@ -1,0 +1,78 @@
+---
+// AR Packages sub page. Packages come from aiOffers group 'ar' in site.es.ts.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, aiOffers, serviceSchema } from '../../../data/site.es';
+import { t, ideas, faq } from '../../../data/production.es';
+
+const packages = aiOffers.filter((o) => o.group === 'ar');
+const faqs = [faq.app, faq.models, faq.bigger];
+const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/production-emerging-tech/ar/');
+---
+<Base title={t.arTitle} seoTitle={t.arSeo} schema={schema} description={t.arDesc}>
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head" set:html={t.arH} />
+      <p class="lede">{t.arL}</p>
+      <div class="hero-actions">
+        <a class="btn" href="/card/">{t.tryCard} <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">{t.book}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={t.pkH} />
+        <p class="lede">{t.pkL}</p>
+      </div>
+      <div class="grid grid-2">
+        {packages.map((p) => (
+          <div class="card offer" id={p.id}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items!.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.id}#start`} style="margin-top: 12px">{t.ask} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+      <div class="card card-row bigger" style="margin-top: 32px">
+        <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div>
+          <h3>{t.bigH}</h3>
+          <p class="muted">{t.bigP}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={t.ideasH} />
+        <p class="lede">{t.ideasL}</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">{t.live}</span> : <span class="idea-tag idea-tag-plain">{i.partner ? t.ideaPartner : t.idea}</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">{t.tryCard} <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top: 32px" set:html={t.website} />
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" topic="ar-card" />
+</Base>

@@ -56,7 +56,16 @@ export const nav = [
       { href: '/technology-consulting/project-management/', label: 'Project management' },
     ],
   },
-  { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
+  {
+    href: '/production-emerging-tech/',
+    label: 'Production & Emerging Tech',
+    menuLabel: 'Production & Emerging Tech pages',
+    children: [
+      { href: '/production-emerging-tech/', label: 'Overview' },
+      { href: '/production-emerging-tech/ar/', label: 'AR packages' },
+      { href: '/production-emerging-tech/studios/', label: 'Game and XR production' },
+    ],
+  },
   { href: '/about/', label: 'About' },
 ];
 

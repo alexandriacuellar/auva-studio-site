@@ -1,60 +1,36 @@
 ---
+// Production & Emerging Tech main page: 2 cards that open the AR and studio sub pages (alexandria 2026-11-03). Copy in data/production.ts.
 import Base from '../layouts/Base.astro';
 import '../styles/pages/production-emerging-tech.css';
 import Icon from '../components/Icon.astro';
 import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
-import { site, testimonials, aiOffers, serviceSchema } from '../data/site';
+import { site, aiOffers, serviceSchema } from '../data/site';
+import { t, services, audiences, faq } from '../data/production';
 
-const offers = aiOffers.filter((o) => o.group !== 'consulting');
-const packages = offers.filter((o) => o.group === 'ar');
-const review = offers.find((o) => o.id === 'review')!;
-const production = offers.find((o) => o.id === 'production')!;
-const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
-
-const audiences = [
-  { icon: 'layers', title: 'Shops, makers, and restaurants', text: 'Let customers see a product at home before they buy, or scan a menu or label that comes alive.' },
-  { icon: 'compass', title: 'Architects, builders, and developers', text: "Show clients a home or building that isn't built yet, on the table or full size on the lot." },
-  { icon: 'book', title: 'Museums, educators, and cultural organizations', text: 'Exhibits, lessons, and historic sites that show a scene, a voice, or a 3D object through a phone or headset.' },
-  { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, events, and campaigns people remember, from a scan-to-play poster to a Meta Horizon world.' },
-  { icon: 'star', title: 'Game and XR studios', text: 'An experienced producer and a schedule people trust, without a full-time hire.' },
-];
-
-
-const ideas = [
-  { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
-  { icon: 'layers', title: 'A sofa in your living room', text: 'Shoppers see the real size and color at home before they order.' },
-  { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
-  { icon: 'compass', title: 'A house on the empty lot', text: 'Buyers stand on the land and see the finished home around them.' },
-  { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },
-  { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step or a hard conversation on Meta Quest before doing it for real.', partner: true },
-];
-
-const faqs = [
-  { q: 'Do my customers need an app?', a: "No. They scan a code or open a link, and it works in their phone's browser." },
-  { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced XR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
-  { q: 'Can you join a game or XR project already underway?', a: 'Yes. I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
-];
+const byId = Object.fromEntries(services.map((x) => [x.id, x]));
+const faqs = [faq.app, faq.bigger, faq.underway];
+const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').map((o) => ({ name: o.title, description: o.text, price: o.price })), '/production-emerging-tech/');
 ---
-<Base title="Production & Emerging Tech" seoTitle="AR Packages, VR & Game Producer | Auva Studio" schema={schema} description="AR packages from $750 for businesses, architects, museums, and brands, opening on any phone with no app, plus a game and XR producer for studios.">
+<Base title={t.title} seoTitle={t.seo} schema={schema} description={t.desc}>
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">AR and VR people remember, <em>and a producer to get it built.</em></h1>
-      <p class="lede">AR that brings your products, menus, and places to life on any phone, and production support for game and XR teams.</p>
+      <h1 class="mag-head" set:html={t.heroH} />
+      <p class="lede">{t.heroL}</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#packages">See AR packages</a>
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#services">{t.seeHow}</a>
       </div>
     </div>
   </section>
 
-  <HelloBand facts={["<b>20+</b> years in web development", "<b>14+</b> projects managed", "<b>Mixed Reality (XR)</b> Certificate"]} />
+  <HelloBand facts={t.facts} />
 
   <section class="alt" id="who">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">Who I <em>work with.</em></h2>
+        <h2 class="mag-head" set:html={t.whoH} />
       </div>
       <div class="grid grid-3 who">
         {audiences.map((a) => (
@@ -62,101 +38,44 @@ const faqs = [
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
+            <a class="more" href={byId[a.to].href} style="margin-top: 12px">{byId[a.to].link} <Icon name="arrow" size={16} /></a>
           </div>
         ))}
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
-          <h3>Something else?</h3>
-          <p>Tell me what you have in mind, and I'll suggest where to start.</p>
-          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+          <h3>{t.elseH}</h3>
+          <p>{t.elseP}</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">{t.talk} <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="packages">
+  <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">AR packages, <em>priced up front.</em></h2>
-        <p class="lede">Each one opens in a phone's browser, with no app to download. Founding prices for my first AR clients.</p>
+        <h2 class="mag-head" set:html={t.twoH} />
+        <p class="lede">{t.twoL}</p>
       </div>
       <div class="grid grid-2">
-        {packages.map((p) => (
-          <div class="card offer" id={p.id}>
-            <div class="icon"><Icon name={p.icon} size={32} /></div>
-            <h3>{p.title}</h3>
-            <p class="svc-meta"><b>{p.price}</b></p>
-            <p class="muted">{p.text}</p>
-            <ul class="ticks">
-              {p.items!.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}
-            </ul>
-            <a class="more" href={`?topic=${p.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
-          </div>
+        {services.map((x) => (
+          <a class="card offer" href={x.href} id={x.id}>
+            <div class="icon"><Icon name={x.icon} size={32} /></div>
+            <h3>{x.title}</h3>
+            <p class="svc-meta"><b>{x.price}</b></p>
+            <p class="muted">{x.text}</p>
+            <span class="more" style="margin-top: auto; padding-top: 12px">{x.link} <Icon name="arrow" size={16} /></span>
+          </a>
         ))}
       </div>
-      <div class="card card-row bigger" style="margin-top: 32px">
+      <div class="card card-row bigger next-card" style="margin-top: 32px" id="next">
         <div class="icon"><Icon name="bolt" size={36} /></div>
         <div>
-          <h3>Need something bigger?</h3>
-          <p class="muted">VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced XR developer partner who joins at the start. I stay on as your producer. Quoted for your project.</p>
+          <span class="idea-tag">{t.nextTag}</span>
+          <h3>{t.nextH}</h3>
+          <p class="muted">{t.nextP}</p>
+          <a class="more" href="?topic=xr-idea#start" style="margin-top: 12px">{t.nextA} <Icon name="arrow" size={16} /></a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt" id="ideas">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">What we could <em>build together.</em></h2>
-        <p class="lede">The first one is my own business card. The others are ideas to spark yours.</p>
-      </div>
-      <div class="grid grid-3">
-        {ideas.map((i) => (
-          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
-            <div class="icon"><Icon name={i.icon} size={32} /></div>
-            {i.live ? <span class="idea-tag">Live demo</span> : <span class="idea-tag idea-tag-plain">{i.partner ? 'Idea, with partner' : 'Idea'}</span>}
-            <h3>{i.title}</h3>
-            <p class="muted">{i.text}</p>
-            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="next" style="padding-bottom: 0">
-    <div class="wrap">
-      <div class="card card-row bigger next-card">
-        <div class="icon"><Icon name="bolt" size={36} /></div>
-        <div>
-          <span class="idea-tag">Coming in 2027</span>
-          <h3>Next up: VR and Meta's AI glasses</h3>
-          <p class="muted">I've built in Meta Horizon Worlds for years and I'm part of Meta Horizon Start and the Meta Horizon Creator Program. Next I'm building for Meta Quest headsets and Meta's AI glasses: hands-free guides and tours, step-by-step help for staff, and VR training. Have an idea? Tell me now and you'll be first in line.</p>
-          <a class="more" href="?topic=xr-idea#start" style="margin-top: 12px">Share your idea <Icon name="arrow" size={16} /></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="production">
-    <div class="wrap about-grid">
-      <div>
-        <h2 class="mag-head">For game and XR <em>studios.</em></h2>
-        <p class="lede">Producer and project management help: plans, schedules, design documents, playtests, and keeping everyone aligned. Join at the start or partway through.</p>
-        <ul class="ticks">
-          <li><Icon name="tick" size={18} /><span><b>{review.title}, {review.price}.</b> I review your scope, milestones, and risks, and give you a plan your team can follow. About 2 weeks.</span></li>
-          <li><Icon name="tick" size={18} /><span><b>{production.title}, $65/hr.</b> Or monthly: 10 hrs $650, 20 hrs $1,200, or 40 hrs $2,200, with a 3-month minimum.</span></li>
-          <li><Icon name="tick" size={18} />Agile workflow, sprints, design documents, and playtests</li>
-        </ul>
-        <a class="btn" href="/production-emerging-tech/?topic=production#start" style="margin-top: 20px">Ask about Production Support</a>
-      </div>
-      <div class="values">
-        {testimonials.map((t) => (
-          <figure class="card quote">
-            <blockquote>“{t.quote}”</blockquote>
-            <figcaption><b>{t.name}</b><span class="muted">{t.role}</span></figcaption>
-          </figure>
-        ))}
       </div>
     </div>
   </section>
@@ -164,16 +83,13 @@ const faqs = [
   <section class="alt" id="how">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="mag-head">How it <em>works.</em></h2>
-        <p class="lede">Simple to start, with no surprises along the way.</p>
+        <h2 class="mag-head" set:html={t.howH} />
+        <p class="lede">{t.howL}</p>
       </div>
       <ol class="steps steps-4">
-        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me what you want people to see, or where your game or XR project stands.</p></li>
-        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>A short proposal with what I'll make, how long it takes, and the price.</p></li>
-        <li><span class="num" aria-hidden="true">3</span><h3>Build and review</h3><p>You try your AR on your own phone and send changes. Studios get sprints, playtests, and milestone reviews.</p></li>
-        <li><span class="num" aria-hidden="true">4</span><h3>Launch and handover</h3><p>You get the link, the printed code, and your files, so it stays yours.</p></li>
+        {t.steps.map(([h, p], i) => <li><span class="num" aria-hidden="true">{i + 1}</span><h3>{h}</h3><p>{p}</p></li>)}
       </ol>
-      <p class="muted" style="margin-top: 32px"><b>Need a website too?</b> See <a href="/websites/#packages">website packages from $1,500</a>. AR Product View can be added to any of them.</p>
+      <p class="muted" style="margin-top: 32px" set:html={t.website} />
     </div>
   </section>
 

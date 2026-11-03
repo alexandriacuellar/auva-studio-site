@@ -1,0 +1,67 @@
+---
+// Game and XR Production sub page.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, testimonials, aiOffers, serviceSchema } from '../../../data/site.es';
+import { t, studioOffers, faq } from '../../../data/production.es';
+
+const titles = Object.fromEntries(aiOffers.map((o) => [o.id, o.title]));
+const offers = studioOffers.map((o) => ({ ...o, title: titles[o.topic] }));
+const faqs = [faq.underway, faq.engines, faq.remote];
+const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/production-emerging-tech/studios/');
+---
+<Base title={t.stTitle} seoTitle={t.stSeo} schema={schema} description={t.stDesc}>
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head" set:html={t.stH} />
+      <p class="lede">{t.stL}</p>
+      <div class="hero-actions">
+        <a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#offers">{t.seeHow}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="offers">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={t.offH} />
+        <p class="lede">{t.offL}</p>
+      </div>
+      <div class="grid grid-2">
+        {offers.map((p) => (
+          <div class="card offer" id={p.topic}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.topic}#start`} style="margin-top: 12px">{t.ask} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={t.proofH} />
+      </div>
+      <div class="grid grid-3">
+        {testimonials.map((q) => (
+          <figure class="card quote">
+            <blockquote>“{q.quote}”</blockquote>
+            <figcaption><b>{q.name}</b><span class="muted">{q.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" topic="production" />
+</Base>

@@ -110,6 +110,17 @@ const showPromo = base === '/' || base.startsWith('/websites/') || base === '/we
 
 const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
+// Sub pages (like /websites/diagnostic/) get breadcrumb data for search results: Home > section > page.
+const navParent = (nav as { href: string; label: string; title?: string; children?: { href: string; label: string }[] }[]).find((item) => item.children?.some((c) => c.href === path) && item.href !== path);
+const navChild = navParent?.children?.find((c) => c.href === path);
+const breadcrumb = navParent && navChild ? [{
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: site.name, item: new URL(lang === 'es' ? '/es/' : '/', site.url).href },
+    { '@type': 'ListItem', position: 2, name: navParent.title ?? navParent.label, item: new URL(navParent.href, site.url).href },
+    { '@type': 'ListItem', position: 3, name: navChild.label, item: pageUrl },
+  ],
+}] : [];
 // One graph per page: the business, its founder, the site, and this page, plus anything the page adds (services, FAQs).
 const schema = {
   '@context': 'https://schema.org',
@@ -145,6 +156,7 @@ const schema = {
     },
     { '@type': 'WebSite', '@id': `${site.url}/#website`, name: site.name, url: `${site.url}/`, publisher: { '@id': `${site.url}/#org` } },
     { '@type': 'WebPage', '@id': `${pageUrl}#page`, url: pageUrl, name: fullTitle, description, inLanguage: lang === 'es' ? 'es-US' : 'en-US', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#org` } },
+    ...breadcrumb,
     ...pageSchema,
   ],
 };
