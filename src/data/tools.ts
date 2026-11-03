@@ -13,6 +13,11 @@ const T: Record<string, Tool> = {
   cloudflare: { name: 'Cloudflare', icon: 'cloudflare' },
   figma: { name: 'Figma', icon: 'figma' },
   typescript: { name: 'TypeScript', icon: 'typescript' },
+  vue: { name: 'Vue', icon: 'vuedotjs' },
+  go: { name: 'Go', icon: 'go' },
+  contentful: { name: 'Contentful', icon: 'contentful' },
+  vercel: { name: 'Vercel', icon: 'vercel' },
+  netlify: { name: 'Netlify', icon: 'netlify' },
   zapier: { name: 'Zapier', icon: 'zapier' },
   make: { name: 'Make', icon: 'make' },
   chatgpt: { name: 'ChatGPT', mark: 'GPT' },
@@ -30,7 +35,7 @@ const T: Record<string, Tool> = {
 
 export const toolSets: Record<string, Tool[]> = {
   websites: [T.astro, T.next, T.react, T.webflow, T.shopify, T.sanity, T.cloudflare],
-  partners: [T.astro, T.next, T.react, T.typescript, T.webflow, T.shopify, T.sanity, T.figma, T.cloudflare],
+  partners: [T.astro, T.next, T.react, T.vue, T.typescript, T.go, T.webflow, T.shopify, T.sanity, T.contentful, T.figma, T.cloudflare, T.vercel, T.netlify],
   automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.notion, T.jira, T.gworkspace, T.m365],
   xr: [T.quest, T.horizon, T.unity, T.blender, T.jira],
 };
