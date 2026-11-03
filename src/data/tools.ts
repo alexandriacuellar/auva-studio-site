@@ -29,6 +29,10 @@ const T: Record<string, Tool> = {
   horizon: { name: 'Horizon Worlds', icon: 'meta' },
   unity: { name: 'Unity', icon: 'unity' },
   blender: { name: 'Blender', icon: 'blender' },
+  krita: { name: 'Krita', icon: 'krita' },
+  mindar: { name: 'MindAR', mark: 'AR' },
+  three: { name: 'three.js', icon: 'threedotjs' },
+  miro: { name: 'Miro', icon: 'miro' },
 };
 
 export const toolSets: Record<string, Tool[]> = {
@@ -36,5 +40,6 @@ export const toolSets: Record<string, Tool[]> = {
   websites: [T.astro, T.next, T.react, T.typescript, T.webflow, T.shopify, T.sanity, T.cloudflare],
   // Automation (new service, alexandria 2026-11-03): only tools she has used. PM tools: Jira, ClickUp, Trello most; learning Notion. Add apps as she connects them for clients.
   automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.metaai, T.copilot, T.jira, T.clickup, T.trello, T.notion],
-  xr: [T.quest, T.horizon, T.unity, T.blender, T.jira],
+  // AR, VR & Production (alexandria 2026-11-03): Quest 2 and 3, Horizon Worlds, Unity, Blender, Krita, MindAR + three.js (web AR, as on her business card; web AR/VR is what she wants to do next), her PM tools, Miro.
+  xr: [T.quest, T.horizon, T.unity, T.blender, T.krita, T.mindar, T.three, T.jira, T.clickup, T.trello, T.notion, T.miro],
 };
