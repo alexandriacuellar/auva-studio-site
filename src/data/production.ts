@@ -60,8 +60,8 @@ export const demos = [
   { pkg: 'ar-product', img: 'room', name: 'See it in your room', href: '/samples/see-it-in-your-space/', works: 'phones and Meta Quest 3',
     text: 'A store page where shoppers place a dress form, a lamp, or a honey pot at real size in their own room, then add more pieces and turn them. The store is made up.',
     goodFor: 'Good for furniture, home goods, and gift shops, and anything people want to see at home first.' },
-  { pkg: 'ar-card', img: 'card', name: 'My AR business card', href: '/card/', works: 'phones',
-    text: 'Point your phone at my business card and I pop out of it, with buttons to book a call, email me, or follow.',
+  { pkg: 'ar-card', img: 'card', name: 'My AR business card', href: '/samples/ar-business-card/', works: 'phones',
+    text: 'Point your phone at my business card, or at the card on your computer screen, and I pop out of it with buttons to book a call, email me, or follow. Only have a phone? Watch it right there.',
     goodFor: 'Good for business cards, flyers, postcards, and event signs.' },
 ];
 

@@ -57,8 +57,8 @@ export const demos = [
   { pkg: 'ar-product', img: 'room', name: 'Véalo en su sala', href: '/samples/see-it-in-your-space/', works: 'teléfonos y Meta Quest 3',
     text: 'Una tienda donde los clientes colocan un maniquí de costura, una lámpara o un tarro de miel a tamaño real en su propia sala, y luego agregan más piezas y las giran. La tienda es inventada.',
     goodFor: 'Ideal para tiendas de muebles, artículos para el hogar y regalos, y todo lo que la gente quiere ver en casa primero.' },
-  { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/card/', works: 'teléfonos',
-    text: 'Apunte el teléfono a mi tarjeta y salgo de ella, con botones para reservar una llamada, escribirme o seguirme.',
+  { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/samples/ar-business-card/', works: 'teléfonos',
+    text: 'Apunte el teléfono a mi tarjeta, o a la tarjeta en la pantalla de su computadora, y salgo de ella con botones para reservar una llamada, escribirme o seguirme. ¿Solo tiene el teléfono? Véalo ahí mismo.',
     goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
 ];
 
