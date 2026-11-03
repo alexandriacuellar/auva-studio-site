@@ -7,6 +7,7 @@ const T: Record<string, Tool> = {
   astro: { name: 'Astro', icon: 'astro' },
   next: { name: 'Next.js', icon: 'nextdotjs' },
   react: { name: 'React', icon: 'react' },
+  typescript: { name: 'TypeScript', icon: 'typescript' },
   webflow: { name: 'Webflow', icon: 'webflow' },
   shopify: { name: 'Shopify', icon: 'shopify' },
   sanity: { name: 'Sanity', icon: 'sanity' },
@@ -28,7 +29,7 @@ const T: Record<string, Tool> = {
 
 export const toolSets: Record<string, Tool[]> = {
   // Websites and Development Partnerships share one list (alexandria 2026-11-03).
-  websites: [T.astro, T.next, T.react, T.webflow, T.shopify, T.sanity, T.cloudflare],
+  websites: [T.astro, T.next, T.react, T.typescript, T.webflow, T.shopify, T.sanity, T.cloudflare],
   automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.notion, T.jira, T.gworkspace, T.m365],
   xr: [T.quest, T.horizon, T.unity, T.blender, T.jira],
 };
