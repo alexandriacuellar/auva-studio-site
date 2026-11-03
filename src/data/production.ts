@@ -7,7 +7,7 @@ export const t = {
   seo: 'AR Packages & Game and XR Producer | Auva Studio',
   desc: 'AR packages from $750 for businesses, architects, museums, and brands, opening on any phone with no app, plus a game and XR producer for studios.',
   heroH: 'AR and VR people remember, <em>and a producer to get it built.</em>',
-  heroL: 'AR that brings your products, menus, and places to life on any phone, and production support for game and XR teams.',
+  heroL: 'AR that works on any phone, VR on Meta Quest, and a producer who keeps game and XR teams on schedule.',
   book: 'Book a free 30-minute call', seeHow: 'See how I help',
   facts: ['<b>20+</b> years in web development', '<b>14+</b> projects managed', '<b>Mixed Reality (XR)</b> Certificate'],
   whoH: 'Who I <em>work with.</em>', elseH: 'Something else?', elseP: "Tell me what you have in mind, and I'll suggest where to start.", talk: 'Talk it through',
@@ -28,7 +28,7 @@ export const t = {
   arDesc: 'AR cards, flyers, menus, packaging, product views, and project viewers from $750. They open in any phone browser, with no app to download.',
   arH: 'AR people remember, <em>from $750.</em>', arL: 'Cards, menus, products, and buildings that come alive on any phone. No app to download.',
   tryCard: 'Try it on my card', pkH: 'AR packages, <em>priced up front.</em>', pkL: "Each one opens in a phone's browser. Founding prices for my first AR clients.", ask: 'Ask about this',
-  bigH: 'Need something bigger?', bigP: 'VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced XR developer partner who joins at the start. I stay on as your producer. Quoted for your project.',
+  bigH: 'Need something bigger?', bigP: 'VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced AR and VR developer partner who joins at the start. I stay on as your producer. Quoted for your project.',
   ideasH: 'What we could <em>build together.</em>', ideasL: 'The first one is my own business card. The others are ideas to spark yours.',
   live: 'Live demo', idea: 'Idea', ideaPartner: 'Idea, with partner',
   // Studios sub page
@@ -68,7 +68,7 @@ export const studioOffers = [
 
 export const faq = {
   app: { q: 'Do my customers need an app?', a: "No. They scan a code or open a link, and it works in their phone's browser." },
-  bigger: { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced XR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
+  bigger: { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced AR and VR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
   underway: { q: 'Can you join a game or XR project already underway?', a: 'Yes. I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
   models: { q: 'Do I need 3D models?', a: 'No. I can make them from your photos or product files. Architects and builders can use the model they already have.' },
   engines: { q: 'Which engines and platforms have you worked with?', a: 'Unity and Meta Quest, plus Meta Horizon Worlds. I manage the work and the schedule; your developers build in the engine you use.' },
