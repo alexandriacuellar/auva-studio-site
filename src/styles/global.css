@@ -117,7 +117,6 @@ section#who, .band-cream { background: var(--band-cream); }
 .hero h1 .accent { color: var(--primary); }
 .hero .lede { margin-bottom: 32px; }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.form-choices { margin-top: 8px; }
 .hero-img { border-radius: 28px; overflow: hidden; box-shadow: var(--shadow-strong); aspect-ratio: 4 / 5; }
 .hero-img img { width: 100%; height: 100%; object-fit: cover; }
 .services-line { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
@@ -208,6 +207,17 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 /* About */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .values { display: grid; gap: 18px; }
+.inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "intro form" "next form"; grid-template-rows: auto 1fr; gap: 28px 56px; align-items: start; }
+.inquiry-grid > * { min-width: 0; }
+.inquiry-intro { grid-area: intro; }
+.inquiry-grid > .card { grid-area: form; }
+.inquiry-next { grid-area: next; }
+.prefer-talk { display: flex; gap: 12px; align-items: flex-start; margin: 20px 0 0; padding: 14px 18px; border-radius: 14px; background: var(--white); border: 1px solid var(--border); color: var(--muted); }
+.prefer-talk svg { flex: none; color: var(--primary); margin-top: 2px; }
+.prefer-talk b { color: var(--ink); }
+.form-sooner { margin: 8px 0 0; color: var(--muted); }
+@media (max-width: 960px) { .inquiry-grid { grid-template-columns: 1fr; grid-template-areas: "intro" "form" "next"; } }
+
 
 /* Forms */
 form { display: grid; gap: 18px; }

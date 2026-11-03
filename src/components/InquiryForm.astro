@@ -48,7 +48,7 @@ const t = {
     readPersonally: 'I read every message personally.',
     alsoEmail: 'I read every message personally. You can also email',
     orForm: 'Or send a message with the form.',
-    sendMsg: 'Send a message',
+    sooner: 'Want to talk sooner?',
     whatNext: 'What happens next',
     scoped: 'Any work is scoped and priced in writing before it begins.',
     preferTalk: 'Prefer to talk?',
@@ -101,7 +101,7 @@ const t = {
     readPersonally: 'Leo cada mensaje personalmente.',
     alsoEmail: 'Leo cada mensaje personalmente. También puede escribir a',
     orForm: 'O envíe un mensaje con el formulario.',
-    sendMsg: 'Envíe un mensaje',
+    sooner: '¿Quiere hablar antes?',
     whatNext: 'Qué sigue',
     scoped: 'Todo trabajo se define y se cotiza por escrito antes de empezar.',
     preferTalk: '¿Prefiere hablar?',
@@ -136,34 +136,26 @@ const websiteIntro = (t.websiteIntro(replyLine) as Record<string, { title: strin
 const formAction = 'https://api.web3forms.com/submit';
 ---
 <section id="start" class:list={{ alt, hero }} data-sending={t.sending} data-thanks={t.thanks} data-failed={t.failed}>
-  <div class="wrap about-grid">
-    <div>
+  <div class="wrap inquiry-grid">
+    <div class="inquiry-intro">
       {isWebsite ? (
         <>
           <h2 class="mag-head" set:html={(websiteIntro ?? { title: t.websiteTitle }).title} />
           <p class="lede">{websiteIntro?.lede}</p>
-          <div class="hero-actions form-choices"><a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a><a class="btn btn-ghost" href="#message">{t.sendMsg}</a></div>
         </>
       ) : (
         <>
           <Heading class="mag-head" set:html={intro.title} />
           <p class="lede">{intro.lede}</p>
-          <div class="hero-actions form-choices"><a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a><a class="btn btn-ghost" href="#message">{t.sendMsg}</a></div>
           {isGeneral ? (
             hero ? <p class="muted small" style="margin-top: 12px">{t.alsoEmail} <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">{t.readPersonally}</p>
           ) : null}
         </>
       )}
-      <div class="values" style="margin-top: 28px">
-        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>{t.whatNext}</h3>{websiteIntro?.steps ? (
-          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
-        ) : (
-          <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
-        )}</div></div>
-      </div>
+      <p class="prefer-talk"><Icon name="chat" size={20} /><span><b>{t.preferTalk}</b> <a href={site.booking} target="_blank" rel="noopener">{t.book}</a> {t.instead}</span></p>
     </div>
     <div class="card">
-      <form action={formAction} method="POST" class="inquiry" id="message">
+      <form action={formAction} method="POST" class="inquiry">
         <input type="hidden" name="access_key" value={site.web3formsKey} />
         <input type="hidden" name="subject" value={subject} />
         <input type="hidden" name="from_name" value="Auva Studio website" />
@@ -225,7 +217,15 @@ const formAction = 'https://api.web3forms.com/submit';
         )}
         <button class="btn" type="submit">{(isWebsite && websiteIntro?.button) || t.send}</button>
         <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-sooner" hidden>{t.sooner} <a href={site.booking} target="_blank" rel="noopener">{t.book}</a></p>
       </form>
+    </div>
+    <div class="values inquiry-next">
+      <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>{t.whatNext}</h3>{websiteIntro?.steps ? (
+          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
+        ) : (
+          <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
+        )}</div></div>
     </div>
   </div>
 </section>
@@ -260,6 +260,7 @@ const formAction = 'https://api.web3forms.com/submit';
         form.reset();
         (window as any).auvaConvert?.('form');
         if (status) status.textContent = words.thanks!;
+        form.querySelector<HTMLElement>('.form-sooner')?.removeAttribute('hidden');
       } catch {
         if (status) status.textContent = words.failed!;
       } finally {
