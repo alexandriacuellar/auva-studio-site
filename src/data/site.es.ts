@@ -40,7 +40,7 @@ export const nav = [
   },
   {
     href: '/es/production-emerging-tech/',
-    label: 'Producción y Tecnología Emergente',
+    label: 'AR, VR y Producción',
     menuLabel: 'Páginas de producción y tecnología emergente',
     children: [
       { href: '/es/production-emerging-tech/', label: 'Resumen' },
@@ -71,12 +71,12 @@ export const categories = [
   },
   {
     icon: 'bolt',
-    title: 'Producción y Tecnología Emergente',
+    title: 'AR, VR y Producción',
     text: 'Realidad aumentada (AR) que da vida a sus productos, menús y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
     offers: [['Paquetes de AR', 'Desde $750'], ['Revisión del Plan de Producción', '$650'], ['Apoyo de producción para equipos de videojuegos y XR', '$65/hora']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
     href: '/es/production-emerging-tech/',
-    cta: 'Ver Producción y Tecnología Emergente',
+    cta: 'Ver AR, VR y Producción',
   },
 ];
 

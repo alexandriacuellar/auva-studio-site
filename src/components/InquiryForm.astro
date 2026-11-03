@@ -54,7 +54,7 @@ const t = {
     instead: 'instead.',
     name: 'Name', email: 'Email', business: 'Business or organization', phone: 'Phone', optional: '(optional)',
     about: "What's this about?",
-    generalTopics: [['website', 'Website'], ['consulting', 'Tech tools, automation, AI, or project help'], ['ai', 'Production & Emerging Tech (games, XR, AR)'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
+    generalTopics: [['website', 'Website'], ['consulting', 'Tech tools, automation, AI, or project help'], ['ai', 'AR, VR, or game production'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
     workingOn: 'What are you working on?',
     need: 'What do you need?', currentSite: 'Current website', tellBusiness: 'Tell me about your business',
     interested: 'Interested in',
@@ -117,7 +117,7 @@ const t = {
     instead: 'en su lugar.',
     name: 'Nombre', email: 'Correo electrónico', business: 'Negocio u organización', phone: 'Teléfono', optional: '(opcional)',
     about: '¿De qué se trata?',
-    generalTopics: [['website', 'Sitio web'], ['consulting', 'Herramientas, automatización, IA o ayuda con proyectos'], ['ai', 'Producción y Tecnología Emergente (videojuegos, XR, AR)'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
+    generalTopics: [['website', 'Sitio web'], ['consulting', 'Herramientas, automatización, IA o ayuda con proyectos'], ['ai', 'AR, VR o producción de videojuegos'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
     workingOn: '¿En qué está trabajando?',
     need: '¿Qué necesita?', currentSite: 'Sitio web actual', tellBusiness: 'Cuénteme sobre su negocio',
     interested: 'Me interesa',
@@ -147,7 +147,7 @@ const t = {
 }[lang];
 const intro = isGeneral && !hero ? t.intros.general : isGeneral ? t.intros.contact : isPartner ? t.intros.partner : isAi ? t.intros.ai : t.intros.consulting;
 // Spanish messages say so in the subject line, so replies go out in Spanish.
-const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New Production & Emerging Tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
+const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New AR, VR & Production inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
 const websiteTopics = t.websiteTopics;
 // Each website service page gets its own heading, lede, and next step.
 const replyLine = t.replyLine;

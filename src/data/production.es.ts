@@ -1,8 +1,8 @@
-// Producción y Tecnología Emergente: página principal + subpáginas (versión en español de production.ts).
+// AR, VR y Producción: página principal + subpáginas (versión en español de production.ts).
 export const base = '/es/production-emerging-tech';
 
 export const t = {
-  title: 'Producción y Tecnología Emergente',
+  title: 'AR, VR y Producción',
   seo: 'Paquetes de AR y productora de videojuegos y XR | Auva Studio',
   desc: 'Paquetes de AR desde $750 para negocios, arquitectos, museos y marcas, que abren en cualquier teléfono sin aplicación, y una productora de videojuegos y XR para estudios.',
   heroH: 'AR y VR que la gente recuerda, <em>y una productora para hacerlo realidad.</em>',

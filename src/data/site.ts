@@ -58,8 +58,8 @@ export const nav = [
   },
   {
     href: '/production-emerging-tech/',
-    label: 'Production & Emerging Tech',
-    menuLabel: 'Production & Emerging Tech pages',
+    label: 'AR, VR & Production',
+    menuLabel: 'AR, VR & Production pages',
     children: [
       { href: '/production-emerging-tech/', label: 'Overview' },
       { href: '/production-emerging-tech/ar/', label: 'AR packages' },
@@ -90,12 +90,12 @@ export const categories = [
   },
   {
     icon: 'bolt',
-    title: 'Production & Emerging Tech',
+    title: 'AR, VR & Production',
     text: 'AR that brings your products, menus, and flyers to life on a phone, plus a producer for game and XR teams.',
     offers: [['AR packages', 'From $750'], ['Production Plan Review', '$650'], ['Production support for game and XR teams', '$65/hr']],
     note: 'AR and VR for phones, Meta Quest, and Meta glasses.',
     href: '/production-emerging-tech/',
-    cta: 'Explore Production & Emerging Tech',
+    cta: 'Explore AR, VR & Production',
   },
 ];
 
@@ -217,7 +217,7 @@ export const testimonials = [
 ];
 
 // AI and production offers. group 'consulting' lives on the Automation, AI & Projects pages;
-// 'ar' (AR packages), 'prototype' (Plan Review) and 'production' live on the Production & Emerging Tech page.
+// 'ar' (AR packages), 'prototype' (Plan Review) and 'production' live on the AR, VR & Production page.
 export const aiOffers = [
   { id: 'review', group: 'prototype', icon: 'search', title: 'Production Plan Review', price: '$650', text: 'For game, XR, and interactive projects. I review your scope, milestones, and risks, and give you a plan your team can follow, with your project tools set up if you need them. About 2 weeks.' },
   { id: 'ar-card', group: 'ar', icon: 'star', title: 'AR Card or Flyer', price: 'From $750', text: 'A card, flyer, or sign that comes alive when someone points a phone at it.', items: ['One printed piece', 'A short video or 3D object', 'Buttons to book, call, or visit your site'] },

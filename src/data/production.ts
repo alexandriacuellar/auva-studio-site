@@ -1,9 +1,9 @@
-// Production & Emerging Tech: main page + AR Packages and Game & XR Production sub pages (alexandria 2026-11-03).
+// AR, VR & Production: main page + AR Packages and Game & XR Production sub pages (alexandria 2026-11-03).
 // Spanish copy is in production.es.ts. Package prices live in aiOffers in site.ts.
 export const base = '/production-emerging-tech';
 
 export const t = {
-  title: 'Production & Emerging Tech',
+  title: 'AR, VR & Production',
   seo: 'AR Packages & Game and XR Producer | Auva Studio',
   desc: 'AR packages from $750 for businesses, architects, museums, and brands, opening on any phone with no app, plus a game and XR producer for studios.',
   heroH: 'AR and VR people remember, <em>and a producer to get it built.</em>',
