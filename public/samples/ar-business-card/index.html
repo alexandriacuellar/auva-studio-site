@@ -63,7 +63,9 @@
   .ar[hidden], .pv[hidden] { display: none; }
   .ar-stage, .pv-stage { position: absolute; inset: 0; overflow: hidden; }
   .ar-top { position: absolute; z-index: 3; top: max(14px, env(safe-area-inset-top)); left: 14px; right: 14px; display: flex; justify-content: flex-end; }
-  .ar-close { min-height: 44px; padding: 10px 18px; background: rgba(10, 20, 64, 0.72); color: var(--white); border: 1px solid rgba(220, 232, 255, 0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .ar-close { min-height: 48px; padding: 10px 20px 10px 16px; gap: 8px; background: var(--white); color: var(--ink); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); }
+  .ar-close svg { width: 20px; height: 20px; }
+  .ar-back { margin-top: 10px; min-height: 44px; width: 100%; background: transparent; color: var(--white); border: 1px solid rgba(220, 232, 255, 0.45); }
   .ar-hint { position: absolute; z-index: 3; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(340px, calc(100% - 32px));
              padding: 14px 18px; border-radius: 18px; text-align: center; background: rgba(10, 20, 64, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .ar-hint p { color: var(--white); font-size: 0.98rem; }
@@ -129,14 +131,14 @@
 <div class="ar" id="ar" hidden role="dialog" aria-modal="true" aria-label="My card in your camera">
   <div class="ar-stage" id="ar-stage"></div>
   <div class="ar-frame" aria-hidden="true"></div>
-  <div class="ar-top"><button class="btn ar-close" id="ar-close" type="button">Done</button></div>
-  <div class="ar-hint" id="ar-hint" aria-live="polite"><p>Starting the camera...</p></div>
+  <div class="ar-top"><button class="btn ar-close" id="ar-close" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Close</button></div>
+  <div class="ar-hint"><div id="ar-hint" aria-live="polite"><p>Starting the camera...</p></div><button class="btn ar-back" type="button" data-back>Back to the page</button></div>
 </div>
 
 <div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-label="My card coming alive">
   <div class="pv-stage" id="pv-stage"></div>
-  <div class="ar-top"><button class="btn ar-close" id="pv-close" type="button">Done</button></div>
-  <div class="ar-hint"><p>Tap an icon to open it</p><p class="small">Drag to turn the card</p></div>
+  <div class="ar-top"><button class="btn ar-close" id="pv-close" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Close</button></div>
+  <div class="ar-hint"><p>Tap an icon to open it</p><p class="small">Drag to turn the card</p><button class="btn ar-back" type="button" data-back>Back to the page</button></div>
   <nav class="sr-only" aria-label="Links floating around me">
     <a href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
     <a href="https://auvastudio.com/">Website</a>
@@ -159,7 +161,7 @@
   let session = null, opener = null;
   const aim = () => say('Point at the front of my card', 'On paper or on a screen, with my photo in view');
   document.querySelectorAll('[data-camera]').forEach((b) => b.addEventListener('click', async () => {
-    opener = b; arEl.hidden = false; arEl.classList.remove('found'); document.body.style.overflow = 'hidden';
+    opener = b; history.pushState({ view: 'camera' }, ''); arEl.hidden = false; arEl.classList.remove('found'); document.body.style.overflow = 'hidden';
     document.getElementById('ar-close').focus();
     say('Starting the camera...');
     try {
@@ -175,21 +177,26 @@
     }
   }));
   const closeAR = () => { session?.stop(); session = null; stage.innerHTML = ''; arEl.hidden = true; document.body.style.overflow = ''; opener?.focus(); };
-  document.getElementById('ar-close').addEventListener('click', closeAR);
+
 
   // On-phone preview: no camera, the card and everything on it in a 3D view.
   const pvEl = document.getElementById('pv'), pvStage = document.getElementById('pv-stage');
   let preview = null;
   document.querySelectorAll('[data-preview]').forEach((b) => b.addEventListener('click', async () => {
-    opener = b; pvEl.hidden = false; document.body.style.overflow = 'hidden';
+    opener = b; history.pushState({ view: 'preview' }, ''); pvEl.hidden = false; document.body.style.overflow = 'hidden';
     document.getElementById('pv-close').focus();
     const { startCardPreview } = await import('./preview.js');
     preview = await startCardPreview(pvStage, { card: './card-front.webp' });
   }));
   const closePV = () => { preview?.stop(); preview = null; pvStage.innerHTML = ''; pvEl.hidden = true; document.body.style.overflow = ''; opener?.focus(); };
-  document.getElementById('pv-close').addEventListener('click', closePV);
 
-  document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!arEl.hidden) closeAR(); if (!pvEl.hidden) closePV(); });
+
+  // Close, Back to the page, Escape, and the phone's own back button all leave the full-screen view.
+  const closeAny = () => { if (!arEl.hidden) closeAR(); if (!pvEl.hidden) closePV(); };
+  const leave = () => { if (history.state?.view) history.back(); else closeAny(); };
+  document.querySelectorAll('.ar-close, [data-back]').forEach((b) => b.addEventListener('click', leave));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') leave(); });
+  addEventListener('popstate', closeAny);
   if (params.has('debug')) window.__cardDemo = { open: () => document.querySelector('.screen [data-preview]').click() };
 </script>
 </body>
