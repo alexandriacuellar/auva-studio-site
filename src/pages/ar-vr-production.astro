@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/pages/production-emerging-tech.css';
 import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
 import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -77,6 +78,7 @@ const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').ma
           <a class="more" href="?topic=xr-idea#start" style="margin-top: 12px">{t.nextA} <Icon name="arrow" size={16} /></a>
         </div>
       </div>
+      <ToolGrid set="xr" />
     </div>
   </section>
 

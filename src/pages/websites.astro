@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/pages/websites.css';
 import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
 import HelloBand from '../components/HelloBand.astro';
 import Packages from '../components/Packages.astro';
 import InquiryForm from '../components/InquiryForm.astro';
@@ -141,6 +142,7 @@ const audiences = [
           <li><details><summary><Icon name={b.icon} size={22} /><span>{b.title}</span></summary><p class="muted">{b.text}</p></details></li>
         ))}
       </ul>
+      <ToolGrid set="websites" lede="Astro for most websites, and other platforms when a project needs them, like an online store or a web app." />
     </div>
   </section>
 
