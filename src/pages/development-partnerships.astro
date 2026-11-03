@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
 import { site, serviceSchema } from '../data/site';
@@ -126,4 +127,5 @@ const schema = serviceSchema(services.map((s) => ({ name: s.title, description: 
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="partner" />
+  <ToolGrid set="websites" lede="Astro for most websites, and other platforms when a project needs them, like an online store or a web app." alt />
 </Base>

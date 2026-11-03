@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/pages/production-emerging-tech.css';
 import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
 import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
@@ -95,4 +96,5 @@ const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').ma
 
   <Faq faqs={faqs} />
   <InquiryForm kind="ai" alt />
+  <ToolGrid set="xr" lede="The headsets, engines, and tools I use to produce games, VR, and AR." />
 </Base>
