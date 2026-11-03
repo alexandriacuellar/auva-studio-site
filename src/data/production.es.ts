@@ -7,7 +7,7 @@ export const t = {
   desc: 'Paquetes de AR desde $750 para negocios, arquitectos, museos y marcas, que abren en cualquier teléfono sin aplicación, y una productora de videojuegos y XR para estudios.',
   heroH: 'AR y VR que la gente recuerda, <em>y una productora para hacerlo realidad.</em>',
   heroL: 'AR que funciona en cualquier teléfono, VR en Meta Quest y una productora que mantiene a tiempo a los equipos de videojuegos y XR.',
-  book: 'Reserve una llamada gratis de 30 minutos', seeHow: 'Vea cómo ayudo',
+  book: 'Reserve una llamada gratis de 30 minutos', seeHow: 'Cómo le ayudo',
   facts: ['<b>20+</b> años en desarrollo web', '<b>14+</b> proyectos dirigidos', 'Certificado en <b>realidad mixta (XR)</b>'],
   whoH: 'Con quién <em>trabajo.</em>', elseH: '¿Algo diferente?', elseP: 'Cuénteme qué tiene en mente y le sugiero por dónde empezar.', talk: 'Hablemos',
   twoH: 'Dos formas <em>en que ayudo.</em>', twoL: 'Precios fijos para AR, por escrito desde el principio. Ayuda de producción para estudios por hora o por mes.',

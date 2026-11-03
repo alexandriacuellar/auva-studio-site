@@ -19,8 +19,8 @@ const schema = serviceSchema(offers.map((o) => ({ name: o.title, description: o.
       <h1 class="mag-head" set:html={t.stH} />
       <p class="lede">{t.stL}</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#offers">{t.seeHow}</a>
+        <a class="btn" href="#offers">{t.seeHow} <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Get in touch</a>
       </div>
     </div>
   </section>
