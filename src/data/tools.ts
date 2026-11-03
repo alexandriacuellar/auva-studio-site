@@ -32,6 +32,7 @@ const T: Record<string, Tool> = {
   krita: { name: 'Krita', icon: 'krita' },
   mindar: { name: 'MindAR', mark: 'AR' },
   three: { name: 'three.js', icon: 'threedotjs' },
+  modelviewer: { name: 'model-viewer', mark: '3D' },
   miro: { name: 'Miro', icon: 'miro' },
 };
 
@@ -41,5 +42,5 @@ export const toolSets: Record<string, Tool[]> = {
   // Automation (new service, alexandria 2026-11-03): only tools she has used. PM tools: Jira, ClickUp, Trello most; learning Notion. Add apps as she connects them for clients.
   automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.metaai, T.copilot, T.jira, T.clickup, T.trello, T.notion],
   // AR, VR & Production (alexandria 2026-11-03): Quest 2 and 3, Horizon Worlds, Unity, Blender, Krita, MindAR + three.js (web AR, as on her business card; web AR/VR is what she wants to do next), her PM tools, Miro.
-  xr: [T.quest, T.horizon, T.unity, T.blender, T.krita, T.mindar, T.three, T.jira, T.clickup, T.trello, T.notion, T.miro],
+  xr: [T.quest, T.horizon, T.unity, T.blender, T.krita, T.mindar, T.three, T.modelviewer, T.jira, T.clickup, T.trello, T.notion, T.miro],
 };
