@@ -73,8 +73,9 @@ export async function startCardPreview(container, { card }) {
     renderer.setSize(w, h, false); renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
     camera.aspect = w / h;
     // Fit the card and the figure above it on narrow phones and wide screens alike.
-    camera.position.set(0, 0.5, (w / h < 0.7 ? 5 : 4.7));
-    camera.lookAt(0, w / h < 0.7 ? 0.4 : 0.25, 0);
+    const narrow = w / h < 0.7;
+    camera.position.set(0, 0.5, narrow ? 4.1 : 4.3);
+    camera.lookAt(0, narrow ? -0.15 : -0.1, 0);
     camera.updateProjectionMatrix();
   };
   size(); addEventListener('resize', size);
