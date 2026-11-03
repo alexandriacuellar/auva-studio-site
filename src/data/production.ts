@@ -61,13 +61,16 @@ export const demos = [
     text: 'A store page where shoppers place a dress form, a lamp, or a honey pot at real size in their own room, then add more pieces and turn them. The store is made up.',
     goodFor: 'Good for furniture, home goods, and gift shops, and anything people want to see at home first.' },
   { pkg: 'ar-card', img: 'card', name: 'My AR business card', href: '/samples/ar-business-card/', works: 'phones',
-    text: 'Point your phone at my business card, or at the card on your computer screen, and I pop out of it with buttons to book a call, email me, or follow. Only have a phone? Watch it right there.',
+    text: 'Point your phone at my business card, or at the card on your computer screen, and I pop out of it with buttons to send me a message, email me, or follow. Only have a phone? Watch it right there.',
     goodFor: 'Good for business cards, flyers, postcards, and event signs.' },
+  { pkg: 'ar-project', img: 'house', name: 'A farmhouse before it’s built', href: '/samples/ar-project-viewer/', works: 'phones and Meta Quest 3',
+    text: 'An architect’s project page where clients set a new farmhouse on the table, lift the roof to see the rooms, try three finishes, and see it at night. Or switch to full size and stand on the porch. The firm is made up.',
+    goodFor: 'Good for architects, builders, remodelers, and developers who want clients to see a project before it’s built.' },
 ];
 
 export const ideas = [
   { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
-  { icon: 'compass', title: 'A house on the empty lot', text: 'Buyers stand on the land and see the finished home around them.' },
+  { icon: 'compass', title: 'A new kitchen before the work starts', text: 'Homeowners see the remodel in their own kitchen before the first wall comes down.' },
   { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },
   { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step or a hard conversation on Meta Quest before doing it for real.', partner: true },
 ];

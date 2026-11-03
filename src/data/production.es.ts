@@ -58,13 +58,16 @@ export const demos = [
     text: 'Una tienda donde los clientes colocan un maniquí de costura, una lámpara o un tarro de miel a tamaño real en su propia sala, y luego agregan más piezas y las giran. La tienda es inventada.',
     goodFor: 'Ideal para tiendas de muebles, artículos para el hogar y regalos, y todo lo que la gente quiere ver en casa primero.' },
   { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/samples/ar-business-card/', works: 'teléfonos',
-    text: 'Apunte el teléfono a mi tarjeta, o a la tarjeta en la pantalla de su computadora, y salgo de ella con botones para reservar una llamada, escribirme o seguirme. ¿Solo tiene el teléfono? Véalo ahí mismo.',
+    text: 'Apunte el teléfono a mi tarjeta, o a la tarjeta en la pantalla de su computadora, y salgo de ella con botones para enviarme un mensaje, escribirme o seguirme. ¿Solo tiene el teléfono? Véalo ahí mismo.',
     goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
+  { pkg: 'ar-project', img: 'house', name: 'Una casa de campo antes de construirla', href: '/samples/ar-project-viewer/', works: 'teléfonos y Meta Quest 3',
+    text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche. La firma es inventada.',
+    goodFor: 'Ideal para arquitectos, constructores, remodeladores y desarrolladores que quieren que sus clientes vean un proyecto antes de construirlo.' },
 ];
 
 export const ideas = [
   { icon: 'book', title: 'Un menú que cobra vida', text: 'Escanean el menú y el plato del día gira en 3D sobre la mesa.' },
-  { icon: 'compass', title: 'Una casa en el terreno vacío', text: 'Los compradores se paran en el terreno y ven la casa terminada a su alrededor.' },
+  { icon: 'compass', title: 'Una cocina nueva antes de la obra', text: 'Los dueños ven la remodelación en su propia cocina antes de tumbar la primera pared.' },
   { icon: 'globe', title: 'Un letrero que cuenta una historia', text: 'Un marcador histórico que muestra la calle hace 100 años.' },
   { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad o una conversación difícil en Meta Quest antes de hacerlo de verdad.', partner: true },
 ];
