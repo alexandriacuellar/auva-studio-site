@@ -29,7 +29,9 @@ export const t = {
   arH: 'AR people remember, <em>from $750.</em>', arL: 'Cards, menus, products, and buildings that come alive on any phone. No app to download.',
   tryCard: 'Try it on my card', pkH: 'AR packages, <em>priced up front.</em>', pkL: "Each one opens in a phone's browser. Founding prices for my first AR clients.", ask: 'Ask about this',
   bigH: 'Need something bigger?', bigP: 'VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced AR and VR developer partner who joins at the start. I stay on as your producer. Quoted for your project.',
-  ideasH: 'What we could <em>build together.</em>', ideasL: 'The first one is my own business card. The others are ideas to spark yours.',
+  ideasH: 'What we could <em>build together.</em>', ideasL: 'A few more ideas to spark yours.',
+  demosH: 'Try my AR demos <em>yourself.</em>', demosL: 'Each demo shows one of my AR packages. Open it on your phone and try it the way your customers would.',
+  seeDemos: 'See the demos', demoTry: 'Try the demo', demoWorks: 'Works on', demoLink: 'See the demo',
   live: 'Live demo', idea: 'Idea', ideaPartner: 'Idea, with partner',
   // Studios sub page
   stTitle: 'Game and XR Production', stSeo: 'Game and XR Producer for Indie Studios | Auva Studio',
@@ -52,9 +54,18 @@ export const audiences = [
   { icon: 'star', title: 'Game and XR studios', text: 'An experienced producer and a schedule people trust, without a full-time hire.', to: 'studios' },
 ];
 
+// Live AR demos on the AR packages page, like the sample sites on the Websites page.
+// pkg is the aiOffers id; its title and price come from site.ts.
+export const demos = [
+  { pkg: 'ar-product', img: 'room', name: 'See it in your room', href: '/samples/see-it-in-your-space/', works: 'phones and Meta Quest 3',
+    text: 'A store page where shoppers place a dress form, a lamp, or a honey pot at real size in their own room, then add more pieces and turn them. The store is made up.',
+    goodFor: 'Good for furniture, home goods, and gift shops, and anything people want to see at home first.' },
+  { pkg: 'ar-card', img: 'card', name: 'My AR business card', href: '/samples/ar-business-card/', works: 'phones',
+    text: 'Point your phone at my business card, or at the card on your computer screen, and I pop out of it with buttons to book a call, email me, or follow. Only have a phone? Watch it right there.',
+    goodFor: 'Good for business cards, flyers, postcards, and event signs.' },
+];
+
 export const ideas = [
-  { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
-  { icon: 'layers', title: 'A sofa in your living room', text: 'Shoppers see the real size and color at home before they order.' },
   { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
   { icon: 'compass', title: 'A house on the empty lot', text: 'Buyers stand on the land and see the finished home around them.' },
   { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },

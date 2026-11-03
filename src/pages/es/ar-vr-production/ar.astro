@@ -4,11 +4,22 @@ import Base from '../../../layouts/Base.astro';
 import '../../../styles/pages/production-emerging-tech.css';
 import Icon from '../../../components/Icon.astro';
 import InquiryForm from '../../../components/InquiryForm.astro';
+import { Image } from 'astro:assets';
+import demoRoom from '../../../assets/ar/demo-room.jpg';
+import demoCard from '../../../assets/ar/demo-card.jpg';
 import Faq from '../../../components/Faq.astro';
 import { site, aiOffers, serviceSchema } from '../../../data/site.es';
-import { t, ideas, faq } from '../../../data/production.es';
+import { t, ideas, demos, faq } from '../../../data/production.es';
 
 const packages = aiOffers.filter((o) => o.group === 'ar');
+const images = { room: demoRoom, card: demoCard };
+const bgs = { room: "#ede9e1", card: "#0f1d52" };
+const alts = { room: 'Un maniquí de costura, una lámpara de mesa y un tarro de miel en 3D', card: 'La tarjeta de presentación de Alexandria Cuellar de Auva Studio' };
+const demoItems = demos.map((d) => {
+  const o = aiOffers.find((x) => x.id === d.pkg)!;
+  return { ...d, pkgTitle: o.title, price: o.price, image: images[d.img as keyof typeof images], bg: bgs[d.img as keyof typeof bgs], alt: alts[d.img as keyof typeof alts] };
+});
+const demoFor = (id: string) => demos.find((d) => d.pkg === id);
 const faqs = [faq.app, faq.models, faq.bigger];
 const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ar-vr-production/ar/');
 ---
@@ -18,7 +29,7 @@ const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: 
       <h1 class="mag-head" set:html={t.arH} />
       <p class="lede">{t.arL}</p>
       <div class="hero-actions">
-        <a class="btn" href="/card/">{t.tryCard} <Icon name="arrow" size={18} /></a>
+        <a class="btn" href="#demos">{t.seeDemos} <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#start">Contácteme</a>
       </div>
     </div>
@@ -38,6 +49,7 @@ const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: 
             <p class="svc-meta"><b>{p.price}</b></p>
             <p class="muted">{p.text}</p>
             <ul class="ticks">{p.items!.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            {demoFor(p.id) && <a class="more" href={demoFor(p.id)!.href} hreflang="en" style="margin-top: 12px">{t.demoLink} <Icon name="arrow" size={16} /></a>}
             <a class="more" href={`?topic=${p.id}#start`} style="margin-top: 12px">{t.ask} <Icon name="arrow" size={16} /></a>
           </div>
         ))}
@@ -52,20 +64,43 @@ const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: 
     </div>
   </section>
 
-  <section id="ideas">
+  <section id="demos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head" set:html={t.demosH} />
+        <p class="lede">{t.demosL}</p>
+      </div>
+      <div class="demo-list">
+        {demoItems.map((d) => (
+          <article class="card demo">
+            <Image class="demo-img" style={`background: ${d.bg}`} src={d.image} alt={d.alt} widths={[400, 800]} sizes="(min-width: 760px) 360px, 100vw" />
+            <div class="demo-body">
+              <p class="demo-meta"><b>{d.pkgTitle}</b> · {d.price}</p>
+              <h3>{d.name}</h3>
+              <p class="muted">{d.text}</p>
+              <p class="small muted">{d.goodFor}</p>
+              <p class="small demo-works"><Icon name="tick" size={16} /> {t.demoWorks} {d.works}</p>
+              <a class="btn" href={d.href} hreflang="en">{t.demoTry} <Icon name="arrow" size={18} /></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="ideas">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head" set:html={t.ideasH} />
         <p class="lede">{t.ideasL}</p>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-2">
         {ideas.map((i) => (
-          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+          <div class="card idea">
             <div class="icon"><Icon name={i.icon} size={32} /></div>
-            {i.live ? <span class="idea-tag">{t.live}</span> : <span class="idea-tag idea-tag-plain">{i.partner ? t.ideaPartner : t.idea}</span>}
+            <span class="idea-tag idea-tag-plain">{i.partner ? t.ideaPartner : t.idea}</span>
             <h3>{i.title}</h3>
             <p class="muted">{i.text}</p>
-            {i.live && <a class="more" href="/card/" style="margin-top: 12px">{t.tryCard} <Icon name="arrow" size={16} /></a>}
           </div>
         ))}
       </div>
@@ -73,6 +108,6 @@ const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: 
     </div>
   </section>
 
-  <Faq faqs={faqs} alt />
-  <InquiryForm kind="ai" topic="ar-card" />
+  <Faq faqs={faqs} />
+  <InquiryForm kind="ai" topic="ar-card" alt />
 </Base>

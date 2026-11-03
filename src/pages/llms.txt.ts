@@ -57,7 +57,7 @@ export function GET() {
     '',
     '## AR, VR & Production',
     ...aiOffers.filter((o) => o.group !== 'consulting').map((o) => `- ${o.title} (${o.price}): ${o.text}`),
-    `- Live AR example: ${site.url}/card/ (Alexandria's AR business card). Bigger productions go to a trusted studio partner, with Alexandria as producer.`,
+    `- Live AR demos (${site.url}/ar-vr-production/ar/#demos): See it in your room, ${site.url}/samples/see-it-in-your-space/ (AR Product View: place real-size products in your room on a phone or Meta Quest 3), and the AR business card, ${site.url}/samples/ar-business-card/ (works with the printed card, a computer screen, or right on a phone). Bigger productions go to a trusted studio partner, with Alexandria as producer.`,
     '',
     '## More answers',
     ...moreAnswers.map((m) => `- ${m.q} ${m.a} (${m.page}: ${site.url}${m.path})`),
