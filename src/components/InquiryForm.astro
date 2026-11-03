@@ -140,6 +140,8 @@ const formAction = 'https://api.web3forms.com/submit';
         <>
           <h2 class="mag-head" set:html={(websiteIntro ?? { title: t.websiteTitle }).title} />
           <p class="lede">{websiteIntro?.lede}</p>
+          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">{t.book} <Icon name="arrow" size={18} /></a>
+          <p class="muted small" style="margin-top: 12px">{t.orForm}</p>
         </>
       ) : (
         <>
@@ -159,9 +161,6 @@ const formAction = 'https://api.web3forms.com/submit';
         ) : (
           <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
         )}</div></div>
-        {isWebsite && (
-          <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>{t.preferTalk}</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">{t.book}</a> {t.instead}</p></div></div>
-        )}
       </div>
     </div>
     <div class="card">
