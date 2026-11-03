@@ -1,13 +1,14 @@
 ---
-// One row of tool logos for a service page. Sits inside an existing section (no section of its own).
+// One row of tool logos for a service page, as its own band just above the footer (alexandria 2026-11-03).
 import { toolSets } from '../data/tools';
 import { toolIcons } from '../data/toolIcons';
-interface Props { set: string; lang?: 'en' | 'es'; title?: string; lede?: string }
-const { set, lang = 'en', title, lede } = Astro.props;
+interface Props { set: string; lang?: 'en' | 'es'; title?: string; lede?: string; alt?: boolean }
+const { set, lang = 'en', title, lede, alt = false } = Astro.props;
 const heading = title ?? (lang === 'es' ? 'Herramientas y plataformas con las que trabajo' : 'Tools and platforms I work with');
 ---
-<div class="tool-block">
-  <h3 class="tool-title">{heading}</h3>
+<section class:list={["tool-band", { alt }]} id="tools">
+<div class="wrap">
+  <h2 class="tool-title">{heading}</h2>
   {lede && <p class="muted tool-lede">{lede}</p>}
   <ul class="tool-grid">
     {toolSets[set].map((tool) => (
@@ -20,9 +21,10 @@ const heading = title ?? (lang === 'es' ? 'Herramientas y plataformas con las qu
     ))}
   </ul>
 </div>
+</section>
 <style>
-  .tool-block { margin-top: 56px; }
-  .tool-title { font-size: 1.35rem; margin-bottom: 6px; }
+  .tool-band { padding: 64px 0; }
+  .tool-title { font-size: 1.5rem; margin-bottom: 6px; }
   .tool-lede { max-width: 680px; margin-bottom: 0; }
   .tool-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
   .tool { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 104px; padding: 16px 10px; background: var(--white); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
