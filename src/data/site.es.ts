@@ -27,7 +27,7 @@ export const nav = [
   },
   {
     href: '/es/technology-consulting/',
-    label: 'IA y Proyectos',
+    label: 'Automatización e IA',
     // Full name for search data; the menu shows the short label so the header stays on one row.
     title: 'Automatización, IA y Proyectos',
     menuLabel: 'Páginas de automatización, IA y proyectos',
