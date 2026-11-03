@@ -144,13 +144,37 @@ const audiences = [
     </div>
   </section>
 
-  <section id="addons">
+  <section id="updates">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Mantenga su sitio <em>al día.</em></h2>
+        <p class="lede">Cada paquete incluye 30 días de correcciones y pequeños ajustes después del lanzamiento. Después, usted elige cómo se actualiza su sitio: hace los cambios usted mismo, o los hago yo.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card" id="cms">
+          <div class="icon"><Icon name="gear" size={32} /></div>
+          <h3>Actualícelo usted mismo</h3>
+          <p class="muted">Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza sus textos, fotos, noticias y eventos. Sin programar.</p>
+          <p><b style="color: var(--primary)">Incluido en Complete Presence</b><br /><span class="muted">Agréguelo a Essential o Expanded desde $1,750.</span></p>
+        </div>
+        <div class="card" id="care">
+          <div class="icon"><Icon name="wrench" size={32} /></div>
+          <h3>O yo hago los cambios</h3>
+          <p class="muted">Funciona con cualquier paquete. Pídame cambios cuando los necesite, sin tarifa mensual. Si su sitio cambia a menudo, use un paquete de horas o un retainer mensual.</p>
+          <p><b style="color: var(--primary)">$59 por cambio</b></p>
+          <a class="more" href="/es/websites/help-after-launch/">Vea cómo funcionan los cambios <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="addons">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Agregue más <em>cuando lo necesite.</em></h2>
       </div>
       <div class="grid grid-2">
-        {addons.map((a) => (
+        {addons.filter((a) => a.id !== 'cms').map((a) => (
           <div class="card">
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
@@ -158,16 +182,6 @@ const audiences = [
             <p><b style="color: var(--primary)">{a.price}</b></p>
           </div>
         ))}
-      </div>
-
-      <div class="grid grid-2" style="margin-top: 24px">
-        <div class="card" id="care">
-          <div class="icon"><Icon name="wrench" size={32} /></div>
-          <h3>¿Prefiere que yo haga los cambios?</h3>
-          <p class="muted">Pídame cambios cuando los necesite, sin tarifa mensual. Si su sitio cambia a menudo, use un paquete de horas o un retainer mensual.</p>
-          <p><b style="color: var(--primary)">$59 por cambio</b></p>
-          <a class="more" href="/es/websites/help-after-launch/">Vea cómo funcionan los cambios <Icon name="arrow" size={16} /></a>
-        </div>
         <div class="card" id="brand">
           <div class="icon"><Icon name="star" size={32} /></div>
           <h3>Identidad de Marca</h3>
@@ -180,7 +194,7 @@ const audiences = [
     </div>
   </section>
 
-  <section class="alt" id="diagnostic">
+  <section id="diagnostic">
     <div class="wrap">
       <div class="band path-band path-band-4">
         <div>
