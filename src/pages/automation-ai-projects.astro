@@ -6,10 +6,9 @@ import Icon from '../components/Icon.astro';
 import HelloBand from '../components/HelloBand.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import Faq from '../components/Faq.astro';
-import { site, testimonials, serviceSchema } from '../data/site';
+import { site, serviceSchema } from '../data/site';
 import { sectionName, services, audiences, safety, aiPackages, pmPackages, faq } from '../data/tech';
 
-const quote = testimonials.find((t) => t.name === 'Aaron Sorrels')!;
 const byId = Object.fromEntries(services.map((x) => [x.id, x]));
 const faqs = [faq.review, faq.inPerson, faq.vendors];
 const schema = serviceSchema([
@@ -116,10 +115,6 @@ const schema = serviceSchema([
         <li><span class="num" aria-hidden="true">3</span><h3>The work</h3><p>Built in your accounts. You approve the wording and we test it together.</p></li>
         <li><span class="num" aria-hidden="true">4</span><h3>Handover</h3><p>A short how-to guide, a walkthrough with your team, and 30 days of fixes.</p></li>
       </ol>
-      <figure class="card quote" style="max-width: 720px; margin: 48px auto 0">
-        <blockquote>“{quote.quote}”</blockquote>
-        <figcaption><b>{quote.name}</b><span class="muted">{quote.role}</span></figcaption>
-      </figure>
     </div>
   </section>
 
