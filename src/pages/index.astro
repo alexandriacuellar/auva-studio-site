@@ -9,15 +9,31 @@ import { categories, site, testimonials } from '../data/site';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import headshot from '../assets/alexandria-cuellar.jpg';
 
-const situations = [
-  { title: 'I need a website', text: "You're starting something new, or you've never had one.", href: '/websites/', to: 'Websites', icon: 'globe' },
-  { title: "My website isn't working for me", text: "It's outdated, slow, hard to update, or customers can't find you on Google Maps.", href: '/websites/diagnostic/', to: 'Website Diagnostic', icon: 'search' },
-  { title: "My tools don't fit how we work", text: "Too many apps, too many workarounds, and you're not sure where AI fits.", href: '/technology-consulting/#planning', to: 'Automation, AI & Projects', icon: 'compass' },
-  { title: 'We do the same tasks by hand every week', text: 'Follow-ups, data entry, and reports that could run on their own.', href: '/technology-consulting/automation/', to: 'Automation', icon: 'gear' },
-  { title: 'This project needs someone to lead it', text: 'Someone to keep scope, schedule, vendors, and people on track.', href: '/technology-consulting/project-management/', to: 'Project Management', icon: 'check' },
-  { title: 'I want customers to see my product before they buy', text: 'Your product in 3D, in their room or on their counter, right from their phone. No app needed.', href: '/production-emerging-tech/ar/#ar-product', to: 'AR Packages', icon: 'layers' },
-  { title: 'I want my menu, packaging, or flyer to do more', text: 'Scan it with a phone and it comes to life, with buttons to order, book, or follow.', href: '/production-emerging-tech/ar/#ar-menu', to: 'AR Packages', icon: 'book' },
-  { title: "We're making a game or XR project", text: 'An experienced producer to keep scope, schedule, and the team on track.', href: '/production-emerging-tech/studios/', to: 'Game and XR Production', icon: 'bolt' },
+const columns = [
+  {
+    icon: 'globe', name: 'Websites', href: '/websites/',
+    items: [
+      { title: 'I need a website', text: "You're starting something new, or you've never had one.", href: '/websites/', to: 'Website packages' },
+      { title: "My website isn't working for me", text: "It's outdated, slow, or hard to update.", href: '/websites/diagnostic/', to: 'Website Diagnostic' },
+      { title: "Customers can't find me on Google Maps", text: 'Your listing is missing, out of date, or buried.', href: '/websites/google-business-profile/', to: 'Google Business Profile' },
+    ],
+  },
+  {
+    icon: 'bulb', name: 'Automation, AI & Projects', href: '/technology-consulting/',
+    items: [
+      { title: 'We do the same tasks by hand every week', text: 'Follow-ups, data entry, and reports that could run on their own.', href: '/technology-consulting/automation/', to: 'Automation' },
+      { title: "I want to use AI, but I'm not sure where to start", text: "Or what's safe to share with it.", href: '/technology-consulting/ai/', to: 'AI for you and your team' },
+      { title: 'This project needs someone to lead it', text: 'Scope, schedule, vendors, and people, kept on track.', href: '/technology-consulting/project-management/', to: 'Project management' },
+    ],
+  },
+  {
+    icon: 'bolt', name: 'AR, VR & Production', href: '/production-emerging-tech/',
+    items: [
+      { title: 'I want customers to see my product before they buy', text: 'Your product in 3D, in their room, right from their phone. No app needed.', href: '/production-emerging-tech/ar/#ar-product', to: 'AR packages' },
+      { title: 'I want my menu, packaging, or flyer to do more', text: 'Scan it and it comes to life, with buttons to order or book.', href: '/production-emerging-tech/ar/#ar-menu', to: 'AR packages' },
+      { title: "We're making a game or XR project", text: 'An experienced producer to keep scope, schedule, and the team on track.', href: '/production-emerging-tech/studios/', to: 'Game and XR production' },
+    ],
+  },
 ];
 const strip = ['Published prices', 'Written quote before work starts', 'You own everything', 'Work with me directly'];
 ---
@@ -45,19 +61,28 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
   </section>
 
   <section class="home-routes">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap">
+      <div class="section-head">
         <h2 class="mag-head">Not sure where to start? <em>Find your situation.</em></h2>
-        <p class="lede">Pick the one that sounds most like you, or <a href="/contact/">tell me what's happening</a>.</p>
+        <p class="lede">Pick the one that sounds most like you.</p>
       </div>
-      <ul class="route-list">
-        {situations.map((x) => (
-          <li><a href={x.href}>
-            <span class="icon"><Icon name={x.icon} /></span>
-            <span><b>{x.title}</b><span class="muted">{x.text}</span><span class="route-to">{x.to} <Icon name="arrow" size={16} /></span></span>
-          </a></li>
+      <div class="sit-board">
+        {columns.map((c) => (
+          <div class="sit-col">
+            <a class="sit-col-head" href={c.href}><Icon name={c.icon} size={20} /> {c.name}</a>
+            <ul>
+              {c.items.map((x) => (
+                <li><a class="sit-card" href={x.href}>
+                  <b>{x.title}</b>
+                  <span class="muted">{x.text}</span>
+                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
+                </a></li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
+      <p class="sit-else"><b>Something else?</b> Too many apps, or not sure what you need? Start with a <a href="/technology-consulting/#planning">$250 Tech Review</a> or <a href="/contact/">tell me what's happening</a>.</p>
     </div>
   </section>
 

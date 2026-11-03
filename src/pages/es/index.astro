@@ -9,15 +9,31 @@ import { categories, site, testimonials } from '../../data/site.es';
 const featured = testimonials.find((t) => t.name === 'Matthew Udy');
 import headshot from '../../assets/alexandria-cuellar.jpg';
 
-const situations = [
-  { title: 'Necesito un sitio web', text: 'Está empezando algo nuevo, o nunca ha tenido uno.', href: '/es/websites/', to: 'Sitios web', icon: 'globe' },
-  { title: 'Mi sitio web no me está funcionando', text: 'Está desactualizado, es lento, cuesta actualizarlo o sus clientes no lo encuentran en Google Maps.', href: '/es/websites/diagnostic/', to: 'Diagnóstico Web', icon: 'search' },
-  { title: 'Mis herramientas no se ajustan a cómo trabajamos', text: 'Demasiadas aplicaciones, demasiados parches, y no sabe dónde encaja la IA.', href: '/es/technology-consulting/#planning', to: 'Automatización, IA y Proyectos', icon: 'compass' },
-  { title: 'Hacemos las mismas tareas a mano cada semana', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/automation/', to: 'Automatización', icon: 'gear' },
-  { title: 'Este proyecto necesita quien lo dirija', text: 'Alguien que mantenga en orden el alcance, el calendario, los proveedores y el equipo.', href: '/es/technology-consulting/project-management/', to: 'Gestión de proyectos', icon: 'check' },
-  { title: 'Quiero que mis clientes vean mi producto antes de comprarlo', text: 'Su producto en 3D, en su sala o sobre su mostrador, directo desde el celular. Sin descargar ninguna aplicación.', href: '/es/production-emerging-tech/ar/#ar-product', to: 'Paquetes de AR', icon: 'layers' },
-  { title: 'Quiero que mi menú, empaque o volante haga más', text: 'Lo escanean con el celular y cobra vida, con botones para pedir, reservar o seguirle.', href: '/es/production-emerging-tech/ar/#ar-menu', to: 'Paquetes de AR', icon: 'book' },
-  { title: 'Estamos creando un videojuego o un proyecto XR', text: 'Una productora con experiencia que mantiene en orden el alcance, el calendario y el equipo.', href: '/es/production-emerging-tech/studios/', to: 'Producción de videojuegos y XR', icon: 'bolt' },
+const columns = [
+  {
+    icon: 'globe', name: 'Sitios web', href: '/es/websites/',
+    items: [
+      { title: 'Necesito un sitio web', text: 'Está empezando algo nuevo, o nunca ha tenido uno.', href: '/es/websites/', to: 'Paquetes de sitios web' },
+      { title: 'Mi sitio web no me está funcionando', text: 'Está desactualizado, es lento o cuesta actualizarlo.', href: '/es/websites/diagnostic/', to: 'Diagnóstico Web' },
+      { title: 'Mis clientes no me encuentran en Google Maps', text: 'Su perfil no aparece, está desactualizado o queda escondido.', href: '/es/websites/google-business-profile/', to: 'Perfil de Negocio de Google' },
+    ],
+  },
+  {
+    icon: 'bulb', name: 'Automatización, IA y Proyectos', href: '/es/technology-consulting/',
+    items: [
+      { title: 'Hacemos las mismas tareas a mano cada semana', text: 'Seguimientos, captura de datos e informes que podrían hacerse solos.', href: '/es/technology-consulting/automation/', to: 'Automatización' },
+      { title: 'Quiero usar la IA, pero no sé por dónde empezar', text: 'Ni qué es seguro compartir con ella.', href: '/es/technology-consulting/ai/', to: 'IA para usted y su equipo' },
+      { title: 'Este proyecto necesita quien lo dirija', text: 'Alcance, calendario, proveedores y equipo, en orden.', href: '/es/technology-consulting/project-management/', to: 'Gestión de proyectos' },
+    ],
+  },
+  {
+    icon: 'bolt', name: 'AR, VR y Producción', href: '/es/production-emerging-tech/',
+    items: [
+      { title: 'Quiero que mis clientes vean mi producto antes de comprarlo', text: 'Su producto en 3D, en su sala, directo desde el celular. Sin descargar ninguna aplicación.', href: '/es/production-emerging-tech/ar/#ar-product', to: 'Paquetes de AR' },
+      { title: 'Quiero que mi menú, empaque o volante haga más', text: 'Lo escanean y cobra vida, con botones para pedir o reservar.', href: '/es/production-emerging-tech/ar/#ar-menu', to: 'Paquetes de AR' },
+      { title: 'Estamos creando un videojuego o un proyecto XR', text: 'Una productora con experiencia que mantiene en orden el alcance, el calendario y el equipo.', href: '/es/production-emerging-tech/studios/', to: 'Producción de videojuegos y XR' },
+    ],
+  },
 ];
 const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar', 'Todo es suyo', 'Trabaja directamente conmigo'];
 ---
@@ -45,19 +61,28 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
   </section>
 
   <section class="home-routes">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap">
+      <div class="section-head">
         <h2 class="mag-head">¿No sabe por dónde empezar? <em>Encuentre su situación.</em></h2>
-        <p class="lede">Elija la que más se parezca a la suya, o <a href="/es/contact/">cuénteme qué está pasando</a>.</p>
+        <p class="lede">Elija la que más se parezca a la suya.</p>
       </div>
-      <ul class="route-list">
-        {situations.map((x) => (
-          <li><a href={x.href}>
-            <span class="icon"><Icon name={x.icon} /></span>
-            <span><b>{x.title}</b><span class="muted">{x.text}</span><span class="route-to">{x.to} <Icon name="arrow" size={16} /></span></span>
-          </a></li>
+      <div class="sit-board">
+        {columns.map((c) => (
+          <div class="sit-col">
+            <a class="sit-col-head" href={c.href}><Icon name={c.icon} size={20} /> {c.name}</a>
+            <ul>
+              {c.items.map((x) => (
+                <li><a class="sit-card" href={x.href}>
+                  <b>{x.title}</b>
+                  <span class="muted">{x.text}</span>
+                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
+                </a></li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
+      <p class="sit-else"><b>¿Otra cosa?</b> ¿Demasiadas aplicaciones, o no sabe qué necesita? Empiece con una <a href="/es/technology-consulting/#planning">Revisión Tecnológica de $250</a> o <a href="/es/contact/">cuénteme qué está pasando</a>.</p>
     </div>
   </section>
 

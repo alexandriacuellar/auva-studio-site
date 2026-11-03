@@ -720,15 +720,6 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .svc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin: 2px 0 8px; font-size: 0.92rem; color: var(--muted); }
 .svc-meta b { color: var(--primary); font-family: var(--font-head); }
 /* Problem/route lists (Home situations, Consulting 'Sound familiar?') */
-.route-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
-.route-list a { display: flex; gap: 18px; align-items: flex-start; padding: 20px 4px; border-bottom: 1px solid var(--border); color: inherit; text-decoration: none; }
-.route-list .icon { color: var(--primary); flex: none; margin-top: 2px; }
-.route-list b { display: block; font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 2px; }
-.route-list .muted { display: block; }
-.route-list a:hover b { color: var(--primary); }
-.route-list .route-to { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--primary); font-weight: 700; font-size: 0.92rem; }
-.route-list .route-to svg { transition: transform .15s; }
-.route-list a:hover .route-to svg { transform: translateX(3px); }
 /* Consulting: everyday AI tasks */
 .ai-tasks .card { padding: 22px; gap: 14px; }
 .ai-tasks h3 { font-size: 1.02rem; margin-bottom: 4px; }
