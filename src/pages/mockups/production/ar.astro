@@ -1,0 +1,88 @@
+---
+// MOCKUP (2026-11-03): AR Packages sub page.
+import Base from '../../../layouts/Base.astro';
+import '../../../styles/pages/production-emerging-tech.css';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import { site, aiOffers } from '../../../data/site';
+
+const packages = aiOffers.filter((o) => o.group === 'ar');
+const ideas = [
+  { icon: 'star', title: 'An AR business card', text: 'Point your phone at the card and the owner appears, with buttons to book, call, or follow.', live: true },
+  { icon: 'layers', title: 'A sofa in your living room', text: 'Shoppers see the real size and color at home before they order.' },
+  { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
+  { icon: 'compass', title: 'A house on the empty lot', text: 'Buyers stand on the land and see the finished home around them.' },
+  { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },
+  { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step or a hard conversation on Meta Quest before doing it for real.', partner: true },
+];
+const faqs = [
+  { q: 'Do my customers need an app?', a: "No. They scan a code or open a link, and it works in their phone's browser." },
+  { q: 'Do I need 3D models?', a: 'No. I can make them from your photos or product files. Architects and builders can use the model they already have.' },
+  { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced XR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
+];
+---
+<Base title="AR Packages (mockup)" description="Mockup of the AR Packages sub page.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">AR people remember, <em>from $750.</em></h1>
+      <p class="lede">Cards, menus, products, and buildings that come alive on any phone. No app to download.</p>
+      <div class="hero-actions">
+        <a class="btn" href="/card/">Try it on my card <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">AR packages, <em>priced up front.</em></h2>
+        <p class="lede">Each one opens in a phone's browser. Founding prices for my first AR clients.</p>
+      </div>
+      <div class="grid grid-2">
+        {packages.map((p) => (
+          <div class="card offer" id={p.id}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items!.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.id}#start`} style="margin-top: 12px">Ask about this <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+      <div class="card card-row bigger" style="margin-top: 32px">
+        <div class="icon"><Icon name="bolt" size={36} /></div>
+        <div>
+          <h3>Need something bigger?</h3>
+          <p class="muted">VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced XR developer partner who joins at the start. I stay on as your producer. Quoted for your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What we could <em>build together.</em></h2>
+        <p class="lede">The first one is my own business card. The others are ideas to spark yours.</p>
+      </div>
+      <div class="grid grid-3">
+        {ideas.map((i) => (
+          <div class={`card idea${i.live ? ' idea-live' : ''}`}>
+            <div class="icon"><Icon name={i.icon} size={32} /></div>
+            {i.live ? <span class="idea-tag">Live demo</span> : <span class="idea-tag idea-tag-plain">{i.partner ? 'Idea, with partner' : 'Idea'}</span>}
+            <h3>{i.title}</h3>
+            <p class="muted">{i.text}</p>
+            {i.live && <a class="more" href="/card/" style="margin-top: 12px">Try it on my card <Icon name="arrow" size={16} /></a>}
+          </div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top: 32px"><b>Need a website too?</b> See <a href="/websites/#packages">website packages from $1,500</a>. AR Product View can be added to any of them.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="ai" topic="ar-card" />
+</Base>
