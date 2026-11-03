@@ -21,6 +21,8 @@ const T: Record<string, Tool> = {
   copilot: { name: 'Microsoft Copilot', mark: 'Co' },
   notion: { name: 'Notion', icon: 'notion' },
   jira: { name: 'Jira', icon: 'jira' },
+  clickup: { name: 'ClickUp', icon: 'clickup' },
+  trello: { name: 'Trello', icon: 'trello' },
   gworkspace: { name: 'Google Workspace', mark: 'G' },
   m365: { name: 'Microsoft 365', mark: '365' },
   quest: { name: 'Meta Quest', icon: 'meta' },
@@ -32,7 +34,7 @@ const T: Record<string, Tool> = {
 export const toolSets: Record<string, Tool[]> = {
   // Websites and Development Partnerships share one list (alexandria 2026-11-03).
   websites: [T.astro, T.next, T.react, T.typescript, T.webflow, T.shopify, T.sanity, T.cloudflare],
-  // Automation (new service, alexandria 2026-11-03): only tools she has used. Add apps as she connects them for clients.
-  automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.metaai, T.copilot],
+  // Automation (new service, alexandria 2026-11-03): only tools she has used. PM tools: Jira, ClickUp, Trello most; learning Notion. Add apps as she connects them for clients.
+  automation: [T.zapier, T.make, T.chatgpt, T.claude, T.gemini, T.metaai, T.copilot, T.jira, T.clickup, T.trello, T.notion],
   xr: [T.quest, T.horizon, T.unity, T.blender, T.jira],
 };
