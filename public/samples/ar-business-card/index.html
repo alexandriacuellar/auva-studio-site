@@ -140,7 +140,7 @@
   <div class="ar-top"><button class="btn ar-close" id="pv-close" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Close</button></div>
   <div class="ar-hint"><p>Tap an icon to open it</p><p class="small">Drag to turn the card</p><button class="btn ar-back" type="button" data-back>Back to the page</button></div>
   <nav class="sr-only" aria-label="Links floating around me">
-    <a href="https://calendly.com/alexandria-cuellar-ny/30min">Book a free 30-minute call</a>
+    <button type="button" data-message>Send me a message</button>
     <a href="https://auvastudio.com/">Website</a>
     <a href="https://auvastudio.com/contact/">Contact</a>
     <a href="https://www.instagram.com/auvastudiony/">Instagram</a>
@@ -150,6 +150,8 @@
 </div>
 
 <script type="module">
+  import { openMessageForm } from '/card/message-form.js';
+  document.querySelectorAll('[data-message]').forEach((b) => b.addEventListener('click', () => openMessageForm(location.pathname)));
   const params = new URLSearchParams(location.search);
   const phone = matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) < 820;
   document.body.classList.toggle('is-phone', phone);
@@ -167,7 +169,7 @@
     try {
       const { startCardAR } = await import('/card/card-ar.js');
       session = await startCardAR(stage, {
-        found: () => { arEl.classList.add('found'); say('Tap an icon to open it', 'Tap me to book a free call'); },
+        found: () => { arEl.classList.add('found'); say('Tap an icon to open it', 'Tap me to send a message'); },
         lost: () => { arEl.classList.remove('found'); aim(); },
       });
       aim();
