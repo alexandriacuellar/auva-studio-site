@@ -14,7 +14,7 @@ const heading = title ?? (lang === 'es' ? 'Herramientas y plataformas con las qu
     {toolSets[set].map((tool) => (
       <li class="tool">
         {tool.icon
-          ? <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d={toolIcons[tool.icon]} /></svg>
+          ? <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d={toolIcons[tool.icon]} /></svg>
           : <span class="tool-mono" aria-hidden="true">{tool.mark}</span>}
         <span class="tool-name">{tool.name}</span>
       </li>
@@ -23,13 +23,12 @@ const heading = title ?? (lang === 'es' ? 'Herramientas y plataformas con las qu
 </div>
 </section>
 <style>
-  .tool-band { padding: 64px 0; }
-  .tool-title { font-size: 1.5rem; margin-bottom: 6px; }
-  .tool-lede { max-width: 680px; margin-bottom: 0; }
-  .tool-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
-  .tool { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 104px; padding: 16px 10px; background: var(--white); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
-  .tool svg { fill: var(--ink); }
-  .tool-mono { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--ink); color: var(--white); font-family: var(--font-head); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.02em; }
-  .tool-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  @media (max-width: 520px) { .tool-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; } .tool { min-height: 92px; padding: 12px 6px; } .tool-name { font-size: 0.8rem; } }
+  .tool-band { padding: 48px 0; }
+  .tool-title { font-size: 1.15rem; margin-bottom: 4px; }
+  .tool-lede { max-width: 680px; margin-bottom: 0; font-size: 0.98rem; }
+  .tool-grid { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; background: var(--white); border: 1px solid var(--border); border-radius: 999px; }
+  .tool svg { fill: var(--ink); flex: none; }
+  .tool-mono { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: var(--ink); color: var(--white); font-family: var(--font-head); font-size: 0.5rem; font-weight: 800; flex: none; }
+  .tool-name { font-size: 0.86rem; font-weight: 600; color: var(--ink); line-height: 1.2; white-space: nowrap; }
 </style>
