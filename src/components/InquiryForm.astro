@@ -48,6 +48,7 @@ const t = {
     readPersonally: 'I read every message personally.',
     alsoEmail: 'I read every message personally. You can also email',
     orForm: 'Or send a message with the form.',
+    sendMsg: 'Send a message',
     whatNext: 'What happens next',
     scoped: 'Any work is scoped and priced in writing before it begins.',
     preferTalk: 'Prefer to talk?',
@@ -100,6 +101,7 @@ const t = {
     readPersonally: 'Leo cada mensaje personalmente.',
     alsoEmail: 'Leo cada mensaje personalmente. También puede escribir a',
     orForm: 'O envíe un mensaje con el formulario.',
+    sendMsg: 'Envíe un mensaje',
     whatNext: 'Qué sigue',
     scoped: 'Todo trabajo se define y se cotiza por escrito antes de empezar.',
     preferTalk: '¿Prefiere hablar?',
@@ -140,19 +142,16 @@ const formAction = 'https://api.web3forms.com/submit';
         <>
           <h2 class="mag-head" set:html={(websiteIntro ?? { title: t.websiteTitle }).title} />
           <p class="lede">{websiteIntro?.lede}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">{t.book} <Icon name="arrow" size={18} /></a>
-          <p class="muted small" style="margin-top: 12px">{t.orForm}</p>
+          <div class="hero-actions form-choices"><a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a><a class="btn btn-ghost" href="#message">{t.sendMsg}</a></div>
         </>
       ) : (
         <>
           <Heading class="mag-head" set:html={intro.title} />
           <p class="lede">{intro.lede}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">{t.book} <Icon name="arrow" size={18} /></a>
+          <div class="hero-actions form-choices"><a class="btn" href={site.booking} target="_blank" rel="noopener">{t.book} <Icon name="arrow" size={18} /></a><a class="btn btn-ghost" href="#message">{t.sendMsg}</a></div>
           {isGeneral ? (
             hero ? <p class="muted small" style="margin-top: 12px">{t.alsoEmail} <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">{t.readPersonally}</p>
-          ) : (
-            <p class="muted small" style="margin-top: 12px">{t.orForm}</p>
-          )}
+          ) : null}
         </>
       )}
       <div class="values" style="margin-top: 28px">
@@ -164,7 +163,7 @@ const formAction = 'https://api.web3forms.com/submit';
       </div>
     </div>
     <div class="card">
-      <form action={formAction} method="POST" class="inquiry">
+      <form action={formAction} method="POST" class="inquiry" id="message">
         <input type="hidden" name="access_key" value={site.web3formsKey} />
         <input type="hidden" name="subject" value={subject} />
         <input type="hidden" name="from_name" value="Auva Studio website" />
