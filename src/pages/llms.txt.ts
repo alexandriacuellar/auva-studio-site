@@ -9,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a digital technology and solutions studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It helps clients build fast websites they own, choose the right tools, put AI to work, and plan and deliver projects, with producer support and prototypes for game, XR, and interactive projects. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
+    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It builds fast websites clients own, sets up automation and AI, and manages projects, plus AR packages and production support for game and XR teams. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',

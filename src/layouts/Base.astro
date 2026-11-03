@@ -108,7 +108,7 @@ const switchHref = switchPath(path, otherLang);
 // The founding offer is for websites, so the bar shows only where website buyers land.
 const showPromo = base === '/' || base.startsWith('/websites/') || base === '/website-check/';
 
-const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
+const orgDescription = 'Auva Studio builds websites clients own, sets up automation and AI, and manages projects for small businesses, startups, nonprofits, and growing teams, plus AR packages and production support for game and XR teams. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
 // Sub pages (like /websites/diagnostic/) get breadcrumb data for search results: Home > section > page.
 const navParent = (nav as { href: string; label: string; title?: string; children?: { href: string; label: string }[] }[]).find((item) => item.children?.some((c) => c.href === path) && item.href !== path);
