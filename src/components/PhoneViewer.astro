@@ -34,8 +34,6 @@ const first = items[0];
 ---
 <div class="pv" data-pv>
   <div class="pv-copy">
-    <h3 class="mag-head pv-title" set:html={t.title} />
-    <p class="muted">{t.text}</p>
     <div class="pv-tabs" role="tablist" aria-label={t.tabs}>
       {items.map((it, i) => (
         <button type="button" role="tab" class="pv-tab" id={`pv-tab-${it.slug}`} aria-controls="pv-screen" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-src={it.href} data-name={it.name} data-title={t.frame(it.name)}>
