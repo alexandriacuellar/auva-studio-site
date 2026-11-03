@@ -138,7 +138,7 @@ export const comparison = {
     { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren al instante en cualquier celular, y sus visitantes se quedan. Le muestro su puntuación de velocidad de Google antes y después.' },
     { icon: 'search', title: 'Hecho para aparecer en Google y en búsquedas con IA', text: 'Los datos que buscan Google y las herramientas de búsqueda con IA, incluidos. No son un extra que se paga después.' },
     { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Gratis, o unos pocos dólares al mes si su sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
-    { icon: 'check', title: 'Fácil de usar para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
+    { icon: 'check', title: 'Accesible para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
     { icon: 'key', title: 'Es suyo, sin ataduras', text: 'Código, contenido, dominio y hosting a su nombre. Sin ataduras.' },
   ],
 };

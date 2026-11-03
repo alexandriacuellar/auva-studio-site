@@ -159,7 +159,7 @@ export const comparison = {
     { icon: 'bolt', title: 'Loads almost instantly', text: "Pages open in a blink on any phone, so visitors stay. I'll show you your Google speed score before and after." },
     { icon: 'search', title: 'Built to be found on Google and AI search', text: 'The details Google and AI search tools look for, built in. Not an extra you pay for later.' },
     { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Free, or a few dollars a month on a busier site. Your domain is about $20 a year.' },
-    { icon: 'check', title: 'Easy for everyone to use', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
+    { icon: 'check', title: 'Accessible to everyone', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
     { icon: 'key', title: 'Yours to keep, no lock-in', text: 'Code, content, domain, and hosting in your name. No lock-in.' },
   ],
 };
