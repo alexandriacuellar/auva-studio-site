@@ -14,7 +14,7 @@ const CSS = `
 .mf h2 { font: 300 1.45rem/1.2 'Montserrat', Arial, sans-serif; margin: 0; }
 .mf h2 b { font-weight: 600; }
 .mf p { margin: 4px 0 0; color: #4a5680; font-size: .95rem; line-height: 1.45; }
-.mf-x { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #d5dcf0; background: #fff; color: #12235e; cursor: pointer; display: grid; place-items: center; }
+.mf-x { flex: 0 0 auto; margin-left: auto; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #d5dcf0; background: #fff; color: #12235e; cursor: pointer; display: grid; place-items: center; }
 .mf form { display: grid; gap: 12px; }
 .mf label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
 .mf .opt { font-weight: 400; color: #6b769a; }
