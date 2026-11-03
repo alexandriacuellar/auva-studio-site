@@ -8,3 +8,16 @@
 .idea-tag-plain { background: transparent; color: var(--muted); border: 1px solid var(--border); }
 .idea-live { border-color: var(--primary); }
 .card.bigger { align-items: center; }
+
+/* AR demos list (like the sample sites on the Websites page, without the phone frame) */
+.demo-list { display: grid; gap: 24px; }
+.demo { display: grid; padding: 0; overflow: hidden; gap: 0; }
+.demo-img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; display: block; }
+.demo-body { padding: 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.demo-body h3 { margin: 0; }
+.demo-body p { margin: 0; }
+.demo-meta { font-size: .9rem; color: var(--muted); }
+.demo-meta b { color: var(--primary); }
+.demo-works { display: flex; align-items: center; gap: 6px; }
+.demo-body .btn { margin-top: 8px; }
+@media (min-width: 760px) { .demo { grid-template-columns: 360px 1fr; align-items: center; } .demo-img { height: 100%; } .demo-body { padding: 28px 32px; } }

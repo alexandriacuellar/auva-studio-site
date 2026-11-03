@@ -27,7 +27,9 @@ export const t = {
   arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
   tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de lanzamiento para mis primeros clientes de AR.', ask: 'Pregunte por este',
   bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
-  ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar las suyas.',
+  ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'Algunas ideas más para inspirar las suyas.',
+  demosH: 'Pruebe mis demostraciones <em>de AR.</em>', demosL: 'Cada demostración muestra uno de mis paquetes de AR. Ábrala en su teléfono y pruébela como lo harían sus clientes. Las demostraciones están en inglés.',
+  seeDemos: 'Ver las demostraciones', demoTry: 'Pruebe la demostración', demoWorks: 'Funciona en', demoLink: 'Ver la demostración',
   live: 'Demostración en vivo', idea: 'Idea', ideaPartner: 'Idea, con colaborador',
   stTitle: 'Producción de videojuegos y XR', stSeo: 'Productora de videojuegos y XR para estudios independientes | Auva Studio',
   stDesc: 'Una productora para equipos de videojuegos y XR: una Revisión del Plan de Producción de $650, o apoyo de producción a $65 por hora o mensual desde $650, sin contratar a tiempo completo.',
@@ -49,9 +51,18 @@ export const audiences = [
   { icon: 'star', title: 'Estudios de videojuegos y XR', text: 'Una productora con experiencia y un calendario en el que la gente confía, sin contratar a nadie de tiempo completo.', to: 'studios' },
 ];
 
+// Demostraciones de AR en la página de paquetes de AR, como los sitios de muestra en la página de Sitios web.
+// pkg es el id de aiOffers; el título y el precio vienen de site.es.ts. Las demostraciones están en inglés.
+export const demos = [
+  { pkg: 'ar-product', img: 'room', name: 'Véalo en su sala', href: '/samples/see-it-in-your-space/', works: 'teléfonos y Meta Quest 3',
+    text: 'Una tienda donde los clientes colocan un maniquí de costura, una lámpara o un tarro de miel a tamaño real en su propia sala, y luego agregan más piezas y las giran. La tienda es inventada.',
+    goodFor: 'Ideal para tiendas de muebles, artículos para el hogar y regalos, y todo lo que la gente quiere ver en casa primero.' },
+  { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/card/', works: 'teléfonos',
+    text: 'Apunte el teléfono a mi tarjeta y salgo de ella, con botones para reservar una llamada, escribirme o seguirme.',
+    goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
+];
+
 export const ideas = [
-  { icon: 'star', title: 'Una tarjeta de presentación con AR', text: 'Apunte el teléfono a la tarjeta y aparece su dueña, con botones para reservar, llamar o seguirla.', live: true },
-  { icon: 'layers', title: 'Un sofá en su sala', text: 'Sus clientes ven el tamaño y el color reales en casa antes de pedirlo.' },
   { icon: 'book', title: 'Un menú que cobra vida', text: 'Escanean el menú y el plato del día gira en 3D sobre la mesa.' },
   { icon: 'compass', title: 'Una casa en el terreno vacío', text: 'Los compradores se paran en el terreno y ven la casa terminada a su alrededor.' },
   { icon: 'globe', title: 'Un letrero que cuenta una historia', text: 'Un marcador histórico que muestra la calle hace 100 años.' },
