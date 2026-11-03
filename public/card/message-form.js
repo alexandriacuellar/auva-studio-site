@@ -38,7 +38,7 @@ function build() {
   root.innerHTML = `
     <div class="mf-sheet">
       <div class="mf-head">
-        <div><h2 id="mf-title">Send me <b>a message</b></h2><p>Tell me what you're working on. I'll reply within 24–48 hours.</p></div>
+        <div class="mf-intro"><h2 id="mf-title">Send me <b>a message</b></h2><p>Tell me what you're working on. I'll reply within 24–48 hours.</p></div>
         <button class="mf-x" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
       <form>
@@ -61,7 +61,7 @@ function build() {
       </div>
     </div>`;
   document.body.appendChild(root);
-  const form = root.querySelector('form'), status = root.querySelector('.mf-status'), done = root.querySelector('.mf-done');
+  const intro = root.querySelector('.mf-intro'), form = root.querySelector('form'), status = root.querySelector('.mf-status'), done = root.querySelector('.mf-done');
   root.querySelector('.mf-x').addEventListener('click', closeMessageForm);
   root.querySelector('[data-close]').addEventListener('click', closeMessageForm);
   root.addEventListener('click', (e) => { if (e.target === root) closeMessageForm(); });
@@ -74,7 +74,7 @@ function build() {
       const data = await res.json();
       if (!data.success) throw new Error(data.message);
       form.reset(); status.textContent = '';
-      form.hidden = true; done.hidden = false; done.querySelector('[data-close]').focus();
+      form.hidden = true; intro.hidden = true; done.hidden = false; done.querySelector('[data-close]').focus();
     } catch {
       status.innerHTML = 'Something went wrong. Please email me at <a href="mailto:hello@auvastudio.com">hello@auvastudio.com</a>.';
     } finally { btn.disabled = false; }
@@ -85,7 +85,7 @@ export function openMessageForm(source = location.pathname) {
   if (!root) build();
   lastFocus = document.activeElement;
   root.querySelector('[name="source"]').value = source;
-  root.querySelector('form').hidden = false; root.querySelector('.mf-done').hidden = true;
+  root.querySelector('form').hidden = false; root.querySelector('.mf-intro').hidden = false; root.querySelector('.mf-done').hidden = true;
   root.hidden = false;
   root.querySelector('.mf-x').focus({ preventScroll: true }); // not the name field, so the phone keyboard doesn't jump up
 }
