@@ -26,7 +26,7 @@ export const t = {
   arDesc: 'Tarjetas, volantes, menús, empaques, vistas de producto y visores de proyectos con AR desde $750. Se abren en el navegador de cualquier teléfono, sin descargar nada.',
   arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
   tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de lanzamiento para mis primeros clientes de AR.', ask: 'Pregunte por este',
-  bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de XR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
+  bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
   ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'La primera es mi propia tarjeta de presentación. Las demás son ideas para inspirar las suyas.',
   live: 'Demostración en vivo', idea: 'Idea', ideaPartner: 'Idea, con colaborador',
   stTitle: 'Producción de videojuegos y XR', stSeo: 'Productora de videojuegos y XR para estudios independientes | Auva Studio',
@@ -65,7 +65,7 @@ export const studioOffers = [
 
 export const faq = {
   app: { q: '¿Mis clientes necesitan una aplicación?', a: 'No. Escanean un código o abren un enlace, y funciona en el navegador de su teléfono.' },
-  bigger: { q: '¿Y si quiero algo más grande?', a: 'La VR, los recorridos completos y los videojuegos los construye un desarrollador de XR con experiencia que se une desde el inicio. Yo sigo como su productora, así tiene a una sola persona desde la primera llamada.' },
+  bigger: { q: '¿Y si quiero algo más grande?', a: 'La VR, los recorridos completos y los videojuegos los construye un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora, así tiene a una sola persona desde la primera llamada.' },
   underway: { q: '¿Puede unirse a un proyecto de videojuego o XR que ya está en marcha?', a: 'Sí. Reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },
   models: { q: '¿Necesito modelos 3D?', a: 'No. Puedo crearlos a partir de sus fotos o archivos de producto. Los arquitectos y constructores pueden usar el modelo que ya tienen.' },
   engines: { q: '¿Con qué motores y plataformas ha trabajado?', a: 'Unity y Meta Quest, además de Meta Horizon Worlds. Yo dirijo el trabajo y el calendario; sus desarrolladores construyen en el motor que usan.' },
