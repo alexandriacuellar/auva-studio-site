@@ -65,7 +65,7 @@ export const demos = [
     goodFor: 'Good for business cards, flyers, postcards, and event signs.' },
   { pkg: 'ar-menu', img: 'label', name: 'A cider label that rides off the can', href: '/samples/ar-label/', works: 'phones',
     text: 'Point your phone at a hard cider label, or at the label on your computer screen, and the Headless Horseman gallops out, rears up, and throws his pumpkin. It bursts into buttons for tasting notes and where to buy. The cider is made up.',
-    goodFor: 'Good for anyone who makes a product, from cider and coffee to candles, skincare, and toys.' },
+    goodFor: 'Good for anyone who makes a physical product, from cider and coffee to candles, skincare, and toys.' },
   { pkg: 'ar-project', img: 'house', name: 'A farmhouse before it’s built', href: '/samples/ar-project-viewer/', works: 'phones and Meta Quest 3',
     text: 'An architect’s project page where clients set a new farmhouse on the table, lift the roof to see the rooms, try three finishes, and see it at night. Or switch to full size and stand on the porch. The firm is made up.',
     goodFor: 'Good for architects, builders, remodelers, and developers who want clients to see a project before it’s built.' },
