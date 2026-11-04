@@ -72,7 +72,7 @@ export const demos = [
 ];
 
 export const ideas = [
-  { icon: 'book', title: 'A menu that comes alive', text: "Scan the menu and tonight's special turns on the plate in 3D." },
+  { icon: 'book', title: 'A box that opens itself', text: "Scan the box and what's inside unfolds in 3D, then shows how to set it up." },
   { icon: 'compass', title: 'A new kitchen before the work starts', text: 'Homeowners see the remodel in their own kitchen before the first wall comes down.' },
   { icon: 'globe', title: 'A sign that tells a story', text: 'A historic marker that shows the street 100 years ago.' },
   { icon: 'shield', title: 'VR training for staff', text: 'Practice a safety step or a hard conversation on Meta Quest before doing it for real.', partner: true },

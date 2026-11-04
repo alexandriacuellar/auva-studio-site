@@ -69,7 +69,7 @@ export const demos = [
 ];
 
 export const ideas = [
-  { icon: 'book', title: 'Un menú que cobra vida', text: 'Escanean el menú y el plato del día gira en 3D sobre la mesa.' },
+  { icon: 'book', title: 'Una caja que se abre sola', text: 'Escanean la caja y lo que hay dentro se despliega en 3D, y luego muestra cómo armarlo.' },
   { icon: 'compass', title: 'Una cocina nueva antes de la obra', text: 'Los dueños ven la remodelación en su propia cocina antes de tumbar la primera pared.' },
   { icon: 'globe', title: 'Un letrero que cuenta una historia', text: 'Un marcador histórico que muestra la calle hace 100 años.' },
   { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad o una conversación difícil en Meta Quest antes de hacerlo de verdad.', partner: true },
