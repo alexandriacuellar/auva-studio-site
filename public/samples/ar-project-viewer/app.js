@@ -21,7 +21,7 @@ function makeHouse() {
 function stepRoof(h, dt) {
   const target = state.roof ? 1 : 0;
   if (h.roofT === target && dt) return false;
-  h.roofT = dt ? (target > h.roofT ? Math.min(1, h.roofT + dt * 1.6) : Math.max(0, h.roofT - dt * 1.6)) : target;
+  h.roofT = dt ? (target > h.roofT ? Math.min(1, h.roofT + dt * 1.1) : Math.max(0, h.roofT - dt * 1.1)) : target;
   const k = h.roofT * h.roofT * (3 - 2 * h.roofT);
   h.roof.position.y = k * 6;
   h.roof.visible = h.roofT < 0.999;
@@ -98,11 +98,14 @@ function previewFrame(t) {
   const dt = Math.min((t - pvLast) / 1000, 0.1) || 0; pvLast = t;
   if (!pvOn || xr.session) return;
   if (pv.view.spin && !matchMedia('(prefers-reduced-motion: reduce)').matches) pv.view.yaw += dt * 0.12;
-  stepRoof(pv.house, dt);
-  if (pv.view.anim) { // glide to the plan view or the front view
-    const a = pv.view.anim, k = 1 - Math.exp(-dt * 4);
+  // Roof off: the roof lifts away first, then the camera turns to the plan.
+  // Roof on: the camera turns to the front first, then the roof comes down.
+  const a = pv.view.anim;
+  if (!(a && a.beforeRoof)) stepRoof(pv.house, dt);
+  if (a && !(a.afterRoof && pv.house.roofT < 1)) {
+    const k = 1 - Math.exp(-dt * 4);
     for (const key of ['yaw', 'pitch', 'dist']) pv.view[key] += (a[key] - pv.view[key]) * k;
-    if (Math.abs(a.yaw - pv.view.yaw) + Math.abs(a.pitch - pv.view.pitch) < 0.002) pv.view.anim = null;
+    if (Math.abs(a.yaw - pv.view.yaw) + Math.abs(a.pitch - pv.view.pitch) < 0.01) pv.view.anim = null;
   }
   const { yaw, pitch } = pv.view, dist = pv.view.dist * pv.view.fit;
   pv.camera.position.set(Math.sin(yaw) * Math.cos(pitch) * dist, 1.5 + Math.sin(pitch) * dist, Math.cos(yaw) * Math.cos(pitch) * dist);
@@ -130,7 +133,7 @@ function apply() {
 function frameForRoof() {
   const v = pv.view; v.spin = false;
   v.yaw = Math.atan2(Math.sin(v.yaw), Math.cos(v.yaw)); // shortest way round to the front
-  v.anim = state.roof ? { yaw: 0, pitch: 1.52, dist: 34 } : { yaw: 0.35, pitch: 0.45, dist: 46 };
+  v.anim = state.roof ? { yaw: 0, pitch: 1.52, dist: 34, afterRoof: true } : { yaw: 0.35, pitch: 0.45, dist: 46, beforeRoof: true };
 }
 document.querySelectorAll('[data-roof]').forEach((b) => b.addEventListener('click', () => { state.roof = !state.roof; frameForRoof(); apply(); }));
 document.querySelectorAll('[data-night]').forEach((b) => b.addEventListener('click', () => { state.night = !state.night; apply(); }));
