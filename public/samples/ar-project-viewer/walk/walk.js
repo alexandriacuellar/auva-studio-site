@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables', 'sofa'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables', 'sofa', 'chairs'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -240,6 +240,23 @@ const placeFurniture = (list) => (g) => {
 };
 new GLTFLoader().load(new URL('./table-set.glb', import.meta.url).href, placeFurniture(TABLES));
 new GLTFLoader().load(new URL('./sofa-set.glb', import.meta.url).href, placeFurniture(SOFAS));
+
+// Chairs from alexandria's chair set, each placed at [x, z] and turned to face [fx, fz] (the models face -z)
+const CHAIRS = [
+  ...[1.2, 1.8, 2.4].flatMap((x) => [{ name: 'Chair04', at: [x, 1.1], face: [0, 1] }, { name: 'Chair04', at: [x, 2.7], face: [0, -1] }]), // dining
+  ...[0.5, 1.1, 1.7].map((x) => ({ name: 'Chair25', at: [x, -1.0], face: [0, -1] })),   // island stools
+  { name: 'Chair46', at: [-2.7, 4.75], face: [0.25, 1] }, { name: 'Chair46', at: [-1.7, 4.75], face: [-0.25, 1] }, // porch rockers
+];
+new GLTFLoader().load(new URL('./chair-set.glb', import.meta.url).href, (g) => {
+  for (const p of CHAIRS) {
+    const src = g.scene.getObjectByName(p.name); if (!src) continue;
+    const o = src.clone(); o.position.set(0, 0, 0); o.rotation.set(0, Math.atan2(-p.face[0], -p.face[1]), 0); o.updateMatrixWorld(true);
+    const b = new THREE.Box3().setFromObject(o);
+    o.position.set(p.at[0] - (b.min.x + b.max.x) / 2, F - b.min.y, p.at[1] - (b.min.z + b.max.z) / 2);
+    house.body.add(o); o.updateMatrixWorld(true);
+    o.traverse((m) => { if (m.isMesh) solids.push(m); });
+  }
+});
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);

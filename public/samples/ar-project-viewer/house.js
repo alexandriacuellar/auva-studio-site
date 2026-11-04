@@ -216,7 +216,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   }
   box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
   box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
-  for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
+  if (!omit.includes('chairs')) for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
   // Dining table on four legs, set toward the kitchen wall so the path from the front door to the kitchen stays open
   const tx0 = 0.9, tx1 = 2.7, tz0 = 1.45, tz1 = 2.35;
   if (!omit.includes('tables')) {
@@ -224,10 +224,12 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     for (const x of [tx0 + 0.06, tx1 - 0.12]) for (const z of [tz0 + 0.06, tz1 - 0.12]) box('oak', x, x + 0.06, F, F + 0.71, z, z + 0.06);
   }
   // Six chairs: seat, four legs, and a back away from the table
-  for (const x of [1.2, 1.8, 2.4]) for (const [z, back] of [[1.05, -1], [2.75, 1]]) {
-    box('oak', x - 0.2, x + 0.2, F + 0.42, F + 0.47, z - 0.2, z + 0.2);
-    for (const lx of [x - 0.19, x + 0.15]) for (const lz of [z - 0.19, z + 0.15]) box('oak', lx, lx + 0.04, F, F + 0.42, lz, lz + 0.04);
-    const bz = z + back * 0.18; box('oak', x - 0.2, x + 0.2, F + 0.47, F + 0.95, bz - 0.02, bz + 0.02);
+  if (!omit.includes('chairs')) {
+    for (const x of [1.2, 1.8, 2.4]) for (const [z, back] of [[1.05, -1], [2.75, 1]]) {
+      box('oak', x - 0.2, x + 0.2, F + 0.42, F + 0.47, z - 0.2, z + 0.2);
+      for (const lx of [x - 0.19, x + 0.15]) for (const lz of [z - 0.19, z + 0.15]) box('oak', lx, lx + 0.04, F, F + 0.42, lz, lz + 0.04);
+      const bz = z + back * 0.18; box('oak', x - 0.2, x + 0.2, F + 0.47, F + 0.95, bz - 0.02, bz + 0.02);
+    }
   }
   // Bedroom 2, bath
   if (!omit.includes('beds')) { box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95); }
