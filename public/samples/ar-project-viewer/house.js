@@ -246,7 +246,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
     glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
-    deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex() }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
+    deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
     inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c8bfae' }), fabric: std({ color: '#9aa6b8' }), oak: std({ color: '#b58a5d' }),
     counter: std({ color: '#e9e7e2', roughness: 0.5 }), cabinet: std({ color: '#5f7a69', roughness: 0.6 }),
     steel: std({ color: '#b9bec4', roughness: 0.35, metalness: 0.6 }), dark: std({ color: '#26282c', roughness: 0.4 }),
@@ -272,8 +272,21 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
 
   // Porch lights (glow at night)
   const bulbs = new THREE.Group(); body.add(bulbs);
-  const bulbMat = std({ color: '#fff3d6', emissive: '#000000' });
-  for (const x of [-0.45, 1.05]) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 8), bulbMat); b.position.set(x, F + 2.0, 4.18); bulbs.add(b); }
+  const bulbMat = std({ color: '#efe6cf', roughness: 0.2, emissive: '#000000' });
+  // Two black wall lanterns beside the front door: backplate, arm, glass box, cap.
+  let lamp;
+  const part = (geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); lamp.add(m); return m; };
+  for (const lx of [-0.42, 1.0]) {
+    lamp = new THREE.Group(); lamp.position.set(lx, F + 1.95, 4 + T / 2); lamp.scale.setScalar(1.25); bulbs.add(lamp);
+    const x = 0, y = 0, wz = 0;
+    part(new THREE.BoxGeometry(0.14, 0.32, 0.03), mats.dark, x, y + 0.02, wz + 0.015);
+    part(new THREE.BoxGeometry(0.04, 0.04, 0.12), mats.dark, x, y + 0.1, wz + 0.09);
+    part(new THREE.BoxGeometry(0.16, 0.24, 0.16), bulbMat, x, y, wz + 0.22);
+    for (const [dx, dz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) part(new THREE.BoxGeometry(0.025, 0.26, 0.025), mats.dark, x + dx * 0.08, y, wz + 0.22 + dz * 0.08);
+    part(new THREE.BoxGeometry(0.2, 0.03, 0.2), mats.dark, x, y - 0.135, wz + 0.22);
+    part(new THREE.BoxGeometry(0.22, 0.03, 0.22), mats.dark, x, y + 0.135, wz + 0.22);
+    part(new THREE.ConeGeometry(0.13, 0.1, 4).rotateY(Math.PI / 4), mats.dark, x, y + 0.2, wz + 0.22);
+  }
 
   // Room names, shown when the roof is off.
   const labelGroup = new THREE.Group(); labelGroup.name = 'labels'; labelGroup.visible = false; body.add(labelGroup);
