@@ -18,8 +18,8 @@ export async function startLabelPreview(container, { label, onAction, labels }) 
     // Narrow phones step back so the circle he rides stays on screen
     const narrow = w / h < 0.7;
     // and sit higher, clear of the hint card at the bottom of the screen.
-    camera.position.set(0, 0.35, narrow ? 5.0 : 3.9);
-    look.set(0, narrow ? -0.6 : -0.3, 0.3);
+    camera.position.set(0, 0.3, narrow ? 4.1 : 3.3);
+    look.set(0, narrow ? -0.5 : -0.3, 0.4);
     camera.lookAt(look);
     camera.updateProjectionMatrix();
   };

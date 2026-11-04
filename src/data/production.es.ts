@@ -44,7 +44,7 @@ export const services = [
 ];
 
 export const audiences = [
-  { icon: 'layers', title: 'Tiendas, artesanos, viñedos y cervecerías', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen una etiqueta que cobra vida.', to: 'ar' },
+  { icon: 'layers', title: 'Tiendas, artesanos y marcas de productos', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen una etiqueta o un empaque que cobra vida.', to: 'ar' },
   { icon: 'compass', title: 'Arquitectos, constructores y desarrolladores', text: 'Muestre a sus clientes una casa o un edificio que aún no existe, sobre la mesa o a tamaño real en el terreno.', to: 'ar' },
   { icon: 'book', title: 'Museos, educadores y organizaciones culturales', text: 'Exhibiciones, clases y sitios históricos que muestran una escena, una voz o un objeto 3D a través del teléfono o de un visor.', to: 'ar' },
   { icon: 'globe', title: 'Recintos, marcas y turismo', text: 'Atracciones, eventos y campañas que la gente recuerda, desde un póster que se escanea para jugar hasta un mundo en Meta Horizon.', to: 'ar' },
@@ -62,7 +62,7 @@ export const demos = [
     goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
   { pkg: 'ar-menu', img: 'label', name: 'Una etiqueta de sidra que cobra vida', href: '/samples/ar-label/', works: 'teléfonos',
     text: 'Apunte el teléfono a la etiqueta de una sidra, o a la etiqueta en la pantalla de su computadora, y el Jinete sin Cabeza sale galopando, se encabrita y lanza su calabaza. La calabaza estalla en botones con notas de cata y dónde comprar. La sidra es inventada.',
-    goodFor: 'Ideal para viñedos, sidrerías, cervecerías, destilerías y productores de alimentos con una historia que contar.' },
+    goodFor: 'Ideal para cualquiera que fabrique un producto, desde sidra y café hasta velas, cosméticos y juguetes.' },
   { pkg: 'ar-project', img: 'house', name: 'Una casa de campo antes de construirla', href: '/samples/ar-project-viewer/', works: 'teléfonos y Meta Quest 3',
     text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche. La firma es inventada.',
     goodFor: 'Ideal para arquitectos, constructores, remodeladores y desarrolladores que quieren que sus clientes vean un proyecto antes de construirlo.' },

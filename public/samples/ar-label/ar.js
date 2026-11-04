@@ -19,7 +19,7 @@ export async function startLabelAR(container, { found, lost, onAction, labels })
   const anchor = mindar.addAnchor(0);
   // A bit smaller than the preview, so he stays in frame with the phone close to the label.
   const show = await buildShow({ groundY: -0.5, onAction, labels });
-  const fit = new THREE.Group(); fit.scale.setScalar(0.7); fit.position.y = -0.15; fit.add(show.root);
+  const fit = new THREE.Group(); fit.scale.setScalar(0.85); fit.position.y = -0.075; fit.add(show.root);
   anchor.group.add(fit);
 
   // Start the ride each time the label comes into view after a proper look away

@@ -185,7 +185,7 @@ function pill(label, { fill, ink, w = 820 }) {
   g.fillText(label, w / 2, 80, w - 80);
   const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex(c), transparent: true, depthWrite: false, depthTest: false }));
   s.renderOrder = 10;
-  const sw = 0.62 * w / 820; s.scale.set(sw, sw * 168 / w, 1); s.userData.base = s.scale.clone();
+  const sw = 0.82 * w / 820; s.scale.set(sw, sw * 168 / w, 1); s.userData.base = s.scale.clone();
   return s;
 }
 
@@ -252,11 +252,12 @@ export async function buildShow({ groundY = -0.5, onAction = () => {}, labels = 
   const buttons = [
     pill(T.tasting, { fill: CREAM, ink: NIGHT }),
     pill(T.store, { fill: CREAM, ink: NIGHT }),
-    pill(T.ask, { fill: ORANGE, ink: NIGHT, w: 980 }),
+    pill(T.ask, { fill: ORANGE, ink: NIGHT, w: 900 }),
   ];
   ['tasting', 'store', 'ask'].forEach((id, i) => { buttons[i].userData.action = id; root.add(buttons[i]); });
-  const burstAt = new THREE.Vector3(0, groundY + 0.95, 0.45);
-  const slots = [new THREE.Vector3(0, groundY + 1.1, 0.42), new THREE.Vector3(0, groundY + 0.95, 0.42), new THREE.Vector3(0, groundY + 0.8, 0.42)];
+  const burstAt = new THREE.Vector3(0, groundY + 0.98, 0.8);
+  // In front of the label and close to the viewer, so they read big and are easy to tap
+  const slots = [new THREE.Vector3(0, groundY + 1.2, 0.8), new THREE.Vector3(0, groundY + 1.0, 0.8), new THREE.Vector3(0, groundY + 0.8, 0.8)];
 
   // Timeline (seconds)
   const C = new THREE.Vector3(0, groundY, 0.42), R = 0.36;
