@@ -87,7 +87,7 @@ const schema = serviceSchema([
             <p class="muted">{p.blurb}</p>
             {p.tiers ? (
               <>
-                <p class="price">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
+                <p class="price pk-prices">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
                 <div class="pk-extra">
                   <div class="pk-toggle" role="group" aria-label={p.toggleLabel}>{p.tiers.map((t, i) => <button type="button" data-t-btn={i} aria-pressed={i === p.tierDefault ? 'true' : 'false'}>{t.label}</button>)}</div>
                   <p class="muted">{p.extra}</p>
