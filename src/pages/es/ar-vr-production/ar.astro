@@ -21,7 +21,7 @@ const demoItems = demos.map((d) => {
   return { ...d, pkgTitle: o.title, price: o.price, image: images[d.img as keyof typeof images], bg: bgs[d.img as keyof typeof bgs], alt: alts[d.img as keyof typeof alts] };
 });
 const demoFor = (id: string) => demos.find((d) => d.pkg === id);
-const faqs = [faq.app, faq.models, faq.bigger];
+const faqs = [faq.app, faq.models, faq.bigger, faq.founding];
 const schema = serviceSchema(packages.map((o) => ({ name: o.title, description: o.text, price: o.price })), '/es/ar-vr-production/ar/');
 ---
 <Base title={t.arTitle} seoTitle={t.arSeo} schema={schema} description={t.arDesc}>

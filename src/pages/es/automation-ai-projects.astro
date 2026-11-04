@@ -11,7 +11,7 @@ import { site, serviceSchema } from '../../data/site.es';
 import { sectionName, services, audiences, safety, aiPackages, pmPackages, faq } from '../../data/tech.es';
 
 const byId = Object.fromEntries(services.map((x) => [x.id, x]));
-const faqs = [faq.review, faq.inPerson, faq.vendors];
+const faqs = [faq.review, faq.inPerson, faq.vendors, faq.founding];
 const schema = serviceSchema([
   { name: 'Tech Review', description: faq.review.a, price: '$250' },
   ...services.map((x) => ({ name: x.title, description: x.text, price: x.price })),
