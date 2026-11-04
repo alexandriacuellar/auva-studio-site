@@ -23,12 +23,12 @@ export const t = {
   ],
   website: '<b>¿También necesita un sitio web?</b> Vea los <a href="/es/websites/#packages">paquetes de sitios web desde $1,500</a>. La Vista de Producto con AR se puede agregar a cualquiera de ellos.',
   arTitle: 'Paquetes de AR', arSeo: 'Paquetes de AR desde $750, sin aplicación | Auva Studio',
-  arDesc: 'Tarjetas, volantes, menús, empaques, vistas de producto y visores de proyectos con AR desde $750. Se abren en el navegador de cualquier teléfono, sin descargar nada.',
-  arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
-  tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de lanzamiento para mis primeros clientes de AR.', ask: 'Pregunte por este',
+  arDesc: 'Tarjetas, volantes, etiquetas, empaques, vistas de producto y visores de proyectos con AR desde $750. Se abren en el navegador de cualquier teléfono, sin descargar nada.',
+  arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, etiquetas, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
+  tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de fundadores para mis primeros 5 clientes de AR.', ask: 'Pregunte por este',
   bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
   ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'Algunas ideas más para inspirar las suyas.',
-  demosH: 'Pruebe mis demostraciones <em>de AR.</em>', demosL: 'Cada demostración muestra uno de mis paquetes de AR. Ábrala en su teléfono y pruébela como lo harían sus clientes. Las demostraciones están en inglés.',
+  demosH: 'Pruebe mis demostraciones <em>de AR.</em>', demosL: 'Cada demostración muestra uno de mis paquetes de AR. Ábrala en su teléfono y pruébela como lo harían sus clientes. Los modelos 3D aquí son sencillos para que carguen rápido. Los suyos pueden ser más detallados o realistas, a partir de sus propios archivos 3D o creados para su proyecto. Las demostraciones están en inglés.',
   seeDemos: 'Ver las demostraciones', demoTry: 'Pruebe la demostración', demoWorks: 'Funciona en', demoLink: 'Ver la demostración',
   live: 'Demostración en vivo', idea: 'Idea', ideaPartner: 'Idea, con colaborador',
   stTitle: 'Producción de videojuegos y XR', stSeo: 'Productora de videojuegos y XR para estudios independientes | Auva Studio',
@@ -39,12 +39,12 @@ export const t = {
 };
 
 export const services = [
-  { id: 'ar', icon: 'layers', title: 'Paquetes de AR', price: 'Desde $750', text: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono, sin descargar ninguna aplicación.', href: `${base}/ar/`, link: 'Vea los paquetes de AR' },
+  { id: 'ar', icon: 'layers', title: 'Paquetes de AR', price: 'Desde $750', text: 'Tarjetas, etiquetas, productos y edificios que cobran vida en cualquier teléfono, sin descargar ninguna aplicación.', href: `${base}/ar/`, link: 'Vea los paquetes de AR' },
   { id: 'studios', icon: 'star', title: 'Producción de videojuegos y XR', price: 'Desde $650', text: 'Una productora con experiencia y un calendario en el que su equipo puede confiar, sin contratar a tiempo completo.', href: `${base}/studios/`, link: 'Vea producción para estudios' },
 ];
 
 export const audiences = [
-  { icon: 'layers', title: 'Tiendas, artesanos y restaurantes', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen un menú o una etiqueta que cobra vida.', to: 'ar' },
+  { icon: 'layers', title: 'Tiendas, artesanos y marcas de productos', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen una etiqueta o un empaque que cobra vida.', to: 'ar' },
   { icon: 'compass', title: 'Arquitectos, constructores y desarrolladores', text: 'Muestre a sus clientes una casa o un edificio que aún no existe, sobre la mesa o a tamaño real en el terreno.', to: 'ar' },
   { icon: 'book', title: 'Museos, educadores y organizaciones culturales', text: 'Exhibiciones, clases y sitios históricos que muestran una escena, una voz o un objeto 3D a través del teléfono o de un visor.', to: 'ar' },
   { icon: 'globe', title: 'Recintos, marcas y turismo', text: 'Atracciones, eventos y campañas que la gente recuerda, desde un póster que se escanea para jugar hasta un mundo en Meta Horizon.', to: 'ar' },
@@ -60,13 +60,16 @@ export const demos = [
   { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/samples/ar-business-card/', works: 'teléfonos',
     text: 'Apunte el teléfono a mi tarjeta, o a la tarjeta en la pantalla de su computadora, y salgo de ella con botones para enviarme un mensaje, escribirme o seguirme. ¿Solo tiene el teléfono? Véalo ahí mismo.',
     goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
+  { pkg: 'ar-menu', img: 'label', name: 'Una etiqueta de sidra que cobra vida', href: '/samples/ar-label/', works: 'teléfonos',
+    text: 'Apunte el teléfono a la etiqueta de una sidra, o a la etiqueta en la pantalla de su computadora, y el Jinete sin Cabeza sale galopando, se encabrita y lanza su calabaza. La calabaza estalla en botones con notas de cata y dónde comprar. La sidra es inventada.',
+    goodFor: 'Ideal para cualquiera que fabrique un producto físico, desde sidra y café hasta velas, cosméticos y juguetes.' },
   { pkg: 'ar-project', img: 'house', name: 'Una casa de campo antes de construirla', href: '/samples/ar-project-viewer/', works: 'teléfonos y Meta Quest 3',
     text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche. La firma es inventada.',
     goodFor: 'Ideal para arquitectos, constructores, remodeladores y desarrolladores que quieren que sus clientes vean un proyecto antes de construirlo.' },
 ];
 
 export const ideas = [
-  { icon: 'book', title: 'Un menú que cobra vida', text: 'Escanean el menú y el plato del día gira en 3D sobre la mesa.' },
+  { icon: 'book', title: 'Una caja que se abre sola', text: 'Escanean la caja y lo que hay dentro se despliega en 3D, y luego muestra cómo armarlo.' },
   { icon: 'compass', title: 'Una cocina nueva antes de la obra', text: 'Los dueños ven la remodelación en su propia cocina antes de tumbar la primera pared.' },
   { icon: 'globe', title: 'Un letrero que cuenta una historia', text: 'Un marcador histórico que muestra la calle hace 100 años.' },
   { icon: 'shield', title: 'Capacitación en VR para su personal', text: 'Practique un paso de seguridad o una conversación difícil en Meta Quest antes de hacerlo de verdad.', partner: true },
@@ -78,6 +81,7 @@ export const studioOffers = [
 ];
 
 export const faq = {
+  founding: { id: 'faq-founding', q: '¿Qué son los precios de fundadores?', a: 'Mis primeros 5 clientes de AR reciben estos precios, a cambio de una breve reseña y permiso para mostrar el proyecto. Después, los precios suben. No se combinan con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor.' },
   app: { q: '¿Mis clientes necesitan una aplicación?', a: 'No. Escanean un código o abren un enlace, y funciona en el navegador de su teléfono.' },
   bigger: { q: '¿Y si quiero algo más grande?', a: 'La VR, los recorridos completos y los videojuegos los construye un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora, así tiene a una sola persona desde la primera llamada.' },
   underway: { q: '¿Puede unirse a un proyecto de videojuego o XR que ya está en marcha?', a: 'Sí. Reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },

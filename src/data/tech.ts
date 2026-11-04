@@ -51,6 +51,7 @@ export const pmPackages = [
 ];
 
 export const faq = {
+  founding: { id: 'faq-founding', q: 'What are founding prices?', a: "My first 5 automation, AI, and project clients get these prices, in exchange for a short review. After that, prices go up. They don't combine with the nonprofit discount; if both apply, you get the bigger one." },
   review: { q: "What's in the Tech Review?", a: 'A 60-minute call, then a written report within 5 business days with your top fixes in order and rough costs. The $250 is credited toward any package with me that starts within 90 days.' },
   inPerson: { q: 'Do you work in person?', a: 'Yes, from New York City and Westchester up to Albany, though most work happens remotely. On-site time is $65 an hour, and any travel outside the Mid-Hudson Valley is agreed in writing before booking.' },
   vendors: { q: 'Can you work with our current vendors or IT provider?', a: 'Yes. I often work alongside existing teams and vendors, and can help you review their proposals.' },

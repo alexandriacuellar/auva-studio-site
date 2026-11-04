@@ -106,6 +106,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
       if (along === 'x') box(key, u0, u1, v0, v1, at + d0, at + d1); else box(key, at + d0, at + d1, v0, v1, u0, u1);
     };
     const s = c - w / 2, e = c + w / 2, fw = 0.07;
+    const z = 0.004; // frames and glass sit a hair off the wall's opening faces, so no two faces share a plane and flicker
     const out = Math.sign(at) || 1; // which side of the wall is outside
     const face = (d) => (out > 0 ? [d - 0.03, d + 0.03] : [-d - 0.03, -d + 0.03]);
     const [f0, f1] = face(th / 2);
@@ -113,14 +114,22 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
       place('door', s, e, b, top, -th / 2 + 0.04, th / 2 - 0.04);
       place('glass', s + 0.15, e - 0.15, b + 1.0, top - 0.15, ...face(th / 2 - 0.02));
     } else {
-      place('glass', s, e, b, top, -0.02, 0.02);
+      place('glass', s + z, e - z, b + z, top - z, -0.02, 0.02);
       const mid = (s + e) / 2, vmid = b + (top - b) * 0.55;
       place('frame', mid - 0.025, mid + 0.025, b, top, f0, f1);
       place('frame', s, e, vmid - 0.025, vmid + 0.025, f0, f1);
     }
-    place('frame', s - fw, s, b, top, f0, f1); place('frame', e, e + fw, b, top, f0, f1);
-    place('frame', s - fw, e + fw, top, top + fw, f0, f1);
-    place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b, ...face(th / 2 + 0.02));
+    place('frame', s - fw, s + z, b, top, f0, f1); place('frame', e - z, e + fw, b, top, f0, f1);
+    place('frame', s - fw, e + fw, top - z, top + fw, f0, f1);
+    place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b - 0.006, ...face(th / 2 + 0.025));
+    if (kind !== 'door') {
+      // Bottom rail outside, and a full frame plus sill on the inside, so the see-through glass reads as a window
+      place('frame', s + z, e - z, b - z, b + fw, f0, f1);
+      const [i0, i1] = face(-th / 2);
+      place('frame', s - fw, s + z, b, top, i0, i1); place('frame', e - z, e + fw, b, top, i0, i1);
+      place('frame', s - fw, e + fw, top - z, top + fw, i0, i1); place('frame', s + z, e - z, b - z, b + fw, i0, i1);
+      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035));
+    }
   }
 
   // ---------- Site ----------
@@ -174,7 +183,18 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   box('rug', -5.2, -1.8, F + 0.005, F + 0.02, -1.4, 1.4);
   box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
   box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6);
-  box('stone', -5.9, -5.55, F, F + 1.4, -0.9, 0.9);
+  // Fireplace: stone jambs and lintel around a dark firebox, logs and a fire, oak mantel, stone hearth
+  box('stone', -5.9, -5.4, F, F + 0.8, -0.9, -0.45); box('stone', -5.9, -5.4, F, F + 0.8, 0.45, 0.9);
+  box('stone', -5.9, -5.4, F + 0.8, F + 1.05, -0.9, 0.9);
+  box('stone', -5.9, -5.62, F + 1.12, F + 2.2, -0.7, 0.7);
+  box('oak', -5.92, -5.3, F + 1.05, F + 1.12, -1.0, 1.0);
+  box('stone', -5.4, -5.05, F, F + 0.06, -1.0, 1.0);
+  box('dark', -5.9, -5.66, F, F + 0.8, -0.45, 0.45);
+  box('dark', -5.66, -5.4, F, F + 0.02, -0.45, 0.45);
+  for (const [z, a] of [[-0.05, 0.35], [0.05, -0.35]]) { const g = new THREE.CylinderGeometry(0.055, 0.06, 0.62, 7); g.rotateX(Math.PI / 2); g.rotateY(a); g.translate(-5.53, F + 0.08, z); add('trunk', g); }
+  for (const [z, h, r, key] of [[-0.16, 0.34, 0.09, 'fire'], [0.02, 0.46, 0.11, 'fire'], [0.18, 0.3, 0.08, 'fire'], [0.02, 0.28, 0.06, 'flame'], [-0.12, 0.2, 0.05, 'flame'], [0.15, 0.18, 0.045, 'flame']]) {
+    const g = new THREE.ConeGeometry(r, h, 7); g.translate(key === 'flame' ? -5.5 : -5.53, F + 0.12 + h / 2, z); add(key, g);
+  }
   // Kitchen: back counter, island, and the dining table with six chairs
   box('cabinet', -0.6, 2.15, F, F + 0.86, -3.9, -3.3);              // base cabinets
   box('counter', -0.62, 2.17, F + 0.86, F + 0.92, -3.92, -3.25);      // stone top
@@ -253,7 +273,8 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   const mats = {
     siding: std({ map: maps.batten }), trim: std({}), roof: std({ map: seamTex(), roughness: 0.45, metalness: 0.35 }),
     frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
-    glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
+    // See-through glass with a light blue tint, so it reads as a window from inside and out
+    glass: std({ color: '#bcd6e6', roughness: 0.08, metalness: 0.1, emissive: '#000000', transparent: true, opacity: 0.32, depthWrite: false }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
     deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#5f6b72' }),
     inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c4ae8c' }), mat: std({ color: '#b5653f' }), walltile: std({ map: tileTex(), color: '#7c97a6' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
@@ -263,6 +284,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     porcelain: std({ color: '#ffffff', roughness: 0.25 }), water: std({ color: '#8fc3d6', roughness: 0.1 }),
     lawn: std({ map: grassTex() }), gravel: std({ color: '#cfc6b4', roughness: 1 }), trunk: std({ color: '#6b4f36' }),
     leaves: std({ color: '#5e7d48', flatShading: true }),
+    fire: std({ color: '#ff7a1a', emissive: '#ff6a10', emissiveIntensity: 1.6, roughness: 1 }), flame: std({ color: '#ffd166', emissive: '#ffc23d', emissiveIntensity: 1.8, roughness: 1 }),
   };
   const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone() };
   const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3 };
@@ -323,8 +345,9 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   }
   function setNight(on) {
     mats.glass.emissive.set(on ? '#ffc477' : '#000000'); mats.glass.emissiveIntensity = on ? 3.2 : 0;
-    mats.glass.color.set(on ? '#5a4a33' : '#2b3546');
+    mats.glass.color.set(on ? '#5a4a33' : '#bcd6e6'); mats.glass.opacity = on ? 0.85 : 0.32;
     bulbMat.emissive.set(on ? '#ffe2a6' : '#000000'); bulbMat.emissiveIntensity = on ? 2 : 0;
+    mats.fire.emissiveIntensity = on ? 3 : 1.6; mats.flame.emissiveIntensity = on ? 3.4 : 1.8;
   }
   setFinish(finish); setNight(false);
   return { root, roof, roofMats: Object.values(roofMats), labels: labelGroup, setFinish, setNight };

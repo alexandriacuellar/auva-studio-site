@@ -18,10 +18,14 @@ const t = {
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
     promoLabel: 'Founding offer',
-    promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review.',
+    promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review. Prices go up after that.',
     promoShort: '<b>Founding offer:</b> 10% off websites.',
     promoLink: 'Ask about it',
     promoLinkShort: 'Ask about it',
+    promoAr: '<b>Founding prices:</b> my AR packages are priced for my first 5 AR clients, in exchange for a short review.',
+    promoArShort: '<b>Founding prices</b> for my first 5 AR clients.',
+    promoTech: '<b>Founding prices:</b> these prices are for my first 5 automation, AI, and project clients, in exchange for a short review.',
+    promoTechShort: '<b>Founding prices</b> for my first 5 clients.',
     home: 'Auva Studio home',
     menu: 'Menu',
     close: 'Close',
@@ -59,10 +63,14 @@ const t = {
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
     promoLabel: 'Oferta para fundadores',
-    promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña.',
+    promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña. Después, los precios suben.',
     promoShort: '<b>Fundadores:</b> 10% en sitios web.',
     promoLink: 'Pregunte por ella',
     promoLinkShort: 'Pregunte',
+    promoAr: '<b>Precios de fundadores:</b> mis paquetes de AR tienen este precio para mis primeros 5 clientes de AR, a cambio de una breve reseña.',
+    promoArShort: '<b>Precios de fundadores</b> para mis primeros 5 clientes de AR.',
+    promoTech: '<b>Precios de fundadores:</b> estos precios son para mis primeros 5 clientes de automatización, IA y proyectos, a cambio de una breve reseña.',
+    promoTechShort: '<b>Precios de fundadores</b> para mis primeros 5 clientes.',
     home: 'Inicio de Auva Studio',
     menu: 'Menú',
     close: 'Cerrar',
@@ -105,8 +113,16 @@ const base = basePath(path);
 const hasSpanish = translatedPages.includes(base);
 const otherLang = lang === 'es' ? 'en' : 'es';
 const switchHref = switchPath(path, otherLang);
-// The founding offer is for websites, so the bar shows only where website buyers land.
-const showPromo = base === '/' || base.startsWith('/websites/') || base === '/website-check/';
+// Each service has its own founding offer, so the bar says something different per section.
+// Websites: 10% off (Home, Websites, website check). AR and Automation: founding prices. Studio pages: none.
+const promo = (base === '/' || base.startsWith('/websites/') || base === '/website-check/')
+  ? { long: t.promoLong, short: t.promoShort, href: '/websites/#faq-founding' }
+  : (base === '/ar-vr-production/' || base.startsWith('/ar-vr-production/ar/'))
+  ? { long: t.promoAr, short: t.promoArShort, href: '/ar-vr-production/ar/#faq-founding' }
+  : base.startsWith('/automation-ai-projects/')
+  ? { long: t.promoTech, short: t.promoTechShort, href: '/automation-ai-projects/#faq-founding' }
+  : null;
+const showPromo = !!promo;
 
 const orgDescription = 'Auva Studio builds websites clients own, sets up automation and AI, and manages projects for small businesses, startups, nonprofits, and growing teams, plus AR packages and production support for game and XR teams. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
@@ -249,7 +265,7 @@ const schema = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
-    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
+    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={promo.long} /><span class="promo-short" set:html={promo.short} /> <a href={l(promo.href)}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
     <header class="site-header">
       <div class="wrap header-inner">
         <a href={l('/')} class="brand" aria-label={t.home}>
