@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -206,6 +206,29 @@ new GLTFLoader().load(new URL('./bed-set.glb', import.meta.url).href, (g) => {
         o.attach(q);
       }
     }
+    house.body.add(o); o.updateMatrixWorld(true);
+    o.traverse((m) => { if (m.isMesh) solids.push(m); });
+  }
+});
+
+// Tables from alexandria's table set (marble tops to go with the kitchen). Each fills its floor area [x0, x1, z0, z1];
+// stretch: true scales length and width separately, so the dining table seats the six chairs.
+const TABLES = [
+  { name: 'Table10', turn: 0, area: [0.9, 2.7, 1.45, 2.35], stretch: true },   // dining
+  { name: 'Table39', turn: Math.PI / 2, area: [-4.1, -3.3, -0.65, 0.65] },     // coffee table
+];
+new GLTFLoader().load(new URL('./table-set.glb', import.meta.url).href, (g) => {
+  for (const p of TABLES) {
+    const o = g.scene.getObjectByName(p.name); if (!o) continue;
+    o.position.set(0, 0, 0); o.rotation.set(0, p.turn, 0); o.scale.setScalar(1); o.updateMatrixWorld(true);
+    let b = new THREE.Box3().setFromObject(o); const [x0, x1, z0, z1] = p.area;
+    const sx = (x1 - x0) / (b.max.x - b.min.x), sz = (z1 - z0) / (b.max.z - b.min.z);
+    if (p.stretch) {
+      // World x/z map to the model's own axes; a quarter turn swaps them
+      const q = Math.abs(Math.sin(p.turn)) > 0.5; o.scale.set(q ? sz : sx, 1, q ? sx : sz);
+    } else o.scale.setScalar(Math.min(1, sx, sz));
+    o.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(o);
+    o.position.set((x0 + x1) / 2 - (b.min.x + b.max.x) / 2, F - b.min.y, (z0 + z1) / 2 - (b.min.z + b.max.z) / 2);
     house.body.add(o); o.updateMatrixWorld(true);
     o.traverse((m) => { if (m.isMesh) solids.push(m); });
   }

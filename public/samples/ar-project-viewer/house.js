@@ -192,7 +192,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   // Living room: rug, sofa facing the fireplace, coffee table, fireplace
   box('rug', -5.2, -1.8, F + 0.005, F + 0.02, -1.4, 1.4);
   box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
-  box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6);
+  if (!omit.includes('tables')) box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6); // coffee table
   // Fireplace: stone jambs and lintel around a dark firebox, logs and a fire, oak mantel, stone hearth
   box('stone', -5.9, -5.4, F, F + 0.8, -0.9, -0.45); box('stone', -5.9, -5.4, F, F + 0.8, 0.45, 0.9);
   box('stone', -5.9, -5.4, F + 0.8, F + 1.05, -0.9, 0.9);
@@ -219,8 +219,10 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
   // Dining table on four legs, set toward the kitchen wall so the path from the front door to the kitchen stays open
   const tx0 = 0.9, tx1 = 2.7, tz0 = 1.45, tz1 = 2.35;
-  box('oak', tx0, tx1, F + 0.71, F + 0.76, tz0, tz1);
-  for (const x of [tx0 + 0.06, tx1 - 0.12]) for (const z of [tz0 + 0.06, tz1 - 0.12]) box('oak', x, x + 0.06, F, F + 0.71, z, z + 0.06);
+  if (!omit.includes('tables')) {
+    box('oak', tx0, tx1, F + 0.71, F + 0.76, tz0, tz1);
+    for (const x of [tx0 + 0.06, tx1 - 0.12]) for (const z of [tz0 + 0.06, tz1 - 0.12]) box('oak', x, x + 0.06, F, F + 0.71, z, z + 0.06);
+  }
   // Six chairs: seat, four legs, and a back away from the table
   for (const x of [1.2, 1.8, 2.4]) for (const [z, back] of [[1.05, -1], [2.75, 1]]) {
     box('oak', x - 0.2, x + 0.2, F + 0.42, F + 0.47, z - 0.2, z + 0.2);
