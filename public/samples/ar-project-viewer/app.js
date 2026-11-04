@@ -70,25 +70,27 @@ function sizePreview() {
 new ResizeObserver(sizePreview).observe(stage); sizePreview();
 
 let drag = null; const pointers = new Map();
+// How close you can zoom: into the rooms with the roof off, just short of the roof with it on.
+const minDist = () => (state.roof ? 9 : 15);
 const cv = pv.renderer.domElement;
-cv.style.touchAction = 'pan-y';
-cv.addEventListener('pointerdown', (e) => { pointers.set(e.pointerId, [e.clientX, e.clientY]); drag = { x: e.clientX, y: e.clientY }; pv.view.spin = false; pv.view.touched = true; cv.setPointerCapture(e.pointerId); });
+cv.style.touchAction = 'none'; // the model gets every touch: one finger turns, two fingers zoom
+cv.addEventListener('pointerdown', (e) => { pointers.set(e.pointerId, [e.clientX, e.clientY]); drag = { x: e.clientX, y: e.clientY }; pv.view.spin = false; pv.view.anim = null; cv.setPointerCapture(e.pointerId); });
 cv.addEventListener('pointermove', (e) => {
   if (!pointers.has(e.pointerId)) return;
   if (pointers.size === 2) {
     const [a, b] = [...pointers.values()]; const d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
     const [c, d] = [...pointers.values()]; const d1 = Math.hypot(c[0] - d[0], c[1] - d[1]);
-    pv.view.dist = THREE.MathUtils.clamp(pv.view.dist * d0 / d1, 24, 70); return;
+    pv.view.dist = THREE.MathUtils.clamp(pv.view.dist * d0 / d1, minDist(), 80); return;
   }
   pointers.set(e.pointerId, [e.clientX, e.clientY]);
   pv.view.yaw -= (e.clientX - drag.x) * 0.008;
-  pv.view.pitch = THREE.MathUtils.clamp(pv.view.pitch + (e.clientY - drag.y) * 0.006, 0.12, 1.4);
+  pv.view.pitch = THREE.MathUtils.clamp(pv.view.pitch + (e.clientY - drag.y) * 0.006, 0.12, 1.52);
   drag = { x: e.clientX, y: e.clientY };
 });
 const lift = (e) => { pointers.delete(e.pointerId); };
-cv.addEventListener('pointerup', (e) => { lift(e); drag = pointers.size ? drag : null; }); cv.addEventListener('pointercancel', lift);
-cv.addEventListener('wheel', (e) => { e.preventDefault(); pv.view.dist = THREE.MathUtils.clamp(pv.view.dist * (1 + e.deltaY * 0.001), 24, 70); pv.view.spin = false; }, { passive: false });
+cv.addEventListener('pointerup', (e) => { lift(e); const rest = [...pointers.values()][0]; drag = rest ? { x: rest[0], y: rest[1] } : null; }); cv.addEventListener('pointercancel', (e) => { lift(e); drag = null; });
+cv.addEventListener('wheel', (e) => { e.preventDefault(); pv.view.dist = THREE.MathUtils.clamp(pv.view.dist * (1 + e.deltaY * 0.001), minDist(), 80); pv.view.spin = false; pv.view.anim = null; }, { passive: false });
 
 let pvLast = 0, pvOn = true;
 new IntersectionObserver(([en]) => { pvOn = en.isIntersecting; }).observe(stage);
@@ -97,7 +99,11 @@ function previewFrame(t) {
   if (!pvOn || xr.session) return;
   if (pv.view.spin && !matchMedia('(prefers-reduced-motion: reduce)').matches) pv.view.yaw += dt * 0.12;
   stepRoof(pv.house, dt);
-  if (!pv.view.touched) { const want = state.roof ? 0.95 : 0.5; pv.view.pitch += Math.sign(want - pv.view.pitch) * Math.min(Math.abs(want - pv.view.pitch), dt * 0.8); }
+  if (pv.view.anim) { // glide to the plan view or the front view
+    const a = pv.view.anim, k = 1 - Math.exp(-dt * 4);
+    for (const key of ['yaw', 'pitch', 'dist']) pv.view[key] += (a[key] - pv.view[key]) * k;
+    if (Math.abs(a.yaw - pv.view.yaw) + Math.abs(a.pitch - pv.view.pitch) < 0.002) pv.view.anim = null;
+  }
   const { yaw, pitch } = pv.view, dist = pv.view.dist * pv.view.fit;
   pv.camera.position.set(Math.sin(yaw) * Math.cos(pitch) * dist, 1.5 + Math.sin(pitch) * dist, Math.cos(yaw) * Math.cos(pitch) * dist);
   pv.camera.lookAt(0, 1.2, 0);
@@ -120,7 +126,13 @@ function apply() {
   syncFallback();
   if (xr.session) refreshPanel();
 }
-document.querySelectorAll('[data-roof]').forEach((b) => b.addEventListener('click', () => { state.roof = !state.roof; apply(); }));
+// Roof off: turn to a top-down plan view. Roof on: back to the front view.
+function frameForRoof() {
+  const v = pv.view; v.spin = false;
+  v.yaw = Math.atan2(Math.sin(v.yaw), Math.cos(v.yaw)); // shortest way round to the front
+  v.anim = state.roof ? { yaw: 0, pitch: 1.52, dist: 34 } : { yaw: 0.35, pitch: 0.45, dist: 46 };
+}
+document.querySelectorAll('[data-roof]').forEach((b) => b.addEventListener('click', () => { state.roof = !state.roof; frameForRoof(); apply(); }));
 document.querySelectorAll('[data-night]').forEach((b) => b.addEventListener('click', () => { state.night = !state.night; apply(); }));
 document.querySelectorAll('[data-finish]').forEach((b) => b.addEventListener('click', () => { state.finish = b.dataset.finish; apply(); }));
 const finishOrder = Object.keys(FINISHES);
