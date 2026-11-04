@@ -50,7 +50,7 @@ export const pmPackages = [
 ];
 
 export const faq = {
-  founding: { id: 'faq-founding', q: '¿Qué son los precios de fundadores?', a: 'Mis primeros 5 clientes de automatización, IA y proyectos reciben estos precios, a cambio de una breve reseña. Después, los precios suben. No se combinan con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor.' },
+  founding: { id: 'faq-founding', q: '¿Qué son los precios de fundadores?', a: 'Mis primeros 5 clientes de automatización, IA y proyectos reciben estos precios, a cambio de una breve reseña. Es una oferta por tiempo limitado: después, los precios suben. No se combinan con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor.' },
   review: { q: '¿Qué incluye la Revisión Tecnológica?', a: 'Una llamada de 60 minutos y luego un informe escrito en 5 días hábiles con sus principales arreglos en orden y costos aproximados. Los $250 se abonan a cualquier paquete conmigo que empiece dentro de 90 días.' },
   inPerson: { q: '¿Trabaja en persona?', a: 'Sí, desde la ciudad de Nueva York y Westchester hasta Albany, aunque la mayor parte del trabajo es a distancia. El tiempo en sus instalaciones cuesta $65 por hora, y cualquier viaje fuera del Mid-Hudson Valley se acuerda por escrito antes de reservar.' },
   vendors: { q: '¿Puede trabajar con nuestros proveedores actuales o nuestro soporte de TI?', a: 'Sí. Muchas veces trabajo junto a equipos y proveedores existentes, y puedo ayudarle a revisar sus propuestas.' },

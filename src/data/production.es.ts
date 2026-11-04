@@ -81,7 +81,7 @@ export const studioOffers = [
 ];
 
 export const faq = {
-  founding: { id: 'faq-founding', q: '¿Qué son los precios de fundadores?', a: 'Mis primeros 5 clientes de AR reciben estos precios, a cambio de una breve reseña y permiso para mostrar el proyecto. Después, los precios suben. No se combinan con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor.' },
+  founding: { id: 'faq-founding', q: '¿Qué son los precios de fundadores?', a: 'Mis primeros 5 clientes de AR reciben estos precios, a cambio de una breve reseña y permiso para mostrar el proyecto. Es una oferta por tiempo limitado: después, los precios suben. No se combinan con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor.' },
   app: { q: '¿Mis clientes necesitan una aplicación?', a: 'No. Escanean un código o abren un enlace, y funciona en el navegador de su teléfono.' },
   bigger: { q: '¿Y si quiero algo más grande?', a: 'La VR, los recorridos completos y los videojuegos los construye un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora, así tiene a una sola persona desde la primera llamada.' },
   underway: { q: '¿Puede unirse a un proyecto de videojuego o XR que ya está en marcha?', a: 'Sí. Reviso cómo están las cosas, armo un plan y un calendario, y mantengo al equipo avanzando desde ahí.' },

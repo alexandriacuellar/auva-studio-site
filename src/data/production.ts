@@ -84,7 +84,7 @@ export const studioOffers = [
 ];
 
 export const faq = {
-  founding: { id: 'faq-founding', q: 'What are founding prices?', a: "My first 5 AR clients get these prices, in exchange for a short review and permission to show the project. After that, prices go up. They don't combine with the nonprofit discount; if both apply, you get the bigger one." },
+  founding: { id: 'faq-founding', q: 'What are founding prices?', a: "My first 5 AR clients get these prices, in exchange for a short review and permission to show the project. This is a limited-time offer: after that, prices go up. They don't combine with the nonprofit discount; if both apply, you get the bigger one." },
   app: { q: 'Do my customers need an app?', a: "No. They scan a code or open a link, and it works in their phone's browser." },
   bigger: { q: 'What if I want something bigger?', a: 'VR, full walkthroughs, and games are built by an experienced AR and VR developer partner who joins at the start. I stay on as your producer, so you have one person from the first call.' },
   underway: { q: 'Can you join a game or XR project already underway?', a: 'Yes. I review where things stand, set up a plan and schedule, and keep the team moving from there.' },
