@@ -121,6 +121,14 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     place('frame', s - fw, s, b, top, f0, f1); place('frame', e, e + fw, b, top, f0, f1);
     place('frame', s - fw, e + fw, top, top + fw, f0, f1);
     place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b, ...face(th / 2 + 0.02));
+    if (kind !== 'door') {
+      // Bottom rail outside, and a full frame plus sill on the inside, so the see-through glass reads as a window
+      place('frame', s, e, b, b + fw, f0, f1);
+      const [i0, i1] = face(-th / 2);
+      place('frame', s - fw, s, b, top, i0, i1); place('frame', e, e + fw, b, top, i0, i1);
+      place('frame', s - fw, e + fw, top, top + fw, i0, i1); place('frame', s, e, b, b + fw, i0, i1);
+      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.04, b, ...face(-th / 2 - 0.04));
+    }
   }
 
   // ---------- Site ----------
