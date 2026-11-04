@@ -106,6 +106,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
       if (along === 'x') box(key, u0, u1, v0, v1, at + d0, at + d1); else box(key, at + d0, at + d1, v0, v1, u0, u1);
     };
     const s = c - w / 2, e = c + w / 2, fw = 0.07;
+    const z = 0.004; // frames and glass sit a hair off the wall's opening faces, so no two faces share a plane and flicker
     const out = Math.sign(at) || 1; // which side of the wall is outside
     const face = (d) => (out > 0 ? [d - 0.03, d + 0.03] : [-d - 0.03, -d + 0.03]);
     const [f0, f1] = face(th / 2);
@@ -113,21 +114,21 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
       place('door', s, e, b, top, -th / 2 + 0.04, th / 2 - 0.04);
       place('glass', s + 0.15, e - 0.15, b + 1.0, top - 0.15, ...face(th / 2 - 0.02));
     } else {
-      place('glass', s, e, b, top, -0.02, 0.02);
+      place('glass', s + z, e - z, b + z, top - z, -0.02, 0.02);
       const mid = (s + e) / 2, vmid = b + (top - b) * 0.55;
       place('frame', mid - 0.025, mid + 0.025, b, top, f0, f1);
       place('frame', s, e, vmid - 0.025, vmid + 0.025, f0, f1);
     }
-    place('frame', s - fw, s, b, top, f0, f1); place('frame', e, e + fw, b, top, f0, f1);
-    place('frame', s - fw, e + fw, top, top + fw, f0, f1);
-    place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b, ...face(th / 2 + 0.02));
+    place('frame', s - fw, s + z, b, top, f0, f1); place('frame', e - z, e + fw, b, top, f0, f1);
+    place('frame', s - fw, e + fw, top - z, top + fw, f0, f1);
+    place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b - 0.006, ...face(th / 2 + 0.025));
     if (kind !== 'door') {
       // Bottom rail outside, and a full frame plus sill on the inside, so the see-through glass reads as a window
-      place('frame', s, e, b, b + fw, f0, f1);
+      place('frame', s + z, e - z, b - z, b + fw, f0, f1);
       const [i0, i1] = face(-th / 2);
-      place('frame', s - fw, s, b, top, i0, i1); place('frame', e, e + fw, b, top, i0, i1);
-      place('frame', s - fw, e + fw, top, top + fw, i0, i1); place('frame', s, e, b, b + fw, i0, i1);
-      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.04, b, ...face(-th / 2 - 0.04));
+      place('frame', s - fw, s + z, b, top, i0, i1); place('frame', e - z, e + fw, b, top, i0, i1);
+      place('frame', s - fw, e + fw, top - z, top + fw, i0, i1); place('frame', s + z, e - z, b - z, b + fw, i0, i1);
+      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035));
     }
   }
 

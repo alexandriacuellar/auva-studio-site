@@ -7,6 +7,7 @@ import * as THREE from 'three';
 export const LABEL_H = 1.3;
 const ORANGE = '#f08a2a', CREAM = '#f4e6c8', NIGHT = '#0b1030';
 
+const CLOAK_L = 0.6; // cape length: short enough to clear the horse's back
 const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0, flatShading: false, ...extra });
 const M = {
   horse: mat('#3f3a4c'), mane: mat('#1c1a24'), hoof: mat('#141318'),
@@ -167,8 +168,8 @@ function makeHorse() {
   const rein = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1, 8), M.rein); body.add(rein);
 
   // Cloak: hangs from the shoulders and streams back with speed
-  const cloakGeo = new THREE.PlaneGeometry(0.6, 1.0, 12, 20);
-  cloakGeo.translate(0, -0.5, 0);
+  const cloakGeo = new THREE.PlaneGeometry(0.6, CLOAK_L, 12, 16);
+  cloakGeo.translate(0, -CLOAK_L / 2, 0);
   const cloak = new THREE.Mesh(cloakGeo, M.cloak);
   const cloakRoot = new THREE.Group(); cloakRoot.position.set(-0.15, 0.68, 0); cloakRoot.rotation.y = -Math.PI / 2; torso.add(cloakRoot); cloakRoot.add(cloak);
   const cloakBase = Float32Array.from(cloakGeo.attributes.position.array);
@@ -304,9 +305,9 @@ export async function buildShow({ groundY = -0.5, onAction = () => {}, labels = 
     const p = H.cloak.geometry.attributes.position;
     for (let i = 0; i < p.count; i++) {
       const x = H.cloakBase[i * 3], y = H.cloakBase[i * 3 + 1];
-      const v = -y / 1.0; // 0 at the shoulders, 1 at the hem
+      const v = -y / CLOAK_L; // 0 at the shoulders, 1 at the hem
       // Drapes out over the back and coat even when he stands still, then streams back with speed
-      const flow = 0.07 + v * 0.34 + v * v * speed * 0.75;
+      const flow = 0.07 + v * 0.3 + v * v * speed * 0.6;
       const wave = Math.sin(time * (6 + speed * 6) - v * 5 + x * 3) * 0.06 * v * (0.4 + speed);
       p.setXYZ(i, x * (1 + v * 0.3), y * (1 - flow * 0.35), flow * 0.9 + wave);
     }
