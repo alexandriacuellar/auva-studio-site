@@ -172,7 +172,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   wall('inner', 'x', 0.2, 3, 6, F, H, t, [[4.2, 0.9, F, F + 2.1]]);
   // Living room: rug, sofa facing the fireplace, coffee table, fireplace
   box('rug', -5.2, -1.8, F + 0.005, F + 0.02, -1.4, 1.4);
-  box('fabric', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('fabric', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
+  box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
   box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6);
   box('stone', -5.9, -5.55, F, F + 1.4, -0.9, 0.9);
   // Kitchen: back counter, island, and the dining table with six chairs
@@ -188,7 +188,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   box('oak', 0.2, 2.0, F + 0.7, F + 0.76, 1.45, 2.35);
   for (const x of [0.5, 1.1, 1.7]) for (const z of [1.05, 2.75]) box('oak', x - 0.2, x + 0.2, F, F + 0.45, z - 0.2, z + 0.2);
   // Bedroom 2, bath
-  box('fabric', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95);
+  box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95);
   box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
   box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
   box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
@@ -196,10 +196,10 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   box('porcelain', 3.2, 3.5, F + 0.86, F + 0.9, -2.65, -2.25);       // basin
   box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
   box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
-  box('rug', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
+  box('mat', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
   // Primary suite in the wing
   box('rug', 7.4, 10.0, F + 0.005, F + 0.02, -2.0, 1.0);
-  box('fabric', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45);
+  box('bedding', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('throw', 8.28, 8.85, F + 0.02, F + 0.58, -1.42, 0.42); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45);
 
   // ---------- Roof (lifts off) ----------
   const ov = 0.4;
@@ -247,7 +247,8 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
     deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
-    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c8bfae' }), fabric: std({ color: '#9aa6b8' }), oak: std({ color: '#b58a5d' }),
+    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#e4d5ba' }), mat: std({ color: '#7f9a86' }), sofa: std({ color: '#3e5a7a' }),
+    bedding: std({ color: '#f4f0e8' }), throw: std({ color: '#b5653f' }), oak: std({ color: '#b58a5d' }),
     counter: std({ color: '#e9e7e2', roughness: 0.5 }), cabinet: std({ color: '#5f7a69', roughness: 0.6 }),
     steel: std({ color: '#b9bec4', roughness: 0.35, metalness: 0.6 }), dark: std({ color: '#26282c', roughness: 0.4 }),
     porcelain: std({ color: '#ffffff', roughness: 0.25 }), water: std({ color: '#8fc3d6', roughness: 0.1 }),
