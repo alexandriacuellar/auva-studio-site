@@ -264,7 +264,8 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   const mats = {
     siding: std({ map: maps.batten }), trim: std({}), roof: std({ map: seamTex(), roughness: 0.45, metalness: 0.35 }),
     frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
-    glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
+    // See-through glass with a light blue tint, so it reads as a window from inside and out
+    glass: std({ color: '#bcd6e6', roughness: 0.08, metalness: 0.1, emissive: '#000000', transparent: true, opacity: 0.32, depthWrite: false }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
     deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#5f6b72' }),
     inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c4ae8c' }), mat: std({ color: '#b5653f' }), walltile: std({ map: tileTex(), color: '#7c97a6' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
@@ -335,7 +336,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   }
   function setNight(on) {
     mats.glass.emissive.set(on ? '#ffc477' : '#000000'); mats.glass.emissiveIntensity = on ? 3.2 : 0;
-    mats.glass.color.set(on ? '#5a4a33' : '#2b3546');
+    mats.glass.color.set(on ? '#5a4a33' : '#bcd6e6'); mats.glass.opacity = on ? 0.85 : 0.32;
     bulbMat.emissive.set(on ? '#ffe2a6' : '#000000'); bulbMat.emissiveIntensity = on ? 2 : 0;
     mats.fire.emissiveIntensity = on ? 3 : 1.6; mats.flame.emissiveIntensity = on ? 3.4 : 1.8;
   }
