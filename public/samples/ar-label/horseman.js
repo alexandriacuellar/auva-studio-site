@@ -7,7 +7,7 @@ import * as THREE from 'three';
 export const LABEL_H = 1.3;
 const ORANGE = '#f08a2a', CREAM = '#f4e6c8', NIGHT = '#0b1030';
 
-const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0, flatShading: true, ...extra });
+const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0, flatShading: false, ...extra });
 const M = {
   horse: mat('#3f3a4c'), mane: mat('#1c1a24'), hoof: mat('#141318'),
   eye: new THREE.MeshBasicMaterial({ color: '#ffb347' }),
@@ -24,12 +24,12 @@ const ease = (x) => { x = clamp01(x); return x * x * (3 - 2 * x); };
 const easeOutBack = (x) => { x = clamp01(x); return 1 + 2.4 * Math.pow(x - 1, 3) + 1.4 * Math.pow(x - 1, 2); };
 
 // A cylinder from a to b (2D in the horse's side plane, z kept)
-function limb(r1, r2, len, material, seg = 7) {
+function limb(r1, r2, len, material, seg = 18) {
   const m = new THREE.Mesh(new THREE.CylinderGeometry(r1, r2, len, seg), material);
   m.position.y = -len / 2; return m;
 }
 const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
-function blob(r, sx, sy, sz, material, seg = 10) {
+function blob(r, sx, sy, sz, material, seg = 28) {
   const m = new THREE.Mesh(new THREE.SphereGeometry(r, seg, Math.round(seg * 0.75)), material);
   m.scale.set(sx, sy, sz); return m;
 }
@@ -66,7 +66,7 @@ function makePumpkin() {
   ex.fillStyle = '#000'; ex.fillRect(0, 0, 512, 256); face(ex, 128);
   const pm = new THREE.MeshStandardMaterial({ map: tex(c), emissiveMap: tex(e), emissive: '#ffb347', emissiveIntensity: 1.6, roughness: 0.6, flatShading: false });
   const body = new THREE.Mesh(g, pm);
-  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.13, 0.32, 6), M.stem);
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.13, 0.32, 10), M.stem);
   stem.position.y = 0.92; stem.rotation.z = 0.25;
   const pumpkin = new THREE.Group(); pumpkin.add(body, stem);
   const light = new THREE.PointLight('#ff9a3c', 1.4, 2.2, 1.6);
@@ -80,30 +80,32 @@ function makeHorse() {
   pitch.position.set(-0.58, 1.18, 0); horse.add(pitch);
   const body = new THREE.Group(); body.position.set(0.58, 0, 0); pitch.add(body); // body coords: origin under the middle at hip height
 
-  body.add(at(blob(1, 0.82, 0.4, 0.34, M.horse), 0, 0.25, 0));
-  body.add(at(blob(0.42, 1, 1.05, 0.9, M.horse), 0.55, 0.3, 0));
-  body.add(at(blob(0.44, 1, 1, 0.92, M.horse), -0.55, 0.3, 0));
+  // One smooth barrel, with chest and rump blended in
+  const barrel = new THREE.Mesh(new THREE.CapsuleGeometry(0.38, 1.0, 12, 32), M.horse);
+  barrel.rotation.z = Math.PI / 2; barrel.scale.set(1, 1, 0.88); barrel.position.set(0, 0.27, 0); body.add(barrel);
+  body.add(at(blob(0.4, 1, 1.02, 0.86, M.horse, 32), 0.5, 0.31, 0));
+  body.add(at(blob(0.42, 1, 1, 0.9, M.horse, 32), -0.52, 0.32, 0));
 
   // Neck and head bob together
   const neck = new THREE.Group(); neck.position.set(0.7, 0.45, 0); body.add(neck);
-  const neckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.3, 0.85, 8), M.horse);
+  const neckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.3, 0.85, 20, 4), M.horse);
   neckMesh.rotation.z = -0.62; neckMesh.position.set(0.24, 0.34, 0); neck.add(neckMesh);
   const head = new THREE.Group(); head.position.set(0.5, 0.72, 0); neck.add(head);
   const skull = blob(0.19, 1.1, 0.95, 0.8, M.horse); head.add(skull);
   // The face runs forward and down from the poll to the nose
-  const muzzle = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 0.5, 8), M.horse);
+  const muzzle = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 0.5, 20, 3), M.horse);
   muzzle.rotation.z = 0.69; muzzle.position.set(0.16, -0.19, 0); head.add(muzzle);
   head.add(at(blob(0.11, 1.1, 0.9, 1, M.horse), 0.3, -0.36, 0));
   for (const s of [-1, 1]) {
-    const ear = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.18, 5), M.horse);
+    const ear = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.18, 12), M.horse);
     ear.position.set(-0.08, 0.2, s * 0.08); ear.rotation.set(s * -0.2, 0, -0.3); head.add(ear);
-    const eye = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 6), M.eye);
+    const eye = new THREE.Mesh(new THREE.SphereGeometry(0.035, 16, 12), M.eye);
     eye.position.set(0.05, 0.04, s * 0.14); head.add(eye);
   }
   // Mane: dark blades along the top of the neck
   const mane = [];
   for (let i = 0; i < 7; i++) {
-    const b = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.22, 0.05), M.mane);
+    const b = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.26, 12), M.mane); b.scale.z = 0.45;
     const k = i / 6;
     b.position.set(0.02 + k * 0.42, 0.3 + k * 0.5, 0); b.rotation.z = 0.9;
     neck.add(b); mane.push(b);
@@ -112,7 +114,7 @@ function makeHorse() {
   // Tail: a chain of tapering segments that swings
   const tail = []; let parent = new THREE.Group(); parent.position.set(-1, 0.42, 0); parent.rotation.z = -2.3; body.add(parent);
   for (let i = 0; i < 4; i++) {
-    const seg = new THREE.Group(); seg.add(limb(0.09 - i * 0.015, 0.07 - i * 0.012, 0.24, M.mane, 6));
+    const seg = new THREE.Group(); seg.add(limb(0.09 - i * 0.015, 0.07 - i * 0.012, 0.24, M.mane, 14)); seg.add(blob(0.09 - i * 0.015, 1, 1, 1, M.mane, 16));
     if (i) seg.position.y = -0.24; parent.add(seg); tail.push(seg); parent = seg;
   }
 
@@ -122,48 +124,50 @@ function makeHorse() {
     const hip = new THREE.Group(); hip.position.set(x, 0.02, z); body.add(hip);
     hip.add(limb(front ? 0.13 : 0.17, 0.08, 0.56, M.horse));
     const knee = new THREE.Group(); knee.position.y = -0.56; hip.add(knee);
+    knee.add(blob(front ? 0.085 : 0.095, 1, 1, 1, M.horse, 20));
     knee.add(limb(0.075, 0.06, 0.52, M.horse));
-    const hoof = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.095, 0.1, 7), M.hoof); hoof.position.y = -0.56; knee.add(hoof);
+    knee.add(at(blob(0.07, 1, 1, 1, M.horse, 18), 0, -0.47, 0)); // fetlock
+    const hoof = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.095, 0.1, 16), M.hoof); hoof.position.y = -0.56; knee.add(hoof);
     legs.push({ hip, knee, front, phase: 0 });
   }
   legs[0].phase = 0.48; legs[1].phase = 0.58; legs[2].phase = 0.0; legs[3].phase = 0.1;
 
   // The rider: coat, high empty collar, wine cloak, one arm up for the pumpkin
   const rider = new THREE.Group(); rider.position.set(-0.08, 0.62, 0); rider.scale.setScalar(1.25); body.add(rider);
-  const saddle = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.08, 0.5), M.saddle); saddle.position.y = 0.0; rider.add(saddle);
+  const saddle = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.28, 0.08, 28), M.saddle); saddle.scale.set(1.05, 1, 0.95); saddle.position.y = 0.0; rider.add(saddle);
   const torso = new THREE.Group(); torso.position.y = 0.05; torso.rotation.z = -0.12; rider.add(torso);
-  const chest = new THREE.Mesh(new THREE.CapsuleGeometry(0.17, 0.42, 4, 10), M.coat); chest.position.y = 0.36; chest.scale.z = 0.85; torso.add(chest);
-  const coatSkirt = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.32, 0.3, 10, 1, true), M.coat);
+  const chest = new THREE.Mesh(new THREE.CapsuleGeometry(0.17, 0.42, 8, 24), M.coat); chest.position.y = 0.36; chest.scale.z = 0.85; torso.add(chest);
+  const coatSkirt = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.32, 0.3, 28, 2, true), M.coat);
   coatSkirt.material = M.coat.clone(); coatSkirt.material.side = THREE.DoubleSide; coatSkirt.position.y = 0.08; torso.add(coatSkirt);
-  const collar = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.12, 0.2, 12, 1, true), M.coat.clone());
+  const collar = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.12, 0.2, 28, 2, true), M.coat.clone());
   collar.material.side = THREE.DoubleSide; collar.position.y = 0.74; torso.add(collar);
-  const collarDark = new THREE.Mesh(new THREE.CircleGeometry(0.115, 12), M.collarIn); collarDark.rotation.x = Math.PI / 2; collarDark.position.y = 0.7; torso.add(collarDark);
+  const collarDark = new THREE.Mesh(new THREE.CircleGeometry(0.115, 24), M.collarIn); collarDark.rotation.x = Math.PI / 2; collarDark.position.y = 0.7; torso.add(collarDark);
   // Shoulders a touch wider than the chest
   torso.add(at(blob(0.12, 1, 0.8, 2.1, M.coat), 0, 0.62, 0));
   // Thighs and boots down each side of the horse
   for (const s of [-1, 1]) {
     const thigh = new THREE.Group(); thigh.position.set(0.0, 0.06, s * 0.2); thigh.rotation.set(-s * 0.3, 0, 0.8); rider.add(thigh);
     thigh.add(limb(0.08, 0.07, 0.36, M.coat));
-    const shin = new THREE.Group(); shin.position.y = -0.36; shin.rotation.set(s * 0.2, 0, -0.95); thigh.add(shin);
+    const shin = new THREE.Group(); shin.position.y = -0.36; shin.rotation.set(s * 0.2, 0, -0.95); thigh.add(shin); shin.add(blob(0.075, 1, 1, 1, M.coat, 18));
     shin.add(limb(0.07, 0.065, 0.38, M.boot));
   }
   // Left arm forward to the reins
   const armL = new THREE.Group(); armL.position.set(0.02, 0.6, -0.22); armL.rotation.set(0.15, 0, 0.9); torso.add(armL);
   armL.add(limb(0.06, 0.055, 0.32, M.coat));
-  const foreL = new THREE.Group(); foreL.position.y = -0.32; foreL.rotation.z = 0.5; armL.add(foreL);
+  const foreL = new THREE.Group(); foreL.position.y = -0.32; foreL.rotation.z = 0.5; armL.add(foreL); foreL.add(blob(0.058, 1, 1, 1, M.coat, 18)); armL.add(blob(0.07, 1, 1, 1, M.coat, 18));
   foreL.add(limb(0.055, 0.05, 0.3, M.coat)); foreL.add(at(blob(0.06, 1, 1, 1, M.glove), 0, -0.32, 0));
   // Right arm: holds the pumpkin up high
   const armR = new THREE.Group(); armR.position.set(0, 0.62, 0.22); torso.add(armR);
   armR.add(limb(0.06, 0.055, 0.32, M.coat));
-  const foreR = new THREE.Group(); foreR.position.y = -0.32; armR.add(foreR);
+  const foreR = new THREE.Group(); foreR.position.y = -0.32; armR.add(foreR); foreR.add(blob(0.058, 1, 1, 1, M.coat, 18)); armR.add(blob(0.07, 1, 1, 1, M.coat, 18));
   foreR.add(limb(0.055, 0.05, 0.3, M.coat));
   const hand = new THREE.Group(); hand.position.y = -0.33; foreR.add(hand);
   hand.add(blob(0.06, 1, 1, 1, M.glove));
   // Reins from the left hand to the head
-  const rein = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1, 4), M.rein); body.add(rein);
+  const rein = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1, 8), M.rein); body.add(rein);
 
   // Cloak: hangs from the shoulders and streams back with speed
-  const cloakGeo = new THREE.PlaneGeometry(0.6, 1.0, 6, 10);
+  const cloakGeo = new THREE.PlaneGeometry(0.6, 1.0, 12, 20);
   cloakGeo.translate(0, -0.5, 0);
   const cloak = new THREE.Mesh(cloakGeo, M.cloak);
   const cloakRoot = new THREE.Group(); cloakRoot.position.set(-0.13, 0.68, 0); cloakRoot.rotation.y = -Math.PI / 2; torso.add(cloakRoot); cloakRoot.add(cloak);
