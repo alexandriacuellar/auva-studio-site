@@ -109,7 +109,7 @@ house.root.traverse((o) => { if (!o.isMesh) return; if (FLOORS.includes(o.name))
 // Each piece: model node, turn (radians), and the floor area it must fit in [x0, x1, z0, z1]; snap: which wall it backs onto.
 const BATH = [
   { name: 'BathroomVanity05', turn: Math.PI / 2, area: [3.1, 3.66, -3.0, -1.88], snap: 'x0' },
-  { name: 'Toilet01', turn: 0, area: [3.4, 4.1, -3.86, -2.9], snap: 'z0' },
+  { name: 'Toilet01', turn: Math.PI, area: [3.4, 4.1, -3.86, -2.9], snap: 'z0' },
   { name: 'Bathtub01', turn: 0, area: [4.28, 5.86, -3.86, -3.0], snap: 'z0' },
 ];
 const SINK = { name: 'WashBasin03', turn: -Math.PI / 2, maxDepth: 0.44 };
@@ -132,6 +132,8 @@ new GLTFLoader().load(new URL('./bath-set.glb', import.meta.url).href, (g) => {
   const s = g.scene.getObjectByName(SINK.name);
   if (s && top) {
     // The sink sits on the vanity top, its faucet toward the wall
+    // The model's faucet sits off to one side; move it to the middle, behind the bowl
+    const tap = s.getObjectByName('Faucet03'); if (tap) { const tb = new THREE.Box3().setFromObject(tap); tap.position.x -= (tb.min.x + tb.max.x) / 2; }
     let b = fit(s, SINK.turn);
     const k = Math.min(1, SINK.maxDepth / (b.max.x - b.min.x)); s.scale.setScalar(k); s.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(s);
     // world -> house plan coordinates (body is offset by OFF)
