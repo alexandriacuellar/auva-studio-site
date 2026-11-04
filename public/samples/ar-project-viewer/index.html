@@ -65,6 +65,8 @@
   .btn-main { width: 100%; background: var(--green); color: #fff; }
   .btn-main:hover { background: var(--green-deep); }
   .btn-main svg { width: 22px; height: 22px; }
+  .btn-walk { width: 100%; margin-top: 14px; background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .btn-walk svg { width: 22px; height: 22px; }
   .hint { font-size: .92rem; color: var(--muted); margin: 12px 0 0; text-align: center; }
   .qr { display: none; margin-top: 18px; padding: 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); align-items: center; gap: 18px; }
   .qr.show { display: flex; }
@@ -143,6 +145,10 @@
         <span>See it on your table</span>
       </button>
       <p class="hint" id="hint">Opens your camera in the browser. No app needed.</p>
+      <a class="btn btn-walk" href="./walk/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4l-2-3h-2l-2 3H5a2 2 0 0 1-2-2z"/><circle cx="8" cy="11" r="1.5"/><circle cx="16" cy="11" r="1.5"/></svg>
+        <span>Walk inside in VR or on screen</span>
+      </a>
       <div class="qr" id="qr">
         <img src="./qr.svg" alt="QR code for this page">
         <p><b>Open this page on your phone or Meta Quest 3</b> to set the house on your table. Scan the code with your phone camera.</p>

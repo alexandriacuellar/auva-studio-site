@@ -64,7 +64,7 @@ export const demos = [
     text: 'Apunte el teléfono a la etiqueta de una sidra, o a la etiqueta en la pantalla de su computadora, y el Jinete sin Cabeza sale galopando, se encabrita y lanza su calabaza. La calabaza estalla en botones con notas de cata y dónde comprar. La sidra es inventada.',
     goodFor: 'Ideal para cualquiera que fabrique un producto físico, desde sidra y café hasta velas, cosméticos y juguetes.' },
   { pkg: 'ar-project', img: 'house', name: 'Una casa de campo antes de construirla', href: '/samples/ar-project-viewer/', works: 'teléfonos y Meta Quest 3',
-    text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche. La firma es inventada.',
+    text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche, o recorren los cuartos en VR con un Meta Quest. La firma es inventada.',
     goodFor: 'Ideal para arquitectos, constructores, remodeladores y desarrolladores que quieren que sus clientes vean un proyecto antes de construirlo.' },
 ];
 

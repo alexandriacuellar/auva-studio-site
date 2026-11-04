@@ -1,0 +1,418 @@
+// Walk through the Stone Ridge Farmhouse at full size.
+// On screen: drag to look, tap the floor (or use WASD / arrow keys) to walk, or jump to a room.
+// On Meta Quest: "Walk in VR" starts a WebXR session. Left stick walks, right stick turns,
+// pull a trigger at the floor to jump there, and the menu on your left wrist changes the house.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { buildHouse, FINISHES } from '../house.js';
+
+const $ = (id) => document.getElementById(id);
+const state = { finish: 'white', night: false };
+const EYE = 1.6;
+
+// ---------- Renderer, scene, camera ----------
+const stage = $('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.xr.enabled = true;
+renderer.xr.setReferenceSpaceType('local-floor');
+renderer.xr.setFoveation?.(0.5);
+stage.prepend(renderer.domElement);
+const cv = renderer.domElement;
+cv.setAttribute('role', 'img');
+cv.setAttribute('aria-label', 'A walk-through of the Stone Ridge Farmhouse. Drag to look around, tap the floor to walk.');
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envMap = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.environment = envMap;
+const hemi = new THREE.HemisphereLight(0xffffff, 0x7a6f5c, 0.9);
+const sun = new THREE.DirectionalLight(0xfff1dc, 1.6); sun.position.set(-30, 60, 40);
+scene.add(hemi, sun);
+scene.fog = new THREE.Fog('#dfe7ea', 45, 420);
+
+// The rig is where your feet are; the camera is your head.
+const rig = new THREE.Group(); scene.add(rig);
+const camera = new THREE.PerspectiveCamera(70, 1, 0.05, 1200);
+camera.position.set(0, EYE, 0); rig.add(camera);
+let pitch = 0;
+
+// ---------- The world around the house ----------
+const skyMat = new THREE.ShaderMaterial({
+  side: THREE.BackSide, depthWrite: false, fog: false, toneMapped: false,
+  uniforms: { top: { value: new THREE.Color('#6f9fd6') }, bottom: { value: new THREE.Color('#e6eef0') } },
+  vertexShader: 'varying vec3 vP; void main() { vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 bottom; varying vec3 vP; void main() { float h = clamp(vP.y * 1.5 + 0.02, 0.0, 1.0); gl_FragColor = vec4(mix(bottom, top, pow(h, 0.6)), 1.0); \n#include <colorspace_fragment>\n }',
+});
+const sky = new THREE.Mesh(new THREE.SphereGeometry(900, 32, 16), skyMat); sky.renderOrder = -1; scene.add(sky);
+
+const starGeo = new THREE.BufferGeometry(); const sp = [];
+for (let i = 0; i < 900; i++) {
+  const a = Math.random() * Math.PI * 2, y = 0.12 + Math.random() * 0.88, r = Math.sqrt(1 - y * y);
+  sp.push(Math.cos(a) * r * 850, y * 850, Math.sin(a) * r * 850);
+}
+starGeo.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
+const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#ffffff', size: 2, sizeAttenuation: false, fog: false, transparent: true, opacity: 0.85 }));
+stars.visible = false; scene.add(stars);
+
+const groundMat = new THREE.MeshStandardMaterial({ color: '#7a9558', roughness: 1 });
+const ground = new THREE.Mesh(new THREE.CircleGeometry(700, 48).rotateX(-Math.PI / 2), groundMat);
+ground.position.y = -0.03; ground.name = 'ground'; scene.add(ground);
+
+// Distant ridge (the Shawangunks are just east of Stone Ridge) and a tree line around the lot
+const hillMat = new THREE.MeshStandardMaterial({ color: '#5c7253', roughness: 1, flatShading: true });
+for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 300, 200, 34], [2.6, 340, 240, 40], [3.7, 320, 260, 52], [4.9, 350, 200, 38]]) {
+  const h = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 10), hillMat);
+  h.scale.set(sx, sy, sx * 0.45); h.position.set(Math.sin(a) * d, -sy * 0.15, -Math.cos(a) * d); h.lookAt(0, h.position.y, 0); scene.add(h);
+}
+{
+  const leaf = new THREE.IcosahedronGeometry(1, 1); leaf.translate(0, 1.6, 0);
+  const trees = new THREE.InstancedMesh(leaf, new THREE.MeshStandardMaterial({ color: '#4f6d3f', flatShading: true, roughness: 1 }), 220);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3();
+  let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < 220; i++) {
+    const a = rnd() * Math.PI * 2, d = 32 + rnd() * 70, k = 2.2 + rnd() * 2.8;
+    p.set(Math.sin(a) * d, 0, Math.cos(a) * d * 0.9);
+    if (p.z > 10 && Math.abs(p.x) < 14) p.x += 28 * Math.sign(p.x || 1); // keep the view from the road open
+    s.set(k, k * (1.1 + rnd() * 0.6), k); q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rnd() * 6);
+    trees.setMatrixAt(i, m.compose(p, q, s));
+  }
+  scene.add(trees);
+}
+
+// ---------- The house ----------
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true });
+scene.add(house.root);
+house.root.updateMatrixWorld(true);
+const OFF = house.body.position.clone(); // house plan coordinates -> world
+const F = 0.3;
+const at = (x, y, z) => new THREE.Vector3(x, y, z).add(OFF);
+
+// Warm lamps inside, on at night
+const lamps = new THREE.Group(); scene.add(lamps);
+for (const [x, z] of [[-3.4, 0.2], [1.1, -1.8], [1.1, 2.0], [4.6, 2.0], [4.6, -2.6], [8.6, -0.5], [0.3, 5.2]]) {
+  const l = new THREE.PointLight('#ffcf8a', 8, 8, 1.5); l.position.copy(at(x, F + 2.4, z)); lamps.add(l);
+}
+lamps.visible = false;
+
+// Walkable floors and solid things, by mesh name
+const FLOORS = ['lawn', 'gravel', 'deck', 'wood', 'tile', 'rug', 'mat', 'ground'];
+const SOLID = ['siding', 'inner', 'frame', 'glass', 'door', 'trim', 'stone', 'sofa', 'cabinet', 'counter', 'steel', 'oak', 'bedding', 'throw', 'porcelain', 'walltile', 'trunk', 'foundation'];
+const floors = [ground], solids = [];
+house.root.traverse((o) => { if (!o.isMesh) return; if (FLOORS.includes(o.name)) floors.push(o); if (SOLID.includes(o.name)) solids.push(o); });
+
+const ray = new THREE.Raycaster();
+const DOWN = new THREE.Vector3(0, -1, 0);
+function floorAt(x, z, fromY) {
+  ray.set(new THREE.Vector3(x, fromY + 1.2, z), DOWN); ray.far = 4;
+  const h = ray.intersectObjects(floors, false)[0];
+  return h ? h.point.y : null;
+}
+// Can feet at p move by d without walking into a wall or furniture?
+function clear(p, d) {
+  const len = d.length(); if (len < 1e-5) return true;
+  const dir = d.clone().divideScalar(len);
+  for (const h of [0.45, 1.2]) {
+    ray.set(new THREE.Vector3(p.x, p.y + h, p.z), dir); ray.far = len + 0.28;
+    if (ray.intersectObjects(solids, false).length) return false;
+  }
+  return true;
+}
+// Move feet p by d, sliding along walls. Returns true if it moved.
+function tryMove(p, d) {
+  for (const step of [d, new THREE.Vector3(d.x, 0, 0), new THREE.Vector3(0, 0, d.z)]) {
+    if (step.lengthSq() < 1e-8 || !clear(p, step)) continue;
+    const y = floorAt(p.x + step.x, p.z + step.z, p.y);
+    if (y === null || y - p.y > 0.35) continue; // no floor, or too high a step
+    p.x += step.x; p.z += step.z; p.y = y; return true;
+  }
+  return false;
+}
+
+// ---------- Rooms ----------
+const ROOMS = {
+  yard: { label: 'Front yard', at: [0.3, 0, 14.5], look: [0.3, 2.6, 4] },
+  porch: { label: 'Porch', at: [-4.6, F, 5.1], look: [2, 1.6, 4.6] },
+  living: { label: 'Living room', at: [-0.4, F, 1.9], look: [-5.6, 1.1, -0.2] },
+  kitchen: { label: 'Kitchen', at: [2.45, F, -0.2], look: [0.6, 1.0, -3.6] },
+  bedroom: { label: 'Bedroom', at: [4.0, F, 0.75], look: [5.2, 0.9, 2.6] },
+  bath: { label: 'Bath', at: [4.2, F, -2.0], look: [5.2, 0.8, -3.6] },
+  suite: { label: 'Primary suite', at: [6.9, F, 1.7], look: [9.6, 0.9, -0.6] },
+};
+const ROOM_ORDER = Object.keys(ROOMS);
+let roomIdx = 0;
+function placeAt(key, { vr = false } = {}) {
+  const r = ROOMS[key]; roomIdx = ROOM_ORDER.indexOf(key);
+  const p = at(...r.at), l = at(...r.look);
+  const yaw = Math.atan2(-(l.x - p.x), -(l.z - p.z));
+  if (vr && xr.head) {
+    // Turn the rig so the way you face looks at the target, then put your head over the spot
+    const headYaw = xr.headYawLocal;
+    rig.rotation.y = yaw - headYaw;
+    rig.updateMatrixWorld();
+    const h = xr.head.clone().applyMatrix4(rig.matrixWorld);
+    rig.position.x += p.x - h.x; rig.position.z += p.z - h.z; rig.position.y = p.y;
+  } else {
+    rig.position.copy(p); rig.rotation.y = yaw;
+    pitch = Math.atan2(l.y - (p.y + EYE), Math.hypot(l.x - p.x, l.z - p.z)); camera.rotation.set(pitch, 0, 0);
+  }
+  walkTo = null;
+  document.querySelectorAll('[data-room]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.room === key)));
+}
+const fade = $('fade');
+function jump(key) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { placeAt(key); return; }
+  fade.classList.add('on');
+  setTimeout(() => { placeAt(key); fade.classList.remove('on'); }, 220);
+}
+document.querySelectorAll('[data-room]').forEach((b) => b.addEventListener('click', () => jump(b.dataset.room)));
+
+// ---------- Day, night, finish ----------
+function apply() {
+  house.setFinish(state.finish); house.setNight(state.night);
+  // Inside, the windows stay clear glass at night (the lamps light the rooms instead)
+  const g = house.mats.glass;
+  if (state.night) { g.emissiveIntensity = 0.35; g.emissive.set('#ffcf8a'); g.color.set('#26304a'); g.opacity = 0.3; }
+  lamps.visible = state.night; stars.visible = state.night;
+  hemi.intensity = state.night ? 0.7 : 0.9; hemi.color.set(state.night ? '#7d8fc4' : '#ffffff'); hemi.groundColor.set(state.night ? '#1e2236' : '#7a6f5c');
+  sun.intensity = state.night ? 0.25 : 1.6; sun.color.set(state.night ? '#9fb2e8' : '#fff1dc');
+  skyMat.uniforms.top.value.set(state.night ? '#060a1c' : '#6f9fd6');
+  skyMat.uniforms.bottom.value.set(state.night ? '#1d2645' : '#e6eef0');
+  scene.fog.color.set(state.night ? '#1d2645' : '#dfe7ea');
+  groundMat.color.set(state.night ? '#3b4a33' : '#7a9558'); hillMat.color.set(state.night ? '#2a3530' : '#5c7253');
+  scene.environment = state.night ? null : envMap;
+  document.querySelectorAll('[data-night]').forEach((b) => { b.setAttribute('aria-pressed', String(state.night)); b.querySelector('span').textContent = state.night ? 'Back to daytime' : 'See it at night'; });
+  document.querySelectorAll('[data-finish]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.finish === state.finish)));
+  $('finish-name').textContent = FINISHES[state.finish].label;
+  if (xr.session) refreshPanel();
+}
+document.querySelectorAll('[data-night]').forEach((b) => b.addEventListener('click', () => { state.night = !state.night; apply(); }));
+document.querySelectorAll('[data-finish]').forEach((b) => b.addEventListener('click', () => { state.finish = b.dataset.finish; apply(); }));
+const finishOrder = Object.keys(FINISHES);
+const nextFinish = () => { state.finish = finishOrder[(finishOrder.indexOf(state.finish) + 1) % finishOrder.length]; apply(); };
+
+// ---------- On screen: look, tap to walk, keys ----------
+function size() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(() => { if (!xr.session) size(); }).observe(stage); size();
+
+cv.style.touchAction = 'none';
+let drag = null, walkTo = null;
+const marker = new THREE.Mesh(new THREE.RingGeometry(0.16, 0.22, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.85, depthWrite: false, fog: false }));
+marker.visible = false; scene.add(marker);
+cv.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, moved: false }; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+  if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > 6) drag.moved = true;
+  rig.rotation.y += dx * 0.0045;
+  pitch = THREE.MathUtils.clamp(pitch + dy * 0.0035, -1.2, 1.2); camera.rotation.set(pitch, 0, 0);
+});
+cv.addEventListener('pointerup', (e) => {
+  const wasDrag = drag?.moved; drag = null; if (wasDrag) return;
+  // A tap: walk to the floor spot under the finger
+  const r = cv.getBoundingClientRect();
+  ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera); ray.far = 40;
+  const hit = ray.intersectObjects([...floors, ...solids], false)[0];
+  if (hit && floors.includes(hit.object) && hit.face && hit.face.normal.y > 0.5) { walkTo = hit.point.clone(); marker.position.copy(hit.point).add(new THREE.Vector3(0, 0.02, 0)); marker.visible = true; }
+});
+cv.addEventListener('pointercancel', () => { drag = null; });
+const keys = new Set();
+addEventListener('keydown', (e) => {
+  if (e.target.closest?.('input, textarea')) return;
+  const k = e.key.toLowerCase();
+  if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k) && stageVisible) { keys.add(k); if (k.startsWith('arrow')) e.preventDefault(); }
+});
+addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
+addEventListener('blur', () => keys.clear());
+let stageVisible = true;
+new IntersectionObserver(([en]) => { stageVisible = en.isIntersecting; }).observe(stage);
+
+const fwd = new THREE.Vector3(), side = new THREE.Vector3(), mv = new THREE.Vector3();
+function screenStep(dt) {
+  const yaw = rig.rotation.y;
+  fwd.set(-Math.sin(yaw), 0, -Math.cos(yaw)); side.set(-fwd.z, 0, fwd.x);
+  mv.set(0, 0, 0);
+  if (keys.has('w') || keys.has('arrowup')) mv.add(fwd);
+  if (keys.has('s') || keys.has('arrowdown')) mv.sub(fwd);
+  if (keys.has('d')) mv.add(side);
+  if (keys.has('a')) mv.sub(side);
+  if (keys.has('arrowleft')) rig.rotation.y += dt * 1.6;
+  if (keys.has('arrowright')) rig.rotation.y -= dt * 1.6;
+  if (mv.lengthSq()) { walkTo = null; marker.visible = false; tryMove(rig.position, mv.normalize().multiplyScalar(dt * 1.8)); }
+  if (walkTo) {
+    const d = new THREE.Vector3(walkTo.x - rig.position.x, 0, walkTo.z - rig.position.z), dist = d.length();
+    if (dist < 0.08) { walkTo = null; marker.visible = false; }
+    else if (!tryMove(rig.position, d.normalize().multiplyScalar(Math.min(dist, dt * 2.2)))) { walkTo = null; marker.visible = false; }
+  }
+}
+
+// ---------- Meta Quest: VR ----------
+const xr = { session: null, ref: null, head: null, headYawLocal: 0, ctrls: [], panel: null, items: [], reticle: null, turnReady: { left: true, right: true }, target: null };
+if (location.search.includes('debug')) Object.assign(window, { __walk: { xr, rig, camera, state, placeAt, scene, renderer } });
+
+const reticle = new THREE.Mesh(new THREE.RingGeometry(0.2, 0.27, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: '#9fd18b', transparent: true, opacity: 0.9, depthWrite: false, fog: false }));
+reticle.visible = false; scene.add(reticle); xr.reticle = reticle;
+for (let i = 0; i < 2; i++) {
+  const c = renderer.xr.getController(i);
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(0, 0, -1)]), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 }));
+  line.scale.z = 3; c.add(line);
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.012, 12, 8), new THREE.MeshBasicMaterial({ color: '#ffffff' })); c.add(tip);
+  c.addEventListener('connected', (e) => { c.userData.source = e.data; c.visible = e.data.targetRayMode === 'tracked-pointer'; if (e.data.handedness === 'left') attachPanel(c); });
+  c.addEventListener('disconnected', () => { c.userData.source = null; c.visible = false; });
+  rig.add(c); xr.ctrls.push({ c, line });
+}
+
+function labelTexture(text, { w = 512, h = 128, bg = 'rgba(34,37,43,0.92)', fg = '#ffffff', font = '600 48px "Manrope", system-ui, sans-serif' } = {}) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d');
+  g.fillStyle = bg; g.beginPath(); g.roundRect(0, 0, w, h, h / 2); g.fill();
+  g.fillStyle = fg; g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, h / 2 + 2);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const PANEL = ['room', 'finish', 'night', 'exit'];
+function panelText(a) {
+  if (a === 'room') return 'Next: ' + ROOMS[ROOM_ORDER[(roomIdx + 1) % ROOM_ORDER.length]].label;
+  if (a === 'finish') return FINISHES[state.finish].label;
+  if (a === 'night') return state.night ? 'Daytime' : 'Night';
+  return 'Exit VR';
+}
+function refreshPanel() {
+  xr.items.forEach((b) => {
+    const a = b.userData.action; b.material.map?.dispose();
+    b.material.map = labelTexture(panelText(a), a === 'exit' ? { bg: '#ffffff', fg: '#22252b', font: '700 50px "Manrope", system-ui, sans-serif' } : {});
+    b.material.needsUpdate = true;
+  });
+}
+// A small menu on the back of your left wrist: turn your palm up to read it, point the right controller at it.
+function attachPanel(c) {
+  if (xr.panel) { c.add(xr.panel); return; }
+  const panel = new THREE.Group();
+  const title = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.026), new THREE.MeshBasicMaterial({ map: labelTexture('Stone Ridge Farmhouse', { w: 800, font: '600 50px "Manrope", system-ui, sans-serif', bg: 'rgba(251,250,247,0.95)', fg: '#22252b' }), transparent: true }));
+  title.position.set(0, 0.075, 0); panel.add(title);
+  PANEL.forEach((a, i) => {
+    const b = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.034), new THREE.MeshBasicMaterial({ transparent: true }));
+    b.userData.action = a; b.position.set(0, 0.035 - i * 0.042, 0); panel.add(b); xr.items.push(b);
+  });
+  panel.position.set(0, 0.05, 0.02); panel.rotation.set(-Math.PI / 2.6, 0, 0);
+  c.add(panel); xr.panel = panel; refreshPanel();
+}
+function panelHit(c) {
+  if (!xr.panel) return null;
+  const m = c.matrixWorld;
+  ray.ray.origin.setFromMatrixPosition(m); ray.ray.direction.set(0, 0, -1).transformDirection(m); ray.far = 1.5;
+  const h = ray.intersectObjects(xr.items, false)[0];
+  return h ? h.object.userData.action : null;
+}
+function floorHit(c) {
+  const m = c.matrixWorld;
+  ray.ray.origin.setFromMatrixPosition(m); ray.ray.direction.set(0, 0, -1).transformDirection(m); ray.far = 25;
+  const h = ray.intersectObjects([...floors, ...solids], false)[0];
+  return h && floors.includes(h.object) && h.face && h.face.normal.y > 0.5 ? h : null;
+}
+function panelAction(a) {
+  if (a === 'room') { const k = ROOM_ORDER[(roomIdx + 1) % ROOM_ORDER.length]; placeAt(k, { vr: true }); refreshPanel(); }
+  else if (a === 'finish') nextFinish();
+  else if (a === 'night') { state.night = !state.night; apply(); }
+  else if (a === 'exit') xr.session?.end();
+}
+
+const vrBtn = $('vr-start');
+const vrOK = navigator.xr ? navigator.xr.isSessionSupported('immersive-vr').catch(() => false) : Promise.resolve(false);
+// Headsets (and PC VR) only: phones that report VR support would get a split-screen view
+const headsetBrowser = /OculusBrowser|Quest|Pico|Wolvic/i.test(navigator.userAgent) || !matchMedia('(pointer: coarse)').matches;
+vrOK.then((ok) => { if (ok && headsetBrowser) { vrBtn.hidden = false; $('vr-note').hidden = true; } });
+vrBtn.addEventListener('click', async () => {
+  try {
+    const session = await navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] });
+    // Keep standing where you were on screen, facing the same way
+    camera.position.set(0, 0, 0); camera.rotation.set(0, 0, 0);
+    await renderer.xr.setSession(session);
+    xr.session = session; marker.visible = false; walkTo = null;
+    session.addEventListener('select', onSelect);
+    session.addEventListener('end', onEnd);
+    refreshPanel();
+  } catch (err) { console.warn(err); $('vr-note').hidden = false; $('vr-note').textContent = 'VR didn’t start. Check that this browser can use VR, then try again.'; }
+});
+function onEnd() {
+  const s = xr.session; xr.session = null; reticle.visible = false;
+  s?.removeEventListener('select', onSelect);
+  // Back on screen where you were standing
+  const h = xr.head ? xr.head.clone().applyMatrix4(rig.matrixWorld) : rig.position.clone();
+  rig.rotation.y += xr.headYawLocal; rig.position.set(h.x, rig.position.y, h.z);
+  camera.position.set(0, EYE, 0); pitch = 0; camera.rotation.set(0, 0, 0); camera.fov = 70; size();
+}
+function onSelect(e) {
+  const src = e.inputSource;
+  const ctrl = xr.ctrls.find((k) => k.c.userData.source === src); if (!ctrl) return;
+  const a = panelHit(ctrl.c); if (a) { panelAction(a); return; }
+  const h = floorHit(ctrl.c); if (!h || !xr.head) return;
+  // Jump: put your head over the spot you pointed at
+  rig.updateMatrixWorld();
+  const head = xr.head.clone().applyMatrix4(rig.matrixWorld);
+  rig.position.x += h.point.x - head.x; rig.position.z += h.point.z - head.z; rig.position.y = h.point.y;
+}
+
+const q = new THREE.Quaternion(), e3 = new THREE.Euler();
+function vrStep(dt, frame) {
+  xr.ref = renderer.xr.getReferenceSpace();
+  const pose = frame.getViewerPose(xr.ref);
+  if (pose) {
+    const p = pose.transform.position, o = pose.transform.orientation;
+    xr.head = new THREE.Vector3(p.x, 0, p.z);
+    e3.setFromQuaternion(q.set(o.x, o.y, o.z, o.w), 'YXZ'); xr.headYawLocal = e3.y;
+  }
+  rig.updateMatrixWorld();
+  const head = xr.head ? xr.head.clone().applyMatrix4(rig.matrixWorld) : rig.position.clone();
+  let target = null;
+  xr.items.forEach((b) => b.scale.setScalar(1));
+  for (const { c, line } of xr.ctrls) {
+    const src = c.userData.source; if (!src || src.targetRayMode !== 'tracked-pointer') continue;
+    const onPanel = panelHit(c);
+    const hit = onPanel ? null : floorHit(c);
+    line.scale.z = onPanel ? 0.3 : hit ? hit.distance : 3;
+    if (hit && !target) target = hit.point;
+    xr.items.forEach((b) => { if (b.userData.action === onPanel) b.scale.setScalar(1.08); });
+    const ax = src.gamepad?.axes || []; const x = ax.length >= 4 ? ax[2] : ax[0] || 0, y = ax.length >= 4 ? ax[3] : ax[1] || 0;
+    if (src.handedness === 'left') {
+      // Walk where you're looking
+      if (Math.hypot(x, y) > 0.15) {
+        const yaw = rig.rotation.y + xr.headYawLocal;
+        const f = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), r = new THREE.Vector3(-f.z, 0, f.x);
+        const d = f.multiplyScalar(-y).add(r.multiplyScalar(x)).multiplyScalar(dt * 1.6);
+        const feet = new THREE.Vector3(head.x, rig.position.y, head.z);
+        if (tryMove(feet, d)) { rig.position.x += feet.x - head.x; rig.position.z += feet.z - head.z; rig.position.y = feet.y; }
+      }
+    } else {
+      // Snap turn 30° around your head
+      const side = src.handedness === 'right' ? 'right' : 'left';
+      if (Math.abs(x) > 0.7 && xr.turnReady[side]) {
+        xr.turnReady[side] = false;
+        const ang = -Math.sign(x) * Math.PI / 6;
+        const off = rig.position.clone().sub(head).applyAxisAngle(new THREE.Vector3(0, 1, 0), ang);
+        rig.position.copy(head).add(off); rig.rotation.y += ang;
+      } else if (Math.abs(x) < 0.3) xr.turnReady[side] = true;
+    }
+  }
+  reticle.visible = !!target; if (target) reticle.position.copy(target).add(new THREE.Vector3(0, 0.02, 0));
+  // Follow the floor under your head (porch step, front step)
+  const y = floorAt(head.x, head.z, rig.position.y);
+  if (y !== null && Math.abs(y - rig.position.y) < 0.4) rig.position.y += (y - rig.position.y) * Math.min(1, dt * 10);
+}
+
+// ---------- Loop ----------
+let last = 0;
+renderer.setAnimationLoop((t, frame) => {
+  const dt = Math.min((t - last) / 1000, 0.1) || 0; last = t;
+  if (xr.session && frame) vrStep(dt, frame);
+  else if (!stageVisible) return;
+  else screenStep(dt);
+  if (marker.visible) marker.material.opacity = 0.55 + Math.sin(t / 180) * 0.3;
+  renderer.render(scene, camera);
+});
+
+placeAt('yard');
+apply();
