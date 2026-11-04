@@ -15,6 +15,10 @@
 /card/auva-star.glb
   Content-Type: model/gltf-binary
 
+# Chat assistant knowledge, read by the chat function: keep it out of search results.
+/assistant/*
+  X-Robots-Tag: noindex, nofollow
+
 # Page mockups for review: keep them out of search results.
 /mockups/*
   X-Robots-Tag: noindex, nofollow

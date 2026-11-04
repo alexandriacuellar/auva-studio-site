@@ -9,14 +9,16 @@ import InquiryForm from '../components/InquiryForm.astro';
 import PhoneViewer from '../components/PhoneViewer.astro';
 import Faq from '../components/Faq.astro';
 import { comparison, addons, process, packages, samples, site, serviceSchema } from '../data/site';
+import { assistantOn } from '../data/features';
 
 const faqs = [
-  { id: "faq-founding", q: "What is the founding client offer?", a: "My first 10 website clients get 10% off any package, in exchange for a short review and permission to feature their site. After that, package prices go up. It doesn't combine with the nonprofit discount; if both apply, you get the bigger one." },
+  { id: "faq-founding", q: "What is the founding client offer?", a: "My first 10 website clients get 10% off any package. In return, I ask for a short review and permission to show your finished site as an example of my work. After that, package prices go up. It doesn't combine with the nonprofit discount; if both apply, you get the bigger one." },
   { q: "When does a website pay for itself?", a: "Divide the package price by what your site brings in each month. For example, if one new customer is worth $300 to you and your site brings in 2 a month, Expanded ($2,950) pays for itself in about 5 months." },
   { q: "How long does a website take?", a: "Essential takes 2–3 weeks, Expanded 3–5 weeks, and Complete 6+ weeks, once I have your content. The sooner you send your text and photos, the sooner your site goes live." },
+  { id: "faq-payment-plan", q: "Can I pay in installments?", a: "Yes. Websites start with a 50% deposit, with the rest due at launch. If you'd like to spread the cost out more, ask me about a payment plan. I'll split your invoice into scheduled payments, agreed in writing, and you pay each one online." },
   { q: 'Do I own my website?', a: 'Yes. Once your project is paid in full, your website, content, domain, and accounts are yours. You can move to another host or developer anytime.' },
   { q: "Do I need my copy and photos ready?", a: "No. Rough notes, your old site, and phone photos are a fine start, and I polish what you have and draft what's missing. Want a head start? See how to get ready for your new website.", html: "No. Rough notes, your old site, and phone photos are a fine start, and I polish what you have and draft what's missing. Want a head start? See <a href=\"/websites/get-ready/\">how to get ready for your new website</a>." },
-  { q: "Can I update the site myself?", a: "Yes, with a CMS (content management system), a simple dashboard where you change your text, photos, news, and events with no code. It's included in Complete and can be added to Essential or Expanded from $1,750, or you can send changes to me for $59 each." },
+  { q: "Can I update the site myself?", a: "Yes, with a CMS (content management system), a simple dashboard where you change your text, photos, news, and events with no code. It's included in Complete and can be added to Essential or Expanded from $1,750, or you can send changes to me for $59 each. Your CMS runs on its own account in your name. It's free for most small business sites. Large sites with many editors or a lot of content may need a paid plan, which starts around $15 per editor each month. I'll tell you before we start if yours will." },
   { q: "What if something breaks after launch?", a: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see Help After Launch, and I always explain the cause and the cost before fixing anything.", html: "It's rare, since most sites I build have no plugins to break. Fixes are free for 30 days after launch, then see <a href=\"/websites/help-after-launch/\">Help After Launch</a>, and I always explain the cause and the cost before fixing anything." },
   { q: "Will people find me on Google?", a: "Every package is built to be found, with clear page titles, search data, a sitemap, and fast pages that Google and AI tools like ChatGPT can read. No one can honestly promise a ranking, but your site starts with everything search engines look for." },
   { q: "I'm on WordPress, Wix, or Squarespace. Can you move my site?", a: "Most likely, yes. I keep your content and the page addresses Google already knows, so you don't lose visitors, and moving the pages in your package is included. If your site already works well where it is, switching may not be worth it, and I'll tell you honestly." },
@@ -181,6 +183,7 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             <p><b style="color: var(--primary)">{a.price}</b></p>
+            {assistantOn && 'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
           </div>
         ))}
         <div class="card" id="brand">

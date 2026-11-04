@@ -165,10 +165,10 @@ export const comparison = {
 };
 
 export const addons = [
-  { id: 'cms', icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed.', price: 'From $1,750' },
+  { id: 'cms', icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed, and free to run for most sites.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
   { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
-  { icon: 'chat', title: 'AI chatbots and web apps', text: 'A chat assistant that answers visitor questions from your own FAQs, services, and prices, or a custom tool like a client portal or booking app.', price: 'Quoted for your project' },
+  { icon: 'chat', title: 'AI chatbots and web apps', text: 'A chat assistant that answers visitor questions from your own FAQs, services, and prices, or a custom tool like a client portal or booking app.', price: 'Quoted for your project', demo: "Try it now: ask this site's assistant" },
 ];
 
 export const brandEssentials = [
