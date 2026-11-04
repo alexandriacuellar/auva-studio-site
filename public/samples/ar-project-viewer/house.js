@@ -192,8 +192,10 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
   box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
   box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
-  box('counter', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
-  box('porcelain', 3.2, 3.5, F + 0.86, F + 0.9, -2.65, -2.25);       // basin
+  box('vanitytop', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
+  box('porcelain', 3.22, 3.52, F + 0.86, F + 0.93, -2.66, -2.24);     // basin
+  box('water', 3.26, 3.48, F + 0.93, F + 0.935, -2.62, -2.28);
+  box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
   box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
   box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
   box('mat', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
@@ -247,7 +249,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
     deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
-    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#e4d5ba' }), mat: std({ color: '#7f9a86' }), sofa: std({ color: '#3e5a7a' }),
+    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#e4d5ba' }), mat: std({ color: '#7f9a86' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
     bedding: std({ color: '#f4f0e8' }), throw: std({ color: '#b5653f' }), oak: std({ color: '#b58a5d' }),
     counter: std({ color: '#e9e7e2', roughness: 0.5 }), cabinet: std({ color: '#5f7a69', roughness: 0.6 }),
     steel: std({ color: '#b9bec4', roughness: 0.35, metalness: 0.6 }), dark: std({ color: '#26282c', roughness: 0.4 }),
