@@ -69,6 +69,8 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 {
   const leaf = new THREE.IcosahedronGeometry(1, 1); leaf.translate(0, 1.6, 0);
   const trees = new THREE.InstancedMesh(leaf, new THREE.MeshStandardMaterial({ color: '#4f6d3f', flatShading: true, roughness: 1 }), 220);
+  const trunkGeo = new THREE.CylinderGeometry(0.1, 0.14, 1.0, 7); trunkGeo.translate(0, 0.5, 0);
+  const trunks = new THREE.InstancedMesh(trunkGeo, new THREE.MeshStandardMaterial({ color: '#5e4632', roughness: 1 }), 220);
   const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3();
   let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   for (let i = 0; i < 220; i++) {
@@ -76,9 +78,9 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
     p.set(Math.sin(a) * d, 0, Math.cos(a) * d * 0.9);
     if (p.z > 10 && Math.abs(p.x) < 14) p.x += 28 * Math.sign(p.x || 1); // keep the view from the road open
     s.set(k, k * (1.1 + rnd() * 0.6), k); q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rnd() * 6);
-    trees.setMatrixAt(i, m.compose(p, q, s));
+    trees.setMatrixAt(i, m.compose(p, q, s)); trunks.setMatrixAt(i, m);
   }
-  scene.add(trees);
+  scene.add(trees, trunks);
 }
 
 // ---------- The house ----------
@@ -261,7 +263,7 @@ for (let i = 0; i < 2; i++) {
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(0, 0, -1)]), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 }));
   line.scale.z = 3; c.add(line);
   const tip = new THREE.Mesh(new THREE.SphereGeometry(0.012, 12, 8), new THREE.MeshBasicMaterial({ color: '#ffffff' })); c.add(tip);
-  c.addEventListener('connected', (e) => { c.userData.source = e.data; c.visible = e.data.targetRayMode === 'tracked-pointer'; if (e.data.handedness === 'left') attachPanel(c); });
+  c.addEventListener('connected', (e) => { c.userData.source = e.data; c.visible = e.data.targetRayMode === 'tracked-pointer'; });
   c.addEventListener('disconnected', () => { c.userData.source = null; c.visible = false; });
   rig.add(c); xr.ctrls.push({ c, line });
 }
@@ -287,9 +289,10 @@ function refreshPanel() {
     b.material.needsUpdate = true;
   });
 }
-// A small menu on the back of your left wrist: turn your palm up to read it, point the right controller at it.
-function attachPanel(c) {
-  if (xr.panel) { c.add(xr.panel); return; }
+// The menu sits on your left wrist when you hold both controllers (point the right one at it).
+// With one controller, or after pressing Y or B, it floats in front of you instead, so one hand can use it.
+function buildPanel() {
+  if (xr.panel) return;
   const panel = new THREE.Group();
   const title = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.026), new THREE.MeshBasicMaterial({ map: labelTexture('Stone Ridge Farmhouse', { w: 800, font: '600 50px "Manrope", system-ui, sans-serif', bg: 'rgba(251,250,247,0.95)', fg: '#22252b' }), transparent: true }));
   title.position.set(0, 0.075, 0); panel.add(title);
@@ -297,8 +300,22 @@ function attachPanel(c) {
     const b = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.034), new THREE.MeshBasicMaterial({ transparent: true }));
     b.userData.action = a; b.position.set(0, 0.035 - i * 0.042, 0); panel.add(b); xr.items.push(b);
   });
-  panel.position.set(0, 0.05, 0.02); panel.rotation.set(-Math.PI / 2.6, 0, 0);
-  c.add(panel); xr.panel = panel; refreshPanel();
+  // Always drawn on top, so a wall or the sofa never hides the menu
+  panel.children.forEach((m) => { m.material.depthTest = false; m.renderOrder = 20; });
+  xr.panel = panel; xr.panelMode = null; refreshPanel();
+}
+function placePanel(mode, left) {
+  const panel = xr.panel; if (!panel) return;
+  if (mode === 'wrist') {
+    left.add(panel); panel.position.set(0, 0.05, 0.02); panel.rotation.set(-Math.PI / 2.6, 0, 0); panel.scale.setScalar(1);
+  } else {
+    if (!xr.head) return;
+    // In front of you at chest height, facing you (in rig space, so it walks and turns with you)
+    const yaw = xr.headYawLocal, f = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
+    rig.add(panel); panel.position.set(xr.head.x + f.x * 0.65, xr.headY - 0.3, xr.head.z + f.z * 0.65);
+    panel.rotation.set(-0.35, yaw, 0, 'YXZ'); panel.scale.setScalar(2.2);
+  }
+  xr.panelMode = mode;
 }
 function panelHit(c) {
   if (!xr.panel) return null;
@@ -334,11 +351,12 @@ vrBtn.addEventListener('click', async () => {
     xr.session = session; marker.visible = false; walkTo = null;
     session.addEventListener('select', onSelect);
     session.addEventListener('end', onEnd);
-    refreshPanel();
+    session.addEventListener('squeeze', () => { if (xr.panelMode === 'front') xr.panelMode = null; }); // grip: bring the floating menu back in front
+    buildPanel(); xr.forceFront = false;
   } catch (err) { console.warn(err); $('vr-note').hidden = false; $('vr-note').textContent = 'VR didn’t start. Check that this browser can use VR, then try again.'; }
 });
 function onEnd() {
-  const s = xr.session; xr.session = null; reticle.visible = false;
+  const s = xr.session; xr.session = null; reticle.visible = false; xr.panel?.removeFromParent(); xr.panelMode = null;
   s?.removeEventListener('select', onSelect);
   // Back on screen where you were standing
   const h = xr.head ? xr.head.clone().applyMatrix4(rig.matrixWorld) : rig.position.clone();
@@ -362,31 +380,45 @@ function vrStep(dt, frame) {
   const pose = frame.getViewerPose(xr.ref);
   if (pose) {
     const p = pose.transform.position, o = pose.transform.orientation;
-    xr.head = new THREE.Vector3(p.x, 0, p.z);
+    xr.head = new THREE.Vector3(p.x, 0, p.z); xr.headY = p.y;
     e3.setFromQuaternion(q.set(o.x, o.y, o.z, o.w), 'YXZ'); xr.headYawLocal = e3.y;
   }
   rig.updateMatrixWorld();
   const head = xr.head ? xr.head.clone().applyMatrix4(rig.matrixWorld) : rig.position.clone();
   let target = null;
   xr.items.forEach((b) => b.scale.setScalar(1));
-  for (const { c, line } of xr.ctrls) {
-    const src = c.userData.source; if (!src || src.targetRayMode !== 'tracked-pointer') continue;
+  const live = xr.ctrls.filter(({ c }) => c.userData.source?.targetRayMode === 'tracked-pointer');
+  const leftCtrl = live.find(({ c }) => c.userData.source.handedness === 'left');
+  const one = live.length === 1;
+  const want = live.length >= 2 && leftCtrl && !xr.forceFront ? 'wrist' : 'front';
+  if (xr.panel && xr.panelMode !== want) placePanel(want, leftCtrl?.c);
+  for (const { c, line } of live) {
+    const src = c.userData.source;
+    // A or X: next room. B or Y: menu in front of you (press again to put it back on your wrist).
+    const btn = src.gamepad?.buttons || [];
+    for (const [i, act] of [[4, 'room'], [5, 'menu']]) {
+      const down = !!btn[i]?.pressed, key = src.handedness + i;
+      if (down && !xr.pressed?.[key]) { if (act === 'room') panelAction('room'); else { xr.forceFront = !xr.forceFront; xr.panelMode = null; } }
+      (xr.pressed ||= {})[key] = down;
+    }
     const onPanel = panelHit(c);
     const hit = onPanel ? null : floorHit(c);
     line.scale.z = onPanel ? 0.3 : hit ? hit.distance : 3;
     if (hit && !target) target = hit.point;
     xr.items.forEach((b) => { if (b.userData.action === onPanel) b.scale.setScalar(1.08); });
     const ax = src.gamepad?.axes || []; const x = ax.length >= 4 ? ax[2] : ax[0] || 0, y = ax.length >= 4 ? ax[3] : ax[1] || 0;
-    if (src.handedness === 'left') {
-      // Walk where you're looking
-      if (Math.hypot(x, y) > 0.15) {
+    // Left stick walks and right stick turns; with only one controller, its stick does both (up/down walks, left/right turns)
+    if (src.handedness === 'left' || one) {
+      const wy = y, wx = one ? 0 : x;
+      if (Math.hypot(wx, wy) > 0.15) {
         const yaw = rig.rotation.y + xr.headYawLocal;
         const f = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), r = new THREE.Vector3(-f.z, 0, f.x);
-        const d = f.multiplyScalar(-y).add(r.multiplyScalar(x)).multiplyScalar(dt * 1.6);
+        const d = f.multiplyScalar(-wy).add(r.multiplyScalar(wx)).multiplyScalar(dt * 1.6);
         const feet = new THREE.Vector3(head.x, rig.position.y, head.z);
         if (tryMove(feet, d)) { rig.position.x += feet.x - head.x; rig.position.z += feet.z - head.z; rig.position.y = feet.y; }
       }
-    } else {
+    }
+    if (src.handedness !== 'left' || one) {
       // Snap turn 30° around your head
       const side = src.handedness === 'right' ? 'right' : 'left';
       if (Math.abs(x) > 0.7 && xr.turnReady[side]) {
