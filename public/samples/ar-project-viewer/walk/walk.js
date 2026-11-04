@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -177,6 +177,39 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
 // Island to match: black base, white top like the cabinets
 house.mats.cabinet.color.set('#232427');
 house.mats.counter.color.set('#e8e8e6');
+
+// Beds from alexandria's bed set: headboard against the wall (the models' headboard is at -z, so a -90° turn puts it at +x).
+// area: [x0, x1, z0, z1] floor space; the bed is scaled down to fit if needed and pushed against x1.
+const BEDS = [
+  { name: 'BedFrame12', area: [8.2, 10.42, -1.6, 0.6] },   // primary suite
+  { name: 'BedFrame11', area: [3.75, 5.92, 1.1, 3.1] },    // bedroom 2
+];
+new GLTFLoader().load(new URL('./bed-set.glb', import.meta.url).href, (g) => {
+  const pillow = g.scene.getObjectByName('Pillow');
+  for (const p of BEDS) {
+    const o = g.scene.getObjectByName(p.name); if (!o) continue;
+    o.position.set(0, 0, 0); o.rotation.set(0, -Math.PI / 2, 0); o.scale.setScalar(1); o.updateMatrixWorld(true);
+    let b = new THREE.Box3().setFromObject(o); const [x0, x1, z0, z1] = p.area;
+    const k = Math.min(1, (x1 - x0) / (b.max.x - b.min.x), (z1 - z0) / (b.max.z - b.min.z)); o.scale.setScalar(k);
+    o.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(o);
+    o.position.set(x1 - b.max.x, F - b.min.y, (z0 + z1) / 2 - (b.min.z + b.max.z) / 2);
+    o.updateMatrixWorld(true);
+    // Two pillows on the mattress, at the headboard end
+    const mat = o.getObjectByName(p.name.replace('BedFrame', 'Mattress'));
+    if (pillow && mat) {
+      const mb = new THREE.Box3().setFromObject(mat);
+      const bl = o.getObjectByName(p.name.replace('BedFrame', 'Blanket')); if (bl) mb.max.y = Math.max(mb.max.y, new THREE.Box3().setFromObject(bl).max.y); // sit on top of the blanket
+      for (const side of [-1, 1]) {
+        const q = pillow.clone(); q.rotation.set(0, -Math.PI / 2, 0); q.scale.setScalar(k); q.position.set(0, 0, 0); q.updateMatrixWorld(true);
+        const qb = new THREE.Box3().setFromObject(q), w = mb.max.z - mb.min.z;
+        q.position.set(mb.max.x - 0.06 - qb.max.x, mb.max.y - 0.02 - qb.min.y, (mb.min.z + mb.max.z) / 2 + side * w / 4 - (qb.min.z + qb.max.z) / 2);
+        o.attach(q);
+      }
+    }
+    house.body.add(o); o.updateMatrixWorld(true);
+    o.traverse((m) => { if (m.isMesh) solids.push(m); });
+  }
+});
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);

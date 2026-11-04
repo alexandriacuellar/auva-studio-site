@@ -228,7 +228,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     const bz = z + back * 0.18; box('oak', x - 0.2, x + 0.2, F + 0.47, F + 0.95, bz - 0.02, bz + 0.02);
   }
   // Bedroom 2, bath
-  box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95);
+  if (!omit.includes('beds')) { box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95); }
   // omit: leave out fixtures that the walk-through replaces with real 3D models
   if (!omit.includes('tub')) {
     box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
@@ -255,7 +255,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   box('mat', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
   // Primary suite in the wing
   box('rug', 7.4, 10.0, F + 0.005, F + 0.02, -2.0, 1.0);
-  box('bedding', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('throw', 8.28, 8.85, F + 0.02, F + 0.58, -1.42, 0.42); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45);
+  if (!omit.includes('beds')) { box('bedding', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('throw', 8.28, 8.85, F + 0.02, F + 0.58, -1.42, 0.42); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45); }
 
   // ---------- Roof (lifts off) ----------
   const ov = 0.4;
