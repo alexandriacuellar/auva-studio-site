@@ -170,7 +170,7 @@ function makeHorse() {
   const cloakGeo = new THREE.PlaneGeometry(0.6, 1.0, 12, 20);
   cloakGeo.translate(0, -0.5, 0);
   const cloak = new THREE.Mesh(cloakGeo, M.cloak);
-  const cloakRoot = new THREE.Group(); cloakRoot.position.set(-0.13, 0.68, 0); cloakRoot.rotation.y = -Math.PI / 2; torso.add(cloakRoot); cloakRoot.add(cloak);
+  const cloakRoot = new THREE.Group(); cloakRoot.position.set(-0.15, 0.68, 0); cloakRoot.rotation.y = -Math.PI / 2; torso.add(cloakRoot); cloakRoot.add(cloak);
   const cloakBase = Float32Array.from(cloakGeo.attributes.position.array);
 
   // An invisible, generous box to tap the horse and rider
@@ -305,7 +305,8 @@ export async function buildShow({ groundY = -0.5, onAction = () => {}, labels = 
     for (let i = 0; i < p.count; i++) {
       const x = H.cloakBase[i * 3], y = H.cloakBase[i * 3 + 1];
       const v = -y / 1.0; // 0 at the shoulders, 1 at the hem
-      const flow = v * v * (0.15 + speed * 0.75);
+      // Drapes out over the back and coat even when he stands still, then streams back with speed
+      const flow = 0.07 + v * 0.34 + v * v * speed * 0.75;
       const wave = Math.sin(time * (6 + speed * 6) - v * 5 + x * 3) * 0.06 * v * (0.4 + speed);
       p.setXYZ(i, x * (1 + v * 0.3), y * (1 - flow * 0.35), flow * 0.9 + wave);
     }
