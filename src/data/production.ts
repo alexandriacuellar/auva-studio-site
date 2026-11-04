@@ -25,8 +25,8 @@ export const t = {
   website: '<b>Need a website too?</b> See <a href="/websites/#packages">website packages from $1,500</a>. AR Product View can be added to any of them.',
   // AR sub page
   arTitle: 'AR Packages', arSeo: 'AR Packages from $750, No App Needed | Auva Studio',
-  arDesc: 'AR cards, flyers, menus, packaging, product views, and project viewers from $750. They open in any phone browser, with no app to download.',
-  arH: 'AR people remember, <em>from $750.</em>', arL: 'Cards, menus, products, and buildings that come alive on any phone. No app to download.',
+  arDesc: 'AR cards, flyers, labels, packaging, product views, and project viewers from $750. They open in any phone browser, with no app to download.',
+  arH: 'AR people remember, <em>from $750.</em>', arL: 'Cards, labels, products, and buildings that come alive on any phone. No app to download.',
   tryCard: 'Try it on my card', pkH: 'AR packages, <em>priced up front.</em>', pkL: "Each one opens in a phone's browser. Founding prices for my first 5 AR clients.", ask: 'Ask about this',
   bigH: 'Need something bigger?', bigP: 'VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced AR and VR developer partner who joins at the start. I stay on as your producer. Quoted for your project.',
   ideasH: 'What we could <em>build together.</em>', ideasL: 'A few more ideas to spark yours.',
@@ -42,12 +42,12 @@ export const t = {
 };
 
 export const services = [
-  { id: 'ar', icon: 'layers', title: 'AR packages', price: 'From $750', text: 'Cards, menus, products, and buildings that come alive on any phone, with no app to download.', href: `${base}/ar/`, link: 'See AR packages' },
+  { id: 'ar', icon: 'layers', title: 'AR packages', price: 'From $750', text: 'Cards, labels, products, and buildings that come alive on any phone, with no app to download.', href: `${base}/ar/`, link: 'See AR packages' },
   { id: 'studios', icon: 'star', title: 'Game and XR production', price: 'From $650', text: 'An experienced producer and a schedule your team can trust, without a full-time hire.', href: `${base}/studios/`, link: 'See production for studios' },
 ];
 
 export const audiences = [
-  { icon: 'layers', title: 'Shops, makers, and restaurants', text: 'Let customers see a product at home before they buy, or scan a menu or label that comes alive.', to: 'ar' },
+  { icon: 'layers', title: 'Shops, makers, wineries, and breweries', text: 'Let customers see a product at home before they buy, or scan a label that comes alive.', to: 'ar' },
   { icon: 'compass', title: 'Architects, builders, and developers', text: "Show clients a home or building that isn't built yet, on the table or full size on the lot.", to: 'ar' },
   { icon: 'book', title: 'Museums, educators, and cultural organizations', text: 'Exhibits, lessons, and historic sites that show a scene, a voice, or a 3D object through a phone or headset.', to: 'ar' },
   { icon: 'globe', title: 'Venues, brands, and tourism', text: 'Attractions, events, and campaigns people remember, from a scan-to-play poster to a Meta Horizon world.', to: 'ar' },
@@ -63,6 +63,9 @@ export const demos = [
   { pkg: 'ar-card', img: 'card', name: 'My AR business card', href: '/samples/ar-business-card/', works: 'phones',
     text: 'Point your phone at my business card, or at the card on your computer screen, and I pop out of it with buttons to send me a message, email me, or follow. Only have a phone? Watch it right there.',
     goodFor: 'Good for business cards, flyers, postcards, and event signs.' },
+  { pkg: 'ar-menu', img: 'label', name: 'A cider label that rides off the can', href: '/samples/ar-label/', works: 'phones',
+    text: 'Point your phone at a hard cider label, or at the label on your computer screen, and the Headless Horseman gallops out, rears up, and throws his pumpkin. It bursts into buttons for tasting notes and where to buy. The cider is made up.',
+    goodFor: 'Good for wineries, cideries, breweries, distilleries, and food makers with a story to tell.' },
   { pkg: 'ar-project', img: 'house', name: 'A farmhouse before it’s built', href: '/samples/ar-project-viewer/', works: 'phones and Meta Quest 3',
     text: 'An architect’s project page where clients set a new farmhouse on the table, lift the roof to see the rooms, try three finishes, and see it at night. Or switch to full size and stand on the porch. The firm is made up.',
     goodFor: 'Good for architects, builders, remodelers, and developers who want clients to see a project before it’s built.' },

@@ -8,14 +8,15 @@ import { Image } from 'astro:assets';
 import demoRoom from '../../assets/ar/demo-room.jpg';
 import demoCard from '../../assets/ar/demo-card.jpg';
 import demoHouse from '../../assets/ar/demo-house.jpg';
+import demoLabel from '../../assets/ar/demo-label.jpg';
 import Faq from '../../components/Faq.astro';
 import { site, aiOffers, serviceSchema } from '../../data/site';
 import { t, ideas, demos, faq } from '../../data/production';
 
 const packages = aiOffers.filter((o) => o.group === 'ar');
-const images = { room: demoRoom, card: demoCard, house: demoHouse };
-const bgs = { room: "#ede9e1", card: "#0f1d52", house: "#e6e8e1" };
-const alts = { house: 'A modern farmhouse model on a lawn with trees', room: 'A dress form, a table lamp, and a honey pot in 3D', card: "Alexandria Cuellar's Auva Studio business card" };
+const images = { room: demoRoom, card: demoCard, house: demoHouse, label: demoLabel };
+const bgs = { room: "#ede9e1", card: "#0f1d52", house: "#e6e8e1", label: "#281e1d" };
+const alts = { label: 'A can of Hollow Night Hard Cider with the Headless Horseman galloping past it', house: 'A modern farmhouse model on a lawn with trees', room: 'A dress form, a table lamp, and a honey pot in 3D', card: "Alexandria Cuellar's Auva Studio business card" };
 const demoItems = demos.map((d) => {
   const o = aiOffers.find((x) => x.id === d.pkg)!;
   return { ...d, pkgTitle: o.title, price: o.price, image: images[d.img as keyof typeof images], bg: bgs[d.img as keyof typeof bgs], alt: alts[d.img as keyof typeof alts] };

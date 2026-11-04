@@ -8,14 +8,15 @@ import { Image } from 'astro:assets';
 import demoRoom from '../../../assets/ar/demo-room.jpg';
 import demoCard from '../../../assets/ar/demo-card.jpg';
 import demoHouse from '../../../assets/ar/demo-house.jpg';
+import demoLabel from '../../../assets/ar/demo-label.jpg';
 import Faq from '../../../components/Faq.astro';
 import { site, aiOffers, serviceSchema } from '../../../data/site.es';
 import { t, ideas, demos, faq } from '../../../data/production.es';
 
 const packages = aiOffers.filter((o) => o.group === 'ar');
-const images = { room: demoRoom, card: demoCard, house: demoHouse };
-const bgs = { room: "#ede9e1", card: "#0f1d52", house: "#e6e8e1" };
-const alts = { house: 'Un modelo de una casa de campo moderna sobre el césped con árboles', room: 'Un maniquí de costura, una lámpara de mesa y un tarro de miel en 3D', card: 'La tarjeta de presentación de Alexandria Cuellar de Auva Studio' };
+const images = { room: demoRoom, card: demoCard, house: demoHouse, label: demoLabel };
+const bgs = { room: "#ede9e1", card: "#0f1d52", house: "#e6e8e1", label: "#281e1d" };
+const alts = { label: 'Una lata de sidra Hollow Night con el Jinete sin Cabeza galopando junto a ella', house: 'Un modelo de una casa de campo moderna sobre el césped con árboles', room: 'Un maniquí de costura, una lámpara de mesa y un tarro de miel en 3D', card: 'La tarjeta de presentación de Alexandria Cuellar de Auva Studio' };
 const demoItems = demos.map((d) => {
   const o = aiOffers.find((x) => x.id === d.pkg)!;
   return { ...d, pkgTitle: o.title, price: o.price, image: images[d.img as keyof typeof images], bg: bgs[d.img as keyof typeof bgs], alt: alts[d.img as keyof typeof alts] };

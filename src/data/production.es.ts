@@ -23,8 +23,8 @@ export const t = {
   ],
   website: '<b>¿También necesita un sitio web?</b> Vea los <a href="/es/websites/#packages">paquetes de sitios web desde $1,500</a>. La Vista de Producto con AR se puede agregar a cualquiera de ellos.',
   arTitle: 'Paquetes de AR', arSeo: 'Paquetes de AR desde $750, sin aplicación | Auva Studio',
-  arDesc: 'Tarjetas, volantes, menús, empaques, vistas de producto y visores de proyectos con AR desde $750. Se abren en el navegador de cualquier teléfono, sin descargar nada.',
-  arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
+  arDesc: 'Tarjetas, volantes, etiquetas, empaques, vistas de producto y visores de proyectos con AR desde $750. Se abren en el navegador de cualquier teléfono, sin descargar nada.',
+  arH: 'AR que la gente recuerda, <em>desde $750.</em>', arL: 'Tarjetas, etiquetas, productos y edificios que cobran vida en cualquier teléfono. Sin descargar ninguna aplicación.',
   tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de fundadores para mis primeros 5 clientes de AR.', ask: 'Pregunte por este',
   bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
   ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'Algunas ideas más para inspirar las suyas.',
@@ -39,12 +39,12 @@ export const t = {
 };
 
 export const services = [
-  { id: 'ar', icon: 'layers', title: 'Paquetes de AR', price: 'Desde $750', text: 'Tarjetas, menús, productos y edificios que cobran vida en cualquier teléfono, sin descargar ninguna aplicación.', href: `${base}/ar/`, link: 'Vea los paquetes de AR' },
+  { id: 'ar', icon: 'layers', title: 'Paquetes de AR', price: 'Desde $750', text: 'Tarjetas, etiquetas, productos y edificios que cobran vida en cualquier teléfono, sin descargar ninguna aplicación.', href: `${base}/ar/`, link: 'Vea los paquetes de AR' },
   { id: 'studios', icon: 'star', title: 'Producción de videojuegos y XR', price: 'Desde $650', text: 'Una productora con experiencia y un calendario en el que su equipo puede confiar, sin contratar a tiempo completo.', href: `${base}/studios/`, link: 'Vea producción para estudios' },
 ];
 
 export const audiences = [
-  { icon: 'layers', title: 'Tiendas, artesanos y restaurantes', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen un menú o una etiqueta que cobra vida.', to: 'ar' },
+  { icon: 'layers', title: 'Tiendas, artesanos, viñedos y cervecerías', text: 'Deje que sus clientes vean un producto en casa antes de comprarlo, o que escaneen una etiqueta que cobra vida.', to: 'ar' },
   { icon: 'compass', title: 'Arquitectos, constructores y desarrolladores', text: 'Muestre a sus clientes una casa o un edificio que aún no existe, sobre la mesa o a tamaño real en el terreno.', to: 'ar' },
   { icon: 'book', title: 'Museos, educadores y organizaciones culturales', text: 'Exhibiciones, clases y sitios históricos que muestran una escena, una voz o un objeto 3D a través del teléfono o de un visor.', to: 'ar' },
   { icon: 'globe', title: 'Recintos, marcas y turismo', text: 'Atracciones, eventos y campañas que la gente recuerda, desde un póster que se escanea para jugar hasta un mundo en Meta Horizon.', to: 'ar' },
@@ -60,6 +60,9 @@ export const demos = [
   { pkg: 'ar-card', img: 'card', name: 'Mi tarjeta de presentación con AR', href: '/samples/ar-business-card/', works: 'teléfonos',
     text: 'Apunte el teléfono a mi tarjeta, o a la tarjeta en la pantalla de su computadora, y salgo de ella con botones para enviarme un mensaje, escribirme o seguirme. ¿Solo tiene el teléfono? Véalo ahí mismo.',
     goodFor: 'Ideal para tarjetas de presentación, volantes, postales y letreros de eventos.' },
+  { pkg: 'ar-menu', img: 'label', name: 'Una etiqueta de sidra que cobra vida', href: '/samples/ar-label/', works: 'teléfonos',
+    text: 'Apunte el teléfono a la etiqueta de una sidra, o a la etiqueta en la pantalla de su computadora, y el Jinete sin Cabeza sale galopando, se encabrita y lanza su calabaza. La calabaza estalla en botones con notas de cata y dónde comprar. La sidra es inventada.',
+    goodFor: 'Ideal para viñedos, sidrerías, cervecerías, destilerías y productores de alimentos con una historia que contar.' },
   { pkg: 'ar-project', img: 'house', name: 'Una casa de campo antes de construirla', href: '/samples/ar-project-viewer/', works: 'teléfonos y Meta Quest 3',
     text: 'La página de proyecto de un arquitecto donde los clientes colocan una casa nueva sobre la mesa, levantan el techo para ver los cuartos, prueban tres acabados y la ven de noche. O cambian a tamaño real y se paran en el porche. La firma es inventada.',
     goodFor: 'Ideal para arquitectos, constructores, remodeladores y desarrolladores que quieren que sus clientes vean un proyecto antes de construirlo.' },

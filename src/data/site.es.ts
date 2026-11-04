@@ -72,7 +72,7 @@ export const categories = [
   {
     icon: 'bolt',
     title: 'AR, VR y Producción',
-    text: 'Realidad aumentada (AR) que da vida a sus productos, menús y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
+    text: 'Realidad aumentada (AR) que da vida a sus productos, etiquetas y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
     offers: [['Paquetes de AR', 'Desde $750'], ['Producción de videojuegos y XR', 'Desde $650']],
     note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
     href: '/es/ar-vr-production/',
@@ -190,7 +190,7 @@ export { testimonials } from './site';
 export const aiOffers = [
   { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión del Plan de Producción', price: '$650', text: 'Para proyectos de videojuegos, XR e interactivos. Reviso su alcance, sus hitos y sus riesgos, y le entrego un plan que su equipo pueda seguir, con sus herramientas de proyecto configuradas si las necesita. Unas 2 semanas.' },
   { id: 'ar-card', group: 'ar', icon: 'star', title: 'Tarjeta o Volante con AR', price: 'Desde $750', text: 'Una tarjeta, un volante o un letrero que cobra vida cuando alguien lo apunta con el teléfono.', items: ['Una pieza impresa', 'Un video corto o un objeto 3D', 'Botones para reservar, llamar o visitar su sitio'] },
-  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'Menú o Empaque con AR', price: 'Desde $1,000', text: 'Un menú, una etiqueta o una caja que muestra un plato en 3D, cómo se hace algo o un saludo del dueño.', items: ['Un menú, una etiqueta o una caja', 'Hasta 3 artículos en 3D o video', 'Un código impreso que lo abre'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'Etiqueta o Empaque con AR', price: 'Desde $1,000', text: 'Una etiqueta de vino, sidra, cerveza o comida que cobra vida con una historia y luego muestra notas de cata, recetas o dónde comprar.', items: ['Una etiqueta, lata o caja', 'Una escena animada, o hasta 3 artículos en 3D o video', 'Botones a sus notas, recetas o tienda'] },
   { id: 'ar-product', group: 'ar', icon: 'layers', title: 'Vista de Producto con AR', price: 'Desde $1,500', text: 'Sus clientes colocan sus productos en su sala, o se los prueban, directo desde su sitio web.', items: ['Hasta 5 productos en 3D', 'Véalo en su espacio o pruébeselo', 'Agregado a las páginas de producto de su sitio'] },
   { id: 'ar-project', group: 'ar', icon: 'compass', title: 'Visor de Proyectos con AR', price: 'Desde $1,500', text: 'Para arquitectos y constructores: su modelo 3D en el teléfono, sobre la mesa de reuniones o a tamaño real en el terreno.', items: ['Usa el modelo que ya tiene', 'Vista sobre la mesa o a tamaño real', 'Un enlace que puede enviar a sus clientes'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
