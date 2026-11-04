@@ -1,0 +1,66 @@
+---
+// AI sub page.
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages/production-emerging-tech.css';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, serviceSchema } from '../../data/site';
+import { aiPackages, aiTasks, faq } from '../../data/tech';
+
+const faqs = [faq.skills, faq.aiSafe, faq.chatbot];
+const schema = serviceSchema(aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })), '/automation-ai-projects/ai/');
+---
+<Base title="AI for You and Your Team" seoTitle="1-on-1 AI Sessions from $150 | Auva Studio" schema={schema} description="Hands-on AI help for owners and teams: a 90-minute 1-on-1 session for $150, using ChatGPT, Claude, or Gemini on your real work, safely.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Put AI to work <em>in the work you already do.</em></h1>
+      <p class="lede">I use AI tools in my own work every day. I’ll show you where they help, which ones to trust, and how to get good results from them.</p>
+      <div class="hero-actions">
+        <a class="btn" href="?topic=ai-session#start">Book a 1-on-1 AI Session, $150 <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="packages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Hands-on, <em>on your real work.</em></h2>
+        <p class="lede">No technical skills needed. Using ChatGPT, Claude, Gemini, or Meta AI.</p>
+      </div>
+      <div class="grid grid-2">
+        {aiPackages.map((p) => (
+          <div class="card offer" id={p.topic}>
+            <div class="icon"><Icon name={p.icon} size={32} /></div>
+            <h3>{p.title}</h3>
+            <p class="svc-meta"><b>{p.price}</b></p>
+            <p class="muted">{p.text}</p>
+            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            <a class="more" href={`?topic=${p.topic}#start`} style="margin-top: 12px">{p.link} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="uses">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">What small teams <em>use AI for.</em></h2>
+      </div>
+      <div class="grid grid-3 ai-tasks">
+        {aiTasks.map((t) => (
+          <div class="card card-row">
+            <div class="icon"><Icon name={t.icon} size={28} /></div>
+            <div><h3>{t.title}</h3><p class="muted small">{t.text}</p></div>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top: 20px"><b>Tools I use.</b> ChatGPT, Claude, Gemini, Meta AI, and Zapier. Want a chatbot on your website? See <a href="/websites/#addons">website add-ons</a>.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" topic="ai-session" />
+</Base>

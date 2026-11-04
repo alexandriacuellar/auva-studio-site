@@ -2,31 +2,28 @@
 import Base from '../../layouts/Base.astro';
 import '../../styles/pages/websites.css';
 import Icon from '../../components/Icon.astro';
-import PathBand from '../../components/PathBand.astro';
+import ToolGrid from '../../components/ToolGrid.astro';
+import HelloBand from '../../components/HelloBand.astro';
 import Packages from '../../components/Packages.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import PhoneViewer from '../../components/PhoneViewer.astro';
 import Faq from '../../components/Faq.astro';
-import PaybackCalc from '../../components/PaybackCalc.astro';
 import { comparison, addons, process, packages, samples, site, serviceSchema } from '../../data/site.es';
-import { Image } from 'astro:assets';
 import { assistantOn } from '../../data/features';
-import skytopShot from '../../assets/samples/skytop-floor-co.jpg';
-import eneaShot from '../../assets/samples/enea-hudson-cattle-farm.jpg';
-import rondoutShot from '../../assets/samples/rondout-mercantile.jpg';
-import headshot from '../../assets/alexandria-cuellar.jpg';
-const sampleShots: Record<string, ImageMetadata> = { 'skytop-floor-co': skytopShot, 'enea-hudson-cattle-farm': eneaShot, 'rondout-mercantile': rondoutShot };
 
 const faqs = [
-  { id: "faq-founding", q: "¿Qué es la oferta para clientes fundadores?", a: "Mis primeros 10 clientes de sitios web reciben un 10% de descuento en cualquier paquete. A cambio, le pido una breve reseña y permiso para mostrar su sitio terminado como ejemplo de mi trabajo. No se combina con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor." },
+  { id: "faq-founding", q: "¿Qué es la oferta para clientes fundadores?", a: "Mis primeros 10 clientes de sitios web reciben un 10% de descuento en cualquier paquete. A cambio, le pido una breve reseña y permiso para mostrar su sitio terminado como ejemplo de mi trabajo. Después, los precios de los paquetes suben. No se combina con el descuento para organizaciones sin fines de lucro; si aplican los dos, recibe el mayor." },
+  { q: "¿Cuándo se paga solo un sitio web?", a: "Divida el precio del paquete entre lo que su sitio le genera cada mes. Por ejemplo, si un cliente nuevo vale $300 para usted y su sitio le trae 2 al mes, Presencia Ampliada ($2,950) se paga sola en unos 5 meses." },
   { q: "¿Cuánto tarda un sitio web?", a: "Presencia Esencial tarda 2–3 semanas, Ampliada 3–5 semanas y Completa 6+ semanas, una vez que tengo su contenido. Mientras antes me envíe sus textos y fotos, antes estará su sitio en línea." },
   { id: "faq-payment-plan", q: "¿Puedo pagar en cuotas?", a: "Sí. Los sitios web empiezan con un depósito del 50%, y el resto se paga en el lanzamiento. Si prefiere repartir el costo un poco más, pregúnteme por un plan de pagos. Divido su factura en pagos programados, acordados por escrito, y usted paga cada uno en línea." },
   { q: '¿El sitio web es mío?', a: 'Sí. Una vez pagado el proyecto por completo, su sitio web, su contenido, su dominio y sus cuentas son suyos. Puede cambiarse a otro hosting o a otro desarrollador cuando quiera.' },
   { q: "¿Necesito tener listos mis textos y fotos?", a: "No. Notas a mano, su sitio anterior y fotos del celular son un buen comienzo, y yo pulo lo que tenga y redacto lo que falte. ¿Quiere adelantar? Vea cómo prepararse para su sitio web nuevo.", html: "No. Notas a mano, su sitio anterior y fotos del celular son un buen comienzo, y yo pulo lo que tenga y redacto lo que falte. ¿Quiere adelantar? Vea <a href=\"/es/websites/get-ready/\">cómo prepararse para su sitio web nuevo</a>." },
-  { q: "¿Puedo actualizar el sitio por mi cuenta?", a: "Sí, con un CMS (sistema de gestión de contenido), un panel sencillo donde cambia sus textos, fotos, noticias y eventos sin código. Viene incluido en Presencia Completa y se puede agregar a Esencial o Ampliada desde $1,750, o puede enviarme los cambios por $50 cada uno. Su CMS funciona con su propia cuenta, a su nombre. Es gratis para la mayoría de los sitios de pequeños negocios. Los sitios grandes, con muchos editores o mucho contenido, pueden necesitar un plan de pago, desde unos $15 por editor al mes. Si es su caso, se lo digo antes de empezar." },
+  { q: "¿Puedo actualizar el sitio por mi cuenta?", a: "Sí, con un CMS (sistema de gestión de contenido), un panel sencillo donde cambia sus textos, fotos, noticias y eventos sin código. Viene incluido en Presencia Completa y se puede agregar a Esencial o Ampliada desde $1,750, o puede enviarme los cambios por $59 cada uno. Su CMS funciona con su propia cuenta, a su nombre. Es gratis para la mayoría de los sitios de pequeños negocios. Los sitios grandes, con muchos editores o mucho contenido, pueden necesitar un plan de pago, desde unos $15 por editor al mes. Si es su caso, se lo digo antes de empezar." },
   { q: "¿Y si algo falla después del lanzamiento?", a: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea Ayuda después del lanzamiento, y siempre le explico la causa y el costo antes de arreglar nada.", html: "Es poco común, porque la mayoría de los sitios que construyo no tienen plugins que se descompongan. Los arreglos son gratis durante 30 días después del lanzamiento; después, vea <a href=\"/es/websites/help-after-launch/\">Ayuda después del lanzamiento</a>, y siempre le explico la causa y el costo antes de arreglar nada." },
   { q: "¿Me encontrarán en Google?", a: "Cada paquete está hecho para que lo encuentren, con títulos de página claros, datos para buscadores, un mapa del sitio y páginas rápidas que Google y herramientas de IA como ChatGPT pueden leer. Nadie puede prometer honestamente una posición, pero su sitio empieza con todo lo que buscan los buscadores." },
   { q: "Mi sitio está en WordPress, Wix o Squarespace. ¿Puede mudarlo?", a: "Lo más probable es que sí. Conservo su contenido y las direcciones de página que Google ya conoce, para que no pierda visitas, y mudar las páginas de su paquete está incluido. Si su sitio ya funciona bien donde está, quizá no valga la pena cambiar, y se lo diré con honestidad." },
+  { q: "¿Por qué usa Astro?", a: "Los sitios hechos con Astro cargan rápido, necesitan poco mantenimiento y cuestan poco de alojar, así que sus costos se mantienen bajos. El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (HTTP Archive y Chrome UX Report). Para aplicaciones web, como portales para clientes o herramientas a la medida, uso otros frameworks según el proyecto.", html: "Los sitios hechos con Astro cargan rápido, necesitan poco mantenimiento y cuestan poco de alojar, así que sus costos se mantienen bajos. El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (<a href=\"https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress&geo=ALL&rank=ALL\" target=\"_blank\" rel=\"noopener\">HTTP Archive</a> y <a href=\"https://developer.chrome.com/docs/crux\" target=\"_blank\" rel=\"noopener\">Chrome UX Report</a>). Para aplicaciones web, como portales para clientes o herramientas a la medida, uso otros frameworks según el proyecto." },
+  { q: "¿Trabaja con agencias o diseñadores?", a: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea Colaboraciones para agencias.", html: "Sí. Creo sitios para agencias y diseñadores independientes, con su marca o con crédito. Vea <a href=\"/es/development-partnerships/\">Colaboraciones para agencias</a>." },
 ];
 
 const schema = serviceSchema([
@@ -34,31 +31,38 @@ const schema = serviceSchema([
   ...addons.map((a) => ({ name: a.title, description: a.text, price: a.price })),
 ], '/es/websites/');
 
+const groups = [
+  { id: 'website-checks', title: 'Su sitio web', doors: [
+    { label: 'Gratis', title: 'Revisión de su sitio', text: '10 preguntas rápidas. Su puntuación y lo más importante que arreglar, sin dar su correo.', href: '/es/website-check/', cta: 'Empezar la revisión gratis' },
+    { label: 'El panorama completo', title: 'Diagnóstico Web, $199', text: 'Sus arreglos en orden, en 5 días hábiles. Se abona a un sitio nuevo.', href: '/es/websites/diagnostic/', cta: 'Pedir el Diagnóstico' },
+  ] },
+  { id: 'google-business-profile', title: 'Su perfil de Google', doors: [
+    { label: 'Gratis', title: 'Revisión de su perfil de Google', text: 'Su puntuación y lo más importante que arreglar, o pasos sencillos si todavía no tiene perfil.', href: '/es/google-profile-check/', cta: 'Empezar la revisión gratis' },
+    { label: 'Lo hago por usted', title: 'Configuración u optimización, $500', text: 'Pago único, con una guía para mantenerlo al día. Se abonan $150 a un sitio web.', href: '/es/websites/google-business-profile/', cta: 'Que lo haga yo' },
+  ] },
+];
+
 const audiences = [
   { id: 'hospitality', icon: 'star', title: 'Hospitalidad y turismo', text: 'Posadas, restaurantes, viñedos y granjas, con menús, habitaciones y eventos fáciles de encontrar en el celular.' },
   { id: 'makers', icon: 'layers', title: 'Tiendas y artesanos', text: 'Boutiques, galerías y artistas, que muestran su trabajo y dónde comprarlo.' },
   { id: 'services', icon: 'wrench', title: 'Servicios locales', text: 'Oficios, bienestar, salones y bienes raíces, con una forma fácil de llamar, reservar o pedir un presupuesto.' },
   { id: 'nonprofits', icon: 'book', title: 'Organizaciones sin fines de lucro y cultura', text: 'Museos, grupos de arte, rescates y grupos comunitarios, que comparten su historia, sus eventos y cómo apoyar.' },
   { id: 'startups', icon: 'key', title: 'Startups', text: 'Equipos nuevos que necesitan un primer sitio creíble que reciba registros o consultas.' },
-  { id: 'studios', icon: 'bolt', title: 'Estudios de videojuegos y XR', text: 'Estudios independientes de videojuegos y XR, con tráileres, kit de prensa y enlaces a las tiendas.' },
 ];
 ---
-<Base title="Sitios web" seoTitle="Sitios web para pequeños negocios en el Hudson Valley, desde $1,500 | Auva Studio" schema={schema} description="Sitios web rápidos y fáciles de usar en el celular para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. Paquetes de pago único desde $1,500, con hosting gratis o de bajo costo.">
+<Base title="Sitios web" seoTitle="Sitios web para pequeños negocios en el Hudson Valley, desde $1,500 | Auva Studio" schema={schema} description="Sitios web rápidos y fáciles de usar en el celular para pequeños negocios y organizaciones. Paquetes de pago único desde $1,500, con hosting gratis o económico.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head" style="max-width: 22ch">Un sitio web que ayuda a sus clientes a <em>encontrarle, confiar en usted y contactarle.</em></h1>
-      <p class="lede">Fácil de usar en el celular, rápido de cargar, barato de mantener y totalmente suyo.</p>
+      <p class="lede">Un diseño a la medida de su negocio, páginas rápidas en cualquier teléfono y un sitio económico que es completamente suyo.</p>
       <div class="hero-actions">
         <a class="btn" href="#packages">Ver paquetes</a>
-        <a class="btn btn-ghost" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Contácteme</a>
       </div>
-      <ul class="hero-strip">{['Precios fijos', 'Sitios rápidos y accesibles', 'Todo es suyo', 'Visible en Google y en las búsquedas con IA'].map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
     </div>
   </section>
 
-  <section class="hello-band" aria-label="Alexandria Cuellar">
-    <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>Hola, soy Alexandria,</b> fundadora de Auva Studio. Pasé casi 20 años como una de muchas desarrolladoras detrás de sitios web de periódicos locales, incluido el del Times Herald-Record. Ahora creo sitios rápidos y a la medida para pequeños negocios, y trabajará directamente conmigo desde la primera llamada hasta el lanzamiento. <a href="/es/about/">Más sobre mí</a><ul class="hello-facts"><li><b>Casi 20</b> años creando sitios web</li><li><b>20+</b> años en software</li></ul></span></div>
-  </section>
+  <HelloBand facts={["<b>20+</b> años en desarrollo web", "Sitios para <b>150+</b> periódicos", "Con sede en el <b>Hudson Valley</b>"]} />
 
   <section class="alt" id="who">
     <div class="wrap">
@@ -73,14 +77,13 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             {a.id === 'nonprofits' && <p class="small who-phone">Pregunte por mi descuento para organizaciones sin fines de lucro.</p>}
-            <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio</a>
           </div>
         ))}
-        <div class="card who-other who-wide">
+        <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>¿Otra cosa?</h3>
           <p>Cuénteme sobre su negocio o proyecto, y le recomiendo el paquete que le conviene.</p>
-          <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos de su sitio</a>
+          <a class="more" href="?topic=website#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
@@ -90,10 +93,9 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Elija <em>el paquete adecuado.</em></h2>
-        <p class="lede">Cada paquete parte del anterior, así que solo paga por lo que necesita hoy.</p>
+        <p class="lede">Cada paquete parte del anterior, y cada precio es un pago único. Cambie a uno mayor cuando quiera y pague solo la diferencia.</p>
       </div>
       <Packages />
-      <PaybackCalc />
     </div>
   </section>
 
@@ -101,24 +103,9 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Vea cómo <em>se ve cada paquete.</em></h2>
-        <p class="lede">Un sitio de muestra para cada paquete. Los negocios son inventados, pero cada página y función trabaja tal como lo haría en su sitio, y los formularios muestran lo que verían sus visitantes. Los sitios de muestra están en inglés.</p>
+        <p class="lede">Una muestra para cada paquete. Los negocios son inventados, pero todo funciona tal como lo haría en su sitio. Elija una, y desplácese y toque dentro del teléfono. Los sitios de muestra están en inglés.</p>
       </div>
       <PhoneViewer lang="es" />
-      <div class="grid grid-3 samples">
-        {samples.map((sm) => {
-          const pk = packages.find((x) => x.name === sm.package);
-          return (
-            <a class="card sample" href={`/samples/${sm.slug}/`} hreflang="en">
-              <Image class="sample-shot" src={sampleShots[sm.slug]} alt={`La página principal de ${sm.name}, un sitio de muestra del paquete ${sm.package}`} widths={[480, 720, 960]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 380px" />
-              <span class="tag">{sm.package}, {pk?.price}</span>
-              <h3>{sm.name}</h3>
-              <p class="muted">{sm.text}</p>
-              <p class="sample-for">{sm.goodFor}</p>
-              <span class="sample-go">Visitar el sitio de muestra <span aria-hidden="true">→</span></span>
-            </a>
-          );
-        })}
-      </div>
     </div>
   </section>
 
@@ -134,13 +121,14 @@ const audiences = [
             <span class="num" aria-hidden="true">{i + 1}</span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
-            <p class="you"><b>Usted:</b> {s.you}</p>
-            {s.link && <p class="you"><a href={s.link.href}>{s.link.text} <Icon name="arrow" size={14} /></a></p>}
-            <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+            <details class="step-more"><summary>Ver detalles</summary>
+              <p class="you"><b>Usted:</b> {s.you}</p>
+              {s.link && <p class="you"><a href={s.link.href}>{s.link.text} <Icon name="arrow" size={14} /></a></p>}
+              <ul class="step-terms">{s.terms.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
+            </details>
           </li>
         ))}
       </ol>
-      <p class="fine">Los pasos son los mismos para todos los paquetes. Los sitios pequeños los recorren más rápido, y los más grandes toman un poco más.</p>
     </div>
   </section>
 
@@ -148,30 +136,47 @@ const audiences = [
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Rápido, económico <em>y suyo.</em></h2>
-        <p class="lede">Construyo cada sitio con Astro, una herramienta moderna para sitios web rápidos y ligeros. Así su sitio se mantiene rápido y mis precios, justos.</p>
+        <p class="lede">Construyo la mayoría de mis sitios con Astro, un framework moderno para sitios rápidos y ligeros. Esto es lo que significa para usted.</p>
       </div>
-      <div class="grid grid-3 plain-grid">
+      <ul class="benefit-list">
         {comparison.benefits.map((b) => (
-          <div><div class="icon"><Icon name={b.icon} /></div><h3>{b.title}</h3><p class="muted">{b.text}</p></div>
+          <li><details><summary><Icon name={b.icon} size={22} /><span>{b.title}</span></summary><p class="muted">{b.text}</p></details></li>
         ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="updates">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Mantenga su sitio <em>al día.</em></h2>
+        <p class="lede">Después de los 30 días de correcciones, usted hace los cambios o los hago yo.</p>
       </div>
-      <p class="fine">El 71% de los sitios reales hechos con Astro aprueban la evaluación de Core Web Vitals de Google, frente al 48% de los sitios de WordPress (<a href="https://httparchive.org/" target="_blank" rel="noopener">HTTP Archive</a> y <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener">Chrome UX Report</a>). <a href="https://httparchive.org/reports/techreport/tech?client=mobile&tech=Astro,WordPress,Gatsby,Next.js,Nuxt.js&geo=ALL&rank=ALL&page=1" target="_blank" rel="noopener">Ver todos los datos</a>.</p>
-      <div class="proof proof-why">
-        <Image src={headshot} alt="Alexandria Cuellar" width={72} height={72} densities={[1, 2]} />
-        <div>
-          <p class="proof-line">Pasé casi 20 años creando sitios web y aplicaciones web para periódicos. Su sitio recibe el mismo cuidado, desde la primera llamada hasta el lanzamiento.</p>
+      <div class="grid grid-2">
+        <div class="card" id="cms">
+          <div class="icon"><Icon name="gear" size={32} /></div>
+          <h3>Actualícelo usted mismo</h3>
+          <p class="muted">Un CMS (sistema de gestión de contenidos) es un panel sencillo donde usted actualiza sus textos, fotos, noticias y eventos. Sin programar.</p>
+          <p><b style="color: var(--primary)">Incluido en Complete Presence</b><br /><span class="muted">Agréguelo a Essential o Expanded desde $1,750.</span></p>
+        </div>
+        <div class="card" id="care">
+          <div class="icon"><Icon name="wrench" size={32} /></div>
+          <h3>O yo hago los cambios</h3>
+          <p class="muted">Funciona con cualquier paquete. Pídame cambios cuando los necesite, sin tarifa mensual. Si su sitio cambia a menudo, use un paquete de horas o un retainer mensual.</p>
+          <p><b style="color: var(--primary)">$59 por cambio</b></p>
+          <a class="more" href="/es/websites/help-after-launch/">Vea cómo funcionan los cambios <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="addons">
+  <section class="alt" id="addons">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Agregue más <em>cuando lo necesite.</em></h2>
       </div>
       <div class="grid grid-2">
-        {addons.map((a) => (
+        {addons.filter((a) => a.id !== 'cms').map((a) => (
           <div class="card">
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
@@ -180,54 +185,46 @@ const audiences = [
             {assistantOn && 'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
           </div>
         ))}
-      </div>
-
-      <div class="card card-row" id="care" style="margin-top: 24px">
-        <div class="icon"><Icon name="wrench" size={32} /></div>
-        <div>
-          <h3>¿Prefiere que yo haga los cambios?</h3>
-          <p class="muted">Pídame cambios cuando los necesite por <b style="color: var(--primary)">$50 cada uno</b>, sin tarifa mensual, o cuente conmigo como su productora web desde $650 por 5 horas al mes.</p>
-          <a class="more" href="/es/websites/help-after-launch/" style="margin-top: 8px">Vea cómo funcionan los cambios</a>
+        <div class="card" id="brand">
+          <div class="icon"><Icon name="star" size={32} /></div>
+          <h3>Identidad de Marca</h3>
+          <p class="muted">Un logo, colores y tipografías que causan una gran primera impresión. Por sí sola, o con cualquier paquete de sitio web.</p>
+          <p><b style="color: var(--primary)">$1,000</b></p>
+          <a class="more" href="/es/websites/brand-essentials/">Vea lo que incluye <Icon name="arrow" size={16} /></a>
         </div>
       </div>
-
-      <div class="band" style="margin-top: 48px" id="brand">
-        <div>
-          <p class="eyebrow" style="color: var(--tint)">Servicio adicional opcional</p>
-          <h2>Identidad de Marca</h2>
-          <p>Una identidad visual reconocible y uniforme que causa una gran primera impresión, lista para su sitio web y para todo lo demás.</p>
-        </div>
-        <div>
-          <p class="price" style="font-size: 4rem">$1,000</p>
-          <p>Precio fijo. Por sí sola, o con cualquier paquete de sitio web.</p>
-          <a class="btn" href="/es/websites/brand-essentials/">Vea lo que incluye</a>
-        </div>
-      </div>
-      <p class="muted" style="margin-top: 32px"><b>Cuando su sitio esté en línea,</b> también puedo ayudarle a <a href="/es/technology-consulting/#automation">automatizar el trabajo repetitivo</a>, a <a href="/es/technology-consulting/#ai">poner la IA a trabajar para su equipo</a> o a <a href="/es/production-emerging-tech/#ideas">probar la AR en su negocio</a>.</p>
+      <p class="muted" style="margin-top: 32px"><b>Cuando su sitio esté en línea,</b> también puedo ayudarle a <a href="/es/automation-ai-projects/automation/">automatizar el trabajo repetitivo</a>, a <a href="/es/automation-ai-projects/ai/">poner la IA a trabajar para su equipo</a> o a <a href="/es/ar-vr-production/ar/">probar la AR en su negocio</a>.</p>
     </div>
   </section>
 
-  <section class="alt" id="diagnostic">
+  <section id="diagnostic">
     <div class="wrap">
-      <PathBand
-        eyebrow="¿Ya tiene sitio web?"
-        title="Descubra qué le está costando clientes."
-        text="Celular, velocidad, búsqueda en Google y primera impresión: qué funciona, qué no y qué arreglar primero."
-        free={{ label: '¿Aún tiene dudas?', title: 'Revisión gratis de su sitio', text: '10 preguntas rápidas. Su puntuación y lo más importante que arreglar al instante, sin dar su correo.', href: '/es/website-check/', cta: 'Empezar la revisión gratis' }}
-        paid={{ label: '¿Quiere el panorama completo?', title: 'Diagnóstico Web, $199', text: 'Un informe en lenguaje sencillo con sus arreglos en orden, en 5 días hábiles. Se abona a un sitio nuevo.', href: '/es/websites/diagnostic/', cta: 'Pedir el Diagnóstico' }}
-      />
-      <PathBand
-        id="google-business-profile"
-        style="margin-top: 24px"
-        eyebrow="¿Tiene clientes locales?"
-        title="Aparezca en Google Maps."
-        text="Muchas veces es lo primero que ve la gente cuando le busca. Un horario equivocado o un perfil incompleto los manda con otro."
-        free={{ label: '¿Aún tiene dudas?', title: 'Revisión gratis de su perfil de Google', text: 'Su puntuación y lo más importante que arreglar al instante, o pasos sencillos si todavía no tiene perfil.', href: '/es/google-profile-check/', cta: 'Empezar la revisión gratis' }}
-        paid={{ label: '¿Prefiere que lo haga yo?', title: 'Configuración u optimización, $500', text: 'Pago único, con una guía para mantenerlo al día. Se abonan $150 a un sitio web.', href: '/es/websites/google-business-profile/', cta: 'Que lo haga yo' }}
-      />
+      <div class="band path-band path-band-4">
+        <div>
+          <p class="eyebrow" style="color: var(--tint)">¿Ya tiene sitio web o perfil de Google?</p>
+          <h2>Descubra qué le está costando clientes.</h2>
+          <p>Empiece con una revisión gratis y vea al instante lo más importante que arreglar, o deje que yo lo haga.</p>
+        </div>
+        <div class="doors doors-4">
+          {groups.map((g) => (
+            <div class="door-group" id={g.id}>
+              <p class="door-group-title">{g.title}</p>
+              {g.doors.map((d, i) => (
+                <a class:list={['door', { 'door-free': i === 0 }]} href={d.href}>
+                  <span class="door-label">{d.label}</span>
+                  <span class="door-title">{d.title}</span>
+                  <span class="door-text">{d.text}</span>
+                  <span class="door-cta">{d.cta} <Icon name="arrow" size={18} /></span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
   <Faq faqs={faqs} />
   <InquiryForm kind="website" alt />
+  <ToolGrid set="websites" lang="es" lede="Astro para la mayoría de los sitios, y otras plataformas cuando el proyecto lo necesita, como una tienda en línea o una aplicación web." />
 </Base>

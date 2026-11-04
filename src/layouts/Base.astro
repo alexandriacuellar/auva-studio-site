@@ -15,15 +15,19 @@ const l = (href: string) => localize(href, lang);
 // Header, footer, and page-wide wording in each language.
 const t = {
   en: {
-    description: 'Websites you own; help with tech tools, automation, and AI; and production for games, XR, and AR, for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
-    defaultTitle: 'Websites, Tech Help & Game Production in the Hudson Valley',
+    description: 'Websites you own, AI and automation help, and AR, VR, and game production for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
+    defaultTitle: 'Hudson Valley Websites, AI & Automation, AR & VR, Project and Production Support',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
     promoLabel: 'Founding offer',
-    promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review.',
+    promoLong: '<b>Founding client offer:</b> 10% off any website package for my first 10 clients, in exchange for a short review. Prices go up after that.',
     promoShort: '<b>Founding offer:</b> 10% off websites.',
     promoLink: 'Ask about it',
     promoLinkShort: 'Ask about it',
+    promoAr: '<b>Founding prices:</b> my AR packages are priced for my first 5 AR clients, in exchange for a short review.',
+    promoArShort: '<b>Founding prices</b> for my first 5 AR clients.',
+    promoTech: '<b>Founding prices:</b> these prices are for my first 5 automation, AI, and project clients, in exchange for a short review.',
+    promoTechShort: '<b>Founding prices</b> for my first 5 clients.',
     home: 'Auva Studio home',
     menu: 'Menu',
     close: 'Close',
@@ -38,7 +42,7 @@ const t = {
     ftMore: 'More services',
     ftTools: 'Free tools',
     ftAbout: 'About Alexandria',
-    footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/technology-consulting/', 'Tech, Automation & AI'], ['/production-emerging-tech/', 'Production & Emerging Tech'], ['/development-partnerships/', 'Development Partnerships']],
+    footerServices: [['/websites/', 'Website Services'], ['/websites/diagnostic/', 'Website Diagnostic', true], ['/websites/google-business-profile/', 'Google Business Profile', true], ['/websites/help-after-launch/', 'Help After Launch', true], ['/websites/brand-essentials/', 'Brand Essentials', true], ['/development-partnerships/', 'Development Partnerships', true], ['/automation-ai-projects/', 'Automation, AI & Projects'], ['/ar-vr-production/', 'AR, VR & Production']],
     getStarted: 'Get started',
     contact: 'Contact',
     bookCall: 'Book a call',
@@ -56,15 +60,19 @@ const t = {
     about: ', about: ',
   },
   es: {
-    description: 'Sitios web que son suyos; ayuda con herramientas tecnológicas, automatización e IA; y producción para videojuegos, XR y AR, para pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento en el Hudson Valley.',
-    defaultTitle: 'Sitios web, tecnología y producción de videojuegos en el Hudson Valley',
+    description: 'Sitios web que son suyos, ayuda con IA y automatización, y producción de AR, VR y videojuegos para pequeños negocios y organizaciones del Hudson Valley.',
+    defaultTitle: 'Sitios web, IA y automatización, AR y VR, y apoyo de proyectos y producción en el Hudson Valley',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
     promoLabel: 'Oferta para fundadores',
-    promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña.',
+    promoLong: '<b>Oferta para clientes fundadores:</b> 10% de descuento en cualquier paquete de sitio web para mis primeros 10 clientes, a cambio de una breve reseña. Después, los precios suben.',
     promoShort: '<b>Fundadores:</b> 10% en sitios web.',
     promoLink: 'Pregunte por ella',
     promoLinkShort: 'Pregunte',
+    promoAr: '<b>Precios de fundadores:</b> mis paquetes de AR tienen este precio para mis primeros 5 clientes de AR, a cambio de una breve reseña.',
+    promoArShort: '<b>Precios de fundadores</b> para mis primeros 5 clientes de AR.',
+    promoTech: '<b>Precios de fundadores:</b> estos precios son para mis primeros 5 clientes de automatización, IA y proyectos, a cambio de una breve reseña.',
+    promoTechShort: '<b>Precios de fundadores</b> para mis primeros 5 clientes.',
     home: 'Inicio de Auva Studio',
     menu: 'Menú',
     close: 'Cerrar',
@@ -79,7 +87,7 @@ const t = {
     ftMore: 'Más servicios',
     ftTools: 'Herramientas gratis',
     ftAbout: 'Sobre Alexandria',
-    footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/technology-consulting/', 'Tecnología, Automatización e IA'], ['/production-emerging-tech/', 'Producción y Tecnología Emergente'], ['/development-partnerships/', 'Colaboraciones para agencias']],
+    footerServices: [['/websites/', 'Servicios de sitios web'], ['/websites/diagnostic/', 'Diagnóstico Web', true], ['/websites/google-business-profile/', 'Perfil de Negocio de Google', true], ['/websites/help-after-launch/', 'Ayuda después del lanzamiento', true], ['/websites/brand-essentials/', 'Identidad de Marca', true], ['/development-partnerships/', 'Colaboraciones para agencias', true], ['/automation-ai-projects/', 'Automatización, IA y Proyectos'], ['/ar-vr-production/', 'AR, VR y Producción']],
     getStarted: 'Para empezar',
     contact: 'Contacto',
     bookCall: 'Reservar una llamada',
@@ -107,11 +115,30 @@ const base = basePath(path);
 const hasSpanish = translatedPages.includes(base);
 const otherLang = lang === 'es' ? 'en' : 'es';
 const switchHref = switchPath(path, otherLang);
-// The founding offer is for websites, so the bar shows only where website buyers land.
-const showPromo = base === '/' || base.startsWith('/websites/') || base === '/website-check/';
+// Each service has its own founding offer, so the bar says something different per section.
+// Websites: 10% off (Home, Websites, website check). AR and Automation: founding prices. Studio pages: none.
+const promo = (base === '/' || base.startsWith('/websites/') || base === '/website-check/')
+  ? { long: t.promoLong, short: t.promoShort, href: '/websites/#faq-founding' }
+  : (base === '/ar-vr-production/' || base.startsWith('/ar-vr-production/ar/'))
+  ? { long: t.promoAr, short: t.promoArShort, href: '/ar-vr-production/ar/#faq-founding' }
+  : base.startsWith('/automation-ai-projects/')
+  ? { long: t.promoTech, short: t.promoTechShort, href: '/automation-ai-projects/#faq-founding' }
+  : null;
+const showPromo = !!promo;
 
-const orgDescription = 'Auva Studio is a digital technology and solutions studio that builds websites clients own and helps small businesses, startups, nonprofits, and growing teams choose the right tools, put AI to work, and deliver projects, with producer support for game, XR, and interactive projects. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
+const orgDescription = 'Auva Studio builds websites clients own, sets up automation and AI, and manages projects for small businesses, startups, nonprofits, and growing teams, plus AR packages and production support for game and XR teams. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
+// Sub pages (like /websites/diagnostic/) get breadcrumb data for search results: Home > section > page.
+const navParent = (nav as { href: string; label: string; title?: string; children?: { href: string; label: string }[] }[]).find((item) => item.children?.some((c) => c.href === path) && item.href !== path);
+const navChild = navParent?.children?.find((c) => c.href === path);
+const breadcrumb = navParent && navChild ? [{
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: site.name, item: new URL(lang === 'es' ? '/es/' : '/', site.url).href },
+    { '@type': 'ListItem', position: 2, name: navParent.title ?? navParent.label, item: new URL(navParent.href, site.url).href },
+    { '@type': 'ListItem', position: 3, name: navChild.label, item: pageUrl },
+  ],
+}] : [];
 // One graph per page: the business, its founder, the site, and this page, plus anything the page adds (services, FAQs).
 const schema = {
   '@context': 'https://schema.org',
@@ -140,13 +167,14 @@ const schema = {
       '@id': `${site.url}/#founder`,
       name: 'Alexandria Cuellar',
       jobTitle: 'Founder, Auva Studio',
-      description: 'Founder of Auva Studio. Builds websites, sets up tools and automation, and produces games and XR. Web producer, and game and XR producer.',
-      knowsAbout: ['Web production', 'Website project management', 'Game production', 'XR production', 'Agile project management', 'Technology consulting'],
+      description: 'Founder of Auva Studio, a web developer and software engineer, and a game and XR producer. She builds websites, sets up tools and automation, and works with clients directly in English or Spanish.',
+      knowsAbout: ['Web development', 'Software engineering', 'Web production', 'Website project management', 'Game production', 'XR production', 'Agile project management', 'Technology consulting'],
       worksFor: { '@id': `${site.url}/#org` },
       image: `${site.url}/alexandria-cuellar.jpg`,
     },
     { '@type': 'WebSite', '@id': `${site.url}/#website`, name: site.name, url: `${site.url}/`, publisher: { '@id': `${site.url}/#org` } },
     { '@type': 'WebPage', '@id': `${pageUrl}#page`, url: pageUrl, name: fullTitle, description, inLanguage: lang === 'es' ? 'es-US' : 'en-US', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#org` } },
+    ...breadcrumb,
     ...pageSchema,
   ],
 };
@@ -239,7 +267,7 @@ const schema = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
-    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={t.promoLong} /><span class="promo-short" set:html={t.promoShort} /> <a href={l('/websites/#faq-founding')}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
+    {showPromo && <aside class="promo-bar" aria-label={t.promoLabel}><span class="promo-long" set:html={promo.long} /><span class="promo-short" set:html={promo.short} /> <a href={l(promo.href)}>{t.promoLink === t.promoLinkShort ? t.promoLink : <><span class="promo-long">{t.promoLink}</span><span class="promo-short">{t.promoLinkShort}</span></>}</a></aside>}
     <header class="site-header">
       <div class="wrap header-inner">
         <a href={l('/')} class="brand" aria-label={t.home}>

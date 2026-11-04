@@ -23,7 +23,7 @@ const t = {
       general: { eyebrow: 'Send a message', title: 'Tell me <em>about your project.</em>', lede: "Share a few details and I'll follow up personally with questions or a suggested next step." },
       contact: { eyebrow: 'Contact', title: "Let's talk about <em>what you're working on.</em>", lede: "Book a free 30-minute call, or send a message and I'll reply within 24–48 hours. No detailed plan needed." },
       partner: { eyebrow: 'Partner with me', title: 'Tell me <em>about your project.</em>', lede: 'A single build, an overflow project, or an ongoing partnership are all welcome. Designs, briefs, or a rough idea are enough to start.' },
-      ai: { eyebrow: 'Start exploring', title: 'Tell me <em>about your project.</em>', lede: 'A game in production, an early XR idea, or a small AR project. No formal brief needed.' },
+      ai: { eyebrow: 'Start exploring', title: 'Tell me <em>about your project.</em>', lede: 'A game in production, an early VR idea, or a small AR project. No formal brief needed.' },
       consulting: { eyebrow: 'Start a conversation', title: "Tell me <em>what you're working on.</em>", lede: 'Early ideas, projects already underway, and work alongside your current team or vendors are all welcome. No formal brief needed.' },
     },
     websiteTopics: [
@@ -48,34 +48,24 @@ const t = {
     readPersonally: 'I read every message personally.',
     alsoEmail: 'I read every message personally. You can also email',
     orForm: 'Or send a message with the form.',
+    sooner: 'Want to talk sooner?',
     whatNext: 'What happens next',
     scoped: 'Any work is scoped and priced in writing before it begins.',
     preferTalk: 'Prefer to talk?',
     instead: 'instead.',
     name: 'Name', email: 'Email', business: 'Business or organization', phone: 'Phone', optional: '(optional)',
     about: "What's this about?",
-    generalTopics: [['website', 'Website'], ['consulting', 'Tech tools, automation, AI, or project help'], ['ai', 'Production & Emerging Tech (games, XR, AR)'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
+    generalTopics: [['website', 'Website'], ['consulting', 'Automation, AI, or project management'], ['ai', 'AR, VR, or game production'], ['partner', 'Development partnership (agencies and designers)'], ['unsure', 'Not sure yet']],
     workingOn: 'What are you working on?',
     need: 'What do you need?', currentSite: 'Current website', tellBusiness: 'Tell me about your business',
     interested: 'Interested in',
-    aiTopics: [['unsure', 'Not sure yet'], ['production', 'Production Support'], ['review', 'Production Plan Review'], ['ar-starter', 'AR Starter Project']],
-    area: 'Area',
-    consultingTopics: [['unsure', 'Not sure yet'], ['planning', 'Tech Review'], ['automation', 'Automation setup'], ['workspace', 'Project workspace setup'], ['workshop', 'Team AI Workshop'], ['delivery', 'Project Management']],
+    aiTopics: [['unsure', 'Not sure yet'], ['production', 'Production Support ($65/hr)'], ['review', 'Production Plan Review ($650)'], ['ar-card', 'AR Card or Flyer (from $750)'], ['ar-menu', 'AR Label or Packaging (from $1,000)'], ['ar-product', 'AR Product View (from $1,500)'], ['ar-project', 'AR Project Viewer (from $1,500)'], ['xr-idea', 'VR or smart glasses project']],
+    area: 'Interested in',
+    consultingTopics: [['unsure', 'Not sure yet'], ['planning', 'Tech Review ($250)'], ['automation', 'Automation ($500 per workflow)'], ['ai-session', '1-on-1 AI Session ($150)'], ['workshop', 'Team AI Workshop (coming soon)'], ['workspace', 'Project workspace setup (from $400)'], ['kickoff', 'Project Kickoff Plan ($650)'], ['delivery', 'Monthly project management (from $650/mo)']],
     exploring: 'What are you exploring?', going: "What's going on?",
     howWork: 'How would you like to work?',
     partnerTopics: [['unsure', 'Not sure yet'], ['white-label', 'White-label'], ['subcontracting', 'Subcontracting'], ['collaborative', 'Collaborative delivery']],
     projectNeeds: 'What does the project need?',
-    styleLegend: 'Which style feels most like your business?',
-    styleHint: "Not sure? Skip it. We'll choose together on our first call.",
-    example: 'Example:',
-    styles: [
-      ['clean', 'Clean and simple', 'Lots of space, nothing extra.', ''],
-      ['organized', 'Organized and practical', 'Clear sections, easy to scan.', 'Skytop Floor Co.'],
-      ['warm', 'Warm and personal', 'Friendly photos and soft colors.', 'Rondout Mercantile'],
-      ['editorial', 'Editorial and calm', 'A magazine feel, quiet and refined.', 'Enea Hudson Cattle Farm'],
-      ['bold', 'One bold signature', 'One standout color, font, or image.', ''],
-      ['motion', 'Full of motion', 'Animation and interaction that wow.', ''],
-    ],
     send: 'Send message',
     sending: 'Sending…',
     thanks: "Thanks! Your message is on its way. You'll hear back within 24–48 hours.",
@@ -86,7 +76,7 @@ const t = {
       general: { eyebrow: 'Envíe un mensaje', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Comparta algunos detalles y le respondo personalmente con preguntas o un siguiente paso sugerido.' },
       contact: { eyebrow: 'Contacto', title: 'Hablemos de <em>lo que está haciendo.</em>', lede: 'Reserve una llamada gratis de 30 minutos, o envíe un mensaje y le respondo en 24–48 horas. No necesita un plan detallado.' },
       partner: { eyebrow: 'Trabajemos juntos', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Un solo sitio, un proyecto extra o una colaboración continua: todo es bienvenido. Diseños, un brief o una idea general bastan para empezar.' },
-      ai: { eyebrow: 'Empiece a explorar', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Un videojuego en producción, una idea temprana de XR o un proyecto AR pequeño. No necesita una propuesta formal.' },
+      ai: { eyebrow: 'Empiece a explorar', title: 'Cuénteme <em>sobre su proyecto.</em>', lede: 'Un videojuego en producción, una idea temprana de VR o un proyecto AR pequeño. No necesita una propuesta formal.' },
       consulting: { eyebrow: 'Empecemos a conversar', title: 'Cuénteme <em>en qué está trabajando.</em>', lede: 'Ideas tempranas, proyectos ya en marcha y trabajo junto a su equipo o proveedores actuales: todo es bienvenido. No necesita una propuesta formal.' },
     },
     websiteTopics: [
@@ -111,34 +101,24 @@ const t = {
     readPersonally: 'Leo cada mensaje personalmente.',
     alsoEmail: 'Leo cada mensaje personalmente. También puede escribir a',
     orForm: 'O envíe un mensaje con el formulario.',
+    sooner: '¿Quiere hablar antes?',
     whatNext: 'Qué sigue',
     scoped: 'Todo trabajo se define y se cotiza por escrito antes de empezar.',
     preferTalk: '¿Prefiere hablar?',
     instead: 'en su lugar.',
     name: 'Nombre', email: 'Correo electrónico', business: 'Negocio u organización', phone: 'Teléfono', optional: '(opcional)',
     about: '¿De qué se trata?',
-    generalTopics: [['website', 'Sitio web'], ['consulting', 'Herramientas, automatización, IA o ayuda con proyectos'], ['ai', 'Producción y Tecnología Emergente (videojuegos, XR, AR)'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
+    generalTopics: [['website', 'Sitio web'], ['consulting', 'Automatización, IA o gestión de proyectos'], ['ai', 'AR, VR o producción de videojuegos'], ['partner', 'Colaboración de desarrollo (agencias y diseñadores)'], ['unsure', 'Todavía no sé']],
     workingOn: '¿En qué está trabajando?',
     need: '¿Qué necesita?', currentSite: 'Sitio web actual', tellBusiness: 'Cuénteme sobre su negocio',
     interested: 'Me interesa',
-    aiTopics: [['unsure', 'Todavía no sé'], ['production', 'Apoyo de Producción'], ['review', 'Revisión del Plan de Producción'], ['ar-starter', 'Proyecto AR Inicial']],
-    area: 'Área',
-    consultingTopics: [['unsure', 'Todavía no sé'], ['planning', 'Revisión Tecnológica'], ['automation', 'Configuración de automatización'], ['workspace', 'Configuración de espacio de proyectos'], ['workshop', 'Taller de IA para Equipos'], ['delivery', 'Gestión de Proyectos']],
+    aiTopics: [['unsure', 'Todavía no sé'], ['production', 'Apoyo de Producción ($65/hora)'], ['review', 'Revisión del Plan de Producción ($650)'], ['ar-card', 'Tarjeta o Volante con AR (desde $750)'], ['ar-menu', 'Etiqueta o Empaque con AR (desde $1,000)'], ['ar-product', 'Vista de Producto con AR (desde $1,500)'], ['ar-project', 'Visor de Proyectos con AR (desde $1,500)'], ['xr-idea', 'Un proyecto de VR o lentes inteligentes']],
+    area: 'Me interesa',
+    consultingTopics: [['unsure', 'Todavía no sé'], ['planning', 'Revisión Tecnológica ($250)'], ['automation', 'Automatización ($500 por flujo de trabajo)'], ['ai-session', 'Sesión de IA 1 a 1 ($150)'], ['workshop', 'Taller de IA para Equipos (muy pronto)'], ['workspace', 'Configuración de espacio de proyectos (desde $400)'], ['kickoff', 'Plan de Arranque de Proyecto ($650)'], ['delivery', 'Gestión de proyectos mensual (desde $650 al mes)']],
     exploring: '¿Qué está explorando?', going: '¿Qué está pasando?',
     howWork: '¿Cómo le gustaría trabajar?',
     partnerTopics: [['unsure', 'Todavía no sé'], ['white-label', 'Marca blanca'], ['subcontracting', 'Subcontratación'], ['collaborative', 'Entrega colaborativa']],
     projectNeeds: '¿Qué necesita el proyecto?',
-    styleLegend: '¿Qué estilo va más con su negocio?',
-    styleHint: '¿No está seguro? Sáltelo. Lo elegimos juntos en nuestra primera llamada.',
-    example: 'Ejemplo:',
-    styles: [
-      ['clean', 'Limpio y sencillo', 'Mucho espacio, nada de más.', ''],
-      ['organized', 'Organizado y práctico', 'Secciones claras, fácil de recorrer.', 'Skytop Floor Co.'],
-      ['warm', 'Cálido y cercano', 'Fotos amables y colores suaves.', 'Rondout Mercantile'],
-      ['editorial', 'Editorial y sereno', 'Estilo revista, tranquilo y refinado.', 'Enea Hudson Cattle Farm'],
-      ['bold', 'Un sello llamativo', 'Un color, letra o imagen que destaca.', ''],
-      ['motion', 'Lleno de movimiento', 'Animación e interacción que sorprenden.', ''],
-    ],
     send: 'Enviar mensaje',
     sending: 'Enviando…',
     thanks: '¡Gracias! Su mensaje va en camino. Le respondo en 24–48 horas.',
@@ -147,20 +127,17 @@ const t = {
 }[lang];
 const intro = isGeneral && !hero ? t.intros.general : isGeneral ? t.intros.contact : isPartner ? t.intros.partner : isAi ? t.intros.ai : t.intros.consulting;
 // Spanish messages say so in the subject line, so replies go out in Spanish.
-const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New Production & Emerging Tech inquiry from auvastudio.com' : 'New consulting inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
+const subject = (isGeneral ? 'New inquiry from auvastudio.com' : isWebsite ? 'New website inquiry from auvastudio.com' : isPartner ? 'New development partnership inquiry from auvastudio.com' : isAi ? 'New AR, VR & Production inquiry from auvastudio.com' : 'New Automation, AI & Projects inquiry from auvastudio.com') + (lang === 'es' ? ' (Spanish)' : '');
 const websiteTopics = t.websiteTopics;
 // Each website service page gets its own heading, lede, and next step.
 const replyLine = t.replyLine;
 // Paid services list their buying steps in order, so the route to pay is plain.
 const websiteIntro = (t.websiteIntro(replyLine) as Record<string, { title: string; lede: string; next?: string; button?: string; steps?: string[] }>)[topic] ?? null;
 const formAction = 'https://api.web3forms.com/submit';
-// The style step shows for new or improved sites only. Values are sent in English.
-const styleTopics = ['website', 'improve', 'store'];
-const styleValues: Record<string, string> = { clean: 'Clean and simple', organized: 'Organized and practical', warm: 'Warm and personal', editorial: 'Editorial and calm', bold: 'One bold signature', motion: 'Full of motion' };
 ---
 <section id="start" class:list={{ alt, hero }} data-sending={t.sending} data-thanks={t.thanks} data-failed={t.failed}>
-  <div class="wrap about-grid">
-    <div>
+  <div class="wrap inquiry-grid">
+    <div class="inquiry-intro">
       {isWebsite ? (
         <>
           <h2 class="mag-head" set:html={(websiteIntro ?? { title: t.websiteTitle }).title} />
@@ -170,24 +147,12 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
         <>
           <Heading class="mag-head" set:html={intro.title} />
           <p class="lede">{intro.lede}</p>
-          <a class="btn" href={site.booking} target="_blank" rel="noopener" style="margin-top: 8px">{t.book} <Icon name="arrow" size={18} /></a>
           {isGeneral ? (
             hero ? <p class="muted small" style="margin-top: 12px">{t.alsoEmail} <a href={`mailto:${site.email}`}>{site.email}</a>.</p> : <p class="muted small" style="margin-top: 12px">{t.readPersonally}</p>
-          ) : (
-            <p class="muted small" style="margin-top: 12px">{t.orForm}</p>
-          )}
+          ) : null}
         </>
       )}
-      <div class="values" style="margin-top: 28px">
-        <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>{t.whatNext}</h3>{websiteIntro?.steps ? (
-          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
-        ) : (
-          <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
-        )}</div></div>
-        {isWebsite && (
-          <div class="card card-row"><div class="icon"><Icon name="chat" /></div><div><h3>{t.preferTalk}</h3><p class="muted"><a href={site.booking} target="_blank" rel="noopener">{t.book}</a> {t.instead}</p></div></div>
-        )}
-      </div>
+      <p class="prefer-talk"><Icon name="chat" size={20} /><span><b>{t.preferTalk}</b> <a href={site.booking} target="_blank" rel="noopener">{t.book}</a> {t.instead}</span></p>
     </div>
     <div class="card">
       <form action={formAction} method="POST" class="inquiry">
@@ -201,7 +166,7 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
           <label>{t.email}<input type="email" name="email" autocomplete="email" required /></label>
         </div>
         <div class="form-row">
-          <label>{t.business}<input name="business" autocomplete="organization" /></label>
+          <label><span>{t.business} <span class="opt">{t.optional}</span></span><input name="business" autocomplete="organization" /></label>
           <label><span>{t.phone} <span class="opt">{t.optional}</span></span><input type="tel" name="phone" autocomplete="tel" /></label>
         </div>
         {isGeneral ? (
@@ -224,21 +189,6 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
               <label><span>{t.currentSite} <span class="opt">{t.optional}</span></span><input type="url" name="website" placeholder="https://" /></label>
             </div>
             <input type="hidden" name="package" value="" />
-            <fieldset class="style-pick" hidden={!styleTopics.includes(topic)} data-style-topics={styleTopics.join(' ')}>
-              <legend>{t.styleLegend} <span class="opt">{t.optional}</span></legend>
-              <p class="style-hint">{t.styleHint}</p>
-              <div class="style-grid">
-                {t.styles.map(([id, name, desc, ex]) => (
-                  <label class="style-tile">
-                    <input type="radio" name="style" value={styleValues[id]} />
-                    <span class:list={['style-mock', `mock-${id}`]} aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                    <span class="style-name">{name}</span>
-                    <span class="style-desc">{desc}</span>
-                    {ex && <span class="style-ex">{t.example} {ex}</span>}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
             <label><span>{t.tellBusiness} <span class="opt">{t.optional}</span></span><textarea name="message" rows="5"></textarea></label>
           </>
         ) : (
@@ -252,13 +202,13 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
               ) : isAi ? (
                 <label>{t.interested}
                   <select name="topic">
-                    {t.aiTopics.map(([value, label]) => <option value={value}>{label}</option>)}
+                    {t.aiTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                   </select>
                 </label>
               ) : (
                 <label>{t.area}
                   <select name="topic">
-                    {t.consultingTopics.map(([value, label]) => <option value={value}>{label}</option>)}
+                    {t.consultingTopics.map(([value, label]) => <option value={value} selected={value === topic}>{label}</option>)}
                   </select>
                 </label>
               )}
@@ -267,7 +217,15 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
         )}
         <button class="btn" type="submit">{(isWebsite && websiteIntro?.button) || t.send}</button>
         <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-sooner" hidden>{t.sooner} <a href={site.booking} target="_blank" rel="noopener">{t.book}</a></p>
       </form>
+    </div>
+    <div class="values inquiry-next">
+      <div class="card card-row"><div class="icon"><Icon name="clock" /></div><div><h3>{t.whatNext}</h3>{websiteIntro?.steps ? (
+          <ol class="next-steps">{websiteIntro.steps.map((st) => <li set:html={st} />)}</ol>
+        ) : (
+          <p class="muted">{isGeneral ? t.scoped : isWebsite && websiteIntro ? websiteIntro.next : `${replyLine} ${t.scoped}`}</p>
+        )}</div></div>
     </div>
   </div>
 </section>
@@ -285,26 +243,6 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
   const pkgInput = document.querySelector<HTMLInputElement>('form.inquiry input[name="package"]');
   if (pkg && pkgInput) pkgInput.value = pkg;
 
-  // The style step follows the service choice, and a second tap on a chosen style clears it.
-  for (const pick of document.querySelectorAll<HTMLFieldSetElement>('fieldset.style-pick')) {
-    const form = pick.closest('form')!;
-    const select = form.querySelector<HTMLSelectElement>('select[name="topic"]');
-    const topics = (pick.dataset.styleTopics ?? '').split(' ');
-    const sync = () => {
-      const show = !select || topics.includes(select.value);
-      pick.hidden = !show;
-      if (!show) pick.querySelectorAll<HTMLInputElement>('input').forEach((r) => (r.checked = false));
-    };
-    select?.addEventListener('change', sync);
-    sync();
-    let last: HTMLInputElement | null = null;
-    pick.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach((r) => {
-      r.addEventListener('click', () => {
-        if (last === r) { r.checked = false; last = null; } else last = r;
-      });
-    });
-    form.addEventListener('reset', () => (last = null));
-  }
 
   // Send without leaving the page; without JavaScript the form still posts normally.
   for (const form of document.querySelectorAll<HTMLFormElement>('form.inquiry')) {
@@ -322,6 +260,7 @@ const styleValues: Record<string, string> = { clean: 'Clean and simple', organiz
         form.reset();
         (window as any).auvaConvert?.('form');
         if (status) status.textContent = words.thanks!;
+        form.querySelector<HTMLElement>('.form-sooner')?.removeAttribute('hidden');
       } catch {
         if (status) status.textContent = words.failed!;
       } finally {

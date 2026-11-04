@@ -1,0 +1,20 @@
+---
+// The navy intro band under each service page hero (original layout): photo, one hello line, three short facts, then the About link.
+// Same layout on Websites, Tech, and Production (EN + ES); only the facts change from page to page.
+import { Image } from 'astro:assets';
+import headshot from '../assets/alexandria-cuellar.jpg';
+import Icon from './Icon.astro';
+import { langFromPath, localize } from '../i18n';
+
+// Each fact is a short line of HTML with its number in <b>, like '<b>20+</b> years in web development'.
+interface Props { facts: string[] }
+const { facts } = Astro.props;
+const lang = langFromPath(Astro.url.pathname);
+const t = {
+  en: { hi: "Hi, I'm Alexandria,", line: "founder of Auva Studio. You'll work with me directly from the first call to launch.", more: 'More about me' },
+  es: { hi: 'Hola, soy Alexandria,', line: 'fundadora de Auva Studio. Trabajará directamente conmigo desde la primera llamada hasta el lanzamiento.', more: 'Más sobre mí' },
+}[lang];
+---
+<section class="hello-band" aria-label="Alexandria Cuellar">
+  <div class="wrap hello"><Image src={headshot} alt="" width={120} height={120} densities={[1, 2]} /><span><b>{t.hi}</b> {t.line}<span class="hello-foot"><ul class="hello-facts">{facts.map((f) => <li set:html={f} />)}</ul><a class="hello-more" href={localize('/about/', lang)}>{t.more} <Icon name="arrow" size={16} /></a></span></span></div>
+</section>

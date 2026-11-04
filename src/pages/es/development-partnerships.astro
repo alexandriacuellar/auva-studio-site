@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import ToolGrid from '../../components/ToolGrid.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
 import { site } from '../../data/site';
@@ -33,19 +34,19 @@ const faqs = [
   { q: '¿Quién es dueño del sitio terminado?', a: 'Su cliente. El código, el hosting y las cuentas quedan a nombre de su cliente o del suyo, nunca del mío, y le entrego todo al final del proyecto.' },
   { q: '¿Con qué construye los sitios?', a: 'Construyo la mayoría de los sitios con Astro, que los mantiene rápidos, seguros y con hosting de bajo costo. Cuando un proyecto necesita otra plataforma, lo decidimos juntos al definir el alcance.' },
   { q: '¿Cómo funcionan los precios?', a: 'Los socios reciben tarifas preferenciales, cotizadas para cada proyecto según su alcance, mis responsabilidades y cuánto trabajo esperamos hacer juntos. Cada proyecto se define y se cotiza por escrito antes de empezar.' },
-  { q: '¿También puede ayudar con proyectos de IA, XR o videojuegos?', a: 'Sí. Si un cliente pide algo como un flujo de trabajo con IA o un proyecto AR, puedo apoyarlo de la misma forma. Vea la página de Producción y Tecnología Emergente para conocer ese trabajo.' },
+  { q: '¿También puede ayudar con proyectos de IA, XR o videojuegos?', a: 'Sí. Si un cliente pide algo como un flujo de trabajo con IA o un proyecto AR, puedo apoyarlo de la misma forma. Vea la página de AR, VR y Producción para conocer ese trabajo.' },
 ];
 
 const schema = serviceSchema(services.map((s) => ({ name: s.title, description: s.text, price: '' })), '/es/development-partnerships/');
 ---
-<Base title="Colaboraciones para agencias" seoTitle="Colaboraciones de desarrollo web para agencias y diseñadores | Auva Studio" schema={schema} description="Desarrollo web de marca blanca y en colaboración para agencias de marketing, estudios creativos y diseñadores independientes: del diseño al desarrollo, integraciones, migraciones y apoyo técnico en proyectos.">
+<Base title="Colaboraciones para agencias" seoTitle="Colaboraciones de desarrollo web para agencias y diseñadores | Auva Studio" schema={schema} description="Desarrollo web de marca blanca para agencias, estudios creativos y diseñadores: del diseño al desarrollo, integraciones, migraciones y apoyo técnico.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Su visión creativa. <em>Mi experiencia técnica.</em></h1>
       <p class="lede">Colaboro con agencias de marketing, estudios creativos y diseñadores independientes para ofrecer desarrollo web e implementación técnica confiables.</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos</a>
-        <a class="btn btn-ghost" href="#start">Cuénteme sobre un proyecto</a>
+        <a class="btn" href="#start">Cuénteme sobre un proyecto <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Contácteme</a>
       </div>
     </div>
   </section>
@@ -61,14 +62,14 @@ const schema = serviceSchema(services.map((s) => ({ name: s.title, description: 
             <div class="icon"><Icon name={a.icon} size={32} /></div>
             <h3>{a.title}</h3>
             <p>{a.text}</p>
-            <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+            <a class="more" href="#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
           </div>
         ))}
         <div class="card who-other">
           <div class="icon"><Icon name="chat" size={32} /></div>
           <h3>¿Algo diferente?</h3>
           <p>Cuénteme sobre su equipo y sus clientes, y le sugeriré cómo podríamos trabajar juntos.</p>
-          <a class="more" href="#start" style="margin-top: 12px">Hablemos</a>
+          <a class="more" href="#start" style="margin-top: 12px">Hablemos <Icon name="arrow" size={16} /></a>
         </div>
       </div>
     </div>
@@ -127,4 +128,5 @@ const schema = serviceSchema(services.map((s) => ({ name: s.title, description: 
 
   <Faq faqs={faqs} alt />
   <InquiryForm kind="partner" />
+  <ToolGrid set="websites" lang="es" lede="Astro para la mayoría de los sitios, y otras plataformas cuando el proyecto lo necesita, como una tienda en línea o una aplicación web." alt />
 </Base>

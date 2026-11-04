@@ -25,8 +25,29 @@ export const nav = [
       { href: '/es/websites/brand-essentials/', label: 'Identidad de Marca' },
     ],
   },
-  { href: '/es/technology-consulting/', label: 'Tecnología e IA' },
-  { href: '/es/production-emerging-tech/', label: 'Producción y Tecnología Emergente' },
+  {
+    href: '/es/automation-ai-projects/',
+    label: 'Automatización e IA',
+    // Full name for search data; the menu shows the short label so the header stays on one row.
+    title: 'Automatización, IA y Proyectos',
+    menuLabel: 'Páginas de automatización, IA y proyectos',
+    children: [
+      { href: '/es/automation-ai-projects/', label: 'Resumen y Revisión Tecnológica' },
+      { href: '/es/automation-ai-projects/automation/', label: 'Automatización' },
+      { href: '/es/automation-ai-projects/ai/', label: 'IA para usted y su equipo' },
+      { href: '/es/automation-ai-projects/project-management/', label: 'Gestión de proyectos' },
+    ],
+  },
+  {
+    href: '/es/ar-vr-production/',
+    label: 'AR, VR y Producción',
+    menuLabel: 'Páginas de producción y tecnología emergente',
+    children: [
+      { href: '/es/ar-vr-production/', label: 'Resumen' },
+      { href: '/es/ar-vr-production/ar/', label: 'Paquetes de AR' },
+      { href: '/es/ar-vr-production/studios/', label: 'Producción de videojuegos y XR' },
+    ],
+  },
   { href: '/es/about/', label: 'Sobre mí' },
 ];
 
@@ -35,34 +56,30 @@ export const categories = [
     icon: 'globe',
     title: 'Servicios de sitios web',
     text: 'Sitios web que ayudan a sus clientes a encontrarle, confiar en usted y comunicarse.',
-    items: ['Paquetes de sitios web desde $1,500', 'Diagnóstico Web y configuración de su Perfil de Negocio de Google', 'Edición de contenido, tiendas e integraciones', 'Ayuda después del lanzamiento: cambios, arreglos y páginas nuevas'],
+    offers: [['Paquetes de sitios web', 'Desde $1,500'], ['Diagnóstico Web', '$199'], ['Configuración del Perfil de Negocio de Google', '$500'], ['Ayuda después del lanzamiento', 'Desde $59']],
+    note: 'Además, edición de contenido, tiendas e integraciones.',
     href: '/es/websites/',
     cta: 'Ver servicios de sitios web',
   },
   {
     icon: 'bulb',
-    title: 'Tecnología, Automatización e IA',
-    text: 'Configure las herramientas adecuadas, automatice el trabajo repetitivo, ponga la IA a trabajar y mantenga sus proyectos en marcha.',
-    items: ['Revisión Tecnológica de $250', 'Configuración de automatizaciones', 'Configuración de espacios de proyectos', 'Talleres de IA para equipos', 'Gestión de proyectos'],
-    href: '/es/technology-consulting/',
-    cta: 'Ver Tecnología, Automatización e IA',
+    title: 'Automatización, IA y Proyectos',
+    text: 'Automatice el trabajo repetitivo, ponga la IA a trabajar de forma segura y mantenga sus proyectos en marcha.',
+    offers: [['Automatización', '$500 por flujo de trabajo'], ['IA para usted y su equipo', 'Desde $150'], ['Gestión de proyectos', 'Desde $400']],
+    href: '/es/automation-ai-projects/',
+    cta: 'Ver Automatización, IA y Proyectos',
   },
   {
     icon: 'bolt',
-    title: 'Producción y Tecnología Emergente',
-    text: 'Una productora para proyectos de videojuegos, realidad extendida (XR) e interactivos, además de proyectos pequeños de AR para negocios.',
-    items: ['Apoyo de producción para equipos de videojuegos y XR', 'Revisión del Plan de Producción', 'Proyectos AR iniciales', 'AR y VR para teléfonos, Meta Quest y lentes de Meta'],
-    href: '/es/production-emerging-tech/',
-    cta: 'Ver Producción y Tecnología Emergente',
+    title: 'AR, VR y Producción',
+    text: 'Realidad aumentada (AR) que da vida a sus productos, etiquetas y volantes en el celular, además de una productora para equipos de videojuegos y XR.',
+    offers: [['Paquetes de AR', 'Desde $750'], ['Producción de videojuegos y XR', 'Desde $650']],
+    note: 'AR y VR para teléfonos, Meta Quest y lentes de Meta.',
+    href: '/es/ar-vr-production/',
+    cta: 'Ver AR, VR y Producción',
   },
 ];
 
-export const consulting = [
-  { id: 'planning', price: '$250, se acredita a una configuración en 90 días', icon: 'search', title: 'Revisión Tecnológica', text: 'Una llamada de 60 minutos sobre sus herramientas y cómo se hace el trabajo, y luego un informe por escrito en 5 días hábiles con sus arreglos prioritarios, costos aproximados y dónde ayudaría la automatización o la IA.', items: ['Revisión de herramientas y suscripciones', 'Revisión de flujos de trabajo', 'Informe por escrito con prioridades'] },
-  { id: 'automation', price: 'Desde $500', icon: 'gear', title: 'Configuración de automatización', text: 'Conecto las herramientas que ya usa para que el trabajo de rutina se haga solo, como correos de seguimiento, la bienvenida a clientes nuevos y reportes mensuales. Un flujo de trabajo, configurado en sus propias cuentas, con una guía breve.', items: ['Automatización de flujos de trabajo', 'Conexión de las aplicaciones que ya usa', 'Guía para su equipo'] },
-  { id: 'workspace', price: 'Desde $1,500', icon: 'layers', title: 'Configuración de espacio de proyectos', text: 'Configuro la herramienta donde su equipo planifica el trabajo, como Asana, ClickUp, Jira, monday.com, Notion o Trello, con tableros, plantillas y responsables claros, y luego capacito a su equipo.', items: ['Configuración del espacio y las plantillas', 'Capacitación para su equipo', '30 días de preguntas después de la configuración'] },
-  { id: 'delivery', price: '$65/hora, o mensual desde $650', icon: 'check', title: 'Gestión de Proyectos', text: 'Alguien que planifique, organice y mantenga en marcha su proyecto de tecnología, sin contratar a un gerente de tiempo completo.', items: ['Gestión de proyectos técnicos', 'Coordinación con proveedores y partes interesadas', 'Gestión de riesgos, plazos y entregas', 'Gestión de proyectos mensual'] },
-];
 
 
 
@@ -119,15 +136,15 @@ export const packages = [
 export const comparison = {
   benefits: [
     { icon: 'bolt', title: 'Carga casi al instante', text: 'Sus páginas se abren al instante en cualquier celular, y sus visitantes se quedan. Le muestro su puntuación de velocidad de Google antes y después.' },
-    { icon: 'search', title: 'Hecho para que le encuentren, desde el primer día', text: 'Los datos que buscan Google y las herramientas de búsqueda con IA, incluidos. No son un extra que se paga después.' },
+    { icon: 'search', title: 'Hecho para aparecer en Google y en búsquedas con IA', text: 'Los datos que buscan Google y las herramientas de búsqueda con IA, incluidos. No son un extra que se paga después.' },
     { icon: 'cloud', title: 'Hosting gratis o de bajo costo', text: 'Gratis, o unos pocos dólares al mes si su sitio tiene mucho tráfico. Su dominio cuesta unos $20 al año.' },
-    { icon: 'check', title: 'Fácil de usar para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
-    { icon: 'key', title: 'Es suyo', text: 'Código, contenido, dominio y hosting a su nombre. Sin ataduras.' },
+    { icon: 'check', title: 'Accesible para todos', text: 'Una prueba de accesibilidad antes de cada lanzamiento, para lectores de pantalla, teclado y letra más grande.' },
+    { icon: 'key', title: 'Es suyo, sin ataduras', text: 'Código, contenido, dominio y hosting a su nombre. Sin ataduras.' },
   ],
 };
 
 export const addons = [
-  { icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar, y gratis de mantener para la mayoría de los sitios.', price: 'Desde $1,750' },
+  { id: 'cms', icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar, y gratis de mantener para la mayoría de los sitios.', price: 'Desde $1,750' },
   { icon: 'layers', title: 'Tiendas en línea y botones de compra', text: 'Desde unos cuantos botones de compra en un sitio pequeño hasta una tienda en línea completa. Cuénteme qué quiere vender y le doy un presupuesto.', price: 'Presupuesto según su proyecto' },
   { icon: 'clock', title: 'Citas, donaciones y otras herramientas', text: 'Agrego las herramientas de citas, donaciones o foros que ya usa, o le ayudo a configurar unas nuevas.', price: 'Presupuesto según las herramientas que use' },
   { icon: 'chat', title: 'Chatbots de IA y aplicaciones web', text: 'Un asistente de chat que responde las preguntas de sus visitantes con sus propias preguntas frecuentes, servicios y precios, o una herramienta a la medida, como un portal para clientes o una app de citas.', price: 'Presupuesto según su proyecto', demo: "Pruébelo ahora: pregunte al asistente de este sitio" },
@@ -151,23 +168,30 @@ export const process = [
 ];
 
 export const care = [
-  { name: 'Cambios y arreglos', price: '$50 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles.' },
+  { name: 'Cambios y arreglos', price: '$59 cada uno', text: 'Cada cambio incluye hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud. Listo en 2 días hábiles. O compre 5 por adelantado por $249, válidos por 12 meses.' },
   { name: 'Páginas y funciones nuevas', price: '$125/hora, con presupuesto previo', text: 'Páginas nuevas, funciones nuevas o más colecciones para su CMS.' },
 ];
 
+export const hourPacks = [
+  { name: 'Paquete de 5 horas', price: '$575', hours: '5 horas', text: '5 horas para cambios, secciones nuevas, páginas nuevas sencillas con sus diseños de página actuales, agregar formularios, mapas, videos o enlaces de reservas, y ayuda con su CMS. Válidas por 12 meses. Listo en 2 días hábiles.' },
+  { name: 'Paquete de 10 horas', price: '$1,100', hours: '10 horas', text: '10 horas para cambios, secciones nuevas, páginas nuevas sencillas con sus diseños de página actuales, agregar formularios, mapas, videos o enlaces de reservas, y ayuda con su CMS. Válidas por 12 meses. Listo en 2 días hábiles.' },
+];
+
 export const monthly = {
-  name: 'Productora web mensual',
-  price: 'Desde $650 al mes por 5 horas',
-  text: 'Su propia productora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
-  outcomes: ['Se mantiene rápido, seguro y funcionando', 'Recibe páginas nuevas para sus campañas, eventos y productos', 'Se mantiene al día con lo que la gente busca', 'Viene con un informe breve: qué cambió, qué logró y qué sigue'],
+  name: 'Retainer mensual para su sitio web',
+  price: 'Desde $125 al mes por 1 hora, o $575 por 5 horas',
+  text: 'Su propia desarrolladora web, sin tener que contratar a nadie. ¿Trabaja con alguien de marketing o de SEO? Esa persona marca el rumbo, y yo lo hago realidad en su sitio.',
+  outcomes: ['Una llamada mensual para planear', 'Páginas nuevas para sus campañas, eventos y productos', 'Una revisión mensual del sitio y de su salud en Google', 'Un informe breve: qué cambió, qué logró y qué sigue'],
 };
 
 // Client quotes stay in their own words, in English.
 export { testimonials } from './site';
 
 export const aiOffers = [
-  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Taller de IA para Equipos', price: '$750', text: 'Una sesión práctica de 90 minutos para hasta 10 personas. Su equipo practica ChatGPT, Claude o Gemini con trabajo real y se lleva una guía de una página.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Revisión del Plan de Producción', price: '$650', text: 'Para proyectos de videojuegos, XR e interactivos. Reviso su alcance, sus hitos y sus riesgos, y le entrego un plan que su equipo pueda seguir, con sus herramientas de proyecto configuradas si las necesita. Unas 2 semanas.' },
-  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'Proyecto AR Inicial', price: 'Desde $1,500', text: 'Una pieza pequeña de AR que se abre en el navegador del teléfono, sin descargar ninguna app: una tarjeta de presentación, un volante, un póster o un producto que cobra vida. Construida con un desarrollador colaborador cuando hace falta. 2–4 semanas.' },
+  { id: 'ar-card', group: 'ar', icon: 'star', title: 'Tarjeta o Volante con AR', price: 'Desde $750', text: 'Una tarjeta, un volante o un letrero que cobra vida cuando alguien lo apunta con el teléfono.', items: ['Una pieza impresa', 'Un video corto o un objeto 3D', 'Botones para reservar, llamar o visitar su sitio'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'Etiqueta o Empaque con AR', price: 'Desde $1,000', text: 'La etiqueta o el empaque de un producto que cobra vida con una historia y luego muestra cómo usarlo, recetas o dónde comprarlo.', items: ['Una etiqueta, empaque o caja', 'Una escena animada, o hasta 3 artículos en 3D o video', 'Botones a guías, recetas o su tienda'] },
+  { id: 'ar-product', group: 'ar', icon: 'layers', title: 'Vista de Producto con AR', price: 'Desde $1,500', text: 'Sus clientes colocan sus productos en su sala, o se los prueban, directo desde su sitio web.', items: ['Hasta 5 productos en 3D', 'Véalo en su espacio o pruébeselo', 'Agregado a las páginas de producto de su sitio'] },
+  { id: 'ar-project', group: 'ar', icon: 'compass', title: 'Visor de Proyectos con AR', price: 'Desde $1,500', text: 'Para arquitectos y constructores: su modelo 3D en el teléfono, sobre la mesa de reuniones o a tamaño real en el terreno.', items: ['Usa el modelo que ya tiene', 'Vista sobre la mesa o a tamaño real', 'Un enlace que puede enviar a sus clientes'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Apoyo de Producción', price: '$65/hora, o mensual desde $650', text: 'Ayuda de producción y gestión de proyectos para equipos de videojuegos, XR y experiencias inmersivas: planes, calendarios, documentos de diseño, pruebas de juego y mantener a todos alineados.' },
 ];

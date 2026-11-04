@@ -15,3 +15,13 @@
   .about-hero .hero-actions { justify-content: center; }
   .about-photo { width: 200px; height: 200px; }
 }
+
+/* Hudson Valley photo strip (About, "Rooted in the Hudson Valley") */
+.place-strip { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.place-strip figure { margin: 0; }
+.place-strip img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+.place-strip figcaption { margin-top: 10px; font-size: .9rem; font-weight: 600; color: var(--ink, #1b2540); }
+@media (max-width: 860px) {
+  .place-strip { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+  .place-strip figcaption { font-size: .85rem; margin-top: 8px; }
+}

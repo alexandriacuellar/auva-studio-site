@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
-import { care, monthly, serviceSchema, site } from '../../data/site';
+import { care, hourPacks, monthly, serviceSchema, site } from '../../data/site';
 
 const atLaunch = [
   { icon: 'chat', title: 'A walkthrough', text: 'I show you around your new site and answer your questions.' },
@@ -12,40 +12,47 @@ const atLaunch = [
   { icon: 'key', title: 'Everything in your name', text: 'Your domain, hosting, and accounts, so you never depend on me to get in.' },
 ];
 
-// Three ways to get help after launch, shown like the website package cards.
+// Three ways to get help after launch (2026-11-02): single updates, prepaid hour packs, or a monthly retainer. Same rows on every card.
+const basics = ['Send requests by email, any time', 'I tell you first if something will take longer', 'Changes made in your existing page designs', 'Bigger work quoted first, at $125/hr'];
 const paths = [
-  { tag: 'Now and then', name: 'Pay as you go', price: '$50', unit: 'per update', blurb: 'Send me what to change and I take care of it.', items: ['Up to about 30 minutes of edits per update, sent together in one request', 'Done within 2 business days', 'Buy 5 updates ahead for $200 and save $50', 'New pages and features at $125/hr, quoted first', 'No commitment. Pay only when you need something.'], cta: 'Send an update', href: '#start' },
-  { tag: 'Do it yourself', name: 'Update it yourself', price: 'From $1,750', unit: 'one time', blurb: 'A CMS (content management system) is a simple dashboard where you update your text, photos, news, and events yourself. No code needed.', items: ['Make changes whenever you like, with no waiting', 'Up to 2 collections, like news posts or events. More collections, quoted first.', 'Training and an editor guide', '30 days of support after setup', 'Included in Complete Presence'], cta: 'Ask about a CMS', href: '#start' },
-  { tag: 'Every month', name: 'Monthly web producer', price: 'From $650', unit: 'a month for 5 hours', blurb: monthly.text, items: [...monthly.outcomes, 'Same-day help with urgent problems', "3-month minimum, then 30 days' notice to stop"], cta: "Let's talk about what you need", href: site.booking, featured: true },
+  { tag: 'A few changes a year', name: 'Updates', price: '$59', unit: 'per update', extra: 'Or buy 5 ahead for $249 and save $46. Good for 12 months.', blurb: 'Pay only when you need a change.', specs: [['Time', 'About 30 min each'], ['Done within', '2 business days'], ['Planning', null], ['Site check and report', null], ['Google health check', null], ['Urgent help', null]], covers: ['Text, photos, prices, hours, and menus', 'A new team member, event, or news post', 'A broken link, or something that looks off on phones'], cta: 'Send an update', href: '#start' },
+  { tag: 'Changes most months', name: 'Hour packs', price: '$575', unit: 'for 5 hours', extra: 'Or 10 hours for $1,100. Good for 12 months, used in 15-minute steps.', blurb: 'Pay ahead and use the hours as you need them.', specs: [['Time', '5 or 10 hours'], ['Done within', '2 business days'], ['Planning', null], ['Site check and report', null], ['Google health check', null], ['Urgent help', null]], covers: ['Everything in Updates', 'A new section, or a simple new page in one of your page designs', 'Adding a form, button, map, video, or booking link', 'Help with your CMS'], cta: 'Buy an hour pack', href: '#start' },
+  { tag: 'Your own web developer', name: monthly.name, extra: 'Month to month, cancel any time. Unused hours carry over one month.', blurb: 'Your own web developer, without hiring one.', toggleLabel: 'Hours each month', tierDefault: 1, specs: ['Time', 'Done within', 'Planning', 'Site check and report', 'Google health check', 'Urgent help'],
+    tiers: [
+      { label: '1 hour', price: '$125', unit: 'a month for 1 hour', specs: ['1 hour a month', '2 business days', null, 'Monthly', 'Monthly', null], covers: ['Everything in Updates', 'A short monthly note on your site check', 'Steady help, without buying a pack'] },
+      { label: '5 hours', price: '$575', unit: 'a month for 5 hours', specs: ['5+ hours a month', '1 business day', 'Monthly call', 'Monthly', 'Monthly', 'Same day'], covers: ['Everything in Hour packs', 'Landing pages for campaigns and events, and small features', 'A short monthly report on what changed and what\'s next', 'Works alongside your marketer or SEO person'] },
+    ], cta: "Let's talk about what you need", href: site.booking, featured: true },
 ];
 
 const faqs = [
   { q: "What counts as one update?", a: "Up to about 30 minutes of edits, sent together in one request, like new hours, a few new photos, and a typo fix. If a request will take longer, I tell you first." },
-  { q: "Do I need a monthly plan?", a: "No. Most sites I build have no plugins or other add-on software to keep patched, so you pay only when you want a change." },
-  { q: "Can you help with a site you didn't build?", a: "Pay-as-you-go updates are for sites I build. For a site built by someone else, we start with a Website Diagnostic, and then the monthly plan or a small one-time change may fit." },
+  { q: "Do I need a monthly plan?", a: "No. Most sites I build have no plugins to keep patched, so you can pay only when you want a change. If your site changes often, an hour pack or the retainer is simpler. The retainer starts at $125 for 1 hour a month, and it's month to month, so you can stop any time." },
+  { q: "How far does an hour go?", a: "New hours and a couple of photos take about 15 minutes. A new team member with a photo and bio takes about 30 minutes. A simple new page in one of your existing page designs takes about 1 to 2 hours. I track time in 15-minute steps and show what's left in your pack after each request." },
+  { q: "Can you help with a site you didn't build?", a: "Updates and hour packs are for sites I build. For a site built by someone else, we start with a Website Diagnostic, and then the retainer or a small one-time change may fit." },
   { q: "What does my site cost to run?", a: "Your domain is about $20 a year, and hosting is free or low cost for most sites I build, in your name. If your site needs a platform with a monthly fee, I'll tell you before we start." },
 ];
 
 const schema = serviceSchema([
   ...care.map((c) => ({ name: `Help After Launch: ${c.name}`, description: c.text, price: c.price })),
+  ...hourPacks.map((p) => ({ name: `Help After Launch: ${p.name}`, description: p.text, price: p.price })),
   { name: `Help After Launch: ${monthly.name}`, description: monthly.text, price: monthly.price },
   { name: 'CMS (content management system)', description: 'A simple dashboard to update page text, photos, and collections like news or events yourself, with no code.', price: 'From $1,750' },
 ], '/websites/help-after-launch/');
 ---
-<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $50 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $50 per update, a CMS so you can make changes yourself, or a monthly web producer from $650 for 5 hours.">
+<Base title="Help After Launch" seoTitle="Website Updates and Help After Launch, $59 per Update | Auva Studio" schema={schema} description="Website updates when you need them: $59 per update, prepaid hour packs from $575, a monthly website retainer from $125, or a CMS to make changes yourself.">
   <section class="hero bd-hero bd-inner-hero">
     <div class="wrap bd-hero-inner">
       <h1 class="mag-head">Help when you need it, <em>or every month.</em></h1>
-      <p class="lede">Keep your site current without paying for upkeep you don't need. Send me a change when something's new, update it yourself, or keep me on as your web producer to improve your site every month.</p>
+      <p class="lede">Keep your site current without paying for upkeep you don't need. Send me a change when something's new, update it yourself, or keep me on a monthly retainer.</p>
       <div class="hero-actions">
-        <a class="btn" href={site.booking} target="_blank" rel="noopener">Book a free 30-minute call</a>
-        <a class="btn btn-ghost" href="/websites/#packages">See website packages <Icon name="arrow" size={18} /></a>
+        <a class="btn" href="#care">See the options <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Get in touch</a>
       </div>
-      <p class="hero-note">Updates are $50 each, and you pay only when you need one. Monthly help starts at $650 for 5 hours.</p>
+      <p class="hero-note">Updates are $59 each, hour packs start at $575, and the monthly retainer starts at $125 for 1 hour. Start any time, at launch or later.</p>
     </div>
   </section>
 
-  <section>
+  <section class="band-cream">
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Included with every website.</h2>
@@ -66,24 +73,67 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">After launch, <em>three ways to get help.</em></h2>
-        <p class="lede">No monthly fee unless you want one. Pick what fits how often your site changes.</p>
+        <p class="lede">No monthly fee unless you want one. Pick what fits how often your site changes, and switch any time.</p>
+      </div>
+      <div class="pk-basics">
+        <p class="pk-basics-title">Every option includes</p>
+        <ul class="ticks">{basics.map((b) => <li><Icon name="tick" size={18} />{b}</li>)}</ul>
       </div>
       <div class="grid grid-3 packages">
         {paths.map((p) => (
-          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', { featured: p.featured }]}>
+          <article id={p.featured ? 'monthly' : undefined} class:list={['card', 'package', 'pk-9', { featured: p.featured }]} data-tier={p.tiers ? p.tierDefault : undefined}>
             <span class="tag">{p.tag}</span>
             <h3>{p.name}</h3>
             <p class="muted">{p.blurb}</p>
-            <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
-            <ul class="ticks">{p.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+            {p.tiers ? (
+              <>
+                <p class="price pk-prices">{p.tiers.map((t, i) => <span data-t={i} class="pk-tier">{t.price} <span class="price-unit">{t.unit}</span></span>)}</p>
+                <div class="pk-extra">
+                  <div class="pk-toggle" role="group" aria-label={p.toggleLabel}>{p.tiers.map((t, i) => <button type="button" data-t-btn={i} aria-pressed={i === p.tierDefault ? 'true' : 'false'}>{t.label}</button>)}</div>
+                  <p class="muted">{p.extra}</p>
+                </div>
+                <dl class="pk-specs">{p.specs.map((k, r) => <div><dt>{k}</dt>{p.tiers.map((t, i) => { const v = t.specs[r]; return <dd data-t={i} class:list={['pk-tier', { none: !v }]}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd>; })}</div>)}</dl>
+                <p class="pk-covers-title">What it covers</p>
+                <div>{p.tiers.map((t, i) => <ul data-t={i} class="ticks small pk-covers pk-tier">{t.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>)}</div>
+              </>
+            ) : (
+              <>
+                <p class="price">{p.price} <span class="price-unit">{p.unit}</span></p>
+                {p.extra && <p class="pk-extra muted">{p.extra}</p>}
+                <dl class="pk-specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ none: !v }}>{v ?? <><span aria-hidden="true">–</span><span class="sr-only">Not included</span></>}</dd></div>)}</dl>
+                <p class="pk-covers-title">What it covers</p>
+                <ul class="ticks small pk-covers">{p.covers.map((c) => <li><Icon name="tick" size={16} />{c}</li>)}</ul>
+              </>
+            )}
             <a class:list={['btn', { 'btn-ghost': !p.featured }]} href={p.href} {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{p.cta}</a>
           </article>
         ))}
       </div>
-      <p class="fine">Monthly hours are one flexible allowance across anything on the list, and unused hours carry over one month. Third-party fees, like platforms or apps, are separate. I can't promise results like rankings or sales, but I'll show you what's working.</p>
+      <p class="fine"><b>Good to know.</b> Prepaid updates and pack hours are good for 12 months. The retainer is month to month, and unused retainer hours carry over one month. <b>Adding several pages or new features?</b> If your site is on Essential or Expanded, <a href="/websites/#packages">upgrading to the next package</a> and paying only the difference often costs less. Third-party fees, like platforms or apps, are separate. I keep your site fast, secure, and easy for Google to read, and I'll show you what's working.</p>
     </div>
   </section>
 
-  <Faq faqs={faqs} />
-  <InquiryForm kind="website" topic="care" alt />
+  <section id="cms">
+    <div class="wrap">
+      <div class="card" style="display:grid;gap:12px">
+        <h2 class="mag-head">Rather <em>update it yourself?</em></h2>
+        <p class="muted">A CMS (content management system) is a simple dashboard where you update your text, photos, news, and events yourself. No code needed. <b style="color: var(--primary)">From $1,750</b>, one time, with training, an editor guide, and 30 days of support. Up to 2 collections, like news posts or events. Included in Complete Presence.</p>
+        <p><a class="btn btn-ghost" href="#start">Ask about a CMS</a></p>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="care" />
+
+  <script>
+    document.querySelectorAll<HTMLElement>('.package[data-tier]').forEach((card) => {
+      card.querySelectorAll<HTMLButtonElement>('[data-t-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          card.dataset.tier = btn.dataset.tBtn;
+          card.querySelectorAll('[data-t-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+    });
+  </script>
 </Base>

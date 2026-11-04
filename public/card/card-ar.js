@@ -1,9 +1,11 @@
 // Card AR: track the front of the business card and pop Alexandria out of it,
 // with tappable links orbiting her. Runs in the browser (MindAR + three), no app.
 import * as THREE from 'three';
+import { openMessageForm } from '/card/message-form.js';
 import { MindARThree } from '/card/vendor/mindar/mindar-image-three.prod.js';
 
-const CALENDLY = 'https://calendly.com/alexandria-cuellar-ny/30min';
+// Tapping the pill or Alexandria opens the short contact form instead of a link.
+const MESSAGE = 'message';
 const LINKS = [
   { label: 'Website', href: 'https://auvastudio.com/', icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/>' },
   { label: 'Contact', href: 'https://auvastudio.com/contact/', icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
@@ -37,15 +39,15 @@ async function iconSprite(link) {
   return s;
 }
 
-// The pill under her photo: the one thing worth doing next
+// The pill under her photo: the one thing worth doing next (a message, like the contact form on the site)
 function bookSprite() {
   const c = document.createElement('canvas'); c.width = 768; c.height = 168; const g = c.getContext('2d');
   g.shadowColor = 'rgba(0,0,0,0.35)'; g.shadowBlur = 20; g.shadowOffsetY = 6;
   g.fillStyle = STAR; g.beginPath(); g.roundRect(12, 12, 744, 132, 66); g.fill();
   g.shadowColor = 'transparent'; g.fillStyle = '#0a1440'; g.font = font(700, 50); g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillText('Book a free 30-minute call', 384, 80);
+  g.fillText('Send me a message', 384, 80);
   const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture(c), transparent: true, depthWrite: false }));
-  s.scale.set(0.7, 0.153, 1); s.userData.href = CALENDLY; s.userData.base = s.scale.clone();
+  s.scale.set(0.7, 0.153, 1); s.userData.href = MESSAGE; s.userData.base = s.scale.clone();
   return s;
 }
 
@@ -91,7 +93,7 @@ export async function startCardAR(container, { found, lost }) {
   const meTex = await new THREE.TextureLoader().loadAsync('/card/avatar.webp'); meTex.colorSpace = THREE.SRGBColorSpace;
   const H = 1.1, W = H * meTex.image.width / meTex.image.height;
   const me = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshBasicMaterial({ map: meTex, transparent: true, alphaTest: 0.02, side: THREE.DoubleSide }));
-  me.position.y = H / 2; me.userData.href = CALENDLY; me.userData.base = me.scale.clone();
+  me.position.y = H / 2; me.userData.href = MESSAGE; me.userData.base = me.scale.clone();
   const lift = new THREE.Group(); lift.add(me); stand.add(lift);
 
   // The star sits beside her, opposite the waving hand, to balance it
@@ -124,7 +126,7 @@ export async function startCardAR(container, { found, lost }) {
     const hit = ray.intersectObjects([...icons, book], false)[0] || ray.intersectObject(me, false)[0];
     if (!hit) return;
     const { href } = hit.object.userData; pressed = { obj: hit.object, at: performance.now() };
-    window.open(href, '_blank', 'noopener');
+    if (href === MESSAGE) openMessageForm(location.pathname); else window.open(href, '_blank', 'noopener');
   };
   container.addEventListener('click', onTap);
 

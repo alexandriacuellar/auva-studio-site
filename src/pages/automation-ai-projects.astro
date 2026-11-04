@@ -1,0 +1,125 @@
+---
+// Tech, Automation & AI main page: 3 cards that open the sub pages (alexandria 2026-11-02).
+import Base from '../layouts/Base.astro';
+import '../styles/pages/production-emerging-tech.css';
+import Icon from '../components/Icon.astro';
+import ToolGrid from '../components/ToolGrid.astro';
+import HelloBand from '../components/HelloBand.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Faq from '../components/Faq.astro';
+import { site, serviceSchema } from '../data/site';
+import { sectionName, services, audiences, safety, aiPackages, pmPackages, faq } from '../data/tech';
+
+const byId = Object.fromEntries(services.map((x) => [x.id, x]));
+const faqs = [faq.review, faq.inPerson, faq.vendors, faq.founding];
+const schema = serviceSchema([
+  { name: 'Tech Review', description: faq.review.a, price: '$250' },
+  ...services.map((x) => ({ name: x.title, description: x.text, price: x.price })),
+  ...aiPackages.filter((p) => p.price.includes('$')).map((p) => ({ name: p.title, description: p.text, price: p.price })),
+  ...pmPackages.map((p) => ({ name: p.title, description: p.text, price: p.price })),
+], '/automation-ai-projects/');
+---
+<Base title={sectionName} seoTitle="Automation, AI & Project Management Help | Auva Studio" schema={schema} description="Automation from $500 per workflow, 1-on-1 AI sessions from $150, and project management from $400 for Hudson Valley small businesses, nonprofits, and teams.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
+      <p class="lede">Automation for the repetitive work, AI your team can use with confidence, and a project manager to see it through.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#services">How I help <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-ghost" href="#start">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <HelloBand facts={["<b>20+</b> years in web development", "<b>14+</b> projects managed", "<b>AI</b> in my daily work"]} />
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Who I <em>work with.</em></h2>
+      </div>
+      <div class="grid grid-3 who">
+        {audiences.map((a) => (
+          <div class="card">
+            <div class="icon"><Icon name={a.icon} size={32} /></div>
+            <h3>{a.title}</h3>
+            <p class="muted">{a.text}</p>
+            <a class="more" href={byId[a.to].href} style="margin-top: 12px">{byId[a.to].link} <Icon name="arrow" size={16} /></a>
+          </div>
+        ))}
+        <div class="card who-other">
+          <div class="icon"><Icon name="chat" size={32} /></div>
+          <h3>Something else?</h3>
+          <p>Tell me what's slowing your team down, and I'll suggest where to start.</p>
+          <a class="more" href="?topic=unsure#start" style="margin-top: 12px">Talk it through <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Fixed prices, written up front. Not sure which one you need? Start with a free 30-minute call.</p>
+      </div>
+      <div class="grid grid-3">
+        {services.map((x) => (
+          <a class="card offer" href={x.href} id={x.id}>
+            <div class="icon"><Icon name={x.icon} size={32} /></div>
+            <h3>{x.title}</h3>
+            <p class="svc-meta"><b>{x.price}</b></p>
+            <p class="muted">{x.text}</p>
+            <span class="more" style="margin-top: auto; padding-top: 12px">{x.link} <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+
+      <div class="card card-row bigger" style="margin-top: 32px" id="planning">
+        <div class="icon"><Icon name="search" size={36} /></div>
+        <div>
+          <h3>Need a closer look first? Tech Review, $250</h3>
+          <p class="muted">If the free call shows your tools need more than a quick answer: a 60-minute deep dive into how work gets done, then a written report within 5 business days with your top fixes in order. Credited toward any package within 90 days.</p>
+          <a class="more" href="?topic=planning#start" style="margin-top: 12px">Book a Tech Review <Icon name="arrow" size={16} /></a>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 32px">Just need advice? Consulting sessions are $65 an hour. Need a website too? See <a href="/websites/#packages">website packages from $1,500</a>.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="safe">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Built to be safe, <em>and yours.</em></h2>
+        <p class="lede">The same rules for everything I set up.</p>
+      </div>
+      <div class="grid grid-2">
+        {safety.map((s) => (
+          <div class="card">
+            <div class="icon"><Icon name={s.icon} size={32} /></div>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">How it <em>works.</em></h2>
+      </div>
+      <ol class="steps steps-4">
+        <li><span class="num" aria-hidden="true">1</span><h3>Free call</h3><p>Tell me what eats your week. I'll point you to the right help, or a Tech Review if it isn't clear yet.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Written scope and price</h3><p>What I’ll do, in which tools, and the price, before any work starts.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>The work</h3><p>Built in your accounts. You approve the wording and we test it together.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Handover</h3><p>A short how-to guide, a walkthrough with your team, and 30 days of fixes.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="consulting" />
+  <ToolGrid set="automation" lede="The automation, AI, and project tools I use to save your team time." alt />
+</Base>

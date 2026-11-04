@@ -45,8 +45,27 @@ export const nav = [
       { href: '/websites/brand-essentials/', label: 'Brand Essentials' },
     ],
   },
-  { href: '/technology-consulting/', label: 'Tech, Automation & AI' },
-  { href: '/production-emerging-tech/', label: 'Production & Emerging Tech' },
+  {
+    href: '/automation-ai-projects/',
+    label: 'Automation, AI & Projects',
+    menuLabel: 'Automation, AI & Projects pages',
+    children: [
+      { href: '/automation-ai-projects/', label: 'Overview and Tech Review' },
+      { href: '/automation-ai-projects/automation/', label: 'Automation' },
+      { href: '/automation-ai-projects/ai/', label: 'AI for you and your team' },
+      { href: '/automation-ai-projects/project-management/', label: 'Project management' },
+    ],
+  },
+  {
+    href: '/ar-vr-production/',
+    label: 'AR, VR & Production',
+    menuLabel: 'AR, VR & Production pages',
+    children: [
+      { href: '/ar-vr-production/', label: 'Overview' },
+      { href: '/ar-vr-production/ar/', label: 'AR packages' },
+      { href: '/ar-vr-production/studios/', label: 'Game and XR production' },
+    ],
+  },
   { href: '/about/', label: 'About' },
 ];
 
@@ -56,34 +75,30 @@ export const categories = [
     icon: 'globe',
     title: 'Website Services',
     text: 'Websites that help customers find you, trust you, and reach out.',
-    items: ['Website packages from $1,500', 'Website Diagnostic and Google Business Profile setup', 'Content editing, stores, and integrations', 'Help after launch: updates, fixes, and new pages'],
+    offers: [['Website packages', 'From $1,500'], ['Website Diagnostic', '$199'], ['Google Business Profile setup', '$500'], ['Help after launch', 'From $59']],
+    note: 'Plus content editing, stores, and integrations.',
     href: '/websites/',
     cta: 'Explore website services',
   },
   {
     icon: 'bulb',
-    title: 'Tech, Automation & AI',
-    text: 'Get the right tools set up, automate the busywork, put AI to work, and keep projects on track.',
-    items: ['$250 Tech Review', 'Automation setup', 'Project workspace setup', 'Team AI workshops', 'Project management'],
-    href: '/technology-consulting/',
-    cta: 'Explore Tech, Automation & AI',
+    title: 'Automation, AI & Projects',
+    text: 'Automate the busywork, put AI to work safely, and keep projects on track.',
+    offers: [['Automation', '$500 per workflow'], ['AI for you and your team', 'From $150'], ['Project management', 'From $400']],
+    href: '/automation-ai-projects/',
+    cta: 'Explore Automation, AI & Projects',
   },
   {
     icon: 'bolt',
-    title: 'Production & Emerging Tech',
-    text: 'A producer for game, XR, and interactive projects, plus small AR projects for businesses.',
-    items: ['Production support for game and XR teams', 'Production Plan Review', 'AR starter projects', 'AR and VR for phones, Meta Quest, and Meta glasses'],
-    href: '/production-emerging-tech/',
-    cta: 'Explore Production & Emerging Tech',
+    title: 'AR, VR & Production',
+    text: 'AR that brings your products, labels, and flyers to life on a phone, plus a producer for game and XR teams.',
+    offers: [['AR packages', 'From $750'], ['Game and XR production', 'From $650']],
+    note: 'AR and VR for phones, Meta Quest, and Meta glasses.',
+    href: '/ar-vr-production/',
+    cta: 'Explore AR, VR & Production',
   },
 ];
 
-export const consulting = [
-  { id: 'planning', price: '$250, credited toward a setup within 90 days', icon: 'search', title: 'Tech Review', text: 'A 60-minute call about your tools and how work gets done, then a written report within 5 business days with your top fixes in order, rough costs, and where automation or AI would help.', items: ['Tools and subscriptions review', 'Workflow review', 'Prioritized written report'] },
-  { id: 'automation', price: 'From $500', icon: 'gear', title: 'Automation setup', text: 'I connect the tools you already use so routine work happens on its own, like follow-up emails, new-client onboarding, and monthly reports. One workflow, set up in your own accounts, with a short how-to guide.', items: ['Workflow automation', 'Connecting the apps you already use', 'How-to guide for your team'] },
-  { id: 'workspace', price: 'From $1,500', icon: 'layers', title: 'Project workspace setup', text: 'I set up the tool your team plans work in, like Asana, ClickUp, Jira, monday.com, Notion, or Trello, with boards, templates, and clear ownership, then train your team to use it.', items: ['Workspace and template setup', 'Team training', '30 days of questions after setup'] },
-  { id: 'delivery', price: '$65/hr, or monthly from $650', icon: 'check', title: 'Project Management', text: 'Someone to plan, organize, and keep your technology project on track, without hiring a full-time manager.', items: ['Technical project management', 'Vendor and stakeholder coordination', 'Risk, timeline, and delivery management', 'Monthly project management'] },
-];
 
 
 // How every engagement runs, from a small website to a complex project.
@@ -142,15 +157,15 @@ export const packages = [
 export const comparison = {
   benefits: [
     { icon: 'bolt', title: 'Loads almost instantly', text: "Pages open in a blink on any phone, so visitors stay. I'll show you your Google speed score before and after." },
-    { icon: 'search', title: 'Built to be found, from day one', text: 'The details Google and AI search tools look for, built in. Not an extra you pay for later.' },
+    { icon: 'search', title: 'Built to be found on Google and AI search', text: 'The details Google and AI search tools look for, built in. Not an extra you pay for later.' },
     { icon: 'cloud', title: 'Free or low-cost hosting', text: 'Free, or a few dollars a month on a busier site. Your domain is about $20 a year.' },
-    { icon: 'check', title: 'Easy for everyone to use', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
-    { icon: 'key', title: 'Yours to keep', text: 'Code, content, domain, and hosting in your name. No lock-in.' },
+    { icon: 'check', title: 'Accessible to everyone', text: 'An accessibility test before every launch, for screen readers, keyboards, and larger text.' },
+    { icon: 'key', title: 'Yours to keep, no lock-in', text: 'Code, content, domain, and hosting in your name. No lock-in.' },
   ],
 };
 
 export const addons = [
-  { icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed, and free to run for most sites.', price: 'From $1,750' },
+  { id: 'cms', icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed, and free to run for most sites.', price: 'From $1,750' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
   { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
   { icon: 'chat', title: 'AI chatbots and web apps', text: 'A chat assistant that answers visitor questions from your own FAQs, services, and prices, or a custom tool like a client portal or booking app.', price: 'Quoted for your project', demo: "Try it now: ask this site's assistant" },
@@ -175,16 +190,23 @@ export const process = [
 
 // Help After Launch: pay as you go, or one monthly plan sized on a call. A small update is about 30 minutes of work.
 export const care = [
-  { name: 'Updates and fixes', price: '$50 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days.' },
+  { name: 'Updates and fixes', price: '$59 each', text: 'Each update is up to about 30 minutes of edits, sent together in one request. Done within 2 business days. Or buy 5 ahead for $249, good for 12 months.' },
   { name: 'New pages and features', price: '$125/hr, quoted first', text: 'New pages, new features, or more collections for your CMS.' },
 ];
 
-// The only monthly offer: a block of web producer hours. Sold on outcomes; hours set the price.
+// Prepaid hour packs (2026-11-02): for sites that change regularly. Good for 12 months, tracked in 15-minute steps.
+export const hourPacks = [
+  { name: '5-hour pack', price: '$575', hours: '5 hours', text: '5 hours for updates, new sections, simple new pages in your existing page designs, adding forms, maps, videos, or booking links, and CMS help. Good for 12 months. Done within 2 business days.' },
+  { name: '10-hour pack', price: '$1,100', hours: '10 hours', text: '10 hours for updates, new sections, simple new pages in your existing page designs, adding forms, maps, videos, or booking links, and CMS help. Good for 12 months. Done within 2 business days.' },
+];
+
+// The monthly offer: your own web developer. Month to month: 1 hour $125 (list rate) or 5 hours $575 (same rate as the 5-hour pack) (alexandria 2026-11-02).
+
 export const monthly = {
-  name: 'Monthly web producer',
-  price: 'From $650 a month for 5 hours',
-  text: 'Your own web producer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
-  outcomes: ['Stays fast, secure, and working', 'Gets new pages for your campaigns, events, and products', 'Keeps up with what people are searching for', 'Comes with a short report on what changed, what it did, and what\'s next'],
+  name: 'Monthly website retainer',
+  price: 'From $125 a month for 1 hour, or $575 for 5 hours',
+  text: 'Your own web developer, without hiring one. Working with a marketer or SEO person? They set the direction, and I make it happen on your site.',
+  outcomes: ['A monthly planning call', 'New pages for your campaigns, events, and products', 'A monthly site check and Google health check', 'A short report on what changed, what it did, and what\'s next'],
 };
 
 
@@ -194,12 +216,14 @@ export const testimonials = [
   { quote: 'She was always super organized, dependable, and really good at keeping everything moving in the right direction.', name: 'Matthew Udy', role: 'CEO, Flip Key Studios' },
 ];
 
-// AI and production offers. group 'consulting' lives on the Tech, Automation & AI page;
-// 'prototype' (first steps) and 'production' live on the Production & Emerging Tech page.
+// AI and production offers. group 'consulting' lives on the Automation, AI & Projects pages;
+// 'ar' (AR packages), 'prototype' (Plan Review) and 'production' live on the AR, VR & Production page.
 export const aiOffers = [
-  { id: 'workshop', group: 'consulting', icon: 'chat', title: 'Team AI Workshop', price: '$750', text: 'A 90-minute hands-on session for up to 10 people. Your team practices ChatGPT, Claude, or Gemini on real work and leaves with a one-page guide.' },
   { id: 'review', group: 'prototype', icon: 'search', title: 'Production Plan Review', price: '$650', text: 'For game, XR, and interactive projects. I review your scope, milestones, and risks, and give you a plan your team can follow, with your project tools set up if you need them. About 2 weeks.' },
-  { id: 'ar-starter', group: 'prototype', icon: 'star', title: 'AR Starter Project', price: 'From $1,500', text: "A small AR piece that opens in a phone's browser, with no app needed: a business card, flyer, poster, or product that comes to life. Built with a developer partner when needed. 2–4 weeks." },
+  { id: 'ar-card', group: 'ar', icon: 'star', title: 'AR Card or Flyer', price: 'From $750', text: 'A card, flyer, or sign that comes alive when someone points a phone at it.', items: ['One printed piece', 'A short video or 3D object', 'Buttons to book, call, or visit your site'] },
+  { id: 'ar-menu', group: 'ar', icon: 'book', title: 'AR Label or Packaging', price: 'From $1,000', text: 'A product label or package that comes alive with a story, then shows how to use it, recipes, or where to buy.', items: ['One label, package, or box', 'One animated scene, or up to 3 items in 3D or video', 'Buttons to how-tos, recipes, or your shop'] },
+  { id: 'ar-product', group: 'ar', icon: 'layers', title: 'AR Product View', price: 'From $1,500', text: 'Customers place your products in their room, or try them on, right from your website.', items: ['Up to 5 products in 3D', 'View in your space or try on', 'Added to your website product pages'] },
+  { id: 'ar-project', group: 'ar', icon: 'compass', title: 'AR Project Viewer', price: 'From $1,500', text: 'For architects and builders: your 3D model on a phone, at the meeting table or full size on site.', items: ['Uses the model you already have', 'Tabletop or full-size view', 'A link you can send to clients'] },
   { id: 'production', group: 'production', icon: 'star', title: 'Production Support', price: '$65/hr, or monthly from $650', text: 'Producer and project management help for game, XR, and immersive teams: plans, schedules, design documents, playtests, and keeping everyone aligned.' },
 ];
 

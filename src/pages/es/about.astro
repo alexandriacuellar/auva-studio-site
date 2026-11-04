@@ -6,30 +6,41 @@ import '../../styles/pages/about.css';
 import Icon from '../../components/Icon.astro';
 import Cta from '../../components/Cta.astro';
 import { site, testimonials } from '../../data/site.es';
+import bearMountain from '../../assets/about/bear-mountain-bridge.jpg';
+import nyack from '../../assets/about/nyack-broadway.jpg';
+import mohonk from '../../assets/about/mohonk-new-paltz.jpg';
+import centralPark from '../../assets/about/central-park-nyc.jpg';
 import headshot from '../../assets/alexandria-cuellar.jpg';
+const places = [
+  { src: bearMountain, place: 'Puente Bear Mountain', alt: 'El puente Bear Mountain sobre el río Hudson en otoño' },
+  { src: nyack, place: 'Nyack', alt: 'Fachadas de ladrillo y un café en la acera de Broadway, en Nyack' },
+  { src: mohonk, pos: 'right center', place: 'Mohonk, New Paltz', alt: 'Mohonk Mountain House sobre el lago Mohonk con colores de otoño' },
+  { src: centralPark, place: 'Central Park, Nueva York', alt: 'El paseo del Central Park con árboles de otoño y faroles' }
+];
 ---
-<Base title="Sobre mí" seoTitle="Sobre Alexandria Cuellar | Auva Studio" description="Alexandria Cuellar, fundadora de Auva Studio: más de 20 años ayudando a organizaciones a resolver problemas con tecnología, desde el Mid-Hudson Valley.">
+<Base title="Sobre mí" seoTitle="Sobre Alexandria Cuellar, desarrolladora web y productora XR | Auva Studio" description="Alexandria Cuellar, fundadora de Auva Studio. Trabaje directamente con ella en sitios web, herramientas, IA, AR y VR, en español o inglés, desde el Hudson Valley.">
   <section class="hero about-hero">
     <div class="wrap">
       <Image class="about-photo" src={headshot} alt="Alexandria Cuellar" width={300} height={300} densities={[1, 2]} loading="eager" />
       <div>
         <h1 class="mag-head" set:html={`Hola, soy Alexandria. <em>Hagamos que la tecnología trabaje para usted.</em>`} />
-        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/technology-consulting/">tecnología, automatización e IA</a>, y <a href="/es/production-emerging-tech/">producción para videojuegos, XR y AR</a>.</p>
+        <p class="lede">Fundé Auva Studio para ayudar a pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento a tomar decisiones tecnológicas con confianza, empezando por sus metas. Le ayudo con <a href="/es/websites/">sitios web</a>, <a href="/es/automation-ai-projects/">automatización e IA, gestión de proyectos</a>, y <a href="/es/ar-vr-production/">producción de AR, VR y videojuegos</a>.</p>
         <p class="about-role">Fundadora de Auva Studio, en el Mid-Hudson Valley</p>
         <div class="hero-actions">
-          <a class="btn" href={site.booking} target="_blank" rel="noopener">Reserve una llamada gratis de 30 minutos <Icon name="arrow" size={18} /></a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={18} /> Siga a Auva Studio en LinkedIn</a>
+          <a class="btn" href="/es/#services">Cómo le ayudo <Icon name="arrow" size={18} /></a>
+          <a class="btn btn-ghost" href="/es/contact/">Contácteme</a>
         </div>
+        <p class="small" style="margin-top: 16px"><a href="https://www.linkedin.com/company/auva-studio/" target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Siga a Auva Studio en LinkedIn</a></p>
       </div>
     </div>
   </section>
 
-  <section class="alt about-story">
+  <section class="band-cream about-story">
     <div class="wrap about-grid">
       <div>
         <h2 class="mag-head" set:html={`Más de 20 años haciendo que <em>la tecnología funcione para las personas.</em>`} />
-        <p>Empecé mi carrera en el Times Herald-Record y pasé casi dos décadas como una de muchas desarrolladoras creando sitios web y aplicaciones web para periódicos, mientras la empresa crecía hasta convertirse en GateHouse Media y luego en Gannett, hoy USA TODAY Co., con más de 150 diarios. Gran parte de ese trabajo consistía en conectar servicios externos a los sitios web y llevar sitios a nuevos diseños y tecnologías sin perder años de contenido, justo lo que hoy necesitan los pequeños negocios. Al principio también creé sitios web para pequeños negocios, a través del paquete de sitios web que el periódico ofrecía a sus nuevos anunciantes y, más adelante, para diseñadores locales. Desde 2023 trabajo como gerente de proyectos técnicos y he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Como mi experiencia está tanto en el desarrollo de software como en la gestión de proyectos, entiendo cómo funciona la tecnología y armo planes que los equipos realmente pueden seguir. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
-        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> Proyectos: Jira, Trello, Notion, ClickUp y Zapier. XR y videojuegos: Unity, Meta Quest, lentes de Meta, Meta Horizon y AR en el navegador. IA: ChatGPT, Claude, Gemini y Meta AI.</p>
+        <p>Pasé casi dos décadas como desarrolladora detrás de sitios web y aplicaciones web de periódicos, desde el Times Herald-Record hasta más de 150 diarios que hoy pertenecen a USA TODAY Co. Al principio también creé sitios web para pequeños negocios, a través del paquete de sitios web que el periódico ofrecía a sus nuevos anunciantes y, más adelante, para diseñadores locales. Desde 2023 trabajo como gerente de proyectos técnicos y he dirigido más de 14 experiencias de realidad virtual y juegos para celular para estudios independientes de videojuegos. Llevo años creando en Meta Horizon Worlds y formo parte de Meta Horizon Start y del Meta Horizon Creator Program. Como mi experiencia está tanto en el desarrollo de software como en la gestión de proyectos, entiendo cómo funciona la tecnología y armo planes que los equipos realmente pueden seguir. Ahora llevo esa experiencia a negocios que necesitan un sitio web, quieren sacarle más provecho a sus herramientas o sienten curiosidad por la IA y la tecnología emergente.</p>
+        <p class="small muted" style="margin-top: 20px"><b>Herramientas con las que trabajo.</b> Proyectos: Jira, Trello, Notion, ClickUp y Zapier. AR, VR y videojuegos: Unity, Meta Quest, lentes de Meta, Meta Horizon y AR en el navegador. IA: ChatGPT, Claude, Gemini y Meta AI.</p>
       </div>
       <div class="stats">
           <div><span class="stat">20+</span><span class="muted">años en software y tecnología digital</span></div>
@@ -42,7 +53,7 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
   <section class="about-why">
     <div class="wrap about-home">
       <h2 class="mag-head" set:html={`Por qué fundé <em>Auva Studio.</em>`} />
-      <p class="lede">La tecnología cambia sin parar, y la IA y la XR la están cambiando más rápido que nunca. Fundé Auva Studio para poner mis décadas de experiencia al servicio de pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento: para ayudarle a mantenerse al día con esos cambios y hacer que la tecnología trabaje para usted. Uso herramientas de IA en mi propio trabajo, y me encantará mostrarle cómo pueden ayudarle a usted también.</p>
+      <p class="lede">La tecnología cambia sin parar, y la IA, la AR y la VR la están cambiando más rápido que nunca. Fundé Auva Studio para poner mis décadas de experiencia al servicio de pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento: para ayudarle a mantenerse al día con esos cambios y hacer que la tecnología trabaje para usted. Uso herramientas de IA en mi propio trabajo, y me encantará mostrarle cómo pueden ayudarle a usted también.</p>
     </div>
   </section>
 
@@ -81,6 +92,16 @@ import headshot from '../../assets/alexandria-cuellar.jpg';
     <div class="wrap about-home">
       <h2 class="mag-head" set:html={`Con raíces en <em>el Hudson Valley.</em>`} />
       <p class="lede">Vivo en el Mid-Hudson Valley y trabajo con negocios y organizaciones en todo el Hudson Valley, en la ciudad de Nueva York y en cualquier parte de Estados Unidos. Cuando no estoy trabajando, me encontrará en largas caminatas con mi perra, Midna.</p>
+      <ul class="place-strip" aria-label="Lugares que me encantan en el Hudson Valley y Nueva York">
+        {places.map((pl) => (
+          <li>
+            <figure>
+              <Image src={pl.src} alt={pl.alt} style={pl.pos ? `object-position: ${pl.pos}` : undefined} widths={[360, 560, 760]} sizes="(max-width: 860px) 46vw, 270px" loading="lazy" />
+              <figcaption>{pl.place}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
   <Cta />
