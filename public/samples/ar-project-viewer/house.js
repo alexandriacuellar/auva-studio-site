@@ -249,7 +249,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
     deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
-    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#e4d5ba' }), mat: std({ color: '#7f9a86' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
+    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c4ae8c' }), mat: std({ color: '#7f9a86' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
     bedding: std({ color: '#f4f0e8' }), throw: std({ color: '#b5653f' }), oak: std({ color: '#b58a5d' }),
     counter: std({ color: '#e9e7e2', roughness: 0.5 }), cabinet: std({ color: '#5f7a69', roughness: 0.6 }),
     steel: std({ color: '#b9bec4', roughness: 0.35, metalness: 0.6 }), dark: std({ color: '#26282c', roughness: 0.4 }),
