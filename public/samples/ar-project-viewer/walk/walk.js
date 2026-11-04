@@ -97,8 +97,8 @@ for (const [x, z] of [[-3.4, 0.2], [1.1, -1.8], [1.1, 2.0], [4.6, 2.0], [4.6, -2
 lamps.visible = false;
 
 // Walkable floors and solid things, by mesh name
-const FLOORS = ['lawn', 'gravel', 'deck', 'wood', 'tile', 'rug', 'mat', 'ground'];
-const SOLID = ['siding', 'inner', 'frame', 'glass', 'door', 'trim', 'stone', 'sofa', 'cabinet', 'counter', 'steel', 'oak', 'bedding', 'throw', 'porcelain', 'walltile', 'trunk', 'foundation'];
+const FLOORS = ['lawn', 'gravel', 'deck', 'wood', 'tile', 'rug', 'mat', 'ground', 'foundation'];
+const SOLID = ['siding', 'inner', 'frame', 'glass', 'door', 'trim', 'stone', 'sofa', 'cabinet', 'counter', 'steel', 'oak', 'bedding', 'throw', 'porcelain', 'walltile', 'trunk'];
 const floors = [ground], solids = [];
 house.root.traverse((o) => { if (!o.isMesh) return; if (FLOORS.includes(o.name)) floors.push(o); if (SOLID.includes(o.name)) solids.push(o); });
 
@@ -252,7 +252,7 @@ function screenStep(dt) {
 
 // ---------- Meta Quest: VR ----------
 const xr = { session: null, ref: null, head: null, headYawLocal: 0, ctrls: [], panel: null, items: [], reticle: null, turnReady: { left: true, right: true }, target: null };
-if (location.search.includes('debug')) Object.assign(window, { __walk: { xr, rig, camera, state, placeAt, scene, renderer } });
+if (location.search.includes('debug')) Object.assign(window, { __walk: { xr, rig, camera, state, placeAt, scene, renderer, tryMove, at } });
 
 const reticle = new THREE.Mesh(new THREE.RingGeometry(0.2, 0.27, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: '#9fd18b', transparent: true, opacity: 0.9, depthWrite: false, fog: false }));
 reticle.visible = false; scene.add(reticle); xr.reticle = reticle;
