@@ -28,7 +28,7 @@ export const t = {
   tryCard: 'Pruébelo en mi tarjeta', pkH: 'Paquetes de AR, <em>con precio desde el inicio.</em>', pkL: 'Cada uno se abre en el navegador del teléfono. Precios de fundadores para mis primeros 5 clientes de AR.', ask: 'Pregunte por este',
   bigH: '¿Necesita algo más grande?', bigP: 'La capacitación en VR, los recorridos de casas, los mundos en Meta Horizon y las aplicaciones completas se construyen con un desarrollador de AR y VR con experiencia que se une desde el inicio. Yo sigo como su productora. Cotizado para su proyecto.',
   ideasH: 'Lo que podríamos <em>crear juntos.</em>', ideasL: 'Algunas ideas más para inspirar las suyas.',
-  demosH: 'Pruebe mis demostraciones <em>de AR.</em>', demosL: 'Cada demostración muestra uno de mis paquetes de AR. Ábrala en su teléfono y pruébela como lo harían sus clientes. Las demostraciones están en inglés.',
+  demosH: 'Pruebe mis demostraciones <em>de AR.</em>', demosL: 'Cada demostración muestra uno de mis paquetes de AR. Ábrala en su teléfono y pruébela como lo harían sus clientes. Los modelos 3D aquí son sencillos para que carguen rápido. Los suyos pueden ser más detallados o realistas, a partir de sus propios archivos 3D o creados para su proyecto. Las demostraciones están en inglés.',
   seeDemos: 'Ver las demostraciones', demoTry: 'Pruebe la demostración', demoWorks: 'Funciona en', demoLink: 'Ver la demostración',
   live: 'Demostración en vivo', idea: 'Idea', ideaPartner: 'Idea, con colaborador',
   stTitle: 'Producción de videojuegos y XR', stSeo: 'Productora de videojuegos y XR para estudios independientes | Auva Studio',

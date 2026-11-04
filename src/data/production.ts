@@ -30,7 +30,7 @@ export const t = {
   tryCard: 'Try it on my card', pkH: 'AR packages, <em>priced up front.</em>', pkL: "Each one opens in a phone's browser. Founding prices for my first 5 AR clients.", ask: 'Ask about this',
   bigH: 'Need something bigger?', bigP: 'VR training, home walkthroughs, Meta Horizon worlds, and full apps are built with an experienced AR and VR developer partner who joins at the start. I stay on as your producer. Quoted for your project.',
   ideasH: 'What we could <em>build together.</em>', ideasL: 'A few more ideas to spark yours.',
-  demosH: 'Try my AR demos <em>yourself.</em>', demosL: 'Each demo shows one of my AR packages. Open it on your phone and try it the way your customers would.',
+  demosH: 'Try my AR demos <em>yourself.</em>', demosL: 'Each demo shows one of my AR packages. Open it on your phone and try it the way your customers would. The 3D models here are kept simple so they load fast. Yours can be more detailed or realistic, built from your own 3D files or made for your project.',
   seeDemos: 'See the demos', demoTry: 'Try the demo', demoWorks: 'Works on', demoLink: 'See the demo',
   live: 'Live demo', idea: 'Idea', ideaPartner: 'Idea, with partner',
   // Studios sub page
