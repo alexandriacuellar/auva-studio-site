@@ -214,8 +214,10 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     box('cabinet', -0.6, 0.1, F + 1.5, F + 2.25, -3.9, -3.55);          // upper cabinets
     box('steel', 2.2, 2.88, F, F + 1.95, -3.9, -3.2);                   // fridge
   }
-  box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
-  box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
+  if (!omit.includes('island')) {
+    box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
+    box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
+  }
   if (!omit.includes('chairs')) for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
   // Dining table on four legs, set toward the kitchen wall so the path from the front door to the kitchen stays open
   const tx0 = 0.9, tx1 = 2.7, tz0 = 1.45, tz1 = 2.35;
@@ -284,7 +286,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   const AW = Math.PI / 4, ridgeW = HW + 2.25 + 0.05;
   const wingR = slab(6 + ov * 2, 'z', AW, ridgeW, 2.25, ov, 'roof', 0.14, 8.25, -0.5);
   wingR(1);
-  const wingL = slab(6 + ov * 2, 'z', AW, ridgeW, 2.25, 0, 'roof', 0.14, 8.25, -0.5);
+  const wingL = slab(6 + ov * 2, 'z', AW, ridgeW, 2.08, 0, 'roof', 0.14, 8.25, -0.5); // stops inside the hall wall, so its edge doesn't poke through as a dark bar (the main roof covers the rest)
   wingL(-1);
   const capW = new THREE.BoxGeometry(0.28, 0.16, 6 + ov * 2); capW.translate(8.25, ridgeW + 0.1, -0.5); addRoof('roof', capW);
   // Porch roof: a gentle shed roof from the wall out over the posts

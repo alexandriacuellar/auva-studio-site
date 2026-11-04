@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables', 'sofa', 'chairs'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables', 'sofa', 'chairs', 'island'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -174,6 +174,28 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
     }
   }
 });
+// Island from the same cabinets, turned to face the cook (back to back with the stools), under one white top
+// that overhangs on the stool side. Plan x 0.15 to 2.05, cabinet fronts at z -2.3.
+const ISLAND = ['CabinetD02', 'CabinetD04', 'CabinetD02', 'CabinetD04'];
+new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) => {
+  const parts = ISLAND.map((n) => g.scene.getObjectByName(n)).filter(Boolean).map((src) => {
+    const o = src.clone(); o.position.set(0, 0, 0); o.rotation.set(0, Math.PI, 0); o.updateMatrixWorld(true);
+    return { o, b: new THREE.Box3().setFromObject(o) };
+  });
+  const total = parts.reduce((s, p) => s + p.b.max.x - p.b.min.x, 0);
+  let x = 1.1 - total / 2, top = 0, back = -2.3;
+  for (const { o, b } of parts) {
+    o.position.set(x - b.min.x, F - b.min.y, -2.3 - b.min.z); x += b.max.x - b.min.x;
+    top = Math.max(top, b.max.y - b.min.y); back = Math.max(back, -2.3 + b.max.z - b.min.z);
+    house.body.add(o); o.updateMatrixWorld(true); o.traverse((m) => { if (m.isMesh) solids.push(m); });
+  }
+  // Back panel on the stool side, then the top
+  const panel = new THREE.Mesh(new THREE.BoxGeometry(total, top - 0.04, 0.02), house.mats.cabinet);
+  panel.position.set(1.1, F + (top - 0.04) / 2, back + 0.01); house.body.add(panel);
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(total + 0.1, 0.04, back - (-2.3) + 0.35), house.mats.counter);
+  slab.position.set(1.1, F + top + 0.02, (-2.32 + back + 0.3) / 2); house.body.add(slab);
+  solids.push(panel, slab);
+});
 // Island to match: black base, white top like the cabinets
 house.mats.cabinet.color.set('#232427');
 house.mats.counter.color.set('#e8e8e6');
@@ -181,7 +203,7 @@ house.mats.counter.color.set('#e8e8e6');
 // Beds from alexandria's bed set: headboard against the wall (the models' headboard is at -z, so a -90° turn puts it at +x).
 // area: [x0, x1, z0, z1] floor space; the bed is scaled down to fit if needed and pushed against x1.
 const BEDS = [
-  { name: 'BedFrame12', area: [8.2, 10.42, -1.6, 0.6] },   // primary suite
+  { name: 'BedFrame12', area: [8.06, 10.28, -1.6, 0.6] },  // primary suite, clear of the window sill (sill reaches x 10.335)
   { name: 'BedFrame11', area: [3.75, 5.92, 1.1, 3.1] },    // bedroom 2
 ];
 new GLTFLoader().load(new URL('./bed-set.glb', import.meta.url).href, (g) => {
