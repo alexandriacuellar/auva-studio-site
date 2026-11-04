@@ -69,7 +69,7 @@ function planarUV(geo, size) {
   return geo;
 }
 
-export function buildHouse({ finish = 'white', labels = true } = {}) {
+export function buildHouse({ finish = 'white', labels = true, openDoor = false, lining = false } = {}) {
   const parts = {}; // material key -> geometries
   const add = (key, geo) => { (parts[key] ||= []).push(geo.index ? geo.toNonIndexed() : geo); };
   const box = (key, x0, x1, y0, y1, z0, z1) => {
@@ -86,10 +86,16 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   // A straight wall with window and door holes. along: 'x' or 'z'; at: the fixed coordinate.
   // openings: [center along the wall, width, bottom y, top y, kind]
   function wall(key, along, at, a0, a1, y0, y1, th, openings = []) {
+    // lining: painted drywall on the inside face of the siding walls, for the walk-through
+    const inside = key === 'siding' && lining ? -(Math.sign(at) || 1) : 0;
     const seg = (b0, b1, c0, c1) => {
       if (b1 - b0 < 0.001 || c1 - c0 < 0.001) return;
       if (along === 'x') box(key, b0, b1, c0, c1, at - th / 2, at + th / 2);
       else box(key, at - th / 2, at + th / 2, c0, c1, b0, b1);
+      if (!inside) return;
+      const d0 = at + inside * (th / 2 + 0.002), d1 = at + inside * (th / 2 + 0.012);
+      if (along === 'x') box('inner', b0, b1, c0, c1, Math.min(d0, d1), Math.max(d0, d1));
+      else box('inner', Math.min(d0, d1), Math.max(d0, d1), c0, c1, b0, b1);
     };
     const ops = [...openings].sort((p, q) => p[0] - q[0]);
     let cur = a0;
@@ -110,7 +116,12 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     const out = Math.sign(at) || 1; // which side of the wall is outside
     const face = (d) => (out > 0 ? [d - 0.03, d + 0.03] : [-d - 0.03, -d + 0.03]);
     const [f0, f1] = face(th / 2);
-    if (kind === 'door') {
+    if (kind === 'door' && openDoor) {
+      // Swung open into the house, so the walk-through can go in the front door
+      const inn = -out * (th / 2 + 0.005);
+      if (along === 'x') box('door', s + 0.005, s + 0.055, b, top, at + Math.min(inn, inn - out * 0.95), at + Math.max(inn, inn - out * 0.95));
+      else box('door', at + Math.min(inn, inn - out * 0.95), at + Math.max(inn, inn - out * 0.95), b, top, s + 0.005, s + 0.055);
+    } else if (kind === 'door') {
       place('door', s, e, b, top, -th / 2 + 0.04, th / 2 - 0.04);
       place('glass', s + 0.15, e - 0.15, b + 1.0, top - 0.15, ...face(th / 2 - 0.02));
     } else {
@@ -264,8 +275,14 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     const s = new THREE.Shape([new THREE.Vector2(-half, 0), new THREE.Vector2(half, 0), new THREE.Vector2(0, rise)]);
     const g = new THREE.ExtrudeGeometry(s, { depth: T, bevelEnabled: false }); g.translate(0, y0, -T / 2); return g;
   };
-  for (const x of [-6, 6]) { const g = gable(4 + T / 2, 4 * Math.tan(A), H); g.rotateY(Math.PI / 2); g.translate(x, 0, 0); addRoof('siding', planarUV(g, 0.45)); }
-  for (const z of [2.5, -3.5]) { const g = gable(2.25 + T / 2, 2.25, HW); g.translate(8.25, 0, z); addRoof('siding', planarUV(g, 0.45)); }
+  for (const x of [-6, 6]) {
+    const g = gable(4 + T / 2, 4 * Math.tan(A), H); g.rotateY(Math.PI / 2); g.translate(x, 0, 0); addRoof('siding', planarUV(g, 0.45));
+    if (lining) { const l = gable(4, 4 * Math.tan(A) - 0.1, H); l.scale(1, 1, 0.05); l.rotateY(Math.PI / 2); l.translate(x - Math.sign(x) * (T / 2 + 0.006), 0, 0); addRoof('inner', l); }
+  }
+  for (const z of [2.5, -3.5]) {
+    const g = gable(2.25 + T / 2, 2.25, HW); g.translate(8.25, 0, z); addRoof('siding', planarUV(g, 0.45));
+    if (lining) { const l = gable(2.25, 2.15, HW); l.scale(1, 1, 0.05); l.translate(8.25, 0, z - Math.sign(z) * (T / 2 + 0.006)); addRoof('inner', l); }
+  }
 
   // ---------- Materials ----------
   const std = (o) => new THREE.MeshStandardMaterial({ roughness: 0.8, ...o });
@@ -286,7 +303,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     leaves: std({ color: '#5e7d48', flatShading: true }),
     fire: std({ color: '#ff7a1a', emissive: '#ff6a10', emissiveIntensity: 1.6, roughness: 1 }), flame: std({ color: '#ffd166', emissive: '#ffc23d', emissiveIntensity: 1.8, roughness: 1 }),
   };
-  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone() };
+  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone() } : {}) };
   const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3 };
 
   const root = new THREE.Group(); root.name = 'farmhouse';
@@ -350,5 +367,5 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     mats.fire.emissiveIntensity = on ? 3 : 1.6; mats.flame.emissiveIntensity = on ? 3.4 : 1.8;
   }
   setFinish(finish); setNight(false);
-  return { root, roof, roofMats: Object.values(roofMats), labels: labelGroup, setFinish, setNight };
+  return { root, body, roof, mats, roofMats: Object.values(roofMats), labels: labelGroup, setFinish, setNight };
 }
