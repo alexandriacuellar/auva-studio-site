@@ -198,6 +198,13 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
   box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
   box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
   box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
+  // Blue-gray tile up the bath walls, so the white tub, toilet and sink stand out.
+  const wh = F + 1.25;
+  box('walltile', 3.06, 5.9, F, wh, -3.9, -3.87);            // back wall
+  box('walltile', 5.87, 5.9, F, wh, -3.9, -1.66);            // right wall
+  box('walltile', 3.06, 3.09, F, wh, -3.9, -1.66);           // left wall
+  box('walltile', 3.06, 3.8, F, wh, -1.69, -1.66);           // front wall, either side of the door
+  box('walltile', 4.6, 5.9, F, wh, -1.69, -1.66);
   box('mat', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
   // Primary suite in the wing
   box('rug', 7.4, 10.0, F + 0.005, F + 0.02, -2.0, 1.0);
@@ -248,8 +255,8 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
     glass: std({ color: '#2b3546', roughness: 0.12, metalness: 0.3, emissive: '#000000' }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
-    deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#b9c6c8' }),
-    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c4ae8c' }), mat: std({ color: '#7f9a86' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
+    deck: std({ map: plankTex(), color: '#b98f63' }), wood: std({ map: plankTex(), color: '#7a5840' }), tile: std({ map: tileTex(), color: '#5f6b72' }),
+    inner: std({ color: '#f6f4ef' }), rug: std({ color: '#c4ae8c' }), mat: std({ color: '#b5653f' }), walltile: std({ map: tileTex(), color: '#7c97a6' }), vanitytop: std({ color: '#3d4045', roughness: 0.35 }), sofa: std({ color: '#3e5a7a' }),
     bedding: std({ color: '#f4f0e8' }), throw: std({ color: '#b5653f' }), oak: std({ color: '#b58a5d' }),
     counter: std({ color: '#e9e7e2', roughness: 0.5 }), cabinet: std({ color: '#5f7a69', roughness: 0.6 }),
     steel: std({ color: '#b9bec4', roughness: 0.35, metalness: 0.6 }), dark: std({ color: '#26282c', roughness: 0.4 }),
@@ -258,7 +265,7 @@ export function buildHouse({ finish = 'white', labels = true } = {}) {
     leaves: std({ color: '#5e7d48', flatShading: true }),
   };
   const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone() };
-  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, lawn: 3 };
+  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3 };
 
   const root = new THREE.Group(); root.name = 'farmhouse';
   const body = new THREE.Group(); body.name = 'house'; root.add(body);
