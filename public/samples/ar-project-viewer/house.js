@@ -206,12 +206,14 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     const g = new THREE.ConeGeometry(r, h, 7); g.translate(key === 'flame' ? -5.5 : -5.53, F + 0.12 + h / 2, z); add(key, g);
   }
   // Kitchen: back counter, island, and the dining table with six chairs
-  box('cabinet', -0.6, 2.15, F, F + 0.86, -3.9, -3.3);              // base cabinets
-  box('counter', -0.62, 2.17, F + 0.86, F + 0.92, -3.92, -3.25);      // stone top
-  box('steel', 0.95, 1.55, F + 0.92, F + 0.93, -3.8, -3.42);          // sink
-  box('dark', -0.45, 0.25, F + 0.92, F + 0.935, -3.82, -3.36);        // cooktop
-  box('cabinet', -0.6, 0.1, F + 1.5, F + 2.25, -3.9, -3.55);          // upper cabinets
-  box('steel', 2.2, 2.88, F, F + 1.95, -3.9, -3.2);                   // fridge
+  if (!omit.includes('kitchen')) {
+    box('cabinet', -0.6, 2.15, F, F + 0.86, -3.9, -3.3);              // base cabinets
+    box('counter', -0.62, 2.17, F + 0.86, F + 0.92, -3.92, -3.25);      // stone top
+    box('steel', 0.95, 1.55, F + 0.92, F + 0.93, -3.8, -3.42);          // sink
+    box('dark', -0.45, 0.25, F + 0.92, F + 0.935, -3.82, -3.36);        // cooktop
+    box('cabinet', -0.6, 0.1, F + 1.5, F + 2.25, -3.9, -3.55);          // upper cabinets
+    box('steel', 2.2, 2.88, F, F + 1.95, -3.9, -3.2);                   // fridge
+  }
   box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
   box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
   for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools

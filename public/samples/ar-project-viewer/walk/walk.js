@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -142,6 +142,41 @@ new GLTFLoader().load(new URL('./bath-set.glb', import.meta.url).href, (g) => {
     house.body.add(s); s.updateMatrixWorld(true);
   }
 });
+
+// Kitchen: real models from alexandria's kitchen set, along the back wall (plan x -0.6 to 2.88, wall at z -3.9).
+// The window over the sink leaves no room for wall cabinets. Each piece: model node, left edge x (or center cx), height of its base above the floor.
+const WALL = -3.9;
+const KITCHEN = [
+  { name: 'CabinetD03', x: -0.6 }, { name: 'CabinetD04', x: -0.18 }, { name: 'CabinetD02', x: 0.24 },
+  { name: 'CabinetD_Sink', x: 0.66 }, { name: 'CabinetD01', x: 1.5 },
+  { name: 'Refrigerator06', x: 1.96, fitW: 0.92 },
+  { name: 'GasStove07', cx: -0.18, y: 0.92, z: 0.3 }, { name: 'Sink06', cx: 1.08, y: 0.92, z: 0.3, byOrigin: true },
+  { name: 'KitchenExhaust01', cx: -0.18, y: 1.62 },
+];
+new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) => {
+  for (const p of KITCHEN) {
+    const o = g.scene.getObjectByName(p.name); if (!o) continue;
+    o.position.set(0, 0, 0); o.rotation.set(0, 0, 0); o.scale.set(1, 1, p.sz || 1); o.updateMatrixWorld(true);
+    let b = new THREE.Box3().setFromObject(o);
+    if (p.fitW) { const k = Math.min(1, p.fitW / (b.max.x - b.min.x)); o.scale.setScalar(k); o.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(o); }
+    const dx = p.cx !== undefined ? p.cx - (b.min.x + b.max.x) / 2 : p.x - b.min.x;
+    const dz = p.z !== undefined ? WALL + p.z - (b.min.z + b.max.z) / 2 : WALL - b.min.z;
+    // The sink hangs below the counter, so it's placed by its own origin (the counter line)
+    const dy = p.byOrigin ? F + p.y : F + (p.y || 0) - b.min.y;
+    o.position.set(dx, dy, dz);
+    house.body.add(o); o.updateMatrixWorld(true);
+    o.traverse((m) => { if (m.isMesh) solids.push(m); });
+    if (p.name.startsWith('KitchenExhaust')) {
+      // A steel duct from the hood up to the ceiling
+      b = new THREE.Box3().setFromObject(o); const cx = (b.min.x + b.max.x) / 2 - OFF.x, top = b.max.y - OFF.y, H = F + 3.0; // world -> plan
+      const duct = new THREE.Mesh(new THREE.BoxGeometry(0.26, H - top, 0.24), house.mats.steel);
+      duct.position.set(cx, (top + H) / 2, WALL + 0.13); house.body.add(duct);
+    }
+  }
+});
+// Island to match: black base, white top like the cabinets
+house.mats.cabinet.color.set('#232427');
+house.mats.counter.color.set('#e8e8e6');
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);
