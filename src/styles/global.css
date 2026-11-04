@@ -264,6 +264,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   body { font-size: 17px; }
   section { padding: 64px 0; }
   .grid-2, .grid-3, .grid-4, .steps, .form-row { grid-template-columns: 1fr; }
+  /* One column: no shared rows to line up, and Safari can leave subgrid rows at a stale height after a toggle. */
+  .package, .package.pk-9 { display: flex; flex-direction: column; gap: 6px; }
   .site-footer .footer-area ul { display: grid; gap: 6px; }
   .site-header ul { gap: 16px; }
   .brand img { height: 36px; }
@@ -698,6 +700,10 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .package.pk-9 { grid-row: span 9; }
 /* Retainer card toggle (1 hour / 5 hours) */
 .package[data-tier="0"] .pk-tier[data-t="1"], .package[data-tier="1"] .pk-tier[data-t="0"] { display: none; }
+/* Both prices share one cell, so the price row keeps the same height when the toggle switches. */
+.package .price.pk-prices { display: grid; }
+.package .price.pk-prices > .pk-tier { grid-area: 1 / 1; display: block; }
+.package[data-tier="0"] .price.pk-prices > [data-t="1"], .package[data-tier="1"] .price.pk-prices > [data-t="0"] { visibility: hidden; }
 .package .pk-toggle { display: inline-flex; gap: 4px; padding: 4px; margin: 6px 0 8px; background: var(--alt, #eef3fd); border: 1px solid var(--border); border-radius: 999px; }
 .package .pk-toggle button { font: inherit; font-size: 0.92rem; font-weight: 700; padding: 6px 16px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
 .package .pk-toggle button[aria-pressed="true"] { background: var(--primary); color: #fff; }
