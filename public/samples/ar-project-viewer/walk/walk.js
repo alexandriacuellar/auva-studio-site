@@ -85,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables'] });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub', 'kitchen', 'beds', 'tables', 'sofa'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -217,8 +217,13 @@ const TABLES = [
   { name: 'Table10', turn: 0, area: [0.9, 2.7, 1.45, 2.35], stretch: true },   // dining
   { name: 'Table39', turn: Math.PI / 2, area: [-4.1, -3.3, -0.65, 0.65] },     // coffee table
 ];
-new GLTFLoader().load(new URL('./table-set.glb', import.meta.url).href, (g) => {
-  for (const p of TABLES) {
+// Black leather sofa and armchair from alexandria's sofa set (fronts face -z in the model)
+const SOFAS = [
+  { name: 'Sofa01', turn: Math.PI / 2, area: [-2.65, -1.75, -1.2, 1.2] },        // sofa facing the fireplace
+  { name: 'Sofa02', turn: 0.35, area: [-4.25, -3.25, 1.35, 2.35] },             // armchair by the coffee table
+];
+const placeFurniture = (list) => (g) => {
+  for (const p of list) {
     const o = g.scene.getObjectByName(p.name); if (!o) continue;
     o.position.set(0, 0, 0); o.rotation.set(0, p.turn, 0); o.scale.setScalar(1); o.updateMatrixWorld(true);
     let b = new THREE.Box3().setFromObject(o); const [x0, x1, z0, z1] = p.area;
@@ -232,7 +237,9 @@ new GLTFLoader().load(new URL('./table-set.glb', import.meta.url).href, (g) => {
     house.body.add(o); o.updateMatrixWorld(true);
     o.traverse((m) => { if (m.isMesh) solids.push(m); });
   }
-});
+};
+new GLTFLoader().load(new URL('./table-set.glb', import.meta.url).href, placeFurniture(TABLES));
+new GLTFLoader().load(new URL('./sofa-set.glb', import.meta.url).href, placeFurniture(SOFAS));
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);

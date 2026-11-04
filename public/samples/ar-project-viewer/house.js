@@ -191,7 +191,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   wall('inner', 'x', 0.2, 3, 6, F, H, t, [[4.2, 0.9, F, F + 2.1]]);
   // Living room: rug, sofa facing the fireplace, coffee table, fireplace
   box('rug', -5.2, -1.8, F + 0.005, F + 0.02, -1.4, 1.4);
-  box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
+  if (!omit.includes('sofa')) { box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2); }
   if (!omit.includes('tables')) box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6); // coffee table
   // Fireplace: stone jambs and lintel around a dark firebox, logs and a fire, oak mantel, stone hearth
   box('stone', -5.9, -5.4, F, F + 0.8, -0.9, -0.45); box('stone', -5.9, -5.4, F, F + 0.8, 0.45, 0.9);
