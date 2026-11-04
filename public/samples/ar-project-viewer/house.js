@@ -69,7 +69,7 @@ function planarUV(geo, size) {
   return geo;
 }
 
-export function buildHouse({ finish = 'white', labels = true, openDoor = false, lining = false } = {}) {
+export function buildHouse({ finish = 'white', labels = true, openDoor = false, lining = false, omit = [] } = {}) {
   const parts = {}; // material key -> geometries
   const add = (key, geo) => { (parts[key] ||= []).push(geo.index ? geo.toNonIndexed() : geo); };
   const box = (key, x0, x1, y0, y1, z0, z1) => {
@@ -227,15 +227,22 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   }
   // Bedroom 2, bath
   box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95);
-  box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
-  box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
-  box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
-  box('vanitytop', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
-  box('porcelain', 3.22, 3.52, F + 0.86, F + 0.93, -2.66, -2.24);     // basin
-  box('water', 3.26, 3.48, F + 0.93, F + 0.935, -2.62, -2.28);
-  box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
-  box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
-  box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
+  // omit: leave out fixtures that the walk-through replaces with real 3D models
+  if (!omit.includes('tub')) {
+    box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
+    box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
+  }
+  if (!omit.includes('vanity')) {
+    box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
+    box('vanitytop', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
+    box('porcelain', 3.22, 3.52, F + 0.86, F + 0.93, -2.66, -2.24);     // basin
+    box('water', 3.26, 3.48, F + 0.93, F + 0.935, -2.62, -2.28);
+    box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
+  }
+  if (!omit.includes('toilet')) {
+    box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
+    box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
+  }
   // Blue-gray tile up the bath walls, so the white tub, toilet and sink stand out.
   const wh = F + 1.25;
   box('walltile', 3.06, 5.9, F, wh, -3.9, -3.87);            // back wall

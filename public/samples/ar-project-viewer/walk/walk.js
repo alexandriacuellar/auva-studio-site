@@ -4,6 +4,7 @@
 // pull a trigger at the floor to jump there, and the menu on your left wrist changes the house.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { buildHouse, FINISHES } from '../house.js';
 
 const $ = (id) => document.getElementById(id);
@@ -84,7 +85,7 @@ for (const [a, d, sx, sy] of [[-0.5, 330, 260, 46], [0.35, 360, 220, 62], [1.4, 
 }
 
 // ---------- The house ----------
-const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true });
+const house = buildHouse({ finish: state.finish, labels: false, openDoor: true, lining: true, omit: ['vanity', 'toilet', 'tub'] });
 scene.add(house.root);
 house.root.updateMatrixWorld(true);
 const OFF = house.body.position.clone(); // house plan coordinates -> world
@@ -103,6 +104,42 @@ const FLOORS = ['lawn', 'gravel', 'deck', 'wood', 'tile', 'rug', 'mat', 'ground'
 const SOLID = ['siding', 'inner', 'frame', 'glass', 'door', 'trim', 'stone', 'sofa', 'cabinet', 'counter', 'steel', 'oak', 'bedding', 'throw', 'porcelain', 'walltile', 'trunk'];
 const floors = [ground], solids = [];
 house.root.traverse((o) => { if (!o.isMesh) return; if (FLOORS.includes(o.name)) floors.push(o); if (SOLID.includes(o.name)) solids.push(o); });
+
+// Real bathroom fixtures (a 3D model set), placed into the bath in house plan coordinates.
+// Each piece: model node, turn (radians), and the floor area it must fit in [x0, x1, z0, z1]; snap: which wall it backs onto.
+const BATH = [
+  { name: 'BathroomVanity05', turn: Math.PI / 2, area: [3.1, 3.66, -3.0, -1.88], snap: 'x0' },
+  { name: 'Toilet01', turn: 0, area: [3.4, 4.1, -3.86, -2.9], snap: 'z0' },
+  { name: 'Bathtub01', turn: 0, area: [4.28, 5.86, -3.86, -3.0], snap: 'z0' },
+];
+const SINK = { name: 'WashBasin03', turn: -Math.PI / 2, maxDepth: 0.44 };
+new GLTFLoader().load(new URL('./bath-set.glb', import.meta.url).href, (g) => {
+  const fit = (o, turn) => { o.rotation.set(0, turn, 0); o.scale.setScalar(1); o.position.set(0, 0, 0); o.updateMatrixWorld(true); return new THREE.Box3().setFromObject(o); };
+  let top = null;
+  for (const p of BATH) {
+    const o = g.scene.getObjectByName(p.name); if (!o) continue;
+    // Measured before it joins the house, so the numbers are plan coordinates
+    let b = fit(o, p.turn); const [x0, x1, z0, z1] = p.area;
+    const k = Math.min(1, (x1 - x0) / (b.max.x - b.min.x), (z1 - z0) / (b.max.z - b.min.z)); o.scale.setScalar(k);
+    o.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(o);
+    const dx = p.snap === 'x0' ? x0 - b.min.x : (x0 + x1) / 2 - (b.min.x + b.max.x) / 2;
+    const dz = p.snap === 'z0' ? z0 - b.min.z : (z0 + z1) / 2 - (b.min.z + b.max.z) / 2;
+    o.position.set(dx, F - b.min.y, dz);
+    house.body.add(o); o.updateMatrixWorld(true);
+    o.traverse((m) => { if (m.isMesh) solids.push(m); });
+    if (p.name.startsWith('BathroomVanity')) top = new THREE.Box3().setFromObject(o);
+  }
+  const s = g.scene.getObjectByName(SINK.name);
+  if (s && top) {
+    // The sink sits on the vanity top, its faucet toward the wall
+    let b = fit(s, SINK.turn);
+    const k = Math.min(1, SINK.maxDepth / (b.max.x - b.min.x)); s.scale.setScalar(k); s.updateMatrixWorld(true); b = new THREE.Box3().setFromObject(s);
+    // world -> house plan coordinates (body is offset by OFF)
+    const cx = (top.min.x + top.max.x) / 2 - OFF.x, cz = (top.min.z + top.max.z) / 2 - OFF.z;
+    s.position.set(cx - (b.min.x + b.max.x) / 2, top.max.y - OFF.y - b.min.y, cz - (b.min.z + b.max.z) / 2);
+    house.body.add(s); s.updateMatrixWorld(true);
+  }
+});
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);
