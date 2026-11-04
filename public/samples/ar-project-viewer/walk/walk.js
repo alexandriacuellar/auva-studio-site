@@ -247,16 +247,25 @@ const CHAIRS = [
   ...[0.5, 1.1, 1.7].map((x) => ({ name: 'Chair25', at: [x, -1.0], face: [0, -1] })),   // island stools
   { name: 'Chair46', at: [-2.7, 4.75], face: [0.25, 1] }, { name: 'Chair46', at: [-1.7, 4.75], face: [-0.25, 1] }, // porch rockers
 ];
-new GLTFLoader().load(new URL('./chair-set.glb', import.meta.url).href, (g) => {
-  for (const p of CHAIRS) {
+// Light-oak dresser and nightstand to match the oak beds (these models face +z); [x, z] is the center, face is the direction
+const DRESSERS = [
+  { name: 'Drawer35_Body', at: [6.38, 1.3], face: [1, 0], flip: true },     // suite, against the hall wall
+  { name: 'Drawer_Body01', at: [5.54, 1.0], face: [-1, 0], flip: true },    // bedroom 2, beside the bed
+];
+// Place each piece by its center and facing; models in the chair set face -z, drawer models face +z (flip)
+const placeChairs = (g, list) => {
+  for (const p of list) {
     const src = g.scene.getObjectByName(p.name); if (!src) continue;
-    const o = src.clone(); o.position.set(0, 0, 0); o.rotation.set(0, Math.atan2(-p.face[0], -p.face[1]), 0); o.updateMatrixWorld(true);
+    const o = src.clone(); o.position.set(0, 0, 0);
+    o.rotation.set(0, p.flip ? Math.atan2(p.face[0], p.face[1]) : Math.atan2(-p.face[0], -p.face[1]), 0); o.updateMatrixWorld(true);
     const b = new THREE.Box3().setFromObject(o);
     o.position.set(p.at[0] - (b.min.x + b.max.x) / 2, F - b.min.y, p.at[1] - (b.min.z + b.max.z) / 2);
     house.body.add(o); o.updateMatrixWorld(true);
     o.traverse((m) => { if (m.isMesh) solids.push(m); });
   }
-});
+};
+new GLTFLoader().load(new URL('./chair-set.glb', import.meta.url).href, (g) => placeChairs(g, CHAIRS));
+new GLTFLoader().load(new URL('./drawer-set.glb', import.meta.url).href, (g) => placeChairs(g, DRESSERS));
 
 const ray = new THREE.Raycaster();
 const DOWN = new THREE.Vector3(0, -1, 0);
