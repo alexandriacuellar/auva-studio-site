@@ -162,8 +162,8 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   box('wood', -5.9, 5.9, F - 0.01, F + 0.005, -3.9, 3.9);
   box('wood', 6, 10.4, F - 0.01, F + 0.005, -3.4, 2.4);
   box('tile', 3.06, 5.9, F + 0.005, F + 0.012, -3.9, -1.66);
-  box('oak', 5.88, 6.08, F - 0.01, F + 0.008, -1.15, -0.25);      // threshold into the wing
-  box('oak', -0.2, 0.8, F - 0.01, F + 0.008, 3.88, 4.12);         // front door threshold
+  box('wood', 5.88, 6.08, F - 0.01, F + 0.006, -1.15, -0.25);     // threshold into the wing, in the floor wood so it blends in
+  box('dark', -0.2, 0.8, F - 0.01, F + 0.008, 3.88, 4.12);        // front door threshold: dark bronze, like a real door sill
 
   // ---------- Exterior walls ----------
   const W1 = F + 0.9, W2 = F + 2.6;   // window sill and head
