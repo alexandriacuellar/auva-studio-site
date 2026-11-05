@@ -188,7 +188,7 @@ export const monthly = {
 export const takeover = {
   name: 'Arreglo de su sitio web',
   price: '$575',
-  text: 'Para un sitio hecho por otra persona, en una plataforma con la que trabajo. Antes de arreglar algo, entro en su sitio y aprendo cómo está hecho. Incluye un Diagnóstico Web, acceso configurado a su nombre, una copia de trabajo segura con respaldo, una lista de arreglos con precios y su primera hora de arreglos, como cambios de texto o una galería que no funciona. Si ya compró un Diagnóstico ($199), se abona al arreglo.',
+  text: 'Para un sitio hecho por otra persona, una vez que confirmo que es buen candidato. Funciona mejor en plataformas modernas como Astro o Webflow, y no es para sitios que necesitan un rediseño completo. Antes de arreglar algo, entro en su sitio y aprendo cómo está hecho. Incluye un Diagnóstico Web, acceso configurado a su nombre, una copia de trabajo segura con respaldo, una lista de arreglos con precios y su primera hora de arreglos, como cambios de texto o una galería que no funciona. Si ya compró un Diagnóstico ($199), se abona al arreglo.',
 };
 
 // Client quotes stay in their own words, in English.
