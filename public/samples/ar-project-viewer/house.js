@@ -94,8 +94,10 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
       else box(key, at - th / 2, at + th / 2, c0, c1, b0, b1);
       if (!inside) return;
       const d0 = at + inside * (th / 2 + 0.002), d1 = at + inside * (th / 2 + 0.012);
-      if (along === 'x') box('inner', b0, b1, c0, c1, Math.min(d0, d1), Math.max(d0, d1));
-      else box('inner', Math.min(d0, d1), Math.max(d0, d1), c0, c1, b0, b1);
+      // overlap neighboring pieces by a few mm, so no hairline of siding shows between them
+      const o = 0.004;
+      if (along === 'x') box('inner', b0 - o, b1 + o, c0 - o, c1 + o, Math.min(d0, d1), Math.max(d0, d1));
+      else box('inner', Math.min(d0, d1), Math.max(d0, d1), c0 - o, c1 + o, b0 - o, b1 + o);
     };
     const ops = [...openings].sort((p, q) => p[0] - q[0]);
     let cur = a0;
@@ -105,6 +107,12 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
       if (kind) opening(along, at, c, w, b, top, th, kind);
     }
     seg(cur, a1, y0, y1);
+    // lining: a painted strip on top of the wall's inner half, up into the ceiling, so the top of the siding never shows inside
+    if (inside) {
+      const d0 = at, d1 = at + inside * (th / 2 + 0.012);
+      if (along === 'x') box('inner', a0, a1, y1 - 0.01, y1 + 0.08, Math.min(d0, d1), Math.max(d0, d1));
+      else box('inner', Math.min(d0, d1), Math.max(d0, d1), y1 - 0.01, y1 + 0.08, a0, a1);
+    }
   }
   // Window or door filling a hole in an exterior wall.
   function opening(along, at, c, w, b, top, th, kind) {
@@ -133,15 +141,17 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     place('frame', s - fw, s + z, b, top, f0, f1); place('frame', e - z, e + fw, b, top, f0, f1);
     place('frame', s - fw, e + fw, top - z, top + fw, f0, f1);
     place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b - 0.006, ...face(th / 2 + 0.025));
+    // lining: painted returns inside the opening (sides and head; bottom too for windows), so the walk-through
+    // doesn't see siding or exterior trim in the window and door reveals
+    if (lining) {
+      const r = out > 0 ? [-th / 2 - 0.013, th / 2 - 0.03] : [-(th / 2 - 0.03), th / 2 + 0.013];
+      place('sill', s - 0.02, s + 0.008, b - 0.02, top + 0.02, ...r); place('sill', e - 0.008, e + 0.02, b - 0.02, top + 0.02, ...r);
+      place('sill', s - 0.02, e + 0.02, top - 0.008, top + 0.02, ...r);
+      if (kind !== 'door') place('sill', s - 0.02, e + 0.02, b - 0.02, b + 0.008, ...r);
+    }
     if (kind !== 'door') {
       // Bottom rail outside and a sill on the inside (no inside frame, so it doesn't read as a second window)
       place('frame', s + z, e - z, b - z, b + fw, f0, f1);
-      // lining: painted returns inside the opening (sides, head and bottom), so the walk-through doesn't see siding in the window reveal
-      if (lining) {
-        const r = out > 0 ? [-th / 2 - 0.002, th / 2 - 0.03] : [-(th / 2 - 0.03), th / 2 + 0.002];
-        place('sill', s - 0.002, s + 0.008, b, top, ...r); place('sill', e - 0.008, e + 0.002, b, top, ...r);
-        place('sill', s, e, top - 0.008, top + 0.002, ...r); place('sill', s, e, b - 0.002, b + 0.008, ...r);
-      }
       place('sill', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035)); // inside sill: always painted white, whatever the exterior trim color
     }
   }
@@ -179,7 +189,11 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   wall('siding', 'x', -3.5, 6, 10.5 + T / 2, F, HW, T, [[8.25, 1.2, W1, W2 - 0.2, 'win']]);
   wall('siding', 'z', 10.5, -3.5 + T / 2, 2.5 - T / 2, F, HW, T, [[-0.5, 1.2, W1, W2 - 0.2, 'win']]);
   // Corner boards
-  for (const [x, z] of [[-6, 4], [6, 4], [-6, -4], [6, -4], [10.5, 2.5], [10.5, -3.5]]) box('trim', x - 0.17, x + 0.17, F - 0.02, (x > 7 ? HW : H) + 0.01, z - 0.17, z + 0.17);
+  // (outside only: each board stops at the walls' inner faces, so it never pokes into a room)
+  for (const [x, z] of [[-6, 4], [6, 4], [-6, -4], [6, -4], [10.5, 2.5], [10.5, -3.5]]) {
+    const sx = Math.sign(x), sz = Math.sign(z), ix = x - sx * T / 2, ox = x + sx * 0.17, iz = z - sz * T / 2, oz = z + sz * 0.17;
+    box('trim', Math.min(ix, ox), Math.max(ix, ox), F - 0.02, (x > 7 ? HW : H) + 0.01, Math.min(iz, oz), Math.max(iz, oz));
+  }
 
   // Chimney (stone) on the left end
   box('stone', -6.95, -6.1, 0, 7.6, -0.5, 0.5);
@@ -316,11 +330,12 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   };
   for (const x of [-6, 6]) {
     const g = gable(4 + T / 2, 4 * Math.tan(A), H); g.rotateY(Math.PI / 2); g.translate(x, 0, 0); addRoof('siding', planarUV(g, 0.45));
-    if (lining) { const l = gable(4, 4 * Math.tan(A) - 0.1, H); l.scale(1, 1, 0.05); l.rotateY(Math.PI / 2); l.translate(x - Math.sign(x) * (T / 2 + 0.006), 0, 0); addRoof('inner', l); }
+    // lining gables start a little below the eave and reach just into the ceiling, so no siding edge shows inside
+    if (lining) { const l = gable(4 + 0.16 / Math.tan(A), 4 * Math.tan(A) + 0.16, H - 0.1); l.scale(1, 1, 0.05); l.rotateY(Math.PI / 2); l.translate(x - Math.sign(x) * (T / 2 + 0.006), 0, 0); addRoof('inner', l); }
   }
   for (const z of [2.5, -3.5]) {
     const g = gable(2.25 + T / 2, 2.25, HW); g.translate(8.25, 0, z); addRoof('siding', planarUV(g, 0.45));
-    if (lining) { const l = gable(2.25, 2.15, HW); l.scale(1, 1, 0.05); l.translate(8.25, 0, z - Math.sign(z) * (T / 2 + 0.006)); addRoof('inner', l); }
+    if (lining) { const l = gable(2.41, 2.41, HW - 0.1); l.scale(1, 1, 0.05); l.translate(8.25, 0, z - Math.sign(z) * (T / 2 + 0.006)); addRoof('inner', l); }
   }
 
   // ---------- Materials ----------
