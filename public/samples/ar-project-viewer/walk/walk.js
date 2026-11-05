@@ -174,12 +174,12 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
     }
   }
 });
-// Walnut plank floor from alexandria's texture (6 boards per image, about 20 cm each). The house floor UVs are
+// Walnut plank floor from alexandria's texture, contrast softened so the grain stays calm (6 boards per image, about 20 cm each). The house floor UVs are
 // 1 unit per 1.6 m, so the image repeats 1.6 / 1.2 times per unit.
 {
   const t = new THREE.TextureLoader().load(new URL('./floor-walnut.jpg', import.meta.url).href);
   t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; t.repeat.set(1.6 / 1.2, 1.6 / 1.2); // mirrored, so no seams where the image repeats
-  house.mats.wood.map = t; house.mats.wood.color.set('#9a9a9a'); house.mats.wood.needsUpdate = true;
+  house.mats.wood.map = t; house.mats.wood.color.set('#a8907c'); house.mats.wood.needsUpdate = true;
 }
 // Bath wall tile from alexandria's blue terrazzo-look tile: cropped to exactly 2 x 2 tiles so it repeats cleanly.
 // Wall-tile UVs are 1 unit per 0.6 m, so 2 repeats give 15 cm tiles.
