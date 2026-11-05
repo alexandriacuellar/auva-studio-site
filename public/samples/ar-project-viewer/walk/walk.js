@@ -206,6 +206,19 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
   const b = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, 0.01), new THREE.MeshStandardMaterial({ map: t, color: '#ececec', roughness: 0.35 }));
   b.position.set((x0 + x1) / 2, (y0 + y1) / 2, WALL + 0.012); house.body.add(b);
 }
+// Siding: her white vertical boards (12 per image), spread so each board is about 25 cm wide (image = 3 m; siding UVs
+// are 1 unit per 0.45 m). Used for the white and barn-red finishes (the red tints it); cedar keeps its own boards.
+{
+  const t = new THREE.TextureLoader().load(new URL('./siding.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; t.repeat.set(0.45 / 3, 0.45 / 3);
+  const setFinish = house.setFinish;
+  house.setFinish = (name) => {
+    setFinish(name);
+    if (FINISHES[name]?.map !== 'batten') return;
+    for (const m of [house.mats.siding, house.roof.getObjectByName('roof-siding')?.material]) if (m) { m.map = t; m.needsUpdate = true; }
+  };
+  house.setFinish(state.finish);
+}
 // Rugs from alexandria's carpet images. Bedrooms: blue and oatmeal pattern, repeating about every 1.3 m (suite rug and
 // a new rug under the bed in bedroom 2). Living room: cream medallion rug, and the white bath mat, each shown once.
 // Plan [x0, x1, z0, z1]; tile: pattern size in meters, or 0 to stretch the image over the rug.
