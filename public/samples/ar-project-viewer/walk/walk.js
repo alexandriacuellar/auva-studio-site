@@ -211,13 +211,33 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
 {
   const t = new THREE.TextureLoader().load(new URL('./siding.jpg', import.meta.url).href);
   t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; t.repeat.set(0.45 / 3, 0.45 / 3);
+  // Roof: her charcoal standing-seam metal (10 panels per image, about 45 cm each, so the image is 4.5 m; roof UVs are
+  // 1 unit per 0.45 m). The image is already charcoal, so it isn't tinted. Cedar keeps its lighter gray roof.
+  const r = new THREE.TextureLoader().load(new URL('./roof.jpg', import.meta.url).href);
+  r.colorSpace = THREE.SRGBColorSpace; r.wrapS = r.wrapT = THREE.RepeatWrapping; r.anisotropy = 8; r.repeat.set(0.1, 0.1);
+  const roofMat = house.roof.getObjectByName('roof-roof')?.material, roofMap = roofMat?.map;
   const setFinish = house.setFinish;
   house.setFinish = (name) => {
     setFinish(name);
-    if (FINISHES[name]?.map !== 'batten') return;
+    const mine = FINISHES[name]?.map === 'batten';
+    if (roofMat) { roofMat.map = mine ? r : roofMap; if (mine) { roofMat.color.set('#8c8c8c'); roofMat.metalness = 0.15; } roofMat.needsUpdate = true; }
+    if (!mine) return;
     for (const m of [house.mats.siding, house.roof.getObjectByName('roof-siding')?.material]) if (m) { m.map = t; m.needsUpdate = true; }
   };
   house.setFinish(state.finish);
+}
+// Lawn: her grass texture, about 2 m per image, mirrored so the repeats don't show, and toned down a little to sit with
+// the soft colors of the scene. Used on the yard (UVs 1 unit per 3 m) and the wide ground around the lot (one UV over 1.4 km).
+// Gravel path and driveway: her dark gravel, 1 m per image (UVs 1 unit per 1 m), lightened a touch.
+{
+  const t = new THREE.TextureLoader().load(new URL('./gravel.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8;
+  house.mats.gravel.map = t; house.mats.gravel.color.set('#ffffff'); house.mats.gravel.needsUpdate = true;
+}
+for (const [mat, rep] of [[house.mats.lawn, 1.5], [groundMat, 700]]) {
+  const t = new THREE.TextureLoader().load(new URL('./lawn.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; t.repeat.set(rep, rep);
+  mat.map = t; mat.color.set('#aebd96'); mat.needsUpdate = true;
 }
 // Rugs from alexandria's carpet images. Bedrooms: blue and oatmeal pattern, repeating about every 1.3 m (suite rug and
 // a new rug under the bed in bedroom 2). Living room: cream medallion rug, and the white bath mat, each shown once.
