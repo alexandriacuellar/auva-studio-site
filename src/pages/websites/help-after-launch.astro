@@ -28,7 +28,7 @@ const faqs = [
   { q: "What counts as one update?", a: "Up to about 30 minutes of edits, sent together in one request, like new hours, a few new photos, and a typo fix. If a request will take longer, I tell you first." },
   { q: "Do I need a monthly plan?", a: "No. Most sites I build have no plugins to keep patched, so you can pay only when you want a change. If your site changes often, an hour pack or the retainer is simpler. The retainer starts at $125 for 1 hour a month, and it's month to month, so you can stop any time." },
   { q: "How far does an hour go?", a: "New hours and a couple of photos take about 15 minutes. A new team member with a photo and bio takes about 30 minutes. A simple new page in one of your existing page designs takes about 1 to 2 hours. I track time in 15-minute steps and show what's left in your pack after each request." },
-  { q: "Can you help with a site you didn't build?", a: "Yes, if it's built on a platform I work in. We start with a Site takeover ($449), which includes a Website Diagnostic. If you've already bought a Diagnostic, the $199 is credited toward it. After that, all three options above are open to you." },
+  { q: "Can you help with a site you didn't build?", a: "Yes, if it's built on a platform I work in. Before I can fix anything, I need to get into your site and learn how it was built. That first step is $575 and includes a Website Diagnostic, a fix list with prices, and your first hour of fixes. If you've already bought a Diagnostic, the $199 is credited toward it. After that, all three options above are open to you." },
   { q: "What does my site cost to run?", a: "Your domain is about $20 a year, and hosting is free or low cost for most sites I build, in your name. If your site needs a platform with a monthly fee, I'll tell you before we start." },
 ];
 
@@ -49,7 +49,7 @@ const schema = serviceSchema([
         <a class="btn" href="#care">See the options <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#start">Get in touch</a>
       </div>
-      <p class="hero-note">Updates are $59 each, hour packs start at $575, and the monthly retainer starts at $125 for 1 hour. Start any time, at launch or later. Site built by someone else? Start with a <a href="#takeover">Site takeover</a>.</p>
+      <p class="hero-note">Updates are $59 each, hour packs start at $575, and the monthly retainer starts at $125 for 1 hour. Start any time, at launch or later. Site built by someone else? <a href="#takeover">Start here</a>.</p>
     </div>
   </section>
 
@@ -118,8 +118,8 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="card" style="display:grid;gap:12px">
         <h2 class="mag-head">Site built <em>by someone else?</em></h2>
-        <p class="muted">I can take it over. A Site takeover is <b style="color: var(--primary)">{takeover.price}</b>, one time. I review your site, get access set up in your name, make sure I can update it safely, and send you a fix list with prices. Then keep your design and fix what's broken, or start fresh. After that, updates, hour packs, and the retainer work the same as for sites I build.</p>
-        <p><a class="btn btn-ghost" href="?topic=takeover#start">Ask about a takeover</a></p>
+        <p class="muted">I can help. Before I can fix anything, I need to get into your site and learn how it was built. For <b style="color: var(--primary)">{takeover.price}</b>, one time, I review your site, get access set up in your name, and send you a fix list with prices. Your first hour of fixes is included, like copy changes or a broken gallery. Then you choose what else to fix, using updates, an hour pack, or the retainer, or we start fresh with a new site.</p>
+        <p><a class="btn btn-ghost" href="?topic=takeover#start">Get started with my site</a></p>
       </div>
     </div>
   </section>
