@@ -272,7 +272,7 @@ for (const [mat, rep] of [[house.mats.lawn, 1.5], [groundMat, 700]]) {
 {
   const RUGS = [
     { file: 'carpet.jpg', area: [7.39, 10.01, -2.01, 1.01], tile: 1.3 },
-    { file: 'carpet.jpg', area: [3.4, 5.75, 0.8, 3.5], tile: 1.3 },
+    { file: 'rug-bed2.jpg', area: [3.4, 5.75, 0.8, 3.5], tile: 0 },        // bedroom 2: her orange and oatmeal rug, lightened
     { file: 'rug-living.jpg', area: [-5.21, -1.79, -1.41, 1.41], tile: 0 },
     { file: 'bathmat.jpg', area: [4.39, 5.41, -2.96, -2.44], tile: 0 },     // white plush bath mat
   ];
