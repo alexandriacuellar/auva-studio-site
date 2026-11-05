@@ -202,7 +202,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   // Fireplace: stone jambs and lintel around a dark firebox, logs and a fire, oak mantel, stone hearth
   box('stone', -5.9, -5.4, F, F + 0.8, -0.9, -0.45); box('stone', -5.9, -5.4, F, F + 0.8, 0.45, 0.9);
   box('stone', -5.9, -5.4, F + 0.8, F + 1.05, -0.9, 0.9);
-  box('stone', -5.9, -5.62, F + 1.12, F + 2.2, -0.7, 0.7);
+  box('stone', -5.9, -5.62, F + 1.12, lining ? F + 5.8 : F + 2.2, -0.7, 0.7); // walk-through: the chimney breast runs up into the vaulted ceiling
   box('oak', -5.92, -5.3, F + 1.05, F + 1.12, -1.0, 1.0);
   box('stone', -5.4, -5.05, F, F + 0.06, -1.0, 1.0);
   box('dark', -5.9, -5.66, F, F + 0.8, -0.45, 0.45);
