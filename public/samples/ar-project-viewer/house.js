@@ -272,11 +272,22 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     if (along === 'x') g.translate(0, thick / 2, L / 2); else g.translate(L / 2, thick / 2, 0);
     planarUV(g, 0.45);
     if (along === 'z') { const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) { const u = uv.getX(i); uv.setX(i, uv.getY(i)); uv.setY(i, u); } }
+    // lining: a thin ceiling just under each roof plane, for the walk-through (boards run along the ridge)
+    let gc = null;
+    if (lining && key === 'roof') {
+      gc = new THREE.BoxGeometry(along === 'x' ? len : L, 0.01, along === 'x' ? L : len);
+      if (along === 'x') gc.translate(0, -0.006, L / 2); else gc.translate(L / 2, -0.006, 0);
+      planarUV(gc, 1.2);
+      if (along === 'z') { const uv = gc.attributes.uv; for (let i = 0; i < uv.count; i++) { const u = uv.getX(i); uv.setX(i, uv.getY(i)); uv.setY(i, u); } }
+    }
     return (dir) => {
-      const c = g.clone();
-      if (along === 'x') { c.rotateX(angle); if (dir < 0) c.rotateY(Math.PI); }
-      else { c.rotateZ(-angle); if (dir < 0) c.rotateY(Math.PI); }
-      c.translate(cx, ridgeY, cz); addRoof(key, c);
+      for (const [k, src] of [[key, g], ['ceiling', gc]]) {
+        if (!src) continue;
+        const c = src.clone();
+        if (along === 'x') { c.rotateX(angle); if (dir < 0) c.rotateY(Math.PI); }
+        else { c.rotateZ(-angle); if (dir < 0) c.rotateY(Math.PI); }
+        c.translate(cx, ridgeY, cz); addRoof(k, c);
+      }
     };
   };
   const A = Math.atan2(3.2, 4), ridge = H + 4 * Math.tan(A) + 0.05;
@@ -325,8 +336,8 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     leaves: std({ color: '#5e7d48', flatShading: true }),
     fire: std({ color: '#ff7a1a', emissive: '#ff6a10', emissiveIntensity: 1.6, roughness: 1 }), flame: std({ color: '#ffd166', emissive: '#ffc23d', emissiveIntensity: 1.8, roughness: 1 }),
   };
-  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone() } : {}) };
-  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3 };
+  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone(), ceiling: std({ color: '#f4f2ec', roughness: 0.9 }) } : {}) };
+  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3, stone: 1.1 };
 
   const root = new THREE.Group(); root.name = 'farmhouse';
   const body = new THREE.Group(); body.name = 'house'; root.add(body);

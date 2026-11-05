@@ -174,6 +174,38 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
     }
   }
 });
+// Walnut plank floor from alexandria's texture (6 boards per image, about 20 cm each). The house floor UVs are
+// 1 unit per 1.6 m, so the image repeats 1.6 / 1.2 times per unit.
+{
+  const t = new THREE.TextureLoader().load(new URL('./floor-walnut.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; t.repeat.set(1.6 / 1.2, 1.6 / 1.2); // mirrored, so no seams where the image repeats
+  house.mats.wood.map = t; house.mats.wood.color.set('#9a9a9a'); house.mats.wood.needsUpdate = true;
+}
+// Bath wall tile from alexandria's blue terrazzo-look tile: cropped to exactly 2 x 2 tiles so it repeats cleanly.
+// Wall-tile UVs are 1 unit per 0.6 m, so 2 repeats give 15 cm tiles.
+{
+  const t = new THREE.TextureLoader().load(new URL('./bath-walltile.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; t.repeat.set(2, 2);
+  house.mats.walltile.map = t; house.mats.walltile.color.set('#d6d6d6'); house.mats.walltile.needsUpdate = true;
+}
+// Bath floor: alexandria's dark slate mosaic (about 20 tiles across the image, so about 5 cm tiles at 1 m per image;
+// floor-tile UVs are 1 unit per 1.2 m). Ceiling: her white-washed shiplap, 10 boards per image at 1.2 m (12 cm boards).
+// Fireplace and chimney: her light gray stacked stone, 1.1 m per image. All mirrored so the image edges never show a seam.
+for (const [mat, file, rep, tint] of [[house.mats.tile, 'bath-floor.jpg', 1.2, '#bdbdbd'], [house.roof.getObjectByName('roof-ceiling')?.material, 'ceiling.jpg', 1, '#ffffff'], [house.mats.stone, 'stone.jpg', 1, '#e6e6e6']]) {
+  if (!mat) continue;
+  const t = new THREE.TextureLoader().load(new URL(`./${file}`, import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; t.repeat.set(rep, rep);
+  mat.map = t; mat.color.set(tint); mat.needsUpdate = true;
+}
+// Kitchen backsplash: her white subway tile (image = 0.75 m square, 7.5 x 15 cm tiles). A strip along the counter
+// under the window, and a taller panel behind the stove up to the hood. Plan [x0, x1, y0, y1] on the back wall.
+for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F + 0.92, F + 1.62]]) {
+  const t = new THREE.TextureLoader().load(new URL('./backsplash.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8;
+  t.repeat.set((x1 - x0) / 0.75, (y1 - y0) / 0.75); t.offset.set(x0 / 0.75, (y0 - F) / 0.75); // lines up across both pieces
+  const b = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, 0.01), new THREE.MeshStandardMaterial({ map: t, color: '#ececec', roughness: 0.35 }));
+  b.position.set((x0 + x1) / 2, (y0 + y1) / 2, WALL + 0.012); house.body.add(b);
+}
 // Rugs from alexandria's carpet images. Bedrooms: blue and oatmeal pattern, repeating about every 1.3 m (suite rug and
 // a new rug under the bed in bedroom 2). Living room: cream medallion rug, and the white bath mat, each shown once.
 // Plan [x0, x1, z0, z1]; tile: pattern size in meters, or 0 to stretch the image over the rug.
