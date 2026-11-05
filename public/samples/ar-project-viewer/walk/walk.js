@@ -174,6 +174,24 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
     }
   }
 });
+// Rugs from alexandria's carpet images. Bedrooms: blue and oatmeal pattern, repeating about every 1.3 m (suite rug and
+// a new rug under the bed in bedroom 2). Living room: cream medallion rug, and the white bath mat, each shown once.
+// Plan [x0, x1, z0, z1]; tile: pattern size in meters, or 0 to stretch the image over the rug.
+{
+  const RUGS = [
+    { file: 'carpet.jpg', area: [7.39, 10.01, -2.01, 1.01], tile: 1.3 },
+    { file: 'carpet.jpg', area: [3.4, 5.75, 0.8, 3.5], tile: 1.3 },
+    { file: 'rug-living.jpg', area: [-5.21, -1.79, -1.41, 1.41], tile: 0 },
+    { file: 'bathmat.jpg', area: [4.39, 5.41, -2.96, -2.44], tile: 0 },     // white plush bath mat
+  ];
+  for (const { file, area: [x0, x1, z0, z1], tile } of RUGS) {
+    const t = new THREE.TextureLoader().load(new URL(`./${file}`, import.meta.url).href); // own texture per rug for its own repeat
+    t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4;
+    if (tile) t.repeat.set((x1 - x0) / tile, (z1 - z0) / tile);
+    const rug = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.016, z1 - z0), new THREE.MeshStandardMaterial({ map: t, roughness: 1, color: 0xcfcfcf }));
+    rug.position.set((x0 + x1) / 2, F + 0.026, (z0 + z1) / 2); house.body.add(rug);
+  }
+}
 // Island from the same cabinets, turned to face the cook (back to back with the stools), under one white top
 // that overhangs on the stool side. Plan x 0.15 to 2.05, cabinet fronts at z -2.3.
 const ISLAND = ['CabinetD02', 'CabinetD04', 'CabinetD02', 'CabinetD04'];
