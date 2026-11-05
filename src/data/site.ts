@@ -213,7 +213,7 @@ export const monthly = {
 export const takeover = {
   name: 'Website Fix-Up',
   price: '$575',
-  text: 'For a site someone else built, once I confirm it's a good fit. Works best on modern platforms like Astro or Webflow, and not meant for sites that need a full redesign. Before I can fix anything, I get into your site and learn how it was built. Includes a Website Diagnostic, access set up in your name, a safe working copy and backup, a fix list with prices, and your first hour of fixes, like copy changes or a broken gallery. A Diagnostic you already bought ($199) is credited toward it.',
+  text: 'For a site someone else built, once I confirm it is a good fit. Works best on modern platforms like Astro or Webflow, and not meant for sites that need a full redesign. Before I can fix anything, I get into your site and learn how it was built. Includes a Website Diagnostic, access set up in your name, a safe working copy and backup, a fix list with prices, and your first hour of fixes, like copy changes or a broken gallery. A Diagnostic you already bought ($199) is credited toward it.',
 };
 
 export const testimonials = [
