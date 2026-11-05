@@ -136,7 +136,13 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     if (kind !== 'door') {
       // Bottom rail outside and a sill on the inside (no inside frame, so it doesn't read as a second window)
       place('frame', s + z, e - z, b - z, b + fw, f0, f1);
-      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035));
+      // lining: painted returns inside the opening (sides, head and bottom), so the walk-through doesn't see siding in the window reveal
+      if (lining) {
+        const r = out > 0 ? [-th / 2 - 0.002, th / 2 - 0.03] : [-(th / 2 - 0.03), th / 2 + 0.002];
+        place('sill', s - 0.002, s + 0.008, b, top, ...r); place('sill', e - 0.008, e + 0.002, b, top, ...r);
+        place('sill', s, e, top - 0.008, top + 0.002, ...r); place('sill', s, e, b - 0.002, b + 0.008, ...r);
+      }
+      place('sill', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035)); // inside sill: always painted white, whatever the exterior trim color
     }
   }
 
@@ -322,7 +328,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   const maps = { batten: battenTex(), cedar: cedarTex() };
   const mats = {
     siding: std({ map: maps.batten }), trim: std({}), roof: std({ map: seamTex(), roughness: 0.45, metalness: 0.35 }),
-    frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
+    frame: std({ roughness: 0.5 }), sill: std({ color: '#f4f2ec', roughness: 0.6 }), door: std({ roughness: 0.5 }),
     // See-through glass with a light blue tint, so it reads as a window from inside and out
     glass: std({ color: '#bcd6e6', roughness: 0.08, metalness: 0.1, emissive: '#000000', transparent: true, opacity: 0.32, depthWrite: false }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
