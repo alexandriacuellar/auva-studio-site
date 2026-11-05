@@ -240,7 +240,7 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
   const r = new THREE.TextureLoader().load(new URL('./roof.jpg', import.meta.url).href);
   r.colorSpace = THREE.SRGBColorSpace; r.wrapS = r.wrapT = THREE.RepeatWrapping; r.anisotropy = 8; r.repeat.set(0.1, 0.1);
   const rc = new THREE.TextureLoader().load(new URL('./roof-cedar.jpg', import.meta.url).href);
-  rc.colorSpace = THREE.SRGBColorSpace; rc.wrapS = rc.wrapT = THREE.RepeatWrapping; rc.anisotropy = 8; rc.repeat.set(0.1, 0.1);
+  rc.colorSpace = THREE.SRGBColorSpace; rc.wrapS = rc.wrapT = THREE.RepeatWrapping; rc.anisotropy = 8; rc.repeat.set(0.13, 0.13); // galvanized: about 7.5 panels per image, so 3.4 m
   const roofMat = house.roof.getObjectByName('roof-roof')?.material, roofMap = roofMat?.map;
   const c = new THREE.TextureLoader().load(new URL('./siding-cedar.jpg', import.meta.url).href);
   c.colorSpace = THREE.SRGBColorSpace; c.wrapS = c.wrapT = THREE.MirroredRepeatWrapping; c.anisotropy = 8; c.repeat.set(0.45 / 1.2, 0.45 / 1.2);
@@ -251,10 +251,10 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
     const mine = FINISHES[name]?.map === 'batten';
     // Front door: her black shaker panel on the dark-door finishes (white and barn red); cedar keeps its blue door.
     house.mats.door.map = mine ? doorTex : null; if (mine) house.mats.door.color.set('#ffffff'); house.mats.door.needsUpdate = true;
-    // Cedar keeps a lighter slate-gray roof: the same standing seam, brightened.
+    // Cedar gets her galvanized standing-seam roof.
     if (roofMat) {
       roofMat.map = mine ? r : FINISHES[name]?.map === 'cedar' ? rc : roofMap;
-      if (roofMat.map !== roofMap) { roofMat.color.set('#8c8c8c'); roofMat.metalness = 0.15; }
+      if (roofMat.map !== roofMap) { roofMat.color.set(roofMat.map === rc ? '#d4d4d4' : '#8c8c8c'); roofMat.metalness = 0.15; }
       roofMat.needsUpdate = true;
     }
     // Cedar finish: her cedar lap boards (8 per image, about 15 cm each, so 1.2 m), toned a little warmer.
