@@ -184,6 +184,13 @@ export const monthly = {
   outcomes: ['Una llamada mensual para planear', 'Páginas nuevas para sus campañas, eventos y productos', 'Una revisión mensual del sitio y de su salud en Google', 'Un informe breve: qué cambió, qué logró y qué sigue'],
 };
 
+// Arreglo de su sitio web (2026-11-05): paso único antes de la Ayuda después del lanzamiento en un sitio hecho por otra persona. Incluye el Diagnóstico y la primera hora de arreglos.
+export const takeover = {
+  name: 'Arreglo de su sitio web',
+  price: '$575',
+  text: 'Para un sitio hecho por otra persona, en una plataforma con la que trabajo. Antes de arreglar algo, entro en su sitio y aprendo cómo está hecho. Incluye un Diagnóstico Web, acceso configurado a su nombre, una copia de trabajo segura con respaldo, una lista de arreglos con precios y su primera hora de arreglos, como cambios de texto o una galería que no funciona. Si ya compró un Diagnóstico ($199), se abona al arreglo.',
+};
+
 // Client quotes stay in their own words, in English.
 export { testimonials } from './site';
 

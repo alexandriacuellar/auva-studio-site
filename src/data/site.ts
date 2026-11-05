@@ -209,6 +209,12 @@ export const monthly = {
   outcomes: ['A monthly planning call', 'New pages for your campaigns, events, and products', 'A monthly site check and Google health check', 'A short report on what changed, what it did, and what\'s next'],
 };
 
+// Website Fix-Up (2026-11-05): one-time first step before Help After Launch on a site someone else built. Includes the Diagnostic and the first hour of fixes.
+export const takeover = {
+  name: 'Website Fix-Up',
+  price: '$575',
+  text: 'For a site someone else built, on a platform I work in. Before I can fix anything, I get into your site and learn how it was built. Includes a Website Diagnostic, access set up in your name, a safe working copy and backup, a fix list with prices, and your first hour of fixes, like copy changes or a broken gallery. A Diagnostic you already bought ($199) is credited toward it.',
+};
 
 export const testimonials = [
   { quote: 'She expertly managed our Agile workflow, tracked deliverables, and ensured our team stayed focused, aligned, and on schedule.', name: 'Juliann Stainbrook', role: 'CEO, hyLite Studios' },

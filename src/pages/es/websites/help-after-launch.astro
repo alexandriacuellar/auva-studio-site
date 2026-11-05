@@ -3,7 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import InquiryForm from '../../../components/InquiryForm.astro';
 import Faq from '../../../components/Faq.astro';
-import { care, hourPacks, monthly, serviceSchema, site } from '../../../data/site.es';
+import { care, hourPacks, monthly, serviceSchema, site, takeover } from '../../../data/site.es';
 
 const atLaunch = [
   { icon: 'chat', title: 'Un recorrido', text: 'Le muestro su sitio nuevo y respondo sus preguntas.' },
@@ -28,7 +28,7 @@ const faqs = [
   { q: "¿Qué cuenta como un cambio?", a: "Hasta unos 30 minutos de ediciones, enviadas juntas en una sola solicitud, como un horario nuevo, algunas fotos nuevas y un error de escritura. Si una solicitud va a tomar más, se lo digo antes." },
   { q: "¿Necesito un plan mensual?", a: "No. La mayoría de los sitios que construyo no tienen plugins que mantener al día, así que puede pagar solo cuando quiere un cambio. Si su sitio cambia a menudo, un paquete de horas o el retainer es más sencillo. El retainer empieza en $125 por 1 hora al mes, y es mes a mes, así que puede dejarlo cuando quiera." },
   { q: "¿Cuánto rinde una hora?", a: "Un horario nuevo y un par de fotos toman unos 15 minutos. Un nuevo miembro del equipo con foto y biografía toma unos 30 minutos. Una página nueva sencilla con uno de sus diseños de página actuales toma de 1 a 2 horas. Registro el tiempo en pasos de 15 minutos y le muestro lo que queda en su paquete después de cada solicitud." },
-  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Los cambios y los paquetes de horas son para sitios que yo construyo. Para un sitio hecho por otra persona, empezamos con un Diagnóstico Web, y luego puede convenir el retainer o un cambio puntual pequeño." },
+  { q: "¿Puede ayudar con un sitio que usted no hizo?", a: "Sí, si está hecho en una plataforma con la que trabajo. Antes de arreglar algo, necesito entrar en su sitio y aprender cómo está hecho. Un Arreglo de su sitio web cuesta $575 e incluye un Diagnóstico Web, una lista de arreglos con precios y su primera hora de arreglos. Si ya compró un Diagnóstico, los $199 se abonan al arreglo. Después, las tres opciones de arriba están disponibles para usted." },
   { q: "¿Cuánto cuesta mantener mi sitio funcionando?", a: "Su dominio cuesta unos $20 al año, y el hosting es gratis o de bajo costo para la mayoría de los sitios que construyo, a su nombre. Si su sitio necesita una plataforma con cuota mensual, se lo digo antes de empezar." },
 ];
 
@@ -36,6 +36,7 @@ const schema = serviceSchema([
   ...care.map((c) => ({ name: `Ayuda después del lanzamiento: ${c.name}`, description: c.text, price: c.price })),
   ...hourPacks.map((p) => ({ name: `Ayuda después del lanzamiento: ${p.name}`, description: p.text, price: p.price })),
   { name: `Ayuda después del lanzamiento: ${monthly.name}`, description: monthly.text, price: monthly.price },
+  { name: `Ayuda después del lanzamiento: ${takeover.name}`, description: takeover.text, price: takeover.price },
   { name: 'CMS (sistema de gestión de contenidos)', description: 'Un panel sencillo para actualizar por su cuenta los textos, las fotos y colecciones como noticias o eventos, sin programar.', price: 'Desde $1,750' },
 ], '/es/websites/help-after-launch/');
 ---
@@ -48,7 +49,7 @@ const schema = serviceSchema([
         <a class="btn" href="#care">Ver las opciones <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="#start">Contácteme</a>
       </div>
-      <p class="hero-note">Los cambios cuestan $59 cada uno, los paquetes de horas desde $575 y el retainer mensual desde $125 por 1 hora. Empiece cuando quiera, al lanzar o más adelante.</p>
+      <p class="hero-note">Los cambios cuestan $59 cada uno, los paquetes de horas desde $575 y el retainer mensual desde $125 por 1 hora. Empiece cuando quiera, al lanzar o más adelante. ¿Su sitio lo hizo otra persona? <a href="#takeover">Empiece aquí</a>.</p>
     </div>
   </section>
 
@@ -110,6 +111,16 @@ const schema = serviceSchema([
         ))}
       </div>
       <p class="fine"><b>Bueno saber.</b> Los cambios prepagados y las horas de los paquetes son válidos por 12 meses. El retainer es mes a mes, y las horas del retainer que no use pasan al mes siguiente. <b>¿Quiere agregar varias páginas o funciones nuevas?</b> Si su sitio tiene Presencia Esencial o Presencia Ampliada, <a href="/es/websites/#packages">pasar al siguiente paquete</a> y pagar solo la diferencia suele costar menos. Las tarifas de terceros, como plataformas o aplicaciones, se pagan aparte. Mantengo su sitio rápido, seguro y fácil de leer para Google, y le mostraré lo que está funcionando.</p>
+    </div>
+  </section>
+
+  <section id="takeover">
+    <div class="wrap">
+      <div class="card" style="display:grid;gap:12px">
+        <h2 class="mag-head">¿Su sitio lo hizo <em>otra persona?</em></h2>
+        <p class="muted">Puedo ayudarle. Antes de arreglar algo, necesito entrar en su sitio y aprender cómo está hecho. Un Arreglo de su sitio web cuesta <b style="color: var(--primary)">{takeover.price}</b>, una sola vez. Reviso su sitio, configuro el acceso a su nombre y le envío una lista de arreglos con precios. Su primera hora de arreglos está incluida, como cambios de texto o una galería que no funciona. Luego usted elige qué más arreglar, con cambios sueltos, un paquete de horas o el retainer. Si en cambio empezamos de nuevo con un sitio nuevo, $199 se abonan a su paquete de sitio web nuevo.</p>
+        <p><a class="btn btn-ghost" href="?topic=takeover#start">Pedir el arreglo de mi sitio</a></p>
+      </div>
     </div>
   </section>
 
