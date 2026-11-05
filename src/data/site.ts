@@ -209,6 +209,12 @@ export const monthly = {
   outcomes: ['A monthly planning call', 'New pages for your campaigns, events, and products', 'A monthly site check and Google health check', 'A short report on what changed, what it did, and what\'s next'],
 };
 
+// Site takeover (2026-11-05): one-time first step before Help After Launch on a site someone else built. Includes the Diagnostic.
+export const takeover = {
+  name: 'Site takeover',
+  price: '$449',
+  text: 'For a site someone else built, on a platform I work in. Includes a Website Diagnostic, access set up in your name, a safe working copy and backup, a fix list with prices, and notes on how the site is built. Done within 7 business days of getting access. A Diagnostic you already bought ($199) is credited toward it.',
+};
 
 export const testimonials = [
   { quote: 'She expertly managed our Agile workflow, tracked deliverables, and ensured our team stayed focused, aligned, and on schedule.', name: 'Juliann Stainbrook', role: 'CEO, hyLite Studios' },

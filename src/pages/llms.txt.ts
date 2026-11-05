@@ -1,6 +1,6 @@
 // A plain-text summary for AI tools (llms.txt), built from the same data as the pages so prices stay in sync.
 import { aiPackages as techAi, pmPackages as techPm, automationExamples } from '../data/tech';
-import { site, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly } from '../data/site';
+import { site, packages, packageBasics, aiOffers, addons, care, hourPacks, monthly, takeover } from '../data/site';
 import { moreAnswers } from '../data/moreAnswers';
 
 const items = (p: (typeof packages)[number]) => p.specs.map(([k, v]) => `${k}: ${v ?? 'not included'}`).join('; ');
@@ -31,7 +31,7 @@ export function GET() {
     '- She is part of Meta Horizon Start and the Meta Horizon Creator Program.',
     '',
     '## Website Services',
-    `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website): a review of an existing site for usability, mobile, search, and performance.`,
+    `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website or a Site takeover): a review of an existing site for usability, mobile, search, and performance.`,
     `- [Google Business Profile Setup](${site.url}/websites/google-business-profile/) ($500, one-time): create or claim the profile, add business details, categories, services, hours, and photos, and help with verification. $150 credited toward a website within 6 months.`,
     `- [Google Business Profile Optimization](${site.url}/websites/google-business-profile/) ($500, one-time): review an existing profile and improve its categories, description, services, attributes, photos, and website links. $150 credited toward a website within 6 months.`,
     `- Every website package includes: ${packageBasics.join('; ')}.`,
@@ -47,7 +47,7 @@ export function GET() {
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
     ...hourPacks.map((p) => `- [Help After Launch](${site.url}/websites/help-after-launch/#care), ${p.name} (${p.price}): ${p.text} Tracked in 15-minute steps.`),
     `- [Help After Launch](${site.url}/websites/help-after-launch/#monthly), ${monthly.name} (${monthly.price}): a monthly website retainer: a block of web developer hours. The client's marketer or SEO person sets the direction; Auva Studio builds and runs the pages, keeps the site working, and sends a short monthly report. Every retainer includes a monthly site check and Google health check (errors, indexing, and speed in Search Console). The 1-hour retainer covers updates and fixes within 2 business days. The 5-hour retainer adds a monthly planning call, landing pages and small features, 1-business-day turnaround, and same-day help with urgent problems. Month to month, cancel any time; unused hours carry over one month.`,
-    '- Help After Launch updates and hour packs are for websites Auva Studio built. The monthly retainer can also take sites built by others on platforms Auva Studio works in, starting with a Website Diagnostic.',
+    `- [Site takeover](${site.url}/websites/help-after-launch/#takeover) (${takeover.price}): ${takeover.text} After it, all Help After Launch options (updates, hour packs, monthly retainer) are open to sites built by others.`,
     '',
     '## Automation, AI & Projects',
     '- Tech Review ($250): a 60-minute call, then a written report within 5 business days with top fixes in order and rough costs. Credited toward any package within 90 days.',

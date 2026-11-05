@@ -184,6 +184,13 @@ export const monthly = {
   outcomes: ['Una llamada mensual para planear', 'Páginas nuevas para sus campañas, eventos y productos', 'Una revisión mensual del sitio y de su salud en Google', 'Un informe breve: qué cambió, qué logró y qué sigue'],
 };
 
+// Traspaso del sitio (2026-11-05): paso único antes de la Ayuda después del lanzamiento en un sitio hecho por otra persona. Incluye el Diagnóstico.
+export const takeover = {
+  name: 'Traspaso del sitio',
+  price: '$449',
+  text: 'Para un sitio hecho por otra persona, en una plataforma con la que trabajo. Incluye un Diagnóstico Web, acceso configurado a su nombre, una copia de trabajo segura con respaldo, una lista de arreglos con precios y notas sobre cómo está hecho el sitio. Listo en 7 días hábiles desde que tengo acceso. Si ya compró un Diagnóstico ($199), se abona al traspaso.',
+};
+
 // Client quotes stay in their own words, in English.
 export { testimonials } from './site';
 
