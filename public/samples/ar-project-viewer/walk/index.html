@@ -43,8 +43,7 @@
   .fade { position: absolute; inset: 0; background: #11152a; opacity: 0; pointer-events: none; transition: opacity .2s; }
   .fade.on { opacity: 1; }
 
-  .rooms { display: flex; gap: 8px; overflow-x: auto; padding: 12px 2px 4px; scrollbar-width: none; }
-  .rooms::-webkit-scrollbar { display: none; }
+  .rooms { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 2px 4px; }
   .room { flex: 0 0 auto; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: 600 .92rem/1 var(--sans); cursor: pointer; }
   .room[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
   .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; align-items: center; }
@@ -147,7 +146,7 @@
     <ol class="steps">
       <li><b>Open the link</b><p>On a Meta Quest, tap “Walk in VR”. On a phone or computer, walk right on this page.</p></li>
       <li><b>Walk through the house</b><p>In VR, the left stick walks and the right stick turns. Or point at the floor and pull the trigger to jump there.</p></li>
-      <li><b>Try it your way</b><p>The menu on your left wrist switches the finish, turns on night, and takes you room to room.</p></li>
+      <li><b>Try it your way</b><p>The menu on your left wrist switches the finish, turns on night, and takes you room to room. Press Y or B to bring it in front of you. A or X jumps to the next room. With one controller, the menu waits in front of you.</p></li>
     </ol>
     <p class="devices">Works on Meta Quest 2, 3, and 3S in the Quest browser. On a computer, drag to look and use WASD or the arrow keys. On a phone, drag to look and tap the floor to walk.</p>
   </section>

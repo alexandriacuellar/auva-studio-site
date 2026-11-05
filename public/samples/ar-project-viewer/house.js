@@ -69,7 +69,7 @@ function planarUV(geo, size) {
   return geo;
 }
 
-export function buildHouse({ finish = 'white', labels = true, openDoor = false, lining = false } = {}) {
+export function buildHouse({ finish = 'white', labels = true, openDoor = false, lining = false, omit = [] } = {}) {
   const parts = {}; // material key -> geometries
   const add = (key, geo) => { (parts[key] ||= []).push(geo.index ? geo.toNonIndexed() : geo); };
   const box = (key, x0, x1, y0, y1, z0, z1) => {
@@ -134,12 +134,15 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     place('frame', s - fw, e + fw, top - z, top + fw, f0, f1);
     place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.06, b - 0.006, ...face(th / 2 + 0.025));
     if (kind !== 'door') {
-      // Bottom rail outside, and a full frame plus sill on the inside, so the see-through glass reads as a window
+      // Bottom rail outside and a sill on the inside (no inside frame, so it doesn't read as a second window)
       place('frame', s + z, e - z, b - z, b + fw, f0, f1);
-      const [i0, i1] = face(-th / 2);
-      place('frame', s - fw, s + z, b, top, i0, i1); place('frame', e - z, e + fw, b, top, i0, i1);
-      place('frame', s - fw, e + fw, top - z, top + fw, i0, i1); place('frame', s + z, e - z, b - z, b + fw, i0, i1);
-      place('trim', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035));
+      // lining: painted returns inside the opening (sides, head and bottom), so the walk-through doesn't see siding in the window reveal
+      if (lining) {
+        const r = out > 0 ? [-th / 2 - 0.002, th / 2 - 0.03] : [-(th / 2 - 0.03), th / 2 + 0.002];
+        place('sill', s - 0.002, s + 0.008, b, top, ...r); place('sill', e - 0.008, e + 0.002, b, top, ...r);
+        place('sill', s, e, top - 0.008, top + 0.002, ...r); place('sill', s, e, b - 0.002, b + 0.008, ...r);
+      }
+      place('sill', s - fw - 0.04, e + fw + 0.04, b - 0.045, b - 0.006, ...face(-th / 2 - 0.035)); // inside sill: always painted white, whatever the exterior trim color
     }
   }
 
@@ -159,6 +162,8 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   box('wood', -5.9, 5.9, F - 0.01, F + 0.005, -3.9, 3.9);
   box('wood', 6, 10.4, F - 0.01, F + 0.005, -3.4, 2.4);
   box('tile', 3.06, 5.9, F + 0.005, F + 0.012, -3.9, -1.66);
+  box('wood', 5.88, 6.08, F - 0.01, F + 0.006, -1.15, -0.25);     // threshold into the wing, in the floor wood so it blends in
+  box('dark', -0.2, 0.8, F - 0.01, F + 0.008, 3.88, 4.12);        // front door threshold: dark bronze, like a real door sill
 
   // ---------- Exterior walls ----------
   const W1 = F + 0.9, W2 = F + 2.6;   // window sill and head
@@ -192,12 +197,12 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   wall('inner', 'x', 0.2, 3, 6, F, H, t, [[4.2, 0.9, F, F + 2.1]]);
   // Living room: rug, sofa facing the fireplace, coffee table, fireplace
   box('rug', -5.2, -1.8, F + 0.005, F + 0.02, -1.4, 1.4);
-  box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2);
-  box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6);
+  if (!omit.includes('sofa')) { box('sofa', -2.6, -1.8, F, F + 0.45, -1.2, 1.2); box('sofa', -2.0, -1.75, F, F + 0.85, -1.2, 1.2); }
+  if (!omit.includes('tables')) box('oak', -4.1, -3.3, F, F + 0.42, -0.6, 0.6); // coffee table
   // Fireplace: stone jambs and lintel around a dark firebox, logs and a fire, oak mantel, stone hearth
   box('stone', -5.9, -5.4, F, F + 0.8, -0.9, -0.45); box('stone', -5.9, -5.4, F, F + 0.8, 0.45, 0.9);
   box('stone', -5.9, -5.4, F + 0.8, F + 1.05, -0.9, 0.9);
-  box('stone', -5.9, -5.62, F + 1.12, F + 2.2, -0.7, 0.7);
+  box('stone', -5.9, -5.62, F + 1.12, lining ? F + 5.8 : F + 2.2, -0.7, 0.7); // walk-through: the chimney breast runs up into the vaulted ceiling
   box('oak', -5.92, -5.3, F + 1.05, F + 1.12, -1.0, 1.0);
   box('stone', -5.4, -5.05, F, F + 0.06, -1.0, 1.0);
   box('dark', -5.9, -5.66, F, F + 0.8, -0.45, 0.45);
@@ -207,28 +212,51 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     const g = new THREE.ConeGeometry(r, h, 7); g.translate(key === 'flame' ? -5.5 : -5.53, F + 0.12 + h / 2, z); add(key, g);
   }
   // Kitchen: back counter, island, and the dining table with six chairs
-  box('cabinet', -0.6, 2.15, F, F + 0.86, -3.9, -3.3);              // base cabinets
-  box('counter', -0.62, 2.17, F + 0.86, F + 0.92, -3.92, -3.25);      // stone top
-  box('steel', 0.95, 1.55, F + 0.92, F + 0.93, -3.8, -3.42);          // sink
-  box('dark', -0.45, 0.25, F + 0.92, F + 0.935, -3.82, -3.36);        // cooktop
-  box('cabinet', -0.6, 0.1, F + 1.5, F + 2.25, -3.9, -3.55);          // upper cabinets
-  box('steel', 2.2, 2.88, F, F + 1.95, -3.9, -3.2);                   // fridge
-  box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
-  box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
-  for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
-  box('oak', 0.2, 2.0, F + 0.7, F + 0.76, 1.45, 2.35);
-  for (const x of [0.5, 1.1, 1.7]) for (const z of [1.05, 2.75]) box('oak', x - 0.2, x + 0.2, F, F + 0.45, z - 0.2, z + 0.2);
+  if (!omit.includes('kitchen')) {
+    box('cabinet', -0.6, 2.15, F, F + 0.86, -3.9, -3.3);              // base cabinets
+    box('counter', -0.62, 2.17, F + 0.86, F + 0.92, -3.92, -3.25);      // stone top
+    box('steel', 0.95, 1.55, F + 0.92, F + 0.93, -3.8, -3.42);          // sink
+    box('dark', -0.45, 0.25, F + 0.92, F + 0.935, -3.82, -3.36);        // cooktop
+    box('cabinet', -0.6, 0.1, F + 1.5, F + 2.25, -3.9, -3.55);          // upper cabinets
+    box('steel', 2.2, 2.88, F, F + 1.95, -3.9, -3.2);                   // fridge
+  }
+  if (!omit.includes('island')) {
+    box('cabinet', 0.15, 2.05, F, F + 0.86, -2.3, -1.5);                // island
+    box('counter', 0.05, 2.15, F + 0.86, F + 0.92, -2.35, -1.25);
+  }
+  if (!omit.includes('chairs')) for (const x of [0.5, 1.1, 1.7]) box('oak', x - 0.17, x + 0.17, F, F + 0.68, -1.15, -0.85); // stools
+  // Dining table on four legs, set toward the kitchen wall so the path from the front door to the kitchen stays open
+  const tx0 = 0.9, tx1 = 2.7, tz0 = 1.45, tz1 = 2.35;
+  if (!omit.includes('tables')) {
+    box('oak', tx0, tx1, F + 0.71, F + 0.76, tz0, tz1);
+    for (const x of [tx0 + 0.06, tx1 - 0.12]) for (const z of [tz0 + 0.06, tz1 - 0.12]) box('oak', x, x + 0.06, F, F + 0.71, z, z + 0.06);
+  }
+  // Six chairs: seat, four legs, and a back away from the table
+  if (!omit.includes('chairs')) {
+    for (const x of [1.2, 1.8, 2.4]) for (const [z, back] of [[1.05, -1], [2.75, 1]]) {
+      box('oak', x - 0.2, x + 0.2, F + 0.42, F + 0.47, z - 0.2, z + 0.2);
+      for (const lx of [x - 0.19, x + 0.15]) for (const lz of [z - 0.19, z + 0.15]) box('oak', lx, lx + 0.04, F, F + 0.42, lz, lz + 0.04);
+      const bz = z + back * 0.18; box('oak', x - 0.2, x + 0.2, F + 0.47, F + 0.95, bz - 0.02, bz + 0.02);
+    }
+  }
   // Bedroom 2, bath
-  box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95);
-  box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
-  box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
-  box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
-  box('vanitytop', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
-  box('porcelain', 3.22, 3.52, F + 0.86, F + 0.93, -2.66, -2.24);     // basin
-  box('water', 3.26, 3.48, F + 0.93, F + 0.935, -2.62, -2.28);
-  box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
-  box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
-  box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
+  if (!omit.includes('beds')) { box('bedding', 3.9, 5.88, F, F + 0.5, 1.3, 2.9); box('throw', 3.88, 4.45, F + 0.02, F + 0.53, 1.28, 2.92); box('oak', 5.8, 5.88, F, F + 1.1, 1.25, 2.95); }
+  // omit: leave out fixtures that the walk-through replaces with real 3D models
+  if (!omit.includes('tub')) {
+    box('porcelain', 4.25, 5.9, F, F + 0.56, -3.9, -3.1);              // tub
+    box('water', 4.38, 5.77, F + 0.56, F + 0.565, -3.8, -3.2);
+  }
+  if (!omit.includes('vanity')) {
+    box('cabinet', 3.06, 3.62, F, F + 0.82, -2.95, -1.95);             // vanity
+    box('vanitytop', 3.06, 3.65, F + 0.82, F + 0.86, -2.98, -1.92);
+    box('porcelain', 3.22, 3.52, F + 0.86, F + 0.93, -2.66, -2.24);     // basin
+    box('water', 3.26, 3.48, F + 0.93, F + 0.935, -2.62, -2.28);
+    box('steel', 3.08, 3.2, F + 0.86, F + 1.02, -2.48, -2.42);          // faucet
+  }
+  if (!omit.includes('toilet')) {
+    box('porcelain', 3.45, 3.95, F, F + 0.8, -3.9, -3.72);             // toilet tank
+    box('porcelain', 3.5, 3.9, F, F + 0.42, -3.72, -3.3);              // toilet bowl
+  }
   // Blue-gray tile up the bath walls, so the white tub, toilet and sink stand out.
   const wh = F + 1.25;
   box('walltile', 3.06, 5.9, F, wh, -3.9, -3.87);            // back wall
@@ -239,7 +267,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   box('mat', 4.4, 5.4, F + 0.012, F + 0.024, -2.95, -2.45);          // bath mat
   // Primary suite in the wing
   box('rug', 7.4, 10.0, F + 0.005, F + 0.02, -2.0, 1.0);
-  box('bedding', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('throw', 8.28, 8.85, F + 0.02, F + 0.58, -1.42, 0.42); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45);
+  if (!omit.includes('beds')) { box('bedding', 8.3, 10.38, F, F + 0.55, -1.4, 0.4); box('throw', 8.28, 8.85, F + 0.02, F + 0.58, -1.42, 0.42); box('oak', 10.3, 10.38, F, F + 1.2, -1.45, 0.45); }
 
   // ---------- Roof (lifts off) ----------
   const ov = 0.4;
@@ -250,11 +278,22 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     if (along === 'x') g.translate(0, thick / 2, L / 2); else g.translate(L / 2, thick / 2, 0);
     planarUV(g, 0.45);
     if (along === 'z') { const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) { const u = uv.getX(i); uv.setX(i, uv.getY(i)); uv.setY(i, u); } }
+    // lining: a thin ceiling just under each roof plane, for the walk-through (boards run along the ridge)
+    let gc = null;
+    if (lining && key === 'roof') {
+      gc = new THREE.BoxGeometry(along === 'x' ? len : L, 0.01, along === 'x' ? L : len);
+      if (along === 'x') gc.translate(0, -0.006, L / 2); else gc.translate(L / 2, -0.006, 0);
+      planarUV(gc, 1.2);
+      if (along === 'z') { const uv = gc.attributes.uv; for (let i = 0; i < uv.count; i++) { const u = uv.getX(i); uv.setX(i, uv.getY(i)); uv.setY(i, u); } }
+    }
     return (dir) => {
-      const c = g.clone();
-      if (along === 'x') { c.rotateX(angle); if (dir < 0) c.rotateY(Math.PI); }
-      else { c.rotateZ(-angle); if (dir < 0) c.rotateY(Math.PI); }
-      c.translate(cx, ridgeY, cz); addRoof(key, c);
+      for (const [k, src] of [[key, g], ['ceiling', gc]]) {
+        if (!src) continue;
+        const c = src.clone();
+        if (along === 'x') { c.rotateX(angle); if (dir < 0) c.rotateY(Math.PI); }
+        else { c.rotateZ(-angle); if (dir < 0) c.rotateY(Math.PI); }
+        c.translate(cx, ridgeY, cz); addRoof(k, c);
+      }
     };
   };
   const A = Math.atan2(3.2, 4), ridge = H + 4 * Math.tan(A) + 0.05;
@@ -264,7 +303,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   const AW = Math.PI / 4, ridgeW = HW + 2.25 + 0.05;
   const wingR = slab(6 + ov * 2, 'z', AW, ridgeW, 2.25, ov, 'roof', 0.14, 8.25, -0.5);
   wingR(1);
-  const wingL = slab(6 + ov * 2, 'z', AW, ridgeW, 2.25, 0, 'roof', 0.14, 8.25, -0.5);
+  const wingL = slab(6 + ov * 2, 'z', AW, ridgeW, 2.08, 0, 'roof', 0.14, 8.25, -0.5); // stops inside the hall wall, so its edge doesn't poke through as a dark bar (the main roof covers the rest)
   wingL(-1);
   const capW = new THREE.BoxGeometry(0.28, 0.16, 6 + ov * 2); capW.translate(8.25, ridgeW + 0.1, -0.5); addRoof('roof', capW);
   // Porch roof: a gentle shed roof from the wall out over the posts
@@ -289,7 +328,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   const maps = { batten: battenTex(), cedar: cedarTex() };
   const mats = {
     siding: std({ map: maps.batten }), trim: std({}), roof: std({ map: seamTex(), roughness: 0.45, metalness: 0.35 }),
-    frame: std({ roughness: 0.5 }), door: std({ roughness: 0.5 }),
+    frame: std({ roughness: 0.5 }), sill: std({ color: '#f4f2ec', roughness: 0.6 }), door: std({ roughness: 0.5 }),
     // See-through glass with a light blue tint, so it reads as a window from inside and out
     glass: std({ color: '#bcd6e6', roughness: 0.08, metalness: 0.1, emissive: '#000000', transparent: true, opacity: 0.32, depthWrite: false }),
     foundation: std({ color: '#7c7d7f' }), stone: std({ color: '#8f8a82', roughness: 0.95 }),
@@ -303,8 +342,8 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     leaves: std({ color: '#5e7d48', flatShading: true }),
     fire: std({ color: '#ff7a1a', emissive: '#ff6a10', emissiveIntensity: 1.6, roughness: 1 }), flame: std({ color: '#ffd166', emissive: '#ffc23d', emissiveIntensity: 1.8, roughness: 1 }),
   };
-  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone() } : {}) };
-  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3 };
+  const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone(), ceiling: std({ color: '#f4f2ec', roughness: 0.9 }) } : {}) };
+  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3, stone: 1.1, gravel: 1.0, oak: 0.9, inner: 2.0 };
 
   const root = new THREE.Group(); root.name = 'farmhouse';
   const body = new THREE.Group(); body.name = 'house'; root.add(body);
@@ -340,7 +379,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
   // Room names, shown when the roof is off.
   const labelGroup = new THREE.Group(); labelGroup.name = 'labels'; labelGroup.visible = false; body.add(labelGroup);
   if (labels) {
-    const rooms = [['Living room', -3.6, 0.2], ['Kitchen', 1.1, -0.45], ['Dining', 1.1, 3.0], ['Bedroom', 4.5, 1.0], ['Bath', 4.6, -1.95],
+    const rooms = [['Living room', -3.6, 0.2], ['Kitchen', 1.1, -0.45], ['Dining', 1.8, 3.0], ['Bedroom', 4.5, 1.0], ['Bath', 4.6, -1.95],
       ['Primary suite', 8.25, 1.4], ['Front porch', -3.5, 5.1]];
     for (const [name, x, z] of rooms) {
       const c = document.createElement('canvas'); c.width = 512; c.height = 128;
