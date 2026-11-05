@@ -236,10 +236,14 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
   const t = new THREE.TextureLoader().load(new URL('./siding.jpg', import.meta.url).href);
   t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; t.repeat.set(0.45 / 3, 0.45 / 3);
   // Roof: her charcoal standing-seam metal (10 panels per image, about 45 cm each, so the image is 4.5 m; roof UVs are
-  // 1 unit per 0.45 m). The image is already charcoal, so it isn't tinted. Cedar keeps its lighter gray roof.
+  // 1 unit per 0.45 m). The image is already charcoal, so it isn't tinted much.
   const r = new THREE.TextureLoader().load(new URL('./roof.jpg', import.meta.url).href);
   r.colorSpace = THREE.SRGBColorSpace; r.wrapS = r.wrapT = THREE.RepeatWrapping; r.anisotropy = 8; r.repeat.set(0.1, 0.1);
+  const rc = new THREE.TextureLoader().load(new URL('./roof-cedar.jpg', import.meta.url).href);
+  rc.colorSpace = THREE.SRGBColorSpace; rc.wrapS = rc.wrapT = THREE.RepeatWrapping; rc.anisotropy = 8; rc.repeat.set(0.1, 0.1);
   const roofMat = house.roof.getObjectByName('roof-roof')?.material, roofMap = roofMat?.map;
+  const c = new THREE.TextureLoader().load(new URL('./siding-cedar.jpg', import.meta.url).href);
+  c.colorSpace = THREE.SRGBColorSpace; c.wrapS = c.wrapT = THREE.MirroredRepeatWrapping; c.anisotropy = 8; c.repeat.set(0.45 / 1.2, 0.45 / 1.2);
   const doorTex = new THREE.TextureLoader().load(new URL('./door.jpg', import.meta.url).href); doorTex.colorSpace = THREE.SRGBColorSpace;
   const setFinish = house.setFinish;
   house.setFinish = (name) => {
@@ -247,9 +251,18 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
     const mine = FINISHES[name]?.map === 'batten';
     // Front door: her black shaker panel on the dark-door finishes (white and barn red); cedar keeps its blue door.
     house.mats.door.map = mine ? doorTex : null; if (mine) house.mats.door.color.set('#ffffff'); house.mats.door.needsUpdate = true;
-    if (roofMat) { roofMat.map = mine ? r : roofMap; if (mine) { roofMat.color.set('#8c8c8c'); roofMat.metalness = 0.15; } roofMat.needsUpdate = true; }
-    if (!mine) return;
-    for (const m of [house.mats.siding, house.roof.getObjectByName('roof-siding')?.material]) if (m) { m.map = t; m.needsUpdate = true; }
+    // Cedar keeps a lighter slate-gray roof: the same standing seam, brightened.
+    if (roofMat) {
+      roofMat.map = mine ? r : FINISHES[name]?.map === 'cedar' ? rc : roofMap;
+      if (roofMat.map !== roofMap) { roofMat.color.set('#8c8c8c'); roofMat.metalness = 0.15; }
+      roofMat.needsUpdate = true;
+    }
+    // Cedar finish: her cedar lap boards (8 per image, about 15 cm each, so 1.2 m), toned a little warmer.
+    const cedar = FINISHES[name]?.map === 'cedar';
+    if (!mine && !cedar) return;
+    for (const m of [house.mats.siding, house.roof.getObjectByName('roof-siding')?.material]) if (m) {
+      m.map = cedar ? c : t; if (cedar) m.color.set('#dcc2a6'); m.needsUpdate = true;
+    }
   };
   house.setFinish(state.finish);
 }
