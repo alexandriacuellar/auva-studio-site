@@ -337,7 +337,7 @@ export function buildHouse({ finish = 'white', labels = true, openDoor = false, 
     fire: std({ color: '#ff7a1a', emissive: '#ff6a10', emissiveIntensity: 1.6, roughness: 1 }), flame: std({ color: '#ffd166', emissive: '#ffc23d', emissiveIntensity: 1.8, roughness: 1 }),
   };
   const roofMats = { roof: mats.roof.clone(), siding: mats.siding.clone(), ...(lining ? { inner: mats.inner.clone(), ceiling: std({ color: '#f4f2ec', roughness: 0.9 }) } : {}) };
-  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3, stone: 1.1, gravel: 1.0 };
+  const uvSize = { siding: 0.45, roof: 0.45, wood: 1.6, deck: 1.6, tile: 1.2, walltile: 0.6, lawn: 3, stone: 1.1, gravel: 1.0, oak: 0.9, inner: 2.0 };
 
   const root = new THREE.Group(); root.name = 'farmhouse';
   const body = new THREE.Group(); body.name = 'house'; root.add(body);

@@ -191,6 +191,30 @@ new GLTFLoader().load(new URL('./kitchen-set.glb', import.meta.url).href, (g) =>
 // Bath floor: alexandria's dark slate mosaic (about 20 tiles across the image, so about 5 cm tiles at 1 m per image;
 // floor-tile UVs are 1 unit per 1.2 m). Ceiling: her white-washed shiplap, 10 boards per image at 1.2 m (12 cm boards).
 // Fireplace and chimney: her light gray stacked stone, 1.1 m per image. All mirrored so the image edges never show a seam.
+// Walls: her warm-white plaster, 2 m per image (inner-wall UVs are 1 unit per 2 m), mirrored to hide the repeats.
+{
+  const t = new THREE.TextureLoader().load(new URL('./plaster.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8;
+  for (const m of [house.mats.inner, house.roof.getObjectByName('roof-inner')?.material]) if (m) { m.map = t; m.color.set('#ffffff'); m.needsUpdate = true; }
+}
+// Porch deck: her weathered cedar boards (11 per image, about 14 cm each, so 1.5 m; deck UVs are 1 unit per 1.6 m).
+{
+  const t = new THREE.TextureLoader().load(new URL('./deck.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; t.repeat.set(1.6 / 1.5, 1.6 / 1.5);
+  house.mats.deck.map = t; house.mats.deck.color.set('#e8e8e8'); house.mats.deck.needsUpdate = true;
+}
+// Hearth: her dark honed slate, one slab in front of the fireplace (plan x -5.41 to -5.04, z -1.01 to 1.01).
+{
+  const t = new THREE.TextureLoader().load(new URL('./hearth.jpg', import.meta.url).href); t.colorSpace = THREE.SRGBColorSpace;
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(0.37, 0.066, 2.02), new THREE.MeshStandardMaterial({ map: t, roughness: 0.55, color: '#d0d0d0' }));
+  slab.position.set(-5.225, F + 0.033, 0); house.body.add(slab);
+}
+// Mantel (and the oak thresholds): her reclaimed oak, 0.9 m per image (oak UVs are 1 unit per 0.9 m).
+{
+  const t = new THREE.TextureLoader().load(new URL('./mantel-oak.jpg', import.meta.url).href);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8;
+  house.mats.oak.map = t; house.mats.oak.color.set('#e0d4c4'); house.mats.oak.needsUpdate = true;
+}
 for (const [mat, file, rep, tint] of [[house.mats.tile, 'bath-floor.jpg', 1.2, '#bdbdbd'], [house.roof.getObjectByName('roof-ceiling')?.material, 'ceiling.jpg', 1, '#ffffff'], [house.mats.stone, 'stone.jpg', 1, '#e6e6e6']]) {
   if (!mat) continue;
   const t = new THREE.TextureLoader().load(new URL(`./${file}`, import.meta.url).href);
@@ -216,10 +240,13 @@ for (const [x0, x1, y0, y1] of [[0.2, 1.96, F + 0.92, F + 1.17], [-0.6, 0.2, F +
   const r = new THREE.TextureLoader().load(new URL('./roof.jpg', import.meta.url).href);
   r.colorSpace = THREE.SRGBColorSpace; r.wrapS = r.wrapT = THREE.RepeatWrapping; r.anisotropy = 8; r.repeat.set(0.1, 0.1);
   const roofMat = house.roof.getObjectByName('roof-roof')?.material, roofMap = roofMat?.map;
+  const doorTex = new THREE.TextureLoader().load(new URL('./door.jpg', import.meta.url).href); doorTex.colorSpace = THREE.SRGBColorSpace;
   const setFinish = house.setFinish;
   house.setFinish = (name) => {
     setFinish(name);
     const mine = FINISHES[name]?.map === 'batten';
+    // Front door: her black shaker panel on the dark-door finishes (white and barn red); cedar keeps its blue door.
+    house.mats.door.map = mine ? doorTex : null; if (mine) house.mats.door.color.set('#ffffff'); house.mats.door.needsUpdate = true;
     if (roofMat) { roofMat.map = mine ? r : roofMap; if (mine) { roofMat.color.set('#8c8c8c'); roofMat.metalness = 0.15; } roofMat.needsUpdate = true; }
     if (!mine) return;
     for (const m of [house.mats.siding, house.roof.getObjectByName('roof-siding')?.material]) if (m) { m.map = t; m.needsUpdate = true; }
