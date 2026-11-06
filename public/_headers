@@ -3,7 +3,7 @@
   X-Robots-Tag: noindex, nofollow
 
 # Business card AR page: keep it out of search results.
-/card/*
+/card/ar/*
   X-Robots-Tag: noindex, nofollow
 
 /card/alexandria-cuellar.vcf
@@ -16,7 +16,7 @@
   Content-Type: model/gltf-binary
 
 # Contact card: the owner-only QR page stays out of search results.
-/me/show/*
+/card/show/*
   X-Robots-Tag: noindex, nofollow
 
 # Chat assistant knowledge, read by the chat function: keep it out of search results.
