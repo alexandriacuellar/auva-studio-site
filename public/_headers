@@ -19,6 +19,9 @@
 /card/show/*
   X-Robots-Tag: noindex, nofollow
 
+/es/card/show/*
+  X-Robots-Tag: noindex, nofollow
+
 # Chat assistant knowledge, read by the chat function: keep it out of search results.
 /assistant/*
   X-Robots-Tag: noindex, nofollow
