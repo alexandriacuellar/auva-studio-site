@@ -280,6 +280,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .steps.steps-4 .num { margin-top: 0; }
 .ticks li.card { padding: 18px 22px; }
 @media (max-width: 960px) { .steps.steps-4 { grid-template-columns: 1fr 1fr; } }
+.steps.steps-3 { grid-template-columns: repeat(3, 1fr); }
+.steps.steps-3 .num { margin-top: 0; }
+@media (max-width: 760px) { .steps.steps-3 { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .steps.steps-4 { grid-template-columns: 1fr; } }
 .category h3 { font-size: 1.5rem; }
 .category .ticks { margin-top: 8px; }
