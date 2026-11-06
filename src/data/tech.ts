@@ -30,6 +30,15 @@ export const automationExamples = [
   { icon: 'gear', title: 'Your own', text: 'Client onboarding, a monthly report, or another task your team does by hand.' },
 ];
 
+// Auva Studio's own inquiry workflow, shown on the Automation page as a real example.
+export const ownWorkflow = {
+  title: 'How I handle <em>my own inquiries.</em>',
+  lede: 'Before offering this to anyone else, I built it for Auva Studio. It’s the lead follow-up workflow above, running on the free plans of Make, Trello, and Slack.',
+  before: { title: 'Before', items: ['Form messages mixed in with everything else in my inbox', 'How fast people heard back depended on when I checked email', 'No single list of who asked about what', 'Follow-ups were easy to lose track of'] },
+  after: { title: 'After', items: ['A friendly reply goes out within minutes, in English or Spanish', 'Each inquiry becomes a card on my Trello leads board', 'My phone gets a Slack ping', 'If I haven’t moved a card in 2 days, I get a reminder'] },
+  note: 'Cost: $0 a month, since mine is small enough for free plans. Yours can use the tools you already have, like Gmail, Google Sheets, Asana, or text messages.',
+};
+
 export const aiPackages = [
   { icon: 'bulb', title: '1-on-1 AI Session', price: '$150', text: 'For owners and solo pros. 90 minutes, just you and me, working on your own tasks in the AI tool you choose.', items: ['Set up safely on your account', 'Practice on your real work', 'Your saved prompts to keep'], link: 'Ask about this', topic: 'ai-session' },
   { icon: 'chat', title: 'Team AI Workshop', price: 'Coming soon', text: 'The same hands-on approach for up to 10 people, with safe account setup, saved prompts, and one-page AI rules for your team.', items: ['Practice on real tasks together', 'What is safe to share, and what is not', 'A one-page guide to keep'], link: 'Ask to be first in line', topic: 'workshop' },

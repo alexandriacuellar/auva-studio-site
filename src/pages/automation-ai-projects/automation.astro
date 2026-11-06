@@ -6,7 +6,7 @@ import Icon from '../../components/Icon.astro';
 import InquiryForm from '../../components/InquiryForm.astro';
 import Faq from '../../components/Faq.astro';
 import { site, serviceSchema } from '../../data/site';
-import { base, safety, automationExamples, services, faq } from '../../data/tech';
+import { base, safety, automationExamples, ownWorkflow, services, faq } from '../../data/tech';
 
 const faqs = [faq.needAi, faq.appChanges, faq.tools, faq.vendors];
 const svc = services.find((x) => x.id === 'automation')!;
@@ -40,6 +40,22 @@ const schema = serviceSchema([{ name: svc.title, description: svc.text, price: s
         ))}
       </div>
       <p class="small muted" style="margin-top: 24px">Automations with several steps usually need your own paid Zapier or Make plan, about $20 to $30 a month. I’ll tell you before we start.</p>
+      <div class="own-flow" id="my-workflow">
+        <h3 class="mag-head own-flow-head" set:html={ownWorkflow.title} />
+        <p class="muted">{ownWorkflow.lede}</p>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>{ownWorkflow.before.title}</h3>
+            <ul class="own-before">{ownWorkflow.before.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+          <div class="card">
+            <h3>{ownWorkflow.after.title}</h3>
+            <ul class="ticks">{ownWorkflow.after.items.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top: 16px">{ownWorkflow.note}</p>
+      </div>
+
     </div>
   </section>
 
@@ -64,3 +80,10 @@ const schema = serviceSchema([{ name: svc.title, description: svc.text, price: s
   <Faq faqs={faqs} alt />
   <InquiryForm kind="consulting" topic="automation" />
 </Base>
+
+<style>
+  .own-flow { margin-top: 56px; }
+  .own-flow-head { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+  .own-flow > .muted { max-width: 60ch; margin-bottom: 24px; }
+  .own-before { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); }
+</style>

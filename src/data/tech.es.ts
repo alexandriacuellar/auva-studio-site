@@ -29,6 +29,15 @@ export const automationExamples = [
   { icon: 'gear', title: 'La suya', text: 'Bienvenida a clientes, un informe mensual u otra tarea que su equipo hace a mano.' },
 ];
 
+// El flujo propio de Auva Studio para consultas, como ejemplo real en la página de Automatización.
+export const ownWorkflow = {
+  title: 'Cómo manejo <em>mis propias consultas.</em>',
+  lede: 'Antes de ofrecerlo a otros, lo construí para Auva Studio. Es el seguimiento de consultas de arriba, funcionando con los planes gratuitos de Make, Trello y Slack.',
+  before: { title: 'Antes', items: ['Los mensajes del formulario se mezclaban con todo lo demás en mi correo', 'La rapidez de mi respuesta dependía de cuándo revisaba el correo', 'No había una sola lista de quién preguntó qué', 'Era fácil perder de vista un seguimiento'] },
+  after: { title: 'Después', items: ['Una respuesta amable sale en minutos, en inglés o en español', 'Cada consulta se convierte en una tarjeta en mi tablero de Trello', 'Mi teléfono recibe un aviso en Slack', 'Si no muevo una tarjeta en 2 días, recibo un recordatorio'] },
+  note: 'Costo: $0 al mes, porque el mío es lo bastante pequeño para los planes gratuitos. El suyo puede usar las herramientas que ya tiene, como Gmail, Google Sheets, Asana o mensajes de texto.',
+};
+
 export const aiPackages = [
   { icon: 'bulb', title: 'Sesión de IA 1 a 1', price: '$150', text: 'Para dueños y profesionales independientes. 90 minutos, solo usted y yo, trabajando en sus propias tareas con la herramienta de IA que elija.', items: ['Configurada de forma segura en su cuenta', 'Práctica con su trabajo real', 'Sus instrucciones guardadas para quedarse'], link: 'Pregunte por esto', topic: 'ai-session' },
   { icon: 'chat', title: 'Taller de IA para Equipos', price: 'Muy pronto', text: 'El mismo enfoque práctico para hasta 10 personas, con cuentas configuradas de forma segura, instrucciones guardadas y reglas de IA de una página para su equipo.', items: ['Práctica con tareas reales en grupo', 'Qué es seguro compartir y qué no', 'Una guía de una página para quedarse'], link: 'Apúntese primero en la lista', topic: 'workshop' },
