@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Common Ground Garden
+ORG:Common Ground Garden
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/common-ground-garden/
+ADR;TYPE=WORK:;;;Peekskill\, NY;;;
+NOTE:A neighborhood garden that feeds neighbors.
+END:VCARD

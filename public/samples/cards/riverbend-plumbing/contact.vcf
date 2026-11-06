@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Riverbend Plumbing
+ORG:Riverbend Plumbing
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/riverbend-plumbing/
+ADR;TYPE=WORK:;;;Newburgh\, NY;;;
+NOTE:Leaks\, heaters and drains. Same-day calls.
+END:VCARD

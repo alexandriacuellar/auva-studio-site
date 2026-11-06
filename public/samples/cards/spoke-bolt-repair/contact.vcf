@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Spoke & Bolt Repair
+ORG:Spoke & Bolt Repair
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/spoke-bolt-repair/
+ADR;TYPE=WORK:;;;New Paltz\, NY;;;
+NOTE:Bikes\, small engines and tools\, fixed right.
+END:VCARD

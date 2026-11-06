@@ -6,7 +6,7 @@ import Faq from '../../components/Faq.astro';
 import PayBar from '../../components/PayBar.astro';
 import PhoneViewer from '../../components/PhoneViewer.astro';
 import { serviceSchema } from '../../data/site';
-import { cardDemos } from '../../data/cardDemos';
+import { cardStyles } from '../../data/cardDemos';
 
 // Written for someone who has never heard of a QR code page or a Google Business Profile.
 const steps = [
@@ -32,7 +32,12 @@ const addons = [
   { title: 'Need a logo?', price: '$1,000', text: 'A designer I work with creates your logo and colors. Your card can go live with your photo first, and the logo goes on when it is ready.', href: '/websites/brand-essentials/' },
 ];
 
-const items = cardDemos.map((d) => ({ slug: d.slug, name: d.name, short: d.style, href: `/samples/cards/${d.slug}/` }));
+const groups = cardStyles.map((g, i) => ({
+  label: `Style ${i + 1}`,
+  meta: `${g.length} looks`,
+  looksLabel: `Looks in style ${i + 1}`,
+  items: g.map((d) => ({ slug: d.slug, name: d.name, short: d.look, href: `/samples/cards/${d.slug}/` })),
+}));
 
 const faqs = [
   { q: 'Do my customers need to download an app?', a: 'No. They point their phone camera at the code, or tap the link you send them, and your card opens. It works on any phone.' },
@@ -114,9 +119,9 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">See <em>examples.</em></h2>
-        <p class="lede">Six styles, each made for a pretend business. Tap a name, then scroll and tap inside the phone, just like your customers would. Want to see a real one? <a href="/card/">Here's mine.</a></p>
+        <p class="lede">Six styles and 19 looks, shown on sample businesses with made-up details. Pick a style and a look, then scroll and tap inside the phone, just like your customers would. Want to see a real one? <a href="/card/">Here's mine.</a></p>
       </div>
-      <PhoneViewer items={items} tabsLabel="Example cards" frameLabel="example card on a phone" />
+      <PhoneViewer groups={groups} tabsLabel="Card styles" frameLabel="example card on a phone" />
     </div>
   </section>
 

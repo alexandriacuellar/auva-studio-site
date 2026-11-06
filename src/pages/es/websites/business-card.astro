@@ -6,7 +6,7 @@ import Faq from '../../../components/Faq.astro';
 import PayBar from '../../../components/PayBar.astro';
 import PhoneViewer from '../../../components/PhoneViewer.astro';
 import { serviceSchema } from '../../../data/site.es';
-import { cardDemos } from '../../../data/cardDemos';
+import { cardStyles } from '../../../data/cardDemos';
 
 // Escrito para alguien que nunca ha oído hablar de un código QR ni de un Perfil de Negocio de Google.
 const steps = [
@@ -32,7 +32,12 @@ const addons = [
   { title: '¿Necesita un logo?', price: '$1,000', text: 'Una diseñadora con quien trabajo crea su logo y sus colores. Su tarjeta puede salir primero con su foto, y el logo se agrega cuando esté listo.', href: '/es/websites/brand-essentials/' },
 ];
 
-const items = cardDemos.map((d) => ({ slug: d.slug, name: d.name, short: d.styleEs, href: `/samples/cards/${d.slug}/` }));
+const groups = cardStyles.map((g, i) => ({
+  label: `Estilo ${i + 1}`,
+  meta: `${g.length} variantes`,
+  looksLabel: `Variantes del estilo ${i + 1}`,
+  items: g.map((d) => ({ slug: d.slug, name: d.name, short: d.lookEs, href: `/samples/cards/${d.slug}/` })),
+}));
 
 const faqs = [
   { q: '¿Mis clientes tienen que descargar una app?', a: 'No. Apuntan la cámara del teléfono al código, o tocan el enlace que usted les envía, y se abre su tarjeta. Funciona en cualquier teléfono.' },
@@ -114,9 +119,9 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">Vea <em>ejemplos.</em></h2>
-        <p class="lede">Seis estilos, cada uno para un negocio inventado (los ejemplos están en inglés). Toque un nombre, y desplácese y toque dentro del teléfono, como lo harán sus clientes. ¿Quiere ver una real? <a href="/es/card/">Esta es la mía.</a></p>
+        <p class="lede">Seis estilos y 19 variantes, en negocios de ejemplo con datos inventados (los ejemplos están en inglés). Elija un estilo y una variante, y desplácese y toque dentro del teléfono, como lo harán sus clientes. ¿Quiere ver una real? <a href="/es/card/">Esta es la mía.</a></p>
       </div>
-      <PhoneViewer lang="es" items={items} tabsLabel="Tarjetas de ejemplo" frameLabel="tarjeta de ejemplo en un teléfono" />
+      <PhoneViewer lang="es" groups={groups} tabsLabel="Estilos de tarjeta" frameLabel="tarjeta de ejemplo en un teléfono" />
     </div>
   </section>
 

@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Hollow Creek Farm
+ORG:Hollow Creek Farm
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/hollow-creek-farm/
+ADR;TYPE=WORK:;;;Stone Ridge\, NY;;;
+NOTE:Vegetables\, eggs and flowers from our fields.
+END:VCARD

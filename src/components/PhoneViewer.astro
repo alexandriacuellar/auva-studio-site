@@ -6,8 +6,10 @@ import Icon from './Icon.astro';
 
 // items: optional custom list (e.g. the demo cards); defaults to the sample sites.
 interface Item { slug: string; name: string; short: string; price?: string; href: string }
-interface Props { lang?: 'en' | 'es'; items?: Item[]; tabsLabel?: string; frameLabel?: string }
-const { lang = 'en', items: custom, tabsLabel, frameLabel } = Astro.props;
+// groups: optional numbered styles, each with its own looks (shown as a second row of buttons).
+interface Group { label: string; meta: string; looksLabel: string; items: Item[] }
+interface Props { lang?: 'en' | 'es'; items?: Item[]; groups?: Group[]; tabsLabel?: string; frameLabel?: string }
+const { lang = 'en', items: custom, groups, tabsLabel, frameLabel } = Astro.props;
 const es = lang === 'es';
 
 const t = es
@@ -30,7 +32,7 @@ const t = es
 
 if (tabsLabel) t.tabs = tabsLabel;
 if (frameLabel) t.frame = (n: string) => `${n}, ${frameLabel}`;
-const items: Item[] = custom ?? samples.map((sm) => {
+const items: Item[] = groups ? groups.flatMap((g) => g.items) : custom ?? samples.map((sm) => {
   const pk = packages.find((x) => x.name === sm.package);
   return { ...sm, short: pk?.short ?? sm.package, price: pk?.price ?? '', href: `/samples/${sm.slug}/` };
 });
@@ -38,6 +40,25 @@ const first = items[0];
 ---
 <div class="pv" data-pv>
   <div class="pv-copy">
+    {groups ? (
+      <div class="pv-groups">
+        <div class="pv-tabs pv-many pv-styles" role="group" aria-label={t.tabs}>
+          {groups.map((g, gi) => (
+            <button type="button" class="pv-tab pv-style" aria-pressed={gi === 0 ? 'true' : 'false'} data-group={gi}>
+              <span class="pv-tab-name">{g.label}</span>
+              <span class="pv-tab-meta">{g.meta}</span>
+            </button>
+          ))}
+        </div>
+        {groups.map((g, gi) => (
+          <div class="pv-looks" role="group" aria-label={g.looksLabel} data-looks={gi} hidden={gi !== 0}>
+            {g.items.map((it, i) => (
+              <button type="button" class="pv-look" id={`pv-tab-${it.slug}`} aria-pressed={gi === 0 && i === 0 ? 'true' : 'false'} data-src={it.href} data-name={it.name} data-title={t.frame(it.name)}>{it.short}</button>
+            ))}
+          </div>
+        ))}
+      </div>
+    ) : (
     <div class:list={['pv-tabs', { 'pv-many': items.length > 4 }]} role="tablist" aria-label={t.tabs}>
       {items.map((it, i) => (
         <button type="button" role="tab" class="pv-tab" id={`pv-tab-${it.slug}`} aria-controls="pv-screen" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-src={it.href} data-name={it.name} data-title={t.frame(it.name)}>
@@ -46,6 +67,7 @@ const first = items[0];
         </button>
       ))}
     </div>
+    )}
     <a class="pv-open" href={first.href} hreflang={es ? 'en' : undefined} target="_blank" rel="noopener" data-pv-open><span>{t.open[0]} <span data-pv-name>{first.name}</span> {t.open[1]}</span> <Icon name="arrow" size={16} /></a>
   </div>
   <figure class="pv-phone-wrap">
@@ -63,7 +85,7 @@ const first = items[0];
   document.querySelectorAll<HTMLElement>('[data-pv]').forEach((root) => {
     const screen = root.querySelector<HTMLElement>('.pv-screen')!;
     const frame = screen.querySelector('iframe')!;
-    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.pv-tab'));
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.pv-tab:not(.pv-style)'));
     const open = root.querySelector<HTMLAnchorElement>('[data-pv-open]')!;
     const openName = root.querySelector<HTMLElement>('[data-pv-name]')!;
 
@@ -89,6 +111,29 @@ const first = items[0];
       openName.textContent = tab.dataset.name!;
     };
     frame.addEventListener('load', () => screen.classList.remove('is-loading'));
+
+    // Grouped mode: style buttons pick a group of looks; look buttons load a card.
+    const looks = Array.from(root.querySelectorAll<HTMLButtonElement>('.pv-look'));
+    const show = (btn: HTMLButtonElement) => {
+      looks.forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
+      screen.setAttribute('aria-labelledby', btn.id);
+      if (frame.getAttribute('src') !== btn.dataset.src) {
+        screen.classList.add('is-loading');
+        frame.src = btn.dataset.src!;
+        frame.title = btn.dataset.title!;
+      }
+      open.href = btn.dataset.src!;
+      openName.textContent = btn.dataset.name!;
+    };
+    looks.forEach((b) => b.addEventListener('click', () => show(b)));
+    root.querySelectorAll<HTMLButtonElement>('.pv-style').forEach((s, _i, all) => {
+      s.addEventListener('click', () => {
+        all.forEach((x) => x.setAttribute('aria-pressed', String(x === s)));
+        root.querySelectorAll<HTMLElement>('[data-looks]').forEach((g) => { g.hidden = g.dataset.looks !== s.dataset.group; });
+        const first = root.querySelector<HTMLButtonElement>(`[data-looks="${s.dataset.group}"] .pv-look`);
+        if (first) show(first);
+      });
+    });
 
     tabs.forEach((tab, i) => {
       tab.addEventListener('click', () => select(tab));
