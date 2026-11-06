@@ -43,7 +43,6 @@ export function GET() {
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     `- [Brand Essentials](${site.url}/websites/brand-essentials/) ($1,000, on its own or with any website): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet, designed with a professional designer partner.`,
     `- Free website check (${site.url}/website-check/): 10 quick questions with an instant score and what to fix first.`,
-    `- Free automation check (${site.url}/automation-ai-projects/automation-check/): tick the tasks a team does by hand and see which can run on their own with Make or Zapier, and how.`,
     `- Free guide: What's safe to share with AI (${site.url}/downloads/ai-safe-to-share-guide.pdf), a one-page PDF on what to paste into AI tools, what to keep out, and which settings to check.`,
     `- Free website prep checklist (${site.url}/websites/get-ready/): the business basics, photos, words, and accounts to gather before a new website is built.`,
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
