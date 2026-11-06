@@ -50,6 +50,7 @@ const first = items[0];
             </button>
           ))}
         </div>
+        <div class="pv-looks-col">
         {groups.map((g, gi) => (
           <div class="pv-looks" role="group" aria-label={g.looksLabel} data-looks={gi} hidden={gi !== 0}>
             {g.items.map((it, i) => (
@@ -57,6 +58,8 @@ const first = items[0];
             ))}
           </div>
         ))}
+          <a class="pv-open" href={first.href} hreflang={es ? 'en' : undefined} target="_blank" rel="noopener" data-pv-open><span>{t.open[0]} <span data-pv-name>{first.name}</span> {t.open[1]}</span> <Icon name="arrow" size={16} /></a>
+        </div>
       </div>
     ) : (
     <div class:list={['pv-tabs', { 'pv-many': items.length > 4 }]} role="tablist" aria-label={t.tabs}>
@@ -68,7 +71,7 @@ const first = items[0];
       ))}
     </div>
     )}
-    <a class="pv-open" href={first.href} hreflang={es ? 'en' : undefined} target="_blank" rel="noopener" data-pv-open><span>{t.open[0]} <span data-pv-name>{first.name}</span> {t.open[1]}</span> <Icon name="arrow" size={16} /></a>
+    {!groups && <a class="pv-open" href={first.href} hreflang={es ? 'en' : undefined} target="_blank" rel="noopener" data-pv-open><span>{t.open[0]} <span data-pv-name>{first.name}</span> {t.open[1]}</span> <Icon name="arrow" size={16} /></a>}
   </div>
   <figure class="pv-phone-wrap">
     <div class="pv-phone">
