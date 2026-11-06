@@ -41,6 +41,7 @@ export const nav = [
       { href: '/websites/', label: 'Website packages' },
       { href: '/websites/diagnostic/', label: 'Website Diagnostic' },
       { href: '/websites/google-business-profile/', label: 'Google Business Profile' },
+      { href: '/websites/business-card/', label: 'Digital Business Card' },
       { href: '/websites/help-after-launch/', label: 'Help After Launch' },
       { href: '/websites/brand-essentials/', label: 'Brand Essentials' },
     ],

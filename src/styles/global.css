@@ -280,6 +280,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .steps.steps-4 .num { margin-top: 0; }
 .ticks li.card { padding: 18px 22px; }
 @media (max-width: 960px) { .steps.steps-4 { grid-template-columns: 1fr 1fr; } }
+.steps.steps-3 { grid-template-columns: repeat(3, 1fr); }
+.steps.steps-3 .num { margin-top: 0; }
+@media (max-width: 760px) { .steps.steps-3 { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .steps.steps-4 { grid-template-columns: 1fr; } }
 .category h3 { font-size: 1.5rem; }
 .category .ticks { margin-top: 8px; }
@@ -669,6 +672,8 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
   .pv-screen { border-radius: 22px; }
 }
 .pv-open svg { vertical-align: -3px; margin-left: 4px; }
+/* Six or more tabs (demo cards): three per row on phones. */
+@media (max-width: 640px) { .pv-tabs.pv-many { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Service pages: a small hello from Alexandria with her photo (HelloBand.astro, same on Websites, Tech, and Production). */
 .hello-band { padding: 36px 0; background: var(--night); color: var(--white); }

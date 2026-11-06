@@ -21,6 +21,7 @@ export const nav = [
       { href: '/es/websites/', label: 'Paquetes de sitios web' },
       { href: '/es/websites/diagnostic/', label: 'Diagnóstico Web' },
       { href: '/es/websites/google-business-profile/', label: 'Perfil de Negocio de Google' },
+      { href: '/es/websites/business-card/', label: 'Tarjeta de presentación digital' },
       { href: '/es/websites/help-after-launch/', label: 'Ayuda después del lanzamiento' },
       { href: '/es/websites/brand-essentials/', label: 'Identidad de Marca' },
     ],

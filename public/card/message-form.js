@@ -29,6 +29,18 @@ const CSS = `
 `;
 
 let root = null, lastFocus = null;
+const ES = document.documentElement.lang === 'es';
+const T = ES ? {
+  title: 'Envíeme <b>un mensaje</b>', intro: 'Cuénteme en qué está trabajando. Le respondo en 24 a 48 horas.', close: 'Cerrar',
+  name: 'Nombre', email: 'Correo', phone: 'Teléfono', message: 'Mensaje', opt: '(opcional)', send: 'Enviar mensaje',
+  thanks: '¡Gracias! <b>Ya va en camino.</b>', reply: 'Le responderé en 24 a 48 horas.', back: 'Volver', sending: 'Enviando…',
+  error: 'Algo salió mal. Escríbame a <a href="mailto:hello@auvastudio.com">hello@auvastudio.com</a>.', subject: ' (Spanish)',
+} : {
+  title: 'Send me <b>a message</b>', intro: "Tell me what you're working on. I'll reply within 24–48 hours.", close: 'Close',
+  name: 'Name', email: 'Email', phone: 'Phone', message: 'Message', opt: '(optional)', send: 'Send message',
+  thanks: "Thanks! <b>It's on its way.</b>", reply: "You'll hear back within 24–48 hours.", back: 'Back', sending: 'Sending…',
+  error: 'Something went wrong. Please email me at <a href="mailto:hello@auvastudio.com">hello@auvastudio.com</a>.', subject: '',
+};
 
 function build() {
   const style = document.createElement('style'); style.textContent = CSS; document.head.appendChild(style);
@@ -38,26 +50,26 @@ function build() {
   root.innerHTML = `
     <div class="mf-sheet">
       <div class="mf-head">
-        <div class="mf-intro"><h2 id="mf-title">Send me <b>a message</b></h2><p>Tell me what you're working on. I'll reply within 24–48 hours.</p></div>
-        <button class="mf-x" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        <div class="mf-intro"><h2 id="mf-title">${T.title}</h2><p>${T.intro}</p></div>
+        <button class="mf-x" type="button" aria-label="${T.close}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
       <form>
         <input type="hidden" name="access_key" value="${KEY}">
-        <input type="hidden" name="subject" value="New message from the AR business card">
+        <input type="hidden" name="subject" value="New message from the AR business card${T.subject}">
         <input type="hidden" name="from_name" value="Auva Studio AR card">
         <input type="hidden" name="source" value="">
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label>Name<input name="name" autocomplete="name" required></label>
-        <label>Email<input type="email" name="email" autocomplete="email" required></label>
-        <label><span>Phone <span class="opt">(optional)</span></span><input type="tel" name="phone" autocomplete="tel"></label>
-        <label><span>Message <span class="opt">(optional)</span></span><textarea name="message" rows="3"></textarea></label>
-        <button class="mf-send" type="submit">Send message</button>
+        <label>${T.name}<input name="name" autocomplete="name" required></label>
+        <label>${T.email}<input type="email" name="email" autocomplete="email" required></label>
+        <label><span>${T.phone} <span class="opt">${T.opt}</span></span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label><span>${T.message} <span class="opt">${T.opt}</span></span><textarea name="message" rows="3"></textarea></label>
+        <button class="mf-send" type="submit">${T.send}</button>
         <p class="mf-status" aria-live="polite"></p>
       </form>
       <div class="mf-done" hidden>
-        <h2>Thanks! <b>It's on its way.</b></h2>
-        <p>You'll hear back within 24–48 hours.</p>
-        <button class="mf-send" type="button" data-close>Back</button>
+        <h2>${T.thanks}</h2>
+        <p>${T.reply}</p>
+        <button class="mf-send" type="button" data-close>${T.back}</button>
       </div>
     </div>`;
   document.body.appendChild(root);
@@ -68,7 +80,7 @@ function build() {
   root.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.stopPropagation(); closeMessageForm(); } });
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = form.querySelector('.mf-send'); btn.disabled = true; status.textContent = 'Sending…';
+    const btn = form.querySelector('.mf-send'); btn.disabled = true; status.textContent = T.sending;
     try {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
       const data = await res.json();
@@ -76,7 +88,7 @@ function build() {
       form.reset(); status.textContent = '';
       form.hidden = true; intro.hidden = true; done.hidden = false; done.querySelector('[data-close]').focus();
     } catch {
-      status.innerHTML = 'Something went wrong. Please email me at <a href="mailto:hello@auvastudio.com">hello@auvastudio.com</a>.';
+      status.innerHTML = T.error;
     } finally { btn.disabled = false; }
   });
 }

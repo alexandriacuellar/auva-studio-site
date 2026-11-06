@@ -6,9 +6,10 @@ import { MindARThree } from '/card/vendor/mindar/mindar-image-three.prod.js';
 
 // Tapping the pill or Alexandria opens the short contact form instead of a link.
 const MESSAGE = 'message';
+const ES = document.documentElement.lang === 'es';
 const LINKS = [
-  { label: 'Website', href: 'https://auvastudio.com/', icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/>' },
-  { label: 'Contact', href: 'https://auvastudio.com/contact/', icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
+  { label: ES ? 'Sitio web' : 'Website', href: ES ? 'https://auvastudio.com/es/' : 'https://auvastudio.com/', icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/>' },
+  { label: ES ? 'Contacto' : 'Contact', href: ES ? 'https://auvastudio.com/es/contact/' : 'https://auvastudio.com/contact/', icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
   { label: 'Instagram', href: 'https://www.instagram.com/auvastudiony/', icon: '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>' },
   { label: 'Facebook', href: 'https://www.facebook.com/auvastudiony', icon: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/auva-studio/', icon: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>' },
@@ -45,7 +46,7 @@ function bookSprite() {
   g.shadowColor = 'rgba(0,0,0,0.35)'; g.shadowBlur = 20; g.shadowOffsetY = 6;
   g.fillStyle = STAR; g.beginPath(); g.roundRect(12, 12, 744, 132, 66); g.fill();
   g.shadowColor = 'transparent'; g.fillStyle = '#0a1440'; g.font = font(700, 50); g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillText('Send me a message', 384, 80);
+  g.fillText(ES ? 'Envíeme un mensaje' : 'Send me a message', 384, 80, 700);
   const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture(c), transparent: true, depthWrite: false }));
   s.scale.set(0.7, 0.153, 1); s.userData.href = MESSAGE; s.userData.base = s.scale.clone();
   return s;

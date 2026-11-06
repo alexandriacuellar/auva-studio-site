@@ -4,8 +4,10 @@
 import { samples, packages } from '../data/site';
 import Icon from './Icon.astro';
 
-interface Props { lang?: 'en' | 'es' }
-const { lang = 'en' } = Astro.props;
+// items: optional custom list (e.g. the demo cards); defaults to the sample sites.
+interface Item { slug: string; name: string; short: string; price?: string; href: string }
+interface Props { lang?: 'en' | 'es'; items?: Item[]; tabsLabel?: string; frameLabel?: string }
+const { lang = 'en', items: custom, tabsLabel, frameLabel } = Astro.props;
 const es = lang === 'es';
 
 const t = es
@@ -26,7 +28,9 @@ const t = es
       frame: (n: string) => `${n}, sample site on a phone`,
     };
 
-const items = samples.map((sm) => {
+if (tabsLabel) t.tabs = tabsLabel;
+if (frameLabel) t.frame = (n: string) => `${n}, ${frameLabel}`;
+const items: Item[] = custom ?? samples.map((sm) => {
   const pk = packages.find((x) => x.name === sm.package);
   return { ...sm, short: pk?.short ?? sm.package, price: pk?.price ?? '', href: `/samples/${sm.slug}/` };
 });
@@ -34,11 +38,11 @@ const first = items[0];
 ---
 <div class="pv" data-pv>
   <div class="pv-copy">
-    <div class="pv-tabs" role="tablist" aria-label={t.tabs}>
+    <div class:list={['pv-tabs', { 'pv-many': items.length > 4 }]} role="tablist" aria-label={t.tabs}>
       {items.map((it, i) => (
         <button type="button" role="tab" class="pv-tab" id={`pv-tab-${it.slug}`} aria-controls="pv-screen" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-src={it.href} data-name={it.name} data-title={t.frame(it.name)}>
           <span class="pv-tab-name">{it.name}</span>
-          <span class="pv-tab-meta">{it.short}, {it.price}</span>
+          <span class="pv-tab-meta">{it.price ? `${it.short}, ${it.price}` : it.short}</span>
         </button>
       ))}
     </div>

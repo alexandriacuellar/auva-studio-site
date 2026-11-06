@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Clay & Kiln
+ORG:Clay & Kiln
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/clay-kiln/
+ADR;TYPE=WORK:;;;Saugerties\, NY;;;
+NOTE:Handmade pottery and weekend wheel classes.
+END:VCARD

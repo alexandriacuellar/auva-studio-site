@@ -3,7 +3,7 @@
   X-Robots-Tag: noindex, nofollow
 
 # Business card AR page: keep it out of search results.
-/card/*
+/card/ar/*
   X-Robots-Tag: noindex, nofollow
 
 /card/alexandria-cuellar.vcf
@@ -15,6 +15,13 @@
 /card/auva-star.glb
   Content-Type: model/gltf-binary
 
+# Contact card: the owner-only QR page stays out of search results.
+/card/show/*
+  X-Robots-Tag: noindex, nofollow
+
+/es/card/show/*
+  X-Robots-Tag: noindex, nofollow
+
 # Chat assistant knowledge, read by the chat function: keep it out of search results.
 /assistant/*
   X-Robots-Tag: noindex, nofollow
@@ -22,3 +29,7 @@
 # Page mockups for review: keep them out of search results.
 /mockups/*
   X-Robots-Tag: noindex, nofollow
+
+# Demo business cards: Save contact downloads as a contact file.
+/samples/cards/:slug/contact.vcf
+  Content-Type: text/vcard; charset=utf-8

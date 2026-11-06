@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="alternate" hreflang="en" href="https://auvastudio.com/card/ar/">
+<title>Tarjeta de presentación con AR | Auva Studio</title>
+<meta name="description" content="Apunte la cámara a mi tarjeta de presentación y me verá salir de ella, o ponga la estrella de Auva en 3D sobre su escritorio.">
+<meta name="theme-color" content="#fbfcff">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "/card/vendor/three.module.min.js", "three/addons/": "/card/vendor/three-addons/" } }</script>
+<script type="module" src="/card/vendor/model-viewer.min.js"></script>
+<style>
+  /* Clean look in Auva brand colors, to match the contact card at /card/ */
+  :root { --page: #fbfcff; --surface: #ffffff; --tile: #f1f4fb; --ink: #12235e; --muted: #4b5878; --line: #d3def3; --accent: #1f5fe0;
+          --tint: #dce8ff; --peri: #9fb6ff; --star: #f39a3b; --deep: #0a1440; --white: #fff;
+          --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  main { max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; gap: 22px;
+         padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
+  .logo { width: 104px; height: auto; align-self: center; }
+  model-viewer { width: 100%; height: min(46vh, 380px); background: radial-gradient(closest-side, #e6eeff, var(--tile)); border-radius: 28px; --poster-color: transparent; }
+  model-viewer::part(default-progress-bar) { background: var(--accent); }
+  h1 { font-weight: 700; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 10px; text-align: center; text-wrap: balance; }
+  h1 b { font-weight: 700; color: var(--accent); }
+  h2 { font-weight: 650; font-size: 1.3rem; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 6px; }
+  h2 b { font-weight: 700; }
+  p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+  .intro p { text-align: center; font-size: 1.06rem; }
+  .actions { display: grid; gap: 10px; }
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 22px; border-radius: 999px; border: 0; font: 600 1rem var(--font); text-decoration: none; cursor: pointer; }
+  .btn-star { background: var(--accent); color: var(--white); }
+  .btn-light { background: var(--surface); color: var(--accent); border: 1.5px solid var(--accent); }
+  .btn-ghost { background: var(--tile); color: var(--ink); }
+  .btn:focus-visible { outline: 3px solid var(--peri); outline-offset: 3px; }
+  .ar-btn { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); white-space: nowrap; box-shadow: 0 6px 20px rgba(18, 35, 94, 0.25); }
+  .no-ar { margin-top: -10px; text-align: center; font-size: 0.9rem; color: var(--muted); }
+  .note { font-size: 0.85rem; text-align: center; }
+  .star-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.92rem; }
+  .star-note::before, .star-icon::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+  .card-link { display: block; text-align: center; color: var(--accent); font-size: 0.95rem; font-weight: 600; text-underline-offset: 3px; padding: 6px 0; }
+  .lang-switch { position: absolute; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); font: 600 0.85rem var(--font); text-decoration: none; }
+  .lang-switch:focus-visible { outline: 3px solid var(--peri); outline-offset: 2px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  /* The one bold element: her avatar standing on an outline of the card, in a soft tile with Clean's slanted blue edge */
+  .hero { position: relative; height: 340px; display: grid; place-items: end center; border-radius: 28px; overflow: hidden;
+          background: linear-gradient(180deg, #eaf1ff, var(--tile)); }
+  .hero::after { content: ''; position: absolute; inset: 0; background: var(--accent); clip-path: polygon(0 92%, 100% 80%, 100% 86%, 0 98%); pointer-events: none; }
+  .hero .card-outline { position: absolute; bottom: 34px; left: 50%; width: 150px; height: 64px; transform: translateX(-50%);
+                        border: 1.5px solid rgba(31, 95, 224, 0.45); border-radius: 10px; background: rgba(31, 95, 224, 0.07);
+                        clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+  .hero .ring { position: absolute; bottom: 56px; left: 50%; width: 92px; height: 22px; transform: translateX(-50%); border: 2px solid var(--accent); border-radius: 50%; }
+  .hero img { position: relative; height: 268px; width: auto; margin-bottom: 64px; }
+  .hero .star { position: absolute; top: 50px; left: calc(50% + 72px); width: 20px; height: 20px; background: var(--star); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .sr-only:focus-within { position: fixed; z-index: 4; left: 14px; top: 70px; width: auto; height: auto; margin: 0; clip: auto; overflow: visible; white-space: normal; padding: 12px 16px; border-radius: 14px; background: var(--deep); }
+  .sr-only a, .sr-only button { color: var(--white); display: block; padding: 4px 0; background: none; border: 0; font: inherit; cursor: pointer; }
+  .divider { height: 1px; background: var(--line); }
+
+  /* Card AR: full screen camera view, the card comes alive under it */
+  .ar { position: fixed; inset: 0; z-index: 10; background: #000; }
+  .ar[hidden] { display: none; }
+  .ar-stage { position: absolute; inset: 0; overflow: hidden; }
+  .ar-top { position: absolute; z-index: 3; top: max(14px, env(safe-area-inset-top)); left: 14px; right: 14px; display: flex; justify-content: flex-end; }
+  .ar-close { min-height: 44px; padding: 10px 18px; background: rgba(10, 20, 64, 0.72); color: var(--white); border: 1px solid rgba(220, 232, 255, 0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .ar-hint { position: absolute; z-index: 3; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(340px, calc(100% - 32px));
+             padding: 14px 18px; border-radius: 18px; text-align: center; background: rgba(10, 20, 64, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .ar-hint p { color: var(--white); font-size: 0.98rem; }
+  .ar-hint .small { color: var(--tint); font-size: 0.85rem; margin-top: 2px; }
+  .ar-frame { position: absolute; z-index: 2; left: 50%; top: 46%; width: min(46vw, 210px); aspect-ratio: 2 / 3.5; transform: translate(-50%, -50%); border-radius: 14px; border: 2px dashed rgba(220, 232, 255, 0.7); pointer-events: none; transition: opacity 0.3s; }
+  .ar.found .ar-frame { opacity: 0; }
+</style>
+</head>
+<body>
+<a class="lang-switch" href="/card/ar/" hreflang="en" lang="en">English</a>
+<main>
+  <img class="logo" src="/auva-logo-tight.png" alt="Auva Studio" width="693" height="208">
+
+  <div class="hero" aria-hidden="true">
+    <span class="card-outline"></span><span class="ring"></span>
+    <img src="/card/avatar.webp" alt="" width="373" height="1024">
+    <span class="star"></span>
+  </div>
+
+  <div class="intro">
+    <h1>Hola, soy <b>Alexandria</b></h1>
+    <p>Apunte la cámara al frente de mi tarjeta y saldré de ella.</p>
+  </div>
+  <button class="btn btn-star" id="start-card" type="button">Apunte la cámara a mi tarjeta</button>
+
+  <div class="actions">
+    <button class="btn btn-light" type="button" data-message>Envíeme un mensaje</button>
+    <div class="row">
+      <a class="btn btn-ghost" href="/card/alexandria-cuellar.vcf">Guardar contacto</a>
+      <a class="btn btn-ghost" href="/es/">Ver mi trabajo</a>
+    </div>
+    <a class="card-link" href="/es/card/">Abrir mi tarjeta de contacto</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <div>
+    <h2>¿No tiene la tarjeta a mano? Ponga la estrella en su escritorio</h2>
+    <p>Toque el botón, apunte el teléfono a una mesa y la estrella de Auva aparecerá ahí mismo. Camine a su alrededor o pellizque la pantalla para agrandarla.</p>
+  </div>
+
+  <model-viewer id="star" src="/card/auva-star.glb" ios-src="/card/auva-star.usdz" alt="Una pieza 3D de Auva Studio: la A azul de Auva sobre una base azul marino, con la constelación de Virgo flotando encima y la estrella ámbar Delta Virginis en la punta"
+    ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"
+    camera-controls interaction-prompt="none"
+    camera-orbit="0deg 78deg 0.9m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 95deg auto" field-of-view="30deg"
+    shadow-intensity="1" shadow-softness="0.9" exposure="1.15" tone-mapping="neutral" environment-image="neutral" loading="lazy">
+    <button class="btn btn-star ar-btn" slot="ar-button" type="button">Póngala en su escritorio</button>
+  </model-viewer>
+  <p class="no-ar" id="no-ar" hidden>Abra esta página en su teléfono para ponerla en su escritorio.</p>
+
+  <p class="star-note">La estrella ámbar de arriba es Auva, o Delta Virginis (oficialmente Minelauva), una gigante roja fría de la constelación de Virgo.</p>
+  <p class="note">Funciona en Safari en iPhone y en Chrome en Android. No necesita ninguna app.</p>
+</main>
+
+<div class="ar" id="ar" hidden role="dialog" aria-modal="true" aria-label="Mi tarjeta en su cámara">
+  <div class="ar-stage" id="ar-stage"></div>
+  <div class="ar-frame" aria-hidden="true"></div>
+  <div class="ar-top"><button class="btn ar-close" id="ar-close" type="button">Listo</button></div>
+  <div class="ar-hint" id="ar-hint" aria-live="polite"><p>Encendiendo la cámara...</p></div>
+  <nav class="sr-only" aria-label="Enlaces que flotan a mi alrededor">
+    <button type="button" data-message>Envíeme un mensaje</button>
+    <a href="https://auvastudio.com/es/">Sitio web</a>
+    <a href="https://auvastudio.com/es/contact/">Contacto</a>
+    <a href="https://www.instagram.com/auvastudiony/">Instagram</a>
+    <a href="https://www.facebook.com/auvastudiony">Facebook</a>
+    <a href="https://www.linkedin.com/company/auva-studio/">LinkedIn</a>
+  </nav>
+</div>
+
+<script type="module">
+  import { openMessageForm } from '/card/message-form.js';
+  document.querySelectorAll('[data-message]').forEach((b) => b.addEventListener('click', () => openMessageForm(location.pathname)));
+  const mv = document.getElementById('star');
+  // model-viewer hides the AR button on its own when AR isn't available; say why instead of leaving a gap.
+  mv.addEventListener('load', () => { if (!mv.canActivateAR) document.getElementById('no-ar').hidden = false; });
+
+  const arEl = document.getElementById('ar'), stage = document.getElementById('ar-stage'), hint = document.getElementById('ar-hint');
+  const say = (big, small = '') => { hint.innerHTML = `<p>${big}</p>` + (small ? `<p class="small">${small}</p>` : ''); };
+  let session = null;
+
+  const startBtn = document.getElementById('start-card'), closeBtn = document.getElementById('ar-close');
+  startBtn.addEventListener('click', async () => {
+    arEl.hidden = false; arEl.classList.remove('found'); document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    say('Encendiendo la cámara...');
+    try {
+      const { startCardAR } = await import('/card/card-ar.js');
+      session = await startCardAR(stage, {
+        found: () => { arEl.classList.add('found'); say('Toque un ícono para abrirlo', 'Tóqueme para enviarme un mensaje'); },
+        lost: () => { arEl.classList.remove('found'); say('Apunte al frente de mi tarjeta', 'Manténgala plana, con mi foto a la vista'); },
+      });
+      say('Apunte al frente de mi tarjeta', 'Manténgala plana, con mi foto a la vista');
+    } catch (e) {
+      console.error(e);
+      say('La cámara no se encendió', 'Permita el acceso a la cámara para esta página e inténtelo de nuevo.');
+    }
+  });
+
+  const closeAR = () => {
+    session?.stop(); session = null; stage.innerHTML = '';
+    arEl.hidden = true; document.body.style.overflow = '';
+    startBtn.focus();
+  };
+  closeBtn.addEventListener('click', closeAR);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !arEl.hidden) closeAR(); });
+</script>
+</body>
+</html>
