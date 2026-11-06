@@ -104,5 +104,19 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
-  <Cta promises={strip} />
+  <section class="home-plan" id="plan">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Empezar <em>es sencillo.</em></h2>
+      </div>
+      <ol class="steps steps-3">
+        <li><span class="num" aria-hidden="true">1</span><h3>Reserve una llamada gratis de 30 minutos</h3><p>Cuénteme qué está pasando y le sugiero el siguiente paso adecuado.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Reciba un plan y un precio por escrito</h3><p>No empieza ningún trabajo hasta que usted diga que sí.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Se hace el trabajo, y es suyo</h3><p>Todo queda a su nombre, con una guía práctica.</p></li>
+      </ol>
+      <ul class="promise-strip on-light">{strip.map((p) => <li><Icon name="tick" size={16} />{p}</li>)}</ul>
+    </div>
+  </section>
+
+  <Cta />
 </Base>
