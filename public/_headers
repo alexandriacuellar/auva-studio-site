@@ -15,6 +15,10 @@
 /card/auva-star.glb
   Content-Type: model/gltf-binary
 
+# Contact card: the owner-only QR page stays out of search results.
+/me/show/*
+  X-Robots-Tag: noindex, nofollow
+
 # Chat assistant knowledge, read by the chat function: keep it out of search results.
 /assistant/*
   X-Robots-Tag: noindex, nofollow
