@@ -40,23 +40,12 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">Make technology <em>work for your business.</em></h1>
-      <p class="lede">Websites, automation, AI, project help, and AR and VR production for small businesses and teams in New York’s Hudson Valley and beyond.</p>
+      <h1 class="mag-head">Get found, get organized, and <em>get your time back.</em></h1>
+      <p class="lede">I build websites, set up automation and AI, manage projects, and produce AR and VR for small businesses and teams in the Hudson Valley and beyond.</p>
       <div class="hero-actions">
         <a class="btn" href="#services">How I help <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="/contact/">Get in touch</a>
       </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Three ways <em>I help.</em></h2>
-        <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
-      </div>
-      <ServiceCards categories={categories} lang="en" />
-      <p class="hero-checks" style="text-align: center; margin-top: 64px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
     </div>
   </section>
 
@@ -73,9 +62,8 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
             <ul>
               {c.items.map((x) => (
                 <li><a class="sit-card" href={x.href}>
-                  <b>{x.title}</b>
+                  <b>{x.title} <Icon name="arrow" size={16} /></b>
                   <span class="muted">{x.text}</span>
-                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
                 </a></li>
               ))}
             </ul>
@@ -86,12 +74,23 @@ const strip = ['Published prices', 'Written quote before work starts', 'You own 
     </div>
   </section>
 
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Three ways <em>I help.</em></h2>
+        <p class="lede">Start with a conversation or a focused review. I recommend only what you need, then help you put it in place.</p>
+      </div>
+      <ServiceCards categories={categories} lang="en" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">Not ready to talk? Try a free 2-minute check: <a href="/website-check/">your website</a> or <a href="/google-profile-check/">your Google profile</a>.</p>
+    </div>
+  </section>
+
   <section class="home-about-band" id="about">
     <div class="wrap home-about">
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={200} height={200} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Practical technology guidance, <em>built around people.</em></h2>
-        <p class="lede">Hi, I'm Alexandria, founder of Auva Studio. I bring 20+ years in web development and project management to small businesses, startups, nonprofits, and growing teams. I also hold a Mixed Reality (XR) Certificate and use AI in my work every day.</p>
+        <p class="lede">Hi, I'm Alexandria, founder of Auva Studio. Technology gets confusing fast, and most small teams have no one to ask. I explain your options in plain English, recommend only what you need, and set it up for you. I bring 20+ years in web development and project management, and I use AI in my work every day.</p>
         <figure class="quote home-about-quote">
         <blockquote>“{featured.quote}”</blockquote>
         <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>

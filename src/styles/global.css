@@ -281,6 +281,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .after-card svg { color: var(--primary); }
 .after-card h3 { margin: 4px 0 0; font-size: 1.1rem; }
 .after-card p { margin: 0; }
+.after-close { margin: 20px 0 0; font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; }
 
 /* Four-step approach and checklist cards */
 .steps.steps-4 { grid-template-columns: repeat(4, 1fr); }

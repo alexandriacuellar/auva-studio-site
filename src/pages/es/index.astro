@@ -40,23 +40,12 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
 <Base>
   <section class="hero bd-hero">
     <div class="wrap bd-hero-inner">
-      <h1 class="mag-head">Que la tecnología <em>trabaje para su negocio.</em></h1>
-      <p class="lede">Sitios web, automatización, IA, gestión de proyectos y producción de AR y VR para pequeños negocios y equipos en el Hudson Valley de Nueva York y más allá.</p>
+      <h1 class="mag-head">Que le encuentren, organícese y <em>recupere su tiempo.</em></h1>
+      <p class="lede">Creo sitios web, configuro automatización e IA, gestiono proyectos y produzco AR y VR para pequeños negocios y equipos en el Hudson Valley y más allá.</p>
       <div class="hero-actions">
         <a class="btn" href="#services">Cómo le ayudo <Icon name="arrow" size={18} /></a>
         <a class="btn btn-ghost" href="/es/contact/">Contácteme</a>
       </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
-        <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
-      </div>
-      <ServiceCards categories={categories} lang="es" />
-      <p class="hero-checks" style="text-align: center; margin-top: 64px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
     </div>
   </section>
 
@@ -73,9 +62,8 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
             <ul>
               {c.items.map((x) => (
                 <li><a class="sit-card" href={x.href}>
-                  <b>{x.title}</b>
+                  <b>{x.title} <Icon name="arrow" size={16} /></b>
                   <span class="muted">{x.text}</span>
-                  <span class="sit-to">{x.to} <Icon name="arrow" size={16} /></span>
                 </a></li>
               ))}
             </ul>
@@ -86,12 +74,23 @@ const strip = ['Precios publicados', 'Presupuesto por escrito antes de empezar',
     </div>
   </section>
 
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Tres formas <em>de ayudarle.</em></h2>
+        <p class="lede">Empiece con una conversación o una revisión enfocada. Le recomiendo solo lo que necesita y luego le ayudo a ponerlo en marcha.</p>
+      </div>
+      <ServiceCards categories={categories} lang="es" />
+      <p class="hero-checks" style="text-align: center; margin-top: 64px">¿Todavía no quiere hablar? Haga una revisión gratis de 2 minutos: <a href="/es/website-check/">su sitio web</a> o <a href="/es/google-profile-check/">su perfil de Google</a>.</p>
+    </div>
+  </section>
+
   <section class="home-about-band" id="about">
     <div class="wrap home-about">
       <Image class="home-about-photo" src={headshot} alt="Alexandria Cuellar" width={200} height={200} densities={[1, 2]} />
       <div class="home-about-text">
         <h2 class="mag-head">Orientación tecnológica práctica, <em>pensada para las personas.</em></h2>
-        <p class="lede">Hola, soy Alexandria, fundadora de Auva Studio. Pongo más de 20 años en desarrollo web y gestión de proyectos al servicio de pequeños negocios, startups, organizaciones sin fines de lucro y equipos en crecimiento. También tengo un certificado en realidad mixta (XR) y uso IA en mi trabajo todos los días.</p>
+        <p class="lede">Hola, soy Alexandria, fundadora de Auva Studio. La tecnología se complica rápido, y la mayoría de los equipos pequeños no tienen a quién preguntar. Le explico sus opciones en palabras sencillas, le recomiendo solo lo que necesita y lo configuro por usted. Tengo más de 20 años en desarrollo web y gestión de proyectos, y uso IA en mi trabajo todos los días.</p>
         <figure class="quote home-about-quote" lang="en">
         <blockquote>“{featured.quote}”</blockquote>
         <figcaption><b>{featured.name}</b><span class="muted">{featured.role}</span></figcaption>

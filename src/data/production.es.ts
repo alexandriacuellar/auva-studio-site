@@ -33,7 +33,7 @@ export const t = {
   live: 'Demostración en vivo', idea: 'Idea', ideaPartner: 'Idea, con colaborador',
   stTitle: 'Producción de videojuegos y XR', stSeo: 'Productora de videojuegos y XR para estudios independientes | Auva Studio',
   stDesc: 'Una productora para equipos de videojuegos y XR: una Revisión del Plan de Producción de $650, o apoyo de producción a $65 por hora o mensual desde $650, sin contratar a tiempo completo.',
-  stH: 'Una productora para equipos de videojuegos y XR, <em>sin contratar a tiempo completo.</em>', stL: 'Planes, calendarios, documentos de diseño y pruebas de juego que mantienen a su equipo alineado y su lanzamiento en camino.',
+  stH: 'Una productora para equipos de videojuegos y XR, <em>sin contratar a tiempo completo.</em>', stL: 'Sin una productora, el alcance crece, las pruebas de juego se retrasan y las fechas de lanzamiento se mueven. Aporto planes, calendarios, documentos de diseño y pruebas de juego que mantienen a su equipo alineado y su lanzamiento en camino.',
   offH: 'Empiece con un plan, <em>o súmeme al equipo.</em>', offL: 'Más de 14 proyectos de videojuegos y XR dirigidos para estudios independientes desde 2023.',
   proofH: 'De los estudios <em>con los que he trabajado.</em>',
 };

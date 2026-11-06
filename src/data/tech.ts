@@ -25,7 +25,7 @@ export const safety = [
 ];
 
 export const automationExamples = [
-  { icon: 'mail', title: 'Lead follow-up', text: 'Every website inquiry gets an instant reply and lands in one list, with a nudge to you if nobody answers in 2 days.' },
+  { icon: 'mail', title: 'Lead follow-up', text: 'An inquiry that waits two days for a reply may already have called someone else. With this, every website inquiry gets an instant reply and lands in one list, with a nudge to you if nobody answers in 2 days.' },
   { icon: 'star', title: 'Review requests', text: 'After a job or visit, a thank-you with your Google review link and one gentle reminder.' },
   { icon: 'gear', title: 'Your own', text: 'Client onboarding, a monthly report, or another task your team does by hand.' },
 ];

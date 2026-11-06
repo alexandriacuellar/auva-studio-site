@@ -36,7 +36,7 @@ export const t = {
   // Studios sub page
   stTitle: 'Game and XR Production', stSeo: 'Game and XR Producer for Indie Studios | Auva Studio',
   stDesc: 'A producer for game and XR teams: a $650 Production Plan Review, or production support at $65/hr or monthly from $650, without a full-time hire.',
-  stH: 'A producer for game and XR teams, <em>without a full-time hire.</em>', stL: 'Plans, schedules, design documents, and playtests that keep your team aligned and your launch on track.',
+  stH: 'A producer for game and XR teams, <em>without a full-time hire.</em>', stL: 'Without a producer, scope creeps, playtests slip, and launch dates move. I bring plans, schedules, design documents, and playtests that keep your team aligned and your launch on track.',
   offH: 'Start with a plan, <em>or bring me onto the team.</em>', offL: '14+ game and XR projects managed for indie studios since 2023.',
   proofH: "From the studios <em>I've worked with.</em>",
 };
