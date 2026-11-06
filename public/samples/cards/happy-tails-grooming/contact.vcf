@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Happy Tails Grooming
+ORG:Happy Tails Grooming
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/happy-tails-grooming/
+ADR;TYPE=WORK:;;;Red Hook\, NY;;;
+NOTE:Gentle grooming for dogs of every size.
+END:VCARD

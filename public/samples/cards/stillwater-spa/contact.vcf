@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Stillwater Spa
+ORG:Stillwater Spa
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/stillwater-spa/
+ADR;TYPE=WORK:;;;Rhinebeck\, NY;;;
+NOTE:Massage and skin care in a quiet room.
+END:VCARD

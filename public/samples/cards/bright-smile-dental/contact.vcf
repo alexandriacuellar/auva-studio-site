@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Bright Smile Dental
+ORG:Bright Smile Dental
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/bright-smile-dental/
+ADR;TYPE=WORK:;;;Wappingers Falls\, NY;;;
+NOTE:Gentle family dentistry.
+END:VCARD

@@ -6,7 +6,7 @@ import Faq from '../../components/Faq.astro';
 import PayBar from '../../components/PayBar.astro';
 import PhoneViewer from '../../components/PhoneViewer.astro';
 import { serviceSchema } from '../../data/site';
-import { cardDemos } from '../../data/cardDemos';
+import { cardStyles } from '../../data/cardDemos';
 
 // Written for someone who has never heard of a QR code page or a Google Business Profile.
 const steps = [
@@ -26,24 +26,27 @@ const included = [
 ];
 
 const addons = [
-  { title: 'Show up on Google Maps', price: '+$500', text: 'I set up your Google Business Profile, or fix the one you have, so people find your hours, photos, and reviews, and I link it to your card. $850 for both.' },
+  { title: 'Your Google Business Profile', price: '+$500', text: 'I set up your profile, or improve the one you have, so people find your hours, photos, and reviews, and I link it to your card. $850 for both.' },
   { title: 'Two languages', price: '+$150', text: 'Your card in a second language of your choice, like Spanish, with a button to switch.' },
   { title: 'Cards for your team', price: '$95 per person', text: 'A matching card for each person who works with you.' },
   { title: 'Need a logo?', price: '$1,000', text: 'A designer I work with creates your logo and colors. Your card can go live with your photo first, and the logo goes on when it is ready.', href: '/websites/brand-essentials/' },
 ];
 
-const items = cardDemos.map((d) => ({ slug: d.slug, name: d.name, short: d.style, href: `/samples/cards/${d.slug}/` }));
+const groups = cardStyles.map((g, i) => ({
+  label: `Style ${i + 1}`,
+  meta: `${g.length} looks`,
+  looksLabel: `Looks in style ${i + 1}`,
+  items: g.map((d) => ({ slug: d.slug, name: d.name, short: d.look, href: `/samples/cards/${d.slug}/` })),
+}));
 
 const faqs = [
-  { q: 'Do my customers need to download an app?', a: 'No. They point their phone camera at the code, or tap the link you send them, and your card opens. It works on any phone.' },
-  { q: 'What is a QR code?', a: 'The small black-and-white square you see on menus and signs. A phone camera reads it and opens a link. I put yours on your printed business card, and you can print it for your counter, window, or flyers too.' },
-  { q: 'What do I need to send you?', a: 'Your logo or a photo of you, your phone number and email, your hours, a short list of what you offer, and a photo of your work or your space.' },
+  { q: 'What do I need to send you?', a: 'Your logo or a photo of you, your phone number and email, your hours, a short list of what you offer, a photo of your work or your space, and your Google Business Profile link if you have one.' },
   { q: 'Is there a monthly fee?', a: 'No. You pay $350 once. The only ongoing cost is your web address (like yourbusiness.com), about $20 a year, paid to the company you buy it from, in your name.' },
   { q: 'Do you print the business cards?', a: 'I design them and send you the files, and you order from any online printer. That way you choose the paper and how many, and you pay the printer directly.' },
-  { q: 'Do I need a website already?', a: 'No. Your digital card can be the first place people find you online. If you already have a website, the card can live on it and link back to it.' },
-  { q: 'Do I need the Google Maps add-on?', a: 'Only if you want people to find you when they search on Google or Google Maps. If you already show up there with the right hours and phone number, you can skip it. Not sure? Try the free Google profile check.' },
+  { q: 'Do I need a website already?', a: 'No. Your digital card can be the first place people find you online. If you already have a website, the card can live on it and link back to it. Either way, your card goes at yourbusiness.com/card, so the code on your printed cards keeps working if you add a full website later.' },
+  { q: 'Do I need the Google Business Profile add-on?', a: 'No. But if you don’t have a profile yet, it’s a good idea to create one, since it’s how people find you on Google and Google Maps. I can set it up for you, or improve the one you have.' },
   { q: 'Can I change it later?', a: 'Yes. Fixes are free for 30 days. After that, each change is $59.' },
-  { q: 'Is this the same as a full website?', a: 'No. Your card is one screen with the basics. A full website has room for your story, photos, reviews, and a contact form, and starts at $1,500. If you add the Google Maps setup and want a full website within 6 months, you save $150 to $550 on it.' },
+  { q: 'Is this the same as a full website?', a: 'No. Your card is one screen with the basics. A full website has room for your story, photos, reviews, and a contact form, and starts at $1,500. If you add the Google Business Profile setup and want a full website within 6 months, you save $150 to $550 on it.' },
 ];
 
 const schema = serviceSchema([
@@ -114,9 +117,9 @@ const schema = serviceSchema([
     <div class="wrap">
       <div class="section-head">
         <h2 class="mag-head">See <em>examples.</em></h2>
-        <p class="lede">Six styles, each made for a pretend business. Tap a name, then scroll and tap inside the phone, just like your customers would. Want to see a real one? <a href="/card/">Here's mine.</a></p>
+        <p class="lede">Six styles and 19 looks, shown on sample businesses with made-up details. Pick a style and a look, then scroll and tap inside the phone, just like your customers would. Want to see a real one? <a href="/card/">Here's mine.</a></p>
       </div>
-      <PhoneViewer items={items} tabsLabel="Example cards" frameLabel="example card on a phone" />
+      <PhoneViewer groups={groups} tabsLabel="Card styles" frameLabel="example card on a phone" />
     </div>
   </section>
 

@@ -673,6 +673,18 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 }
 .pv-open svg { vertical-align: -3px; margin-left: 4px; }
 /* Six or more tabs (demo cards): three per row on phones. */
+/* Grouped viewer: numbered styles, then a row of looks for the chosen style. */
+.pv-groups { display: grid; gap: 14px; max-width: 420px; }
+.pv-styles.pv-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: none; }
+.pv-styles .pv-tab { flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 10px 6px; text-align: center; transform: none !important; }
+.pv-style[aria-pressed='true'] { border-color: var(--primary); background: var(--tint); }
+.pv-looks { display: flex; flex-wrap: wrap; gap: 8px; }
+.pv-looks[hidden] { display: none; }
+.pv-look { min-height: 44px; padding: 8px 16px; border: 2px solid var(--border); border-radius: 999px; background: var(--white); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.pv-look:hover { border-color: var(--bright); }
+.pv-look[aria-pressed='true'] { border-color: var(--primary); background: var(--primary); color: var(--white); }
+.pv-look:focus-visible, .pv-style:focus-visible { outline: 3px solid var(--bright); outline-offset: 2px; }
+@media (max-width: 900px) { .pv-groups { margin: 0 auto; } .pv-looks { justify-content: center; } }
 @media (max-width: 640px) { .pv-tabs.pv-many { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Service pages: a small hello from Alexandria with her photo (HelloBand.astro, same on Websites, Tech, and Production). */

@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Forge Fitness
+ORG:Forge Fitness
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/forge-fitness/
+ADR;TYPE=WORK:;;;Fishkill\, NY;;;
+NOTE:Strength classes for every level.
+END:VCARD

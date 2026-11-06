@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Elena Brooks
+ORG:Elena Brooks
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/elena-brooks/
+ADR;TYPE=WORK:;;;Cold Spring\, NY;;;
+NOTE:Homes across the Hudson Valley.
+END:VCARD

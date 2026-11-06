@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Ines Mora Studio
+ORG:Ines Mora Studio
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/ines-mora-studio/
+ADR;TYPE=WORK:;;;Catskill\, NY;;;
+NOTE:Paintings\, murals and commissions.
+END:VCARD
