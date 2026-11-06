@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Night Shift Live
+ORG:Night Shift Live
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/night-shift-live/
+ADR;TYPE=WORK:;;;Kingston\, NY;;;
+NOTE:Live music and DJ nights\, every weekend.
+END:VCARD

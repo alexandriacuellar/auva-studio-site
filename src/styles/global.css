@@ -669,6 +669,8 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
   .pv-screen { border-radius: 22px; }
 }
 .pv-open svg { vertical-align: -3px; margin-left: 4px; }
+/* Six or more tabs (demo cards): three per row on phones. */
+@media (max-width: 640px) { .pv-tabs.pv-many { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Service pages: a small hello from Alexandria with her photo (HelloBand.astro, same on Websites, Tech, and Production). */
 .hello-band { padding: 36px 0; background: var(--night); color: var(--white); }

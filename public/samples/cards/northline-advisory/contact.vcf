@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Northline Advisory
+ORG:Northline Advisory
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/northline-advisory/
+ADR;TYPE=WORK:;;;Kingston\, NY;;;
+NOTE:Bookkeeping and tax help for small businesses.
+END:VCARD

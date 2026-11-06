@@ -1,0 +1,119 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import InquiryForm from '../../../components/InquiryForm.astro';
+import Faq from '../../../components/Faq.astro';
+import PayBar from '../../../components/PayBar.astro';
+import PhoneViewer from '../../../components/PhoneViewer.astro';
+import { serviceSchema } from '../../../data/site.es';
+import { cardDemos } from '../../../data/cardDemos';
+
+const included = [
+  'Su tarjeta en un estilo que va con su negocio, en sus colores',
+  'Tocar para llamar, enviar un mensaje o un correo, ver cómo llegar o reservar',
+  'Su horario con una línea "Abierto ahora", más servicios y redes sociales',
+  'Un enlace a sus reseñas de Google',
+  'Botones para guardar el contacto y compartir, y un enlace para agregarla a la pantalla de inicio',
+  'Un diseño de tarjeta impresa con un código QR a su tarjeta, listo para pedir',
+  'En su propia dirección web, con alojamiento gratis en su cuenta',
+  'Una ronda de cambios, lista en una semana aproximadamente',
+];
+
+const addons = [
+  { title: 'Perfil de Negocio de Google', price: '+$500', text: 'Configuración u optimización, para que su perfil y su tarjeta se enlacen entre sí. $850 en total.' },
+  { title: 'Versión en inglés', price: '+$150', text: 'Una segunda tarjeta completa en inglés, con un botón para cambiar de idioma.' },
+  { title: 'Tarjetas para su equipo', price: '$95 por persona', text: 'El mismo estilo para todo su equipo, una tarjeta para cada persona.' },
+  { title: 'Identidad de Marca', price: '$1,000', text: '¿Todavía no tiene logo? Obtenga un logo y colores; mientras tanto, su tarjeta sale con su foto o sus iniciales.', href: '/es/websites/brand-essentials/' },
+];
+
+const items = cardDemos.map((d) => ({ slug: d.slug, name: d.name, short: d.styleEs, href: `/samples/cards/${d.slug}/` }));
+
+const faqs = [
+  { q: '¿Qué es una tarjeta de presentación digital?', a: 'Una página de una sola pantalla con todo lo de su tarjeta de papel, más botones que funcionan. La gente toca para llamarle, guardar su contacto o ver su horario, y usted la comparte con un código QR o un enlace.' },
+  { q: '¿En qué se diferencia de una app de tarjetas?', a: 'Las apps de tarjetas cobran cada mes, muchas veces por persona, y su tarjeta desaparece si deja de pagar. Esta es suya, en su propia dirección web, sin cuota mensual.' },
+  { q: '¿Necesito tener un sitio web?', a: 'No. La tarjeta puede ser su primera presencia en línea. Si ya tiene un sitio, la tarjeta puede estar en susitio.com/card y enlazar a él.' },
+  { q: '¿Qué tengo que enviar?', a: 'Su logo o una foto suya, sus colores si los tiene, sus datos de contacto, horario y servicios, y una foto de su trabajo o su local para la parte de arriba de la tarjeta.' },
+  { q: '¿Usted imprime las tarjetas?', a: 'Usted recibe los archivos listos para imprimir, del frente y del reverso, y los pide en cualquier imprenta en línea. Así elige el papel y la cantidad, y le paga directamente a la imprenta.' },
+  { q: '¿Puedo cambiarla después?', a: 'Sí. Los arreglos son gratis durante 30 días. Después, los cambios se hacen con Ayuda después del lanzamiento, a $59 por actualización.' },
+  { q: '¿Es lo mismo que un sitio web de una página?', a: 'No. Un sitio de una página cuenta su historia, con fotos, reseñas y un formulario de contacto, y está hecho para aparecer en Google. Eso empieza con el paquete Essential. Muchos negocios empiezan con una tarjeta y luego pasan a un sitio completo, y la tarjeta se queda con usted.' },
+  { q: '¿Ahorro algo en un sitio web después?', a: 'Sí, si agrega el perfil de Google. Dentro de 6 meses, ahorra $150 en Essential, $295 en Expanded o $550 en Complete. No se combina con otras ofertas.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Tarjeta de presentación digital', description: 'Una tarjeta de presentación en forma de sitio web, de una sola pantalla, con botón para llamar, horario, servicios, enlace a reseñas de Google, guardar contacto y un diseño de tarjeta impresa con código QR.', price: '$350' },
+], '/es/websites/business-card/');
+---
+<Base title="Tarjeta de presentación digital" seoTitle="Tarjeta de presentación digital, $350 | Auva Studio" schema={schema} description="Una tarjeta de presentación digital en forma de sitio web para pequeños negocios del Hudson Valley. Botón para llamar, horario, servicios y tarjeta impresa con código QR. $350, pago único, sin cuota mensual.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Su tarjeta de presentación, <em>en forma de sitio web.</em></h1>
+      <p class="lede">Un enlace con todo lo que sus clientes necesitan: tocar para llamar, su horario y servicios, y sus reseñas de Google. Compártala con un código QR, sin descargar ninguna app.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Pedir la suya, $350</a>
+        <a class="btn btn-ghost" href="#demos">Pruebe las tarjetas de muestra <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">Pago único, sin cuota mensual. Pague con un enlace seguro cuando confirme los detalles. Es suya para siempre.</p>
+    </div>
+  </section>
+
+  <section class="band-cream">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Todo lo de su tarjeta, <em>más botones que funcionan.</em></h2>
+        <p class="lede">Más que una tarjeta digital, menos que un sitio web. Hecha para usted, y lista en una semana aproximadamente.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="icon"><Icon name="mail" size={32} /></div>
+          <h3>Tarjeta de presentación digital</h3>
+          <p class="price">$350</p>
+          <p class="muted">Para cualquier negocio que quiere un lugar sencillo y profesional al que enviar a la gente.</p>
+          <ul class="ticks">{included.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+          <a class="btn" href="#start">Pedir la suya, $350</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="layers" size={32} /></div>
+          <h3>Agregue lo que necesite</h3>
+          <ul style="list-style:none;margin:8px 0 0;padding:0">
+            {addons.map((a) => (
+              <li style="display:grid;gap:2px;padding:10px 0;border-bottom:1px solid var(--line, #e3e7ef)">
+                <strong>{a.href ? <a href={a.href}>{a.title}</a> : a.title}, {a.price}</strong>
+                <span class="muted">{a.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="demos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Pruebe las <em>tarjetas de muestra.</em></h2>
+        <p class="lede">Seis estilos, cada uno para un negocio inventado (las muestras están en inglés). Elija una, y desplácese y toque dentro del teléfono. ¿Quiere ver una real? <a href="/es/card/">Esta es la mía.</a></p>
+      </div>
+      <PhoneViewer lang="es" items={items} tabsLabel="Tarjetas de muestra" frameLabel="tarjeta de muestra en un teléfono" />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Sin app. Sin cuota mensual.</h2>
+          <p>Las apps de tarjetas cobran de $5 a $10 al mes, por persona, mientras las use. Su tarjeta es un pago único, en su propia dirección web, y nunca desaparece.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$350</p>
+          <p>Una vez. Es suya.</p>
+          <a class="btn" href="#start">Pedir la suya</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="card" />
+  <PayBar label="Pedir la suya, $350" />
+</Base>

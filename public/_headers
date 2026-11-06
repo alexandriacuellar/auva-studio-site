@@ -29,3 +29,7 @@
 # Page mockups for review: keep them out of search results.
 /mockups/*
   X-Robots-Tag: noindex, nofollow
+
+# Demo business cards: Save contact downloads as a contact file.
+/samples/cards/:slug/contact.vcf
+  Content-Type: text/vcard; charset=utf-8

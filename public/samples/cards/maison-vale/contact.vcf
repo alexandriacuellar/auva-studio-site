@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Maison Vale
+ORG:Maison Vale
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/maison-vale/
+ADR;TYPE=WORK:;;;Hudson\, NY;;;
+NOTE:Slow fashion\, chosen piece by piece.
+END:VCARD

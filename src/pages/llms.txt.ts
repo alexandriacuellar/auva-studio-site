@@ -32,6 +32,7 @@ export function GET() {
     '',
     '## Website Services',
     `- [Website Diagnostic](${site.url}/websites/diagnostic/) ($199, credited toward a new website or a Website Fix-Up): a review of an existing site for usability, mobile, search, and performance.`,
+    `- [Digital Business Card Website](${site.url}/websites/business-card/) ($350, one-time): a one-screen card site with tap to call, hours, services, Google reviews link, save contact, and a printed card design with a QR code. Add Google Business Profile setup for $500.`,
     `- [Google Business Profile Setup](${site.url}/websites/google-business-profile/) ($500, one-time): create or claim the profile, add business details, categories, services, hours, and photos, and help with verification. $150 credited toward a website within 6 months.`,
     `- [Google Business Profile Optimization](${site.url}/websites/google-business-profile/) ($500, one-time): review an existing profile and improve its categories, description, services, attributes, photos, and website links. $150 credited toward a website within 6 months.`,
     `- Every website package includes: ${packageBasics.join('; ')}.`,

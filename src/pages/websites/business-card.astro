@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import Faq from '../../components/Faq.astro';
+import PayBar from '../../components/PayBar.astro';
+import PhoneViewer from '../../components/PhoneViewer.astro';
+import { serviceSchema } from '../../data/site';
+import { cardDemos } from '../../data/cardDemos';
+
+const included = [
+  'Your card in a style that fits your business, in your colors',
+  'Tap to call, text, email, get directions, or book',
+  'Your hours with a live "Open now" line, plus services and social links',
+  'A link to your Google reviews',
+  'Save contact and Share buttons, and an Add to home screen link',
+  'A printed business card design with a QR code to your card, ready to order',
+  'On your own web address, hosted free in your account',
+  'One round of changes, ready in about a week',
+];
+
+const addons = [
+  { icon: 'star', title: 'Google Business Profile', price: '+$500', text: 'Setup or optimization, so your profile and your card point to each other. $850 together.' },
+  { icon: 'globe', title: 'Spanish version', price: '+$150', text: 'A full second card in Spanish, with a switch between the two.' },
+  { icon: 'layers', title: 'Team cards', price: '$95 per person', text: 'The same look for everyone on your team, one card each.' },
+  { icon: 'bulb', title: 'Brand Essentials', price: '$1,000', text: 'No logo yet? Get a logo and colors, and your card launches with your photo or initials until it is ready.', href: '/websites/brand-essentials/' },
+];
+
+const items = cardDemos.map((d) => ({ slug: d.slug, name: d.name, short: d.style, href: `/samples/cards/${d.slug}/` }));
+
+const faqs = [
+  { q: 'What is a business card website?', a: 'A one-screen page with everything on your paper card, plus buttons that work. People tap to call you, save your contact, or find your hours, and you share it with a QR code or a link.' },
+  { q: 'How is this different from a card app?', a: 'Card apps charge every month, often per person, and your card disappears if you stop paying. This is yours to keep, on your own web address, with no monthly fee.' },
+  { q: 'Do I need a website already?', a: 'No. The card can be your first stop online. If you already have a site, the card can live at yoursite.com/card and link back to it.' },
+  { q: 'What do I need to send?', a: 'Your logo or a photo of you, your colors if you have them, your contact details, hours, and services, and a photo of your work or space for the top of the card.' },
+  { q: 'Do you print the cards?', a: 'You get print-ready files for the front and back, and you order from any online printer. That way you choose the paper and quantity, and you pay the printer directly.' },
+  { q: 'Can I change it later?', a: 'Yes. Fixes are free for 30 days. After that, changes go through Help After Launch, at $59 per update.' },
+  { q: 'Is this the same as a one-page website?', a: 'No. A one-page website tells your story, with photos, reviews, and a contact form, and is built to show up on Google. That starts with the Essential package. Many businesses start with a card and grow into a full site, and the card moves over with you.' },
+  { q: 'Do I save anything on a website later?', a: 'Yes, if you add the Google profile. Within 6 months, you save $150 on Essential, $295 on Expanded, or $550 on Complete. It does not combine with other offers.' },
+];
+
+const schema = serviceSchema([
+  { name: 'Digital Business Card Website', description: 'A one-screen business card website with tap-to-call, hours, services, Google reviews link, save contact, and a printed card design with a QR code.', price: '$350' },
+], '/websites/business-card/');
+---
+<Base title="Digital Business Card Website" seoTitle="Digital Business Card Website, $350 | Auva Studio" schema={schema} description="A digital business card website for Hudson Valley small businesses. Tap to call, hours, services, and a printed card with a QR code. $350 one time, no monthly fee.">
+  <section class="hero bd-hero bd-inner-hero">
+    <div class="wrap bd-hero-inner">
+      <h1 class="mag-head">Your business card, <em>as a website.</em></h1>
+      <p class="lede">One link with everything customers need: tap to call, your hours and services, and your Google reviews. Share it with a QR code, with no app to download.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#start">Get yours, $350</a>
+        <a class="btn btn-ghost" href="#demos">Try the demo cards <Icon name="arrow" size={18} /></a>
+      </div>
+      <p class="hero-note">One time, no monthly fee. Pay by secure link once I confirm the details. It's yours to keep.</p>
+    </div>
+  </section>
+
+  <section class="band-cream">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Everything on your card, <em>plus buttons that work.</em></h2>
+        <p class="lede">More than a digital business card, less than a website. Made for you, and ready in about a week.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="icon"><Icon name="mail" size={32} /></div>
+          <h3>Digital Business Card Website</h3>
+          <p class="price">$350</p>
+          <p class="muted">For any business that wants a simple, polished place to send people.</p>
+          <ul class="ticks">{included.map((i) => <li><Icon name="tick" size={18} />{i}</li>)}</ul>
+          <a class="btn" href="#start">Get yours, $350</a>
+        </div>
+        <div class="card">
+          <div class="icon"><Icon name="layers" size={32} /></div>
+          <h3>Add what you need</h3>
+          <ul style="list-style:none;margin:8px 0 0;padding:0">
+            {addons.map((a) => (
+              <li style="display:grid;gap:2px;padding:10px 0;border-bottom:1px solid var(--line, #e3e7ef)">
+                <strong>{a.href ? <a href={a.href}>{a.title}</a> : a.title}, {a.price}</strong>
+                <span class="muted">{a.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="demos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="mag-head">Try the <em>demo cards.</em></h2>
+        <p class="lede">Six styles, each for a made-up business. Pick one, then scroll and tap inside the phone. Want to see a real one? <a href="/card/">Here's mine.</a></p>
+      </div>
+      <PhoneViewer items={items} tabsLabel="Demo cards" frameLabel="demo card on a phone" />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>No app. No monthly fee.</h2>
+          <p>Card apps charge about $5 to $10 a month, per person, for as long as you use them. Your card website is a one-time cost, on your own web address, and it never disappears.</p>
+        </div>
+        <div>
+          <p class="price" style="font-size: 4rem">$350</p>
+          <p>Once. Yours to keep.</p>
+          <a class="btn" href="#start">Get yours</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} alt />
+  <InquiryForm kind="website" topic="card" />
+  <PayBar label="Get yours, $350" />
+</Base>

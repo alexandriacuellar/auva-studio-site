@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Harlow & Vance\, CPA
+ORG:Harlow & Vance\, CPA
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/harlow-vance-cpa/
+ADR;TYPE=WORK:;;;Poughkeepsie\, NY;;;
+NOTE:Tax\, estate and business accounting.
+END:VCARD

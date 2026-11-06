@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Ironside Barbers
+ORG:Ironside Barbers
+TEL;TYPE=WORK,VOICE:+10000000000
+EMAIL;TYPE=WORK:hello@example.com
+URL:https://auvastudio.com/samples/cards/ironside-barbers/
+ADR;TYPE=WORK:;;;Middletown\, NY;;;
+NOTE:Sharp cuts. Hot towel shaves.
+END:VCARD

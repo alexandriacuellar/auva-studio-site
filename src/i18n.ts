@@ -3,7 +3,7 @@
 export type Lang = 'en' | 'es';
 
 // English addresses of every page that has a Spanish version. Add new pages here (and to the sitemap).
-export const translatedPages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/automation-ai-projects/', '/automation-ai-projects/automation/', '/automation-ai-projects/ai/', '/automation-ai-projects/project-management/', '/ar-vr-production/', '/ar-vr-production/ar/', '/ar-vr-production/studios/', '/development-partnerships/', '/about/', '/contact/', '/privacy/'];
+export const translatedPages = ['/', '/websites/', '/websites/diagnostic/', '/websites/google-business-profile/', '/websites/business-card/', '/websites/help-after-launch/', '/websites/brand-essentials/', '/websites/get-ready/', '/website-check/', '/google-profile-check/', '/automation-ai-projects/', '/automation-ai-projects/automation/', '/automation-ai-projects/ai/', '/automation-ai-projects/project-management/', '/ar-vr-production/', '/ar-vr-production/ar/', '/ar-vr-production/studios/', '/development-partnerships/', '/about/', '/contact/', '/privacy/'];
 
 export const langFromPath = (path: string): Lang => (path === '/es' || path.startsWith('/es/') ? 'es' : 'en');
 
