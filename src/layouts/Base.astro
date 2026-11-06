@@ -49,6 +49,7 @@ const t = {
     websiteCheck: 'Free website check',
     profileCheck: 'Free Google profile check',
     automationCheck: 'Free automation check',
+    aiGuide: "What's safe to share with AI (PDF)",
     prepChecklist: 'Website prep checklist',
     serviceArea: 'Service area',
     counties: (c: string) => `${c} counties`,
@@ -95,6 +96,7 @@ const t = {
     websiteCheck: 'Revisión gratis de su sitio web',
     profileCheck: 'Revisión gratis de su perfil de Google',
     automationCheck: 'Revisión gratis de automatización',
+    aiGuide: 'Qué es seguro compartir con la IA (PDF)',
     prepChecklist: 'Checklist para preparar su sitio web',
     serviceArea: 'Zona de servicio',
     counties: (c: string) => `condados de ${c.replace(/, ([^,]+)$/, ' y $1')}`,
@@ -331,6 +333,7 @@ const schema = {
               <li><a href={l('/website-check/')}>{t.websiteCheck}</a></li>
               <li><a href={l('/google-profile-check/')}>{t.profileCheck}</a></li>
               <li><a href={l('/automation-ai-projects/automation-check/')}>{t.automationCheck}</a></li>
+              <li><a href={lang === 'es' ? '/downloads/ai-safe-to-share-guide-es.pdf' : '/downloads/ai-safe-to-share-guide.pdf'} download>{t.aiGuide}</a></li>
               <li><a href={l('/websites/get-ready/')}>{t.prepChecklist}</a></li>
             </ul>
           </div>
