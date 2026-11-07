@@ -112,13 +112,17 @@ export const samples = [
 ];
 
 // Shared by every package; shown once above the package cards.
-export const packageBasics = [
-  'A planning call and content plan',
-  "I polish your copy and fill in what's missing",
-  'Custom design made for your business, built for phones first',
-  'A contact form and a map to find you',
-  'Set up for Google and AI search: page titles, business details, and a sitemap',
-  'Google Business Profile guidance, where applicable',
+// Every package includes: [short title, one-line detail] (shown above the package cards).
+export const packageBasics: [string, string][] = [
+  ['A planning call', 'And a content plan before anything is built.'],
+  ['Your words, polished', "I polish your copy and fill in what's missing."],
+  ['Custom design', 'Made for your business, built for phones first.'],
+  ['Contact form and map', 'So customers can reach you and find you.'],
+  ['Found on Google and AI search', 'Page titles, business details, and a sitemap.'],
+  ['Google Business Profile tips', 'Guidance on your profile, where applicable.'],
+  ['Loads almost instantly', 'Pages open in a blink on any phone.'],
+  ['Accessible to everyone', 'An accessibility test before every launch.'],
+  ['Yours to keep', 'Every account in your name. No lock-in.'],
 ];
 
 export const packages = [
@@ -167,6 +171,7 @@ export const comparison = {
 
 export const addons = [
   { id: 'cms', icon: 'gear', title: 'CMS (content management system)', text: 'A simple dashboard to update your page text, photos, news, and events yourself. No code needed, and free to run for most sites.', price: 'From $1,750' },
+  { id: 'landing', icon: 'bolt', title: 'Landing page for an ad, event, or offer', text: 'One focused page for an ad campaign, an event, a sale, or a launch, with its own form or sign-up so you can see what it brings in. Add it to your website, or get it on its own.', price: 'From $850' },
   { icon: 'layers', title: 'Online stores and buy buttons', text: "From a few buy buttons on a small site to a full online store. Tell me what you'd like to sell, and I'll quote it for you.", price: 'Quoted for your project' },
   { icon: 'clock', title: 'Booking, donations, and other tools', text: "Add the booking, donation, or forum tools you already use, or I'll help you set up new ones.", price: 'Quoted based on the tools you use' },
   { icon: 'chat', title: 'AI chatbots and web apps', text: 'A chat assistant that answers visitor questions from your own FAQs, services, and prices, or a custom tool like a client portal or booking app.', price: 'Quoted for your project', demo: "Try it now: ask this site's assistant" },

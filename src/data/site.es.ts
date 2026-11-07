@@ -91,13 +91,17 @@ export const samples = [
 ];
 
 // Lo que incluyen todos los paquetes; se muestra una vez sobre las tarjetas.
-export const packageBasics = [
-  'Una llamada de planificación y un plan de contenido',
-  'Pulo sus textos y completo lo que falte',
-  'Diseño a la medida de su negocio, pensado primero para el celular',
-  'Un formulario de contacto y un mapa para encontrarle',
-  'Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio',
-  'Orientación sobre su Perfil de Negocio de Google, cuando aplique',
+// Every package includes: [short title, one-line detail] (shown above the package cards).
+export const packageBasics: [string, string][] = [
+  ['Una llamada de planificación', 'Y un plan de contenido antes de construir nada.'],
+  ['Sus textos, pulidos', 'Pulo sus textos y completo lo que falte.'],
+  ['Diseño a la medida', 'Hecho para su negocio, pensado primero para el celular.'],
+  ['Formulario de contacto y mapa', 'Para que sus clientes le escriban y le encuentren.'],
+  ['Visible en Google y en búsquedas con IA', 'Títulos de página, datos de su negocio y un mapa del sitio.'],
+  ['Consejos para su Perfil de Negocio de Google', 'Orientación sobre su perfil, cuando aplique.'],
+  ['Carga casi al instante', 'Las páginas abren en un instante en cualquier celular.'],
+  ['Accesible para todos', 'Una prueba de accesibilidad antes de cada lanzamiento.'],
+  ['Suyo para siempre', 'Todas las cuentas a su nombre. Sin ataduras.'],
 ];
 
 export const packages = [
@@ -146,6 +150,7 @@ export const comparison = {
 
 export const addons = [
   { id: 'cms', icon: 'gear', title: 'CMS (sistema de gestión de contenidos)', text: 'Un panel sencillo para actualizar usted mismo los textos, las fotos, las noticias y los eventos de sus páginas. Sin programar, y gratis de mantener para la mayoría de los sitios.', price: 'Desde $1,750' },
+  { id: 'landing', icon: 'bolt', title: 'Página de aterrizaje para un anuncio, evento u oferta', text: 'Una sola página enfocada para una campaña de anuncios, un evento, una venta o un lanzamiento, con su propio formulario o registro para que vea lo que genera. Agréguela a su sitio web o pídala por separado.', price: 'Desde $850' },
   { icon: 'layers', title: 'Tiendas en línea y botones de compra', text: 'Desde unos cuantos botones de compra en un sitio pequeño hasta una tienda en línea completa. Cuénteme qué quiere vender y le doy un presupuesto.', price: 'Presupuesto según su proyecto' },
   { icon: 'clock', title: 'Citas, donaciones y otras herramientas', text: 'Agrego las herramientas de citas, donaciones o foros que ya usa, o le ayudo a configurar unas nuevas.', price: 'Presupuesto según las herramientas que use' },
   { icon: 'chat', title: 'Chatbots de IA y aplicaciones web', text: 'Un asistente de chat que responde las preguntas de sus visitantes con sus propias preguntas frecuentes, servicios y precios, o una herramienta a la medida, como un portal para clientes o una app de citas.', price: 'Presupuesto según su proyecto', demo: "Pruébelo ahora: pregunte al asistente de este sitio" },

@@ -12,9 +12,9 @@ const t = {
   es: { recommended: 'Recomendado', once: 'una vez que tenga su contenido', sample: (n: string) => `Ver un sitio de muestra del paquete ${n}`, start: (n: string) => `Empezar con ${n}`, bigger: '<b>¿Necesita algo diferente?</b> Si necesita más de 20 páginas, una tienda en línea, donaciones, acceso para miembros o funciones especiales, hablemos y encontremos la mejor opción.', custom: 'Hablemos de un sitio a la medida', customPkg: 'Sitio a la medida', basics: 'Todos los paquetes incluyen', pay: '<b>Cómo se paga:</b> 50% para empezar y el resto antes del lanzamiento. ¿Prefiere pagar en partes? <a href="#start">Pregunte por un plan de pagos</a>.', notIncluded: 'No incluido', upgrade: '<b>Empiece en pequeño y crezca después.</b> Cambie a un paquete mayor cuando quiera y pague solo la diferencia. <b>Precios fijos, sin sorpresas.</b> Todos los precios son pagos únicos por proyecto, y el Diagnóstico Web de $199 se abona a su sitio nuevo. <b>¿Prefiere pagar en partes?</b> Ofrezco planes de pago. <a href="#start">Pregúnteme por uno</a>.' },
 }[lang];
 ---
-<div class="pk-basics">
-  <p class="pk-basics-title">{t.basics}</p>
-  <ul class="ticks">{packageBasics.map((b) => <li><Icon name="tick" size={18} />{b}</li>)}</ul>
+<div class="pk-included">
+  <p class="pk-included-title">{t.basics}</p>
+  <ol>{packageBasics.map(([title, text], i) => <li style={`--n: ${i}`}><span class="n" aria-hidden="true">{i + 1}</span><span><b>{title}</b><small>{text}</small></span></li>)}</ol>
 </div>
 <div class="grid grid-3 packages">
   {packages.map((p) => (
