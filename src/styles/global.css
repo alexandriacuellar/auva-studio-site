@@ -504,6 +504,8 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 /* Websites page: shorter on phones. */
 .who-phone { margin-top: 6px; color: var(--primary); font-weight: 600; }
 .step-terms { list-style: none; padding: 10px 0 0; margin: 10px 0 0; border-top: 1px solid var(--border); display: grid; gap: 6px; font-size: 0.88rem; color: var(--muted); }
+.addon-box { margin-top: 4px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; display: grid; gap: 8px; font-size: 0.92rem; }
+.addon-box .step-terms { border-top: 0; margin: 0; padding: 0; }
 .step-terms li { display: flex; gap: 6px; align-items: flex-start; }
 .step-terms svg { flex: none; margin-top: 3px; color: var(--success); }
 .steps .you + .step-terms { margin-top: 10px; }
