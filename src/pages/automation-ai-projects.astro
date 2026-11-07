@@ -25,13 +25,13 @@ const schema = serviceSchema([
       <h1 class="mag-head">Less busywork, better tools, <em>projects that finish.</em></h1>
       <p class="lede">Automation for the repetitive work, AI your team can use with confidence, and a project manager to see it through.</p>
       <div class="hero-actions">
-        <a class="btn" href="#services">How I help <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#start">Get in touch</a>
+        <a class="btn" href="#start">Get in touch</a>
+        <a class="btn btn-ghost" href="#services">How I help <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>
 
-  <HelloBand facts={["<b>20+</b> years in web development", "<b>14+</b> projects managed", "<b>AI</b> in my daily work"]} />
+  <HelloBand facts={["<b>20+</b> years in web development", "<b>14+</b> projects managed", "<b>AI</b> in my daily work"]} line="New tools can feel like one more thing to manage, so I set everything up in your accounts and show your team how it works." />
 
   <section class="alt" id="who">
     <div class="wrap">
@@ -74,6 +74,16 @@ const schema = serviceSchema([
           </a>
         ))}
       </div>
+
+      <div class="section-head after-head">
+        <h2 class="mag-head">What <em>changes.</em></h2>
+      </div>
+      <div class="grid grid-3 after-grid">
+        <div class="card after-card"><Icon name="mail" size={24} /><h3>Every inquiry answered</h3><p class="muted">New inquiries get a reply right away, even when you're busy.</p></div>
+        <div class="card after-card"><Icon name="star" size={24} /><h3>Reviews asked for</h3><p class="muted">Review requests go out after every job, without you having to remember.</p></div>
+        <div class="card after-card"><Icon name="check" size={24} /><h3>Projects on track</h3><p class="muted">Your team knows what's next on every project.</p></div>
+      </div>
+      <p class="after-close">You spend your week on the work only you can do.</p>
 
       <div class="card card-row bigger" style="margin-top: 32px" id="planning">
         <div class="icon"><Icon name="search" size={36} /></div>

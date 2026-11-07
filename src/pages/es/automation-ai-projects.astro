@@ -25,13 +25,13 @@ const schema = serviceSchema([
       <h1 class="mag-head">Menos trabajo repetitivo, mejores herramientas, <em>proyectos que se terminan.</em></h1>
       <p class="lede">Automatización para el trabajo repetitivo, IA que su equipo puede usar con confianza y una gestora de proyectos que lo lleve hasta el final.</p>
       <div class="hero-actions">
-        <a class="btn" href="#services">Cómo le ayudo <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#start">Contácteme</a>
+        <a class="btn" href="#start">Contácteme</a>
+        <a class="btn btn-ghost" href="#services">Cómo le ayudo <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>
 
-  <HelloBand facts={["<b>20+</b> años en desarrollo web", "<b>14+</b> proyectos dirigidos", "<b>IA</b> en mi trabajo diario"]} />
+  <HelloBand facts={["<b>20+</b> años en desarrollo web", "<b>14+</b> proyectos dirigidos", "<b>IA</b> en mi trabajo diario"]} line="Las herramientas nuevas pueden sentirse como una cosa más que manejar, así que lo configuro todo en sus cuentas y le muestro a su equipo cómo funciona." />
 
   <section class="alt" id="who">
     <div class="wrap">
@@ -74,6 +74,16 @@ const schema = serviceSchema([
           </a>
         ))}
       </div>
+
+      <div class="section-head after-head">
+        <h2 class="mag-head">Lo que <em>cambia.</em></h2>
+      </div>
+      <div class="grid grid-3 after-grid">
+        <div class="card after-card"><Icon name="mail" size={24} /><h3>Cada consulta respondida</h3><p class="muted">Las consultas nuevas reciben respuesta de inmediato, aunque usted esté ocupado.</p></div>
+        <div class="card after-card"><Icon name="star" size={24} /><h3>Reseñas solicitadas</h3><p class="muted">Las solicitudes de reseña salen después de cada trabajo, sin que tenga que acordarse.</p></div>
+        <div class="card after-card"><Icon name="check" size={24} /><h3>Proyectos en marcha</h3><p class="muted">Su equipo sabe qué sigue en cada proyecto.</p></div>
+      </div>
+      <p class="after-close">Usted dedica su semana al trabajo que solo usted puede hacer.</p>
 
       <div class="card card-row bigger" style="margin-top: 32px" id="planning">
         <div class="icon"><Icon name="search" size={36} /></div>

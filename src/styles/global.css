@@ -275,6 +275,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   .header-inner { min-height: 64px; flex-wrap: nowrap; }
 }
 
+/* Websites "After launch" success cards (StoryBrand review 2026-11-06) */
+.after-head { margin-top: 72px; }
+.after-card { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+.after-card svg { color: var(--primary); }
+.after-card h3 { margin: 4px 0 0; font-size: 1.1rem; }
+.after-card p { margin: 0; }
+.after-close { margin: 20px 0 0; font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; }
+
 /* Four-step approach and checklist cards */
 .steps.steps-4 { grid-template-columns: repeat(4, 1fr); }
 .steps.steps-4 .num { margin-top: 0; }
@@ -460,6 +468,9 @@ form.inquiry .opt { font-weight: 400; color: var(--muted); font-size: 0.9em; }
 .promise-strip { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 0.95rem; color: #c4d2f0; }
 .promise-strip li { display: inline-flex; align-items: center; gap: 6px; }
 .promise-strip svg { color: #6fd8a3; flex: none; }
+/* Home plan (StoryBrand review 2026-11-06): the same strip on a light band, right under the 3 steps */
+.promise-strip.on-light { color: var(--ink); font-weight: 500; margin-top: 32px; }
+.promise-strip.on-light svg { color: var(--success); }
 @media (max-width: 640px) { .promise-strip { display: grid; grid-template-columns: auto auto; justify-content: center; text-align: left; font-size: 0.88rem; gap: 8px 16px; } }
 .hero-checks { margin: 14px 0 0; font-size: 0.95rem; color: var(--muted); }
 .hero-checks a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

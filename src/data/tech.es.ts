@@ -24,7 +24,7 @@ export const safety = [
 ];
 
 export const automationExamples = [
-  { icon: 'mail', title: 'Seguimiento de consultas', text: 'Cada consulta de su sitio web recibe una respuesta inmediata y queda en una sola lista, con un aviso para usted si nadie responde en 2 días.' },
+  { icon: 'mail', title: 'Seguimiento de consultas', text: 'Quien espera dos días una respuesta quizá ya llamó a otro negocio. Con esto, cada consulta de su sitio web recibe una respuesta inmediata y queda en una sola lista, con un aviso para usted si nadie responde en 2 días.' },
   { icon: 'star', title: 'Solicitudes de reseñas', text: 'Después de un trabajo o una visita, un agradecimiento con el enlace a sus reseñas de Google y un recordatorio amable.' },
   { icon: 'gear', title: 'La suya', text: 'Bienvenida a clientes, un informe mensual u otra tarea que su equipo hace a mano.' },
 ];

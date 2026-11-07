@@ -20,13 +20,13 @@ const schema = serviceSchema(aiOffers.filter((o) => o.group !== 'consulting').ma
       <h1 class="mag-head" set:html={t.heroH} />
       <p class="lede">{t.heroL}</p>
       <div class="hero-actions">
-        <a class="btn" href="#services">{t.seeHow} <Icon name="arrow" size={18} /></a>
-        <a class="btn btn-ghost" href="#start">Get in touch</a>
+        <a class="btn" href="#start">Get in touch</a>
+        <a class="btn btn-ghost" href="#services">{t.seeHow} <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>
 
-  <HelloBand facts={t.facts} />
+  <HelloBand facts={t.facts} line="AR and VR can sound expensive and complicated. I keep it simple: a fixed price, a version you try on your own phone, and files you keep." />
 
   <section class="alt" id="who">
     <div class="wrap">

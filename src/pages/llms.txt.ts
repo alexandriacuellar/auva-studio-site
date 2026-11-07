@@ -9,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It builds fast websites clients own, sets up automation and AI, and manages projects, plus AR packages and production support for game and XR teams. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
+    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. Small businesses and teams are stuck with technology that's slow, confusing, or hard to keep up with. Auva Studio builds fast websites clients own, sets up automation and AI, manages projects, and produces AR and VR, so clients get found, spend less time on busywork, finish what they start, and stand out. Founded by Alexandria Cuellar, a software developer and technical project manager, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
@@ -43,6 +43,7 @@ export function GET() {
     ...addons.map((a) => `- ${a.title} (${a.price}): ${a.text}`),
     `- [Brand Essentials](${site.url}/websites/brand-essentials/) ($1,000, on its own or with any website): logo or wordmark, variations, favicon, color palette, typography, and a brand reference sheet, designed with a professional designer partner.`,
     `- Free website check (${site.url}/website-check/): 10 quick questions with an instant score and what to fix first.`,
+    `- Free guide: What's safe to share with AI (${site.url}/downloads/ai-safe-to-share-guide.pdf), a one-page PDF on what to paste into AI tools, what to keep out, and which settings to check.`,
     `- Free website prep checklist (${site.url}/websites/get-ready/): the business basics, photos, words, and accounts to gather before a new website is built.`,
     `- Free Google profile check (${site.url}/google-profile-check/): quick questions about a Google Business Profile with setup steps or what to fix first.`,
     ...care.map((c) => `- [Help After Launch](${site.url}/websites/help-after-launch/), ${c.name} (${c.price}): ${c.text}`),
