@@ -192,13 +192,6 @@ const audiences = [
             <h3>{a.title}</h3>
             <p class="muted">{a.text}</p>
             <p><b style="color: var(--primary)">{a.price}</b></p>
-            {'box' in a && a.box && (
-              <div class="addon-box">
-                <p><b>{a.box.title}</b></p>
-                <ul class="step-terms">{a.box.items.map((t) => <li><Icon name="tick" size={16} />{t}</li>)}</ul>
-                <p class="small muted">{a.box.note}</p>
-              </div>
-            )}
             {assistantOn && 'demo' in a && <p><a href="#ask" class="arrow-link">{a.demo} <Icon name="arrow" size={16} /></a></p>}
           </div>
         ))}
