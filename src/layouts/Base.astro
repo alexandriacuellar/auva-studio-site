@@ -15,7 +15,7 @@ const l = (href: string) => localize(href, lang);
 // Header, footer, and page-wide wording in each language.
 const t = {
   en: {
-    description: 'Websites you own, AI and automation help, and AR, VR, and game production for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
+    description: 'Websites you own, automation and AI, project management, and AR, VR, and game production for small businesses, startups, nonprofits, and growing teams in the Hudson Valley.',
     defaultTitle: 'Hudson Valley Websites, AI & Automation, AR & VR, Project and Production Support',
     ogImageAlt: 'Auva Studio: make technology work for your business',
     skip: 'Skip to content',
@@ -61,7 +61,7 @@ const t = {
     about: ', about: ',
   },
   es: {
-    description: 'Sitios web que son suyos, ayuda con IA y automatización, y producción de AR, VR y videojuegos para pequeños negocios y organizaciones del Hudson Valley.',
+    description: 'Sitios web que son suyos, automatización e IA, gestión de proyectos y producción de AR, VR y videojuegos para pequeños negocios y organizaciones del Hudson Valley.',
     defaultTitle: 'Sitios web, IA y automatización, AR y VR, y apoyo de proyectos y producción en el Hudson Valley',
     ogImageAlt: 'Auva Studio: que la tecnología trabaje para su negocio',
     skip: 'Ir al contenido',
@@ -128,7 +128,7 @@ const promo = (base === '/' || base.startsWith('/websites/') || base === '/websi
   : null;
 const showPromo = !!promo;
 
-const orgDescription = 'Auva Studio builds websites clients own, sets up automation and AI, and manages projects for small businesses, startups, nonprofits, and growing teams, plus AR packages and production support for game and XR teams. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
+const orgDescription = 'Auva Studio builds websites clients own, sets up automation and AI, manages projects, and produces AR and VR for small businesses, startups, nonprofits, and growing teams, plus production support for game and XR teams. Based in the Mid-Hudson Valley, NY, serving the Hudson Valley and New York City in person and clients anywhere in the US remotely.';
 const pageUrl = new URL(path, site.url).href;
 // Sub pages (like /websites/diagnostic/) get breadcrumb data for search results: Home > section > page.
 const navParent = (nav as { href: string; label: string; title?: string; children?: { href: string; label: string }[] }[]).find((item) => item.children?.some((c) => c.href === path) && item.href !== path);
@@ -169,8 +169,8 @@ const schema = {
       '@id': `${site.url}/#founder`,
       name: 'Alexandria Cuellar',
       jobTitle: 'Founder, Auva Studio',
-      description: 'Founder of Auva Studio, a web developer and software engineer, and a game and XR producer. She builds websites, sets up tools and automation, and works with clients directly in English or Spanish.',
-      knowsAbout: ['Web development', 'Software engineering', 'Web production', 'Website project management', 'Game production', 'XR production', 'Agile project management', 'Technology consulting'],
+      description: 'Founder of Auva Studio, a software developer and technical project manager, and a game and XR producer. She builds websites, sets up automation and AI, manages projects, and produces AR and VR, and works with clients directly in English or Spanish.',
+      knowsAbout: ['Web development', 'Software engineering', 'Web production', 'Website project management', 'Technical project management', 'Game production', 'XR production', 'Agile project management', 'Technology consulting'],
       worksFor: { '@id': `${site.url}/#org` },
       image: `${site.url}/alexandria-cuellar.jpg`,
     },

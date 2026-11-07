@@ -9,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     '',
-    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. It builds fast websites clients own, sets up automation and AI, and manages projects, plus AR packages and production support for game and XR teams. Founded by Alexandria Cuellar, a web developer and software engineer, and a game and XR producer, with 20+ years in technology.`,
+    `> ${site.name} is a studio in the ${site.location} for small businesses, startups, nonprofits, and growing teams. Small businesses and teams are stuck with technology that's slow, confusing, or hard to keep up with. Auva Studio builds fast websites clients own, sets up automation and AI, manages projects, and produces AR and VR, so clients get found, spend less time on busywork, finish what they start, and stand out. Founded by Alexandria Cuellar, a software developer and technical project manager, and a game and XR producer, with 20+ years in technology.`,
     '',
     `Service area: in person across the Hudson Valley (${site.regions.map(([r, c]) => `${r}: ${c} counties`).join('; ')}) and New York City; remote anywhere in the US. Contact: ${site.email}.`,
     '',
