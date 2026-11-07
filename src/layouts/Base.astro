@@ -7,7 +7,7 @@ import Icon from '../components/Icon.astro';
 import Assistant from '../components/Assistant.astro';
 import { langFromPath, switchPath, localize, translatedPages, basePath } from '../i18n';
 
-interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[] }
+interface Props { title?: string; seoTitle?: string; description?: string; schema?: Record<string, unknown>[]; ogImage?: string; ogImageAlt?: string }
 const path = Astro.url.pathname;
 const lang = langFromPath(path);
 const { site, nav } = lang === 'es' ? es : en;
@@ -109,6 +109,9 @@ const t = {
 }[lang];
 const description = Astro.props.description ?? t.description;
 const { title, seoTitle, schema: pageSchema = [] } = Astro.props;
+// Link preview image (Facebook, LinkedIn, texts). Pages can pass their own; the default matches the page language.
+const ogImage = Astro.props.ogImage ?? (lang === 'es' ? '/og-image-es.png' : '/og-image.png');
+const ogImageAlt = Astro.props.ogImageAlt ?? t.ogImageAlt;
 // seoTitle is the full browser-tab and search-result title when a page wants more than "Title | Auva Studio".
 const fullTitle = seoTitle ?? (title ? `${title} | ${site.name}` : `${t.defaultTitle} | ${site.name}`);
 const year = new Date().getFullYear();
@@ -201,10 +204,10 @@ const schema = {
       <link rel="alternate" hreflang="x-default" href={new URL(base, site.url)} />
       <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_US'} />
     </>}
-    <meta property="og:image" content={`${site.url}/og-image.png`} />
+    <meta property="og:image" content={`${site.url}${ogImage}`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={t.ogImageAlt} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
