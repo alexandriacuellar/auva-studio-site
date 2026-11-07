@@ -91,13 +91,17 @@ export const samples = [
 ];
 
 // Lo que incluyen todos los paquetes; se muestra una vez sobre las tarjetas.
-export const packageBasics = [
-  'Una llamada de planificación y un plan de contenido',
-  'Pulo sus textos y completo lo que falte',
-  'Diseño a la medida de su negocio, pensado primero para el celular',
-  'Un formulario de contacto y un mapa para encontrarle',
-  'Preparado para Google y las búsquedas con IA: títulos de página, datos de su negocio y un mapa del sitio',
-  'Orientación sobre su Perfil de Negocio de Google, cuando aplique',
+// Every package includes: [short title, one-line detail] (shown above the package cards).
+export const packageBasics: [string, string][] = [
+  ['Una llamada de planificación', 'Y un plan de contenido antes de construir nada.'],
+  ['Sus textos, pulidos', 'Pulo sus textos y completo lo que falte.'],
+  ['Diseño a la medida', 'Hecho para su negocio, pensado primero para el celular.'],
+  ['Formulario de contacto y mapa', 'Para que sus clientes le escriban y le encuentren.'],
+  ['Visible en Google y en búsquedas con IA', 'Títulos de página, datos de su negocio y un mapa del sitio.'],
+  ['Consejos para su Perfil de Negocio de Google', 'Orientación sobre su perfil, cuando aplique.'],
+  ['Carga casi al instante', 'Las páginas abren en un instante en cualquier celular.'],
+  ['Accesible para todos', 'Una prueba de accesibilidad antes de cada lanzamiento.'],
+  ['Suyo para siempre', 'Todas las cuentas a su nombre. Sin ataduras.'],
 ];
 
 export const packages = [

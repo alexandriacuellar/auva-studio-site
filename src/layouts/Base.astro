@@ -383,7 +383,7 @@ const schema = {
   <script is:inline>
     // Fade sections and cards in as they scroll into view; cards in the same row arrive one after another.
     if (document.documentElement.classList.contains('reveal-on')) {
-      const sel = 'main section:not(.hero) :is(.section-head, .card, .steps li, .band, .quote, .table-wrap)';
+      const sel = 'main section:not(.hero) :is(.section-head, .card, .steps li, .band, .quote, .table-wrap, .pk-included)';
       const io = new IntersectionObserver((entries) => {
         for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       }, { rootMargin: '0px 0px -8% 0px' });

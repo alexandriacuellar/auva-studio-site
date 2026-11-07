@@ -112,13 +112,17 @@ export const samples = [
 ];
 
 // Shared by every package; shown once above the package cards.
-export const packageBasics = [
-  'A planning call and content plan',
-  "I polish your copy and fill in what's missing",
-  'Custom design made for your business, built for phones first',
-  'A contact form and a map to find you',
-  'Set up for Google and AI search: page titles, business details, and a sitemap',
-  'Google Business Profile guidance, where applicable',
+// Every package includes: [short title, one-line detail] (shown above the package cards).
+export const packageBasics: [string, string][] = [
+  ['A planning call', 'And a content plan before anything is built.'],
+  ['Your words, polished', "I polish your copy and fill in what's missing."],
+  ['Custom design', 'Made for your business, built for phones first.'],
+  ['Contact form and map', 'So customers can reach you and find you.'],
+  ['Found on Google and AI search', 'Page titles, business details, and a sitemap.'],
+  ['Google Business Profile tips', 'Guidance on your profile, where applicable.'],
+  ['Loads almost instantly', 'Pages open in a blink on any phone.'],
+  ['Accessible to everyone', 'An accessibility test before every launch.'],
+  ['Yours to keep', 'Every account in your name. No lock-in.'],
 ];
 
 export const packages = [
